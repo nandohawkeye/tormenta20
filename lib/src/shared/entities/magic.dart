@@ -1,11 +1,13 @@
 import 'package:tormenta20/src/shared/entities/magic_circle.dart';
+import 'package:tormenta20/src/shared/entities/magic_school.dart';
+import 'package:tormenta20/src/shared/entities/magic_type.dart';
 
 class Magic {
   final String name;
   final String desc;
   final MagicCircle circle;
-  final String type;
-  final String school;
+  final MagicType type;
+  final MagicSchool school;
   final String execution;
   final String duration;
   final String range;

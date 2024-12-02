@@ -17,7 +17,7 @@ class SimpleButton extends StatelessWidget {
       height: 38,
       child: DecoratedBox(
         decoration: BoxDecoration(
-            color: palette.primaryCTA.withOpacity(.4),
+            color: palette.primaryCTA.withOpacity(.8),
             borderRadius: T20UI.borderRadius),
         child: Icon(icon),
       ),

@@ -13,8 +13,8 @@ class MagicsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const AppLogo(
-          height: 48,
-          width: 150,
+          height: 42,
+          width: 180,
         ),
       ),
       body: Column(
@@ -40,9 +40,19 @@ class MagicsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Labels('Magias'),
-                SimpleButton(
-                  icon: FontAwesomeIcons.magnifyingGlass,
-                  onTap: () {},
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SimpleButton(
+                      icon: FontAwesomeIcons.sliders,
+                      onTap: () {},
+                    ),
+                    const SizedBox(width: 16),
+                    SimpleButton(
+                      icon: FontAwesomeIcons.magnifyingGlass,
+                      onTap: () {},
+                    )
+                  ],
                 )
               ],
             ),
