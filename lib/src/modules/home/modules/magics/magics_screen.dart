@@ -1,62 +1,86 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/magics_store.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_filter_dialog.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_search_filter.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/widgets/magics_wrap.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
-import 'package:tormenta20/src/shared/widgets/app_logo.dart';
 
-class MagicsScreen extends StatelessWidget {
+class MagicsScreen extends StatefulWidget {
   const MagicsScreen({super.key});
+
+  @override
+  State<MagicsScreen> createState() => _MagicsScreenState();
+}
+
+class _MagicsScreenState extends State<MagicsScreen> {
+  late final MagicsStore _store;
+
+  @override
+  void initState() {
+    super.initState();
+    _store = MagicsStore();
+    _store.init();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const AppLogo(
-          height: 42,
-          width: 180,
-        ),
-      ),
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: Stack(
         children: [
-          Padding(
-            padding: T20UI.allPadding,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Labels('Grimórios'),
-                SimpleButton(
-                  icon: FontAwesomeIcons.plus,
-                  onTap: () {},
-                )
+                Padding(
+                  padding: T20UI.allPadding,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Labels('Grimórios'),
+                      SimpleButton(
+                        icon: FontAwesomeIcons.plus,
+                        onTap: () {},
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: T20UI.allPadding,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Labels('Magias'),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SimpleButton(
+                            icon: FontAwesomeIcons.sliders,
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (_) => const MagicFilterDialog(),
+                              );
+                            },
+                          ),
+                          const SizedBox(width: 16),
+                          SimpleButton(
+                            icon: FontAwesomeIcons.magnifyingGlass,
+                            onTap: () => _store.changeSearchEnable(true),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                MagicsWrap(store: _store)
               ],
             ),
           ),
-          Padding(
-            padding: T20UI.allPadding,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Labels('Magias'),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SimpleButton(
-                      icon: FontAwesomeIcons.sliders,
-                      onTap: () {},
-                    ),
-                    const SizedBox(width: 16),
-                    SimpleButton(
-                      icon: FontAwesomeIcons.magnifyingGlass,
-                      onTap: () {},
-                    )
-                  ],
-                )
-              ],
-            ),
-          ),
+          MagicSearchFilter(store: _store)
         ],
       ),
     );

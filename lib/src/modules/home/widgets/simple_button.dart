@@ -6,7 +6,7 @@ class SimpleButton extends StatelessWidget {
   const SimpleButton({super.key, required this.icon, required this.onTap});
 
   final IconData icon;
-  final Function onTap;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +15,16 @@ class SimpleButton extends StatelessWidget {
     return SizedBox(
       width: 38,
       height: 38,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
+      child: Card(
+        child: InkWell(
+          borderRadius: T20UI.borderRadius,
+          splashColor: palette.primaryCTA.withOpacity(.4),
+          onTap: onTap,
+          child: Icon(
+            icon,
             color: palette.primaryCTA.withOpacity(.8),
-            borderRadius: T20UI.borderRadius),
-        child: Icon(icon),
+          ),
+        ),
       ),
     );
   }

@@ -1,6 +1,7 @@
-import 'package:tormenta20/src/shared/entities/magic_circle.dart';
-import 'package:tormenta20/src/shared/entities/magic_school.dart';
-import 'package:tormenta20/src/shared/entities/magic_type.dart';
+import 'package:tormenta20/src/shared/entities/magic/magic_circle.dart';
+import 'package:tormenta20/src/shared/entities/magic/magic_range.dart';
+import 'package:tormenta20/src/shared/entities/magic/magic_school.dart';
+import 'package:tormenta20/src/shared/entities/magic/magic_type.dart';
 
 class Magic {
   final String name;
@@ -10,7 +11,7 @@ class Magic {
   final MagicSchool school;
   final String execution;
   final String duration;
-  final String range;
+  final MagicRange range;
   final String resistence;
   final String targetAreaEfect;
 

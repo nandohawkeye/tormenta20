@@ -1,4 +1,4 @@
-import 'package:tormenta20/src/shared/entities/magic_circle.dart';
+import 'package:tormenta20/src/shared/entities/magic/magic_circle.dart';
 
 final MagicCircle firstCircle = MagicCircle(level: 1, pm: 1);
 final MagicCircle secondCircle = MagicCircle(level: 2, pm: 3);

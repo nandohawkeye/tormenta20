@@ -1,4 +1,4 @@
-import 'package:tormenta20/src/shared/entities/magic.dart';
+import 'package:tormenta20/src/shared/entities/magic/magic.dart';
 
 class MagicCharacter extends Magic {
   final String uuid;

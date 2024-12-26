@@ -5,6 +5,7 @@ import 'package:tormenta20/src/modules/home/modules/about/about_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/init/init_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/magics_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/shield/shield_screen.dart';
+import 'package:tormenta20/src/shared/widgets/app_logo.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, this.initialIndex = 0});
@@ -43,7 +44,12 @@ class _HomeScreenState extends State<HomeScreen> {
         animation: _store,
         builder: (_, __) {
           return Scaffold(
-            appBar: AppBar(elevation: 0, toolbarHeight: 0),
+            appBar: AppBar(
+              title: const AppLogo(
+                height: 42,
+                width: 180,
+              ),
+            ),
             body: _pages[_store.index],
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: _store.index,
