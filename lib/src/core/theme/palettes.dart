@@ -115,11 +115,11 @@ abstract class Palettes {
         textDisable: const Color(0xFF5E6064),
         textPrimary: const Color(0xFFFAFAFA),
         textSecundary: const Color(0xFFC9C9C9),
-        divider: const Color(0xFF424242),
-        dividerBottomSheet: const Color(0xFF161616),
-        bottomSheetBackground: const Color(0xFF101010),
+        divider: const Color(0xFF212121),
+        dividerBottomSheet: const Color(0xFF424242),
+        bottomSheetBackground: const Color(0xFF212121),
         unselectedWidget: const Color(0xFF616161),
         remove: const Color(0xFFDA0000),
-        onBottomsheet: const Color(0xFF212121),
+        onBottomsheet: const Color(0xFF424242),
       );
 }

@@ -7,7 +7,6 @@ import 'package:tormenta20/src/core/theme/palettes.dart';
 final palette = Palettes.dark();
 
 final ThemeData theme = ThemeData(
-  fontFamily: 'medieval',
   useMaterial3: false,
   brightness: Brightness.light,
   scaffoldBackgroundColor: palette.background,

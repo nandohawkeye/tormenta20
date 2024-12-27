@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/palettes.dart';
 
 abstract class T20UI {
-  static const double inputHeight = 48;
+  static const double inputHeight = 44;
   static const double inputBorderRadius = 12;
   static const double listSpaceSize = 8;
   static const double spaceSize = 16;

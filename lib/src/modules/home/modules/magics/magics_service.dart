@@ -1,5 +1,7 @@
 import 'package:tormenta20/src/shared/entities/magic/magic.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_circles.dart';
+import 'package:tormenta20/src/shared/entities/magic/magic_duration.dart';
+import 'package:tormenta20/src/shared/entities/magic/magic_execution.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_range.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_school.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_type.dart';
@@ -15,9 +17,9 @@ class MagicsService {
       circle: firstCircle,
       type: MagicType.Divina,
       school: MagicSchool.Transmutacao,
-      execution: 'Padrão',
-      duration: 'Cena',
-      range: MagicRange.curto,
+      execution: MagicExecution.Padrao,
+      duration: MagicDuration.Cena,
+      range: MagicRange.Curto,
       resistence: 'Nenhuma',
       targetAreaEfect: 'Alimento para 1 criatura',
     ),
@@ -28,9 +30,9 @@ class MagicsService {
       circle: firstCircle,
       type: MagicType.Divina,
       school: MagicSchool.Encantamento,
-      execution: 'Padrão',
-      duration: 'Cena',
-      range: MagicRange.curto,
+      execution: MagicExecution.Padrao,
+      duration: MagicDuration.Cena,
+      range: MagicRange.Curto,
       resistence: 'Vontade anula',
       targetAreaEfect: '1 animal',
     ),
@@ -41,9 +43,9 @@ class MagicsService {
       circle: firstCircle,
       type: MagicType.Arcana,
       school: MagicSchool.Convocacao,
-      execution: 'Padrão',
-      duration: 'Sustentada',
-      range: MagicRange.pessoal,
+      execution: MagicExecution.Padrao,
+      duration: MagicDuration.Sustentada,
+      range: MagicRange.Pessoal,
       resistence: 'Reflexos reduz parcial',
       targetAreaEfect: 'Açoite de chamas criado em sua mão (veja texto)',
     ),
@@ -54,9 +56,9 @@ class MagicsService {
       circle: firstCircle,
       type: MagicType.Arcana,
       school: MagicSchool.Convocacao,
-      execution: 'Padrão',
-      duration: 'Instantânea',
-      range: MagicRange.curto,
+      execution: MagicExecution.Padrao,
+      duration: MagicDuration.Instantanea,
+      range: MagicRange.Curto,
       resistence: 'Vontade parcial',
       targetAreaEfect: '1 criatura',
     ),

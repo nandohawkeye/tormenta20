@@ -7,7 +7,7 @@ class CustomChecked extends StatelessWidget {
   const CustomChecked({
     super.key,
     required this.value,
-    this.size = 25,
+    this.size = 20,
     this.onChange,
     this.isEnabledToTap = true,
     this.color,
@@ -36,7 +36,7 @@ class CustomChecked extends StatelessWidget {
           duration: const Duration(milliseconds: 200),
           decoration: BoxDecoration(
             color: value ? selectedColor : Colors.transparent,
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(5),
             border: Border.all(
               width: 1,
               color: value ? selectedColor : palette.disable,

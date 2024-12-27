@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/magics_store.dart';
-import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_card.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_card/magic_card.dart';
 
 class MagicsWrap extends StatelessWidget {
   const MagicsWrap({super.key, required this.store});
@@ -16,8 +16,14 @@ class MagicsWrap extends StatelessWidget {
         child: Wrap(
           spacing: 16,
           runSpacing: 16,
-          children:
-              store.magics.map((magic) => MagicCard(magic: magic)).toList(),
+          children: store.magics
+              .map(
+                (magic) => MagicCard(
+                  magic: magic,
+                  searchFilter: store.searchFilter,
+                ),
+              )
+              .toList(),
         ),
       ),
     );
