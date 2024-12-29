@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/magics_store.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_filter_bottomsheet/magic_filter_bottomsheet.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_search_filter.dart';
@@ -58,32 +59,40 @@ class _MagicsScreenState extends State<MagicsScreen> {
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          SimpleButton(
-                            icon: FontAwesomeIcons.sliders,
-                            onTap: () async {
-                              await showModalBottomSheet<MagicFilterDto?>(
-                                isScrollControlled: true,
-                                isDismissible: true,
-                                backgroundColor: Colors.transparent,
-                                context: context,
-                                builder: (context) => Padding(
-                                  padding: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context)
-                                        .viewInsets
-                                        .bottom,
+                          AnimatedBuilder(
+                            animation: _store,
+                            builder: (_, __) => SimpleButton(
+                              icon: FontAwesomeIcons.sliders,
+                              backgroundColor: _store.hasFilterAplied
+                                  ? palette.primaryCTA.withOpacity(.5)
+                                  : null,
+                              iconColor:
+                                  _store.hasFilterAplied ? palette.icon : null,
+                              onTap: () async {
+                                await showModalBottomSheet<MagicFilterDto?>(
+                                  isScrollControlled: true,
+                                  isDismissible: true,
+                                  backgroundColor: Colors.transparent,
+                                  context: context,
+                                  builder: (context) => Padding(
+                                    padding: EdgeInsets.only(
+                                      bottom: MediaQuery.of(context)
+                                          .viewInsets
+                                          .bottom,
+                                    ),
+                                    child: MagicFilterBottomsheet(
+                                      dto: _store.toFilterDto(),
+                                    ),
                                   ),
-                                  child: MagicFilterBottomsheet(
-                                    dto: _store.toFilterDto(),
-                                  ),
-                                ),
-                              ).then(
-                                (value) {
-                                  if (value != null) {
-                                    _store.changeFilters(value);
-                                  }
-                                },
-                              );
-                            },
+                                ).then(
+                                  (value) {
+                                    if (value != null) {
+                                      _store.changeFilters(value);
+                                    }
+                                  },
+                                );
+                              },
+                            ),
                           ),
                           const SizedBox(width: 16),
                           SimpleButton(

@@ -6,6 +6,7 @@ class MagicCharacter extends Magic {
   MagicCharacter({
     required this.uuid,
     required this.grimoireUUid,
+    required super.id,
     required super.name,
     required super.desc,
     required super.circle,

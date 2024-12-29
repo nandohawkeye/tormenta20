@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/magics_service.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/magics_utils.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_circle.dart';
-import 'package:tormenta20/src/shared/entities/magic/magic_circles.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_duration.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_execution.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_filter_dto.dart';
@@ -16,24 +16,41 @@ import 'package:tormenta20/src/shared/extensions/string_ext.dart';
 class MagicsStore extends ChangeNotifier {
   final MagicsService _service = MagicsService();
 
+  bool _compareText(String value) => value
+      .toLowerCase()
+      .replaceAllDiacritics()
+      .contains(_searchFilter.toLowerCase().replaceAllDiacritics());
+
   List<Magic> _magics = [];
   List<Magic> get magics => _magics
       .where(
         (m) =>
-            (m.name.toLowerCase().replaceAllDiacritics().contains(
-                    _searchFilter.toLowerCase().replaceAllDiacritics()) ||
-                m.desc.toLowerCase().replaceAllDiacritics().contains(
-                    _searchFilter.toLowerCase().replaceAllDiacritics()) ||
-                m.targetAreaEfect.toLowerCase().replaceAllDiacritics().contains(
-                    _searchFilter.toLowerCase().replaceAllDiacritics())) &&
-            _typesSelecteds.contains(m.type) &&
-            _schoolsSelecteds.contains(m.school) &&
-            _rangesSelecteds.contains(m.range) &&
-            _circlesSelecteds.contains(m.circle) &&
-            _durationsSelected.contains(m.duration) &&
-            _executionsSelecteds.contains(m.execution) &&
-            _resistenciesSelecteds.any(
-                (r) => m.resistence.toLowerCase().contains(r.toLowerCase())),
+            (_compareText(m.name) ||
+                _compareText(m.desc) ||
+                _compareText(m.targetAreaEfect)) &&
+            (_typesSelecteds.isNotEmpty
+                ? _typesSelecteds.contains(m.type)
+                : MagicsUtils.allTypes.contains(m.type)) &&
+            (_schoolsSelecteds.isNotEmpty
+                ? _schoolsSelecteds.contains(m.school)
+                : MagicsUtils.allSchools.contains(m.school)) &&
+            (_rangesSelecteds.isNotEmpty
+                ? _rangesSelecteds.contains(m.range)
+                : MagicsUtils.allRanges.contains(m.range)) &&
+            (_circlesSelecteds.isNotEmpty
+                ? _circlesSelecteds.contains(m.circle)
+                : MagicsUtils.allCircles.contains(m.circle)) &&
+            (_durationsSelected.isNotEmpty
+                ? _durationsSelected.contains(m.duration)
+                : MagicsUtils.allDurations.contains(m.duration)) &&
+            (_executionsSelecteds.isNotEmpty
+                ? _executionsSelecteds.contains(m.execution)
+                : MagicsUtils.allExecutions.contains(m.execution)) &&
+            (_resistenciesSelecteds.isNotEmpty
+                ? _resistenciesSelecteds.any(
+                    (r) => m.resistence.toLowerCase().contains(r.toLowerCase()))
+                : MagicsUtils.allResistencies.any((r) =>
+                    m.resistence.toLowerCase().contains(r.toLowerCase()))),
       )
       .toList();
 
@@ -63,59 +80,22 @@ class MagicsStore extends ChangeNotifier {
     _magics.addAll(_service.getAllMagics());
   }
 
-  List<MagicType> _typesSelecteds = [
-    MagicType.Arcana,
-    MagicType.Divina,
-    MagicType.Universal
-  ];
+  List<MagicType> _typesSelecteds = [];
+  List<MagicSchool> _schoolsSelecteds = [];
+  List<MagicRange> _rangesSelecteds = [];
+  List<MagicCircle> _circlesSelecteds = [];
+  List<MagicDuration> _durationsSelected = [];
+  List<MagicExecution> _executionsSelecteds = [];
+  List<String> _resistenciesSelecteds = [];
 
-  List<MagicSchool> _schoolsSelecteds = [
-    MagicSchool.Abjuracao,
-    MagicSchool.Adivinhacao,
-    MagicSchool.Convocacao,
-    MagicSchool.Encantamento,
-    MagicSchool.Evocacao,
-    MagicSchool.Ilusao,
-    MagicSchool.Necromancia,
-    MagicSchool.Transmutacao,
-  ];
-
-  List<MagicRange> _rangesSelecteds = [
-    MagicRange.Curto,
-    MagicRange.Ilimitado,
-    MagicRange.Longo,
-    MagicRange.Medio,
-    MagicRange.Pessoal,
-    MagicRange.Toque,
-  ];
-
-  List<MagicCircle> _circlesSelecteds = [
-    firstCircle,
-    secondCircle,
-    thirdCircle,
-    fourthCircle,
-    fifthCircle,
-  ];
-
-  List<MagicDuration> _durationsSelected = [
-    MagicDuration.Cena,
-    MagicDuration.Instantanea,
-    MagicDuration.Sustentada,
-  ];
-
-  List<MagicExecution> _executionsSelecteds = [
-    MagicExecution.Completa,
-    MagicExecution.Livre,
-    MagicExecution.Padrao,
-    MagicExecution.Reacao,
-  ];
-
-  List<String> _resistenciesSelecteds = [
-    'Fortitude',
-    'Reflexos',
-    'Vontade',
-    'Nenhuma',
-  ];
+  bool get hasFilterAplied =>
+      _typesSelecteds.isNotEmpty ||
+      _schoolsSelecteds.isNotEmpty ||
+      _rangesSelecteds.isNotEmpty ||
+      _circlesSelecteds.isNotEmpty ||
+      _durationsSelected.isNotEmpty ||
+      _executionsSelecteds.isNotEmpty ||
+      _resistenciesSelecteds.isNotEmpty;
 
   MagicFilterDto toFilterDto() {
     return MagicFilterDto(
