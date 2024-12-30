@@ -13,6 +13,7 @@ final ThemeData theme = ThemeData(
   primaryColor: palette.inputColor,
   indicatorColor: palette.indicator,
   canvasColor: palette.inputColor,
+  splashColor: palette.primaryCTA.withOpacity(.4),
   colorScheme: ColorScheme.light(
     primary: palette.primary,
     secondary: palette.secondary,

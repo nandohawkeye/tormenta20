@@ -18,4 +18,37 @@ class MagicCharacter extends Magic {
     required super.resistence,
     required super.targetAreaEfect,
   });
+
+  @override
+  bool operator ==(other) =>
+      other is MagicCharacter &&
+      other.desc == desc &&
+      other.name == name &&
+      other.circle == circle &&
+      other.type == type &&
+      other.school == school &&
+      other.execution == execution &&
+      other.duration == duration &&
+      other.range == range &&
+      other.resistence == resistence &&
+      other.targetAreaEfect == targetAreaEfect &&
+      other.uuid == uuid &&
+      other.id == id &&
+      other.grimoireUUid == grimoireUUid;
+
+  @override
+  int get hashCode =>
+      desc.hashCode ^
+      name.hashCode ^
+      circle.hashCode ^
+      type.hashCode ^
+      school.hashCode ^
+      execution.hashCode ^
+      duration.hashCode ^
+      range.hashCode ^
+      resistence.hashCode ^
+      targetAreaEfect.hashCode ^
+      id.hashCode ^
+      uuid.hashCode ^
+      grimoireUUid.hashCode;
 }

@@ -94,7 +94,7 @@ abstract class Palettes {
         background: const Color(0xFF000000),
         symbolAvatar: const Color(0xFF0c0c0c),
         textSelection: const Color(0xFF000000),
-        cardStroke: const Color(0xFF161616),
+        cardStroke: Colors.transparent,
         inputColor: const Color(0xFF212121),
         canceled: const Color(0xFFDC4740),
         lateWarning: const Color(0xFFF19F38),
