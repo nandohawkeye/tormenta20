@@ -224,9 +224,10 @@ final ThemeData theme = ThemeData(
     centerTitle: false,
     foregroundColor: palette.textPrimary,
     titleTextStyle: TextStyle(
-      fontSize: 18,
+      fontSize: 20,
       fontWeight: FontWeight.w500,
       color: palette.textPrimary,
+      fontFamily: 'tormenta',
     ),
     titleSpacing: 12,
     elevation: 1,

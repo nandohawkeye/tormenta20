@@ -1,12 +1,19 @@
+// ignore_for_file: prefer_final_fields
+
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/widgets/add_grimorie_bottomsheet/add_grimorie_bottomsheet_desc_field.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/widgets/add_grimorie_bottomsheet/add_grimorie_bottomsheet_header.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/widgets/add_grimorie_bottomsheet/add_grimorie_bottomsheet_image_field.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/widgets/add_grimorie_bottomsheet/add_grimorie_bottomsheet_name_field.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
+import 'package:tormenta20/src/shared/entities/magic/magic_character.dart';
 import 'package:tormenta20/src/shared/widgets/bottom_sheet_divider.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
+import 'package:uuid/uuid.dart';
 
 class AddGrimorieBottomsheet extends StatefulWidget {
   const AddGrimorieBottomsheet({super.key, this.initialGrimoire});
@@ -19,6 +26,10 @@ class AddGrimorieBottomsheet extends StatefulWidget {
 
 class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
   final _formKey = GlobalKey<FormState>();
+
+  String? _uuid;
+  DateTime? _createdAt;
+  List<MagicCharacter> _magics = [];
 
   late final ValueNotifier<String?> _name;
   late final ValueNotifier<String?> _desc;
@@ -35,6 +46,9 @@ class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
   @override
   void initState() {
     super.initState();
+    _uuid = widget.initialGrimoire?.uuid ?? const Uuid().v4();
+    _createdAt = widget.initialGrimoire?.createdAt;
+    _magics.addAll(widget.initialGrimoire?.magicsCharacters ?? []);
     _name = ValueNotifier<String?>(widget.initialGrimoire?.name);
     _desc = ValueNotifier<String?>(widget.initialGrimoire?.desc);
     _imagePath = ValueNotifier<String?>(widget.initialGrimoire?.imagePath);
@@ -86,24 +100,7 @@ class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          T20UI.spaceHeight,
-                          Padding(
-                            padding: T20UI.horizontalPadding,
-                            child: Text(
-                              '${widget.initialGrimoire != null ? 'Editando' : 'Criando'} grimório',
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontFamily: 'tormenta',
-                              ),
-                            ),
-                          ),
-                          T20UI.spaceHeight,
-                        ],
-                      ),
+                      AddGrimorieBottomsheetHeader(widget.initialGrimoire),
                       const BottomSheetDivider(verticalPadding: 0),
                       Expanded(
                         child: SingleChildScrollView(
@@ -114,87 +111,16 @@ class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Form(
-                                key: _formKey,
-                                child: Padding(
-                                  padding: T20UI.horizontalPadding,
-                                  child: ValueListenableBuilder(
-                                    valueListenable: _errorName,
-                                    builder: (_, error, __) => TextFormField(
-                                      autofocus: true,
-                                      onChanged: (value) {
-                                        _name.value = value;
-                                        _errorName.value = _validName(value);
-                                      },
-                                      validator: _validName,
-                                      style: const TextStyle(fontSize: 16),
-                                      decoration: InputDecoration(
-                                        hintText: 'Nome',
-                                        errorText: error,
-                                        fillColor: palette.onBottomsheet,
-                                        hintStyle: TextStyle(
-                                            fontSize: 16,
-                                            color: palette.textPrimary),
-                                        contentPadding:
-                                            const EdgeInsets.symmetric(
-                                          vertical: 6,
-                                          horizontal: T20UI.spaceSize,
-                                        ),
-                                        helperText: 'Obrigatório',
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                              AddGrimorieBottomsheetNameField(
+                                validator: _validName,
+                                formKey: _formKey,
+                                name: _name,
+                                errorName: _errorName,
                               ),
                               T20UI.spaceHeight,
-                              Padding(
-                                padding: T20UI.horizontalPadding,
-                                child: SizedBox(
-                                  height: T20UI.inputHeight,
-                                  width: double.infinity,
-                                  child: Card(
-                                    color: palette.onBottomsheet,
-                                    child: InkWell(
-                                      borderRadius: T20UI.borderRadius,
-                                      onTap: () {},
-                                      child: Padding(
-                                        padding: T20UI.horizontalPadding,
-                                        child: Row(
-                                          children: [
-                                            Icon(FontAwesomeIcons.image),
-                                            SizedBox(width: 8),
-                                            Text(
-                                              'Imagem',
-                                              style: TextStyle(fontSize: 16),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              const AddGrimorieBottomsheetImageField(),
                               T20UI.spaceHeight,
-                              Padding(
-                                padding: T20UI.horizontalPadding,
-                                child: TextField(
-                                  autofocus: true,
-                                  onChanged: (value) => _desc.value = value,
-                                  maxLines: 4,
-                                  style: const TextStyle(fontSize: 16),
-                                  decoration: InputDecoration(
-                                    hintText: 'Descrição',
-                                    fillColor: palette.onBottomsheet,
-                                    hintStyle: TextStyle(
-                                        fontSize: 16,
-                                        color: palette.textPrimary),
-                                    contentPadding: const EdgeInsets.symmetric(
-                                      vertical: 6,
-                                      horizontal: T20UI.spaceSize,
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              AddGrimorieBottomsheetDescField(desc: _desc),
                             ],
                           ),
                         ),
@@ -215,7 +141,17 @@ class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
                                     onTap: () {
                                       if (_formKey.currentState?.validate() ??
                                           false) {
-                                        //TODO cria aqui
+                                        final now = DateTime.now();
+                                        final Grimoire grimoire = Grimoire(
+                                          uuid: _uuid!,
+                                          name: _name.value ?? '',
+                                          desc: _desc.value,
+                                          createdAt: _createdAt ?? now,
+                                          updatedAt: now,
+                                          magicsCharacters: _magics,
+                                        );
+
+                                        Navigator.pop(context, grimoire);
                                       }
                                     },
                                   ),

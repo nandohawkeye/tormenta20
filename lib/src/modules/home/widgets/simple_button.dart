@@ -9,12 +9,14 @@ class SimpleButton extends StatelessWidget {
     required this.onTap,
     this.backgroundColor,
     this.iconColor,
+    this.iconPadding = EdgeInsets.zero,
   });
 
   final IconData icon;
   final Function() onTap;
   final Color? backgroundColor;
   final Color? iconColor;
+  final EdgeInsets iconPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +31,12 @@ class SimpleButton extends StatelessWidget {
           borderRadius: T20UI.borderRadius,
           splashColor: palette.primaryCTA.withOpacity(.4),
           onTap: onTap,
-          child: Icon(
-            icon,
-            color: iconColor ?? palette.primaryCTA.withOpacity(.8),
+          child: Padding(
+            padding: iconPadding,
+            child: Icon(
+              icon,
+              color: iconColor ?? palette.primaryCTA.withOpacity(.8),
+            ),
           ),
         ),
       ),
