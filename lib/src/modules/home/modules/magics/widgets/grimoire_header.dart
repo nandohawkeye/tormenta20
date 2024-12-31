@@ -6,14 +6,18 @@ import 'package:get_it/get_it.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/grimorie_screen.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/grimories_store.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/add_grimorie_bottomsheet/add_grimorie_bottomsheet.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/widgets/grimoire_card.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
 class GrimoireHeader extends StatelessWidget {
-  const GrimoireHeader({super.key});
+  const GrimoireHeader(this.store, {super.key});
+
+  final GrimoriesStore store;
 
   @override
   Widget build(BuildContext context) {
@@ -48,12 +52,13 @@ class GrimoireHeader extends StatelessWidget {
       });
     }
 
-    return Padding(
-      padding: T20UI.allPadding,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: T20UI.allPadding,
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Labels('Grimórios'),
@@ -63,13 +68,32 @@ class GrimoireHeader extends StatelessWidget {
               )
             ],
           ),
-          T20UI.spaceHeight,
-          MainButton(
-            label: 'Crie um grimório',
-            onTap: () async => await addGrimoire(),
-          )
-        ],
-      ),
+        ),
+        AnimatedBuilder(
+          animation: store,
+          builder: (_, __) => store.grimories.isEmpty
+              ? Padding(
+                  padding: const EdgeInsets.only(bottom: T20UI.spaceSize),
+                  child: MainButton(
+                    label: 'Crie um grimório',
+                    onTap: () async => await addGrimoire(),
+                  ),
+                )
+              : SizedBox(
+                  height: 100 * MediaQuery.of(context).textScaler.scale(1),
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: T20UI.spaceSize - 4),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: store.grimories.length,
+                    separatorBuilder: T20UI.separatorBuilderHorizontal,
+                    itemBuilder: (_, index) =>
+                        GrimoireCard(grimoire: store.grimories[index]),
+                  ),
+                ),
+        ),
+      ],
     );
   }
 }
