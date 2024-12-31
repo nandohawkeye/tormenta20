@@ -32,6 +32,8 @@ class AddGrimorieBottomsheetNameField extends StatelessWidget {
             initialValue: name.value,
             validator: validator,
             style: const TextStyle(fontSize: 16),
+            textInputAction: TextInputAction.next,
+            keyboardType: TextInputType.name,
             decoration: InputDecoration(
               hintText: 'Nome',
               errorText: error,

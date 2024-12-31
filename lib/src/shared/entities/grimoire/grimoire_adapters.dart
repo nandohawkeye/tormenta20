@@ -10,7 +10,8 @@ abstract class GrimoiteAdapters {
       uuid: Value<String>(entity.uuid),
       name: Value<String>(entity.name),
       desc: Value<String?>(entity.desc),
-      imagePath: Value<String?>(entity.imagePath),
+      iconAsset: Value<String>(entity.iconAsset),
+      colorInt: Value<int>(entity.colorInt),
       createdAt: Value<DateTime>(entity.createdAt),
       updatedAt: Value<DateTime>(entity.updatedAt),
     );
@@ -21,7 +22,8 @@ abstract class GrimoiteAdapters {
       uuid: dto.grimoireData.uuid,
       name: dto.grimoireData.name,
       desc: dto.grimoireData.desc,
-      imagePath: dto.grimoireData.imagePath,
+      iconAsset: dto.grimoireData.iconAsset,
+      colorInt: dto.grimoireData.colorInt,
       createdAt: dto.grimoireData.createdAt,
       updatedAt: dto.grimoireData.updatedAt,
       magicsCharacters:

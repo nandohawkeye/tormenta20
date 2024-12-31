@@ -35,7 +35,12 @@ class _MagicsScreenState extends State<MagicsScreen> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                GrimoireHeader(_grimoriesStore),
+                AnimatedBuilder(
+                  animation: _magicStore,
+                  builder: (_, __) => _magicStore.searchEnable
+                      ? const SizedBox.shrink()
+                      : GrimoireHeader(_grimoriesStore),
+                ),
                 MagicsHeader(_magicStore),
                 MagicsWrap(store: _magicStore)
               ],

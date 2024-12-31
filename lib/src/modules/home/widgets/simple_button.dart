@@ -23,8 +23,8 @@ class SimpleButton extends StatelessWidget {
     final palette = Palettes.dark();
 
     return SizedBox(
-      width: 38,
-      height: 38,
+      width: 35,
+      height: 35,
       child: Card(
         color: backgroundColor,
         child: InkWell(
@@ -35,6 +35,7 @@ class SimpleButton extends StatelessWidget {
             padding: iconPadding,
             child: Icon(
               icon,
+              size: 16,
               color: iconColor ?? palette.primaryCTA.withOpacity(.8),
             ),
           ),

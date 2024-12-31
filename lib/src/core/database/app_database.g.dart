@@ -24,12 +24,18 @@ class $GrimoireTableTable extends GrimoireTable
   late final GeneratedColumn<String> desc = GeneratedColumn<String>(
       'desc', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _imagePathMeta =
-      const VerificationMeta('imagePath');
+  static const VerificationMeta _iconAssetMeta =
+      const VerificationMeta('iconAsset');
   @override
-  late final GeneratedColumn<String> imagePath = GeneratedColumn<String>(
-      'image_path', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
+  late final GeneratedColumn<String> iconAsset = GeneratedColumn<String>(
+      'icon_asset', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _colorIntMeta =
+      const VerificationMeta('colorInt');
+  @override
+  late final GeneratedColumn<int> colorInt = GeneratedColumn<int>(
+      'color_int', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _createdAtMeta =
       const VerificationMeta('createdAt');
   @override
@@ -44,7 +50,7 @@ class $GrimoireTableTable extends GrimoireTable
       type: DriftSqlType.dateTime, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
-      [uuid, name, desc, imagePath, createdAt, updatedAt];
+      [uuid, name, desc, iconAsset, colorInt, createdAt, updatedAt];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -71,9 +77,17 @@ class $GrimoireTableTable extends GrimoireTable
       context.handle(
           _descMeta, desc.isAcceptableOrUnknown(data['desc']!, _descMeta));
     }
-    if (data.containsKey('image_path')) {
-      context.handle(_imagePathMeta,
-          imagePath.isAcceptableOrUnknown(data['image_path']!, _imagePathMeta));
+    if (data.containsKey('icon_asset')) {
+      context.handle(_iconAssetMeta,
+          iconAsset.isAcceptableOrUnknown(data['icon_asset']!, _iconAssetMeta));
+    } else if (isInserting) {
+      context.missing(_iconAssetMeta);
+    }
+    if (data.containsKey('color_int')) {
+      context.handle(_colorIntMeta,
+          colorInt.isAcceptableOrUnknown(data['color_int']!, _colorIntMeta));
+    } else if (isInserting) {
+      context.missing(_colorIntMeta);
     }
     if (data.containsKey('created_at')) {
       context.handle(_createdAtMeta,
@@ -102,8 +116,10 @@ class $GrimoireTableTable extends GrimoireTable
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
       desc: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}desc']),
-      imagePath: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}image_path']),
+      iconAsset: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}icon_asset'])!,
+      colorInt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}color_int'])!,
       createdAt: attachedDatabase.typeMapping
           .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
       updatedAt: attachedDatabase.typeMapping
@@ -122,14 +138,16 @@ class GrimoireTableData extends DataClass
   final String uuid;
   final String name;
   final String? desc;
-  final String? imagePath;
+  final String iconAsset;
+  final int colorInt;
   final DateTime createdAt;
   final DateTime updatedAt;
   const GrimoireTableData(
       {required this.uuid,
       required this.name,
       this.desc,
-      this.imagePath,
+      required this.iconAsset,
+      required this.colorInt,
       required this.createdAt,
       required this.updatedAt});
   @override
@@ -140,9 +158,8 @@ class GrimoireTableData extends DataClass
     if (!nullToAbsent || desc != null) {
       map['desc'] = Variable<String>(desc);
     }
-    if (!nullToAbsent || imagePath != null) {
-      map['image_path'] = Variable<String>(imagePath);
-    }
+    map['icon_asset'] = Variable<String>(iconAsset);
+    map['color_int'] = Variable<int>(colorInt);
     map['created_at'] = Variable<DateTime>(createdAt);
     map['updated_at'] = Variable<DateTime>(updatedAt);
     return map;
@@ -153,9 +170,8 @@ class GrimoireTableData extends DataClass
       uuid: Value(uuid),
       name: Value(name),
       desc: desc == null && nullToAbsent ? const Value.absent() : Value(desc),
-      imagePath: imagePath == null && nullToAbsent
-          ? const Value.absent()
-          : Value(imagePath),
+      iconAsset: Value(iconAsset),
+      colorInt: Value(colorInt),
       createdAt: Value(createdAt),
       updatedAt: Value(updatedAt),
     );
@@ -168,7 +184,8 @@ class GrimoireTableData extends DataClass
       uuid: serializer.fromJson<String>(json['uuid']),
       name: serializer.fromJson<String>(json['name']),
       desc: serializer.fromJson<String?>(json['desc']),
-      imagePath: serializer.fromJson<String?>(json['imagePath']),
+      iconAsset: serializer.fromJson<String>(json['iconAsset']),
+      colorInt: serializer.fromJson<int>(json['colorInt']),
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
       updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
     );
@@ -180,7 +197,8 @@ class GrimoireTableData extends DataClass
       'uuid': serializer.toJson<String>(uuid),
       'name': serializer.toJson<String>(name),
       'desc': serializer.toJson<String?>(desc),
-      'imagePath': serializer.toJson<String?>(imagePath),
+      'iconAsset': serializer.toJson<String>(iconAsset),
+      'colorInt': serializer.toJson<int>(colorInt),
       'createdAt': serializer.toJson<DateTime>(createdAt),
       'updatedAt': serializer.toJson<DateTime>(updatedAt),
     };
@@ -190,14 +208,16 @@ class GrimoireTableData extends DataClass
           {String? uuid,
           String? name,
           Value<String?> desc = const Value.absent(),
-          Value<String?> imagePath = const Value.absent(),
+          String? iconAsset,
+          int? colorInt,
           DateTime? createdAt,
           DateTime? updatedAt}) =>
       GrimoireTableData(
         uuid: uuid ?? this.uuid,
         name: name ?? this.name,
         desc: desc.present ? desc.value : this.desc,
-        imagePath: imagePath.present ? imagePath.value : this.imagePath,
+        iconAsset: iconAsset ?? this.iconAsset,
+        colorInt: colorInt ?? this.colorInt,
         createdAt: createdAt ?? this.createdAt,
         updatedAt: updatedAt ?? this.updatedAt,
       );
@@ -206,7 +226,8 @@ class GrimoireTableData extends DataClass
       uuid: data.uuid.present ? data.uuid.value : this.uuid,
       name: data.name.present ? data.name.value : this.name,
       desc: data.desc.present ? data.desc.value : this.desc,
-      imagePath: data.imagePath.present ? data.imagePath.value : this.imagePath,
+      iconAsset: data.iconAsset.present ? data.iconAsset.value : this.iconAsset,
+      colorInt: data.colorInt.present ? data.colorInt.value : this.colorInt,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
       updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
     );
@@ -218,7 +239,8 @@ class GrimoireTableData extends DataClass
           ..write('uuid: $uuid, ')
           ..write('name: $name, ')
           ..write('desc: $desc, ')
-          ..write('imagePath: $imagePath, ')
+          ..write('iconAsset: $iconAsset, ')
+          ..write('colorInt: $colorInt, ')
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt')
           ..write(')'))
@@ -227,7 +249,7 @@ class GrimoireTableData extends DataClass
 
   @override
   int get hashCode =>
-      Object.hash(uuid, name, desc, imagePath, createdAt, updatedAt);
+      Object.hash(uuid, name, desc, iconAsset, colorInt, createdAt, updatedAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -235,7 +257,8 @@ class GrimoireTableData extends DataClass
           other.uuid == this.uuid &&
           other.name == this.name &&
           other.desc == this.desc &&
-          other.imagePath == this.imagePath &&
+          other.iconAsset == this.iconAsset &&
+          other.colorInt == this.colorInt &&
           other.createdAt == this.createdAt &&
           other.updatedAt == this.updatedAt);
 }
@@ -244,7 +267,8 @@ class GrimoireTableCompanion extends UpdateCompanion<GrimoireTableData> {
   final Value<String> uuid;
   final Value<String> name;
   final Value<String?> desc;
-  final Value<String?> imagePath;
+  final Value<String> iconAsset;
+  final Value<int> colorInt;
   final Value<DateTime> createdAt;
   final Value<DateTime> updatedAt;
   final Value<int> rowid;
@@ -252,7 +276,8 @@ class GrimoireTableCompanion extends UpdateCompanion<GrimoireTableData> {
     this.uuid = const Value.absent(),
     this.name = const Value.absent(),
     this.desc = const Value.absent(),
-    this.imagePath = const Value.absent(),
+    this.iconAsset = const Value.absent(),
+    this.colorInt = const Value.absent(),
     this.createdAt = const Value.absent(),
     this.updatedAt = const Value.absent(),
     this.rowid = const Value.absent(),
@@ -261,19 +286,23 @@ class GrimoireTableCompanion extends UpdateCompanion<GrimoireTableData> {
     required String uuid,
     required String name,
     this.desc = const Value.absent(),
-    this.imagePath = const Value.absent(),
+    required String iconAsset,
+    required int colorInt,
     required DateTime createdAt,
     required DateTime updatedAt,
     this.rowid = const Value.absent(),
   })  : uuid = Value(uuid),
         name = Value(name),
+        iconAsset = Value(iconAsset),
+        colorInt = Value(colorInt),
         createdAt = Value(createdAt),
         updatedAt = Value(updatedAt);
   static Insertable<GrimoireTableData> custom({
     Expression<String>? uuid,
     Expression<String>? name,
     Expression<String>? desc,
-    Expression<String>? imagePath,
+    Expression<String>? iconAsset,
+    Expression<int>? colorInt,
     Expression<DateTime>? createdAt,
     Expression<DateTime>? updatedAt,
     Expression<int>? rowid,
@@ -282,7 +311,8 @@ class GrimoireTableCompanion extends UpdateCompanion<GrimoireTableData> {
       if (uuid != null) 'uuid': uuid,
       if (name != null) 'name': name,
       if (desc != null) 'desc': desc,
-      if (imagePath != null) 'image_path': imagePath,
+      if (iconAsset != null) 'icon_asset': iconAsset,
+      if (colorInt != null) 'color_int': colorInt,
       if (createdAt != null) 'created_at': createdAt,
       if (updatedAt != null) 'updated_at': updatedAt,
       if (rowid != null) 'rowid': rowid,
@@ -293,7 +323,8 @@ class GrimoireTableCompanion extends UpdateCompanion<GrimoireTableData> {
       {Value<String>? uuid,
       Value<String>? name,
       Value<String?>? desc,
-      Value<String?>? imagePath,
+      Value<String>? iconAsset,
+      Value<int>? colorInt,
       Value<DateTime>? createdAt,
       Value<DateTime>? updatedAt,
       Value<int>? rowid}) {
@@ -301,7 +332,8 @@ class GrimoireTableCompanion extends UpdateCompanion<GrimoireTableData> {
       uuid: uuid ?? this.uuid,
       name: name ?? this.name,
       desc: desc ?? this.desc,
-      imagePath: imagePath ?? this.imagePath,
+      iconAsset: iconAsset ?? this.iconAsset,
+      colorInt: colorInt ?? this.colorInt,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       rowid: rowid ?? this.rowid,
@@ -320,8 +352,11 @@ class GrimoireTableCompanion extends UpdateCompanion<GrimoireTableData> {
     if (desc.present) {
       map['desc'] = Variable<String>(desc.value);
     }
-    if (imagePath.present) {
-      map['image_path'] = Variable<String>(imagePath.value);
+    if (iconAsset.present) {
+      map['icon_asset'] = Variable<String>(iconAsset.value);
+    }
+    if (colorInt.present) {
+      map['color_int'] = Variable<int>(colorInt.value);
     }
     if (createdAt.present) {
       map['created_at'] = Variable<DateTime>(createdAt.value);
@@ -341,7 +376,8 @@ class GrimoireTableCompanion extends UpdateCompanion<GrimoireTableData> {
           ..write('uuid: $uuid, ')
           ..write('name: $name, ')
           ..write('desc: $desc, ')
-          ..write('imagePath: $imagePath, ')
+          ..write('iconAsset: $iconAsset, ')
+          ..write('colorInt: $colorInt, ')
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
           ..write('rowid: $rowid')
@@ -1034,7 +1070,8 @@ typedef $$GrimoireTableTableCreateCompanionBuilder = GrimoireTableCompanion
   required String uuid,
   required String name,
   Value<String?> desc,
-  Value<String?> imagePath,
+  required String iconAsset,
+  required int colorInt,
   required DateTime createdAt,
   required DateTime updatedAt,
   Value<int> rowid,
@@ -1044,7 +1081,8 @@ typedef $$GrimoireTableTableUpdateCompanionBuilder = GrimoireTableCompanion
   Value<String> uuid,
   Value<String> name,
   Value<String?> desc,
-  Value<String?> imagePath,
+  Value<String> iconAsset,
+  Value<int> colorInt,
   Value<DateTime> createdAt,
   Value<DateTime> updatedAt,
   Value<int> rowid,
@@ -1070,7 +1108,8 @@ class $$GrimoireTableTableTableManager extends RootTableManager<
             Value<String> uuid = const Value.absent(),
             Value<String> name = const Value.absent(),
             Value<String?> desc = const Value.absent(),
-            Value<String?> imagePath = const Value.absent(),
+            Value<String> iconAsset = const Value.absent(),
+            Value<int> colorInt = const Value.absent(),
             Value<DateTime> createdAt = const Value.absent(),
             Value<DateTime> updatedAt = const Value.absent(),
             Value<int> rowid = const Value.absent(),
@@ -1079,7 +1118,8 @@ class $$GrimoireTableTableTableManager extends RootTableManager<
             uuid: uuid,
             name: name,
             desc: desc,
-            imagePath: imagePath,
+            iconAsset: iconAsset,
+            colorInt: colorInt,
             createdAt: createdAt,
             updatedAt: updatedAt,
             rowid: rowid,
@@ -1088,7 +1128,8 @@ class $$GrimoireTableTableTableManager extends RootTableManager<
             required String uuid,
             required String name,
             Value<String?> desc = const Value.absent(),
-            Value<String?> imagePath = const Value.absent(),
+            required String iconAsset,
+            required int colorInt,
             required DateTime createdAt,
             required DateTime updatedAt,
             Value<int> rowid = const Value.absent(),
@@ -1097,7 +1138,8 @@ class $$GrimoireTableTableTableManager extends RootTableManager<
             uuid: uuid,
             name: name,
             desc: desc,
-            imagePath: imagePath,
+            iconAsset: iconAsset,
+            colorInt: colorInt,
             createdAt: createdAt,
             updatedAt: updatedAt,
             rowid: rowid,
@@ -1123,8 +1165,13 @@ class $$GrimoireTableTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<String> get imagePath => $state.composableBuilder(
-      column: $state.table.imagePath,
+  ColumnFilters<String> get iconAsset => $state.composableBuilder(
+      column: $state.table.iconAsset,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get colorInt => $state.composableBuilder(
+      column: $state.table.colorInt,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -1157,8 +1204,13 @@ class $$GrimoireTableTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<String> get imagePath => $state.composableBuilder(
-      column: $state.table.imagePath,
+  ColumnOrderings<String> get iconAsset => $state.composableBuilder(
+      column: $state.table.iconAsset,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get colorInt => $state.composableBuilder(
+      column: $state.table.colorInt,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 

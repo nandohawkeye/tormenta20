@@ -15,6 +15,7 @@ class AddGrimorieBottomsheetDescField extends StatelessWidget {
         onChanged: (value) => desc.value = value,
         maxLines: 4,
         initialValue: desc.value,
+        textInputAction: TextInputAction.done,
         style: const TextStyle(fontSize: 16),
         decoration: InputDecoration(
           hintText: 'Descrição',

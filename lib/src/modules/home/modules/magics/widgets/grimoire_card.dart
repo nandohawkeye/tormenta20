@@ -1,4 +1,7 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
@@ -40,17 +43,20 @@ class GrimoireCard extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Icon(
-                            FontAwesomeIcons.leaf,
-                            size: 16,
-                            color: Colors.greenAccent,
+                          SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: SvgPicture.asset(
+                              'assets/icons/${grimoire.iconAsset}.svg',
+                              color: Color(grimoire.colorInt),
+                            ),
                           ),
-                          SizedBox(width: 6),
+                          const SizedBox(width: 6),
                           Text(
                             grimoire.name,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontFamily: 'tormenta',
-                              color: Colors.greenAccent,
+                              color: Color(grimoire.colorInt),
                               fontSize: 18,
                             ),
                           ),
@@ -67,22 +73,134 @@ class GrimoireCard extends StatelessWidget {
                         maxLines: 1,
                       ),
                       const SizedBox(height: 6),
-                      Row(
+                      Stack(
                         children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 125),
+                            child: SizedBox(
+                              height: 32,
+                              width: 32,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    width: .5,
+                                    color: palette.textSecundary,
+                                  ),
+                                  color: Colors.grey[800],
+                                ),
+                                child: const Center(
+                                    child: Text(
+                                  '+2',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 100),
+                            child: SizedBox(
+                              height: 32,
+                              width: 32,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.grey[800],
+                                  border: Border.all(
+                                    width: .5,
+                                    color: palette.textSecundary,
+                                  ),
+                                ),
+                                child: const Icon(
+                                  FontAwesomeIcons.userSlash,
+                                  size: 14,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 75),
+                            child: SizedBox(
+                              height: 32,
+                              width: 32,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.grey[800],
+                                  border: Border.all(
+                                    width: .5,
+                                    color: palette.textSecundary,
+                                  ),
+                                ),
+                                child: const Icon(
+                                  FontAwesomeIcons.userSlash,
+                                  size: 14,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 50),
+                            child: SizedBox(
+                              height: 32,
+                              width: 32,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.grey[800],
+                                  border: Border.all(
+                                    width: .5,
+                                    color: palette.textSecundary,
+                                  ),
+                                ),
+                                child: const Icon(
+                                  FontAwesomeIcons.userSlash,
+                                  size: 14,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 25),
+                            child: SizedBox(
+                              height: 32,
+                              width: 32,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.grey[800],
+                                  border: Border.all(
+                                    width: .5,
+                                    color: palette.textSecundary,
+                                  ),
+                                ),
+                                child: const Icon(
+                                  FontAwesomeIcons.userSlash,
+                                  size: 14,
+                                ),
+                              ),
+                            ),
+                          ),
                           SizedBox(
-                            height: 35,
-                            width: 35,
+                            height: 32,
+                            width: 32,
                             child: DecoratedBox(
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: palette.textDisable.withOpacity(.5),
+                                color: Colors.grey[800],
+                                border: Border.all(
+                                  width: .5,
+                                  color: palette.textSecundary,
+                                ),
                               ),
-                              child: Icon(
+                              child: const Icon(
                                 FontAwesomeIcons.userSlash,
-                                size: 16,
+                                size: 14,
                               ),
                             ),
-                          )
+                          ),
                         ],
                       )
                     ],

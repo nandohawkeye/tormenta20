@@ -108,7 +108,7 @@ abstract class Palettes {
         cancelCTABorder: const Color(0xFF221210),
         onCancelCTA: const Color(0xFFEA4335),
         popMenu: const Color(0xFF262626),
-        primary: const Color(0xFF1F6FEB),
+        primary: const Color(0xFFCC152A),
         secondary: const Color(0xFF262626),
         success: const Color(0xFF65C466),
         disable: const Color(0xFF5E6064),

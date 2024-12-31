@@ -4,9 +4,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/widgets/add_grimorie_bottomsheet/add_grimorie_bottomsheet_color_field.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/add_grimorie_bottomsheet/add_grimorie_bottomsheet_desc_field.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/add_grimorie_bottomsheet/add_grimorie_bottomsheet_header.dart';
-import 'package:tormenta20/src/modules/home/modules/magics/widgets/add_grimorie_bottomsheet/add_grimorie_bottomsheet_image_field.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/widgets/add_grimorie_bottomsheet/add_grimorie_bottomsheet_icon_field.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/add_grimorie_bottomsheet/add_grimorie_bottomsheet_name_field.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_character.dart';
@@ -33,8 +34,9 @@ class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
 
   late final ValueNotifier<String?> _name;
   late final ValueNotifier<String?> _desc;
-  late final ValueNotifier<String?> _imagePath;
   late final ValueNotifier<String?> _errorName;
+  late final ValueNotifier<int> _colorInt;
+  late final ValueNotifier<String> _iconAsset;
   String? _validName(String? value) {
     if (value?.isEmpty ?? true) {
       return 'O nome é obrigatório!';
@@ -51,15 +53,17 @@ class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
     _magics.addAll(widget.initialGrimoire?.magicsCharacters ?? []);
     _name = ValueNotifier<String?>(widget.initialGrimoire?.name);
     _desc = ValueNotifier<String?>(widget.initialGrimoire?.desc);
-    _imagePath = ValueNotifier<String?>(widget.initialGrimoire?.imagePath);
     _errorName = ValueNotifier<String?>(null);
+    _colorInt =
+        ValueNotifier<int>(widget.initialGrimoire?.colorInt ?? 0xFFCC152A);
+    _iconAsset =
+        ValueNotifier<String>(widget.initialGrimoire?.iconAsset ?? 'book');
   }
 
   @override
   void dispose() {
     _name.dispose();
     _desc.dispose();
-    _imagePath.dispose();
     _errorName.dispose();
     super.dispose();
   }
@@ -69,7 +73,7 @@ class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
     final mediaQuery = MediaQuery.of(context);
     final height = mediaQuery.size.height;
     final limite = ((height - kToolbarHeight) / height);
-    final initialSize = (limite * .6);
+    final initialSize = (limite * .9);
 
     return Stack(
       children: [
@@ -118,9 +122,13 @@ class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
                                 errorName: _errorName,
                               ),
                               T20UI.spaceHeight,
-                              const AddGrimorieBottomsheetImageField(),
-                              T20UI.spaceHeight,
                               AddGrimorieBottomsheetDescField(desc: _desc),
+                              T20UI.spaceHeight,
+                              AddGrimorieBottomsheetColorField(
+                                  colorInt: _colorInt),
+                              T20UI.spaceHeight,
+                              AddGrimorieBottomsheetIconField(
+                                  iconAsset: _iconAsset)
                             ],
                           ),
                         ),
@@ -149,6 +157,8 @@ class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
                                           createdAt: _createdAt ?? now,
                                           updatedAt: now,
                                           magicsCharacters: _magics,
+                                          iconAsset: _iconAsset.value,
+                                          colorInt: _colorInt.value,
                                         );
 
                                         Navigator.pop(context, grimoire);

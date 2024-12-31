@@ -6,17 +6,19 @@ class Grimoire {
   final String? desc;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final String? imagePath;
+  final String iconAsset;
+  final int colorInt;
   final List<MagicCharacter> magicsCharacters;
 
   Grimoire({
     required this.uuid,
     required this.name,
     this.desc,
-    this.imagePath,
     required this.createdAt,
     required this.updatedAt,
     required this.magicsCharacters,
+    required this.iconAsset,
+    required this.colorInt,
   });
 
   @override
@@ -26,8 +28,9 @@ class Grimoire {
       other.name == name &&
       other.createdAt == createdAt &&
       other.updatedAt == updatedAt &&
-      other.imagePath == imagePath &&
       other.uuid == uuid &&
+      other.iconAsset == iconAsset &&
+      other.colorInt == colorInt &&
       other.magicsCharacters == magicsCharacters;
 
   @override
@@ -36,7 +39,8 @@ class Grimoire {
       name.hashCode ^
       createdAt.hashCode ^
       updatedAt.hashCode ^
-      imagePath.hashCode ^
       uuid.hashCode ^
-      magicsCharacters.hashCode;
+      magicsCharacters.hashCode ^
+      iconAsset.hashCode ^
+      colorInt.hashCode;
 }

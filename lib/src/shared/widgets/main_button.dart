@@ -3,10 +3,18 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 
 class MainButton extends StatelessWidget {
-  const MainButton({super.key, required this.label, required this.onTap});
+  const MainButton({
+    super.key,
+    required this.label,
+    required this.onTap,
+    this.backgroundColor,
+    this.textColor,
+  });
 
   final String label;
   final Function() onTap;
+  final Color? backgroundColor;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +24,7 @@ class MainButton extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: T20UI.borderRadius,
-          color: palette.primaryCTA.withOpacity(.4),
+          color: backgroundColor ?? palette.primaryCTA.withOpacity(.4),
         ),
         child: Material(
           color: Colors.transparent,
@@ -27,8 +35,9 @@ class MainButton extends StatelessWidget {
             child: Center(
               child: Text(
                 label,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
+                  color: textColor,
                   fontWeight: FontWeight.w500,
                   fontFamily: 'tormenta',
                 ),

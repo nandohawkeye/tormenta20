@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/grimorie_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/grimories_store.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/add_grimorie_bottomsheet/add_grimorie_bottomsheet.dart';
@@ -76,6 +77,8 @@ class GrimoireHeader extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: T20UI.spaceSize),
                   child: MainButton(
                     label: 'Crie um grimório',
+                    textColor: palette.primary.withOpacity(.6),
+                    backgroundColor: palette.cardBackground.withOpacity(.5),
                     onTap: () async => await addGrimoire(),
                   ),
                 )

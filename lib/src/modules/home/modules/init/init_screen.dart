@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
@@ -36,6 +37,8 @@ class InitScreen extends StatelessWidget {
             ),
             child: MainButton(
               label: 'Crie um personagem',
+              textColor: palette.primary.withOpacity(.6),
+              backgroundColor: palette.cardBackground.withOpacity(.5),
               onTap: () async {},
             ),
           ),
@@ -61,6 +64,8 @@ class InitScreen extends StatelessWidget {
             child: MainButton(
               label: 'Crie uma aventura',
               onTap: () async {},
+              textColor: palette.primary.withOpacity(.6),
+              backgroundColor: palette.cardBackground.withOpacity(.5),
             ),
           ),
           Padding(
@@ -85,6 +90,8 @@ class InitScreen extends StatelessWidget {
             child: MainButton(
               label: 'Crie uma ameaça',
               onTap: () async {},
+              textColor: palette.primary.withOpacity(.6),
+              backgroundColor: palette.cardBackground.withOpacity(.5),
             ),
           ),
         ],
