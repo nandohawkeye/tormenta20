@@ -13,8 +13,8 @@ import 'package:tormenta20/src/shared/entities/magic/magic_school.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_type.dart';
 import 'package:tormenta20/src/shared/extensions/string_ext.dart';
 
-class AddMagicsBottomsheetStore extends ChangeNotifier {
-  AddMagicsBottomsheetStore(List<Magic> initialMagics) {
+class AddMagicsStore extends ChangeNotifier {
+  AddMagicsStore(List<Magic> initialMagics) {
     _disabledMagics.addAll(initialMagics);
   }
 

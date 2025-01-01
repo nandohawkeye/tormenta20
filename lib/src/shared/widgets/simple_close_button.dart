@@ -4,7 +4,9 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 
 class SimpleCloseButton extends StatelessWidget {
-  const SimpleCloseButton({super.key});
+  const SimpleCloseButton({super.key, this.backgroundColor});
+
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,7 @@ class SimpleCloseButton extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: T20UI.borderRadius,
-          color: palette.onBottomsheet,
+          color: backgroundColor ?? palette.onBottomsheet,
         ),
         child: Material(
           color: Colors.transparent,

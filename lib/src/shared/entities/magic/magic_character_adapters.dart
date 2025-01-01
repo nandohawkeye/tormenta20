@@ -1,5 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
+import 'package:tormenta20/src/shared/entities/magic/magic.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_character.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_circles.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_duration.dart';
@@ -7,8 +8,27 @@ import 'package:tormenta20/src/shared/entities/magic/magic_execution.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_range.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_school.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_type.dart';
+import 'package:uuid/uuid.dart';
 
 abstract class MagicCharacterAdapters {
+  static MagicCharacter createFromMagic(Magic magic, String grimorieUuid) {
+    return MagicCharacter(
+      uuid: const Uuid().v4(),
+      grimoireUUid: grimorieUuid,
+      id: magic.id,
+      name: magic.name,
+      desc: magic.desc,
+      circle: magic.circle,
+      type: magic.type,
+      school: magic.school,
+      execution: magic.execution,
+      duration: magic.duration,
+      range: magic.range,
+      resistence: magic.resistence,
+      targetAreaEfect: magic.targetAreaEfect,
+    );
+  }
+
   static MagicCharacter fromDriftData(MagicCharacterTableData data) {
     return MagicCharacter(
       uuid: data.uuid,

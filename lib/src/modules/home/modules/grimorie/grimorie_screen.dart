@@ -8,12 +8,14 @@ import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/grimorie_store.dart';
-import 'package:tormenta20/src/modules/home/modules/grimorie/widgets/add_magics_bottomsheet/add_magics_bottomsheet.dart';
+import 'package:tormenta20/src/modules/home/modules/grimorie/modules/add_magics/add_magics_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/add_grimorie_bottomsheet/add_grimorie_bottomsheet.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
+import 'package:tormenta20/src/shared/entities/grimoire/grimoire_adapters.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic.dart';
+import 'package:tormenta20/src/shared/entities/magic/magic_character_adapters.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
 class GrimorieScreen extends StatefulWidget {
@@ -160,30 +162,51 @@ class _GrimorieScreenState extends State<GrimorieScreen> {
                       SimpleButton(
                         icon: FontAwesomeIcons.plus,
                         onTap: () async {
-                          await showModalBottomSheet<List<Magic>?>(
-                            isScrollControlled: true,
-                            isDismissible: true,
-                            backgroundColor: Colors.transparent,
-                            context: context,
-                            builder: (context) => Padding(
-                              padding: EdgeInsets.only(
-                                bottom:
-                                    MediaQuery.of(context).viewInsets.bottom,
+                          await Navigator.push<List<Magic>?>(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => AddMagicsScreen(
+                                initialMagics: _store.grimoire.magicsCharacters
+                                    .map((m) => m as Magic)
+                                    .toList(),
                               ),
-                              child:
-                                  const AddMagicsBottomsheet(initialMagics: []),
                             ),
                           ).then((result) async {
-                            // if (result != null) {
-                            //   await GetIt.I<AppDatabase>()
-                            //       .grimoireDAO
-                            //       .insertGrimoire(result)
-                            //       .then((failure) {
-                            //     if (failure == null) {
-                            //       _store.updateGrimorie(result);
-                            //     }
-                            //   });
-                            // }
+                            if (result != null) {
+                              print('result: $result');
+                              try {
+                                final newMagics = result
+                                    .map((m) =>
+                                        MagicCharacterAdapters.createFromMagic(
+                                            m, _store.grimoire.uuid))
+                                    .toList();
+                                final oldMagics =
+                                    _store.grimoire.magicsCharacters;
+
+                                final upGriporio =
+                                    GrimoireAdapters.copyWithNewMagics(
+                                        _store.grimoire,
+                                        [...oldMagics, ...newMagics]);
+
+                                await Future.forEach(
+                                    newMagics,
+                                    (magic) async =>
+                                        await GetIt.I<AppDatabase>()
+                                            .magicCharacterDAO
+                                            .insertMagic(magic));
+
+                                await GetIt.I<AppDatabase>()
+                                    .grimoireDAO
+                                    .insertGrimoire(upGriporio)
+                                    .then((failure) {
+                                  if (failure == null) {
+                                    _store.updateGrimorie(upGriporio);
+                                  }
+                                });
+                              } catch (e) {
+                                print('erro: $e');
+                              }
+                            }
                           });
                         },
                       )
@@ -191,16 +214,21 @@ class _GrimorieScreenState extends State<GrimorieScreen> {
                   ),
                 ),
                 T20UI.spaceHeight,
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: T20UI.spaceSize - 4),
-                  child: MainButton(
-                    label: 'Adicione uma magia',
-                    textColor: palette.primary.withOpacity(.6),
-                    backgroundColor: palette.cardBackground.withOpacity(.5),
-                    onTap: () {},
-                  ),
-                )
+                AnimatedBuilder(
+                    animation: _store,
+                    builder: (_, __) => _store.grimoire.magicsCharacters.isEmpty
+                        ? Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: T20UI.spaceSize - 4),
+                            child: MainButton(
+                              label: 'Adicione uma magia',
+                              textColor: palette.primary.withOpacity(.6),
+                              backgroundColor:
+                                  palette.cardBackground.withOpacity(.5),
+                              onTap: () {},
+                            ),
+                          )
+                        : Text('Tem mágicas '))
               ],
             ),
           ),

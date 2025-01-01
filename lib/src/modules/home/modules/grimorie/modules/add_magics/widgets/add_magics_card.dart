@@ -1,0 +1,104 @@
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_bottomsheet/magic_bottomsheet.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_card/magic_card_indicator_search.dart';
+import 'package:tormenta20/src/shared/entities/magic/magic.dart';
+import 'package:tormenta20/src/shared/widgets/custom_checked.dart';
+
+class AddMagicsCard extends StatelessWidget {
+  const AddMagicsCard({
+    super.key,
+    required this.magic,
+    required this.selectedMagics,
+    required this.onTap,
+    required this.searchFilter,
+    required this.disabledMagics,
+  });
+
+  final Magic magic;
+  final List<Magic> selectedMagics;
+  final String searchFilter;
+  final List<Magic> disabledMagics;
+  final Function(Magic) onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final isDisable = disabledMagics.any((m) => m.id == magic.id);
+    final bool hasInTarget = searchFilter.isEmpty
+        ? false
+        : magic.targetAreaEfect.contains(searchFilter);
+    final bool hasInDesc =
+        searchFilter.isEmpty ? false : magic.desc.contains(searchFilter);
+    return Opacity(
+      opacity: isDisable ? .2 : 1,
+      child: Card(
+        child: InkWell(
+          borderRadius: T20UI.borderRadius,
+          onTap: isDisable ? null : () => onTap(magic),
+          enableFeedback: false,
+          onLongPress: isDisable
+              ? null
+              : () async {
+                  await showModalBottomSheet(
+                    isScrollControlled: true,
+                    isDismissible: true,
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    builder: (context) => Padding(
+                      padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom,
+                      ),
+                      child: MagicBottomsheet(magic: magic),
+                    ),
+                  );
+                },
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        magic.name,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4),
+                        child: Wrap(
+                          runSpacing: 6,
+                          spacing: 16,
+                          children: [
+                            if (hasInTarget)
+                              const MagicCardIndicatorSearch(
+                                icon: FontAwesomeIcons.locationCrosshairs,
+                                label: 'no alvo/área/efeito',
+                              ),
+                            if (hasInDesc)
+                              const MagicCardIndicatorSearch(
+                                icon: FontAwesomeIcons.scroll,
+                                label: 'na descrição',
+                              ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                CustomChecked(
+                  value: selectedMagics.contains(magic),
+                  isEnabledToTap: false,
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

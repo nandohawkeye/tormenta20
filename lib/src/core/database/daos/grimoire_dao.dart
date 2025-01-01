@@ -17,7 +17,7 @@ class GrimoireDAO extends DatabaseAccessor<AppDatabase>
   Future<Failure?> insertGrimoire(Grimoire entity) async {
     try {
       await into(grimoireTable).insertOnConflictUpdate(
-        GrimoiteAdapters.toCompanion(entity),
+        GrimoireAdapters.toCompanion(entity),
       );
 
       return null;
@@ -44,7 +44,7 @@ class GrimoireDAO extends DatabaseAccessor<AppDatabase>
       final rows = await (select(grimoireTable)).join([
         leftOuterJoin(
           magicCharacterTable,
-          magicCharacterTable.uuid.equalsExp(
+          grimoireTable.uuid.equalsExp(
             magicCharacterTable.grimoireUUid,
           ),
         ),
@@ -70,7 +70,7 @@ class GrimoireDAO extends DatabaseAccessor<AppDatabase>
       return (
         failure: null,
         grimoires: grimoiresDTO.values
-            .map((g) => GrimoiteAdapters.fromDriftDto(g))
+            .map((g) => GrimoireAdapters.fromDriftDto(g))
             .toList()
       );
     } catch (e) {
