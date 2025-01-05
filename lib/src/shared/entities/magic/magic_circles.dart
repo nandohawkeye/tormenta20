@@ -8,7 +8,7 @@ final MagicCircle fifthCircle = MagicCircle(level: 5, pm: 15);
 
 MagicCircle magicCircleFromLevel(int level) {
   if (level == 1) {
-    return fifthCircle;
+    return firstCircle;
   } else if (level == 2) {
     return secondCircle;
   } else if (level == 3) {

@@ -28,6 +28,14 @@ class GrimoireDAO extends DatabaseAccessor<AppDatabase>
 
   Future<Failure?> deleteGrimoire(Grimoire entity) async {
     try {
+      final magics = entity.magicsCharacters;
+
+      await Future.forEach(magics, (magic) async {
+        await (delete(magicCharacterTable)
+              ..where((tbl) => tbl.uuid.equals(entity.uuid)))
+            .go();
+      });
+
       await (delete(grimoireTable)
             ..where((tbl) => tbl.uuid.equals(entity.uuid)))
           .go();
@@ -75,6 +83,101 @@ class GrimoireDAO extends DatabaseAccessor<AppDatabase>
       );
     } catch (e) {
       return (failure: Failure(e.toString()), grimoires: <Grimoire>[]);
+    }
+  }
+
+  Future<({Failure? failure, Stream<List<Grimoire>>? grimoires})>
+      watchAllGrimoires() async {
+    try {
+      return (
+        failure: null,
+        grimoires: (select(grimoireTable))
+            .join([
+              leftOuterJoin(
+                magicCharacterTable,
+                grimoireTable.uuid.equalsExp(
+                  magicCharacterTable.grimoireUUid,
+                ),
+              ),
+            ])
+            .watch()
+            .map((rows) {
+              Map<String, GrimoireDriftDto> grimoiresDTO = {};
+
+              for (var row in rows) {
+                final grimoireData = row.readTable(grimoireTable);
+                final magicCharactersData =
+                    row.readTableOrNull(magicCharacterTable);
+
+                if (!(grimoiresDTO.containsKey(grimoireData.uuid))) {
+                  grimoiresDTO.addAll({
+                    grimoireData.uuid:
+                        GrimoireDriftDto(grimoireData: grimoireData)
+                  });
+                }
+
+                if (magicCharactersData != null) {
+                  grimoiresDTO[grimoireData.uuid]!
+                      .magicsData
+                      .add(magicCharactersData);
+                }
+              }
+
+              return grimoiresDTO.values
+                  .map((g) => GrimoireAdapters.fromDriftDto(g))
+                  .toList();
+            })
+      );
+    } catch (e) {
+      return (failure: Failure(e.toString()), grimoires: null);
+    }
+  }
+
+  Future<({Failure? failure, Stream<List<Grimoire>>? grimoires})>
+      watchAllGrimoire(String grimoireUuid) async {
+    try {
+      return (
+        failure: null,
+        grimoires: (select(grimoireTable)
+              ..where((tbl) => tbl.uuid.equals(grimoireUuid)))
+            .join([
+              leftOuterJoin(
+                magicCharacterTable,
+                grimoireTable.uuid.equalsExp(
+                  magicCharacterTable.grimoireUUid,
+                ),
+              ),
+            ])
+            .watch()
+            .map((rows) {
+              Map<String, GrimoireDriftDto> grimoiresDTO = {};
+
+              for (var row in rows) {
+                final grimoireData = row.readTable(grimoireTable);
+                final magicCharactersData =
+                    row.readTableOrNull(magicCharacterTable);
+
+                if (!(grimoiresDTO.containsKey(grimoireData.uuid))) {
+                  grimoiresDTO.addAll({
+                    grimoireData.uuid:
+                        GrimoireDriftDto(grimoireData: grimoireData)
+                  });
+                }
+
+                if (magicCharactersData != null) {
+                  grimoiresDTO[grimoireData.uuid]!
+                      .magicsData
+                      .add(magicCharactersData);
+                }
+              }
+
+              return grimoiresDTO.values
+                  .map((g) => GrimoireAdapters.fromDriftDto(g))
+                  .toList();
+            })
+      );
+    } catch (e) {
+      return (failure: Failure(e.toString()), grimoires: null);
     }
   }
 }

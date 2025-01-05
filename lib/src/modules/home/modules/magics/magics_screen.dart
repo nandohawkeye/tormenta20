@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/grimories_store.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/magics_store.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/grimoire_header.dart';
@@ -21,7 +22,7 @@ class _MagicsScreenState extends State<MagicsScreen> {
   void initState() {
     super.initState();
     _magicStore = MagicsStore();
-    _grimoriesStore = GrimoriesStore();
+    _grimoriesStore = GetIt.I<GrimoriesStore>();
     _magicStore.init();
   }
 

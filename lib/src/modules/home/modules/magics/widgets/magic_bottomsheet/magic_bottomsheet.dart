@@ -4,32 +4,53 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_bottomsheet/magic_bottomsheet_grimorie_card.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_bottomsheet/magic_bottomsheet_item.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_bottomsheet/magic_bottomsheet_store.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic.dart';
 import 'package:tormenta20/src/shared/widgets/bottom_sheet_divider.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
-class MagicBottomsheet extends StatelessWidget {
+class MagicBottomsheet extends StatefulWidget {
   const MagicBottomsheet({super.key, required this.magic});
 
   final Magic magic;
 
   @override
+  State<MagicBottomsheet> createState() => _MagicBottomsheetState();
+}
+
+class _MagicBottomsheetState extends State<MagicBottomsheet> {
+  late final MagicBottomsheetStore _store;
+
+  @override
+  void initState() {
+    super.initState();
+    _store = MagicBottomsheetStore(widget.magic);
+  }
+
+  @override
+  void dispose() {
+    _store.dispose();
+    super.dispose();
+  }
+
+  Map<String, String> schollLabels = {
+    'Abjuracao': 'Abjuração',
+    'Adivinhacao': 'Adivinhação',
+    'Convocacao': 'Convocação',
+    'Evocacao': 'Evocação',
+    'Ilusao': 'Ilusão',
+    'Transmutacao': 'Transmutação',
+  };
+
+  Map<String, String> executionsLabels = {
+    'Padrao': 'Padrão',
+    'Reacao': 'Reação',
+  };
+
+  @override
   Widget build(BuildContext context) {
-    Map<String, String> schollLabels = {
-      'Abjuracao': 'Abjuração',
-      'Adivinhacao': 'Adivinhação',
-      'Convocacao': 'Convocação',
-      'Evocacao': 'Evocação',
-      'Ilusao': 'Ilusão',
-      'Transmutacao': 'Transmutação',
-    };
-
-    Map<String, String> executionsLabels = {
-      'Padrao': 'Padrão',
-      'Reacao': 'Reação',
-    };
-
     final mediaQuery = MediaQuery.of(context);
     final height = mediaQuery.size.height;
     final limite = ((height - kToolbarHeight) / height);
@@ -72,7 +93,7 @@ class MagicBottomsheet extends StatelessWidget {
                           Padding(
                             padding: T20UI.horizontalPadding,
                             child: Text(
-                              magic.name,
+                              widget.magic.name,
                               style: const TextStyle(
                                 fontSize: 18,
                                 fontFamily: 'tormenta',
@@ -83,6 +104,44 @@ class MagicBottomsheet extends StatelessWidget {
                         ],
                       ),
                       const BottomSheetDivider(verticalPadding: 0),
+                      T20UI.spaceHeight,
+                      AnimatedBuilder(
+                        animation: _store,
+                        builder: (_, __) {
+                          return _store.grimories.isEmpty
+                              ? const SizedBox.shrink()
+                              : Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    LimitedBox(
+                                      maxHeight: T20UI.inputHeight *
+                                          MediaQuery.of(context)
+                                              .textScaler
+                                              .scale(1),
+                                      child: ListView.separated(
+                                        shrinkWrap: true,
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: T20UI.spaceSize - 4),
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: _store.grimories.length,
+                                        separatorBuilder:
+                                            T20UI.separatorBuilderHorizontal,
+                                        itemBuilder: (_, index) =>
+                                            MagicBottomsheetGrimorieCard(
+                                          grimoire: _store.grimories[index],
+                                          magic: widget.magic,
+                                          onTap: _store.onTapGrimoire,
+                                        ),
+                                      ),
+                                    ),
+                                    T20UI.spaceHeight,
+                                    const BottomSheetDivider(
+                                        verticalPadding: 0),
+                                  ],
+                                );
+                        },
+                      ),
                       Expanded(
                         child: SingleChildScrollView(
                           controller: scrollController,
@@ -100,55 +159,57 @@ class MagicBottomsheet extends StatelessWidget {
                                   children: [
                                     MagicBottomsheetItem(
                                       icon: FontAwesomeIcons.circleDot,
-                                      preffix: '${magic.circle.level}˚',
+                                      preffix: '${widget.magic.circle.level}˚',
                                       text: ' circulo',
                                     ),
                                     MagicBottomsheetItem(
                                       preffix: 'Tipo: ',
                                       icon: FontAwesomeIcons.hatWizard,
-                                      text: magic.type.name,
+                                      text: widget.magic.type.name,
                                     ),
                                     MagicBottomsheetItem(
                                       preffix: 'Alcance: ',
                                       icon: FontAwesomeIcons.peopleArrows,
-                                      text: magic.range.name == 'Medio'
+                                      text: widget.magic.range.name == 'Medio'
                                           ? 'Médio'
-                                          : magic.range.name,
+                                          : widget.magic.range.name,
                                     ),
                                     MagicBottomsheetItem(
                                       preffix: 'Escola: ',
                                       icon: FontAwesomeIcons.school,
-                                      text: schollLabels[magic.school.name] ??
-                                          magic.school.name,
+                                      text: schollLabels[
+                                              widget.magic.school.name] ??
+                                          widget.magic.school.name,
                                     ),
                                     MagicBottomsheetItem(
                                       preffix: 'Execução: ',
                                       icon: FontAwesomeIcons.handSparkles,
                                       text: executionsLabels[
-                                              magic.execution.name] ??
-                                          magic.execution.name,
+                                              widget.magic.execution.name] ??
+                                          widget.magic.execution.name,
                                     ),
                                     MagicBottomsheetItem(
                                       preffix: 'Duração: ',
                                       icon: FontAwesomeIcons.hourglassHalf,
-                                      text: magic.duration.name == 'Instantanea'
+                                      text: widget.magic.duration.name ==
+                                              'Instantanea'
                                           ? 'Instantânea'
-                                          : magic.duration.name,
+                                          : widget.magic.duration.name,
                                     ),
                                     MagicBottomsheetItem(
                                       preffix: 'Resistência: ',
                                       icon: FontAwesomeIcons.shieldHalved,
-                                      text: magic.resistence,
+                                      text: widget.magic.resistence,
                                     ),
                                     MagicBottomsheetItem(
                                       preffix: 'Alvo/Área/Efeito: ',
                                       icon: FontAwesomeIcons.locationCrosshairs,
-                                      text: magic.targetAreaEfect,
+                                      text: widget.magic.targetAreaEfect,
                                     ),
                                     MagicBottomsheetItem(
                                       preffix: 'Descrição: ',
                                       icon: FontAwesomeIcons.scroll,
-                                      text: magic.desc,
+                                      text: widget.magic.desc,
                                     ),
                                   ],
                                 ),

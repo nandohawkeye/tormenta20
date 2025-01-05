@@ -18,8 +18,6 @@ class MagicCharacterDAO extends DatabaseAccessor<AppDatabase>
         MagicCharacterAdapters.toCompanion(entity),
       );
 
-      print('inseriu mágica');
-
       return null;
     } catch (e) {
       print('erro: $e');
