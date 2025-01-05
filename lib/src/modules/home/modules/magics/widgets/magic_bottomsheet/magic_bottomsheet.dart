@@ -12,9 +12,14 @@ import 'package:tormenta20/src/shared/widgets/bottom_sheet_divider.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
 class MagicBottomsheet extends StatefulWidget {
-  const MagicBottomsheet({super.key, required this.magic});
+  const MagicBottomsheet({
+    super.key,
+    required this.magic,
+    required this.enableGrimories,
+  });
 
   final Magic magic;
+  final bool enableGrimories;
 
   @override
   State<MagicBottomsheet> createState() => _MagicBottomsheetState();
@@ -104,16 +109,17 @@ class _MagicBottomsheetState extends State<MagicBottomsheet> {
                         ],
                       ),
                       const BottomSheetDivider(verticalPadding: 0),
-                      T20UI.spaceHeight,
                       AnimatedBuilder(
                         animation: _store,
                         builder: (_, __) {
-                          return _store.grimories.isEmpty
+                          return _store.grimories.isEmpty ||
+                                  !widget.enableGrimories
                               ? const SizedBox.shrink()
                               : Column(
                                   mainAxisSize: MainAxisSize.min,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    T20UI.spaceHeight,
                                     LimitedBox(
                                       maxHeight: T20UI.inputHeight *
                                           MediaQuery.of(context)

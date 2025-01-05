@@ -20,7 +20,6 @@ class MagicCharacterDAO extends DatabaseAccessor<AppDatabase>
 
       return null;
     } catch (e) {
-      print('erro: $e');
       return Failure(e.toString());
     }
   }

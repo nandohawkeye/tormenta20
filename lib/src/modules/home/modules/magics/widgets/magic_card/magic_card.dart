@@ -39,7 +39,10 @@ class MagicCard extends StatelessWidget {
                 padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom,
                 ),
-                child: MagicBottomsheet(magic: magic),
+                child: MagicBottomsheet(
+                  magic: magic,
+                  enableGrimories: true,
+                ),
               ),
             );
           },
