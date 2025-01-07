@@ -27,6 +27,8 @@ class MagicCharacterTable extends Table {
 
   TextColumn get targetAreaEfect => text()();
 
+  TextColumn get publication => text()();
+
   @override
   Set<Column>? get primaryKey => {uuid};
 }

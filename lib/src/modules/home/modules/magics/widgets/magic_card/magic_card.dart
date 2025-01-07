@@ -19,6 +19,8 @@ class MagicCard extends StatelessWidget {
         : magic.targetAreaEfect.contains(searchFilter);
     final bool hasInDesc =
         searchFilter.isEmpty ? false : magic.desc.contains(searchFilter);
+    final bool hasInPublication =
+        searchFilter.isEmpty ? false : magic.publication.contains(searchFilter);
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: T20UI.borderRadius,
@@ -72,6 +74,11 @@ class MagicCard extends StatelessWidget {
                       const MagicCardIndicatorSearch(
                         icon: FontAwesomeIcons.scroll,
                         label: 'na descrição',
+                      ),
+                    if (hasInPublication)
+                      const MagicCardIndicatorSearch(
+                        icon: FontAwesomeIcons.bookOpen,
+                        label: 'na publicação',
                       ),
                   ],
                 )

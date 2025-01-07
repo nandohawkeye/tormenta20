@@ -30,6 +30,8 @@ class AddMagicsCard extends StatelessWidget {
         : magic.targetAreaEfect.contains(searchFilter);
     final bool hasInDesc =
         searchFilter.isEmpty ? false : magic.desc.contains(searchFilter);
+    final bool hasInPublication =
+        searchFilter.isEmpty ? false : magic.publication.contains(searchFilter);
     return Opacity(
       opacity: isDisable ? .2 : 1,
       child: Card(
@@ -86,6 +88,11 @@ class AddMagicsCard extends StatelessWidget {
                               const MagicCardIndicatorSearch(
                                 icon: FontAwesomeIcons.scroll,
                                 label: 'na descrição',
+                              ),
+                            if (hasInPublication)
+                              const MagicCardIndicatorSearch(
+                                icon: FontAwesomeIcons.bookOpen,
+                                label: 'na publicação',
                               ),
                           ],
                         ),

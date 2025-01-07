@@ -17,6 +17,7 @@ class Magic {
   final String resistence;
   final String targetAreaEfect;
   final int id;
+  final String publication;
 
   Magic({
     required this.id,
@@ -30,6 +31,7 @@ class Magic {
     required this.range,
     required this.resistence,
     required this.targetAreaEfect,
+    required this.publication,
   });
 
   @override
@@ -45,7 +47,8 @@ class Magic {
       other.range == range &&
       other.resistence == resistence &&
       other.targetAreaEfect == targetAreaEfect &&
-      other.id == id;
+      other.id == id &&
+      other.publication == publication;
 
   @override
   int get hashCode =>
@@ -59,5 +62,6 @@ class Magic {
       range.hashCode ^
       resistence.hashCode ^
       targetAreaEfect.hashCode ^
-      id.hashCode;
+      id.hashCode ^
+      publication.hashCode;
 }

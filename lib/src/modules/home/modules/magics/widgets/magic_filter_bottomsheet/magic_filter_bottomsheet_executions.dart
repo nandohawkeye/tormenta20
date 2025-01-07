@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_filter_bottomsheet/magic_filter_bottomsheet_item.dart';
+import 'package:tormenta20/src/shared/entities/magic/magic_utils.dart';
 
 class MagicFilterBottomsheetExecutions extends StatelessWidget {
   const MagicFilterBottomsheetExecutions({
@@ -18,11 +19,6 @@ class MagicFilterBottomsheetExecutions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Map<String, String> labels = {
-      'Padrao': 'Padrão',
-      'Reacao': 'Reação',
-    };
-
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: T20UI.borderRadius,
@@ -66,7 +62,7 @@ class MagicFilterBottomsheetExecutions extends StatelessWidget {
                 children: itens
                     .map(
                       (i) => MagicFilterBottomsheetItem(
-                        label: labels[i.name] ?? i.name,
+                        label: MagicUtils.executionsLabels[i.name] ?? i.name,
                         checked: itensSelected.contains(i),
                         type: i,
                         onTap: onTap,

@@ -45,6 +45,10 @@ abstract class MagicsUtils {
     MagicDuration.Cena,
     MagicDuration.Instantanea,
     MagicDuration.Sustentada,
+    MagicDuration.UmDia,
+    MagicDuration.UmaRodada,
+    MagicDuration.UmTurno,
+    MagicDuration.Umd4Rodadas,
   ];
 
   static List<MagicExecution> allExecutions = [
@@ -52,6 +56,7 @@ abstract class MagicsUtils {
     MagicExecution.Livre,
     MagicExecution.Padrao,
     MagicExecution.Reacao,
+    MagicExecution.Movimento,
   ];
 
   static List<String> allResistencies = [

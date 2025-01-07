@@ -106,6 +106,10 @@ class MagicFilterBottomsheetStore extends ChangeNotifier {
     MagicDuration.Cena,
     MagicDuration.Instantanea,
     MagicDuration.Sustentada,
+    MagicDuration.UmDia,
+    MagicDuration.UmaRodada,
+    MagicDuration.UmTurno,
+    MagicDuration.Umd4Rodadas,
   ];
   List<MagicDuration> get durations => _durations;
   List<MagicDuration> _durationsSelecteds = [];
@@ -124,6 +128,7 @@ class MagicFilterBottomsheetStore extends ChangeNotifier {
     MagicExecution.Livre,
     MagicExecution.Padrao,
     MagicExecution.Reacao,
+    MagicExecution.Movimento,
   ];
   List<MagicExecution> get executions => _executions;
   List<MagicExecution> _executionsSelecteds = [];

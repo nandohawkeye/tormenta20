@@ -467,6 +467,12 @@ class $MagicCharacterTableTable extends MagicCharacterTable
   late final GeneratedColumn<String> targetAreaEfect = GeneratedColumn<String>(
       'target_area_efect', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _publicationMeta =
+      const VerificationMeta('publication');
+  @override
+  late final GeneratedColumn<String> publication = GeneratedColumn<String>(
+      'publication', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [
         magicId,
@@ -481,7 +487,8 @@ class $MagicCharacterTableTable extends MagicCharacterTable
         durationIndex,
         rangeIndex,
         resistence,
-        targetAreaEfect
+        targetAreaEfect,
+        publication
       ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -588,6 +595,14 @@ class $MagicCharacterTableTable extends MagicCharacterTable
     } else if (isInserting) {
       context.missing(_targetAreaEfectMeta);
     }
+    if (data.containsKey('publication')) {
+      context.handle(
+          _publicationMeta,
+          publication.isAcceptableOrUnknown(
+              data['publication']!, _publicationMeta));
+    } else if (isInserting) {
+      context.missing(_publicationMeta);
+    }
     return context;
   }
 
@@ -624,6 +639,8 @@ class $MagicCharacterTableTable extends MagicCharacterTable
           .read(DriftSqlType.string, data['${effectivePrefix}resistence'])!,
       targetAreaEfect: attachedDatabase.typeMapping.read(
           DriftSqlType.string, data['${effectivePrefix}target_area_efect'])!,
+      publication: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}publication'])!,
     );
   }
 
@@ -648,6 +665,7 @@ class MagicCharacterTableData extends DataClass
   final int rangeIndex;
   final String resistence;
   final String targetAreaEfect;
+  final String publication;
   const MagicCharacterTableData(
       {required this.magicId,
       required this.uuid,
@@ -661,7 +679,8 @@ class MagicCharacterTableData extends DataClass
       required this.durationIndex,
       required this.rangeIndex,
       required this.resistence,
-      required this.targetAreaEfect});
+      required this.targetAreaEfect,
+      required this.publication});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -678,6 +697,7 @@ class MagicCharacterTableData extends DataClass
     map['range_index'] = Variable<int>(rangeIndex);
     map['resistence'] = Variable<String>(resistence);
     map['target_area_efect'] = Variable<String>(targetAreaEfect);
+    map['publication'] = Variable<String>(publication);
     return map;
   }
 
@@ -696,6 +716,7 @@ class MagicCharacterTableData extends DataClass
       rangeIndex: Value(rangeIndex),
       resistence: Value(resistence),
       targetAreaEfect: Value(targetAreaEfect),
+      publication: Value(publication),
     );
   }
 
@@ -716,6 +737,7 @@ class MagicCharacterTableData extends DataClass
       rangeIndex: serializer.fromJson<int>(json['rangeIndex']),
       resistence: serializer.fromJson<String>(json['resistence']),
       targetAreaEfect: serializer.fromJson<String>(json['targetAreaEfect']),
+      publication: serializer.fromJson<String>(json['publication']),
     );
   }
   @override
@@ -735,6 +757,7 @@ class MagicCharacterTableData extends DataClass
       'rangeIndex': serializer.toJson<int>(rangeIndex),
       'resistence': serializer.toJson<String>(resistence),
       'targetAreaEfect': serializer.toJson<String>(targetAreaEfect),
+      'publication': serializer.toJson<String>(publication),
     };
   }
 
@@ -751,7 +774,8 @@ class MagicCharacterTableData extends DataClass
           int? durationIndex,
           int? rangeIndex,
           String? resistence,
-          String? targetAreaEfect}) =>
+          String? targetAreaEfect,
+          String? publication}) =>
       MagicCharacterTableData(
         magicId: magicId ?? this.magicId,
         uuid: uuid ?? this.uuid,
@@ -766,6 +790,7 @@ class MagicCharacterTableData extends DataClass
         rangeIndex: rangeIndex ?? this.rangeIndex,
         resistence: resistence ?? this.resistence,
         targetAreaEfect: targetAreaEfect ?? this.targetAreaEfect,
+        publication: publication ?? this.publication,
       );
   MagicCharacterTableData copyWithCompanion(MagicCharacterTableCompanion data) {
     return MagicCharacterTableData(
@@ -794,6 +819,8 @@ class MagicCharacterTableData extends DataClass
       targetAreaEfect: data.targetAreaEfect.present
           ? data.targetAreaEfect.value
           : this.targetAreaEfect,
+      publication:
+          data.publication.present ? data.publication.value : this.publication,
     );
   }
 
@@ -812,7 +839,8 @@ class MagicCharacterTableData extends DataClass
           ..write('durationIndex: $durationIndex, ')
           ..write('rangeIndex: $rangeIndex, ')
           ..write('resistence: $resistence, ')
-          ..write('targetAreaEfect: $targetAreaEfect')
+          ..write('targetAreaEfect: $targetAreaEfect, ')
+          ..write('publication: $publication')
           ..write(')'))
         .toString();
   }
@@ -831,7 +859,8 @@ class MagicCharacterTableData extends DataClass
       durationIndex,
       rangeIndex,
       resistence,
-      targetAreaEfect);
+      targetAreaEfect,
+      publication);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -848,7 +877,8 @@ class MagicCharacterTableData extends DataClass
           other.durationIndex == this.durationIndex &&
           other.rangeIndex == this.rangeIndex &&
           other.resistence == this.resistence &&
-          other.targetAreaEfect == this.targetAreaEfect);
+          other.targetAreaEfect == this.targetAreaEfect &&
+          other.publication == this.publication);
 }
 
 class MagicCharacterTableCompanion
@@ -866,6 +896,7 @@ class MagicCharacterTableCompanion
   final Value<int> rangeIndex;
   final Value<String> resistence;
   final Value<String> targetAreaEfect;
+  final Value<String> publication;
   final Value<int> rowid;
   const MagicCharacterTableCompanion({
     this.magicId = const Value.absent(),
@@ -881,6 +912,7 @@ class MagicCharacterTableCompanion
     this.rangeIndex = const Value.absent(),
     this.resistence = const Value.absent(),
     this.targetAreaEfect = const Value.absent(),
+    this.publication = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   MagicCharacterTableCompanion.insert({
@@ -897,6 +929,7 @@ class MagicCharacterTableCompanion
     required int rangeIndex,
     required String resistence,
     required String targetAreaEfect,
+    required String publication,
     this.rowid = const Value.absent(),
   })  : magicId = Value(magicId),
         uuid = Value(uuid),
@@ -910,7 +943,8 @@ class MagicCharacterTableCompanion
         durationIndex = Value(durationIndex),
         rangeIndex = Value(rangeIndex),
         resistence = Value(resistence),
-        targetAreaEfect = Value(targetAreaEfect);
+        targetAreaEfect = Value(targetAreaEfect),
+        publication = Value(publication);
   static Insertable<MagicCharacterTableData> custom({
     Expression<int>? magicId,
     Expression<String>? uuid,
@@ -925,6 +959,7 @@ class MagicCharacterTableCompanion
     Expression<int>? rangeIndex,
     Expression<String>? resistence,
     Expression<String>? targetAreaEfect,
+    Expression<String>? publication,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -941,6 +976,7 @@ class MagicCharacterTableCompanion
       if (rangeIndex != null) 'range_index': rangeIndex,
       if (resistence != null) 'resistence': resistence,
       if (targetAreaEfect != null) 'target_area_efect': targetAreaEfect,
+      if (publication != null) 'publication': publication,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -959,6 +995,7 @@ class MagicCharacterTableCompanion
       Value<int>? rangeIndex,
       Value<String>? resistence,
       Value<String>? targetAreaEfect,
+      Value<String>? publication,
       Value<int>? rowid}) {
     return MagicCharacterTableCompanion(
       magicId: magicId ?? this.magicId,
@@ -974,6 +1011,7 @@ class MagicCharacterTableCompanion
       rangeIndex: rangeIndex ?? this.rangeIndex,
       resistence: resistence ?? this.resistence,
       targetAreaEfect: targetAreaEfect ?? this.targetAreaEfect,
+      publication: publication ?? this.publication,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -1020,6 +1058,9 @@ class MagicCharacterTableCompanion
     if (targetAreaEfect.present) {
       map['target_area_efect'] = Variable<String>(targetAreaEfect.value);
     }
+    if (publication.present) {
+      map['publication'] = Variable<String>(publication.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -1042,6 +1083,7 @@ class MagicCharacterTableCompanion
           ..write('rangeIndex: $rangeIndex, ')
           ..write('resistence: $resistence, ')
           ..write('targetAreaEfect: $targetAreaEfect, ')
+          ..write('publication: $publication, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -1240,6 +1282,7 @@ typedef $$MagicCharacterTableTableCreateCompanionBuilder
   required int rangeIndex,
   required String resistence,
   required String targetAreaEfect,
+  required String publication,
   Value<int> rowid,
 });
 typedef $$MagicCharacterTableTableUpdateCompanionBuilder
@@ -1257,6 +1300,7 @@ typedef $$MagicCharacterTableTableUpdateCompanionBuilder
   Value<int> rangeIndex,
   Value<String> resistence,
   Value<String> targetAreaEfect,
+  Value<String> publication,
   Value<int> rowid,
 });
 
@@ -1291,6 +1335,7 @@ class $$MagicCharacterTableTableTableManager extends RootTableManager<
             Value<int> rangeIndex = const Value.absent(),
             Value<String> resistence = const Value.absent(),
             Value<String> targetAreaEfect = const Value.absent(),
+            Value<String> publication = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               MagicCharacterTableCompanion(
@@ -1307,6 +1352,7 @@ class $$MagicCharacterTableTableTableManager extends RootTableManager<
             rangeIndex: rangeIndex,
             resistence: resistence,
             targetAreaEfect: targetAreaEfect,
+            publication: publication,
             rowid: rowid,
           ),
           createCompanionCallback: ({
@@ -1323,6 +1369,7 @@ class $$MagicCharacterTableTableTableManager extends RootTableManager<
             required int rangeIndex,
             required String resistence,
             required String targetAreaEfect,
+            required String publication,
             Value<int> rowid = const Value.absent(),
           }) =>
               MagicCharacterTableCompanion.insert(
@@ -1339,6 +1386,7 @@ class $$MagicCharacterTableTableTableManager extends RootTableManager<
             rangeIndex: rangeIndex,
             resistence: resistence,
             targetAreaEfect: targetAreaEfect,
+            publication: publication,
             rowid: rowid,
           ),
         ));
@@ -1411,6 +1459,11 @@ class $$MagicCharacterTableTableFilterComposer
       column: $state.table.targetAreaEfect,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get publication => $state.composableBuilder(
+      column: $state.table.publication,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
 }
 
 class $$MagicCharacterTableTableOrderingComposer
@@ -1478,6 +1531,11 @@ class $$MagicCharacterTableTableOrderingComposer
 
   ColumnOrderings<String> get targetAreaEfect => $state.composableBuilder(
       column: $state.table.targetAreaEfect,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get publication => $state.composableBuilder(
+      column: $state.table.publication,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }

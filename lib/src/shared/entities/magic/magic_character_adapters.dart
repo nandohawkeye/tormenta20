@@ -26,6 +26,7 @@ abstract class MagicCharacterAdapters {
       range: magic.range,
       resistence: magic.resistence,
       targetAreaEfect: magic.targetAreaEfect,
+      publication: magic.publication,
     );
   }
 
@@ -44,6 +45,7 @@ abstract class MagicCharacterAdapters {
       range: MagicRange.values[data.rangeIndex],
       resistence: data.resistence,
       targetAreaEfect: data.targetAreaEfect,
+      publication: data.publication,
     );
   }
 
@@ -62,6 +64,7 @@ abstract class MagicCharacterAdapters {
       rangeIndex: Value<int>(entity.range.index),
       resistence: Value<String>(entity.resistence),
       targetAreaEfect: Value<String>(entity.targetAreaEfect),
+      publication: Value<String>(entity.publication),
     );
   }
 }

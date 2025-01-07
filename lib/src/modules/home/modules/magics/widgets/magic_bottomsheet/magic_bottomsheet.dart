@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_bottomsheet/magic_bottomsheet_desc.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_bottomsheet/magic_bottomsheet_grimorie_card.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_bottomsheet/magic_bottomsheet_item.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_bottomsheet/magic_bottomsheet_store.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic.dart';
+import 'package:tormenta20/src/shared/entities/magic/magic_utils.dart';
 import 'package:tormenta20/src/shared/widgets/bottom_sheet_divider.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
@@ -39,20 +41,6 @@ class _MagicBottomsheetState extends State<MagicBottomsheet> {
     _store.dispose();
     super.dispose();
   }
-
-  Map<String, String> schollLabels = {
-    'Abjuracao': 'Abjuração',
-    'Adivinhacao': 'Adivinhação',
-    'Convocacao': 'Convocação',
-    'Evocacao': 'Evocação',
-    'Ilusao': 'Ilusão',
-    'Transmutacao': 'Transmutação',
-  };
-
-  Map<String, String> executionsLabels = {
-    'Padrao': 'Padrão',
-    'Reacao': 'Reação',
-  };
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +154,7 @@ class _MagicBottomsheetState extends State<MagicBottomsheet> {
                                     MagicBottomsheetItem(
                                       icon: FontAwesomeIcons.circleDot,
                                       preffix: '${widget.magic.circle.level}˚',
-                                      text: ' circulo',
+                                      text: ' Circulo',
                                     ),
                                     MagicBottomsheetItem(
                                       preffix: 'Tipo: ',
@@ -183,24 +171,28 @@ class _MagicBottomsheetState extends State<MagicBottomsheet> {
                                     MagicBottomsheetItem(
                                       preffix: 'Escola: ',
                                       icon: FontAwesomeIcons.school,
-                                      text: schollLabels[
+                                      text: MagicUtils.schollLabels[
                                               widget.magic.school.name] ??
                                           widget.magic.school.name,
                                     ),
                                     MagicBottomsheetItem(
                                       preffix: 'Execução: ',
                                       icon: FontAwesomeIcons.handSparkles,
-                                      text: executionsLabels[
+                                      text: MagicUtils.executionsLabels[
                                               widget.magic.execution.name] ??
                                           widget.magic.execution.name,
                                     ),
                                     MagicBottomsheetItem(
+                                      preffix: 'Publicação: ',
+                                      icon: FontAwesomeIcons.bookOpen,
+                                      text: widget.magic.publication,
+                                    ),
+                                    MagicBottomsheetItem(
                                       preffix: 'Duração: ',
                                       icon: FontAwesomeIcons.hourglassHalf,
-                                      text: widget.magic.duration.name ==
-                                              'Instantanea'
-                                          ? 'Instantânea'
-                                          : widget.magic.duration.name,
+                                      text: MagicUtils.durationLabels[
+                                              widget.magic.duration.name] ??
+                                          widget.magic.duration.name,
                                     ),
                                     MagicBottomsheetItem(
                                       preffix: 'Resistência: ',
@@ -212,11 +204,7 @@ class _MagicBottomsheetState extends State<MagicBottomsheet> {
                                       icon: FontAwesomeIcons.locationCrosshairs,
                                       text: widget.magic.targetAreaEfect,
                                     ),
-                                    MagicBottomsheetItem(
-                                      preffix: 'Descrição: ',
-                                      icon: FontAwesomeIcons.scroll,
-                                      text: widget.magic.desc,
-                                    ),
+                                    MagicBottomsheetDesc(widget.magic.desc),
                                   ],
                                 ),
                               ),

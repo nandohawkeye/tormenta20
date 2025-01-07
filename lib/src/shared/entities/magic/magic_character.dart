@@ -17,6 +17,7 @@ class MagicCharacter extends Magic {
     required super.range,
     required super.resistence,
     required super.targetAreaEfect,
+    required super.publication,
   });
 
   @override
@@ -34,7 +35,8 @@ class MagicCharacter extends Magic {
       other.targetAreaEfect == targetAreaEfect &&
       other.uuid == uuid &&
       other.id == id &&
-      other.grimoireUUid == grimoireUUid;
+      other.grimoireUUid == grimoireUUid &&
+      other.publication == publication;
 
   @override
   int get hashCode =>
@@ -50,5 +52,6 @@ class MagicCharacter extends Magic {
       targetAreaEfect.hashCode ^
       id.hashCode ^
       uuid.hashCode ^
-      grimoireUUid.hashCode;
+      grimoireUUid.hashCode ^
+      publication.hashCode;
 }
