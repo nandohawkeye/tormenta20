@@ -43,7 +43,8 @@ class _MagicsScreenState extends State<MagicsScreen> {
                       : GrimoireHeader(_grimoriesStore),
                 ),
                 MagicsHeader(_magicStore),
-                MagicsWrap(store: _magicStore)
+                MagicsWrap(store: _magicStore),
+                const SizedBox(height: 100)
               ],
             ),
           ),

@@ -7,5 +7,7 @@ enum MagicDuration {
   UmDia,
   UmaRodada,
   UmTurno,
-  Umd4Rodadas
+  Umd4Rodadas,
+  SoloOuCena,
+  Permanente
 }

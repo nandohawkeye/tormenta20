@@ -26,7 +26,7 @@ class SimpleButton extends StatelessWidget {
       width: 35,
       height: 35,
       child: Card(
-        color: backgroundColor,
+        color: backgroundColor ?? palette.cardBackground.withOpacity(.5),
         child: InkWell(
           borderRadius: T20UI.borderRadius,
           splashColor: palette.primaryCTA.withOpacity(.4),

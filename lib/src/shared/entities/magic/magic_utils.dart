@@ -18,6 +18,7 @@ abstract class MagicUtils {
     'UmDia': 'Um dia',
     'UmaRodada': 'Uma rodada',
     'UmTurno': 'Um turno',
-    'Umd4Rodadas': '1d4 rodadas,'
+    'Umd4Rodadas': '1d4 rodadas',
+    'SoloOuCena': 'Solo ou cena',
   };
 }

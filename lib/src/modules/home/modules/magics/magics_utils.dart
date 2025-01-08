@@ -49,6 +49,8 @@ abstract class MagicsUtils {
     MagicDuration.UmaRodada,
     MagicDuration.UmTurno,
     MagicDuration.Umd4Rodadas,
+    MagicDuration.SoloOuCena,
+    MagicDuration.Permanente,
   ];
 
   static List<MagicExecution> allExecutions = [

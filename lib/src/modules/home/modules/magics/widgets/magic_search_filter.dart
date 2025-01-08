@@ -16,36 +16,46 @@ class MagicSearchFilter extends StatelessWidget {
       builder: (_, __) => store.searchEnable
           ? Align(
               alignment: Alignment.bottomCenter,
-              child: Card(
-                margin: T20UI.allPadding,
-                child: SizedBox(
-                  height: T20UI.inputHeight,
-                  child: TextField(
-                    autofocus: true,
-                    onChanged: store.changeSearchFilter,
-                    style: const TextStyle(fontSize: 16),
-                    decoration: InputDecoration(
-                      hintText: 'Busque por nome ou palavra-chave',
-                      hintStyle:
-                          TextStyle(fontSize: 16, color: palette.textPrimary),
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          FocusScope.of(context).unfocus();
-                          store.changeSearchEnable(false);
-                        },
-                        child: Icon(
-                          FontAwesomeIcons.xmark,
-                          size: T20UI.iconSize,
-                          color: palette.primaryCTA,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ColoredBox(
+                    color: palette.background,
+                    child: Card(
+                      margin: T20UI.allPadding,
+                      color: Colors.transparent,
+                      child: SizedBox(
+                        height: T20UI.inputHeight,
+                        child: TextField(
+                          autofocus: true,
+                          onChanged: store.changeSearchFilter,
+                          style: const TextStyle(fontSize: 16),
+                          decoration: InputDecoration(
+                            hintText: 'Busque por nome ou palavra-chave',
+                            fillColor: palette.cardBackground.withOpacity(.5),
+                            hintStyle: TextStyle(
+                                fontSize: 16, color: palette.textPrimary),
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                FocusScope.of(context).unfocus();
+                                store.changeSearchEnable(false);
+                              },
+                              child: Icon(
+                                FontAwesomeIcons.xmark,
+                                size: T20UI.iconSize,
+                                color: palette.primaryCTA,
+                              ),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                              vertical: 9,
+                              horizontal: T20UI.spaceSize,
+                            ),
+                          ),
                         ),
-                      ),
-                      contentPadding: const EdgeInsets.symmetric(
-                        vertical: 9,
-                        horizontal: T20UI.spaceSize,
                       ),
                     ),
                   ),
-                ),
+                ],
               ),
             )
           : const SizedBox.shrink(),

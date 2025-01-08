@@ -110,6 +110,8 @@ class MagicFilterBottomsheetStore extends ChangeNotifier {
     MagicDuration.UmaRodada,
     MagicDuration.UmTurno,
     MagicDuration.Umd4Rodadas,
+    MagicDuration.SoloOuCena,
+    MagicDuration.Permanente,
   ];
   List<MagicDuration> get durations => _durations;
   List<MagicDuration> _durationsSelecteds = [];
