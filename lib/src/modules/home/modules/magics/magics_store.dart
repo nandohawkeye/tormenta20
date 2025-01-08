@@ -19,7 +19,7 @@ class MagicsStore extends ChangeNotifier {
   bool _compareText(String value) => value
       .toLowerCase()
       .replaceAllDiacritics()
-      .contains(_searchFilter.toLowerCase().replaceAllDiacritics());
+      .contains((_searchFilter.toLowerCase().replaceAllDiacritics()));
 
   List<Magic> _magics = [];
   List<Magic> get magics => _magics

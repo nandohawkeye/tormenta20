@@ -5,6 +5,7 @@ import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_bottomsheet/magic_bottomsheet.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_card/magic_card_indicator_search.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic.dart';
+import 'package:tormenta20/src/shared/extensions/string_ext.dart';
 
 class MagicCard extends StatelessWidget {
   const MagicCard({super.key, required this.magic, required this.searchFilter});
@@ -14,13 +15,16 @@ class MagicCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool hasInTarget = searchFilter.isEmpty
-        ? false
-        : magic.targetAreaEfect.contains(searchFilter);
+    bool compareText(String value) => value
+        .toLowerCase()
+        .replaceAllDiacritics()
+        .contains((searchFilter.toLowerCase().replaceAllDiacritics()));
+    final bool hasInTarget =
+        searchFilter.isEmpty ? false : compareText(magic.targetAreaEfect);
     final bool hasInDesc =
-        searchFilter.isEmpty ? false : magic.desc.contains(searchFilter);
+        searchFilter.isEmpty ? false : compareText(magic.desc);
     final bool hasInPublication =
-        searchFilter.isEmpty ? false : magic.publication.contains(searchFilter);
+        searchFilter.isEmpty ? false : compareText(magic.publication);
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: T20UI.borderRadius,

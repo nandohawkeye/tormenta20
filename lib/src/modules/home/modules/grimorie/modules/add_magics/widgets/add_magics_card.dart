@@ -4,6 +4,7 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_bottomsheet/magic_bottomsheet.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_card/magic_card_indicator_search.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic.dart';
+import 'package:tormenta20/src/shared/extensions/string_ext.dart';
 import 'package:tormenta20/src/shared/widgets/custom_checked.dart';
 
 class AddMagicsCard extends StatelessWidget {
@@ -24,14 +25,17 @@ class AddMagicsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool compareText(String value) => value
+        .toLowerCase()
+        .replaceAllDiacritics()
+        .contains((searchFilter.toLowerCase().replaceAllDiacritics()));
     final isDisable = disabledMagics.any((m) => m.id == magic.id);
-    final bool hasInTarget = searchFilter.isEmpty
-        ? false
-        : magic.targetAreaEfect.contains(searchFilter);
+    final bool hasInTarget =
+        searchFilter.isEmpty ? false : compareText(magic.targetAreaEfect);
     final bool hasInDesc =
-        searchFilter.isEmpty ? false : magic.desc.contains(searchFilter);
+        searchFilter.isEmpty ? false : compareText(magic.desc);
     final bool hasInPublication =
-        searchFilter.isEmpty ? false : magic.publication.contains(searchFilter);
+        searchFilter.isEmpty ? false : compareText(magic.publication);
     return Opacity(
       opacity: isDisable ? .2 : 1,
       child: Card(

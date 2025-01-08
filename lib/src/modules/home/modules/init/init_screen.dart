@@ -91,7 +91,7 @@ class InitScreen extends StatelessWidget {
               label: 'Crie uma ameaça',
               onTap: () async {},
               textColor: palette.primary.withOpacity(.6),
-              backgroundColor: palette.cardBackground.withOpacity(.5),
+              backgroundColor: palette.cardBackground.withOpacity(.7),
             ),
           ),
         ],
