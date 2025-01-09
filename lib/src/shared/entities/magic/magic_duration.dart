@@ -9,5 +9,7 @@ enum MagicDuration {
   UmTurno,
   Umd4Rodadas,
   SoloOuCena,
-  Permanente
+  Permanente,
+  vejaTexto,
+  PermanenteOuDescarregar,
 }

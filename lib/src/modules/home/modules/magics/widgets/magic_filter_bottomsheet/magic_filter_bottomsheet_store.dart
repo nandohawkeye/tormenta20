@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_final_fields, unused_field
 import 'package:flutter/material.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/magics_utils.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_circle.dart';
-import 'package:tormenta20/src/shared/entities/magic/magic_circles.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_duration.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_execution.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_filter_dto.dart';
@@ -20,13 +20,7 @@ class MagicFilterBottomsheetStore extends ChangeNotifier {
     _executionsSelecteds.addAll(dto.executions);
   }
 
-  List<MagicType> _types = const [
-    MagicType.Arcana,
-    MagicType.Divina,
-    MagicType.Universal
-  ];
-  List<MagicType> get types => _types;
-
+  List<MagicType> get types => MagicsUtils.allTypes;
   List<MagicType> _typesSelecteds = [];
   List<MagicType> get typesSelecteds => _typesSelecteds;
 
@@ -38,18 +32,7 @@ class MagicFilterBottomsheetStore extends ChangeNotifier {
     }
   }
 
-  List<MagicSchool> _schools = [
-    MagicSchool.Abjuracao,
-    MagicSchool.Adivinhacao,
-    MagicSchool.Convocacao,
-    MagicSchool.Encantamento,
-    MagicSchool.Evocacao,
-    MagicSchool.Ilusao,
-    MagicSchool.Necromancia,
-    MagicSchool.Transmutacao,
-  ];
-  List<MagicSchool> get schools => _schools;
-
+  List<MagicSchool> get schools => MagicsUtils.allSchools;
   List<MagicSchool> _schoolsSelecteds = [];
   List<MagicSchool> get schoolsSelecteds => _schoolsSelecteds;
 
@@ -61,16 +44,7 @@ class MagicFilterBottomsheetStore extends ChangeNotifier {
     }
   }
 
-  List<MagicRange> _ranges = [
-    MagicRange.Curto,
-    MagicRange.Ilimitado,
-    MagicRange.Longo,
-    MagicRange.Medio,
-    MagicRange.Pessoal,
-    MagicRange.Toque,
-  ];
-  List<MagicRange> get ranges => _ranges;
-
+  List<MagicRange> get ranges => MagicsUtils.allRanges;
   List<MagicRange> _rangesSelecteds = [];
   List<MagicRange> get rangesSelecteds => _rangesSelecteds;
 
@@ -82,15 +56,7 @@ class MagicFilterBottomsheetStore extends ChangeNotifier {
     }
   }
 
-  List<MagicCircle> _circles = [
-    firstCircle,
-    secondCircle,
-    thirdCircle,
-    fourthCircle,
-    fifthCircle,
-  ];
-  List<MagicCircle> get circles => _circles;
-
+  List<MagicCircle> get circles => MagicsUtils.allCircles;
   List<MagicCircle> _circlesSelecteds = [];
   List<MagicCircle> get circlesSelecteds => _circlesSelecteds;
 
@@ -102,18 +68,7 @@ class MagicFilterBottomsheetStore extends ChangeNotifier {
     }
   }
 
-  List<MagicDuration> _durations = [
-    MagicDuration.Cena,
-    MagicDuration.Instantanea,
-    MagicDuration.Sustentada,
-    MagicDuration.UmDia,
-    MagicDuration.UmaRodada,
-    MagicDuration.UmTurno,
-    MagicDuration.Umd4Rodadas,
-    MagicDuration.SoloOuCena,
-    MagicDuration.Permanente,
-  ];
-  List<MagicDuration> get durations => _durations;
+  List<MagicDuration> get durations => MagicsUtils.allDurations;
   List<MagicDuration> _durationsSelecteds = [];
   List<MagicDuration> get durationsSelecteds => _durationsSelecteds;
 
@@ -125,14 +80,7 @@ class MagicFilterBottomsheetStore extends ChangeNotifier {
     }
   }
 
-  List<MagicExecution> _executions = [
-    MagicExecution.Completa,
-    MagicExecution.Livre,
-    MagicExecution.Padrao,
-    MagicExecution.Reacao,
-    MagicExecution.Movimento,
-  ];
-  List<MagicExecution> get executions => _executions;
+  List<MagicExecution> get executions => MagicsUtils.allExecutions;
   List<MagicExecution> _executionsSelecteds = [];
   List<MagicExecution> get executionsSelecteds => _executionsSelecteds;
 
@@ -144,13 +92,7 @@ class MagicFilterBottomsheetStore extends ChangeNotifier {
     }
   }
 
-  List<String> _resistencies = [
-    'Fortitude',
-    'Reflexos',
-    'Vontade',
-    'Nenhuma',
-  ];
-  List<String> get resistencies => _resistencies;
+  List<String> get resistencies => MagicsUtils.allResistencies;
   List<String> _resistenciesSelecteds = [];
   List<String> get resistenciesSelecteds => _resistenciesSelecteds;
 

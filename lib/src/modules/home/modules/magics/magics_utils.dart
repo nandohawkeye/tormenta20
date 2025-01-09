@@ -51,6 +51,8 @@ abstract class MagicsUtils {
     MagicDuration.Umd4Rodadas,
     MagicDuration.SoloOuCena,
     MagicDuration.Permanente,
+    MagicDuration.vejaTexto,
+    MagicDuration.PermanenteOuDescarregar,
   ];
 
   static List<MagicExecution> allExecutions = [
@@ -59,6 +61,8 @@ abstract class MagicsUtils {
     MagicExecution.Padrao,
     MagicExecution.Reacao,
     MagicExecution.Movimento,
+    MagicExecution.umaHora,
+    MagicExecution.umd3Mais1Rodadas,
   ];
 
   static List<String> allResistencies = [
