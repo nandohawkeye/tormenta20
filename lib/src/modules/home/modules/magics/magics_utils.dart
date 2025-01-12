@@ -31,6 +31,8 @@ abstract class MagicsUtils {
     MagicRange.Medio,
     MagicRange.Pessoal,
     MagicRange.Toque,
+    MagicRange.doisKm,
+    MagicRange.vejaTexto,
   ];
 
   static List<MagicCircle> allCircles = [
@@ -53,6 +55,12 @@ abstract class MagicsUtils {
     MagicDuration.Permanente,
     MagicDuration.vejaTexto,
     MagicDuration.PermanenteOuDescarregar,
+    MagicDuration.SemanaOuDescarregar,
+    MagicDuration.CenaOuDescarregar,
+    MagicDuration.SustentadaOuInstantanea,
+    MagicDuration.CincoRodadas,
+    MagicDuration.QuadroD12Horas,
+    MagicDuration.TresRodadas,
   ];
 
   static List<MagicExecution> allExecutions = [
@@ -63,6 +71,8 @@ abstract class MagicsUtils {
     MagicExecution.Movimento,
     MagicExecution.umaHora,
     MagicExecution.umd3Mais1Rodadas,
+    MagicExecution.duasRodadas,
+    MagicExecution.dezMinutos,
   ];
 
   static List<String> allResistencies = [

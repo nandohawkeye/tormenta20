@@ -12,4 +12,10 @@ enum MagicDuration {
   Permanente,
   vejaTexto,
   PermanenteOuDescarregar,
+  SemanaOuDescarregar,
+  CenaOuDescarregar,
+  SustentadaOuInstantanea,
+  CincoRodadas,
+  QuadroD12Horas,
+  TresRodadas,
 }

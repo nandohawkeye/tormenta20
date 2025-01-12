@@ -7,5 +7,7 @@ enum MagicExecution {
   Completa,
   Movimento,
   umaHora,
-  umd3Mais1Rodadas
+  umd3Mais1Rodadas,
+  duasRodadas,
+  dezMinutos,
 }
