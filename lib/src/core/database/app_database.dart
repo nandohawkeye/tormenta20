@@ -31,7 +31,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   @override
   MigrationStrategy get migration {
@@ -42,12 +42,14 @@ class AppDatabase extends _$AppDatabase {
       onUpgrade: (Migrator m, int from, int to) async {
         await customStatement('PRAGMA foreign_keys = OFF');
 
-        // if (kDebugMode) {
-        //   for (final table in allTables) {
-        //     await m.deleteTable(table.actualTableName);
-        //     await m.createTable(table);
-        //   }
-        // }
+        await transaction(() async {
+          if (from < 2) {
+            for (var table in allTables) {
+              await m.deleteTable(table.actualTableName);
+              await m.createTable(table);
+            }
+          }
+        });
 
         // Assert that the schema is valid after migrations
         if (kDebugMode) {
