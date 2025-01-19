@@ -24,13 +24,13 @@ class MainButton extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: T20UI.borderRadius,
-          color: backgroundColor ?? palette.primaryCTA.withOpacity(.4),
+          color: backgroundColor ?? palette.accent.withOpacity(.4),
         ),
         child: Material(
           color: Colors.transparent,
           child: InkWell(
             borderRadius: T20UI.borderRadius,
-            splashColor: palette.primaryCTA.withOpacity(.6),
+            splashColor: palette.accent.withOpacity(.6),
             onTap: onTap,
             child: Center(
               child: Text(

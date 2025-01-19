@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/grimorie_store.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/modules/add_magics/add_magics_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/widgets/grimorie_magic_card.dart';
+import 'package:tormenta20/src/shared/constants/images_assets.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic.dart';
-import 'package:tormenta20/src/shared/widgets/main_button.dart';
+import 'package:tormenta20/src/shared/widgets/screen_image_button.dart';
 
 class GrimorieMagicList extends StatelessWidget {
   const GrimorieMagicList(this.store, {super.key});
@@ -36,12 +36,15 @@ class GrimorieMagicList extends StatelessWidget {
         final magics = store.grimoire.magicsCharacters;
         if (magics.isEmpty) {
           return Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: T20UI.spaceSize - 4),
-            child: MainButton(
-              label: 'Adicione uma magia',
-              textColor: palette.primary.withOpacity(.6),
-              backgroundColor: palette.cardBackground.withOpacity(.5),
+            padding: const EdgeInsets.only(
+              left: T20UI.spaceSize - 4,
+              right: T20UI.spaceSize - 4,
+            ),
+            child: ScreenImageButton(
+              imageAsset: ImagesAssets.fire,
+              title: 'Adicionar magia',
+              subtitle:
+                  'Adicione uma magia ao seu glimório para depois utilizá-las durantes seus combates.',
               onTap: addMagic,
             ),
           );

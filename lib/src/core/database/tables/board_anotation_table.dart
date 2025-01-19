@@ -5,6 +5,7 @@ class BoardAnotationTable extends Table {
   TextColumn get boardUuid => text()();
   IntColumn get level => integer()();
   TextColumn get desc => text().nullable()();
+  TextColumn get characterReferences => text().nullable()();
   DateTimeColumn get createdAt => dateTime()();
   DateTimeColumn get updatedAt => dateTime()();
 

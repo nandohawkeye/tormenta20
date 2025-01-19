@@ -14,15 +14,28 @@ import 'package:tormenta20/src/shared/failures/unknown_failure.dart';
 
 import 'package:uuid/uuid.dart';
 
+import 'daos/board_dao.dart';
+import 'tables/board_game_pause_table.dart';
+import 'tables/board_game_table.dart';
+import 'tables/board_link_table.dart';
+import 'tables/board_material_table.dart';
+import 'tables/board_table.dart';
+
 part 'app_database.g.dart';
 
 @DriftDatabase(
   tables: [
     GrimoireTable,
     MagicCharacterTable,
+    BoardTable,
+    BoardMaterialTable,
+    BoardGameTable,
+    BoardGamePauseTable,
+    BoardLinkTable,
   ],
   daos: [
     GrimoireDAO,
+    BoardDAO,
     MagicCharacterDAO,
   ],
 )

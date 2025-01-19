@@ -1,0 +1,1 @@
+enum BoardMaterialTypes { image, pdf }

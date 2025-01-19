@@ -11,16 +11,16 @@ class Character {
   final List<Origin> origins;
   final Brood brood;
   final List<Classe> classes;
-  final Divinity divinity;
+  final Divinity? divinity;
 
   Character({
     required this.uuid,
     required this.name,
-    required this.imagefilePath,
-    required this.imageAsset,
     required this.origins,
     required this.brood,
     required this.classes,
-    required this.divinity,
+    this.imagefilePath,
+    this.imageAsset,
+    this.divinity,
   });
 }

@@ -30,7 +30,7 @@ class MagicBottomsheetItem extends StatelessWidget {
               padding: const EdgeInsets.only(top: 2),
               child: Icon(
                 icon,
-                color: palette.primaryCTA,
+                color: palette.accent,
                 size: 14,
               ),
             ),
@@ -40,7 +40,7 @@ class MagicBottomsheetItem extends StatelessWidget {
                 TextSpan(
                   text: preffix,
                   style: TextStyle(
-                    color: palette.primaryCTA,
+                    color: palette.accent,
                     fontWeight: FontWeight.w500,
                   ),
                   children: [

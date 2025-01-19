@@ -5,15 +5,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/grimorie_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/grimories_store.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/add_grimorie_bottomsheet/add_grimorie_bottomsheet.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/grimoire_card.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
+import 'package:tormenta20/src/shared/constants/images_assets.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
-import 'package:tormenta20/src/shared/widgets/main_button.dart';
+import 'package:tormenta20/src/shared/widgets/screen_image_button.dart';
 
 class GrimoireHeader extends StatelessWidget {
   const GrimoireHeader(this.store, {super.key});
@@ -74,11 +74,16 @@ class GrimoireHeader extends StatelessWidget {
           animation: store,
           builder: (_, __) => store.grimories.isEmpty
               ? Padding(
-                  padding: const EdgeInsets.only(bottom: T20UI.spaceSize),
-                  child: MainButton(
-                    label: 'Crie um grimório',
-                    textColor: palette.primary.withOpacity(.6),
-                    backgroundColor: palette.cardBackground.withOpacity(.5),
+                  padding: const EdgeInsets.only(
+                    bottom: T20UI.spaceSize,
+                    right: T20UI.spaceSize - 4,
+                    left: T20UI.spaceSize - 4,
+                  ),
+                  child: ScreenImageButton(
+                    imageAsset: ImagesAssets.spellbook,
+                    title: 'Criar grimório',
+                    subtitle:
+                        'Crie um grimório, coloque suas magias favoritas e vincule a seus personagens.',
                     onTap: () async => await addGrimoire(),
                   ),
                 )

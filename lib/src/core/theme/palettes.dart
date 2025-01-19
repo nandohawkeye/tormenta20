@@ -6,18 +6,12 @@ class PaletteBase {
     required this.onInput,
     required this.remove,
     required this.disable,
-    required this.symbolAvatar,
-    required this.cancelCTABorder,
-    required this.lateWarning,
     required this.appBarShadown,
     required this.indicator,
     required this.iconDisable,
     required this.icon,
-    required this.textSelection,
-    required this.cancelCTA,
-    required this.onCancelCTA,
-    required this.primaryCTA,
-    required this.onPrimaryCTA,
+    required this.accent,
+    required this.onAccent,
     required this.secundaryCTA,
     required this.onSecundaryCTA,
     required this.concluded,
@@ -52,21 +46,15 @@ class PaletteBase {
   final Color success;
   final Color error;
   final Color primary;
-  final Color primaryCTA;
-  final Color onPrimaryCTA;
+  final Color accent;
+  final Color onAccent;
   final Color secundaryCTA;
   final Color onSecundaryCTA;
-  final Color cancelCTA;
-  final Color cancelCTABorder;
-  final Color onCancelCTA;
-  final Color textSelection;
   final Color icon;
   final Color iconDisable;
   final Color indicator;
   final Color appBarShadown;
-  final Color lateWarning;
   final Color appBar;
-  final Color symbolAvatar;
   final Color disable;
   final Color remove;
   final Color onInput;
@@ -92,21 +80,15 @@ abstract class Palettes {
         indicator: const Color(0xFFFAFAFA),
         iconDisable: const Color(0xFF424242),
         background: const Color(0xFF000000),
-        symbolAvatar: const Color(0xFF0c0c0c),
-        textSelection: const Color(0xFF000000),
         cardStroke: Colors.transparent,
         inputColor: const Color(0xFF212121),
         canceled: const Color(0xFFDC4740),
-        lateWarning: const Color(0xFFF19F38),
         concluded: const Color(0xFF328D43),
         error: const Color(0xFFCB5247),
-        primaryCTA: const Color(0xFFCC152A),
-        onPrimaryCTA: const Color(0xFFFFFFFF),
+        accent: const Color(0xFFCC152A),
+        onAccent: const Color(0xFFFFFFFF),
         secundaryCTA: Colors.transparent,
         onSecundaryCTA: const Color(0xFF000000),
-        cancelCTA: const Color(0xFF221210),
-        cancelCTABorder: const Color(0xFF221210),
-        onCancelCTA: const Color(0xFFEA4335),
         popMenu: const Color(0xFF262626),
         primary: const Color(0xFFCC152A),
         secondary: const Color(0xFF262626),

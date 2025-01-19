@@ -34,7 +34,7 @@ class MagicCard extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           borderRadius: T20UI.borderRadius,
-          splashColor: palette.primaryCTA.withOpacity(.4),
+          splashColor: palette.accent.withOpacity(.4),
           onTap: () async {
             await showModalBottomSheet(
               isScrollControlled: true,

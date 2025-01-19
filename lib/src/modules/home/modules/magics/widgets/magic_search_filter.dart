@@ -43,7 +43,7 @@ class MagicSearchFilter extends StatelessWidget {
                               child: Icon(
                                 FontAwesomeIcons.xmark,
                                 size: T20UI.iconSize,
-                                color: palette.primaryCTA,
+                                color: palette.accent,
                               ),
                             ),
                             contentPadding: const EdgeInsets.symmetric(

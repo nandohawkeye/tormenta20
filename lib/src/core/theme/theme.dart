@@ -13,7 +13,7 @@ final ThemeData theme = ThemeData(
   primaryColor: palette.inputColor,
   indicatorColor: palette.indicator,
   canvasColor: palette.inputColor,
-  splashColor: palette.primaryCTA.withOpacity(.4),
+  splashColor: palette.accent.withOpacity(.4),
   colorScheme: ColorScheme.light(
     primary: palette.primary,
     secondary: palette.secondary,
@@ -43,11 +43,6 @@ final ThemeData theme = ThemeData(
       ),
     ),
   ),
-  textSelectionTheme: TextSelectionThemeData(
-    selectionColor: palette.textSelection, // Change it later
-    // cursorColor: palette.textSelection,
-    selectionHandleColor: palette.textSelection,
-  ),
   dividerTheme: DividerThemeData(
     color: palette.divider,
     space: 1,
@@ -73,7 +68,7 @@ final ThemeData theme = ThemeData(
         (Set<WidgetState> states) {
       return RoundedRectangleBorder(borderRadius: T20UI.borderRadius);
     }),
-    foregroundColor: WidgetStateColor.resolveWith((_) => palette.primaryCTA),
+    foregroundColor: WidgetStateColor.resolveWith((_) => palette.accent),
   )),
   elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
@@ -89,7 +84,7 @@ final ThemeData theme = ThemeData(
     padding: WidgetStateProperty.resolveWith<EdgeInsetsGeometry>((_) =>
         const EdgeInsets.symmetric(
             horizontal: T20UI.spaceSize, vertical: T20UI.spaceSize)),
-    backgroundColor: WidgetStateColor.resolveWith((_) => palette.primaryCTA),
+    backgroundColor: WidgetStateColor.resolveWith((_) => palette.accent),
   )),
   outlinedButtonTheme: OutlinedButtonThemeData(
       style: ButtonStyle(
@@ -215,7 +210,7 @@ final ThemeData theme = ThemeData(
   ),
   navigationRailTheme: NavigationRailThemeData(
     backgroundColor: palette.background,
-    selectedIconTheme: IconThemeData(color: palette.primaryCTA),
+    selectedIconTheme: IconThemeData(color: palette.accent),
     selectedLabelTextStyle: TextStyle(color: palette.textPrimary),
   ),
   appBarTheme: AppBarTheme(
@@ -241,11 +236,11 @@ final ThemeData theme = ThemeData(
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: palette.background,
-    selectedItemColor: palette.primaryCTA,
+    selectedItemColor: palette.accent,
     unselectedItemColor: palette.iconDisable, // 60% white
     elevation: 3,
     selectedIconTheme:
-        IconThemeData(color: palette.primaryCTA, size: T20UI.iconSize),
+        IconThemeData(color: palette.accent, size: T20UI.iconSize),
     unselectedIconTheme:
         IconThemeData(color: palette.iconDisable, size: T20UI.iconSize),
     type: BottomNavigationBarType.fixed,

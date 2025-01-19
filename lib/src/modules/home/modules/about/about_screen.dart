@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -7,7 +8,7 @@ class AboutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -17,7 +18,12 @@ class AboutScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Labels('Sobre'),
+                const Expanded(child: Labels('Sobre')),
+                Expanded(
+                    child: Labels(
+                  'configurações',
+                  textColor: palette.disable,
+                )),
               ],
             ),
           ),

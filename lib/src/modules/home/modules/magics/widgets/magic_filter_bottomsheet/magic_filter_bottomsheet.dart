@@ -53,7 +53,7 @@ class _MagicFilterBottomsheetState extends State<MagicFilterBottomsheet> {
           child: GestureDetector(
             onTap: () => Navigator.pop(context),
             child: Container(
-              color: palette.primaryCTA.withOpacity(.1),
+              color: palette.accent.withOpacity(.1),
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
             ),

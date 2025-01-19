@@ -28,7 +28,7 @@ class MagicBottomsheetDesc extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 2),
                   child: Icon(
                     FontAwesomeIcons.scroll,
-                    color: palette.primaryCTA,
+                    color: palette.accent,
                     size: 14,
                   ),
                 ),
@@ -37,7 +37,7 @@ class MagicBottomsheetDesc extends StatelessWidget {
                   child: Text(
                     'Descrição:',
                     style: TextStyle(
-                      color: palette.primaryCTA,
+                      color: palette.accent,
                       fontWeight: FontWeight.w500,
                     ),
                   ),

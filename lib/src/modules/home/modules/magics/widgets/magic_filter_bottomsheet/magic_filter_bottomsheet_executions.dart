@@ -39,14 +39,14 @@ class MagicFilterBottomsheetExecutions extends StatelessWidget {
               children: [
                 Icon(
                   FontAwesomeIcons.handSparkles,
-                  color: palette.primaryCTA,
+                  color: palette.accent,
                   size: 12,
                 ),
                 const SizedBox(width: 6),
                 Text(
                   'Execuções:',
                   style: TextStyle(
-                    color: palette.primaryCTA,
+                    color: palette.accent,
                     fontWeight: FontWeight.w500,
                     fontSize: 12,
                   ),

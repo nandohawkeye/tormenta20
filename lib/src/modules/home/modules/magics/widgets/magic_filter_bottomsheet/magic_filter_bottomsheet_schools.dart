@@ -39,14 +39,14 @@ class MagicFilterBottomsheetSchools extends StatelessWidget {
               children: [
                 Icon(
                   FontAwesomeIcons.school,
-                  color: palette.primaryCTA,
+                  color: palette.accent,
                   size: 12,
                 ),
                 const SizedBox(width: 6),
                 Text(
                   'Escolas:',
                   style: TextStyle(
-                    color: palette.primaryCTA,
+                    color: palette.accent,
                     fontWeight: FontWeight.w500,
                     fontSize: 12,
                   ),

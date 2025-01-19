@@ -18,14 +18,14 @@ class MagicCardIndicatorSearch extends StatelessWidget {
       children: [
         Icon(
           icon,
-          color: palette.primaryCTA,
+          color: palette.accent,
           size: 14,
         ),
         const SizedBox(width: 6),
         Text(
           label,
           style: TextStyle(
-            color: palette.primaryCTA,
+            color: palette.accent,
           ),
         )
       ],

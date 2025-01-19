@@ -116,7 +116,7 @@ class _AddMagicsScreenState extends State<AddMagicsScreen> {
                           color: Colors.transparent,
                           child: InkWell(
                             borderRadius: T20UI.borderRadius,
-                            splashColor: palette.primaryCTA.withOpacity(.4),
+                            splashColor: palette.accent.withOpacity(.4),
                             onTap: () async {
                               await showModalBottomSheet<MagicFilterDto?>(
                                 isScrollControlled: true,

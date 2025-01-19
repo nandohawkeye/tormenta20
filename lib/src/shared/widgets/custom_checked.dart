@@ -23,7 +23,7 @@ class CustomChecked extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final selectedColor = color ?? palette.primaryCTA;
+    final selectedColor = color ?? palette.accent;
     final finalCheckedColor = checkedColor ?? Colors.white;
     return IgnorePointer(
       ignoring: !isEnabledToTap,

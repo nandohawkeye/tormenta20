@@ -39,14 +39,14 @@ class MagicFilterBottomsheetRanges extends StatelessWidget {
               children: [
                 Icon(
                   FontAwesomeIcons.peopleArrows,
-                  color: palette.primaryCTA,
+                  color: palette.accent,
                   size: 12,
                 ),
                 const SizedBox(width: 6),
                 Text(
                   'Alcances:',
                   style: TextStyle(
-                    color: palette.primaryCTA,
+                    color: palette.accent,
                     fontWeight: FontWeight.w500,
                     fontSize: 12,
                   ),
