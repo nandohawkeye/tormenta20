@@ -10,19 +10,14 @@ class InitScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Expanded(
-        child: SingleChildScrollView(
-          child: Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                InitCharacterField(),
-                InitBoardField(),
-                InitMenaceField()
-              ],
-            ),
-          ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            InitCharacterField(),
+            InitBoardField(),
+            InitMenaceField(),
+          ],
         ),
       ),
     );

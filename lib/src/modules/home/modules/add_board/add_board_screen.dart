@@ -11,12 +11,17 @@ import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
 
-class AddBoardScreen extends StatelessWidget {
+class AddBoardScreen extends StatefulWidget {
   const AddBoardScreen({super.key});
 
   @override
+  State<AddBoardScreen> createState() => _AddBoardScreenState();
+}
+
+class _AddBoardScreenState extends State<AddBoardScreen> {
+  final _formKey = GlobalKey<FormState>();
+  @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
     return Scaffold(
       body: Column(
         children: [
@@ -36,7 +41,7 @@ class AddBoardScreen extends StatelessWidget {
                   ),
                   T20UI.spaceHeight,
                   Form(
-                    key: formKey,
+                    key: _formKey,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -191,7 +196,7 @@ class AddBoardScreen extends StatelessWidget {
                       child: MainButton(
                         label: 'Salvar',
                         onTap: () {
-                          if (formKey.currentState!.validate()) {
+                          if (_formKey.currentState!.validate()) {
                             Navigator.pop(context);
                           }
                         },
