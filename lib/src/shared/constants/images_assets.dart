@@ -18,6 +18,10 @@ abstract class ImagesAssets {
   static const String swordsman = '${_pathBase}swordsman$_defaultExt';
   static const String wizard = '${_pathBase}wizard$_defaultExt';
   static const String magician = '${_pathBase}magician$_defaultExt';
+  static const String druid = '${_pathBase}druid$_defaultExt';
+  static const String pirate = '${_pathBase}pirate$_defaultExt';
+  static const String samurai = '${_pathBase}samurai$_defaultExt';
+
   static List<String> charactess = [
     alchemy,
     barbarian,
@@ -26,7 +30,10 @@ abstract class ImagesAssets {
     soldier,
     swordsman,
     wizard,
-    magician
+    magician,
+    druid,
+    pirate,
+    samurai,
   ];
 
   //Ameaças
@@ -35,11 +42,16 @@ abstract class ImagesAssets {
   static const String hydra = '${_pathBase}hydra$_defaultExt';
   static const String minotaur = '${_pathBase}minotaur$_defaultExt';
   static const String sphinx = '${_pathBase}sphinx$_defaultExt';
+  static const String wolf = '${_pathBase}wolf$_defaultExt';
+  static const String dragon = '${_pathBase}dragon$_defaultExt';
+
   static List<String> menace = [
     chimera,
     cyclops,
     hydra,
     minotaur,
     sphinx,
+    wolf,
+    dragon,
   ];
 }

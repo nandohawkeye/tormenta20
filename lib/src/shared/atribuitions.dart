@@ -15,4 +15,4 @@
 // <a href="https://www.flaticon.com/free-icons/spellbook" title="spellbook icons">Spellbook icons created by max.icons - Flaticon</a>
 // <a href="https://www.flaticon.com/free-icons/rpg" title="rpg icons">Rpg icons created by max.icons - Flaticon</a>
 
-// https://www.flaticon.com/packs/role-playing-game-1
+// https://www.flaticon.com/authors/maxicons

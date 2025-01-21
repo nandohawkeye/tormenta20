@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/shared/formatters/remove_symbols_input_formatter.dart';
 
 class BoardLevelField extends StatefulWidget {
   const BoardLevelField(this.onChanged, {super.key, this.initialValue});
@@ -49,7 +49,7 @@ class _BoardNameFieldState extends State<BoardLevelField> {
           style: const TextStyle(fontSize: 16),
           validator: _validate,
           keyboardType: TextInputType.number,
-          inputFormatters: [RemoveSymbolsInputFormatter()],
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           decoration: InputDecoration(
             labelText: 'Nivel',
             fillColor: palette.cardBackground,
