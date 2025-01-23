@@ -6,8 +6,6 @@ class HomeScreenStore extends ChangeNotifier {
   int _index = 0;
   int _lastIndex = 0;
 
-  //teste
-
   int get index => _index;
   int get lastIndex => _lastIndex;
 
