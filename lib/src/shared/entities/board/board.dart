@@ -19,6 +19,11 @@ class Board {
   final List<BoardCharacter> characters;
   final BoardType type;
 
+  final String? whatsGroupLink;
+  final String? telegramGroupLink;
+  final String? discordServerLink;
+  final String? driveFilesLink;
+
   Board({
     required this.uuid,
     this.bannerPath,
@@ -33,6 +38,10 @@ class Board {
     required this.level,
     required this.characters,
     required this.type,
+    this.whatsGroupLink,
+    this.telegramGroupLink,
+    this.discordServerLink,
+    this.driveFilesLink,
   });
 
   @override
@@ -50,7 +59,11 @@ class Board {
       other.characters == characters &&
       other.level == level &&
       other.updatedAt == updatedAt &&
-      other.type == type;
+      other.type == type &&
+      other.whatsGroupLink == whatsGroupLink &&
+      other.telegramGroupLink == telegramGroupLink &&
+      other.discordServerLink == discordServerLink &&
+      other.driveFilesLink == driveFilesLink;
 
   @override
   int get hashCode =>
@@ -66,5 +79,9 @@ class Board {
       games.hashCode ^
       characters.hashCode ^
       level.hashCode ^
-      type.hashCode;
+      type.hashCode ^
+      whatsGroupLink.hashCode ^
+      telegramGroupLink.hashCode ^
+      discordServerLink.hashCode ^
+      driveFilesLink.hashCode;
 }

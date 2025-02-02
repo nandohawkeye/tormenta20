@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 
-class BoardDescField extends StatelessWidget {
-  const BoardDescField(this.onChanged, {super.key, this.initialValue});
+class AddEditBoardDescField extends StatelessWidget {
+  const AddEditBoardDescField(this.onChanged, {super.key, this.initialValue});
 
   final Function(String) onChanged;
   final String? initialValue;
@@ -13,6 +13,10 @@ class BoardDescField extends StatelessWidget {
     return TextFormField(
       initialValue: initialValue,
       onChanged: onChanged,
+      textCapitalization: TextCapitalization.sentences,
+      textInputAction: TextInputAction.newline,
+      minLines: 1,
+      maxLines: 10,
       style: const TextStyle(fontSize: 16),
       decoration: InputDecoration(
         labelText: 'Descrição',

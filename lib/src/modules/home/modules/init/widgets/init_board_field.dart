@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/modules/home/modules/add_board/add_board_screen.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_board/add_edit_board_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/bottom_sheet_init_board/bottom_sheet_init_board.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
@@ -34,7 +34,7 @@ class InitBoardField extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => const AddBoardScreen(),
+                          builder: (_) => const AddEditBoardScreen(),
                         ),
                       );
                     },
@@ -78,7 +78,7 @@ class InitBoardField extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => const AddBoardScreen(),
+                        builder: (_) => const AddEditBoardScreen(),
                       ),
                     );
                   }

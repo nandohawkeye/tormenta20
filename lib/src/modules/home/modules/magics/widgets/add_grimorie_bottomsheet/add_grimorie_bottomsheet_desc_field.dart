@@ -13,12 +13,14 @@ class AddGrimorieBottomsheetDescField extends StatelessWidget {
       padding: T20UI.horizontalPadding,
       child: TextFormField(
         onChanged: (value) => desc.value = value,
+        minLines: 1,
         maxLines: 4,
         initialValue: desc.value,
-        textInputAction: TextInputAction.done,
+        textCapitalization: TextCapitalization.sentences,
+        textInputAction: TextInputAction.newline,
         style: const TextStyle(fontSize: 16),
         decoration: InputDecoration(
-          hintText: 'Descrição',
+          labelText: 'Descrição',
           fillColor: palette.onBottomsheet,
           hintStyle: TextStyle(fontSize: 16, color: palette.textPrimary),
           contentPadding: const EdgeInsets.symmetric(

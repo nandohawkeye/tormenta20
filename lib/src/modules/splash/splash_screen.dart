@@ -1,4 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
@@ -23,6 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void _init() async {
     GetIt getIt = GetIt.instance;
     getIt.registerSingleton<AppDatabase>(AppDatabase());
+    getIt.registerSingleton<FilePicker>(FilePicker.platform);
 
     getIt.registerSingletonAsync<GrimoriesStore>(
         () async => GrimoriesStore().init());

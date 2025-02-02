@@ -34,8 +34,9 @@ class AddGrimorieBottomsheetNameField extends StatelessWidget {
             style: const TextStyle(fontSize: 16),
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.name,
+            textCapitalization: TextCapitalization.sentences,
             decoration: InputDecoration(
-              hintText: 'Nome',
+              labelText: 'Nome',
               errorText: error,
               fillColor: palette.onBottomsheet,
               hintStyle: TextStyle(fontSize: 16, color: palette.textPrimary),
@@ -44,6 +45,9 @@ class AddGrimorieBottomsheetNameField extends StatelessWidget {
                 horizontal: T20UI.spaceSize,
               ),
               helperText: 'Obrigatório',
+              helperStyle: TextStyle(
+                color: palette.textDisable,
+              ),
             ),
           ),
         ),

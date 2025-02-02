@@ -25,7 +25,7 @@ class SimpleCloseButton extends StatelessWidget {
             splashColor: palette.accent.withOpacity(.4),
             onTap: () => Navigator.pop(context),
             child: Icon(
-              FontAwesomeIcons.xmark,
+              FontAwesomeIcons.chevronLeft,
               color: palette.icon,
             ),
           ),

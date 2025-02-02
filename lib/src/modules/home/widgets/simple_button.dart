@@ -23,8 +23,8 @@ class SimpleButton extends StatelessWidget {
     final palette = Palettes.dark();
 
     return SizedBox(
-      width: 35,
-      height: 35,
+      width: T20UI.inputHeight,
+      height: T20UI.inputHeight,
       child: Card(
         color: backgroundColor ?? palette.cardBackground.withOpacity(.7),
         child: InkWell(

@@ -47,6 +47,7 @@ dependencies:
   sqlite3: 2.4.6
   flutter_staggered_animations: 1.1.1
   flutter_svg: 2.0.16
+  file_picker: 8.1.7
 
   path: ^1.8.3
 

@@ -3,17 +3,17 @@ import 'package:flutter/services.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 
-class BoardLevelField extends StatefulWidget {
-  const BoardLevelField(this.onChanged, {super.key, this.initialValue});
+class AddEditBoardLevelField extends StatefulWidget {
+  const AddEditBoardLevelField(this.onChanged, {super.key, this.initialValue});
 
   final Function(String) onChanged;
   final String? initialValue;
 
   @override
-  State<BoardLevelField> createState() => _BoardNameFieldState();
+  State<AddEditBoardLevelField> createState() => _BoardNameFieldState();
 }
 
-class _BoardNameFieldState extends State<BoardLevelField> {
+class _BoardNameFieldState extends State<AddEditBoardLevelField> {
   late final ValueNotifier<String?> _errorNotifier;
 
   @override

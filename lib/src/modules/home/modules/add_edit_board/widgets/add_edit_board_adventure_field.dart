@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 
-class BoardNameField extends StatefulWidget {
-  const BoardNameField(this.onChanged, {super.key, this.initialValue});
+class AddEditBoardAdventureField extends StatefulWidget {
+  const AddEditBoardAdventureField(this.onChanged,
+      {super.key, this.initialValue});
 
   final Function(String) onChanged;
   final String? initialValue;
 
   @override
-  State<BoardNameField> createState() => _BoardNameFieldState();
+  State<AddEditBoardAdventureField> createState() => _BoardNameFieldState();
 }
 
-class _BoardNameFieldState extends State<BoardNameField> {
+class _BoardNameFieldState extends State<AddEditBoardAdventureField> {
   late final ValueNotifier<String?> _errorNotifier;
 
   @override
@@ -46,9 +47,10 @@ class _BoardNameFieldState extends State<BoardNameField> {
             widget.onChanged.call(value);
           },
           style: const TextStyle(fontSize: 16),
+          textCapitalization: TextCapitalization.sentences,
           validator: _validate,
           decoration: InputDecoration(
-            labelText: 'Nome da mesa',
+            labelText: 'Aventura',
             fillColor: palette.cardBackground,
             helperText: 'Obrigatório',
             errorText: error,

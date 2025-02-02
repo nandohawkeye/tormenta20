@@ -1,16 +1,14 @@
-import 'package:tormenta20/src/shared/entities/board/board_link_types.dart';
-
 class BoardLink {
   final String uuid;
   final String link;
   final String boardUuid;
-  final BoardLinkType type;
+  final String? title;
 
   BoardLink({
     required this.uuid,
     required this.link,
     required this.boardUuid,
-    required this.type,
+    this.title,
   });
 
   @override
@@ -19,9 +17,9 @@ class BoardLink {
       other.uuid == uuid &&
       other.boardUuid == boardUuid &&
       other.link == link &&
-      other.type == type;
+      other.title == title;
 
   @override
   int get hashCode =>
-      uuid.hashCode ^ boardUuid.hashCode ^ link.hashCode ^ type.hashCode;
+      uuid.hashCode ^ boardUuid.hashCode ^ link.hashCode ^ title.hashCode;
 }
