@@ -7,7 +7,7 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_board/add_edit_boar
 import 'package:tormenta20/src/modules/home/modules/init/widgets/bottom_sheet_init_board/bottom_sheet_init_board.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
-import 'package:tormenta20/src/shared/entities/board/board_type.dart';
+import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
 import 'package:tormenta20/src/shared/widgets/screen_image_button.dart';
 
 class InitBoardField extends StatelessWidget {
@@ -61,7 +61,7 @@ class InitBoardField extends StatelessWidget {
             subtitle:
                 'Crie ou se vincule a mesa de um mestre, e comece a se divertir com seus amigos!',
             onTap: () async {
-              await showModalBottomSheet<BoardType?>(
+              await showModalBottomSheet<BoardModeType?>(
                 isScrollControlled: false,
                 isDismissible: true,
                 backgroundColor: Colors.transparent,
@@ -74,7 +74,7 @@ class InitBoardField extends StatelessWidget {
                 ),
               ).then((result) async {
                 if (result != null) {
-                  if (result == BoardType.created) {
+                  if (result == BoardModeType.master) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(

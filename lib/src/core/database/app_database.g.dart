@@ -1146,6 +1146,30 @@ class $BoardTableTable extends BoardTable
   late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
       'updated_at', aliasedName, false,
       type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _whatsGroupLinkMeta =
+      const VerificationMeta('whatsGroupLink');
+  @override
+  late final GeneratedColumn<String> whatsGroupLink = GeneratedColumn<String>(
+      'whats_group_link', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _telegramGroupLinkMeta =
+      const VerificationMeta('telegramGroupLink');
+  @override
+  late final GeneratedColumn<String> telegramGroupLink =
+      GeneratedColumn<String>('telegram_group_link', aliasedName, true,
+          type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _discordServerLinkMeta =
+      const VerificationMeta('discordServerLink');
+  @override
+  late final GeneratedColumn<String> discordServerLink =
+      GeneratedColumn<String>('discord_server_link', aliasedName, true,
+          type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _driveFilesLinkMeta =
+      const VerificationMeta('driveFilesLink');
+  @override
+  late final GeneratedColumn<String> driveFilesLink = GeneratedColumn<String>(
+      'drive_files_link', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns => [
         uuid,
@@ -1156,7 +1180,11 @@ class $BoardTableTable extends BoardTable
         bannerPath,
         desc,
         createdAt,
-        updatedAt
+        updatedAt,
+        whatsGroupLink,
+        telegramGroupLink,
+        discordServerLink,
+        driveFilesLink
       ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -1222,6 +1250,30 @@ class $BoardTableTable extends BoardTable
     } else if (isInserting) {
       context.missing(_updatedAtMeta);
     }
+    if (data.containsKey('whats_group_link')) {
+      context.handle(
+          _whatsGroupLinkMeta,
+          whatsGroupLink.isAcceptableOrUnknown(
+              data['whats_group_link']!, _whatsGroupLinkMeta));
+    }
+    if (data.containsKey('telegram_group_link')) {
+      context.handle(
+          _telegramGroupLinkMeta,
+          telegramGroupLink.isAcceptableOrUnknown(
+              data['telegram_group_link']!, _telegramGroupLinkMeta));
+    }
+    if (data.containsKey('discord_server_link')) {
+      context.handle(
+          _discordServerLinkMeta,
+          discordServerLink.isAcceptableOrUnknown(
+              data['discord_server_link']!, _discordServerLinkMeta));
+    }
+    if (data.containsKey('drive_files_link')) {
+      context.handle(
+          _driveFilesLinkMeta,
+          driveFilesLink.isAcceptableOrUnknown(
+              data['drive_files_link']!, _driveFilesLinkMeta));
+    }
     return context;
   }
 
@@ -1249,6 +1301,14 @@ class $BoardTableTable extends BoardTable
           .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
       updatedAt: attachedDatabase.typeMapping
           .read(DriftSqlType.dateTime, data['${effectivePrefix}updated_at'])!,
+      whatsGroupLink: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}whats_group_link']),
+      telegramGroupLink: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}telegram_group_link']),
+      discordServerLink: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}discord_server_link']),
+      driveFilesLink: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}drive_files_link']),
     );
   }
 
@@ -1268,6 +1328,10 @@ class BoardTableData extends DataClass implements Insertable<BoardTableData> {
   final String? desc;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final String? whatsGroupLink;
+  final String? telegramGroupLink;
+  final String? discordServerLink;
+  final String? driveFilesLink;
   const BoardTableData(
       {required this.uuid,
       required this.name,
@@ -1277,7 +1341,11 @@ class BoardTableData extends DataClass implements Insertable<BoardTableData> {
       this.bannerPath,
       this.desc,
       required this.createdAt,
-      required this.updatedAt});
+      required this.updatedAt,
+      this.whatsGroupLink,
+      this.telegramGroupLink,
+      this.discordServerLink,
+      this.driveFilesLink});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -1294,6 +1362,18 @@ class BoardTableData extends DataClass implements Insertable<BoardTableData> {
     }
     map['created_at'] = Variable<DateTime>(createdAt);
     map['updated_at'] = Variable<DateTime>(updatedAt);
+    if (!nullToAbsent || whatsGroupLink != null) {
+      map['whats_group_link'] = Variable<String>(whatsGroupLink);
+    }
+    if (!nullToAbsent || telegramGroupLink != null) {
+      map['telegram_group_link'] = Variable<String>(telegramGroupLink);
+    }
+    if (!nullToAbsent || discordServerLink != null) {
+      map['discord_server_link'] = Variable<String>(discordServerLink);
+    }
+    if (!nullToAbsent || driveFilesLink != null) {
+      map['drive_files_link'] = Variable<String>(driveFilesLink);
+    }
     return map;
   }
 
@@ -1310,6 +1390,18 @@ class BoardTableData extends DataClass implements Insertable<BoardTableData> {
       desc: desc == null && nullToAbsent ? const Value.absent() : Value(desc),
       createdAt: Value(createdAt),
       updatedAt: Value(updatedAt),
+      whatsGroupLink: whatsGroupLink == null && nullToAbsent
+          ? const Value.absent()
+          : Value(whatsGroupLink),
+      telegramGroupLink: telegramGroupLink == null && nullToAbsent
+          ? const Value.absent()
+          : Value(telegramGroupLink),
+      discordServerLink: discordServerLink == null && nullToAbsent
+          ? const Value.absent()
+          : Value(discordServerLink),
+      driveFilesLink: driveFilesLink == null && nullToAbsent
+          ? const Value.absent()
+          : Value(driveFilesLink),
     );
   }
 
@@ -1326,6 +1418,12 @@ class BoardTableData extends DataClass implements Insertable<BoardTableData> {
       desc: serializer.fromJson<String?>(json['desc']),
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
       updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      whatsGroupLink: serializer.fromJson<String?>(json['whatsGroupLink']),
+      telegramGroupLink:
+          serializer.fromJson<String?>(json['telegramGroupLink']),
+      discordServerLink:
+          serializer.fromJson<String?>(json['discordServerLink']),
+      driveFilesLink: serializer.fromJson<String?>(json['driveFilesLink']),
     );
   }
   @override
@@ -1341,6 +1439,10 @@ class BoardTableData extends DataClass implements Insertable<BoardTableData> {
       'desc': serializer.toJson<String?>(desc),
       'createdAt': serializer.toJson<DateTime>(createdAt),
       'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'whatsGroupLink': serializer.toJson<String?>(whatsGroupLink),
+      'telegramGroupLink': serializer.toJson<String?>(telegramGroupLink),
+      'discordServerLink': serializer.toJson<String?>(discordServerLink),
+      'driveFilesLink': serializer.toJson<String?>(driveFilesLink),
     };
   }
 
@@ -1353,7 +1455,11 @@ class BoardTableData extends DataClass implements Insertable<BoardTableData> {
           Value<String?> bannerPath = const Value.absent(),
           Value<String?> desc = const Value.absent(),
           DateTime? createdAt,
-          DateTime? updatedAt}) =>
+          DateTime? updatedAt,
+          Value<String?> whatsGroupLink = const Value.absent(),
+          Value<String?> telegramGroupLink = const Value.absent(),
+          Value<String?> discordServerLink = const Value.absent(),
+          Value<String?> driveFilesLink = const Value.absent()}) =>
       BoardTableData(
         uuid: uuid ?? this.uuid,
         name: name ?? this.name,
@@ -1364,6 +1470,16 @@ class BoardTableData extends DataClass implements Insertable<BoardTableData> {
         desc: desc.present ? desc.value : this.desc,
         createdAt: createdAt ?? this.createdAt,
         updatedAt: updatedAt ?? this.updatedAt,
+        whatsGroupLink:
+            whatsGroupLink.present ? whatsGroupLink.value : this.whatsGroupLink,
+        telegramGroupLink: telegramGroupLink.present
+            ? telegramGroupLink.value
+            : this.telegramGroupLink,
+        discordServerLink: discordServerLink.present
+            ? discordServerLink.value
+            : this.discordServerLink,
+        driveFilesLink:
+            driveFilesLink.present ? driveFilesLink.value : this.driveFilesLink,
       );
   BoardTableData copyWithCompanion(BoardTableCompanion data) {
     return BoardTableData(
@@ -1379,6 +1495,18 @@ class BoardTableData extends DataClass implements Insertable<BoardTableData> {
       desc: data.desc.present ? data.desc.value : this.desc,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
       updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      whatsGroupLink: data.whatsGroupLink.present
+          ? data.whatsGroupLink.value
+          : this.whatsGroupLink,
+      telegramGroupLink: data.telegramGroupLink.present
+          ? data.telegramGroupLink.value
+          : this.telegramGroupLink,
+      discordServerLink: data.discordServerLink.present
+          ? data.discordServerLink.value
+          : this.discordServerLink,
+      driveFilesLink: data.driveFilesLink.present
+          ? data.driveFilesLink.value
+          : this.driveFilesLink,
     );
   }
 
@@ -1393,14 +1521,30 @@ class BoardTableData extends DataClass implements Insertable<BoardTableData> {
           ..write('bannerPath: $bannerPath, ')
           ..write('desc: $desc, ')
           ..write('createdAt: $createdAt, ')
-          ..write('updatedAt: $updatedAt')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('whatsGroupLink: $whatsGroupLink, ')
+          ..write('telegramGroupLink: $telegramGroupLink, ')
+          ..write('discordServerLink: $discordServerLink, ')
+          ..write('driveFilesLink: $driveFilesLink')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(uuid, name, level, typeIndex, adventureName,
-      bannerPath, desc, createdAt, updatedAt);
+  int get hashCode => Object.hash(
+      uuid,
+      name,
+      level,
+      typeIndex,
+      adventureName,
+      bannerPath,
+      desc,
+      createdAt,
+      updatedAt,
+      whatsGroupLink,
+      telegramGroupLink,
+      discordServerLink,
+      driveFilesLink);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1413,7 +1557,11 @@ class BoardTableData extends DataClass implements Insertable<BoardTableData> {
           other.bannerPath == this.bannerPath &&
           other.desc == this.desc &&
           other.createdAt == this.createdAt &&
-          other.updatedAt == this.updatedAt);
+          other.updatedAt == this.updatedAt &&
+          other.whatsGroupLink == this.whatsGroupLink &&
+          other.telegramGroupLink == this.telegramGroupLink &&
+          other.discordServerLink == this.discordServerLink &&
+          other.driveFilesLink == this.driveFilesLink);
 }
 
 class BoardTableCompanion extends UpdateCompanion<BoardTableData> {
@@ -1426,6 +1574,10 @@ class BoardTableCompanion extends UpdateCompanion<BoardTableData> {
   final Value<String?> desc;
   final Value<DateTime> createdAt;
   final Value<DateTime> updatedAt;
+  final Value<String?> whatsGroupLink;
+  final Value<String?> telegramGroupLink;
+  final Value<String?> discordServerLink;
+  final Value<String?> driveFilesLink;
   final Value<int> rowid;
   const BoardTableCompanion({
     this.uuid = const Value.absent(),
@@ -1437,6 +1589,10 @@ class BoardTableCompanion extends UpdateCompanion<BoardTableData> {
     this.desc = const Value.absent(),
     this.createdAt = const Value.absent(),
     this.updatedAt = const Value.absent(),
+    this.whatsGroupLink = const Value.absent(),
+    this.telegramGroupLink = const Value.absent(),
+    this.discordServerLink = const Value.absent(),
+    this.driveFilesLink = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   BoardTableCompanion.insert({
@@ -1449,6 +1605,10 @@ class BoardTableCompanion extends UpdateCompanion<BoardTableData> {
     this.desc = const Value.absent(),
     required DateTime createdAt,
     required DateTime updatedAt,
+    this.whatsGroupLink = const Value.absent(),
+    this.telegramGroupLink = const Value.absent(),
+    this.discordServerLink = const Value.absent(),
+    this.driveFilesLink = const Value.absent(),
     this.rowid = const Value.absent(),
   })  : uuid = Value(uuid),
         name = Value(name),
@@ -1467,6 +1627,10 @@ class BoardTableCompanion extends UpdateCompanion<BoardTableData> {
     Expression<String>? desc,
     Expression<DateTime>? createdAt,
     Expression<DateTime>? updatedAt,
+    Expression<String>? whatsGroupLink,
+    Expression<String>? telegramGroupLink,
+    Expression<String>? discordServerLink,
+    Expression<String>? driveFilesLink,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -1479,6 +1643,10 @@ class BoardTableCompanion extends UpdateCompanion<BoardTableData> {
       if (desc != null) 'desc': desc,
       if (createdAt != null) 'created_at': createdAt,
       if (updatedAt != null) 'updated_at': updatedAt,
+      if (whatsGroupLink != null) 'whats_group_link': whatsGroupLink,
+      if (telegramGroupLink != null) 'telegram_group_link': telegramGroupLink,
+      if (discordServerLink != null) 'discord_server_link': discordServerLink,
+      if (driveFilesLink != null) 'drive_files_link': driveFilesLink,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -1493,6 +1661,10 @@ class BoardTableCompanion extends UpdateCompanion<BoardTableData> {
       Value<String?>? desc,
       Value<DateTime>? createdAt,
       Value<DateTime>? updatedAt,
+      Value<String?>? whatsGroupLink,
+      Value<String?>? telegramGroupLink,
+      Value<String?>? discordServerLink,
+      Value<String?>? driveFilesLink,
       Value<int>? rowid}) {
     return BoardTableCompanion(
       uuid: uuid ?? this.uuid,
@@ -1504,6 +1676,10 @@ class BoardTableCompanion extends UpdateCompanion<BoardTableData> {
       desc: desc ?? this.desc,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
+      whatsGroupLink: whatsGroupLink ?? this.whatsGroupLink,
+      telegramGroupLink: telegramGroupLink ?? this.telegramGroupLink,
+      discordServerLink: discordServerLink ?? this.discordServerLink,
+      driveFilesLink: driveFilesLink ?? this.driveFilesLink,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -1538,6 +1714,18 @@ class BoardTableCompanion extends UpdateCompanion<BoardTableData> {
     if (updatedAt.present) {
       map['updated_at'] = Variable<DateTime>(updatedAt.value);
     }
+    if (whatsGroupLink.present) {
+      map['whats_group_link'] = Variable<String>(whatsGroupLink.value);
+    }
+    if (telegramGroupLink.present) {
+      map['telegram_group_link'] = Variable<String>(telegramGroupLink.value);
+    }
+    if (discordServerLink.present) {
+      map['discord_server_link'] = Variable<String>(discordServerLink.value);
+    }
+    if (driveFilesLink.present) {
+      map['drive_files_link'] = Variable<String>(driveFilesLink.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -1556,6 +1744,10 @@ class BoardTableCompanion extends UpdateCompanion<BoardTableData> {
           ..write('desc: $desc, ')
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
+          ..write('whatsGroupLink: $whatsGroupLink, ')
+          ..write('telegramGroupLink: $telegramGroupLink, ')
+          ..write('discordServerLink: $discordServerLink, ')
+          ..write('driveFilesLink: $driveFilesLink, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -2412,8 +2604,14 @@ class $BoardLinkTableTable extends BoardLinkTable
   late final GeneratedColumn<String> boardUuid = GeneratedColumn<String>(
       'board_uuid', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _titleMeta = const VerificationMeta('title');
   @override
-  List<GeneratedColumn> get $columns => [uuid, typeIndex, link, boardUuid];
+  late final GeneratedColumn<String> title = GeneratedColumn<String>(
+      'title', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [uuid, typeIndex, link, boardUuid, title];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -2448,6 +2646,10 @@ class $BoardLinkTableTable extends BoardLinkTable
     } else if (isInserting) {
       context.missing(_boardUuidMeta);
     }
+    if (data.containsKey('title')) {
+      context.handle(
+          _titleMeta, title.isAcceptableOrUnknown(data['title']!, _titleMeta));
+    }
     return context;
   }
 
@@ -2465,6 +2667,8 @@ class $BoardLinkTableTable extends BoardLinkTable
           .read(DriftSqlType.string, data['${effectivePrefix}link'])!,
       boardUuid: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}board_uuid'])!,
+      title: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}title']),
     );
   }
 
@@ -2480,11 +2684,13 @@ class BoardLinkTableData extends DataClass
   final int typeIndex;
   final String link;
   final String boardUuid;
+  final String? title;
   const BoardLinkTableData(
       {required this.uuid,
       required this.typeIndex,
       required this.link,
-      required this.boardUuid});
+      required this.boardUuid,
+      this.title});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -2492,6 +2698,9 @@ class BoardLinkTableData extends DataClass
     map['type_index'] = Variable<int>(typeIndex);
     map['link'] = Variable<String>(link);
     map['board_uuid'] = Variable<String>(boardUuid);
+    if (!nullToAbsent || title != null) {
+      map['title'] = Variable<String>(title);
+    }
     return map;
   }
 
@@ -2501,6 +2710,8 @@ class BoardLinkTableData extends DataClass
       typeIndex: Value(typeIndex),
       link: Value(link),
       boardUuid: Value(boardUuid),
+      title:
+          title == null && nullToAbsent ? const Value.absent() : Value(title),
     );
   }
 
@@ -2512,6 +2723,7 @@ class BoardLinkTableData extends DataClass
       typeIndex: serializer.fromJson<int>(json['typeIndex']),
       link: serializer.fromJson<String>(json['link']),
       boardUuid: serializer.fromJson<String>(json['boardUuid']),
+      title: serializer.fromJson<String?>(json['title']),
     );
   }
   @override
@@ -2522,16 +2734,22 @@ class BoardLinkTableData extends DataClass
       'typeIndex': serializer.toJson<int>(typeIndex),
       'link': serializer.toJson<String>(link),
       'boardUuid': serializer.toJson<String>(boardUuid),
+      'title': serializer.toJson<String?>(title),
     };
   }
 
   BoardLinkTableData copyWith(
-          {String? uuid, int? typeIndex, String? link, String? boardUuid}) =>
+          {String? uuid,
+          int? typeIndex,
+          String? link,
+          String? boardUuid,
+          Value<String?> title = const Value.absent()}) =>
       BoardLinkTableData(
         uuid: uuid ?? this.uuid,
         typeIndex: typeIndex ?? this.typeIndex,
         link: link ?? this.link,
         boardUuid: boardUuid ?? this.boardUuid,
+        title: title.present ? title.value : this.title,
       );
   BoardLinkTableData copyWithCompanion(BoardLinkTableCompanion data) {
     return BoardLinkTableData(
@@ -2539,6 +2757,7 @@ class BoardLinkTableData extends DataClass
       typeIndex: data.typeIndex.present ? data.typeIndex.value : this.typeIndex,
       link: data.link.present ? data.link.value : this.link,
       boardUuid: data.boardUuid.present ? data.boardUuid.value : this.boardUuid,
+      title: data.title.present ? data.title.value : this.title,
     );
   }
 
@@ -2548,13 +2767,14 @@ class BoardLinkTableData extends DataClass
           ..write('uuid: $uuid, ')
           ..write('typeIndex: $typeIndex, ')
           ..write('link: $link, ')
-          ..write('boardUuid: $boardUuid')
+          ..write('boardUuid: $boardUuid, ')
+          ..write('title: $title')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(uuid, typeIndex, link, boardUuid);
+  int get hashCode => Object.hash(uuid, typeIndex, link, boardUuid, title);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -2562,7 +2782,8 @@ class BoardLinkTableData extends DataClass
           other.uuid == this.uuid &&
           other.typeIndex == this.typeIndex &&
           other.link == this.link &&
-          other.boardUuid == this.boardUuid);
+          other.boardUuid == this.boardUuid &&
+          other.title == this.title);
 }
 
 class BoardLinkTableCompanion extends UpdateCompanion<BoardLinkTableData> {
@@ -2570,12 +2791,14 @@ class BoardLinkTableCompanion extends UpdateCompanion<BoardLinkTableData> {
   final Value<int> typeIndex;
   final Value<String> link;
   final Value<String> boardUuid;
+  final Value<String?> title;
   final Value<int> rowid;
   const BoardLinkTableCompanion({
     this.uuid = const Value.absent(),
     this.typeIndex = const Value.absent(),
     this.link = const Value.absent(),
     this.boardUuid = const Value.absent(),
+    this.title = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   BoardLinkTableCompanion.insert({
@@ -2583,6 +2806,7 @@ class BoardLinkTableCompanion extends UpdateCompanion<BoardLinkTableData> {
     required int typeIndex,
     required String link,
     required String boardUuid,
+    this.title = const Value.absent(),
     this.rowid = const Value.absent(),
   })  : uuid = Value(uuid),
         typeIndex = Value(typeIndex),
@@ -2593,6 +2817,7 @@ class BoardLinkTableCompanion extends UpdateCompanion<BoardLinkTableData> {
     Expression<int>? typeIndex,
     Expression<String>? link,
     Expression<String>? boardUuid,
+    Expression<String>? title,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -2600,6 +2825,7 @@ class BoardLinkTableCompanion extends UpdateCompanion<BoardLinkTableData> {
       if (typeIndex != null) 'type_index': typeIndex,
       if (link != null) 'link': link,
       if (boardUuid != null) 'board_uuid': boardUuid,
+      if (title != null) 'title': title,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -2609,12 +2835,14 @@ class BoardLinkTableCompanion extends UpdateCompanion<BoardLinkTableData> {
       Value<int>? typeIndex,
       Value<String>? link,
       Value<String>? boardUuid,
+      Value<String?>? title,
       Value<int>? rowid}) {
     return BoardLinkTableCompanion(
       uuid: uuid ?? this.uuid,
       typeIndex: typeIndex ?? this.typeIndex,
       link: link ?? this.link,
       boardUuid: boardUuid ?? this.boardUuid,
+      title: title ?? this.title,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -2634,6 +2862,9 @@ class BoardLinkTableCompanion extends UpdateCompanion<BoardLinkTableData> {
     if (boardUuid.present) {
       map['board_uuid'] = Variable<String>(boardUuid.value);
     }
+    if (title.present) {
+      map['title'] = Variable<String>(title.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -2647,6 +2878,7 @@ class BoardLinkTableCompanion extends UpdateCompanion<BoardLinkTableData> {
           ..write('typeIndex: $typeIndex, ')
           ..write('link: $link, ')
           ..write('boardUuid: $boardUuid, ')
+          ..write('title: $title, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -3128,6 +3360,10 @@ typedef $$BoardTableTableCreateCompanionBuilder = BoardTableCompanion Function({
   Value<String?> desc,
   required DateTime createdAt,
   required DateTime updatedAt,
+  Value<String?> whatsGroupLink,
+  Value<String?> telegramGroupLink,
+  Value<String?> discordServerLink,
+  Value<String?> driveFilesLink,
   Value<int> rowid,
 });
 typedef $$BoardTableTableUpdateCompanionBuilder = BoardTableCompanion Function({
@@ -3140,6 +3376,10 @@ typedef $$BoardTableTableUpdateCompanionBuilder = BoardTableCompanion Function({
   Value<String?> desc,
   Value<DateTime> createdAt,
   Value<DateTime> updatedAt,
+  Value<String?> whatsGroupLink,
+  Value<String?> telegramGroupLink,
+  Value<String?> discordServerLink,
+  Value<String?> driveFilesLink,
   Value<int> rowid,
 });
 
@@ -3169,6 +3409,10 @@ class $$BoardTableTableTableManager extends RootTableManager<
             Value<String?> desc = const Value.absent(),
             Value<DateTime> createdAt = const Value.absent(),
             Value<DateTime> updatedAt = const Value.absent(),
+            Value<String?> whatsGroupLink = const Value.absent(),
+            Value<String?> telegramGroupLink = const Value.absent(),
+            Value<String?> discordServerLink = const Value.absent(),
+            Value<String?> driveFilesLink = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               BoardTableCompanion(
@@ -3181,6 +3425,10 @@ class $$BoardTableTableTableManager extends RootTableManager<
             desc: desc,
             createdAt: createdAt,
             updatedAt: updatedAt,
+            whatsGroupLink: whatsGroupLink,
+            telegramGroupLink: telegramGroupLink,
+            discordServerLink: discordServerLink,
+            driveFilesLink: driveFilesLink,
             rowid: rowid,
           ),
           createCompanionCallback: ({
@@ -3193,6 +3441,10 @@ class $$BoardTableTableTableManager extends RootTableManager<
             Value<String?> desc = const Value.absent(),
             required DateTime createdAt,
             required DateTime updatedAt,
+            Value<String?> whatsGroupLink = const Value.absent(),
+            Value<String?> telegramGroupLink = const Value.absent(),
+            Value<String?> discordServerLink = const Value.absent(),
+            Value<String?> driveFilesLink = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               BoardTableCompanion.insert(
@@ -3205,6 +3457,10 @@ class $$BoardTableTableTableManager extends RootTableManager<
             desc: desc,
             createdAt: createdAt,
             updatedAt: updatedAt,
+            whatsGroupLink: whatsGroupLink,
+            telegramGroupLink: telegramGroupLink,
+            discordServerLink: discordServerLink,
+            driveFilesLink: driveFilesLink,
             rowid: rowid,
           ),
         ));
@@ -3257,6 +3513,26 @@ class $$BoardTableTableFilterComposer
       column: $state.table.updatedAt,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get whatsGroupLink => $state.composableBuilder(
+      column: $state.table.whatsGroupLink,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get telegramGroupLink => $state.composableBuilder(
+      column: $state.table.telegramGroupLink,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get discordServerLink => $state.composableBuilder(
+      column: $state.table.discordServerLink,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get driveFilesLink => $state.composableBuilder(
+      column: $state.table.driveFilesLink,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
 }
 
 class $$BoardTableTableOrderingComposer
@@ -3304,6 +3580,26 @@ class $$BoardTableTableOrderingComposer
 
   ColumnOrderings<DateTime> get updatedAt => $state.composableBuilder(
       column: $state.table.updatedAt,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get whatsGroupLink => $state.composableBuilder(
+      column: $state.table.whatsGroupLink,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get telegramGroupLink => $state.composableBuilder(
+      column: $state.table.telegramGroupLink,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get discordServerLink => $state.composableBuilder(
+      column: $state.table.discordServerLink,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get driveFilesLink => $state.composableBuilder(
+      column: $state.table.driveFilesLink,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
@@ -3653,6 +3949,7 @@ typedef $$BoardLinkTableTableCreateCompanionBuilder = BoardLinkTableCompanion
   required int typeIndex,
   required String link,
   required String boardUuid,
+  Value<String?> title,
   Value<int> rowid,
 });
 typedef $$BoardLinkTableTableUpdateCompanionBuilder = BoardLinkTableCompanion
@@ -3661,6 +3958,7 @@ typedef $$BoardLinkTableTableUpdateCompanionBuilder = BoardLinkTableCompanion
   Value<int> typeIndex,
   Value<String> link,
   Value<String> boardUuid,
+  Value<String?> title,
   Value<int> rowid,
 });
 
@@ -3686,6 +3984,7 @@ class $$BoardLinkTableTableTableManager extends RootTableManager<
             Value<int> typeIndex = const Value.absent(),
             Value<String> link = const Value.absent(),
             Value<String> boardUuid = const Value.absent(),
+            Value<String?> title = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               BoardLinkTableCompanion(
@@ -3693,6 +3992,7 @@ class $$BoardLinkTableTableTableManager extends RootTableManager<
             typeIndex: typeIndex,
             link: link,
             boardUuid: boardUuid,
+            title: title,
             rowid: rowid,
           ),
           createCompanionCallback: ({
@@ -3700,6 +4000,7 @@ class $$BoardLinkTableTableTableManager extends RootTableManager<
             required int typeIndex,
             required String link,
             required String boardUuid,
+            Value<String?> title = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               BoardLinkTableCompanion.insert(
@@ -3707,6 +4008,7 @@ class $$BoardLinkTableTableTableManager extends RootTableManager<
             typeIndex: typeIndex,
             link: link,
             boardUuid: boardUuid,
+            title: title,
             rowid: rowid,
           ),
         ));
@@ -3734,6 +4036,11 @@ class $$BoardLinkTableTableFilterComposer
       column: $state.table.boardUuid,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get title => $state.composableBuilder(
+      column: $state.table.title,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
 }
 
 class $$BoardLinkTableTableOrderingComposer
@@ -3756,6 +4063,11 @@ class $$BoardLinkTableTableOrderingComposer
 
   ColumnOrderings<String> get boardUuid => $state.composableBuilder(
       column: $state.table.boardUuid,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get title => $state.composableBuilder(
+      column: $state.table.title,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }

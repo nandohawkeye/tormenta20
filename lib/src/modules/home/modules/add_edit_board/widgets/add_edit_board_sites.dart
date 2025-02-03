@@ -7,8 +7,8 @@ import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
-class AddEditBoardCharacters extends StatelessWidget {
-  const AddEditBoardCharacters(this.controller, {super.key});
+class AddEditBoardSites extends StatelessWidget {
+  const AddEditBoardSites(this.controller, {super.key});
 
   final AddEditBoardController controller;
 
@@ -23,18 +23,13 @@ class AddEditBoardCharacters extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Labels('Personagens'),
+              const Labels('Sites'),
               Row(
                 children: [
                   SimpleButton(
                     icon: FontAwesomeIcons.plus,
                     onTap: () {},
                   ),
-                  T20UI.spaceWidth,
-                  SimpleButton(
-                    icon: FontAwesomeIcons.qrcode,
-                    onTap: () {},
-                  )
                 ],
               ),
             ],
@@ -46,7 +41,7 @@ class AddEditBoardCharacters extends StatelessWidget {
             horizontal: T20UI.spaceSize - 4,
           ),
           child: MainButton(
-            label: 'Adicionar personagem',
+            label: 'Adicionar site',
             backgroundColor: palette.cardBackground,
             onTap: () {},
           ),

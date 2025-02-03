@@ -2,7 +2,7 @@ import 'package:tormenta20/src/shared/entities/board/board_character.dart';
 import 'package:tormenta20/src/shared/entities/board/board_game.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link.dart';
 import 'package:tormenta20/src/shared/entities/board/board_material.dart';
-import 'package:tormenta20/src/shared/entities/board/board_type.dart';
+import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
 
 class Board {
   final String uuid;
@@ -17,7 +17,7 @@ class Board {
   final List<BoardLink> links;
   final List<BoardGame> games;
   final List<BoardCharacter> characters;
-  final BoardType type;
+  final BoardModeType mode;
 
   final String? whatsGroupLink;
   final String? telegramGroupLink;
@@ -37,7 +37,7 @@ class Board {
     required this.games,
     required this.level,
     required this.characters,
-    required this.type,
+    required this.mode,
     this.whatsGroupLink,
     this.telegramGroupLink,
     this.discordServerLink,
@@ -59,7 +59,7 @@ class Board {
       other.characters == characters &&
       other.level == level &&
       other.updatedAt == updatedAt &&
-      other.type == type &&
+      other.mode == mode &&
       other.whatsGroupLink == whatsGroupLink &&
       other.telegramGroupLink == telegramGroupLink &&
       other.discordServerLink == discordServerLink &&
@@ -79,7 +79,7 @@ class Board {
       games.hashCode ^
       characters.hashCode ^
       level.hashCode ^
-      type.hashCode ^
+      mode.hashCode ^
       whatsGroupLink.hashCode ^
       telegramGroupLink.hashCode ^
       discordServerLink.hashCode ^

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 
@@ -39,7 +40,7 @@ class MainButton extends StatelessWidget {
                   fontSize: 16,
                   color: textColor,
                   fontWeight: FontWeight.w500,
-                  fontFamily: 'tormenta',
+                  fontFamily: FontFamily.tormenta,
                 ),
               ),
             ),

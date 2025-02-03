@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/palettes.dart';
 
@@ -222,7 +223,7 @@ final ThemeData theme = ThemeData(
       fontSize: 20,
       fontWeight: FontWeight.w500,
       color: palette.textPrimary,
-      fontFamily: 'tormenta',
+      fontFamily: FontFamily.tormenta,
     ),
     titleSpacing: 12,
     elevation: 1,

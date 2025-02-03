@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/grimorie_screen.dart';
@@ -55,7 +56,7 @@ class GrimoireCard extends StatelessWidget {
                           Text(
                             grimoire.name,
                             style: TextStyle(
-                              fontFamily: 'tormenta',
+                              fontFamily: FontFamily.tormenta,
                               color: Color(grimoire.colorInt),
                               fontSize: 18,
                             ),

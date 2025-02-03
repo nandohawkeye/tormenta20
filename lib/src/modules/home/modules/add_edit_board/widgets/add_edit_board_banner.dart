@@ -7,17 +7,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_board/add_edit_board_controller.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/extensions/context_ext.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
 class AddEditBoardBanner extends StatefulWidget {
-  const AddEditBoardBanner(
-      {super.key, this.initialValue, this.changeBannerPath});
+  const AddEditBoardBanner(this.controller, {super.key});
 
-  final String? initialValue;
-  final Function(String?)? changeBannerPath;
+  final AddEditBoardController controller;
 
   @override
   State<AddEditBoardBanner> createState() => _AddEditBoardBannerState();
@@ -30,7 +29,7 @@ class _AddEditBoardBannerState extends State<AddEditBoardBanner> {
   @override
   void initState() {
     super.initState();
-    _bannerPath = ValueNotifier<String?>(widget.initialValue);
+    _bannerPath = ValueNotifier<String?>(widget.controller.bannerPath);
   }
 
   @override
@@ -47,17 +46,13 @@ class _AddEditBoardBannerState extends State<AddEditBoardBanner> {
 
     if (path != null) {
       _setBannerPath(path);
-      if (widget.changeBannerPath != null) {
-        widget.changeBannerPath!(path);
-      }
+      widget.controller.changeBannerPath(path);
     }
   }
 
   void _onRemoveImage() async {
     _setBannerPath(null);
-    if (widget.changeBannerPath != null) {
-      widget.changeBannerPath!(null);
-    }
+    widget.controller.changeBannerPath(null);
   }
 
   @override

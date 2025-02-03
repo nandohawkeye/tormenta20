@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
 
@@ -20,7 +21,7 @@ class AddGrimorieBottomsheetHeader extends StatelessWidget {
             '${initialGrimoire != null ? 'Editando' : 'Criando'} grimório',
             style: const TextStyle(
               fontSize: 18,
-              fontFamily: 'tormenta',
+              fontFamily: FontFamily.tormenta,
             ),
           ),
         ),

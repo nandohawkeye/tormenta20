@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 
@@ -53,7 +54,7 @@ class ScreenImageButton extends StatelessWidget {
                         title,
                         style: TextStyle(
                           color: palette.primary.withOpacity(.6),
-                          fontFamily: 'tormenta',
+                          fontFamily: FontFamily.tormenta,
                           fontSize: titleSize,
                         ),
                       ),

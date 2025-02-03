@@ -1,0 +1,1 @@
+enum BoardModeType { master, player }

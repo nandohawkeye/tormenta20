@@ -5,17 +5,14 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_e
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_desc_field.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_level_field.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_name_field.dart';
-import 'package:tormenta20/src/shared/entities/board/board.dart';
 
 class AddEditBoardTextFields extends StatelessWidget {
   const AddEditBoardTextFields({
     super.key,
-    this.initialBoard,
     required this.formKey,
     required this.controller,
   });
 
-  final Board? initialBoard;
   final GlobalKey<FormState> formKey;
   final AddEditBoardController controller;
 
@@ -38,11 +35,17 @@ class AddEditBoardTextFields extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: AddEditBoardNameField((_) {}),
+                      child: AddEditBoardNameField(
+                        controller.changeName,
+                        initialValue: controller.name,
+                      ),
                     ),
                     T20UI.spaceWidth,
                     Expanded(
-                      child: AddEditBoardLevelField((_) {}),
+                      child: AddEditBoardLevelField(
+                        controller.changeLevel,
+                        initialValue: controller.level.toString(),
+                      ),
                     )
                   ],
                 ),
@@ -52,7 +55,10 @@ class AddEditBoardTextFields extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                   horizontal: T20UI.spaceSize - 4,
                 ),
-                child: AddEditBoardAdventureField((_) {}),
+                child: AddEditBoardAdventureField(
+                  controller.changeAdventure,
+                  initialValue: controller.adventure,
+                ),
               ),
             ],
           ),
@@ -62,7 +68,10 @@ class AddEditBoardTextFields extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
             horizontal: T20UI.spaceSize - 4,
           ),
-          child: AddEditBoardDescField((_) {}),
+          child: AddEditBoardDescField(
+            controller.changeDesc,
+            initialValue: controller.desc,
+          ),
         ),
       ],
     );
