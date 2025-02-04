@@ -7,121 +7,112 @@
 // ignore_for_file: type=lint
 // ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart' as _svg;
-import 'package:vector_graphics/vector_graphics.dart' as _vg;
 
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
   /// File path: assets/icons/biohazard.svg
-  SvgGenImage get biohazard => const SvgGenImage('assets/icons/biohazard.svg');
+  String get biohazard => 'assets/icons/biohazard.svg';
 
   /// File path: assets/icons/book.svg
-  SvgGenImage get book => const SvgGenImage('assets/icons/book.svg');
+  String get book => 'assets/icons/book.svg';
 
   /// File path: assets/icons/book_medical.svg
-  SvgGenImage get bookMedical =>
-      const SvgGenImage('assets/icons/book_medical.svg');
+  String get bookMedical => 'assets/icons/book_medical.svg';
 
   /// File path: assets/icons/book_skull.svg
-  SvgGenImage get bookSkull => const SvgGenImage('assets/icons/book_skull.svg');
+  String get bookSkull => 'assets/icons/book_skull.svg';
 
   /// File path: assets/icons/brain.svg
-  SvgGenImage get brain => const SvgGenImage('assets/icons/brain.svg');
+  String get brain => 'assets/icons/brain.svg';
 
   /// File path: assets/icons/bug.svg
-  SvgGenImage get bug => const SvgGenImage('assets/icons/bug.svg');
+  String get bug => 'assets/icons/bug.svg';
 
   /// File path: assets/icons/dice.svg
-  SvgGenImage get dice => const SvgGenImage('assets/icons/dice.svg');
+  String get dice => 'assets/icons/dice.svg';
 
   /// File path: assets/icons/dragon.svg
-  SvgGenImage get dragon => const SvgGenImage('assets/icons/dragon.svg');
+  String get dragon => 'assets/icons/dragon.svg';
 
   /// File path: assets/icons/eagle.svg
-  SvgGenImage get eagle => const SvgGenImage('assets/icons/eagle.svg');
+  String get eagle => 'assets/icons/eagle.svg';
 
   /// File path: assets/icons/eagle_flying.svg
-  SvgGenImage get eagleFlying =>
-      const SvgGenImage('assets/icons/eagle_flying.svg');
+  String get eagleFlying => 'assets/icons/eagle_flying.svg';
 
   /// File path: assets/icons/feather.svg
-  SvgGenImage get feather => const SvgGenImage('assets/icons/feather.svg');
+  String get feather => 'assets/icons/feather.svg';
 
   /// File path: assets/icons/flame.svg
-  SvgGenImage get flame => const SvgGenImage('assets/icons/flame.svg');
+  String get flame => 'assets/icons/flame.svg';
 
   /// File path: assets/icons/ghost.svg
-  SvgGenImage get ghost => const SvgGenImage('assets/icons/ghost.svg');
+  String get ghost => 'assets/icons/ghost.svg';
 
   /// File path: assets/icons/guitar.svg
-  SvgGenImage get guitar => const SvgGenImage('assets/icons/guitar.svg');
+  String get guitar => 'assets/icons/guitar.svg';
 
   /// File path: assets/icons/hands_praying.svg
-  SvgGenImage get handsPraying =>
-      const SvgGenImage('assets/icons/hands_praying.svg');
+  String get handsPraying => 'assets/icons/hands_praying.svg';
 
   /// File path: assets/icons/leaf.svg
-  SvgGenImage get leaf => const SvgGenImage('assets/icons/leaf.svg');
+  String get leaf => 'assets/icons/leaf.svg';
 
   /// File path: assets/icons/lion.svg
-  SvgGenImage get lion => const SvgGenImage('assets/icons/lion.svg');
+  String get lion => 'assets/icons/lion.svg';
 
   /// File path: assets/icons/magic_potion.svg
-  SvgGenImage get magicPotion =>
-      const SvgGenImage('assets/icons/magic_potion.svg');
+  String get magicPotion => 'assets/icons/magic_potion.svg';
 
   /// File path: assets/icons/mask.svg
-  SvgGenImage get mask => const SvgGenImage('assets/icons/mask.svg');
+  String get mask => 'assets/icons/mask.svg';
 
   /// File path: assets/icons/masks_theater.svg
-  SvgGenImage get masksTheater =>
-      const SvgGenImage('assets/icons/masks_theater.svg');
+  String get masksTheater => 'assets/icons/masks_theater.svg';
 
   /// File path: assets/icons/moon.svg
-  SvgGenImage get moon => const SvgGenImage('assets/icons/moon.svg');
+  String get moon => 'assets/icons/moon.svg';
 
   /// File path: assets/icons/mountain.svg
-  SvgGenImage get mountain => const SvgGenImage('assets/icons/mountain.svg');
+  String get mountain => 'assets/icons/mountain.svg';
 
   /// File path: assets/icons/paw.svg
-  SvgGenImage get paw => const SvgGenImage('assets/icons/paw.svg');
+  String get paw => 'assets/icons/paw.svg';
 
   /// File path: assets/icons/radiation.svg
-  SvgGenImage get radiation => const SvgGenImage('assets/icons/radiation.svg');
+  String get radiation => 'assets/icons/radiation.svg';
 
   /// File path: assets/icons/shield.svg
-  SvgGenImage get shield => const SvgGenImage('assets/icons/shield.svg');
+  String get shield => 'assets/icons/shield.svg';
 
   /// File path: assets/icons/shield_halved.svg
-  SvgGenImage get shieldHalved =>
-      const SvgGenImage('assets/icons/shield_halved.svg');
+  String get shieldHalved => 'assets/icons/shield_halved.svg';
 
   /// File path: assets/icons/skull.svg
-  SvgGenImage get skull => const SvgGenImage('assets/icons/skull.svg');
+  String get skull => 'assets/icons/skull.svg';
 
   /// File path: assets/icons/snowflake.svg
-  SvgGenImage get snowflake => const SvgGenImage('assets/icons/snowflake.svg');
+  String get snowflake => 'assets/icons/snowflake.svg';
 
   /// File path: assets/icons/spider.svg
-  SvgGenImage get spider => const SvgGenImage('assets/icons/spider.svg');
+  String get spider => 'assets/icons/spider.svg';
 
   /// File path: assets/icons/sun.svg
-  SvgGenImage get sun => const SvgGenImage('assets/icons/sun.svg');
+  String get sun => 'assets/icons/sun.svg';
 
   /// File path: assets/icons/sword.svg
-  SvgGenImage get sword => const SvgGenImage('assets/icons/sword.svg');
+  String get sword => 'assets/icons/sword.svg';
 
   /// File path: assets/icons/tornado.svg
-  SvgGenImage get tornado => const SvgGenImage('assets/icons/tornado.svg');
+  String get tornado => 'assets/icons/tornado.svg';
 
   /// File path: assets/icons/virus.svg
-  SvgGenImage get virus => const SvgGenImage('assets/icons/virus.svg');
+  String get virus => 'assets/icons/virus.svg';
 
   /// List of all assets
-  List<SvgGenImage> get values => [
+  List<String> get values => [
         biohazard,
         book,
         bookMedical,
@@ -263,11 +254,22 @@ class $AssetsImagesGen {
       ];
 }
 
+class $AssetsLottieGen {
+  const $AssetsLottieGen();
+
+  /// File path: assets/lottie/loading.lottie
+  String get loading => 'assets/lottie/loading.lottie';
+
+  /// List of all assets
+  List<String> get values => [loading];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsLottieGen lottie = $AssetsLottieGen();
 }
 
 class AssetGenImage {
@@ -343,83 +345,6 @@ class AssetGenImage {
       _assetName,
       bundle: bundle,
       package: package,
-    );
-  }
-
-  String get path => _assetName;
-
-  String get keyName => _assetName;
-}
-
-class SvgGenImage {
-  const SvgGenImage(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  }) : _isVecFormat = false;
-
-  const SvgGenImage.vec(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  }) : _isVecFormat = true;
-
-  final String _assetName;
-  final Size? size;
-  final Set<String> flavors;
-  final bool _isVecFormat;
-
-  _svg.SvgPicture svg({
-    Key? key,
-    bool matchTextDirection = false,
-    AssetBundle? bundle,
-    String? package,
-    double? width,
-    double? height,
-    BoxFit fit = BoxFit.contain,
-    AlignmentGeometry alignment = Alignment.center,
-    bool allowDrawingOutsideViewBox = false,
-    WidgetBuilder? placeholderBuilder,
-    String? semanticsLabel,
-    bool excludeFromSemantics = false,
-    _svg.SvgTheme? theme,
-    ColorFilter? colorFilter,
-    Clip clipBehavior = Clip.hardEdge,
-    @deprecated Color? color,
-    @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
-    @deprecated bool cacheColorFilter = false,
-  }) {
-    final _svg.BytesLoader loader;
-    if (_isVecFormat) {
-      loader = _vg.AssetBytesLoader(
-        _assetName,
-        assetBundle: bundle,
-        packageName: package,
-      );
-    } else {
-      loader = _svg.SvgAssetLoader(
-        _assetName,
-        assetBundle: bundle,
-        packageName: package,
-        theme: theme,
-      );
-    }
-    return _svg.SvgPicture(
-      loader,
-      key: key,
-      matchTextDirection: matchTextDirection,
-      width: width,
-      height: height,
-      fit: fit,
-      alignment: alignment,
-      allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
-      placeholderBuilder: placeholderBuilder,
-      semanticsLabel: semanticsLabel,
-      excludeFromSemantics: excludeFromSemantics,
-      colorFilter: colorFilter ??
-          (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
-      clipBehavior: clipBehavior,
-      cacheColorFilter: cacheColorFilter,
     );
   }
 

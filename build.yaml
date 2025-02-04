@@ -1,0 +1,23 @@
+targets:
+  $default:
+    builders:
+      flutter_gen_runner:
+        enabled: true
+        options: 
+          output: lib/gen/ 
+          line_length: 120
+          integrations:
+            flutter_svg: true
+            lottie: true
+      drift_dev:
+        enabled: true
+        generate_for:
+          include:
+            - "lib/src/core/database/**"
+        options:
+          store_date_time_values_as_text: true
+
+          
+
+      
+

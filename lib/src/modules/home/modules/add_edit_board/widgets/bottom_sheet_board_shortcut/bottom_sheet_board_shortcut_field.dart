@@ -83,7 +83,7 @@ class _BottomSheetBoardShortcutFieldState
                   style: const TextStyle(fontSize: 16),
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.name,
-                  textCapitalization: TextCapitalization.sentences,
+                  textCapitalization: TextCapitalization.none,
                   decoration: InputDecoration(
                     labelText: BoardShortcutsUtils.handleLabel(widget.type),
                     fillColor: palette.onBottomsheet,

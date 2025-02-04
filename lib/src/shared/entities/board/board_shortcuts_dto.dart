@@ -11,6 +11,12 @@ class BoardShortcutsDto {
     required this.telegramLink,
   });
 
+  bool get isEmpty =>
+      whatsLink == null &&
+      dicordLink == null &&
+      drivefilesLink == null &&
+      telegramLink == null;
+
   @override
   bool operator ==(other) =>
       other is BoardShortcutsDto &&

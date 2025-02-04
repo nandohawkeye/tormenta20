@@ -107,7 +107,7 @@ class _AddEditBoardBannerState extends State<AddEditBoardBanner> {
                                   icon: FontAwesomeIcons.solidTrashCan,
                                   backgroundColor:
                                       palette.accent.withOpacity(.6),
-                                  iconColor: palette.indicator,
+                                  iconColor: palette.indicator.withOpacity(.6),
                                   onTap: _onRemoveImage,
                                 )
                               ],

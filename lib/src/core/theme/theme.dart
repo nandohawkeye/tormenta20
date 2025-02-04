@@ -56,7 +56,7 @@ final ThemeData theme = ThemeData(
     shape: T20UI.defaultBorder(palette),
     elevation: 0,
     margin: EdgeInsets.zero,
-    color: palette.inputColor,
+    color: palette.cardBackground,
     shadowColor: Colors.transparent,
   ),
   textButtonTheme: TextButtonThemeData(

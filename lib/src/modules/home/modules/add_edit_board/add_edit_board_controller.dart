@@ -4,11 +4,12 @@ import 'package:tormenta20/src/shared/entities/board/board_link.dart';
 import 'package:tormenta20/src/shared/entities/board/board_material.dart';
 import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
 import 'package:tormenta20/src/shared/entities/board/board_shortcuts_dto.dart';
+import 'package:uuid/uuid.dart';
 
 class AddEditBoardController {
   AddEditBoardController(Board? initialBoard) {
     if (initialBoard != null) {
-      _uuid = initialBoard.uuid;
+      _boardUuid = initialBoard.uuid;
       _name = initialBoard.name;
       _desc = initialBoard.desc;
       _adventure = initialBoard.adventureName;
@@ -22,12 +23,15 @@ class AddEditBoardController {
       _links.addAll(initialBoard.links);
       _characters.addAll(initialBoard.characters);
       _mode = initialBoard.mode;
+    } else {
+      _boardUuid = const Uuid().v4();
     }
   }
 
   BoardModeType _mode = BoardModeType.master;
 
-  String? _uuid;
+  late String _boardUuid;
+  String get boardUuid => _boardUuid;
 
   String? _name;
   String? get name => _name;
@@ -69,9 +73,15 @@ class AddEditBoardController {
 
   List<BoardMaterial> _materials = [];
   List<BoardMaterial> get materials => _materials;
+  void addMaterials(List<BoardMaterial> values) => _materials.addAll(values);
+  void removeMaterials(BoardMaterial value) =>
+      _materials.retainWhere((od) => od.uuid == value.uuid);
 
   List<BoardLink> _links = [];
   List<BoardLink> get links => _links;
+  void addLink(BoardLink value) => _links.add(value);
+  void removeLink(BoardLink value) =>
+      _links.removeWhere((od) => od.uuid == value.uuid);
 
   List<BoardCharacter> _characters = [];
   List<BoardCharacter> get characters => _characters;

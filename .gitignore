@@ -115,6 +115,7 @@ app.*.symbols
 /android/app/release
 
 lib/**/*.g.dart
+lib/gen/**
 
 # Exceptions to above rules.
 !**/ios/**/default.mode1v3

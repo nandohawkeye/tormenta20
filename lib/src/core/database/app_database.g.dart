@@ -2607,8 +2607,8 @@ class $BoardLinkTableTable extends BoardLinkTable
   static const VerificationMeta _titleMeta = const VerificationMeta('title');
   @override
   late final GeneratedColumn<String> title = GeneratedColumn<String>(
-      'title', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
+      'title', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
       [uuid, typeIndex, link, boardUuid, title];
@@ -2649,6 +2649,8 @@ class $BoardLinkTableTable extends BoardLinkTable
     if (data.containsKey('title')) {
       context.handle(
           _titleMeta, title.isAcceptableOrUnknown(data['title']!, _titleMeta));
+    } else if (isInserting) {
+      context.missing(_titleMeta);
     }
     return context;
   }
@@ -2668,7 +2670,7 @@ class $BoardLinkTableTable extends BoardLinkTable
       boardUuid: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}board_uuid'])!,
       title: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}title']),
+          .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
     );
   }
 
@@ -2684,13 +2686,13 @@ class BoardLinkTableData extends DataClass
   final int typeIndex;
   final String link;
   final String boardUuid;
-  final String? title;
+  final String title;
   const BoardLinkTableData(
       {required this.uuid,
       required this.typeIndex,
       required this.link,
       required this.boardUuid,
-      this.title});
+      required this.title});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -2698,9 +2700,7 @@ class BoardLinkTableData extends DataClass
     map['type_index'] = Variable<int>(typeIndex);
     map['link'] = Variable<String>(link);
     map['board_uuid'] = Variable<String>(boardUuid);
-    if (!nullToAbsent || title != null) {
-      map['title'] = Variable<String>(title);
-    }
+    map['title'] = Variable<String>(title);
     return map;
   }
 
@@ -2710,8 +2710,7 @@ class BoardLinkTableData extends DataClass
       typeIndex: Value(typeIndex),
       link: Value(link),
       boardUuid: Value(boardUuid),
-      title:
-          title == null && nullToAbsent ? const Value.absent() : Value(title),
+      title: Value(title),
     );
   }
 
@@ -2723,7 +2722,7 @@ class BoardLinkTableData extends DataClass
       typeIndex: serializer.fromJson<int>(json['typeIndex']),
       link: serializer.fromJson<String>(json['link']),
       boardUuid: serializer.fromJson<String>(json['boardUuid']),
-      title: serializer.fromJson<String?>(json['title']),
+      title: serializer.fromJson<String>(json['title']),
     );
   }
   @override
@@ -2734,7 +2733,7 @@ class BoardLinkTableData extends DataClass
       'typeIndex': serializer.toJson<int>(typeIndex),
       'link': serializer.toJson<String>(link),
       'boardUuid': serializer.toJson<String>(boardUuid),
-      'title': serializer.toJson<String?>(title),
+      'title': serializer.toJson<String>(title),
     };
   }
 
@@ -2743,13 +2742,13 @@ class BoardLinkTableData extends DataClass
           int? typeIndex,
           String? link,
           String? boardUuid,
-          Value<String?> title = const Value.absent()}) =>
+          String? title}) =>
       BoardLinkTableData(
         uuid: uuid ?? this.uuid,
         typeIndex: typeIndex ?? this.typeIndex,
         link: link ?? this.link,
         boardUuid: boardUuid ?? this.boardUuid,
-        title: title.present ? title.value : this.title,
+        title: title ?? this.title,
       );
   BoardLinkTableData copyWithCompanion(BoardLinkTableCompanion data) {
     return BoardLinkTableData(
@@ -2791,7 +2790,7 @@ class BoardLinkTableCompanion extends UpdateCompanion<BoardLinkTableData> {
   final Value<int> typeIndex;
   final Value<String> link;
   final Value<String> boardUuid;
-  final Value<String?> title;
+  final Value<String> title;
   final Value<int> rowid;
   const BoardLinkTableCompanion({
     this.uuid = const Value.absent(),
@@ -2806,12 +2805,13 @@ class BoardLinkTableCompanion extends UpdateCompanion<BoardLinkTableData> {
     required int typeIndex,
     required String link,
     required String boardUuid,
-    this.title = const Value.absent(),
+    required String title,
     this.rowid = const Value.absent(),
   })  : uuid = Value(uuid),
         typeIndex = Value(typeIndex),
         link = Value(link),
-        boardUuid = Value(boardUuid);
+        boardUuid = Value(boardUuid),
+        title = Value(title);
   static Insertable<BoardLinkTableData> custom({
     Expression<String>? uuid,
     Expression<int>? typeIndex,
@@ -2835,7 +2835,7 @@ class BoardLinkTableCompanion extends UpdateCompanion<BoardLinkTableData> {
       Value<int>? typeIndex,
       Value<String>? link,
       Value<String>? boardUuid,
-      Value<String?>? title,
+      Value<String>? title,
       Value<int>? rowid}) {
     return BoardLinkTableCompanion(
       uuid: uuid ?? this.uuid,
@@ -2915,6 +2915,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         boardGamePauseTable,
         boardLinkTable
       ];
+  @override
+  DriftDatabaseOptions get options =>
+      const DriftDatabaseOptions(storeDateTimeAsText: true);
 }
 
 typedef $$GrimoireTableTableCreateCompanionBuilder = GrimoireTableCompanion
@@ -3949,7 +3952,7 @@ typedef $$BoardLinkTableTableCreateCompanionBuilder = BoardLinkTableCompanion
   required int typeIndex,
   required String link,
   required String boardUuid,
-  Value<String?> title,
+  required String title,
   Value<int> rowid,
 });
 typedef $$BoardLinkTableTableUpdateCompanionBuilder = BoardLinkTableCompanion
@@ -3958,7 +3961,7 @@ typedef $$BoardLinkTableTableUpdateCompanionBuilder = BoardLinkTableCompanion
   Value<int> typeIndex,
   Value<String> link,
   Value<String> boardUuid,
-  Value<String?> title,
+  Value<String> title,
   Value<int> rowid,
 });
 
@@ -3984,7 +3987,7 @@ class $$BoardLinkTableTableTableManager extends RootTableManager<
             Value<int> typeIndex = const Value.absent(),
             Value<String> link = const Value.absent(),
             Value<String> boardUuid = const Value.absent(),
-            Value<String?> title = const Value.absent(),
+            Value<String> title = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               BoardLinkTableCompanion(
@@ -4000,7 +4003,7 @@ class $$BoardLinkTableTableTableManager extends RootTableManager<
             required int typeIndex,
             required String link,
             required String boardUuid,
-            Value<String?> title = const Value.absent(),
+            required String title,
             Value<int> rowid = const Value.absent(),
           }) =>
               BoardLinkTableCompanion.insert(

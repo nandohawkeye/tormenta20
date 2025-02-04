@@ -4,9 +4,9 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_board/add_edit_boar
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/add_edit_board_controller_header.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_banner.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_characters.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_shortcuts.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_shortcuts/add_edit_board_shortcuts.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_main_buttons.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_materials.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_materials/add_edit_board_materials.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_sites.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_text_field.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';

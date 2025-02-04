@@ -2,13 +2,13 @@ class BoardLink {
   final String uuid;
   final String link;
   final String boardUuid;
-  final String? title;
+  final String title;
 
   BoardLink({
     required this.uuid,
     required this.link,
     required this.boardUuid,
-    this.title,
+    required this.title,
   });
 
   @override
