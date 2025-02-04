@@ -34,6 +34,7 @@ class PaletteBase {
     required this.onBottomsheet,
     required this.appBar,
     required this.dividerBottomSheet,
+    required this.onBottomsheetSecondLevel,
   });
   final Color background;
   final Color cardStroke;
@@ -67,6 +68,7 @@ class PaletteBase {
   final Color unselectedWidget;
   final Color onBottomsheet;
   final Color onBottomsheetSelected;
+  final Color onBottomsheetSecondLevel;
 }
 
 abstract class Palettes {
@@ -103,5 +105,6 @@ abstract class Palettes {
         unselectedWidget: const Color(0xFF616161),
         remove: const Color(0xFFDA0000),
         onBottomsheet: const Color(0xFF424242),
+        onBottomsheetSecondLevel: const Color(0xFF616161),
       );
 }

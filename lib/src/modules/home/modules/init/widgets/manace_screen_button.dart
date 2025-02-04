@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/shared/constants/images_assets.dart';
 import 'package:tormenta20/src/shared/widgets/screen_image_button.dart';
 
@@ -38,7 +39,7 @@ class _ManaceScreenButtonState extends State<ManaceScreenButton> {
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 300),
+      duration: T20UI.defaultDurationAnimation,
       child: ScreenImageButton(
         key: Key(_image),
         imageAsset: _image,

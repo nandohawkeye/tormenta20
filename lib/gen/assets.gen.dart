@@ -162,6 +162,10 @@ class $AssetsImagesGen {
   AssetGenImage get barbarian =>
       const AssetGenImage('assets/images/barbarian.png');
 
+  /// File path: assets/images/borda_token.png
+  AssetGenImage get bordaToken =>
+      const AssetGenImage('assets/images/borda_token.png');
+
   /// File path: assets/images/bow.png
   AssetGenImage get bow => const AssetGenImage('assets/images/bow.png');
 
@@ -231,6 +235,7 @@ class $AssetsImagesGen {
         alchemy,
         banner,
         barbarian,
+        bordaToken,
         bow,
         chimera,
         cyclops,
@@ -264,12 +269,493 @@ class $AssetsLottieGen {
   List<String> get values => [loading];
 }
 
+class $AssetsTokensGen {
+  const $AssetsTokensGen();
+
+  /// File path: assets/tokens/Aggelus.png
+  AssetGenImage get aggelus => const AssetGenImage('assets/tokens/Aggelus.png');
+
+  /// File path: assets/tokens/Anao.png
+  AssetGenImage get anao => const AssetGenImage('assets/tokens/Anao.png');
+
+  /// File path: assets/tokens/Arcanista_Purista.png
+  AssetGenImage get arcanistaPurista =>
+      const AssetGenImage('assets/tokens/Arcanista_Purista.png');
+
+  /// File path: assets/tokens/Bruxa.png
+  AssetGenImage get bruxa => const AssetGenImage('assets/tokens/Bruxa.png');
+
+  /// File path: assets/tokens/Bugbear.png
+  AssetGenImage get bugbear => const AssetGenImage('assets/tokens/Bugbear.png');
+
+  /// File path: assets/tokens/Bugbear_1.png
+  AssetGenImage get bugbear1 =>
+      const AssetGenImage('assets/tokens/Bugbear_1.png');
+
+  /// File path: assets/tokens/Bugbear_2.png
+  AssetGenImage get bugbear2 =>
+      const AssetGenImage('assets/tokens/Bugbear_2.png');
+
+  /// File path: assets/tokens/Cavalo_de_Guerra.png
+  AssetGenImage get cavaloDeGuerra =>
+      const AssetGenImage('assets/tokens/Cavalo_de_Guerra.png');
+
+  /// File path: assets/tokens/Cultista_da_Tormenta.png
+  AssetGenImage get cultistaDaTormenta =>
+      const AssetGenImage('assets/tokens/Cultista_da_Tormenta.png');
+
+  /// File path: assets/tokens/Cultista_da_Tormenta_1.png
+  AssetGenImage get cultistaDaTormenta1 =>
+      const AssetGenImage('assets/tokens/Cultista_da_Tormenta_1.png');
+
+  /// File path: assets/tokens/Dahllan.png
+  AssetGenImage get dahllan => const AssetGenImage('assets/tokens/Dahllan.png');
+
+  /// File path: assets/tokens/Elfa.png
+  AssetGenImage get elfa => const AssetGenImage('assets/tokens/Elfa.png');
+
+  /// File path: assets/tokens/Fada.png
+  AssetGenImage get fada => const AssetGenImage('assets/tokens/Fada.png');
+
+  /// File path: assets/tokens/Gargula.png
+  AssetGenImage get gargula => const AssetGenImage('assets/tokens/Gargula.png');
+
+  /// File path: assets/tokens/Gnoll.png
+  AssetGenImage get gnoll => const AssetGenImage('assets/tokens/Gnoll.png');
+
+  /// File path: assets/tokens/Gnoll_1.png
+  AssetGenImage get gnoll1 => const AssetGenImage('assets/tokens/Gnoll_1.png');
+
+  /// File path: assets/tokens/Goblin.png
+  AssetGenImage get goblin => const AssetGenImage('assets/tokens/Goblin.png');
+
+  /// File path: assets/tokens/Goblin_1.png
+  AssetGenImage get goblin1 =>
+      const AssetGenImage('assets/tokens/Goblin_1.png');
+
+  /// File path: assets/tokens/Goblin_2.png
+  AssetGenImage get goblin2 =>
+      const AssetGenImage('assets/tokens/Goblin_2.png');
+
+  /// File path: assets/tokens/Golem.png
+  AssetGenImage get golem => const AssetGenImage('assets/tokens/Golem.png');
+
+  /// File path: assets/tokens/Golem_1.png
+  AssetGenImage get golem1 => const AssetGenImage('assets/tokens/Golem_1.png');
+
+  /// File path: assets/tokens/Guarda.png
+  AssetGenImage get guarda => const AssetGenImage('assets/tokens/Guarda.png');
+
+  /// File path: assets/tokens/Hobgoblin.png
+  AssetGenImage get hobgoblin =>
+      const AssetGenImage('assets/tokens/Hobgoblin.png');
+
+  /// File path: assets/tokens/Hobgoblin_1.png
+  AssetGenImage get hobgoblin1 =>
+      const AssetGenImage('assets/tokens/Hobgoblin_1.png');
+
+  /// File path: assets/tokens/Hobgoblin_2.png
+  AssetGenImage get hobgoblin2 =>
+      const AssetGenImage('assets/tokens/Hobgoblin_2.png');
+
+  /// File path: assets/tokens/Hobgoblin_3.png
+  AssetGenImage get hobgoblin3 =>
+      const AssetGenImage('assets/tokens/Hobgoblin_3.png');
+
+  /// File path: assets/tokens/Humana.png
+  AssetGenImage get humana => const AssetGenImage('assets/tokens/Humana.png');
+
+  /// File path: assets/tokens/Humano.png
+  AssetGenImage get humano => const AssetGenImage('assets/tokens/Humano.png');
+
+  /// File path: assets/tokens/Hynne.png
+  AssetGenImage get hynne => const AssetGenImage('assets/tokens/Hynne.png');
+
+  /// File path: assets/tokens/Hynne_1.png
+  AssetGenImage get hynne1 => const AssetGenImage('assets/tokens/Hynne_1.png');
+
+  /// File path: assets/tokens/Kliren.png
+  AssetGenImage get kliren => const AssetGenImage('assets/tokens/Kliren.png');
+
+  /// File path: assets/tokens/Kliren_1.png
+  AssetGenImage get kliren1 =>
+      const AssetGenImage('assets/tokens/Kliren_1.png');
+
+  /// File path: assets/tokens/Lefou.png
+  AssetGenImage get lefou => const AssetGenImage('assets/tokens/Lefou.png');
+
+  /// File path: assets/tokens/Medusa.png
+  AssetGenImage get medusa => const AssetGenImage('assets/tokens/Medusa.png');
+
+  /// File path: assets/tokens/Medusa_1.png
+  AssetGenImage get medusa1 =>
+      const AssetGenImage('assets/tokens/Medusa_1.png');
+
+  /// File path: assets/tokens/Minotauro.png
+  AssetGenImage get minotauro =>
+      const AssetGenImage('assets/tokens/Minotauro.png');
+
+  /// File path: assets/tokens/Minotauro_1.png
+  AssetGenImage get minotauro1 =>
+      const AssetGenImage('assets/tokens/Minotauro_1.png');
+
+  /// File path: assets/tokens/Nagah.png
+  AssetGenImage get nagah => const AssetGenImage('assets/tokens/Nagah.png');
+
+  /// File path: assets/tokens/Necromante.png
+  AssetGenImage get necromante =>
+      const AssetGenImage('assets/tokens/Necromante.png');
+
+  /// File path: assets/tokens/Necromante_1.png
+  AssetGenImage get necromante1 =>
+      const AssetGenImage('assets/tokens/Necromante_1.png');
+
+  /// File path: assets/tokens/Ogro.png
+  AssetGenImage get ogro => const AssetGenImage('assets/tokens/Ogro.png');
+
+  /// File path: assets/tokens/Orc.png
+  AssetGenImage get orc => const AssetGenImage('assets/tokens/Orc.png');
+
+  /// File path: assets/tokens/Osteon.png
+  AssetGenImage get osteon => const AssetGenImage('assets/tokens/Osteon.png');
+
+  /// File path: assets/tokens/Osteon_1.png
+  AssetGenImage get osteon1 =>
+      const AssetGenImage('assets/tokens/Osteon_1.png');
+
+  /// File path: assets/tokens/Osteon_2.png
+  AssetGenImage get osteon2 =>
+      const AssetGenImage('assets/tokens/Osteon_2.png');
+
+  /// File path: assets/tokens/Purista_Soldado.png
+  AssetGenImage get puristaSoldado =>
+      const AssetGenImage('assets/tokens/Purista_Soldado.png');
+
+  /// File path: assets/tokens/Qareen.png
+  AssetGenImage get qareen => const AssetGenImage('assets/tokens/Qareen.png');
+
+  /// File path: assets/tokens/Sargento_Purista.png
+  AssetGenImage get sargentoPurista =>
+      const AssetGenImage('assets/tokens/Sargento_Purista.png');
+
+  /// File path: assets/tokens/Sereia.png
+  AssetGenImage get sereia => const AssetGenImage('assets/tokens/Sereia.png');
+
+  /// File path: assets/tokens/Sereia_1.png
+  AssetGenImage get sereia1 =>
+      const AssetGenImage('assets/tokens/Sereia_1.png');
+
+  /// File path: assets/tokens/Silfide.png
+  AssetGenImage get silfide => const AssetGenImage('assets/tokens/Silfide.png');
+
+  /// File path: assets/tokens/Silfide_1.png
+  AssetGenImage get silfide1 =>
+      const AssetGenImage('assets/tokens/Silfide_1.png');
+
+  /// File path: assets/tokens/Soldado_Purista.png
+  AssetGenImage get soldadoPurista =>
+      const AssetGenImage('assets/tokens/Soldado_Purista.png');
+
+  /// File path: assets/tokens/Sulfure.png
+  AssetGenImage get sulfure => const AssetGenImage('assets/tokens/Sulfure.png');
+
+  /// File path: assets/tokens/Suraggel.png
+  AssetGenImage get suraggel =>
+      const AssetGenImage('assets/tokens/Suraggel.png');
+
+  /// File path: assets/tokens/Trog.png
+  AssetGenImage get trog => const AssetGenImage('assets/tokens/Trog.png');
+
+  /// File path: assets/tokens/Trog_1.png
+  AssetGenImage get trog1 => const AssetGenImage('assets/tokens/Trog_1.png');
+
+  /// File path: assets/tokens/Troll.png
+  AssetGenImage get troll => const AssetGenImage('assets/tokens/Troll.png');
+
+  /// File path: assets/tokens/Uktril.png
+  AssetGenImage get uktril => const AssetGenImage('assets/tokens/Uktril.png');
+
+  /// File path: assets/tokens/Vampira.png
+  AssetGenImage get vampira => const AssetGenImage('assets/tokens/Vampira.png');
+
+  /// File path: assets/tokens/Zumbi.png
+  AssetGenImage get zumbi => const AssetGenImage('assets/tokens/Zumbi.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [
+        aggelus,
+        anao,
+        arcanistaPurista,
+        bruxa,
+        bugbear,
+        bugbear1,
+        bugbear2,
+        cavaloDeGuerra,
+        cultistaDaTormenta,
+        cultistaDaTormenta1,
+        dahllan,
+        elfa,
+        fada,
+        gargula,
+        gnoll,
+        gnoll1,
+        goblin,
+        goblin1,
+        goblin2,
+        golem,
+        golem1,
+        guarda,
+        hobgoblin,
+        hobgoblin1,
+        hobgoblin2,
+        hobgoblin3,
+        humana,
+        humano,
+        hynne,
+        hynne1,
+        kliren,
+        kliren1,
+        lefou,
+        medusa,
+        medusa1,
+        minotauro,
+        minotauro1,
+        nagah,
+        necromante,
+        necromante1,
+        ogro,
+        orc,
+        osteon,
+        osteon1,
+        osteon2,
+        puristaSoldado,
+        qareen,
+        sargentoPurista,
+        sereia,
+        sereia1,
+        silfide,
+        silfide1,
+        soldadoPurista,
+        sulfure,
+        suraggel,
+        trog,
+        trog1,
+        troll,
+        uktril,
+        vampira,
+        zumbi
+      ];
+}
+
+class $AssetsTokensLendasGen {
+  const $AssetsTokensLendasGen();
+
+  /// File path: assets/tokens_lendas/Allen_Toren.png
+  AssetGenImage get allenToren =>
+      const AssetGenImage('assets/tokens_lendas/Allen_Toren.png');
+
+  /// File path: assets/tokens_lendas/Artorius.png
+  AssetGenImage get artorius =>
+      const AssetGenImage('assets/tokens_lendas/Artorius.png');
+
+  /// File path: assets/tokens_lendas/Asha.png
+  AssetGenImage get asha =>
+      const AssetGenImage('assets/tokens_lendas/Asha.png');
+
+  /// File path: assets/tokens_lendas/Ayleth.png
+  AssetGenImage get ayleth =>
+      const AssetGenImage('assets/tokens_lendas/Ayleth.png');
+
+  /// File path: assets/tokens_lendas/Christian.png
+  AssetGenImage get christian =>
+      const AssetGenImage('assets/tokens_lendas/Christian.png');
+
+  /// File path: assets/tokens_lendas/Cranio_Negro.png
+  AssetGenImage get cranioNegro =>
+      const AssetGenImage('assets/tokens_lendas/Cranio_Negro.png');
+
+  /// File path: assets/tokens_lendas/Dok.png
+  AssetGenImage get dok => const AssetGenImage('assets/tokens_lendas/Dok.png');
+
+  /// File path: assets/tokens_lendas/Drikka.png
+  AssetGenImage get drikka =>
+      const AssetGenImage('assets/tokens_lendas/Drikka.png');
+
+  /// File path: assets/tokens_lendas/Enver.png
+  AssetGenImage get enver =>
+      const AssetGenImage('assets/tokens_lendas/Enver.png');
+
+  /// File path: assets/tokens_lendas/Fren.png
+  AssetGenImage get fren =>
+      const AssetGenImage('assets/tokens_lendas/Fren.png');
+
+  /// File path: assets/tokens_lendas/General_Supremo.png
+  AssetGenImage get generalSupremo =>
+      const AssetGenImage('assets/tokens_lendas/General_Supremo.png');
+
+  /// File path: assets/tokens_lendas/Golinda.png
+  AssetGenImage get golinda =>
+      const AssetGenImage('assets/tokens_lendas/Golinda.png');
+
+  /// File path: assets/tokens_lendas/Gradda.png
+  AssetGenImage get gradda =>
+      const AssetGenImage('assets/tokens_lendas/Gradda.png');
+
+  /// File path: assets/tokens_lendas/Gwen.png
+  AssetGenImage get gwen =>
+      const AssetGenImage('assets/tokens_lendas/Gwen.png');
+
+  /// File path: assets/tokens_lendas/Ichabod.png
+  AssetGenImage get ichabod =>
+      const AssetGenImage('assets/tokens_lendas/Ichabod.png');
+
+  /// File path: assets/tokens_lendas/Ingram.png
+  AssetGenImage get ingram =>
+      const AssetGenImage('assets/tokens_lendas/Ingram.png');
+
+  /// File path: assets/tokens_lendas/Kadeen.png
+  AssetGenImage get kadeen =>
+      const AssetGenImage('assets/tokens_lendas/Kadeen.png');
+
+  /// File path: assets/tokens_lendas/Katabrok.png
+  AssetGenImage get katabrok =>
+      const AssetGenImage('assets/tokens_lendas/Katabrok.png');
+
+  /// File path: assets/tokens_lendas/Klunc.png
+  AssetGenImage get klunc =>
+      const AssetGenImage('assets/tokens_lendas/Klunc.png');
+
+  /// File path: assets/tokens_lendas/Klunc_Mago.png
+  AssetGenImage get kluncMago =>
+      const AssetGenImage('assets/tokens_lendas/Klunc_Mago.png');
+
+  /// File path: assets/tokens_lendas/Leon.png
+  AssetGenImage get leon =>
+      const AssetGenImage('assets/tokens_lendas/Leon.png');
+
+  /// File path: assets/tokens_lendas/Lisandra.png
+  AssetGenImage get lisandra =>
+      const AssetGenImage('assets/tokens_lendas/Lisandra.png');
+
+  /// File path: assets/tokens_lendas/Lothar.png
+  AssetGenImage get lothar =>
+      const AssetGenImage('assets/tokens_lendas/Lothar.png');
+
+  /// File path: assets/tokens_lendas/Maquius.png
+  AssetGenImage get maquius =>
+      const AssetGenImage('assets/tokens_lendas/Maquius.png');
+
+  /// File path: assets/tokens_lendas/Marlin.png
+  AssetGenImage get marlin =>
+      const AssetGenImage('assets/tokens_lendas/Marlin.png');
+
+  /// File path: assets/tokens_lendas/Maryx.png
+  AssetGenImage get maryx =>
+      const AssetGenImage('assets/tokens_lendas/Maryx.png');
+
+  /// File path: assets/tokens_lendas/Nargom.png
+  AssetGenImage get nargom =>
+      const AssetGenImage('assets/tokens_lendas/Nargom.png');
+
+  /// File path: assets/tokens_lendas/Niala.png
+  AssetGenImage get niala =>
+      const AssetGenImage('assets/tokens_lendas/Niala.png');
+
+  /// File path: assets/tokens_lendas/Oihanna.png
+  AssetGenImage get oihanna =>
+      const AssetGenImage('assets/tokens_lendas/Oihanna.png');
+
+  /// File path: assets/tokens_lendas/Orion.png
+  AssetGenImage get orion =>
+      const AssetGenImage('assets/tokens_lendas/Orion.png');
+
+  /// File path: assets/tokens_lendas/Presa_Ligeira.png
+  AssetGenImage get presaLigeira =>
+      const AssetGenImage('assets/tokens_lendas/Presa_Ligeira.png');
+
+  /// File path: assets/tokens_lendas/Reynard.png
+  AssetGenImage get reynard =>
+      const AssetGenImage('assets/tokens_lendas/Reynard.png');
+
+  /// File path: assets/tokens_lendas/Ripp.png
+  AssetGenImage get ripp =>
+      const AssetGenImage('assets/tokens_lendas/Ripp.png');
+
+  /// File path: assets/tokens_lendas/Senomar.png
+  AssetGenImage get senomar =>
+      const AssetGenImage('assets/tokens_lendas/Senomar.png');
+
+  /// File path: assets/tokens_lendas/Shivara.png
+  AssetGenImage get shivara =>
+      const AssetGenImage('assets/tokens_lendas/Shivara.png');
+
+  /// File path: assets/tokens_lendas/Val.png
+  AssetGenImage get val => const AssetGenImage('assets/tokens_lendas/Val.png');
+
+  /// File path: assets/tokens_lendas/Vallen.png
+  AssetGenImage get vallen =>
+      const AssetGenImage('assets/tokens_lendas/Vallen.png');
+
+  /// File path: assets/tokens_lendas/Vanessa.png
+  AssetGenImage get vanessa =>
+      const AssetGenImage('assets/tokens_lendas/Vanessa.png');
+
+  /// File path: assets/tokens_lendas/Veronica.png
+  AssetGenImage get veronica =>
+      const AssetGenImage('assets/tokens_lendas/Veronica.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [
+        allenToren,
+        artorius,
+        asha,
+        ayleth,
+        christian,
+        cranioNegro,
+        dok,
+        drikka,
+        enver,
+        fren,
+        generalSupremo,
+        golinda,
+        gradda,
+        gwen,
+        ichabod,
+        ingram,
+        kadeen,
+        katabrok,
+        klunc,
+        kluncMago,
+        leon,
+        lisandra,
+        lothar,
+        maquius,
+        marlin,
+        maryx,
+        nargom,
+        niala,
+        oihanna,
+        orion,
+        presaLigeira,
+        reynard,
+        ripp,
+        senomar,
+        shivara,
+        val,
+        vallen,
+        vanessa,
+        veronica
+      ];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsLottieGen lottie = $AssetsLottieGen();
+  static const $AssetsTokensGen tokens = $AssetsTokensGen();
+  static const $AssetsTokensLendasGen tokensLendas = $AssetsTokensLendasGen();
 }
 
 class AssetGenImage {

@@ -52,7 +52,7 @@ class _BoardNameFieldState extends State<AddEditBoardAdventureField> {
           decoration: InputDecoration(
             labelText: 'Aventura',
             fillColor: palette.cardBackground,
-            helperText: 'Obrigatório',
+            helperText: 'obrigatório',
             errorText: error,
             helperStyle: TextStyle(
               fontSize: 12,

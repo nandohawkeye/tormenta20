@@ -53,7 +53,7 @@ class _BoardNameFieldState extends State<AddEditBoardLevelField> {
           decoration: InputDecoration(
             labelText: 'Nivel',
             fillColor: palette.cardBackground,
-            helperText: 'Obrigatório',
+            helperText: 'obrigatório',
             errorText: error,
             helperStyle: TextStyle(
               fontSize: 12,

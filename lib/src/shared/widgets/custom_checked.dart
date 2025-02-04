@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 
 class CustomChecked extends StatelessWidget {
@@ -33,7 +34,7 @@ class CustomChecked extends StatelessWidget {
         child: AnimatedContainer(
           height: size,
           width: size,
-          duration: const Duration(milliseconds: 200),
+          duration: T20UI.defaultDurationAnimation,
           decoration: BoxDecoration(
             color: value ? selectedColor : Colors.transparent,
             borderRadius: BorderRadius.circular(5),

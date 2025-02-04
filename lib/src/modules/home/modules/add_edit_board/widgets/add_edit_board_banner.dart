@@ -86,7 +86,7 @@ class _AddEditBoardBannerState extends State<AddEditBoardBanner> {
                       child: Stack(
                         children: [
                           FadeInAnimation(
-                            duration: const Duration(milliseconds: 275),
+                            duration: T20UI.defaultDurationAnimation,
                             child: Row(
                               children: [
                                 InkWell(

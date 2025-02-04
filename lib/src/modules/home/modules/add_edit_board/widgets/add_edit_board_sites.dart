@@ -27,8 +27,17 @@ class _AddEditBoardSitesState extends State<AddEditBoardSites> {
     }
 
     List<BoardLink> oldValues = _links.value ?? [];
-    _links.value = null;
-    _links.value = [...oldValues, value];
+
+    if (oldValues.any((ov) => ov.uuid == value.uuid)) {
+      final index = oldValues.indexWhere((old) => old.uuid == value.uuid);
+      oldValues[index] = value;
+      _links.value = null;
+      _links.value = [...oldValues];
+    } else {
+      _links.value = null;
+      _links.value = [...oldValues, value];
+    }
+
     widget.controller.addLink(value);
   }
 
@@ -53,7 +62,7 @@ class _AddEditBoardSitesState extends State<AddEditBoardSites> {
 
   @override
   Widget build(BuildContext context) {
-    void addEditSite() async {
+    void addEditSite(BoardLink? link) async {
       await showModalBottomSheet<BoardLink?>(
         isScrollControlled: true,
         isDismissible: true,
@@ -64,6 +73,7 @@ class _AddEditBoardSitesState extends State<AddEditBoardSites> {
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
           child: BottomSheetAddBoardLink(
+            link: link,
             boardUuid: widget.controller.boardUuid,
           ),
         ),
@@ -84,7 +94,7 @@ class _AddEditBoardSitesState extends State<AddEditBoardSites> {
                 children: [
                   SimpleButton(
                     icon: FontAwesomeIcons.plus,
-                    onTap: addEditSite,
+                    onTap: () => addEditSite(null),
                   ),
                 ],
               ),
@@ -104,7 +114,7 @@ class _AddEditBoardSitesState extends State<AddEditBoardSites> {
                 child: MainButton(
                   label: 'Adicionar site',
                   backgroundColor: palette.cardBackground,
-                  onTap: addEditSite,
+                  onTap: () => addEditSite(null),
                 ),
               );
             }
@@ -117,7 +127,7 @@ class _AddEditBoardSitesState extends State<AddEditBoardSites> {
               itemBuilder: (_, index) => AddEditBoardSiteCard(
                 link: list[index],
                 onRemove: _remove,
-                onSelect: (_) {},
+                onSelect: addEditSite,
               ),
               separatorBuilder: T20UI.separatorBuilderVertical,
               itemCount: list.length,

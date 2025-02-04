@@ -79,9 +79,18 @@ class AddEditBoardController {
 
   List<BoardLink> _links = [];
   List<BoardLink> get links => _links;
-  void addLink(BoardLink value) => _links.add(value);
-  void removeLink(BoardLink value) =>
-      _links.removeWhere((od) => od.uuid == value.uuid);
+  void addLink(BoardLink value) {
+    if (_links.any((l) => l.uuid == value.uuid)) {
+      final index = _links.indexWhere((l) => l.uuid == value.uuid);
+      _links[index] = value;
+    } else {
+      _links.add(value);
+    }
+  }
+
+  void removeLink(BoardLink value) {
+    _links.removeWhere((od) => od.uuid == value.uuid);
+  }
 
   List<BoardCharacter> _characters = [];
   List<BoardCharacter> get characters => _characters;

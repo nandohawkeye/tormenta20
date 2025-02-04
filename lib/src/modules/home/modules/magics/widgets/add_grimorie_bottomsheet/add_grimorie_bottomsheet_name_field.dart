@@ -44,7 +44,7 @@ class AddGrimorieBottomsheetNameField extends StatelessWidget {
                 vertical: 6,
                 horizontal: T20UI.spaceSize,
               ),
-              helperText: 'Obrigatório',
+              helperText: 'obrigatório',
               helperStyle: TextStyle(
                 color: palette.textDisable,
               ),

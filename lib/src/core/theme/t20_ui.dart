@@ -7,6 +7,7 @@ abstract class T20UI {
   static const double listSpaceSize = 8;
   static const double spaceSize = 16;
   static const double iconSize = 18;
+  static const Duration defaultDurationAnimation = Duration(milliseconds: 200);
   static ShapeBorder bottomSheetShape =
       ContinuousRectangleBorder(borderRadius: BorderRadius.circular(0));
 
@@ -58,9 +59,9 @@ abstract class T20UI {
       extra + spaceSize + MediaQuery.of(context).padding.bottom;
 
   static Widget separatorBuilderVertical(_, __) =>
-      const SizedBox(height: listSpaceSize);
+      const SizedBox(height: spaceSize);
   static Widget separatorBuilderHorizontal(_, __) =>
-      const SizedBox(width: listSpaceSize);
+      const SizedBox(width: spaceSize);
   static Border cardBorder(PaletteBase pallete) =>
       Border.all(color: pallete.cardStroke);
   static BorderRadius borderRadius = BorderRadius.circular(inputBorderRadius);

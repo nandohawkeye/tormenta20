@@ -45,7 +45,7 @@ class _BottomSheetBoardShortcutFieldState
     super.initState();
     _url = ValueNotifier<String?>(widget.initialValue);
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 300),
+      duration: T20UI.defaultDurationAnimation,
       vsync: this,
     )..repeat(reverse: true);
 

@@ -55,12 +55,12 @@ class _BottomSheetAddBoardLinkTitleFieldState
           style: const TextStyle(fontSize: 16),
           textInputAction: TextInputAction.next,
           keyboardType: TextInputType.name,
-          textCapitalization: TextCapitalization.none,
+          textCapitalization: TextCapitalization.sentences,
           validator: _validator,
           decoration: InputDecoration(
             labelText: 'Título',
             fillColor: palette.onBottomsheet,
-            helperText: 'Obrigatório',
+            helperText: 'obrigatório',
             errorText: error,
             helperStyle: TextStyle(color: palette.textDisable),
             contentPadding: const EdgeInsets.symmetric(

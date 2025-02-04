@@ -61,7 +61,7 @@ class _BottomSheetAddBoardLinkTitleFieldState
             labelText: 'URL',
             errorText: error,
             fillColor: palette.onBottomsheet,
-            helperText: 'Obrigatório',
+            helperText: 'obrigatório',
             helperStyle: TextStyle(color: palette.textDisable),
             contentPadding: const EdgeInsets.symmetric(
               vertical: 6,
