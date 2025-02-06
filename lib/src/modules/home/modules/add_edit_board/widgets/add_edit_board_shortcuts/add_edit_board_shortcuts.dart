@@ -12,9 +12,14 @@ import 'package:tormenta20/src/shared/entities/board/board_shortcuts_dto.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
 class AddEditBoardShortcuts extends StatefulWidget {
-  const AddEditBoardShortcuts(this.controller, {super.key});
+  const AddEditBoardShortcuts(
+    this.controller, {
+    super.key,
+    required this.scrollController,
+  });
 
   final AddEditBoardController controller;
+  final ScrollController scrollController;
 
   @override
   State<AddEditBoardShortcuts> createState() => _AddEditBoardShortcutsState();
@@ -22,10 +27,17 @@ class AddEditBoardShortcuts extends StatefulWidget {
 
 class _AddEditBoardShortcutsState extends State<AddEditBoardShortcuts> {
   late final ValueNotifier<BoardShortcutsDto> _shortcuts;
-  void _setShortCuts(BoardShortcutsDto? value) {
+  void _setShortCuts(BoardShortcutsDto? value) async {
     if (value != null) {
       _shortcuts.value = value;
       widget.controller.onChangeShortcuts(value);
+      await Future.delayed(const Duration(milliseconds: 500)).then(
+        (_) => widget.scrollController.animateTo(
+          widget.scrollController.position.maxScrollExtent,
+          duration: T20UI.defaultDurationAnimation,
+          curve: Curves.easeIn,
+        ),
+      );
     }
   }
 

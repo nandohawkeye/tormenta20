@@ -60,7 +60,7 @@ class _BottomSheetAddBoardLinkTitleFieldState
           decoration: InputDecoration(
             labelText: 'URL',
             errorText: error,
-            fillColor: palette.onBottomsheet,
+            fillColor: palette.backgroundLevelTwo,
             helperText: 'obrigatório',
             helperStyle: TextStyle(color: palette.textDisable),
             contentPadding: const EdgeInsets.symmetric(

@@ -5,6 +5,7 @@ import 'package:tormenta20/src/modules/home/modules/magics/magics_service.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/magics_utils.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_circle.dart';
+import 'package:tormenta20/src/shared/entities/magic/magic_circles.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_duration.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_execution.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_filter_dto.dart';
@@ -103,23 +104,31 @@ class AddMagicsStore extends ChangeNotifier {
   List<MagicType> _typesSelecteds = [];
   List<MagicSchool> _schoolsSelecteds = [];
   List<MagicRange> _rangesSelecteds = [];
-  List<MagicCircle> _circlesSelecteds = [];
   List<MagicDuration> _durationsSelected = [];
   List<MagicExecution> _executionsSelecteds = [];
   List<String> _resistenciesSelecteds = [];
+  List<MagicCircle> _circlesSelecteds = [firstCircle];
+  List<MagicCircle> get circlesSelecteds => _circlesSelecteds;
+  void onChangeCircleSelected(MagicCircle value) {
+    if (_circlesSelecteds.any((c) => c.level == value.level)) {
+      _circlesSelecteds.removeWhere((c) => c.level == value.level);
+    } else {
+      _circlesSelecteds.add(value);
+    }
+
+    notifyListeners();
+  }
 
   bool get hasFilterAplied =>
       _typesSelecteds.isNotEmpty ||
       _schoolsSelecteds.isNotEmpty ||
       _rangesSelecteds.isNotEmpty ||
-      _circlesSelecteds.isNotEmpty ||
       _durationsSelected.isNotEmpty ||
       _executionsSelecteds.isNotEmpty ||
       _resistenciesSelecteds.isNotEmpty;
 
   MagicFilterDto toFilterDto() {
     return MagicFilterDto(
-      circles: _circlesSelecteds,
       schools: _schoolsSelecteds,
       ranges: _rangesSelecteds,
       types: _typesSelecteds,
@@ -133,14 +142,12 @@ class AddMagicsStore extends ChangeNotifier {
     _typesSelecteds.clear();
     _schoolsSelecteds.clear();
     _rangesSelecteds.clear();
-    _circlesSelecteds.clear();
     _resistenciesSelecteds.clear();
     _durationsSelected.clear();
     _executionsSelecteds.clear();
     _typesSelecteds.addAll(dto.types);
     _schoolsSelecteds.addAll(dto.schools);
     _rangesSelecteds.addAll(dto.ranges);
-    _circlesSelecteds.addAll(dto.circles);
     _resistenciesSelecteds.addAll(dto.resistences);
     _durationsSelected.addAll(dto.durations);
     _executionsSelecteds.addAll(dto.executions);

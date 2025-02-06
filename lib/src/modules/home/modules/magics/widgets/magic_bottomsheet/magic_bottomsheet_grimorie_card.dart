@@ -25,7 +25,7 @@ class MagicBottomsheetGrimorieCard extends StatelessWidget {
     return FittedBox(
       fit: BoxFit.scaleDown,
       child: Card(
-        color: palette.onBottomsheet.withOpacity(.4),
+        color: palette.backgroundLevelTwo,
         child: InkWell(
           borderRadius: T20UI.borderRadius,
           splashColor: Color(grimoire.colorInt).withOpacity(.4),

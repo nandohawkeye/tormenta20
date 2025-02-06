@@ -21,7 +21,7 @@ class AddGrimorieBottomsheetDescField extends StatelessWidget {
         style: const TextStyle(fontSize: 16),
         decoration: InputDecoration(
           labelText: 'Descrição',
-          fillColor: palette.onBottomsheet,
+          fillColor: palette.backgroundLevelTwo,
           hintStyle: TextStyle(fontSize: 16, color: palette.textPrimary),
           contentPadding: const EdgeInsets.symmetric(
             vertical: 6,

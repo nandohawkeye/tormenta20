@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/add_grimorie_bottomsheet/add_grimorie_bottomsheet_icon_field_item.dart';
-import 'package:tormenta20/src/shared/constants/grimorie_icons.dart';
 
 class AddGrimorieBottomsheetIconField extends StatelessWidget {
   const AddGrimorieBottomsheetIconField({super.key, required this.iconAsset});
@@ -16,7 +16,7 @@ class AddGrimorieBottomsheetIconField extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         child: Card(
-          color: palette.onBottomsheet,
+          color: palette.backgroundLevelTwo,
           child: Padding(
             padding: const EdgeInsets.only(
               top: T20UI.spaceSize / 2,
@@ -39,7 +39,7 @@ class AddGrimorieBottomsheetIconField extends StatelessWidget {
                       spacing: T20UI.spaceSize - 2,
                       runSpacing: T20UI.spaceSize - 2,
                       runAlignment: WrapAlignment.spaceBetween,
-                      children: GrimorieIcons.icons
+                      children: Assets.icons.values
                           .map(
                             (asset) => AddGrimorieBottomsheetIconFieldItem(
                               asset: asset,

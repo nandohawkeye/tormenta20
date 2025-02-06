@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/add_edit_board_controller.dart';
@@ -23,11 +25,19 @@ class AddEditBoardScreen extends StatefulWidget {
 class _AddEditBoardScreenState extends State<AddEditBoardScreen> {
   final _formKey = GlobalKey<FormState>();
   late final AddEditBoardController _controller;
+  late final ScrollController _scrollController;
 
   @override
   void initState() {
     super.initState();
+    _scrollController = ScrollController();
     _controller = AddEditBoardController(widget.initialBoard);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -39,6 +49,7 @@ class _AddEditBoardScreenState extends State<AddEditBoardScreen> {
           T20UI.spaceHeight,
           Expanded(
             child: SingleChildScrollView(
+              controller: _scrollController,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -57,18 +68,33 @@ class _AddEditBoardScreenState extends State<AddEditBoardScreen> {
                   T20UI.spaceHeight,
                   AddEditBoardMaterials(_controller),
                   T20UI.spaceHeight,
-                  AddEditBoardShortcuts(_controller),
+                  AddEditBoardShortcuts(
+                    _controller,
+                    scrollController: _scrollController,
+                  ),
                   T20UI.spaceHeight,
-                  AddEditBoardSites(_controller),
+                  AddEditBoardSites(
+                    _controller,
+                    scrollController: _scrollController,
+                  ),
                   const SizedBox(height: T20UI.spaceSize * 2),
                 ],
               ),
             ),
           ),
           AddEditBoardMainButtons(
-            onSave: () {
+            onSave: () async {
+              _scrollController.animateTo(
+                _scrollController.position.minScrollExtent,
+                duration: T20UI.defaultDurationAnimation,
+                curve: Curves.easeIn,
+              );
+
               if (_formKey.currentState!.validate()) {
-                Navigator.pop(context);
+                final board = await _controller.onSave();
+                if (board != null) {
+                  Navigator.pop(context, board);
+                }
               }
             },
           )

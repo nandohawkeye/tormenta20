@@ -16,7 +16,7 @@ class SimpleCloseButton extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: T20UI.borderRadius,
-          color: backgroundColor ?? palette.onBottomsheet,
+          color: backgroundColor ?? palette.backgroundLevelTwo,
         ),
         child: Material(
           color: Colors.transparent,

@@ -18,8 +18,7 @@ class MagicBottomsheetItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-          borderRadius: T20UI.borderRadius,
-          color: palette.onBottomsheet.withOpacity(.2)),
+          borderRadius: T20UI.borderRadius, color: palette.backgroundLevelTwo),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         child: Row(

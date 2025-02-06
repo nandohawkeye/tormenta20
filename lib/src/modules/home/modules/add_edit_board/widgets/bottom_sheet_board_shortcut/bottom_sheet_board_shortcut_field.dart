@@ -86,7 +86,7 @@ class _BottomSheetBoardShortcutFieldState
                   textCapitalization: TextCapitalization.none,
                   decoration: InputDecoration(
                     labelText: BoardShortcutsUtils.handleLabel(widget.type),
-                    fillColor: palette.onBottomsheet,
+                    fillColor: palette.backgroundLevelTwo,
                     suffixIcon: AnimatedBuilder(
                       animation: Listenable.merge([_url, _animation]),
                       builder: (_, __) {

@@ -7,6 +7,10 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:tormenta20/src/core/database/daos/grimoire_dao.dart';
 import 'package:tormenta20/src/core/database/daos/magic_character_dao.dart';
+import 'package:tormenta20/src/core/database/tables/board_character_table.dart';
+import 'package:tormenta20/src/core/database/tables/board_classe_caracter_table.dart';
+import 'package:tormenta20/src/core/database/tables/board_note_table.dart';
+import 'package:tormenta20/src/core/database/tables/board_player_table.dart';
 import 'package:tormenta20/src/core/database/tables/grimoire_table.dart';
 import 'package:tormenta20/src/core/database/tables/magic_character_table.dart';
 import 'package:tormenta20/src/shared/failures/failure.dart';
@@ -15,7 +19,6 @@ import 'package:tormenta20/src/shared/failures/unknown_failure.dart';
 import 'package:uuid/uuid.dart';
 
 import 'daos/board_dao.dart';
-import 'tables/board_game_pause_table.dart';
 import 'tables/board_game_table.dart';
 import 'tables/board_link_table.dart';
 import 'tables/board_material_table.dart';
@@ -30,8 +33,11 @@ part 'app_database.g.dart';
     BoardTable,
     BoardMaterialTable,
     BoardGameTable,
-    BoardGamePauseTable,
     BoardLinkTable,
+    BoardPlayerTable,
+    BoardCharacterTable,
+    BoardNoteTable,
+    BoardClasseCharacterTable,
   ],
   daos: [
     GrimoireDAO,
@@ -40,7 +46,6 @@ part 'app_database.g.dart';
   ],
 )
 class AppDatabase extends _$AppDatabase {
-  // AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
   AppDatabase() : super(_openConnection());
 
   @override

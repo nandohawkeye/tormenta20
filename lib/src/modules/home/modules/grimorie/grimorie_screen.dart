@@ -77,23 +77,29 @@ class _GrimorieScreenState extends State<GrimorieScreen> {
                       children: [
                         AnimatedBuilder(
                           animation: _store,
-                          builder: (_, __) => Row(
-                            children: [
-                              SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: SvgPicture.asset(
-                                  'assets/icons/${_store.grimoire.iconAsset}.svg',
-                                  color: Color(_store.grimoire.colorInt),
-                                ),
+                          builder: (_, __) => Hero(
+                            tag: _store.grimoire.uuid,
+                            child: Material(
+                              color: Colors.transparent,
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: SvgPicture.asset(
+                                      _store.grimoire.iconAsset,
+                                      color: Color(_store.grimoire.colorInt),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 6),
+                                  Labels(
+                                    _store.grimoire.name,
+                                    maxLines: 2,
+                                    textColor: Color(_store.grimoire.colorInt),
+                                  ),
+                                ],
                               ),
-                              const SizedBox(width: 6),
-                              Labels(
-                                _store.grimoire.name,
-                                maxLines: 2,
-                                textColor: Color(_store.grimoire.colorInt),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                         Row(

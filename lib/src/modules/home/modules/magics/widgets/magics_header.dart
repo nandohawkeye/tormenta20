@@ -29,7 +29,7 @@ class MagicsHeader extends StatelessWidget {
                 builder: (_, __) => SimpleButton(
                   icon: FontAwesomeIcons.sliders,
                   backgroundColor: store.hasFilterAplied
-                      ? palette.accent.withOpacity(.5)
+                      ? palette.accent.withOpacity(.6)
                       : null,
                   iconColor: store.hasFilterAplied ? palette.icon : null,
                   onTap: () async {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:tormenta20/src/modules/home/modules/init/widgets/init_board_field.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/init_character_field.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/init_menace_field.dart';

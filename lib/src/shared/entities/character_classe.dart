@@ -2,12 +2,12 @@ import 'package:tormenta20/src/shared/entities/classe_type.dart';
 
 class CharacterClasse {
   final String uuid;
-  final String characterUuid;
+  final String playerUuid;
   final ClasseType type;
 
   CharacterClasse({
     required this.uuid,
-    required this.characterUuid,
+    required this.playerUuid,
     required this.type,
   });
 
@@ -15,9 +15,9 @@ class CharacterClasse {
   bool operator ==(other) =>
       other is CharacterClasse &&
       other.uuid == uuid &&
-      other.characterUuid == characterUuid &&
+      other.playerUuid == playerUuid &&
       other.type == type;
 
   @override
-  int get hashCode => uuid.hashCode ^ characterUuid.hashCode ^ type.hashCode;
+  int get hashCode => uuid.hashCode ^ playerUuid.hashCode ^ type.hashCode;
 }

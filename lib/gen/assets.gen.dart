@@ -152,40 +152,18 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/alchemy.png
-  AssetGenImage get alchemy => const AssetGenImage('assets/images/alchemy.png');
-
   /// File path: assets/images/banner.jpg
   AssetGenImage get banner => const AssetGenImage('assets/images/banner.jpg');
-
-  /// File path: assets/images/barbarian.png
-  AssetGenImage get barbarian =>
-      const AssetGenImage('assets/images/barbarian.png');
 
   /// File path: assets/images/borda_token.png
   AssetGenImage get bordaToken =>
       const AssetGenImage('assets/images/borda_token.png');
 
-  /// File path: assets/images/bow.png
-  AssetGenImage get bow => const AssetGenImage('assets/images/bow.png');
-
-  /// File path: assets/images/chimera.png
-  AssetGenImage get chimera => const AssetGenImage('assets/images/chimera.png');
-
-  /// File path: assets/images/cyclops.png
-  AssetGenImage get cyclops => const AssetGenImage('assets/images/cyclops.png');
-
-  /// File path: assets/images/dragon.png
-  AssetGenImage get dragon => const AssetGenImage('assets/images/dragon.png');
-
-  /// File path: assets/images/druid.png
-  AssetGenImage get druid => const AssetGenImage('assets/images/druid.png');
+  /// Directory path: assets/images/caracters
+  $AssetsImagesCaractersGen get caracters => const $AssetsImagesCaractersGen();
 
   /// File path: assets/images/fire.png
   AssetGenImage get fire => const AssetGenImage('assets/images/fire.png');
-
-  /// File path: assets/images/hydra.png
-  AssetGenImage get hydra => const AssetGenImage('assets/images/hydra.png');
 
   /// File path: assets/images/knight.png
   AssetGenImage get knight => const AssetGenImage('assets/images/knight.png');
@@ -193,70 +171,16 @@ class $AssetsImagesGen {
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
-  /// File path: assets/images/magician.png
-  AssetGenImage get magician =>
-      const AssetGenImage('assets/images/magician.png');
-
-  /// File path: assets/images/minotaur.png
-  AssetGenImage get minotaur =>
-      const AssetGenImage('assets/images/minotaur.png');
-
-  /// File path: assets/images/monk.png
-  AssetGenImage get monk => const AssetGenImage('assets/images/monk.png');
-
-  /// File path: assets/images/pirate.png
-  AssetGenImage get pirate => const AssetGenImage('assets/images/pirate.png');
-
-  /// File path: assets/images/samurai.png
-  AssetGenImage get samurai => const AssetGenImage('assets/images/samurai.png');
-
-  /// File path: assets/images/soldier.png
-  AssetGenImage get soldier => const AssetGenImage('assets/images/soldier.png');
+  /// Directory path: assets/images/menaces
+  $AssetsImagesMenacesGen get menaces => const $AssetsImagesMenacesGen();
 
   /// File path: assets/images/spellbook.png
   AssetGenImage get spellbook =>
       const AssetGenImage('assets/images/spellbook.png');
 
-  /// File path: assets/images/sphinx.png
-  AssetGenImage get sphinx => const AssetGenImage('assets/images/sphinx.png');
-
-  /// File path: assets/images/swordsman.png
-  AssetGenImage get swordsman =>
-      const AssetGenImage('assets/images/swordsman.png');
-
-  /// File path: assets/images/wizard.png
-  AssetGenImage get wizard => const AssetGenImage('assets/images/wizard.png');
-
-  /// File path: assets/images/wolf.png
-  AssetGenImage get wolf => const AssetGenImage('assets/images/wolf.png');
-
   /// List of all assets
-  List<AssetGenImage> get values => [
-        alchemy,
-        banner,
-        barbarian,
-        bordaToken,
-        bow,
-        chimera,
-        cyclops,
-        dragon,
-        druid,
-        fire,
-        hydra,
-        knight,
-        logo,
-        magician,
-        minotaur,
-        monk,
-        pirate,
-        samurai,
-        soldier,
-        spellbook,
-        sphinx,
-        swordsman,
-        wizard,
-        wolf
-      ];
+  List<AssetGenImage> get values =>
+      [banner, bordaToken, fire, knight, logo, spellbook];
 }
 
 class $AssetsLottieGen {
@@ -746,6 +670,105 @@ class $AssetsTokensLendasGen {
         vanessa,
         veronica
       ];
+}
+
+class $AssetsImagesCaractersGen {
+  const $AssetsImagesCaractersGen();
+
+  /// File path: assets/images/caracters/alchemy.png
+  AssetGenImage get alchemy =>
+      const AssetGenImage('assets/images/caracters/alchemy.png');
+
+  /// File path: assets/images/caracters/barbarian.png
+  AssetGenImage get barbarian =>
+      const AssetGenImage('assets/images/caracters/barbarian.png');
+
+  /// File path: assets/images/caracters/bow.png
+  AssetGenImage get bow =>
+      const AssetGenImage('assets/images/caracters/bow.png');
+
+  /// File path: assets/images/caracters/druid.png
+  AssetGenImage get druid =>
+      const AssetGenImage('assets/images/caracters/druid.png');
+
+  /// File path: assets/images/caracters/magician.png
+  AssetGenImage get magician =>
+      const AssetGenImage('assets/images/caracters/magician.png');
+
+  /// File path: assets/images/caracters/monk.png
+  AssetGenImage get monk =>
+      const AssetGenImage('assets/images/caracters/monk.png');
+
+  /// File path: assets/images/caracters/pirate.png
+  AssetGenImage get pirate =>
+      const AssetGenImage('assets/images/caracters/pirate.png');
+
+  /// File path: assets/images/caracters/samurai.png
+  AssetGenImage get samurai =>
+      const AssetGenImage('assets/images/caracters/samurai.png');
+
+  /// File path: assets/images/caracters/soldier.png
+  AssetGenImage get soldier =>
+      const AssetGenImage('assets/images/caracters/soldier.png');
+
+  /// File path: assets/images/caracters/swordsman.png
+  AssetGenImage get swordsman =>
+      const AssetGenImage('assets/images/caracters/swordsman.png');
+
+  /// File path: assets/images/caracters/wizard.png
+  AssetGenImage get wizard =>
+      const AssetGenImage('assets/images/caracters/wizard.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [
+        alchemy,
+        barbarian,
+        bow,
+        druid,
+        magician,
+        monk,
+        pirate,
+        samurai,
+        soldier,
+        swordsman,
+        wizard
+      ];
+}
+
+class $AssetsImagesMenacesGen {
+  const $AssetsImagesMenacesGen();
+
+  /// File path: assets/images/menaces/chimera.png
+  AssetGenImage get chimera =>
+      const AssetGenImage('assets/images/menaces/chimera.png');
+
+  /// File path: assets/images/menaces/cyclops.png
+  AssetGenImage get cyclops =>
+      const AssetGenImage('assets/images/menaces/cyclops.png');
+
+  /// File path: assets/images/menaces/dragon.png
+  AssetGenImage get dragon =>
+      const AssetGenImage('assets/images/menaces/dragon.png');
+
+  /// File path: assets/images/menaces/hydra.png
+  AssetGenImage get hydra =>
+      const AssetGenImage('assets/images/menaces/hydra.png');
+
+  /// File path: assets/images/menaces/minotaur.png
+  AssetGenImage get minotaur =>
+      const AssetGenImage('assets/images/menaces/minotaur.png');
+
+  /// File path: assets/images/menaces/sphinx.png
+  AssetGenImage get sphinx =>
+      const AssetGenImage('assets/images/menaces/sphinx.png');
+
+  /// File path: assets/images/menaces/wolf.png
+  AssetGenImage get wolf =>
+      const AssetGenImage('assets/images/menaces/wolf.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values =>
+      [chimera, cyclops, dragon, hydra, minotaur, sphinx, wolf];
 }
 
 class Assets {

@@ -42,26 +42,32 @@ class GrimoireCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          SizedBox(
-                            height: 20,
-                            width: 20,
-                            child: SvgPicture.asset(
-                              'assets/icons/${grimoire.iconAsset}.svg',
-                              color: Color(grimoire.colorInt),
-                            ),
+                      Hero(
+                        tag: grimoire.uuid,
+                        child: Material(
+                          color: Colors.transparent,
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: SvgPicture.asset(
+                                  grimoire.iconAsset,
+                                  color: Color(grimoire.colorInt),
+                                ),
+                              ),
+                              const SizedBox(width: 6),
+                              Text(
+                                grimoire.name,
+                                style: TextStyle(
+                                  fontFamily: FontFamily.tormenta,
+                                  color: Color(grimoire.colorInt),
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(width: 6),
-                          Text(
-                            grimoire.name,
-                            style: TextStyle(
-                              fontFamily: FontFamily.tormenta,
-                              color: Color(grimoire.colorInt),
-                              fontSize: 18,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                       const SizedBox(height: 6),
                       Text(

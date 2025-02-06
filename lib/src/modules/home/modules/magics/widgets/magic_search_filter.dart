@@ -32,7 +32,7 @@ class MagicSearchFilter extends StatelessWidget {
                           style: const TextStyle(fontSize: 16),
                           decoration: InputDecoration(
                             hintText: 'Busque por nome ou palavra-chave',
-                            fillColor: palette.cardBackground.withOpacity(.5),
+                            fillColor: palette.backgroundLevelOne,
                             hintStyle: TextStyle(
                                 fontSize: 16, color: palette.textPrimary),
                             suffixIcon: GestureDetector(

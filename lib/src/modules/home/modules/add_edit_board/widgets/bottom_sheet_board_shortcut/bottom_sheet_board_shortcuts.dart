@@ -5,6 +5,7 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/botto
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/bottom_sheet_board_shortcut/bottom_sheet_board_shortcut_field.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/bottom_sheet_board_shortcut/bottom_sheet_board_shortcuts_store.dart';
 import 'package:tormenta20/src/shared/entities/board/board_shortcut_types.dart';
+import 'package:tormenta20/src/shared/widgets/bottom_sheet_base.dart';
 import 'package:tormenta20/src/shared/widgets/bottom_sheet_divider.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
@@ -44,12 +45,13 @@ class _BottomSheetBoardShortcutsState extends State<BottomSheetBoardShortcuts> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return BottomSheetBase(
+        child: Padding(
       padding: T20UI.allPaddingWithPaddingBottom(context),
       child: SizedBox(
         child: DecoratedBox(
           decoration: BoxDecoration(
-              color: palette.bottomSheetBackground,
+              color: palette.backgroundLevelOne,
               borderRadius: T20UI.borderRadius),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -121,6 +123,6 @@ class _BottomSheetBoardShortcutsState extends State<BottomSheetBoardShortcuts> {
           ),
         ),
       ),
-    );
+    ));
   }
 }

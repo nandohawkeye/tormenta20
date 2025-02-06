@@ -1,7 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_bottomsheet/magic_bottomsheet_desc.dart';
@@ -11,6 +10,7 @@ import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_bottoms
 import 'package:tormenta20/src/shared/entities/magic/magic.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_utils.dart';
 import 'package:tormenta20/src/shared/widgets/bottom_sheet_divider.dart';
+import 'package:tormenta20/src/shared/widgets/default_brackdrop_filter.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
 class MagicBottomsheet extends StatefulWidget {
@@ -51,17 +51,7 @@ class _MagicBottomsheetState extends State<MagicBottomsheet> {
 
     return Stack(
       children: [
-        BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 6.0, sigmaY: 6.0),
-          child: GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: Container(
-              color: palette.accent.withOpacity(.1),
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-            ),
-          ),
-        ),
+        const DefaultBrackdropFilter(),
         DraggableScrollableSheet(
           maxChildSize: limite,
           initialChildSize: initialSize,
@@ -72,7 +62,7 @@ class _MagicBottomsheetState extends State<MagicBottomsheet> {
               child: SizedBox(
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                      color: palette.bottomSheetBackground,
+                      color: palette.backgroundLevelOne,
                       borderRadius: T20UI.borderRadius),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -89,7 +79,7 @@ class _MagicBottomsheetState extends State<MagicBottomsheet> {
                               widget.magic.name,
                               style: const TextStyle(
                                 fontSize: 18,
-                                fontFamily: 'tormenta',
+                                fontFamily: FontFamily.tormenta,
                               ),
                             ),
                           ),

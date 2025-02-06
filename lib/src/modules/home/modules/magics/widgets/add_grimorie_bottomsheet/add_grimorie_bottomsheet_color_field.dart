@@ -21,7 +21,7 @@ class AddGrimorieBottomsheetColorField extends StatelessWidget {
     return Padding(
       padding: T20UI.horizontalPadding,
       child: Card(
-        color: palette.onBottomsheet,
+        color: palette.backgroundLevelTwo,
         child: Padding(
           padding: const EdgeInsets.only(
             top: T20UI.spaceSize / 2,

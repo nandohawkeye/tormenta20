@@ -2,16 +2,31 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get_it/get_it.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/add_edit_board_screen.dart';
-import 'package:tormenta20/src/modules/home/modules/init/widgets/bottom_sheet_init_board/bottom_sheet_init_board.dart';
+import 'package:tormenta20/src/modules/home/modules/init/init_store.dart';
+import 'package:tormenta20/src/modules/home/modules/init/widgets/board_card/board_card.dart';
+import 'package:tormenta20/src/modules/home/modules/init/widgets/board_screen_image_button.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
-import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
-import 'package:tormenta20/src/shared/widgets/screen_image_button.dart';
+import 'package:tormenta20/src/shared/extensions/context_ext.dart';
 
-class InitBoardField extends StatelessWidget {
+class InitBoardField extends StatefulWidget {
   const InitBoardField({super.key});
+
+  @override
+  State<InitBoardField> createState() => _InitBoardFieldState();
+}
+
+class _InitBoardFieldState extends State<InitBoardField> {
+  late final InitBoardStore _store;
+
+  @override
+  void initState() {
+    super.initState();
+    _store = GetIt.I<InitBoardStore>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +56,7 @@ class InitBoardField extends StatelessWidget {
                   ),
                   T20UI.spaceWidth,
                   SimpleButton(
-                    icon: FontAwesomeIcons.qrcode,
+                    icon: FontAwesomeIcons.solidFileCode,
                     onTap: () {},
                   )
                 ],
@@ -49,43 +64,44 @@ class InitBoardField extends StatelessWidget {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(
-            bottom: T20UI.spaceSize,
-            right: T20UI.spaceSize - 4,
-            left: T20UI.spaceSize - 4,
-          ),
-          child: ScreenImageButton(
-            imageAsset: 'assets/images/knight.png',
-            title: 'Criar ou vincular mesa',
-            subtitle:
-                'Crie ou se vincule a mesa de um mestre, e comece a se divertir com seus amigos!',
-            onTap: () async {
-              await showModalBottomSheet<BoardModeType?>(
-                isScrollControlled: false,
-                isDismissible: true,
-                backgroundColor: Colors.transparent,
-                context: context,
-                builder: (context) => Padding(
-                  padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom,
-                  ),
-                  child: const BottomSheetInitBoard(),
+        AnimatedBuilder(
+          animation: _store,
+          builder: (_, __) {
+            final boards = _store.data;
+
+            if (boards.isEmpty) {
+              return const Padding(
+                padding: EdgeInsets.only(
+                  bottom: T20UI.spaceSize,
+                  right: T20UI.spaceSize - 4,
+                  left: T20UI.spaceSize - 4,
                 ),
-              ).then((result) async {
-                if (result != null) {
-                  if (result == BoardModeType.master) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const AddEditBoardScreen(),
-                      ),
-                    );
-                  }
-                }
-              });
-            },
-          ),
+                child: BoardScreenImageButton(),
+              );
+            }
+
+            boards.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
+
+            return SizedBox(
+              height: 225 * context.realTextScale,
+              width: double.infinity,
+              child: ListView.separated(
+                itemCount: boards.length,
+                padding: const EdgeInsets.only(
+                  bottom: T20UI.spaceSize,
+                  right: T20UI.spaceSize - 4,
+                  left: T20UI.spaceSize - 4,
+                ),
+                scrollDirection: Axis.horizontal,
+                separatorBuilder: T20UI.separatorBuilderHorizontal,
+                itemBuilder: (_, index) {
+                  return BoardCard(
+                    board: boards[index],
+                  );
+                },
+              ),
+            );
+          },
         ),
       ],
     );

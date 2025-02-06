@@ -33,7 +33,7 @@ class BottomSheetInitBoardItem extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             borderRadius: T20UI.borderRadius,
-            color: palette.onBottomsheet,
+            color: palette.backgroundLevelTwo,
           ),
           child: Padding(
             padding: T20UI.allPadding,

@@ -14,7 +14,6 @@ class MagicFilterBottomsheetStore extends ChangeNotifier {
     _typesSelecteds.addAll(dto.types);
     _schoolsSelecteds.addAll(dto.schools);
     _rangesSelecteds.addAll(dto.ranges);
-    _circlesSelecteds.addAll(dto.circles);
     _resistenciesSelecteds.addAll(dto.resistences);
     _durationsSelecteds.addAll(dto.durations);
     _executionsSelecteds.addAll(dto.executions);
@@ -128,7 +127,6 @@ class MagicFilterBottomsheetStore extends ChangeNotifier {
     return MagicFilterDto(
       types: _typesSelecteds,
       schools: _schoolsSelecteds,
-      circles: _circlesSelecteds,
       ranges: _rangesSelecteds,
       resistences: _resistenciesSelecteds,
       durations: _durationsSelecteds,

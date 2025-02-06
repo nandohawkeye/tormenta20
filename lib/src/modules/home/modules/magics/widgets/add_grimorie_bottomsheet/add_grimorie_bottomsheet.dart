@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_final_fields
 
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
@@ -12,6 +11,7 @@ import 'package:tormenta20/src/modules/home/modules/magics/widgets/add_grimorie_
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_character.dart';
 import 'package:tormenta20/src/shared/widgets/bottom_sheet_divider.dart';
+import 'package:tormenta20/src/shared/widgets/default_brackdrop_filter.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
 import 'package:uuid/uuid.dart';
@@ -77,17 +77,7 @@ class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
 
     return Stack(
       children: [
-        BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 6.0, sigmaY: 6.0),
-          child: GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: Container(
-              color: palette.accent.withOpacity(.1),
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-            ),
-          ),
-        ),
+        const DefaultBrackdropFilter(),
         DraggableScrollableSheet(
           maxChildSize: limite,
           initialChildSize: initialSize,
@@ -98,7 +88,7 @@ class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
               child: SizedBox(
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                      color: palette.bottomSheetBackground,
+                      color: palette.backgroundLevelOne,
                       borderRadius: T20UI.borderRadius),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,

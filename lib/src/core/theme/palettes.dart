@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class PaletteBase {
   PaletteBase({
-    required this.onBottomsheetSelected,
     required this.onInput,
     required this.remove,
     required this.disable,
@@ -29,12 +28,14 @@ class PaletteBase {
     required this.inputColor,
     required this.popMenu,
     required this.divider,
-    required this.bottomSheetBackground,
     required this.unselectedWidget,
-    required this.onBottomsheet,
     required this.appBar,
-    required this.dividerBottomSheet,
-    required this.onBottomsheetSecondLevel,
+    required this.dividerLevelTwo,
+    required this.selected,
+    required this.backgroundLevelTwo,
+    required this.backgroundLevelThree,
+    required this.backgroundLevelFour,
+    required this.backgroundLevelOne,
   });
   final Color background;
   final Color cardStroke;
@@ -63,20 +64,21 @@ class PaletteBase {
   final Color textDisable;
   final Color popMenu;
   final Color divider;
-  final Color dividerBottomSheet;
-  final Color bottomSheetBackground;
+  final Color dividerLevelTwo;
   final Color unselectedWidget;
-  final Color onBottomsheet;
-  final Color onBottomsheetSelected;
-  final Color onBottomsheetSecondLevel;
+
+  final Color selected;
+  final Color backgroundLevelOne;
+  final Color backgroundLevelTwo;
+  final Color backgroundLevelThree;
+  final Color backgroundLevelFour;
 }
 
 abstract class Palettes {
   static PaletteBase dark() => PaletteBase(
-        onBottomsheetSelected: const Color(0xFF424242),
         onInput: const Color(0xFF262626),
         appBarShadown: const Color(0xFF191919),
-        cardBackground: const Color(0xFF101010),
+        cardBackground: const Color(0xFF212121),
         appBar: const Color(0xFF000000),
         icon: const Color(0xFFFAFAFA),
         indicator: const Color(0xFFFAFAFA),
@@ -99,12 +101,14 @@ abstract class Palettes {
         textDisable: const Color(0xFF5E6064),
         textPrimary: const Color(0xFFFAFAFA),
         textSecundary: const Color(0xFFC9C9C9),
-        divider: const Color(0xFF212121),
-        dividerBottomSheet: const Color(0xFF424242),
-        bottomSheetBackground: const Color(0xFF212121),
+        divider: const Color(0xFF212121).withOpacity(.6),
+        dividerLevelTwo: const Color(0xFF424242).withOpacity(.6),
         unselectedWidget: const Color(0xFF616161),
         remove: const Color(0xFFDA0000),
-        onBottomsheet: const Color(0xFF424242),
-        onBottomsheetSecondLevel: const Color(0xFF616161),
+        selected: const Color(0xFFCC152A).withOpacity(.6),
+        backgroundLevelOne: const Color(0xFF212121),
+        backgroundLevelTwo: const Color(0xFF424242),
+        backgroundLevelThree: const Color(0xFF616161),
+        backgroundLevelFour: const Color(0xFF757575),
       );
 }

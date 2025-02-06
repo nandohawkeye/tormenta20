@@ -4,6 +4,7 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/bottom_sheet_init_board/bottom_sheet_init_board_item.dart';
 import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
+import 'package:tormenta20/src/shared/widgets/bottom_sheet_base.dart';
 import 'package:tormenta20/src/shared/widgets/bottom_sheet_divider.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
@@ -12,7 +13,8 @@ class BottomSheetInitBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return BottomSheetBase(
+        child: Padding(
       padding: EdgeInsets.only(
         left: T20UI.spaceSize,
         right: T20UI.spaceSize,
@@ -20,7 +22,7 @@ class BottomSheetInitBoard extends StatelessWidget {
       ),
       child: DecoratedBox(
         decoration: BoxDecoration(
-            color: palette.bottomSheetBackground,
+            color: palette.backgroundLevelOne,
             borderRadius: T20UI.borderRadius),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -76,6 +78,6 @@ class BottomSheetInitBoard extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }

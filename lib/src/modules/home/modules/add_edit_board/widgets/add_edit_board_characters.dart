@@ -3,21 +3,42 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/add_edit_board_controller.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/bottom_sheet_add_edit_board_character/bottom_sheet_add_edit_board_character.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_character_card.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_characters_store.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/bottom_sheet_add_edit_board_player/bottom_sheet_add_edit_board_player.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
-import 'package:tormenta20/src/shared/entities/board/board_character.dart';
+import 'package:tormenta20/src/shared/entities/board/board_player.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
-class AddEditBoardCharacters extends StatelessWidget {
+class AddEditBoardCharacters extends StatefulWidget {
   const AddEditBoardCharacters(this.controller, {super.key});
 
   final AddEditBoardController controller;
 
   @override
+  State<AddEditBoardCharacters> createState() => _AddEditBoardCharactersState();
+}
+
+class _AddEditBoardCharactersState extends State<AddEditBoardCharacters> {
+  late final AddEditBoardCharactersStore _store;
+
+  @override
+  void initState() {
+    super.initState();
+    _store = AddEditBoardCharactersStore(widget.controller);
+  }
+
+  @override
+  void dispose() {
+    _store.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    void addEditSite(BoardCharacter? character) async {
-      await showModalBottomSheet<BoardCharacter?>(
+    void addEditPlayer(BoardPlayer? character) async {
+      await showModalBottomSheet<BoardPlayer?>(
         isScrollControlled: true,
         isDismissible: true,
         backgroundColor: Colors.transparent,
@@ -26,11 +47,12 @@ class AddEditBoardCharacters extends StatelessWidget {
           padding: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
-          child: BottomSheetAddEditBoardCharacter(
+          child: BottomSheetAddEditBoardPlayer(
             character: character,
+            boardUuid: widget.controller.boardUuid,
           ),
         ),
-      );
+      ).then(_store.addPlayer);
     }
 
     return Column(
@@ -42,16 +64,16 @@ class AddEditBoardCharacters extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Labels('Personagens'),
+              const Labels('Jogadores'),
               Row(
                 children: [
                   SimpleButton(
                     icon: FontAwesomeIcons.plus,
-                    onTap: () => addEditSite(null),
+                    onTap: () => addEditPlayer(null),
                   ),
                   T20UI.spaceWidth,
                   SimpleButton(
-                    icon: FontAwesomeIcons.qrcode,
+                    icon: FontAwesomeIcons.solidFileCode,
                     onTap: () {},
                   )
                 ],
@@ -60,15 +82,40 @@ class AddEditBoardCharacters extends StatelessWidget {
           ),
         ),
         T20UI.spaceHeight,
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: T20UI.spaceSize - 4,
-          ),
-          child: MainButton(
-            label: 'Adicionar personagem',
-            backgroundColor: palette.cardBackground,
-            onTap: () => addEditSite(null),
-          ),
+        ValueListenableBuilder(
+          valueListenable: _store.players,
+          builder: (_, characters, __) {
+            final list = characters ?? [];
+
+            if (list.isEmpty) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: T20UI.spaceSize - 4,
+                ),
+                child: MainButton(
+                  label: 'Adicionar jogador',
+                  backgroundColor: palette.cardBackground,
+                  onTap: () => addEditPlayer(null),
+                ),
+              );
+            }
+
+            return ListView.separated(
+              shrinkWrap: true,
+              padding: EdgeInsets.zero,
+              physics: const NeverScrollableScrollPhysics(),
+              primary: false,
+              itemCount: list.length,
+              separatorBuilder: T20UI.separatorBuilderVertical,
+              itemBuilder: (_, index) {
+                return AddEditBoardCharacterCard(
+                  player: list[index],
+                  onRemove: _store.remove,
+                  onSelect: addEditPlayer,
+                );
+              },
+            );
+          },
         )
       ],
     );

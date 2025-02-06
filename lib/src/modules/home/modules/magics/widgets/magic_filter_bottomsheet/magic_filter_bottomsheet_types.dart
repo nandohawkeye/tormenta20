@@ -21,7 +21,7 @@ class MagicFilterBottomsheetTypes extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: T20UI.borderRadius,
-        color: palette.onBottomsheet.withOpacity(.2),
+        color: palette.backgroundLevelTwo,
       ),
       child: Padding(
         padding: const EdgeInsets.only(

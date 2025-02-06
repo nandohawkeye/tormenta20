@@ -1,5 +1,9 @@
+// ignore_for_file: prefer_final_fields
+
+import 'package:get_it/get_it.dart';
+import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
-import 'package:tormenta20/src/shared/entities/board/board_character.dart';
+import 'package:tormenta20/src/shared/entities/board/board_player.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link.dart';
 import 'package:tormenta20/src/shared/entities/board/board_material.dart';
 import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
@@ -9,6 +13,8 @@ import 'package:uuid/uuid.dart';
 class AddEditBoardController {
   AddEditBoardController(Board? initialBoard) {
     if (initialBoard != null) {
+      _createdAt = initialBoard.createdAt;
+      _isFavorited = initialBoard.isFavorited;
       _boardUuid = initialBoard.uuid;
       _name = initialBoard.name;
       _desc = initialBoard.desc;
@@ -21,14 +27,19 @@ class AddEditBoardController {
       _telegramLink = initialBoard.telegramGroupLink;
       _materials.addAll(initialBoard.materials);
       _links.addAll(initialBoard.links);
-      _characters.addAll(initialBoard.characters);
+      _players.addAll(initialBoard.players);
       _mode = initialBoard.mode;
     } else {
       _boardUuid = const Uuid().v4();
     }
   }
 
+  final _dao = GetIt.I<AppDatabase>().boardDAO;
+
+  DateTime? _createdAt;
+
   BoardModeType _mode = BoardModeType.master;
+  bool _isFavorited = false;
 
   late String _boardUuid;
   String get boardUuid => _boardUuid;
@@ -71,11 +82,17 @@ class AddEditBoardController {
   String? _telegramLink;
   String? get telegramLink => _telegramLink;
 
+  List<String> _playersToDelete = [];
+  List<String> _materialsToDelete = [];
+  List<String> _linksToDelete = [];
+
   List<BoardMaterial> _materials = [];
   List<BoardMaterial> get materials => _materials;
   void addMaterials(List<BoardMaterial> values) => _materials.addAll(values);
-  void removeMaterials(BoardMaterial value) =>
-      _materials.retainWhere((od) => od.uuid == value.uuid);
+  void removeMaterials(BoardMaterial value) {
+    _materials.retainWhere((od) => od.uuid == value.uuid);
+    _materialsToDelete.add(value.uuid);
+  }
 
   List<BoardLink> _links = [];
   List<BoardLink> get links => _links;
@@ -90,10 +107,28 @@ class AddEditBoardController {
 
   void removeLink(BoardLink value) {
     _links.removeWhere((od) => od.uuid == value.uuid);
+    _linksToDelete.add(value.uuid);
   }
 
-  List<BoardCharacter> _characters = [];
-  List<BoardCharacter> get characters => _characters;
+  List<BoardPlayer> _players = [];
+  List<BoardPlayer> get players => _players;
+  void addPlayer(BoardPlayer? value) {
+    if (value == null) {
+      return;
+    }
+
+    if (_players.any((c) => c.uuid == value.uuid)) {
+      final index = _players.indexWhere((c) => c.uuid == value.uuid);
+      _players[index] = value;
+    } else {
+      _players.add(value);
+    }
+  }
+
+  void removePlayer(BoardPlayer value) {
+    _players.removeWhere((c) => c.uuid == value.uuid);
+    _playersToDelete.add(value.uuid);
+  }
 
   void onChangeShortcuts(BoardShortcutsDto? dto) {
     if (dto != null) {
@@ -102,5 +137,45 @@ class AddEditBoardController {
       _drivefilesLink = dto.drivefilesLink;
       _telegramLink = dto.telegramLink;
     }
+  }
+
+  Future<Board?> onSave() async {
+    final updatedAt = DateTime.now();
+    final board = Board(
+      uuid: _boardUuid,
+      adventureName: _adventure!,
+      name: _name!,
+      createdAt: _createdAt ?? updatedAt,
+      updatedAt: updatedAt,
+      materials: materials,
+      links: links,
+      level: _level!,
+      players: _players,
+      mode: _mode,
+      bannerPath: _bannerPath,
+      whatsGroupLink: _whatsLink,
+      telegramGroupLink: _telegramLink,
+      discordServerLink: _dicordLink,
+      driveFilesLink: _drivefilesLink,
+      desc: _desc,
+      games: [],
+      notes: [],
+      menaces: [],
+      characters: [],
+      isFavorited: _isFavorited,
+    );
+
+    final failure = await _dao.saveBoard(
+      entity: board,
+      playersToDelete: _playersToDelete,
+      materialsToDelete: _materialsToDelete,
+      linksToDelete: _linksToDelete,
+    );
+
+    if (failure == null) {
+      return board;
+    }
+
+    return null;
   }
 }

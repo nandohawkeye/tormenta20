@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/grimorie_store.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/modules/add_magics/add_magics_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/widgets/grimorie_magic_card.dart';
-import 'package:tormenta20/src/shared/constants/images_assets.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic.dart';
 import 'package:tormenta20/src/shared/widgets/screen_image_button.dart';
 
@@ -41,7 +41,7 @@ class GrimorieMagicList extends StatelessWidget {
               right: T20UI.spaceSize - 4,
             ),
             child: ScreenImageButton(
-              imageAsset: ImagesAssets.fire,
+              imageAsset: Assets.images.fire.path,
               title: 'Adicionar magia',
               subtitle:
                   'Adicione uma magia ao seu glimório para depois utilizá-las durantes seus combates.',

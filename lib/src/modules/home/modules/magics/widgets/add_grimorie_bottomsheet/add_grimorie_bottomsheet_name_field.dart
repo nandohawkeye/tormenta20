@@ -38,7 +38,7 @@ class AddGrimorieBottomsheetNameField extends StatelessWidget {
             decoration: InputDecoration(
               labelText: 'Nome',
               errorText: error,
-              fillColor: palette.onBottomsheet,
+              fillColor: palette.backgroundLevelTwo,
               hintStyle: TextStyle(fontSize: 16, color: palette.textPrimary),
               contentPadding: const EdgeInsets.symmetric(
                 vertical: 6,

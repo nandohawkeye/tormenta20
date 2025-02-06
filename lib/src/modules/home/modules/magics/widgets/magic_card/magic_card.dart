@@ -28,7 +28,7 @@ class MagicCard extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: T20UI.borderRadius,
-        color: const Color(0xFF212121),
+        color: palette.backgroundLevelOne,
       ),
       child: Material(
         color: Colors.transparent,

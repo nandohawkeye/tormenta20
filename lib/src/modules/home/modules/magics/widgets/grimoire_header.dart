@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
+import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/grimorie_screen.dart';
@@ -11,7 +12,6 @@ import 'package:tormenta20/src/modules/home/modules/magics/widgets/add_grimorie_
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/grimoire_card.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
-import 'package:tormenta20/src/shared/constants/images_assets.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
 import 'package:tormenta20/src/shared/widgets/screen_image_button.dart';
 
@@ -80,7 +80,7 @@ class GrimoireHeader extends StatelessWidget {
                     left: T20UI.spaceSize - 4,
                   ),
                   child: ScreenImageButton(
-                    imageAsset: ImagesAssets.spellbook,
+                    imageAsset: Assets.images.spellbook.path,
                     title: 'Criar grimório',
                     subtitle:
                         'Crie um grimório, coloque suas magias favoritas e vincule a seus personagens.',

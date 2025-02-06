@@ -1,8 +1,11 @@
-import 'package:tormenta20/src/shared/entities/board/board_character.dart';
+import 'package:tormenta20/src/shared/entities/board/board_charcter.dart';
+import 'package:tormenta20/src/shared/entities/board/board_note.dart';
+import 'package:tormenta20/src/shared/entities/board/board_player.dart';
 import 'package:tormenta20/src/shared/entities/board/board_game.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link.dart';
 import 'package:tormenta20/src/shared/entities/board/board_material.dart';
 import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
+import 'package:tormenta20/src/shared/entities/menace.dart';
 
 class Board {
   final String uuid;
@@ -16,8 +19,12 @@ class Board {
   final List<BoardMaterial> materials;
   final List<BoardLink> links;
   final List<BoardGame> games;
+  final List<BoardPlayer> players;
   final List<BoardCharacter> characters;
   final BoardModeType mode;
+  final bool isFavorited;
+  final List<BoardNote> notes;
+  final List<Menace> menaces;
 
   final String? whatsGroupLink;
   final String? telegramGroupLink;
@@ -28,6 +35,10 @@ class Board {
     required this.uuid,
     this.bannerPath,
     this.desc,
+    this.whatsGroupLink,
+    this.telegramGroupLink,
+    this.discordServerLink,
+    this.driveFilesLink,
     required this.adventureName,
     required this.name,
     required this.createdAt,
@@ -36,12 +47,12 @@ class Board {
     required this.links,
     required this.games,
     required this.level,
-    required this.characters,
+    required this.players,
     required this.mode,
-    this.whatsGroupLink,
-    this.telegramGroupLink,
-    this.discordServerLink,
-    this.driveFilesLink,
+    required this.isFavorited,
+    required this.notes,
+    required this.menaces,
+    required this.characters,
   });
 
   @override
@@ -56,14 +67,18 @@ class Board {
       other.materials == materials &&
       other.links == links &&
       other.games == games &&
-      other.characters == characters &&
+      other.players == players &&
       other.level == level &&
       other.updatedAt == updatedAt &&
       other.mode == mode &&
       other.whatsGroupLink == whatsGroupLink &&
       other.telegramGroupLink == telegramGroupLink &&
       other.discordServerLink == discordServerLink &&
-      other.driveFilesLink == driveFilesLink;
+      other.driveFilesLink == driveFilesLink &&
+      other.characters == characters &&
+      other.isFavorited == isFavorited &&
+      other.notes == notes &&
+      other.menaces == menaces;
 
   @override
   int get hashCode =>
@@ -77,11 +92,15 @@ class Board {
       materials.hashCode ^
       links.hashCode ^
       games.hashCode ^
-      characters.hashCode ^
+      players.hashCode ^
       level.hashCode ^
       mode.hashCode ^
       whatsGroupLink.hashCode ^
       telegramGroupLink.hashCode ^
       discordServerLink.hashCode ^
-      driveFilesLink.hashCode;
+      driveFilesLink.hashCode ^
+      characters.hashCode ^
+      isFavorited.hashCode ^
+      notes.hashCode ^
+      menaces.hashCode;
 }

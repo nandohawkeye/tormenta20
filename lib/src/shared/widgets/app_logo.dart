@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tormenta20/src/shared/constants/images_assets.dart';
+import 'package:tormenta20/gen/assets.gen.dart';
 
 class AppLogo extends StatelessWidget {
   const AppLogo({super.key, this.width, this.height});
@@ -19,8 +19,7 @@ class AppLogo extends StatelessWidget {
         child: SizedBox(
           width: width,
           height: height,
-          child: Image.asset(
-            ImagesAssets.logo,
+          child: Assets.images.logo.image(
             width: width,
             height: height,
           ),

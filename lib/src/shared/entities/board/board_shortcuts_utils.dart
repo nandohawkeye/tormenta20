@@ -16,7 +16,7 @@ abstract class BoardShortcutsUtils {
       } else if (url.contains('dropbox')) {
         return FontAwesomeIcons.dropbox;
       } else {
-        return FontAwesomeIcons.link;
+        return FontAwesomeIcons.solidFolderClosed;
       }
     }
   }

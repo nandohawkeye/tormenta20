@@ -1,10 +1,7 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_filter_bottomsheet/magic_filter_bottomsheet_bottom_widgets.dart';
-import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_filter_bottomsheet/magic_filter_bottomsheet_circles.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_filter_bottomsheet/magic_filter_bottomsheet_duration.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_filter_bottomsheet/magic_filter_bottomsheet_executions.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_filter_bottomsheet/magic_filter_bottomsheet_header.dart';
@@ -15,6 +12,7 @@ import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_filter_
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_filter_bottomsheet/magic_filter_bottomsheet_types.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_filter_dto.dart';
 import 'package:tormenta20/src/shared/widgets/bottom_sheet_divider.dart';
+import 'package:tormenta20/src/shared/widgets/default_brackdrop_filter.dart';
 
 class MagicFilterBottomsheet extends StatefulWidget {
   const MagicFilterBottomsheet({super.key, required this.dto});
@@ -48,17 +46,7 @@ class _MagicFilterBottomsheetState extends State<MagicFilterBottomsheet> {
 
     return Stack(
       children: [
-        BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 6.0, sigmaY: 6.0),
-          child: GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: Container(
-              color: palette.accent.withOpacity(.1),
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-            ),
-          ),
-        ),
+        const DefaultBrackdropFilter(),
         DraggableScrollableSheet(
             maxChildSize: limite,
             initialChildSize: initialSize,
@@ -69,7 +57,7 @@ class _MagicFilterBottomsheetState extends State<MagicFilterBottomsheet> {
                 child: SizedBox(
                   child: DecoratedBox(
                     decoration: BoxDecoration(
-                        color: palette.bottomSheetBackground,
+                        color: palette.backgroundLevelOne,
                         borderRadius: T20UI.borderRadius),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -92,12 +80,6 @@ class _MagicFilterBottomsheetState extends State<MagicFilterBottomsheet> {
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  MagicFilterBottomsheetCircles(
-                                    itens: _store.circles,
-                                    itensSelected: _store.circlesSelecteds,
-                                    onTap: _store.onTap,
-                                  ),
-                                  T20UI.spaceHeight,
                                   MagicFilterBottomsheetTypes(
                                     itens: _store.types,
                                     itensSelected: _store.typesSelecteds,

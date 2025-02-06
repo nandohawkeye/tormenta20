@@ -128,17 +128,17 @@ final ThemeData theme = ThemeData(
     border: T20UI.defaultBorder(palette),
   ),
   datePickerTheme: DatePickerThemeData(
-    backgroundColor: palette.bottomSheetBackground,
+    backgroundColor: palette.backgroundLevelOne,
     headerForegroundColor: palette.textPrimary,
-    headerBackgroundColor: palette.bottomSheetBackground,
-    surfaceTintColor: palette.bottomSheetBackground,
-    dividerColor: palette.dividerBottomSheet,
+    headerBackgroundColor: palette.backgroundLevelOne,
+    surfaceTintColor: palette.backgroundLevelOne,
+    dividerColor: palette.dividerLevelTwo,
     shape: T20UI.defaultBorder(palette),
   ),
   timePickerTheme: TimePickerThemeData(
-    backgroundColor: palette.bottomSheetBackground,
-    dialBackgroundColor: palette.onBottomsheet,
-    hourMinuteColor: palette.onBottomsheet,
+    backgroundColor: palette.backgroundLevelOne,
+    dialBackgroundColor: palette.backgroundLevelTwo,
+    hourMinuteColor: palette.backgroundLevelTwo,
     hourMinuteTextColor: palette.textPrimary,
     cancelButtonStyle: ButtonStyle(
       textStyle: WidgetStateProperty.resolveWith(
@@ -160,7 +160,7 @@ final ThemeData theme = ThemeData(
     shape: T20UI.defaultBorder(palette),
   ),
   bottomSheetTheme: BottomSheetThemeData(
-    backgroundColor: palette.bottomSheetBackground,
+    backgroundColor: palette.backgroundLevelOne,
     shape: T20UI.bottomSheetShape,
   ),
   textTheme: TextTheme(

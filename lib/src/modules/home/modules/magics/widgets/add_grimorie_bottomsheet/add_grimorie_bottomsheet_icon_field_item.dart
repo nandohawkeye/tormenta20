@@ -39,7 +39,7 @@ class AddGrimorieBottomsheetIconFieldItem extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             child: Center(
               child: SvgPicture.asset(
-                'assets/icons/$asset.svg',
+                asset,
                 height: 24,
                 color: isSelected
                     ? palette.primary

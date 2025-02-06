@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/modules/home/home_screen.dart';
+import 'package:tormenta20/src/modules/home/modules/init/init_store.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/grimories_store.dart';
 import 'package:tormenta20/src/shared/widgets/app_logo.dart';
 
@@ -29,12 +30,13 @@ class _SplashScreenState extends State<SplashScreen> {
     getIt.registerSingletonAsync<GrimoriesStore>(
         () async => GrimoriesStore().init());
 
+    getIt.registerSingletonAsync<InitBoardStore>(
+        () async => InitBoardStore().init());
+
     await getIt.allReady();
 
-    Future.delayed(const Duration(seconds: 1)).then((_) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (_) => const HomeScreen()));
-    });
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (_) => const HomeScreen()));
   }
 
   @override

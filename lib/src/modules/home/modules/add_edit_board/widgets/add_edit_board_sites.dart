@@ -4,6 +4,7 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/add_edit_board_controller.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_site_card.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_sites_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/bottom_sheet_add_board_link/bottom_sheet_add_board_link.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
@@ -11,52 +12,34 @@ import 'package:tormenta20/src/shared/entities/board/board_link.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
 class AddEditBoardSites extends StatefulWidget {
-  const AddEditBoardSites(this.controller, {super.key});
+  const AddEditBoardSites(
+    this.controller, {
+    super.key,
+    required this.scrollController,
+  });
 
   final AddEditBoardController controller;
+  final ScrollController scrollController;
 
   @override
   State<AddEditBoardSites> createState() => _AddEditBoardSitesState();
 }
 
 class _AddEditBoardSitesState extends State<AddEditBoardSites> {
-  late final ValueNotifier<List<BoardLink>?> _links;
-  void _add(BoardLink? value) {
-    if (value == null) {
-      return;
-    }
-
-    List<BoardLink> oldValues = _links.value ?? [];
-
-    if (oldValues.any((ov) => ov.uuid == value.uuid)) {
-      final index = oldValues.indexWhere((old) => old.uuid == value.uuid);
-      oldValues[index] = value;
-      _links.value = null;
-      _links.value = [...oldValues];
-    } else {
-      _links.value = null;
-      _links.value = [...oldValues, value];
-    }
-
-    widget.controller.addLink(value);
-  }
-
-  void _remove(BoardLink value) {
-    List<BoardLink> oldValues = _links.value ?? [];
-    oldValues.removeWhere((od) => od.uuid == value.uuid);
-    _links.value = [...oldValues];
-    widget.controller.removeLink(value);
-  }
+  late final AddEditBoardSitesStore _store;
 
   @override
   void initState() {
     super.initState();
-    _links = ValueNotifier<List<BoardLink>?>(widget.controller.links);
+    _store = AddEditBoardSitesStore(
+      widget.controller,
+      widget.scrollController,
+    );
   }
 
   @override
   void dispose() {
-    _links.dispose();
+    _store.dispose();
     super.dispose();
   }
 
@@ -77,7 +60,7 @@ class _AddEditBoardSitesState extends State<AddEditBoardSites> {
             boardUuid: widget.controller.boardUuid,
           ),
         ),
-      ).then(_add);
+      ).then(_store.add);
     }
 
     return Column(
@@ -103,9 +86,9 @@ class _AddEditBoardSitesState extends State<AddEditBoardSites> {
         ),
         T20UI.spaceHeight,
         ValueListenableBuilder(
-          valueListenable: _links,
-          builder: (_, links, __) {
-            final list = links ?? [];
+          valueListenable: _store.sites,
+          builder: (_, sites, __) {
+            final list = sites ?? [];
             if (list.isEmpty) {
               return Padding(
                 padding: const EdgeInsets.symmetric(
@@ -126,7 +109,7 @@ class _AddEditBoardSitesState extends State<AddEditBoardSites> {
               primary: false,
               itemBuilder: (_, index) => AddEditBoardSiteCard(
                 link: list[index],
-                onRemove: _remove,
+                onRemove: _store.remove,
                 onSelect: addEditSite,
               ),
               separatorBuilder: T20UI.separatorBuilderVertical,
