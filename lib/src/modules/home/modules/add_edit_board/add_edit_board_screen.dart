@@ -64,7 +64,7 @@ class _AddEditBoardScreenState extends State<AddEditBoardScreen> {
                   T20UI.spaceHeight,
                   AddEditBoardBanner(_controller),
                   T20UI.spaceHeight,
-                  AddEditBoardCharacters(_controller),
+                  AddEditBoardPlayers(_controller),
                   T20UI.spaceHeight,
                   AddEditBoardMaterials(_controller),
                   T20UI.spaceHeight,

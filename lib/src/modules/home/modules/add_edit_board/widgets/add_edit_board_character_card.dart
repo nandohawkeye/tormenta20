@@ -58,6 +58,8 @@ class AddEditBoardCharacterCard extends StatelessWidget {
                               height: imageSize,
                               width: imageSize,
                               fit: BoxFit.cover,
+                              errorBuilder: (_, __, ___) =>
+                                  const SizedBox.shrink(),
                             ),
                           ),
                         if (player.imageAsset != null)
@@ -87,7 +89,7 @@ class AddEditBoardCharacterCard extends StatelessWidget {
                           '${player.playerName} - ${player.characterName}',
                           style: TextStyle(
                             fontFamily: FontFamily.tormenta,
-                            color: palette.accent.withOpacity(.6),
+                            color: palette.selected,
                           ),
                         ),
                         const SizedBox(height: 4),
@@ -103,7 +105,7 @@ class AddEditBoardCharacterCard extends StatelessWidget {
                   ),
                   SimpleButton(
                     icon: FontAwesomeIcons.solidTrashCan,
-                    backgroundColor: palette.accent.withOpacity(.6),
+                    backgroundColor: palette.selected,
                     iconColor: palette.indicator.withOpacity(.6),
                     onTap: () => onRemove(player),
                   )

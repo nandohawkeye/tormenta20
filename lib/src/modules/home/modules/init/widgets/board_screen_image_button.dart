@@ -14,7 +14,7 @@ class BoardScreenImageButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenImageButton(
       imageAsset: Assets.images.knight.path,
-      title: 'Criar ou vincular mesa',
+      title: 'Mesas',
       subtitle:
           'Crie ou se vincule a mesa de um mestre, e comece a se divertir com seus amigos!',
       onTap: () async {

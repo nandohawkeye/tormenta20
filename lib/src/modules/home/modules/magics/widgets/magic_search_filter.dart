@@ -19,6 +19,7 @@ class MagicSearchFilter extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  const Divider(),
                   ColoredBox(
                     color: palette.background,
                     child: Card(

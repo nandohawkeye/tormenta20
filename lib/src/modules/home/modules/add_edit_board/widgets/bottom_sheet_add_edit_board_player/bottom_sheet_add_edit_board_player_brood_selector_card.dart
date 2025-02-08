@@ -25,9 +25,7 @@ class BottomSheetAddEditBoardPlayerBroodSelectorCard extends StatelessWidget {
       duration: T20UI.defaultDurationAnimation,
       decoration: BoxDecoration(
         borderRadius: T20UI.borderRadius,
-        color: isSelected
-            ? palette.accent.withOpacity(.6)
-            : palette.backgroundLevelThree,
+        color: isSelected ? palette.selected : palette.backgroundLevelThree,
       ),
       child: InkWell(
         borderRadius: T20UI.borderRadius,

@@ -28,8 +28,7 @@ class MagicCirclesSelectorItem extends StatelessWidget {
             width: 2,
             color: isSelected ? Colors.transparent : palette.cardBackground,
           ),
-          color:
-              isSelected ? palette.accent.withOpacity(.6) : Colors.transparent,
+          color: isSelected ? palette.selected : Colors.transparent,
         ),
         child: Material(
           color: Colors.transparent,

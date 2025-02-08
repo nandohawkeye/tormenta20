@@ -6,6 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/bottom_sheet_add_edit_board_player/bottom_sheet_add_edit_board_player_token_card_bord.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/bottom_sheet_add_edit_board_player/bottom_sheet_add_edit_board_player_token_card_tag.dart';
+import 'package:tormenta20/src/shared/widgets/error_image_placeholder.dart';
 
 class BottomSheetAddEditBoardPlayerFileImageSelector extends StatelessWidget {
   const BottomSheetAddEditBoardPlayerFileImageSelector({
@@ -56,11 +57,13 @@ class BottomSheetAddEditBoardPlayerFileImageSelector extends StatelessWidget {
                               height: size,
                               width: size,
                               fit: BoxFit.cover,
+                              errorBuilder: (_, __, ___) =>
+                                  const ErrorImagePlaceholder(),
                             ),
                           )
                         : Icon(
                             FontAwesomeIcons.solidImage,
-                            color: palette.accent.withOpacity(.6),
+                            color: palette.selected,
                           ),
                   ),
                 ),

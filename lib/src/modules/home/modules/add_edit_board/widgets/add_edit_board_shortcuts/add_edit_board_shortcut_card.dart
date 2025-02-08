@@ -6,6 +6,7 @@ import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/board/board_shortcut_types.dart';
 import 'package:tormenta20/src/shared/entities/board/board_shortcuts_utils.dart';
+import 'package:tormenta20/src/shared/widgets/whatsapp_svg_icon.dart';
 
 class AddEditBoardShortcutCard extends StatelessWidget {
   const AddEditBoardShortcutCard({
@@ -33,12 +34,22 @@ class AddEditBoardShortcutCard extends StatelessWidget {
             padding: const EdgeInsets.all(12),
             child: Row(
               children: [
-                Icon(
-                  BoardShortcutsUtils.handleIcon(type, url),
-                  size: 32,
-                  color: palette.accent.withOpacity(.6),
-                ),
-                T20UI.spaceWidth,
+                type == BoardShortcutsType.whats
+                    ? Padding(
+                        padding: const EdgeInsets.only(right: 12, left: 6),
+                        child: WhatsappSvgIcon(
+                          size: 30,
+                          color: palette.selected,
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.only(right: T20UI.spaceSize),
+                        child: Icon(
+                          BoardShortcutsUtils.handleIcon(type, url),
+                          size: 32,
+                          color: palette.selected,
+                        ),
+                      ),
                 Expanded(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -48,7 +59,7 @@ class AddEditBoardShortcutCard extends StatelessWidget {
                         BoardShortcutsUtils.handleLabel(type),
                         style: TextStyle(
                           fontFamily: FontFamily.tormenta,
-                          color: palette.accent.withOpacity(.6),
+                          color: palette.selected,
                         ),
                       ),
                       const SizedBox(height: 4),
@@ -64,7 +75,7 @@ class AddEditBoardShortcutCard extends StatelessWidget {
                 ),
                 SimpleButton(
                   icon: FontAwesomeIcons.penToSquare,
-                  backgroundColor: palette.accent.withOpacity(.6),
+                  backgroundColor: palette.selected,
                   iconColor: palette.indicator.withOpacity(.6),
                   onTap: onTap,
                 )

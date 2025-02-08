@@ -36,7 +36,7 @@ class AddEditBoardSiteCard extends StatelessWidget {
                   Icon(
                     FontAwesomeIcons.link,
                     size: 32,
-                    color: palette.accent.withOpacity(.6),
+                    color: palette.selected,
                   ),
                   T20UI.spaceWidth,
                   Expanded(
@@ -48,7 +48,7 @@ class AddEditBoardSiteCard extends StatelessWidget {
                           link.title,
                           style: TextStyle(
                             fontFamily: FontFamily.tormenta,
-                            color: palette.accent.withOpacity(.6),
+                            color: palette.selected,
                           ),
                         ),
                         const SizedBox(height: 4),
@@ -64,7 +64,7 @@ class AddEditBoardSiteCard extends StatelessWidget {
                   ),
                   SimpleButton(
                     icon: FontAwesomeIcons.solidTrashCan,
-                    backgroundColor: palette.accent.withOpacity(.6),
+                    backgroundColor: palette.selected,
                     iconColor: palette.indicator.withOpacity(.6),
                     onTap: () => onRemove(link),
                   )

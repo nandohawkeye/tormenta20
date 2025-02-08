@@ -28,9 +28,8 @@ class MagicsHeader extends StatelessWidget {
                 animation: store,
                 builder: (_, __) => SimpleButton(
                   icon: FontAwesomeIcons.sliders,
-                  backgroundColor: store.hasFilterAplied
-                      ? palette.accent.withOpacity(.6)
-                      : null,
+                  backgroundColor:
+                      store.hasFilterAplied ? palette.selected : null,
                   iconColor: store.hasFilterAplied ? palette.icon : null,
                   onTap: () async {
                     await showModalBottomSheet<MagicFilterDto?>(

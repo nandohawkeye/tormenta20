@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_board/add_edit_board_screen.dart';
+import 'package:tormenta20/src/modules/home/modules/board_view/board_view_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/board_card/board_card_banner.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/board_card/board_card_player_image.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
@@ -23,7 +23,7 @@ class BoardCard extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => AddEditBoardScreen(initialBoard: board),
+              builder: (_) => BoardViewScreen(initial: board),
             ),
           );
         },
@@ -40,8 +40,7 @@ class BoardCard extends StatelessWidget {
                 ),
                 child: BoardCardBanner(
                   width: width,
-                  bannerPath: board.bannerPath,
-                  isVeryHeight: board.players.isEmpty,
+                  board: board,
                 ),
               ),
               Padding(
@@ -57,7 +56,7 @@ class BoardCard extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: FontFamily.tormenta,
                         fontSize: 18,
-                        color: palette.accent.withOpacity(.6),
+                        color: palette.selected,
                       ),
                     ),
                     Text(

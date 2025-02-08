@@ -52,8 +52,7 @@ class _MagicFilterBottomsheetState extends State<MagicFilterBottomsheet> {
             initialChildSize: initialSize,
             builder: (context, scrollController) {
               return Padding(
-                padding: T20UI.allPaddingWithPaddingBottom(context,
-                    extra: MediaQuery.of(context).padding.bottom),
+                padding: T20UI.allPaddingWithPaddingBottom(context),
                 child: SizedBox(
                   child: DecoratedBox(
                     decoration: BoxDecoration(

@@ -90,7 +90,7 @@ class AddEditBoardController {
   List<BoardMaterial> get materials => _materials;
   void addMaterials(List<BoardMaterial> values) => _materials.addAll(values);
   void removeMaterials(BoardMaterial value) {
-    _materials.retainWhere((od) => od.uuid == value.uuid);
+    _materials.removeWhere((od) => od.uuid == value.uuid);
     _materialsToDelete.add(value.uuid);
   }
 

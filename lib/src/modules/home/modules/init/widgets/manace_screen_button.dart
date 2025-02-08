@@ -11,7 +11,7 @@ class ManaceScreenButton extends StatelessWidget {
         Assets.images.menaces.values.map((m) => m.path).toList();
     return ScreenSlideImagesButton(
       imageAssets: menaces,
-      title: 'Criar ameaça',
+      title: 'Ameaças',
       subtitle:
           'Crie ou se vincule a mesa de um mestre, e comece a se divertir com seus amigos!',
       onTap: () {},

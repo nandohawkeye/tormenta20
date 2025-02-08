@@ -12,10 +12,7 @@ class InitBoardStore extends ChangeNotifier {
   Future<InitBoardStore> init() async {
     await GetIt.I<AppDatabase>().boardDAO.watchBoards().then((resp) {
       if (resp.boards != null) {
-        _subBoards ??= resp.boards?.listen((data) {
-          _setData(data);
-          print('data: $data');
-        });
+        _subBoards ??= resp.boards?.listen(_setData);
       }
     });
 

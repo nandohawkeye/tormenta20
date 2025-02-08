@@ -11,16 +11,16 @@ import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
-class AddEditBoardCharacters extends StatefulWidget {
-  const AddEditBoardCharacters(this.controller, {super.key});
+class AddEditBoardPlayers extends StatefulWidget {
+  const AddEditBoardPlayers(this.controller, {super.key});
 
   final AddEditBoardController controller;
 
   @override
-  State<AddEditBoardCharacters> createState() => _AddEditBoardCharactersState();
+  State<AddEditBoardPlayers> createState() => _AddEditBoardPlayersState();
 }
 
-class _AddEditBoardCharactersState extends State<AddEditBoardCharacters> {
+class _AddEditBoardPlayersState extends State<AddEditBoardPlayers> {
   late final AddEditBoardCharactersStore _store;
 
   @override

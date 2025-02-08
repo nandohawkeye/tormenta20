@@ -27,13 +27,15 @@ class InitCharacterField extends StatelessWidget {
             ],
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.only(
+        Padding(
+          padding: const EdgeInsets.only(
             bottom: T20UI.spaceSize,
             right: T20UI.spaceSize - 4,
             left: T20UI.spaceSize - 4,
           ),
-          child: CharacterScreenButton(),
+          child: CharacterScreenButton(
+            onTap: () {},
+          ),
         ),
       ],
     );

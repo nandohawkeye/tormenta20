@@ -171,8 +171,15 @@ class $AssetsImagesGen {
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
+  /// File path: assets/images/manuscript.png
+  AssetGenImage get manuscript =>
+      const AssetGenImage('assets/images/manuscript.png');
+
   /// Directory path: assets/images/menaces
   $AssetsImagesMenacesGen get menaces => const $AssetsImagesMenacesGen();
+
+  /// File path: assets/images/pdf.png
+  AssetGenImage get pdf => const AssetGenImage('assets/images/pdf.png');
 
   /// File path: assets/images/spellbook.png
   AssetGenImage get spellbook =>
@@ -180,17 +187,30 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values =>
-      [banner, bordaToken, fire, knight, logo, spellbook];
+      [banner, bordaToken, fire, knight, logo, manuscript, pdf, spellbook];
+}
+
+class $AssetsInterfaceGen {
+  const $AssetsInterfaceGen();
+
+  /// File path: assets/interface/whatsapp.svg
+  String get whatsapp => 'assets/interface/whatsapp.svg';
+
+  /// List of all assets
+  List<String> get values => [whatsapp];
 }
 
 class $AssetsLottieGen {
   const $AssetsLottieGen();
 
+  /// File path: assets/lottie/arrows.lottie
+  String get arrows => 'assets/lottie/arrows.lottie';
+
   /// File path: assets/lottie/loading.lottie
   String get loading => 'assets/lottie/loading.lottie';
 
   /// List of all assets
-  List<String> get values => [loading];
+  List<String> get values => [arrows, loading];
 }
 
 class $AssetsTokensGen {
@@ -776,6 +796,7 @@ class Assets {
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsInterfaceGen interface = $AssetsInterfaceGen();
   static const $AssetsLottieGen lottie = $AssetsLottieGen();
   static const $AssetsTokensGen tokens = $AssetsTokensGen();
   static const $AssetsTokensLendasGen tokensLendas = $AssetsTokensLendasGen();

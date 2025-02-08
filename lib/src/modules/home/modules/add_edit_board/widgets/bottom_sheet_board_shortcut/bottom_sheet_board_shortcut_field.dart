@@ -3,6 +3,7 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/entities/board/board_shortcut_types.dart';
 import 'package:tormenta20/src/shared/entities/board/board_shortcuts_utils.dart';
+import 'package:tormenta20/src/shared/widgets/whatsapp_svg_icon.dart';
 
 class BottomSheetBoardShortcutField extends StatefulWidget {
   const BottomSheetBoardShortcutField({
@@ -90,12 +91,16 @@ class _BottomSheetBoardShortcutFieldState
                     suffixIcon: AnimatedBuilder(
                       animation: Listenable.merge([_url, _animation]),
                       builder: (_, __) {
-                        return Icon(
-                          BoardShortcutsUtils.handleIcon(
-                              widget.type, _url.value ?? ''),
-                          size: T20UI.iconSize,
-                          color: _animation.value,
-                        );
+                        return widget.type == BoardShortcutsType.whats
+                            ? WhatsappSvgIcon(
+                                color: _animation.value ?? palette.textPrimary,
+                              )
+                            : Icon(
+                                BoardShortcutsUtils.handleIcon(
+                                    widget.type, _url.value ?? ''),
+                                size: T20UI.iconSize,
+                                color: _animation.value,
+                              );
                       },
                     ),
                     helperText: widget.helperText,

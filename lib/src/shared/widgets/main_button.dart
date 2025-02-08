@@ -10,12 +10,14 @@ class MainButton extends StatelessWidget {
     required this.onTap,
     this.backgroundColor,
     this.textColor,
+    this.icon,
   });
 
   final String label;
   final Function() onTap;
   final Color? backgroundColor;
   final Color? textColor;
+  final IconData? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -25,22 +27,38 @@ class MainButton extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: T20UI.borderRadius,
-          color: backgroundColor ?? palette.accent.withOpacity(.4),
+          color: backgroundColor ?? palette.accent.withOpacity(.6),
         ),
         child: Material(
           color: Colors.transparent,
           child: InkWell(
             borderRadius: T20UI.borderRadius,
-            splashColor: palette.accent.withOpacity(.6),
+            splashColor: palette.selected,
             onTap: onTap,
             child: Center(
-              child: Text(
-                label,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: textColor,
-                  fontWeight: FontWeight.w500,
-                  fontFamily: FontFamily.tormenta,
+              child: Padding(
+                padding: EdgeInsets.only(right: icon != null ? 10 : 0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (icon != null)
+                      Padding(
+                        padding: const EdgeInsets.only(right: 6),
+                        child: Icon(
+                          icon,
+                          size: 16,
+                        ),
+                      ),
+                    Text(
+                      label,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: textColor,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: FontFamily.tormenta,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

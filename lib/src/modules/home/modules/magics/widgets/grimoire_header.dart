@@ -81,7 +81,7 @@ class GrimoireHeader extends StatelessWidget {
                   ),
                   child: ScreenImageButton(
                     imageAsset: Assets.images.spellbook.path,
-                    title: 'Criar grimório',
+                    title: 'Grimórios',
                     subtitle:
                         'Crie um grimório, coloque suas magias favoritas e vincule a seus personagens.',
                     onTap: () async => await addGrimoire(),

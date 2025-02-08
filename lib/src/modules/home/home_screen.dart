@@ -4,7 +4,6 @@ import 'package:tormenta20/src/modules/home/home_screen_store.dart';
 import 'package:tormenta20/src/modules/home/modules/about/about_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/init/init_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/magics_screen.dart';
-import 'package:tormenta20/src/modules/home/modules/shield/shield_screen.dart';
 import 'package:tormenta20/src/shared/widgets/app_logo.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,7 +20,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   static const _pages = <Widget>[
     InitScreen(),
-    ShieldScreen(),
     MagicsScreen(),
     AboutScreen(),
   ];
@@ -60,10 +58,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 BottomNavigationBarItem(
                   icon: Icon(FontAwesomeIcons.diceD20),
                   label: 'Inicio',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(FontAwesomeIcons.shieldHalved),
-                  label: 'Escudo do mestre',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(FontAwesomeIcons.hatWizard),

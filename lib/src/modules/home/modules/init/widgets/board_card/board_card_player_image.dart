@@ -53,6 +53,7 @@ class BoardCardPlayerImage extends StatelessWidget {
                   height: minusSize,
                   width: minusSize,
                   fit: BoxFit.cover,
+                  errorBuilder: (_, __, ___) => const SizedBox.shrink(),
                 ),
               ),
             if (player.imageAsset != null)

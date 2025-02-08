@@ -16,3 +16,9 @@
 // <a href="https://www.flaticon.com/free-icons/rpg" title="rpg icons">Rpg icons created by max.icons - Flaticon</a>
 
 // https://www.flaticon.com/authors/maxicons
+
+//manucript
+// <a href="https://www.flaticon.com/free-icons/poetry" title="poetry icons">Poetry icons created by Freepik - Flaticon</a>
+
+//pfd
+// <a href="https://www.flaticon.com/free-icons/pdf" title="pdf icons">Pdf icons created by Dimitry Miroliubov - Flaticon</a>

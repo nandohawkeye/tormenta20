@@ -2,24 +2,24 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/utils/pdf_utils.dart';
 import 'package:tormenta20/src/shared/widgets/custom_loader.dart';
+import 'package:tormenta20/src/shared/widgets/error_image_placeholder.dart';
 
-class AddEditBoardMaterialCardPdfThumb extends StatefulWidget {
-  const AddEditBoardMaterialCardPdfThumb(this.path, {super.key});
+class BoardMaterialCardPdfThumb extends StatefulWidget {
+  const BoardMaterialCardPdfThumb(this.path, {super.key, required this.size});
 
   final String path;
+  final double size;
 
   @override
-  State<AddEditBoardMaterialCardPdfThumb> createState() =>
-      _AddEditBoardMaterialCardPdfThumbState();
+  State<BoardMaterialCardPdfThumb> createState() =>
+      _BoardMaterialCardPdfThumbState();
 }
 
-class _AddEditBoardMaterialCardPdfThumbState
-    extends State<AddEditBoardMaterialCardPdfThumb> {
+class _BoardMaterialCardPdfThumbState extends State<BoardMaterialCardPdfThumb> {
   late final ValueNotifier<Uint8List?> _thumb;
   late final ValueNotifier<bool> _error;
 
@@ -50,8 +50,8 @@ class _AddEditBoardMaterialCardPdfThumbState
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 120,
-      width: 120,
+      height: widget.size,
+      width: widget.size,
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: palette.cardBackground,
@@ -64,9 +64,7 @@ class _AddEditBoardMaterialCardPdfThumbState
             final thumb = _thumb.value;
 
             if (hasError) {
-              return const Center(
-                child: Icon(FontAwesomeIcons.solidFilePdf),
-              );
+              return const ErrorImagePlaceholder();
             }
 
             if (thumb == null) {
@@ -76,10 +74,11 @@ class _AddEditBoardMaterialCardPdfThumbState
             return ClipRRect(
               borderRadius: T20UI.borderRadius,
               child: Image.memory(
-                height: 120,
-                width: 120,
+                height: widget.size,
+                width: widget.size,
                 fit: BoxFit.cover,
                 thumb,
+                errorBuilder: (_, __, ___) => const ErrorImagePlaceholder(),
               ),
             );
           },
