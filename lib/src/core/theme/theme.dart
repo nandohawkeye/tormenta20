@@ -229,7 +229,7 @@ final ThemeData theme = ThemeData(
     elevation: 1,
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarBrightness: Brightness.dark,
-      systemNavigationBarColor: palette.appBar,
+      systemNavigationBarColor: palette.background,
       systemNavigationBarIconBrightness: Brightness.dark,
       statusBarIconBrightness: Brightness.light,
       statusBarColor: palette.appBar,
@@ -238,7 +238,7 @@ final ThemeData theme = ThemeData(
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: palette.background,
     selectedItemColor: palette.accent,
-    unselectedItemColor: palette.iconDisable, // 60% white
+    unselectedItemColor: palette.iconDisable,
     elevation: 3,
     selectedIconTheme:
         IconThemeData(color: palette.accent, size: T20UI.iconSize),

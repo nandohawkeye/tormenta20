@@ -56,47 +56,59 @@ class _BottomSheetAddEditBoardPlayerState
               children: [
                 const BottomSheetAddEditBoardPlayerHeader(),
                 const BottomSheetDivider(verticalPadding: 0),
-                T20UI.spaceHeight,
-                BottomSheetAddEditBoardPlayerTokens(store: _store, size: 80),
-                T20UI.spaceHeight,
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: T20UI.horizontalPadding,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: BottomSheetAddEditBoardPlayerNameField(
-                                onchange: _store.onChangePlayer,
-                                initialTitle: _store.player,
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        T20UI.spaceHeight,
+                        BottomSheetAddEditBoardPlayerTokens(
+                            store: _store, size: 80),
+                        T20UI.spaceHeight,
+                        Form(
+                          key: _formKey,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: T20UI.horizontalPadding,
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child:
+                                          BottomSheetAddEditBoardPlayerNameField(
+                                        onchange: _store.onChangePlayer,
+                                        initialTitle: _store.player,
+                                      ),
+                                    ),
+                                    T20UI.spaceWidth,
+                                    Expanded(
+                                      child:
+                                          BottomSheetAddEditBoardPlayerNamecharacterField(
+                                        onchange: _store.onChangeCharacter,
+                                        initialTitle: _store.name,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            T20UI.spaceWidth,
-                            Expanded(
-                              child:
-                                  BottomSheetAddEditBoardPlayerNamecharacterField(
-                                onchange: _store.onChangeCharacter,
-                                initialTitle: _store.name,
+                              T20UI.spaceHeight,
+                              BottomSheetAddEditBoardPlayerBroodSelector(
+                                store: _store,
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      T20UI.spaceHeight,
-                      BottomSheetAddEditBoardPlayerBroodSelector(
-                        store: _store,
-                      ),
-                      T20UI.spaceHeight,
-                      BottomSheetAddEditBoardPlayerClassesSelector(
-                        store: _store,
-                      ),
-                      T20UI.spaceHeight,
-                    ],
+                              T20UI.spaceHeight,
+                              BottomSheetAddEditBoardPlayerClassesSelector(
+                                store: _store,
+                              ),
+                              T20UI.spaceHeight,
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 BottomSheetAddEditBoardPlayerMainButtons(

@@ -79,7 +79,7 @@ abstract class Palettes {
         onInput: const Color(0xFF262626),
         appBarShadown: const Color(0xFF191919),
         cardBackground: const Color(0xFF212121),
-        appBar: const Color(0xFF000000),
+        appBar: Colors.transparent,
         icon: const Color(0xFFFAFAFA),
         indicator: const Color(0xFFFAFAFA),
         iconDisable: const Color(0xFF424242),

@@ -128,47 +128,18 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
 
   Future<Failure?> saveBoard({
     required Board entity,
-    required List<String> playersToDelete,
     required List<String> materialsToDelete,
     required List<String> linksToDelete,
   }) async {
     try {
-      List<CharacterClasse> classes = [];
-
-      if (entity.players.isNotEmpty) {
-        for (var player in entity.players) {
-          classes.addAll(player.classes);
-        }
-
-        Future.forEach(entity.players, (player) async {
-          await (delete(boardClasseCharacterTable)
-                ..where((tbl) => tbl.playerUuid.equals(player.uuid)))
-              .go();
-        });
-      }
-
-      print('classes: $classes');
-
       await batch((batch) {
         batch.insertAllOnConflictUpdate(
             boardTable, [BoardAdapters.toCompanion(entity)]);
-        batch.insertAllOnConflictUpdate(boardPlayerTable,
-            entity.players.map(BoardPlayerAdapters.toCompanion));
-        batch.insertAllOnConflictUpdate(boardClasseCharacterTable,
-            classes.map(CharacterClasseAdapters.toCompanion));
         batch.insertAllOnConflictUpdate(
             boardLinkTable, entity.links.map(BoardLinkAdapters.toCompanion));
         batch.insertAllOnConflictUpdate(boardMaterialTable,
             entity.materials.map(BoardMaterialsAdapters.toCompanion));
       });
-
-      if (playersToDelete.isNotEmpty) {
-        Future.forEach(playersToDelete, (uuid) async {
-          await (delete(boardPlayerTable)
-                ..where((tbl) => tbl.uuid.equals(uuid)))
-              .go();
-        });
-      }
 
       if (materialsToDelete.isNotEmpty) {
         Future.forEach(materialsToDelete, (uuid) async {

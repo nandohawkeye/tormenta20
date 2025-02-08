@@ -3,7 +3,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
-import 'package:tormenta20/src/shared/entities/board/board_player.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link.dart';
 import 'package:tormenta20/src/shared/entities/board/board_material.dart';
 import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
@@ -27,7 +26,6 @@ class AddEditBoardController {
       _telegramLink = initialBoard.telegramGroupLink;
       _materials.addAll(initialBoard.materials);
       _links.addAll(initialBoard.links);
-      _players.addAll(initialBoard.players);
       _mode = initialBoard.mode;
     } else {
       _boardUuid = const Uuid().v4();
@@ -82,7 +80,6 @@ class AddEditBoardController {
   String? _telegramLink;
   String? get telegramLink => _telegramLink;
 
-  List<String> _playersToDelete = [];
   List<String> _materialsToDelete = [];
   List<String> _linksToDelete = [];
 
@@ -110,26 +107,6 @@ class AddEditBoardController {
     _linksToDelete.add(value.uuid);
   }
 
-  List<BoardPlayer> _players = [];
-  List<BoardPlayer> get players => _players;
-  void addPlayer(BoardPlayer? value) {
-    if (value == null) {
-      return;
-    }
-
-    if (_players.any((c) => c.uuid == value.uuid)) {
-      final index = _players.indexWhere((c) => c.uuid == value.uuid);
-      _players[index] = value;
-    } else {
-      _players.add(value);
-    }
-  }
-
-  void removePlayer(BoardPlayer value) {
-    _players.removeWhere((c) => c.uuid == value.uuid);
-    _playersToDelete.add(value.uuid);
-  }
-
   void onChangeShortcuts(BoardShortcutsDto? dto) {
     if (dto != null) {
       _whatsLink = dto.whatsLink;
@@ -150,7 +127,7 @@ class AddEditBoardController {
       materials: materials,
       links: links,
       level: _level!,
-      players: _players,
+      players: [],
       mode: _mode,
       bannerPath: _bannerPath,
       whatsGroupLink: _whatsLink,
@@ -167,7 +144,6 @@ class AddEditBoardController {
 
     final failure = await _dao.saveBoard(
       entity: board,
-      playersToDelete: _playersToDelete,
       materialsToDelete: _materialsToDelete,
       linksToDelete: _linksToDelete,
     );

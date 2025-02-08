@@ -12,11 +12,14 @@ abstract class PdfUtils {
       width: page.width * 2,
       height: page.height * 2,
       format: PdfPageImageFormat.png,
-
-      // Crop rect in image for render
-      //cropRect: Rect.fromLTRB(left, top, right, bottom),
     );
 
     return image;
+  }
+
+  static Future<int> getPagesCount(File file) async {
+    final document = await PdfDocument.openFile(file.path);
+
+    return document.pagesCount;
   }
 }

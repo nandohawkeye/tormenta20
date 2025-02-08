@@ -65,7 +65,7 @@ class BoardViewPlayersField extends StatelessWidget {
     }
 
     final players = board.players;
-    players.sort((a, b) => a.updatedAt.compareTo(b.updatedAt));
+    players.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -112,15 +112,15 @@ class BoardViewPlayersField extends StatelessWidget {
             : Padding(
                 padding: const EdgeInsets.only(bottom: T20UI.spaceSize),
                 child: SizedBox(
-                  height: 70,
                   width: double.infinity,
                   child: ListView.separated(
                     shrinkWrap: true,
+                    primary: false,
+                    physics: const NeverScrollableScrollPhysics(),
                     padding: const EdgeInsets.symmetric(
                         horizontal: T20UI.spaceSize - 4),
-                    scrollDirection: Axis.horizontal,
                     itemCount: players.length,
-                    separatorBuilder: T20UI.separatorBuilderHorizontal,
+                    separatorBuilder: T20UI.separatorBuilderVertical,
                     itemBuilder: (_, index) {
                       return BoardViewPlayerCard(
                         player: players[index],
