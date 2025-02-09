@@ -162,8 +162,23 @@ class $AssetsImagesGen {
   /// Directory path: assets/images/caracters
   $AssetsImagesCaractersGen get caracters => const $AssetsImagesCaractersGen();
 
+  /// File path: assets/images/developer.jpg
+  AssetGenImage get developer =>
+      const AssetGenImage('assets/images/developer.jpg');
+
   /// File path: assets/images/fire.png
   AssetGenImage get fire => const AssetGenImage('assets/images/fire.png');
+
+  /// File path: assets/images/icon_logo_t20.png
+  AssetGenImage get iconLogoT20 =>
+      const AssetGenImage('assets/images/icon_logo_t20.png');
+
+  /// File path: assets/images/instagram.png
+  AssetGenImage get instagram =>
+      const AssetGenImage('assets/images/instagram.png');
+
+  /// File path: assets/images/jambo.jpg
+  AssetGenImage get jambo => const AssetGenImage('assets/images/jambo.jpg');
 
   /// File path: assets/images/knight.png
   AssetGenImage get knight => const AssetGenImage('assets/images/knight.png');
@@ -186,8 +201,20 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/spellbook.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [banner, bordaToken, fire, knight, logo, manuscript, pdf, spellbook];
+  List<AssetGenImage> get values => [
+        banner,
+        bordaToken,
+        developer,
+        fire,
+        iconLogoT20,
+        instagram,
+        jambo,
+        knight,
+        logo,
+        manuscript,
+        pdf,
+        spellbook
+      ];
 }
 
 class $AssetsInterfaceGen {

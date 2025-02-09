@@ -6,7 +6,7 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/botto
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/bottom_sheet_board_shortcut/bottom_sheet_board_shortcuts_store.dart';
 import 'package:tormenta20/src/shared/entities/board/board_shortcut_types.dart';
 import 'package:tormenta20/src/shared/widgets/bottom_sheet_base.dart';
-import 'package:tormenta20/src/shared/widgets/bottom_sheet_divider.dart';
+import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
 
@@ -58,7 +58,7 @@ class _BottomSheetBoardShortcutsState extends State<BottomSheetBoardShortcuts> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const BottomSheetBoardShortcutsHeader(),
-              const BottomSheetDivider(verticalPadding: 0),
+              const DividerLevelTwo(verticalPadding: 0),
               T20UI.spaceHeight,
               Column(
                 mainAxisSize: MainAxisSize.min,
@@ -98,7 +98,7 @@ class _BottomSheetBoardShortcutsState extends State<BottomSheetBoardShortcuts> {
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const BottomSheetDivider(verticalPadding: 0),
+                  const DividerLevelTwo(verticalPadding: 0),
                   Padding(
                     padding: T20UI.allPadding,
                     child: Row(

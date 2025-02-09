@@ -7,7 +7,7 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/botto
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/bottom_sheet_add_board_link/bottom_sheet_add_board_link_url_field.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link.dart';
 import 'package:tormenta20/src/shared/widgets/bottom_sheet_base.dart';
-import 'package:tormenta20/src/shared/widgets/bottom_sheet_divider.dart';
+import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 import 'package:uuid/uuid.dart';
 
 class BottomSheetAddBoardLink extends StatefulWidget {
@@ -55,7 +55,7 @@ class _BottomSheetAddBoardLinkState extends State<BottomSheetAddBoardLink> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const BottomSheetAddBoardLinkHeader(),
-                const BottomSheetDivider(verticalPadding: 0),
+                const DividerLevelTwo(verticalPadding: 0),
                 T20UI.spaceHeight,
                 Form(
                   key: _formKey,

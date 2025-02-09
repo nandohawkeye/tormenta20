@@ -3,7 +3,7 @@ import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/widgets/bottom_sheet_base.dart';
-import 'package:tormenta20/src/shared/widgets/bottom_sheet_divider.dart';
+import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
 
@@ -42,7 +42,7 @@ class DeleteGrimorieBottomsheet extends StatelessWidget {
                     T20UI.spaceHeight,
                   ],
                 ),
-                const BottomSheetDivider(verticalPadding: 0),
+                const DividerLevelTwo(verticalPadding: 0),
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,7 +69,7 @@ class DeleteGrimorieBottomsheet extends StatelessWidget {
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const BottomSheetDivider(verticalPadding: 0),
+                    const DividerLevelTwo(verticalPadding: 0),
                     Padding(
                       padding: T20UI.allPadding,
                       child: Row(

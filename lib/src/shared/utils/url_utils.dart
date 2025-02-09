@@ -22,7 +22,6 @@ abstract class UrlUtils {
         url.replaceAll('https:', '').replaceAll('http:', '').trim();
     await canLaunchUrl(Uri.parse('https:$clearUrl')).then(
       (bool canLauch) async {
-        print('can lauch: $canLauch - url: $url');
         if (canLauch) {
           return await launchUrl(
             Uri.parse('https:$clearUrl'),

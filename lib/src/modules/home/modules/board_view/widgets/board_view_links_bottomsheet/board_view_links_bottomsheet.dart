@@ -4,7 +4,7 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_links_bottomsheet/board_view_links_bottomsheet_item.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link.dart';
-import 'package:tormenta20/src/shared/widgets/bottom_sheet_divider.dart';
+import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 import 'package:tormenta20/src/shared/widgets/default_brackdrop_filter.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
@@ -56,7 +56,7 @@ class BoardViewLinksBottomsheet extends StatelessWidget {
                             T20UI.spaceHeight,
                           ],
                         ),
-                        const BottomSheetDivider(verticalPadding: 0),
+                        const DividerLevelTwo(verticalPadding: 0),
                         Expanded(
                           child: SingleChildScrollView(
                             controller: scrollController,
@@ -76,7 +76,7 @@ class BoardViewLinksBottomsheet extends StatelessWidget {
                         Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const BottomSheetDivider(verticalPadding: 0),
+                            const DividerLevelTwo(verticalPadding: 0),
                             Padding(
                               padding: T20UI.allPadding,
                               child: Row(

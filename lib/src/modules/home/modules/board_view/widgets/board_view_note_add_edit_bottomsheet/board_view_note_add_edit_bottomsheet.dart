@@ -6,7 +6,7 @@ import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_vie
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_note_add_edit_bottomsheet/board_view_note_add_edit_bottomsheet_note_field.dart';
 import 'package:tormenta20/src/shared/entities/board/board_note.dart';
 import 'package:tormenta20/src/shared/widgets/bottom_sheet_base.dart';
-import 'package:tormenta20/src/shared/widgets/bottom_sheet_divider.dart';
+import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 import 'package:uuid/uuid.dart';
 
 class BoardViewNoteAddEditBottomsheet extends StatefulWidget {
@@ -57,7 +57,7 @@ class _BoardViewNoteAddEditBottomsheetState
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const BoardViewNoteAddEditBottomsheetHeader(),
-                const BottomSheetDivider(verticalPadding: 0),
+                const DividerLevelTwo(verticalPadding: 0),
                 T20UI.spaceHeight,
                 Form(
                   key: _formKey,

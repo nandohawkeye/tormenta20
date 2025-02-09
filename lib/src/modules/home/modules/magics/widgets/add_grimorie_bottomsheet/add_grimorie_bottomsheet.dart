@@ -10,7 +10,7 @@ import 'package:tormenta20/src/modules/home/modules/magics/widgets/add_grimorie_
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/add_grimorie_bottomsheet/add_grimorie_bottomsheet_name_field.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_character.dart';
-import 'package:tormenta20/src/shared/widgets/bottom_sheet_divider.dart';
+import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 import 'package:tormenta20/src/shared/widgets/default_brackdrop_filter.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
@@ -95,7 +95,7 @@ class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AddGrimorieBottomsheetHeader(widget.initialGrimoire),
-                      const BottomSheetDivider(verticalPadding: 0),
+                      const DividerLevelTwo(verticalPadding: 0),
                       Expanded(
                         child: SingleChildScrollView(
                           controller: scrollController,
@@ -126,7 +126,7 @@ class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
                       Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const BottomSheetDivider(verticalPadding: 0),
+                          const DividerLevelTwo(verticalPadding: 0),
                           Padding(
                             padding: T20UI.allPadding,
                             child: Row(

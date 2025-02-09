@@ -9,7 +9,7 @@ import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_bottoms
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_bottomsheet/magic_bottomsheet_store.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_utils.dart';
-import 'package:tormenta20/src/shared/widgets/bottom_sheet_divider.dart';
+import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 import 'package:tormenta20/src/shared/widgets/default_brackdrop_filter.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
@@ -86,7 +86,7 @@ class _MagicBottomsheetState extends State<MagicBottomsheet> {
                           T20UI.spaceHeight,
                         ],
                       ),
-                      const BottomSheetDivider(verticalPadding: 0),
+                      const DividerLevelTwo(verticalPadding: 0),
                       AnimatedBuilder(
                         animation: _store,
                         builder: (_, __) {
@@ -120,8 +120,7 @@ class _MagicBottomsheetState extends State<MagicBottomsheet> {
                                       ),
                                     ),
                                     T20UI.spaceHeight,
-                                    const BottomSheetDivider(
-                                        verticalPadding: 0),
+                                    const DividerLevelTwo(verticalPadding: 0),
                                   ],
                                 );
                         },
@@ -205,7 +204,7 @@ class _MagicBottomsheetState extends State<MagicBottomsheet> {
                       Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const BottomSheetDivider(verticalPadding: 0),
+                          const DividerLevelTwo(verticalPadding: 0),
                           Padding(
                             padding: T20UI.allPadding,
                             child: MainButton(

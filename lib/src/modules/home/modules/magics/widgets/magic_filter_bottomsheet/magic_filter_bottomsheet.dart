@@ -11,7 +11,7 @@ import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_filter_
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_filter_bottomsheet/magic_filter_bottomsheet_store.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_filter_bottomsheet/magic_filter_bottomsheet_types.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_filter_dto.dart';
-import 'package:tormenta20/src/shared/widgets/bottom_sheet_divider.dart';
+import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 import 'package:tormenta20/src/shared/widgets/default_brackdrop_filter.dart';
 
 class MagicFilterBottomsheet extends StatefulWidget {
@@ -63,7 +63,7 @@ class _MagicFilterBottomsheetState extends State<MagicFilterBottomsheet> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const MagicFilterBottomsheetHeader(),
-                        const BottomSheetDivider(verticalPadding: 0),
+                        const DividerLevelTwo(verticalPadding: 0),
                         Expanded(
                           child: SingleChildScrollView(
                             controller: scrollController,

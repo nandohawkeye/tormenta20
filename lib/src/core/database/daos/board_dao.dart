@@ -224,8 +224,6 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
                       .add(BoardPlayerDto(data: playerData));
                 }
 
-                print('classe data: $classeCharacterData');
-
                 if (playerData != null &&
                     classeCharacterData != null &&
                     !(boardsDTO[boardData.uuid]!

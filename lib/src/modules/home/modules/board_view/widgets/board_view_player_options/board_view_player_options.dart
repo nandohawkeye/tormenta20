@@ -4,7 +4,7 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/bottom_sheet_init_board/bottom_sheet_init_board_item.dart';
 import 'package:tormenta20/src/shared/widgets/bottom_sheet_base.dart';
-import 'package:tormenta20/src/shared/widgets/bottom_sheet_divider.dart';
+import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
 class BoardViewPlayerOptions extends StatelessWidget {
@@ -70,7 +70,7 @@ class BoardViewPlayerOptions extends StatelessWidget {
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const BottomSheetDivider(verticalPadding: 0),
+                  const DividerLevelTwo(verticalPadding: 0),
                   Padding(
                     padding: T20UI.allPadding,
                     child: Row(

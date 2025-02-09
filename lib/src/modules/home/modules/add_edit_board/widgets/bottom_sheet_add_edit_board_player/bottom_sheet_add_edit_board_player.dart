@@ -13,7 +13,7 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/botto
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/bottom_sheet_add_edit_board_player/bottom_sheet_add_edit_board_player_name_field.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/bottom_sheet_add_edit_board_player/bottom_sheet_add_edit_board_player_tokens.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player.dart';
-import 'package:tormenta20/src/shared/widgets/bottom_sheet_divider.dart';
+import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 import 'package:tormenta20/src/shared/widgets/default_brackdrop_filter.dart';
 
 class BottomSheetAddEditBoardPlayer extends StatefulWidget {
@@ -72,7 +72,7 @@ class _BottomSheetAddEditBoardPlayerState
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const BottomSheetAddEditBoardPlayerHeader(),
-                      const BottomSheetDivider(verticalPadding: 0),
+                      const DividerLevelTwo(verticalPadding: 0),
                       Expanded(
                         child: SingleChildScrollView(
                           controller: scrollController,
