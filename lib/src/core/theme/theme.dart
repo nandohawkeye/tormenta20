@@ -13,7 +13,7 @@ final ThemeData theme = ThemeData(
   scaffoldBackgroundColor: palette.background,
   primaryColor: palette.inputColor,
   indicatorColor: palette.indicator,
-  canvasColor: palette.inputColor,
+  canvasColor: Colors.transparent,
   splashColor: palette.accent.withOpacity(.4),
   colorScheme: ColorScheme.light(
     primary: palette.primary,
@@ -160,7 +160,15 @@ final ThemeData theme = ThemeData(
     shape: T20UI.defaultBorder(palette),
   ),
   bottomSheetTheme: BottomSheetThemeData(
-    backgroundColor: palette.backgroundLevelOne,
+    backgroundColor: Colors.transparent,
+    surfaceTintColor: Colors.transparent,
+    modalBackgroundColor: Colors.transparent,
+    shadowColor: Colors.transparent,
+    dragHandleColor: Colors.transparent,
+    modalBarrierColor: Colors.transparent,
+    elevation: 0,
+    modalElevation: 0,
+    showDragHandle: false,
     shape: T20UI.bottomSheetShape,
   ),
   textTheme: TextTheme(

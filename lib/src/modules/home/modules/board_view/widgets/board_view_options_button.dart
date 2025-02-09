@@ -70,6 +70,7 @@ class _BoardViewOptionsButtonState extends State<BoardViewOptionsButton> {
                     isScrollControlled: true,
                     isDismissible: true,
                     backgroundColor: Colors.transparent,
+                    barrierColor: Colors.transparent,
                     context: context,
                     builder: (context) => Padding(
                       padding: EdgeInsets.only(

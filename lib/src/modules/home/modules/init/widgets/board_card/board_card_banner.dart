@@ -18,15 +18,14 @@ class BoardCardBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isVeryHeight = board.players.isEmpty;
-    final height = (isVeryHeight ? 163 : 120) * context.realTextScale;
+    final height = (120 * context.realTextScale);
     return Hero(
       tag: board.uuid,
       child: Material(
         color: Colors.transparent,
-        child: SizedBox(
-          height: height,
-          width: width,
+        child: LimitedBox(
+          maxHeight: height,
+          maxWidth: width,
           child: Stack(
             children: [
               board.bannerPath != null

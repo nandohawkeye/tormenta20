@@ -29,6 +29,13 @@ class AddEditBoardController {
       _mode = initialBoard.mode;
     } else {
       _boardUuid = const Uuid().v4();
+      _links.add(BoardLink(
+        boardUuid: _boardUuid,
+        uuid: const Uuid().v4(),
+        title: 'Mapa de Arton',
+        link: 'https://mapadearton.fichasdenimb.com.br',
+      ));
+      _dicordLink = 'https://discord.gg/9DcyWYXR';
     }
   }
 

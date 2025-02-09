@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link.dart';
 
 class BoardViewLinksBottomsheetItem extends StatelessWidget {
@@ -21,8 +24,9 @@ class BoardViewLinksBottomsheetItem extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(12),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
+                Flexible(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,13 +42,19 @@ class BoardViewLinksBottomsheetItem extends StatelessWidget {
                       Text(
                         site.link,
                         style: TextStyle(
-                          color: palette.selected,
+                          color: palette.secondary,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                     ],
                   ),
                 ),
+                SimpleButton(
+                  icon: FontAwesomeIcons.shareNodes,
+                  backgroundColor: palette.selected,
+                  iconColor: palette.indicator,
+                  onTap: () => Share.share('*${site.title}* \n ${site.link}'),
+                )
               ],
             ),
           ),

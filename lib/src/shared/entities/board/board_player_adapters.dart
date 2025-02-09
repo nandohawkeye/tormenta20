@@ -17,6 +17,9 @@ abstract class BoardPlayerAdapters {
       broodIndex: Value<int>(entity.brood.index),
       createdAt: Value<DateTime>(entity.createdAt),
       updatedAt: Value<DateTime>(entity.updatedAt),
+      life: Value<int>(entity.life),
+      mana: Value<int>(entity.mana),
+      defense: Value<int>(entity.defense),
     );
   }
 
@@ -34,6 +37,9 @@ abstract class BoardPlayerAdapters {
       classes: classes,
       imageAsset: dto.data.imageAsset,
       imagePath: dto.data.imagePath,
+      life: dto.data.life,
+      mana: dto.data.mana,
+      defense: dto.data.defense,
     );
   }
 }

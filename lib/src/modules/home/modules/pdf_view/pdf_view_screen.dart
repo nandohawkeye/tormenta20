@@ -37,7 +37,7 @@ class _PdfViewScreenState extends State<PdfViewScreen> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.transparent,
+      color: palette.background,
       child: Column(
         children: [
           const SizedBox(height: kTextTabBarHeight + (T20UI.spaceSize * 3)),

@@ -10,6 +10,9 @@ class BoardPlayerTable extends Table {
   IntColumn get broodIndex => integer()();
   DateTimeColumn get createdAt => dateTime()();
   DateTimeColumn get updatedAt => dateTime()();
+  IntColumn get life => integer()();
+  IntColumn get mana => integer()();
+  IntColumn get defense => integer()();
 
   @override
   Set<Column>? get primaryKey => {uuid};

@@ -20,6 +20,9 @@ class BotomSheetAddEditBoardPlayerStore {
       _filePath = initialValue.imagePath;
       _brood = initialValue.brood;
       _classes.addAll(initialValue.classes);
+      _life = initialValue.life;
+      _mana = initialValue.mana;
+      _defense = initialValue.defense;
     } else {
       _characterUuid = const Uuid().v4();
     }
@@ -30,8 +33,19 @@ class BotomSheetAddEditBoardPlayerStore {
 
   late String _characterUuid;
   late String _boardUuid;
-
   DateTime? _createdAt;
+
+  int? _life;
+  int? get life => _life;
+  void onChangeLife(String? value) => _life = int.parse(value ?? '1');
+
+  int? _mana;
+  int? get mana => _mana;
+  void onChangeMana(String? value) => _mana = int.parse(value ?? '1');
+
+  int? _defense;
+  int? get defense => _defense;
+  void onChangeDefense(String? value) => _defense = int.parse(value ?? '1');
 
   String? _characterName;
   String? get name => _characterName;
@@ -99,6 +113,9 @@ class BotomSheetAddEditBoardPlayerStore {
       createdAt: _createdAt ?? updatedAt,
       updatedAt: updatedAt,
       classes: _classes,
+      life: _life!,
+      mana: _mana!,
+      defense: _defense!,
     );
 
     return character;

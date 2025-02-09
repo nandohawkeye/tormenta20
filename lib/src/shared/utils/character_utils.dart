@@ -37,7 +37,7 @@ abstract class CharacterUtils {
       return 'Caçador';
     } else {
       final first = value.split('_').first;
-      return first.capitalize();
+      return first.capitalize().trim();
     }
   }
 
@@ -65,7 +65,7 @@ abstract class CharacterUtils {
       return 'Anão';
     } else {
       final first = value.split('_').first;
-      return first.capitalize();
+      return first.capitalize().trim();
     }
   }
 }

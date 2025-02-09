@@ -97,6 +97,57 @@ class BoardViewPlayerCard extends StatelessWidget {
                           fontSize: 12,
                         ),
                       ),
+                      const SizedBox(height: 4),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            FontAwesomeIcons.shieldHalved,
+                            size: 12,
+                            color: palette.textDisable,
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            player.defense.toString().padLeft(2, '0'),
+                            maxLines: 2,
+                            style: TextStyle(
+                              color: palette.textDisable,
+                              fontSize: 12,
+                            ),
+                          ),
+                          T20UI.spaceWidth,
+                          Icon(
+                            FontAwesomeIcons.solidHeart,
+                            size: 12,
+                            color: palette.textDisable,
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            player.life.toString().padLeft(2, '0'),
+                            maxLines: 2,
+                            style: TextStyle(
+                              color: palette.textDisable,
+                              fontSize: 12,
+                            ),
+                          ),
+                          T20UI.spaceWidth,
+                          Icon(
+                            FontAwesomeIcons.handSparkles,
+                            size: 12,
+                            color: palette.textDisable,
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            player.mana.toString().padLeft(2, '0'),
+                            maxLines: 2,
+                            style: TextStyle(
+                              color: palette.textDisable,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ),

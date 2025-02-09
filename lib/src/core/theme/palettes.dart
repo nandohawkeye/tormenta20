@@ -99,7 +99,7 @@ abstract class Palettes {
         disable: const Color(0xFF5E6064),
         textDisable: const Color(0xFF5E6064),
         textPrimary: const Color(0xFFFAFAFA),
-        textSecundary: const Color(0xFFC9C9C9),
+        textSecundary: const Color(0xFFFAFAFA).withOpacity(.5),
         divider: const Color(0xFF212121).withOpacity(.6),
         dividerLevelTwo: const Color(0xFF424242).withOpacity(.6),
         unselectedWidget: const Color(0xFF616161),

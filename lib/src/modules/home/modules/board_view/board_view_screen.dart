@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/board_view_store.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_banner.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_bottom_widgets.dart';
@@ -43,7 +44,7 @@ class _BoardViewScreenState extends State<BoardViewScreen> {
         final board = _store.board;
 
         return Material(
-          color: Colors.transparent,
+          color: palette.background,
           child: Stack(
             children: [
               SingleChildScrollView(

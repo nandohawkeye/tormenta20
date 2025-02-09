@@ -12,6 +12,9 @@ class BoardPlayer {
   final List<CharacterClasse> classes;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final int life;
+  final int mana;
+  final int defense;
 
   BoardPlayer({
     this.imagePath,
@@ -24,6 +27,9 @@ class BoardPlayer {
     required this.createdAt,
     required this.updatedAt,
     required this.classes,
+    required this.life,
+    required this.mana,
+    required this.defense,
   });
 
   @override
@@ -38,7 +44,10 @@ class BoardPlayer {
       other.updatedAt == updatedAt &&
       other.createdAt == createdAt &&
       other.imageAsset == imageAsset &&
-      other.classes == classes;
+      other.classes == classes &&
+      other.life == life &&
+      other.mana == mana &&
+      other.defense == defense;
 
   @override
   int get hashCode =>
@@ -51,5 +60,8 @@ class BoardPlayer {
       updatedAt.hashCode ^
       brood.hashCode ^
       imageAsset.hashCode ^
-      classes.hashCode;
+      classes.hashCode ^
+      life.hashCode ^
+      mana.hashCode ^
+      defense.hashCode;
 }

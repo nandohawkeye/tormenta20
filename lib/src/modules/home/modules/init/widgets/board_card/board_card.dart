@@ -4,9 +4,8 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/board_view_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/board_card/board_card_banner.dart';
-import 'package:tormenta20/src/modules/home/modules/init/widgets/board_card/board_card_player_image.dart';
+import 'package:tormenta20/src/modules/home/modules/init/widgets/board_card/board_card_players_tokens.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
-import 'package:tormenta20/src/shared/extensions/context_ext.dart';
 
 class BoardCard extends StatelessWidget {
   const BoardCard({super.key, required this.board, this.width = 300});
@@ -16,6 +15,8 @@ class BoardCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final players = board.players;
+    players.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
     return Card(
       child: InkWell(
         borderRadius: T20UI.borderRadius,
@@ -68,27 +69,10 @@ class BoardCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: T20UI.spaceSize / 2),
-                    if (board.players.isNotEmpty)
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(bottom: T20UI.spaceSize / 2),
-                        child: SizedBox(
-                          height: (40 * context.realTextScale),
-                          width: width,
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: List.generate(
-                              board.players.length,
-                              (index) => BoardCardPlayerImage(
-                                index: index,
-                                player: board.players[index],
-                                minusSize: (38 * context.realTextScale),
-                                defaultSize: (40 * context.realTextScale),
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
+                    BoardCardPlayersTokens(
+                      players: players,
+                      width: width,
+                    )
                   ],
                 ),
               )
