@@ -63,9 +63,19 @@ class GrimoireHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Labels('Grimórios'),
-              SimpleButton(
-                icon: FontAwesomeIcons.plus,
-                onTap: () async => await addGrimoire(),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SimpleButton(
+                    icon: FontAwesomeIcons.plus,
+                    onTap: () async => await addGrimoire(),
+                  ),
+                  T20UI.spaceWidth,
+                  SimpleButton(
+                    icon: FontAwesomeIcons.solidFileCode,
+                    onTap: () {},
+                  )
+                ],
               )
             ],
           ),
