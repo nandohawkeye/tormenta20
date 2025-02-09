@@ -33,7 +33,7 @@ Para as margens de tela e entre componente, varia entre 2 a 32 pixel a depender 
 Para a navegação não foram utilizados os padrões de backbutton do Material ou Cupertino, afim de criar uma identidade própria e maior imersão ao projeto
 As fontes utilizadas no projeto foram: tormenta, medieva.
 
-## 💡 Futuramente novas informações e modificações serão adicionadas a esse Readme
+### 💡 Futuramente novas informações e modificações serão adicionadas a esse Readme
 
 
 
