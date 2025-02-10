@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_developer_card.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_label.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_other_rights_reserveds_card.dart';
@@ -35,6 +36,19 @@ class AboutScreenInfos extends StatelessWidget {
             child: Labels('Outros direitos reservados'),
           ),
           const AboutOtherRightsReservedsCard(),
+          T20UI.spaceHeight,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                'v1.0.0 - ${DateTime.now().year}',
+                style: TextStyle(
+                  color: palette.textDisable,
+                ),
+              ),
+              T20UI.spaceWidth,
+            ],
+          ),
           SizedBox(
             height: MediaQuery.of(context).padding.bottom + T20UI.spaceSize,
           )

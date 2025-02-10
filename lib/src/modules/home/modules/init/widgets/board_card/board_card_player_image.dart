@@ -41,7 +41,7 @@ class BoardCardPlayerImage extends StatelessWidget {
                   padding: EdgeInsets.only(left: 1, bottom: 2),
                   child: Icon(
                     FontAwesomeIcons.solidUser,
-                    size: 10,
+                    size: 14,
                   ),
                 ),
               ),

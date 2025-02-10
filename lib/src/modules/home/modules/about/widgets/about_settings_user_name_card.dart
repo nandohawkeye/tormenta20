@@ -19,7 +19,6 @@ class AboutSettingsUserNameCard extends StatelessWidget {
               child: Text(
                 'Clique aqui para salvar seu nome',
                 maxLines: 10,
-                style: TextStyle(fontSize: 16),
               ),
             ),
           ),

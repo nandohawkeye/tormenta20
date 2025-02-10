@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/about/about_custom_tab_bar.dart';
 import 'package:tormenta20/src/modules/home/modules/about/about_store.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_screen_infos.dart';
@@ -40,6 +41,7 @@ class _AboutScreenState extends State<AboutScreen> {
             store: _store,
             controller: _pageController,
           ),
+          T20UI.spaceHeight,
           Expanded(
             child: PageView(
               onPageChanged: _store.changeCurrentPage,

@@ -17,7 +17,6 @@ class AboutOtherRightsReservedsCard extends StatelessWidget {
             child: Text(
               'Clique aqui para ver os direitos reservados de outros recursos usados no projeto',
               maxLines: 10,
-              style: TextStyle(fontSize: 16),
             ),
           ),
         ),

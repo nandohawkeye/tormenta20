@@ -12,7 +12,7 @@ class AboutDeveloperCardLinks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(T20UI.spaceSize / 2),
+      padding: T20UI.allPadding,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
