@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_bottomsheet/magic_bottomsheet.dart';
+import 'package:tormenta20/src/modules/home/modules/magic_selected/magic_selected.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_card/magic_card_indicator_search.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic.dart';
 import 'package:tormenta20/src/shared/extensions/string_ext.dart';
@@ -46,16 +46,10 @@ class AddMagicsCard extends StatelessWidget {
           onLongPress: isDisable
               ? null
               : () async {
-                  await showModalBottomSheet(
-                    isScrollControlled: true,
-                    isDismissible: true,
-                    backgroundColor: Colors.transparent,
-                    context: context,
-                    builder: (context) => Padding(
-                      padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).viewInsets.bottom,
-                      ),
-                      child: MagicBottomsheet(
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => MagicSelected(
                         magic: magic,
                         enableGrimories: false,
                       ),

@@ -8,11 +8,10 @@ import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/grimorie_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/grimories_store.dart';
-import 'package:tormenta20/src/modules/home/modules/magics/widgets/add_grimorie_bottomsheet/add_grimorie_bottomsheet.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/grimoire_card.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
-import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
 import 'package:tormenta20/src/shared/widgets/screen_image_button.dart';
 
 class GrimoireHeader extends StatelessWidget {
@@ -23,16 +22,10 @@ class GrimoireHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<void> addGrimoire() async {
-      await showModalBottomSheet<Grimoire?>(
-        isScrollControlled: true,
-        isDismissible: true,
-        backgroundColor: Colors.transparent,
-        context: context,
-        builder: (context) => Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          child: const AddGrimorieBottomsheet(initialGrimoire: null),
+      await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => const AddGrimorieBottomsheet(initialGrimoire: null),
         ),
       ).then((result) async {
         if (result != null) {

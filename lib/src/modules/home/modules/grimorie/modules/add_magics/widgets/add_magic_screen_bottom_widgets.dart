@@ -4,8 +4,7 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/modules/add_magics/add_magics_store.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_circles_selector/magic_circles_selector.dart';
-import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_filter_bottomsheet/magic_filter_bottomsheet.dart';
-import 'package:tormenta20/src/shared/entities/magic/magic_filter_dto.dart';
+import 'package:tormenta20/src/modules/home/modules/filter_magics/magic_filter.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
 
@@ -59,16 +58,10 @@ class AddMagicScreenBottomWidgets extends StatelessWidget {
                       borderRadius: T20UI.borderRadius,
                       splashColor: palette.accent.withOpacity(.4),
                       onTap: () async {
-                        await showModalBottomSheet<MagicFilterDto?>(
-                          isScrollControlled: true,
-                          isDismissible: true,
-                          backgroundColor: Colors.transparent,
-                          context: context,
-                          builder: (context) => Padding(
-                            padding: EdgeInsets.only(
-                              bottom: MediaQuery.of(context).viewInsets.bottom,
-                            ),
-                            child: MagicFilterBottomsheet(
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => MagicFilter(
                               dto: store.toFilterDto(),
                             ),
                           ),

@@ -29,7 +29,7 @@ class AboutLabel extends StatelessWidget {
                           ' ao redor de uma mesa, e de ser um complemento e não um substituto aos livros de Tormenta 20.\n\n'),
                   TextSpan(
                     text:
-                        'Tormenta 20 pertence a Jambo Editora, Todos os direitos sobre a marca Tormenta 20 são reservados a editora.',
+                        'Tormenta 20 é um produto da Jambô Editora e seus respectivos criadores, todos os direitos reservados.',
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: palette.selected,

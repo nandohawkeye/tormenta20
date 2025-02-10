@@ -3,10 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/magics_store.dart';
-import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_filter_bottomsheet/magic_filter_bottomsheet.dart';
+import 'package:tormenta20/src/modules/home/modules/filter_magics/magic_filter.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
-import 'package:tormenta20/src/shared/entities/magic/magic_filter_dto.dart';
 
 class MagicsHeader extends StatelessWidget {
   const MagicsHeader(this.store, {super.key});
@@ -32,18 +31,10 @@ class MagicsHeader extends StatelessWidget {
                       store.hasFilterAplied ? palette.selected : null,
                   iconColor: store.hasFilterAplied ? palette.icon : null,
                   onTap: () async {
-                    await showModalBottomSheet<MagicFilterDto?>(
-                      isScrollControlled: true,
-                      isDismissible: true,
-                      backgroundColor: Colors.transparent,
-                      context: context,
-                      builder: (context) => Padding(
-                        padding: EdgeInsets.only(
-                          bottom: MediaQuery.of(context).viewInsets.bottom,
-                        ),
-                        child: MagicFilterBottomsheet(
-                          dto: store.toFilterDto(),
-                        ),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => MagicFilter(dto: store.toFilterDto()),
                       ),
                     ).then(
                       (value) {

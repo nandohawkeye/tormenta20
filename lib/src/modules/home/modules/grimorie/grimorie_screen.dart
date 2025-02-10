@@ -10,7 +10,7 @@ import 'package:tormenta20/src/modules/home/modules/grimorie/grimorie_store.dart
 import 'package:tormenta20/src/modules/home/modules/grimorie/modules/add_magics/add_magics_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/widgets/delete_grimorie_bottom_sheet/delete_grimorie_bottomsheet.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/widgets/grimorie_magic_list.dart';
-import 'package:tormenta20/src/modules/home/modules/magics/widgets/add_grimorie_bottomsheet/add_grimorie_bottomsheet.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
@@ -145,18 +145,10 @@ class _GrimorieScreenState extends State<GrimorieScreen> {
                                     const EdgeInsets.only(left: 4, bottom: 2),
                                 icon: FontAwesomeIcons.penToSquare,
                                 onTap: () async {
-                                  await showModalBottomSheet<Grimoire?>(
-                                    isScrollControlled: true,
-                                    isDismissible: true,
-                                    backgroundColor: Colors.transparent,
-                                    context: context,
-                                    builder: (context) => Padding(
-                                      padding: EdgeInsets.only(
-                                        bottom: MediaQuery.of(context)
-                                            .viewInsets
-                                            .bottom,
-                                      ),
-                                      child: AddGrimorieBottomsheet(
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => AddGrimorieBottomsheet(
                                           initialGrimoire: _store.grimoire),
                                     ),
                                   ).then((result) async {

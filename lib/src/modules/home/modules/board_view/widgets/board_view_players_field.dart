@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/bottom_sheet_add_edit_board_player/bottom_sheet_add_edit_board_player.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/add_edit_player_character.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_player_card.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_player_options/board_view_player_options.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/character_screen_button.dart';
@@ -20,16 +20,10 @@ class BoardViewPlayersField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void addEditPlayer(BoardPlayer? character) async {
-      await showModalBottomSheet<BoardPlayer?>(
-        isScrollControlled: true,
-        isDismissible: true,
-        backgroundColor: Colors.transparent,
-        context: context,
-        builder: (context) => Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          child: BottomSheetAddEditBoardPlayer(
+      await Navigator.push<BoardPlayer?>(
+        context,
+        MaterialPageRoute(
+          builder: (_) => AddEditBoardPlayerCharacter(
             character: character,
             boardUuid: board.uuid,
           ),

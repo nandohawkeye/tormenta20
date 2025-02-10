@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_links_bottomsheet/board_view_links_bottomsheet.dart';
+import 'package:tormenta20/src/modules/home/modules/board_view_links/board_view_links_screen.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link.dart';
 import 'package:tormenta20/src/shared/utils/url_utils.dart';
 
@@ -14,16 +14,10 @@ class BoardViewLinksButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void openLinks() async {
-      await showModalBottomSheet<String?>(
-        isScrollControlled: true,
-        isDismissible: true,
-        backgroundColor: Colors.transparent,
-        context: context,
-        builder: (context) => Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          child: BoardViewLinksBottomsheet(links: links),
+      await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => BoardViewLinks(links: links),
         ),
       ).then((urlSite) async {
         if (urlSite != null) {

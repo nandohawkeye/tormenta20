@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_bottomsheet/magic_bottomsheet.dart';
+import 'package:tormenta20/src/modules/home/modules/magic_selected/magic_selected.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_character.dart';
 
 class GrimorieMagicCard extends StatelessWidget {
@@ -17,16 +17,10 @@ class GrimorieMagicCard extends StatelessWidget {
     return Card(
       child: InkWell(
         onTap: () async {
-          await showModalBottomSheet(
-            isScrollControlled: true,
-            isDismissible: true,
-            backgroundColor: Colors.transparent,
-            context: context,
-            builder: (context) => Padding(
-              padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom,
-              ),
-              child: MagicBottomsheet(
+          await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => MagicSelected(
                 magic: magic,
                 enableGrimories: false,
               ),
