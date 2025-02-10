@@ -44,7 +44,10 @@ class AboutDeveloperCardLinks extends StatelessWidget {
                 await UrlUtils.lauch('https://github.com/nandohawkeye'),
           ),
           AboutSimpleLinkButton(
-            icon: const Icon(FontAwesomeIcons.mugHot),
+            icon: const Padding(
+              padding: EdgeInsets.only(left: 4),
+              child: Icon(FontAwesomeIcons.mugHot),
+            ),
             onTap: () {},
           ),
         ],
