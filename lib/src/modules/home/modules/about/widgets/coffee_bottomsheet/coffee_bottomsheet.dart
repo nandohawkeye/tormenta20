@@ -31,12 +31,13 @@ class CoffeeBottomsheet extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               T20UI.spaceHeight,
-              const Text(
+              Text(
                 'Muito obrigado pelo cafezinho, TMJ!',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   fontFamily: FontFamily.tormenta,
+                  color: palette.accent,
                 ),
               ),
               T20UI.spaceHeight,

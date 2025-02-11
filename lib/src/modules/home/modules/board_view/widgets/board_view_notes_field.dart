@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get_it/get_it.dart';
 import 'package:tormenta20/gen/assets.gen.dart';
+import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/modules/home/modules/board_notes/board_notes_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_note_add_edit_bottomsheet/board_view_note_add_edit_bottomsheet.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
@@ -30,6 +33,23 @@ class BoardViewNotesField extends StatelessWidget {
             boardUuid: board.uuid,
           ),
         ),
+      ).then((note) {
+        if (note != null) {
+          GetIt.I<AppDatabase>().boardDAO.saveNote(note);
+        }
+      });
+    }
+
+    final notes = board.notes;
+    final favoritedsNotes = notes.where((note) => note.isFavorited);
+    void showNodes() async {
+      await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => BoardNotesScreen(
+            boardUuid: board.uuid,
+          ),
+        ),
       );
     }
 
@@ -52,40 +72,21 @@ class BoardViewNotesField extends StatelessWidget {
           ),
         ),
         T20UI.spaceHeight,
-
-        if (board.notes.isEmpty)
-          Padding(
-            padding: const EdgeInsets.only(
-              bottom: T20UI.spaceSize,
-              right: T20UI.spaceSize - 4,
-              left: T20UI.spaceSize - 4,
-            ),
-            child: ScreenImageButton(
-              imageAsset: Assets.images.manuscript.path,
-              title: 'Anotações',
-              subtitle:
-                  'Crie anotações sobre esta mesa e consulte toda vez que precisar',
-              onTap: addEditNote,
-            ),
-          )
-
-        // SizedBox(
-        //   height: 120,
-        //   width: double.infinity,
-        //   child: ListView.separated(
-        //     shrinkWrap: true,
-        //     padding:
-        //         const EdgeInsets.symmetric(horizontal: T20UI.spaceSize - 4),
-        //     scrollDirection: Axis.horizontal,
-        //     itemCount: board.materials.length,
-        //     separatorBuilder: T20UI.separatorBuilderHorizontal,
-        //     itemBuilder: (_, index) {
-        //       return BoardViewMaterialCard(
-        //         material: board.materials[index],
-        //       );
-        //     },
-        //   ),
-        // ),
+        Padding(
+          padding: const EdgeInsets.only(
+            bottom: T20UI.spaceSize,
+            right: T20UI.spaceSize - 4,
+            left: T20UI.spaceSize - 4,
+          ),
+          child: ScreenImageButton(
+            imageAsset: Assets.images.manuscript.path,
+            title: 'Anotações',
+            subtitle: notes.isNotEmpty
+                ? 'Você tem ${notes.length.toString().padLeft(2, '0')} anotações${favoritedsNotes.isNotEmpty ? ' sendo ${favoritedsNotes.length.toString().padLeft(2, '0')} delas favoritadas' : ''} sobre essa mesa. Clique aqui para vê-las.'
+                : 'Crie anotações sobre esta mesa e consulte toda vez que precisar',
+            onTap: notes.isNotEmpty ? showNodes : addEditNote,
+          ),
+        )
       ],
     );
   }

@@ -4,7 +4,7 @@ class BoardNote {
   final DateTime createdAt;
   final DateTime updatedAt;
   final String boardUuid;
-  final bool isFavotited;
+  final bool isFavorited;
 
   BoardNote({
     required this.uuid,
@@ -12,7 +12,7 @@ class BoardNote {
     required this.createdAt,
     required this.updatedAt,
     required this.boardUuid,
-    required this.isFavotited,
+    required this.isFavorited,
   });
 
   @override
@@ -21,7 +21,7 @@ class BoardNote {
       other.uuid == uuid &&
       other.boardUuid == boardUuid &&
       other.note == note &&
-      other.isFavotited == isFavotited &&
+      other.isFavorited == isFavorited &&
       other.createdAt == createdAt &&
       other.updatedAt == updatedAt;
 
@@ -30,7 +30,7 @@ class BoardNote {
       uuid.hashCode ^
       boardUuid.hashCode ^
       note.hashCode ^
-      isFavotited.hashCode ^
+      isFavorited.hashCode ^
       createdAt.hashCode ^
       updatedAt.hashCode;
 }

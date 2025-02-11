@@ -39,7 +39,7 @@ class _BoardViewNoteAddEditBottomsheetState
   void initState() {
     super.initState();
     _setNoteText(widget.note?.note);
-    _isFavorited = ValueNotifier<bool>(widget.note?.isFavotited ?? false);
+    _isFavorited = ValueNotifier<bool>(widget.note?.isFavorited ?? false);
   }
 
   @override
@@ -84,28 +84,29 @@ class _BoardViewNoteAddEditBottomsheetState
                   ),
                 ),
                 ValueListenableBuilder(
-                    valueListenable: _isFavorited,
-                    builder: (_, isFavorited, __) {
-                      return BoardViewNoteAddEditBottomsheetBottomButtons(
-                        isFavorited: isFavorited,
-                        changeFavorited: _changeFavorited,
-                        onSave: () {
-                          if (_formKey.currentState!.validate()) {
-                            final updateAt = DateTime.now();
+                  valueListenable: _isFavorited,
+                  builder: (_, isFavorited, __) {
+                    return BoardViewNoteAddEditBottomsheetBottomButtons(
+                      isFavorited: isFavorited,
+                      changeFavorited: _changeFavorited,
+                      onSave: () {
+                        if (_formKey.currentState!.validate()) {
+                          final updateAt = DateTime.now();
 
-                            final newNote = BoardNote(
-                                boardUuid: widget.boardUuid,
-                                uuid: widget.note?.uuid ?? const Uuid().v4(),
-                                note: _noteText!,
-                                isFavotited: _isFavorited.value,
-                                updatedAt: updateAt,
-                                createdAt: widget.note?.createdAt ?? updateAt);
+                          final newNote = BoardNote(
+                              boardUuid: widget.boardUuid,
+                              uuid: widget.note?.uuid ?? const Uuid().v4(),
+                              note: _noteText!,
+                              isFavorited: _isFavorited.value,
+                              updatedAt: updateAt,
+                              createdAt: widget.note?.createdAt ?? updateAt);
 
-                            Navigator.pop(context, newNote);
-                          }
-                        },
-                      );
-                    })
+                          Navigator.pop(context, newNote);
+                        }
+                      },
+                    );
+                  },
+                )
               ],
             ),
           ),

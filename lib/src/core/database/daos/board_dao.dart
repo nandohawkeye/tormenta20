@@ -15,6 +15,8 @@ import 'package:tormenta20/src/shared/entities/board/board_dto.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_material.dart';
 import 'package:tormenta20/src/shared/entities/board/board_materials_adapters.dart';
+import 'package:tormenta20/src/shared/entities/board/board_note.dart';
+import 'package:tormenta20/src/shared/entities/board/board_note_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player_dto.dart';
@@ -43,6 +45,28 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
         batch.insertAllOnConflictUpdate(boardMaterialTable,
             materials.map(BoardMaterialsAdapters.toCompanion));
       });
+
+      return null;
+    } catch (e) {
+      return Failure(e.toString());
+    }
+  }
+
+  Future<Failure?> saveNote(BoardNote note) async {
+    try {
+      await into(boardNoteTable)
+          .insertOnConflictUpdate(BoardNoteAdapters.toCompanion(note));
+
+      return null;
+    } catch (e) {
+      return Failure(e.toString());
+    }
+  }
+
+  Future<Failure?> deleteNote(BoardNote note) async {
+    try {
+      await (delete(boardNoteTable)..where((tbl) => tbl.uuid.equals(note.uuid)))
+          .go();
 
       return null;
     } catch (e) {
@@ -166,6 +190,21 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
     }
   }
 
+  Future<({Failure? failure, Stream<List<BoardNote>>? notes})> watchNotes(
+      String boardUuid) async {
+    try {
+      return (
+        failure: null,
+        notes: (select(boardNoteTable)
+              ..where((tbl) => tbl.boardUuid.equals(boardUuid)))
+            .watch()
+            .map((rows) => rows.map(BoardNoteAdapters.fromDriftData).toList())
+      );
+    } catch (e) {
+      return (failure: Failure(e.toString()), notes: null);
+    }
+  }
+
   Future<({Failure? failure, Stream<List<Board>>? boards})>
       watchBoards() async {
     try {
@@ -197,6 +236,12 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
                   boardMaterialTable.boardUuid,
                 ),
               ),
+              leftOuterJoin(
+                boardNoteTable,
+                boardTable.uuid.equalsExp(
+                  boardNoteTable.boardUuid,
+                ),
+              ),
             ])
             .watch()
             .map((rows) {
@@ -207,6 +252,7 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
                 final playerData = row.readTableOrNull(boardPlayerTable);
                 final linkData = row.readTableOrNull(boardLinkTable);
                 final materialData = row.readTableOrNull(boardMaterialTable);
+                final noteData = row.readTableOrNull(boardNoteTable);
                 final classeCharacterData =
                     row.readTableOrNull(boardClasseCharacterTable);
 
@@ -222,6 +268,13 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
                   boardsDTO[boardData.uuid]!
                       .playersData
                       .add(BoardPlayerDto(data: playerData));
+                }
+
+                if (noteData != null &&
+                    !(boardsDTO[boardData.uuid]!
+                        .notesData
+                        .any((data) => data.uuid == noteData.uuid))) {
+                  boardsDTO[boardData.uuid]!.notesData.add(noteData);
                 }
 
                 if (playerData != null &&
@@ -294,6 +347,12 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
                   boardMaterialTable.boardUuid,
                 ),
               ),
+              leftOuterJoin(
+                boardNoteTable,
+                boardTable.uuid.equalsExp(
+                  boardNoteTable.boardUuid,
+                ),
+              ),
             ])
             .watch()
             .map(
@@ -305,12 +364,20 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
                   final playerData = row.readTableOrNull(boardPlayerTable);
                   final linkData = row.readTableOrNull(boardLinkTable);
                   final materialData = row.readTableOrNull(boardMaterialTable);
+                  final noteData = row.readTableOrNull(boardNoteTable);
                   final classeCharacterData =
                       row.readTableOrNull(boardClasseCharacterTable);
 
                   if (!(boardsDTO.containsKey(boardData.uuid))) {
                     boardsDTO.addAll(
                         {boardData.uuid: BoardDriftDto(boardData: boardData)});
+                  }
+
+                  if (noteData != null &&
+                      !(boardsDTO[boardData.uuid]!
+                          .notesData
+                          .any((data) => data.uuid == noteData.uuid))) {
+                    boardsDTO[boardData.uuid]!.notesData.add(noteData);
                   }
 
                   if (playerData != null &&

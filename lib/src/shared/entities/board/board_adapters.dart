@@ -5,6 +5,7 @@ import 'package:tormenta20/src/shared/entities/board/board_dto.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_materials_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
+import 'package:tormenta20/src/shared/entities/board/board_note_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player_adapters.dart';
 
 abstract class BoardAdapters {
@@ -33,6 +34,7 @@ abstract class BoardAdapters {
         dto.playersData.map(BoardPlayerAdapters.fromDriftDto).toList();
     final materials =
         dto.materialsData.map(BoardMaterialsAdapters.fromDriftData).toList();
+    final notes = dto.notesData.map(BoardNoteAdapters.fromDriftData).toList();
     return Board(
       uuid: dto.boardData.uuid,
       adventureName: dto.boardData.adventureName,
@@ -51,9 +53,9 @@ abstract class BoardAdapters {
       links: links,
       players: players,
       materials: materials,
+      notes: notes,
       menaces: [],
       characters: [],
-      notes: [],
       games: [],
     );
   }

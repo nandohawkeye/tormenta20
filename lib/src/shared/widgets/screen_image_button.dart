@@ -25,53 +25,46 @@ class ScreenImageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
+    return Card(
       child: InkWell(
         borderRadius: T20UI.borderRadius,
         onTap: onTap,
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            borderRadius: T20UI.borderRadius,
-            color: palette.cardBackground,
-          ),
-          child: Padding(
-            padding: T20UI.allPadding,
-            child: Row(
-              children: [
-                Image.asset(
-                  height: imageSize,
-                  width: imageSize,
-                  imageAsset,
-                ),
-                T20UI.spaceWidth,
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        style: TextStyle(
-                          color: palette.primary.withOpacity(.6),
-                          fontFamily: FontFamily.tormenta,
-                          fontSize: titleSize,
-                        ),
+        child: Padding(
+          padding: T20UI.allPadding,
+          child: Row(
+            children: [
+              Image.asset(
+                height: imageSize,
+                width: imageSize,
+                imageAsset,
+              ),
+              T20UI.spaceWidth,
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        color: palette.primary.withOpacity(.6),
+                        fontFamily: FontFamily.tormenta,
+                        fontSize: titleSize,
                       ),
-                      const SizedBox(height: 6),
-                      Text(
-                        subtitle,
-                        maxLines: 4,
-                        style: TextStyle(
-                          fontSize: subtitleSize,
-                          color: palette.textSecundary,
-                        ),
-                      )
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      subtitle,
+                      maxLines: 4,
+                      style: TextStyle(
+                        fontSize: subtitleSize,
+                        color: palette.textSecundary,
+                      ),
+                    )
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

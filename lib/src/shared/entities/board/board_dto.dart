@@ -8,4 +8,5 @@ class BoardDriftDto {
   List<BoardPlayerDto> playersData = [];
   List<BoardLinkTableData> linksData = [];
   List<BoardMaterialTableData> materialsData = [];
+  List<BoardNoteTableData> notesData = [];
 }
