@@ -49,7 +49,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration {
@@ -61,7 +61,7 @@ class AppDatabase extends _$AppDatabase {
         await customStatement('PRAGMA foreign_keys = OFF');
 
         await transaction(() async {
-          if (from < 2) {
+          if (from < 3) {
             for (var table in allTables) {
               await m.deleteTable(table.actualTableName);
               await m.createTable(table);
