@@ -49,7 +49,7 @@ class _AddEditBoardSitesState extends State<AddEditBoardSites> {
       await showModalBottomSheet<BoardLink?>(
         isScrollControlled: true,
         isDismissible: true,
-        backgroundColor: Colors.transparent,
+        enableDrag: false,
         context: context,
         builder: (context) => Padding(
           padding: EdgeInsets.only(

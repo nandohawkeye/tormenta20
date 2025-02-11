@@ -81,7 +81,9 @@ class DeleteGrimorieBottomsheet extends StatelessWidget {
                             ),
                           ),
                           T20UI.spaceWidth,
-                          const SimpleCloseButton()
+                          SimpleCloseButton(
+                            backgroundColor: palette.backgroundLevelTwo,
+                          )
                         ],
                       ),
                     )

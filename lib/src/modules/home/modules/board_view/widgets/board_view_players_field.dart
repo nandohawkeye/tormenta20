@@ -39,7 +39,7 @@ class BoardViewPlayersField extends StatelessWidget {
       await showModalBottomSheet<PlayerOptionsType?>(
         isScrollControlled: true,
         isDismissible: true,
-        backgroundColor: Colors.transparent,
+        enableDrag: false,
         context: context,
         builder: (context) => Padding(
           padding: EdgeInsets.only(

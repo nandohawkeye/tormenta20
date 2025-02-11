@@ -4,6 +4,7 @@ import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_developer_card_links.dart';
+import 'package:tormenta20/src/modules/home/modules/about/widgets/coffee_bottomsheet/coffee_bottomsheet.dart';
 import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 
 class AboutDeveloperCard extends StatelessWidget {
@@ -19,54 +20,71 @@ class AboutDeveloperCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(T20UI.spaceSize / 2),
-              child: Row(
-                children: [
-                  SizedBox(
-                    height: 80,
-                    width: 80,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        ClipOval(
-                          child: Assets.images.developer.image(
-                            height: 75,
-                            width: 75,
-                          ),
-                        ),
-                        Assets.images.bordaToken.image(
-                          height: 80,
-                          width: 80,
-                        ),
-                      ],
+            InkWell(
+              borderRadius: T20UI.borderRadius,
+              onTap: () async {
+                await showModalBottomSheet(
+                  isScrollControlled: true,
+                  isDismissible: true,
+                  enableDrag: false,
+                  context: context,
+                  builder: (context) => Padding(
+                    padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom,
                     ),
+                    child: const CoffeeBottomsheet(),
                   ),
-                  const SizedBox(width: T20UI.spaceSize / 2),
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Olá meu nome é Nando!',
-                          style: TextStyle(
-                            color: palette.accent,
-                            fontFamily: FontFamily.tormenta,
-                            fontSize: 18,
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(T20UI.spaceSize / 2),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      height: 80,
+                      width: 80,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          ClipOval(
+                            child: Assets.images.developer.image(
+                              height: 75,
+                              width: 75,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 4),
-                        const Text(
-                          'Contribua com esse projeto me pagando um cafezinho clicando aqui, e conheça  também minhas redes sociais abaixo.',
-                          maxLines: 10,
-                          style: TextStyle(fontWeight: FontWeight.w500),
-                        ),
-                      ],
+                          Assets.images.bordaToken.image(
+                            height: 80,
+                            width: 80,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                    const SizedBox(width: T20UI.spaceSize / 2),
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Olá meu nome é Nando!',
+                            style: TextStyle(
+                              color: palette.accent,
+                              fontFamily: FontFamily.tormenta,
+                              fontSize: 18,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          const Text(
+                            'Contribua com esse projeto me pagando um cafezinho clicando aqui, e conheça  também minhas redes sociais abaixo.',
+                            maxLines: 10,
+                            style: TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             const DividerLevelTwo(verticalPadding: 0),

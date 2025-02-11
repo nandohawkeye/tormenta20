@@ -19,12 +19,12 @@ class AboutPublisherCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(T20UI.spaceSize / 2),
-              child: InkWell(
-                borderRadius: T20UI.borderRadius,
-                onTap: () async =>
-                    await UrlUtils.lauch('https://jamboeditora.com.br'),
+            InkWell(
+              borderRadius: T20UI.borderRadius,
+              onTap: () async =>
+                  await UrlUtils.lauch('https://jamboeditora.com.br'),
+              child: Padding(
+                padding: const EdgeInsets.all(T20UI.spaceSize / 2),
                 child: Row(
                   children: [
                     SizedBox(

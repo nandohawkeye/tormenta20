@@ -69,8 +69,7 @@ class _BoardViewOptionsButtonState extends State<BoardViewOptionsButton> {
                   await showModalBottomSheet<BordViewOptionType?>(
                     isScrollControlled: true,
                     isDismissible: true,
-                    backgroundColor: Colors.transparent,
-                    barrierColor: Colors.transparent,
+                    enableDrag: false,
                     context: context,
                     builder: (context) => Padding(
                       padding: EdgeInsets.only(
@@ -93,7 +92,7 @@ class _BoardViewOptionsButtonState extends State<BoardViewOptionsButton> {
                       await showModalBottomSheet<bool?>(
                         isScrollControlled: true,
                         isDismissible: true,
-                        backgroundColor: Colors.transparent,
+                        enableDrag: false,
                         context: context,
                         builder: (context) => Padding(
                           padding: EdgeInsets.only(

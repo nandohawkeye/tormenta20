@@ -64,7 +64,7 @@ class _AddEditBoardShortcutsState extends State<AddEditBoardShortcuts> {
     await showModalBottomSheet<BoardShortcutsDto?>(
       isScrollControlled: true,
       isDismissible: true,
-      backgroundColor: Colors.transparent,
+      enableDrag: false,
       context: context,
       builder: (context) => Padding(
         padding: EdgeInsets.only(

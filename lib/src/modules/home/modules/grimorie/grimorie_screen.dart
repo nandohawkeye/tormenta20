@@ -112,7 +112,7 @@ class _GrimorieScreenState extends State<GrimorieScreen> {
                                   await showModalBottomSheet<bool?>(
                                     isScrollControlled: true,
                                     isDismissible: true,
-                                    backgroundColor: Colors.transparent,
+                                    enableDrag: false,
                                     context: context,
                                     builder: (context) => Padding(
                                       padding: EdgeInsets.only(

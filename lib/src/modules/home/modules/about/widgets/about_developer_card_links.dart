@@ -4,6 +4,7 @@ import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_simple_link_button.dart';
+import 'package:tormenta20/src/modules/home/modules/about/widgets/coffee_bottomsheet/coffee_bottomsheet.dart';
 import 'package:tormenta20/src/shared/utils/url_utils.dart';
 
 class AboutDeveloperCardLinks extends StatelessWidget {
@@ -48,7 +49,20 @@ class AboutDeveloperCardLinks extends StatelessWidget {
               padding: EdgeInsets.only(left: 4),
               child: Icon(FontAwesomeIcons.mugHot),
             ),
-            onTap: () {},
+            onTap: () async {
+              await showModalBottomSheet(
+                isScrollControlled: true,
+                isDismissible: true,
+                enableDrag: false,
+                context: context,
+                builder: (context) => Padding(
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom,
+                  ),
+                  child: const CoffeeBottomsheet(),
+                ),
+              );
+            },
           ),
         ],
       ),
