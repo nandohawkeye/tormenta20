@@ -56,7 +56,7 @@ abstract class BoardAdapters {
       notes: notes,
       menaces: [],
       characters: [],
-      games: [],
+      sessions: [],
     );
   }
 }

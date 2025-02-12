@@ -9,6 +9,7 @@ import 'package:tormenta20/src/core/database/daos/grimoire_dao.dart';
 import 'package:tormenta20/src/core/database/daos/magic_character_dao.dart';
 import 'package:tormenta20/src/core/database/tables/board_character_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_classe_caracter_table.dart';
+import 'package:tormenta20/src/core/database/tables/board_combat_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_note_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_player_table.dart';
 import 'package:tormenta20/src/core/database/tables/grimoire_table.dart';
@@ -19,7 +20,7 @@ import 'package:tormenta20/src/shared/failures/unknown_failure.dart';
 import 'package:uuid/uuid.dart';
 
 import 'daos/board_dao.dart';
-import 'tables/board_game_table.dart';
+import 'tables/board_session_table.dart';
 import 'tables/board_link_table.dart';
 import 'tables/board_material_table.dart';
 import 'tables/board_table.dart';
@@ -32,11 +33,12 @@ part 'app_database.g.dart';
     MagicCharacterTable,
     BoardTable,
     BoardMaterialTable,
-    BoardGameTable,
+    BoardSessionTable,
     BoardLinkTable,
     BoardPlayerTable,
     BoardCharacterTable,
     BoardNoteTable,
+    BoardCombatTable,
     BoardClasseCharacterTable,
   ],
   daos: [

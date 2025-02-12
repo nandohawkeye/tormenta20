@@ -142,7 +142,7 @@ class AddEditBoardController {
       discordServerLink: _dicordLink,
       driveFilesLink: _drivefilesLink,
       desc: _desc,
-      games: [],
+      sessions: [],
       notes: [],
       menaces: [],
       characters: [],

@@ -3,7 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/core/database/tables/board_character_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_classe_caracter_table.dart';
-import 'package:tormenta20/src/core/database/tables/board_game_table.dart';
+import 'package:tormenta20/src/core/database/tables/board_combat_table.dart';
+import 'package:tormenta20/src/core/database/tables/board_session_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_link_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_material_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_note_table.dart';
@@ -31,8 +32,9 @@ part 'board_dao.g.dart';
   BoardMaterialTable,
   BoardCharacterTable,
   BoardPlayerTable,
-  BoardGameTable,
+  BoardSessionTable,
   BoardLinkTable,
+  BoardCombatTable,
   BoardNoteTable,
   BoardClasseCharacterTable
 ])

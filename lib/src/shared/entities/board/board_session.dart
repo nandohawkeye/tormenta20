@@ -1,10 +1,10 @@
-class BoardGame {
+class BoardSession {
   final String uuid;
   final String boardUuid;
   final DateTime startedAt;
   final DateTime? endAt;
 
-  BoardGame({
+  BoardSession({
     required this.uuid,
     required this.boardUuid,
     required this.startedAt,
@@ -13,7 +13,7 @@ class BoardGame {
 
   @override
   bool operator ==(other) =>
-      other is BoardGame &&
+      other is BoardSession &&
       other.uuid == uuid &&
       other.boardUuid == boardUuid &&
       other.startedAt == startedAt &&

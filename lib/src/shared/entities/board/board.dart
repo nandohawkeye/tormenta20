@@ -1,7 +1,7 @@
 import 'package:tormenta20/src/shared/entities/board/board_charcter.dart';
 import 'package:tormenta20/src/shared/entities/board/board_note.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player.dart';
-import 'package:tormenta20/src/shared/entities/board/board_game.dart';
+import 'package:tormenta20/src/shared/entities/board/board_session.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link.dart';
 import 'package:tormenta20/src/shared/entities/board/board_material.dart';
 import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
@@ -18,7 +18,7 @@ class Board {
   final DateTime updatedAt;
   final List<BoardMaterial> materials;
   final List<BoardLink> links;
-  final List<BoardGame> games;
+  final List<BoardSession> sessions;
   final List<BoardPlayer> players;
   final List<BoardCharacter> characters;
   final BoardModeType mode;
@@ -45,7 +45,7 @@ class Board {
     required this.updatedAt,
     required this.materials,
     required this.links,
-    required this.games,
+    required this.sessions,
     required this.level,
     required this.players,
     required this.mode,
@@ -66,7 +66,7 @@ class Board {
       other.createdAt == createdAt &&
       other.materials == materials &&
       other.links == links &&
-      other.games == games &&
+      other.sessions == sessions &&
       other.players == players &&
       other.level == level &&
       other.updatedAt == updatedAt &&
@@ -91,7 +91,7 @@ class Board {
       updatedAt.hashCode ^
       materials.hashCode ^
       links.hashCode ^
-      games.hashCode ^
+      sessions.hashCode ^
       players.hashCode ^
       level.hashCode ^
       mode.hashCode ^

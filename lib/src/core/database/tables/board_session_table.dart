@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
 
-class BoardGameTable extends Table {
+class BoardSessionTable extends Table {
   TextColumn get uuid => text()();
   TextColumn get boardUuid => text()();
   DateTimeColumn get startedAt => dateTime()();

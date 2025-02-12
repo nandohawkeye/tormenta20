@@ -2070,12 +2070,12 @@ class BoardMaterialTableCompanion
   }
 }
 
-class $BoardGameTableTable extends BoardGameTable
-    with TableInfo<$BoardGameTableTable, BoardGameTableData> {
+class $BoardSessionTableTable extends BoardSessionTable
+    with TableInfo<$BoardSessionTableTable, BoardSessionTableData> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $BoardGameTableTable(this.attachedDatabase, [this._alias]);
+  $BoardSessionTableTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _uuidMeta = const VerificationMeta('uuid');
   @override
   late final GeneratedColumn<String> uuid = GeneratedColumn<String>(
@@ -2104,9 +2104,10 @@ class $BoardGameTableTable extends BoardGameTable
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
-  static const String $name = 'board_game_table';
+  static const String $name = 'board_session_table';
   @override
-  VerificationContext validateIntegrity(Insertable<BoardGameTableData> instance,
+  VerificationContext validateIntegrity(
+      Insertable<BoardSessionTableData> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -2138,9 +2139,9 @@ class $BoardGameTableTable extends BoardGameTable
   @override
   Set<GeneratedColumn> get $primaryKey => {uuid};
   @override
-  BoardGameTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
+  BoardSessionTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return BoardGameTableData(
+    return BoardSessionTableData(
       uuid: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}uuid'])!,
       boardUuid: attachedDatabase.typeMapping
@@ -2153,18 +2154,18 @@ class $BoardGameTableTable extends BoardGameTable
   }
 
   @override
-  $BoardGameTableTable createAlias(String alias) {
-    return $BoardGameTableTable(attachedDatabase, alias);
+  $BoardSessionTableTable createAlias(String alias) {
+    return $BoardSessionTableTable(attachedDatabase, alias);
   }
 }
 
-class BoardGameTableData extends DataClass
-    implements Insertable<BoardGameTableData> {
+class BoardSessionTableData extends DataClass
+    implements Insertable<BoardSessionTableData> {
   final String uuid;
   final String boardUuid;
   final DateTime startedAt;
   final DateTime? endAt;
-  const BoardGameTableData(
+  const BoardSessionTableData(
       {required this.uuid,
       required this.boardUuid,
       required this.startedAt,
@@ -2181,8 +2182,8 @@ class BoardGameTableData extends DataClass
     return map;
   }
 
-  BoardGameTableCompanion toCompanion(bool nullToAbsent) {
-    return BoardGameTableCompanion(
+  BoardSessionTableCompanion toCompanion(bool nullToAbsent) {
+    return BoardSessionTableCompanion(
       uuid: Value(uuid),
       boardUuid: Value(boardUuid),
       startedAt: Value(startedAt),
@@ -2191,10 +2192,10 @@ class BoardGameTableData extends DataClass
     );
   }
 
-  factory BoardGameTableData.fromJson(Map<String, dynamic> json,
+  factory BoardSessionTableData.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return BoardGameTableData(
+    return BoardSessionTableData(
       uuid: serializer.fromJson<String>(json['uuid']),
       boardUuid: serializer.fromJson<String>(json['boardUuid']),
       startedAt: serializer.fromJson<DateTime>(json['startedAt']),
@@ -2212,19 +2213,19 @@ class BoardGameTableData extends DataClass
     };
   }
 
-  BoardGameTableData copyWith(
+  BoardSessionTableData copyWith(
           {String? uuid,
           String? boardUuid,
           DateTime? startedAt,
           Value<DateTime?> endAt = const Value.absent()}) =>
-      BoardGameTableData(
+      BoardSessionTableData(
         uuid: uuid ?? this.uuid,
         boardUuid: boardUuid ?? this.boardUuid,
         startedAt: startedAt ?? this.startedAt,
         endAt: endAt.present ? endAt.value : this.endAt,
       );
-  BoardGameTableData copyWithCompanion(BoardGameTableCompanion data) {
-    return BoardGameTableData(
+  BoardSessionTableData copyWithCompanion(BoardSessionTableCompanion data) {
+    return BoardSessionTableData(
       uuid: data.uuid.present ? data.uuid.value : this.uuid,
       boardUuid: data.boardUuid.present ? data.boardUuid.value : this.boardUuid,
       startedAt: data.startedAt.present ? data.startedAt.value : this.startedAt,
@@ -2234,7 +2235,7 @@ class BoardGameTableData extends DataClass
 
   @override
   String toString() {
-    return (StringBuffer('BoardGameTableData(')
+    return (StringBuffer('BoardSessionTableData(')
           ..write('uuid: $uuid, ')
           ..write('boardUuid: $boardUuid, ')
           ..write('startedAt: $startedAt, ')
@@ -2248,27 +2249,28 @@ class BoardGameTableData extends DataClass
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is BoardGameTableData &&
+      (other is BoardSessionTableData &&
           other.uuid == this.uuid &&
           other.boardUuid == this.boardUuid &&
           other.startedAt == this.startedAt &&
           other.endAt == this.endAt);
 }
 
-class BoardGameTableCompanion extends UpdateCompanion<BoardGameTableData> {
+class BoardSessionTableCompanion
+    extends UpdateCompanion<BoardSessionTableData> {
   final Value<String> uuid;
   final Value<String> boardUuid;
   final Value<DateTime> startedAt;
   final Value<DateTime?> endAt;
   final Value<int> rowid;
-  const BoardGameTableCompanion({
+  const BoardSessionTableCompanion({
     this.uuid = const Value.absent(),
     this.boardUuid = const Value.absent(),
     this.startedAt = const Value.absent(),
     this.endAt = const Value.absent(),
     this.rowid = const Value.absent(),
   });
-  BoardGameTableCompanion.insert({
+  BoardSessionTableCompanion.insert({
     required String uuid,
     required String boardUuid,
     required DateTime startedAt,
@@ -2277,7 +2279,7 @@ class BoardGameTableCompanion extends UpdateCompanion<BoardGameTableData> {
   })  : uuid = Value(uuid),
         boardUuid = Value(boardUuid),
         startedAt = Value(startedAt);
-  static Insertable<BoardGameTableData> custom({
+  static Insertable<BoardSessionTableData> custom({
     Expression<String>? uuid,
     Expression<String>? boardUuid,
     Expression<DateTime>? startedAt,
@@ -2293,13 +2295,13 @@ class BoardGameTableCompanion extends UpdateCompanion<BoardGameTableData> {
     });
   }
 
-  BoardGameTableCompanion copyWith(
+  BoardSessionTableCompanion copyWith(
       {Value<String>? uuid,
       Value<String>? boardUuid,
       Value<DateTime>? startedAt,
       Value<DateTime?>? endAt,
       Value<int>? rowid}) {
-    return BoardGameTableCompanion(
+    return BoardSessionTableCompanion(
       uuid: uuid ?? this.uuid,
       boardUuid: boardUuid ?? this.boardUuid,
       startedAt: startedAt ?? this.startedAt,
@@ -2331,7 +2333,7 @@ class BoardGameTableCompanion extends UpdateCompanion<BoardGameTableData> {
 
   @override
   String toString() {
-    return (StringBuffer('BoardGameTableCompanion(')
+    return (StringBuffer('BoardSessionTableCompanion(')
           ..write('uuid: $uuid, ')
           ..write('boardUuid: $boardUuid, ')
           ..write('startedAt: $startedAt, ')
@@ -4059,6 +4061,321 @@ class BoardNoteTableCompanion extends UpdateCompanion<BoardNoteTableData> {
   }
 }
 
+class $BoardCombatTableTable extends BoardCombatTable
+    with TableInfo<$BoardCombatTableTable, BoardCombatTableData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $BoardCombatTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _uuidMeta = const VerificationMeta('uuid');
+  @override
+  late final GeneratedColumn<String> uuid = GeneratedColumn<String>(
+      'uuid', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _boardUuidMeta =
+      const VerificationMeta('boardUuid');
+  @override
+  late final GeneratedColumn<String> boardUuid = GeneratedColumn<String>(
+      'board_uuid', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _sessionUuidMeta =
+      const VerificationMeta('sessionUuid');
+  @override
+  late final GeneratedColumn<String> sessionUuid = GeneratedColumn<String>(
+      'session_uuid', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _startedAtMeta =
+      const VerificationMeta('startedAt');
+  @override
+  late final GeneratedColumn<DateTime> startedAt = GeneratedColumn<DateTime>(
+      'started_at', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _endAtMeta = const VerificationMeta('endAt');
+  @override
+  late final GeneratedColumn<DateTime> endAt = GeneratedColumn<DateTime>(
+      'end_at', aliasedName, true,
+      type: DriftSqlType.dateTime, requiredDuringInsert: false);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [uuid, boardUuid, sessionUuid, startedAt, endAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'board_combat_table';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<BoardCombatTableData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('uuid')) {
+      context.handle(
+          _uuidMeta, uuid.isAcceptableOrUnknown(data['uuid']!, _uuidMeta));
+    } else if (isInserting) {
+      context.missing(_uuidMeta);
+    }
+    if (data.containsKey('board_uuid')) {
+      context.handle(_boardUuidMeta,
+          boardUuid.isAcceptableOrUnknown(data['board_uuid']!, _boardUuidMeta));
+    } else if (isInserting) {
+      context.missing(_boardUuidMeta);
+    }
+    if (data.containsKey('session_uuid')) {
+      context.handle(
+          _sessionUuidMeta,
+          sessionUuid.isAcceptableOrUnknown(
+              data['session_uuid']!, _sessionUuidMeta));
+    } else if (isInserting) {
+      context.missing(_sessionUuidMeta);
+    }
+    if (data.containsKey('started_at')) {
+      context.handle(_startedAtMeta,
+          startedAt.isAcceptableOrUnknown(data['started_at']!, _startedAtMeta));
+    } else if (isInserting) {
+      context.missing(_startedAtMeta);
+    }
+    if (data.containsKey('end_at')) {
+      context.handle(
+          _endAtMeta, endAt.isAcceptableOrUnknown(data['end_at']!, _endAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {uuid};
+  @override
+  BoardCombatTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return BoardCombatTableData(
+      uuid: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}uuid'])!,
+      boardUuid: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}board_uuid'])!,
+      sessionUuid: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}session_uuid'])!,
+      startedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}started_at'])!,
+      endAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}end_at']),
+    );
+  }
+
+  @override
+  $BoardCombatTableTable createAlias(String alias) {
+    return $BoardCombatTableTable(attachedDatabase, alias);
+  }
+}
+
+class BoardCombatTableData extends DataClass
+    implements Insertable<BoardCombatTableData> {
+  final String uuid;
+  final String boardUuid;
+  final String sessionUuid;
+  final DateTime startedAt;
+  final DateTime? endAt;
+  const BoardCombatTableData(
+      {required this.uuid,
+      required this.boardUuid,
+      required this.sessionUuid,
+      required this.startedAt,
+      this.endAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['uuid'] = Variable<String>(uuid);
+    map['board_uuid'] = Variable<String>(boardUuid);
+    map['session_uuid'] = Variable<String>(sessionUuid);
+    map['started_at'] = Variable<DateTime>(startedAt);
+    if (!nullToAbsent || endAt != null) {
+      map['end_at'] = Variable<DateTime>(endAt);
+    }
+    return map;
+  }
+
+  BoardCombatTableCompanion toCompanion(bool nullToAbsent) {
+    return BoardCombatTableCompanion(
+      uuid: Value(uuid),
+      boardUuid: Value(boardUuid),
+      sessionUuid: Value(sessionUuid),
+      startedAt: Value(startedAt),
+      endAt:
+          endAt == null && nullToAbsent ? const Value.absent() : Value(endAt),
+    );
+  }
+
+  factory BoardCombatTableData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return BoardCombatTableData(
+      uuid: serializer.fromJson<String>(json['uuid']),
+      boardUuid: serializer.fromJson<String>(json['boardUuid']),
+      sessionUuid: serializer.fromJson<String>(json['sessionUuid']),
+      startedAt: serializer.fromJson<DateTime>(json['startedAt']),
+      endAt: serializer.fromJson<DateTime?>(json['endAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'uuid': serializer.toJson<String>(uuid),
+      'boardUuid': serializer.toJson<String>(boardUuid),
+      'sessionUuid': serializer.toJson<String>(sessionUuid),
+      'startedAt': serializer.toJson<DateTime>(startedAt),
+      'endAt': serializer.toJson<DateTime?>(endAt),
+    };
+  }
+
+  BoardCombatTableData copyWith(
+          {String? uuid,
+          String? boardUuid,
+          String? sessionUuid,
+          DateTime? startedAt,
+          Value<DateTime?> endAt = const Value.absent()}) =>
+      BoardCombatTableData(
+        uuid: uuid ?? this.uuid,
+        boardUuid: boardUuid ?? this.boardUuid,
+        sessionUuid: sessionUuid ?? this.sessionUuid,
+        startedAt: startedAt ?? this.startedAt,
+        endAt: endAt.present ? endAt.value : this.endAt,
+      );
+  BoardCombatTableData copyWithCompanion(BoardCombatTableCompanion data) {
+    return BoardCombatTableData(
+      uuid: data.uuid.present ? data.uuid.value : this.uuid,
+      boardUuid: data.boardUuid.present ? data.boardUuid.value : this.boardUuid,
+      sessionUuid:
+          data.sessionUuid.present ? data.sessionUuid.value : this.sessionUuid,
+      startedAt: data.startedAt.present ? data.startedAt.value : this.startedAt,
+      endAt: data.endAt.present ? data.endAt.value : this.endAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('BoardCombatTableData(')
+          ..write('uuid: $uuid, ')
+          ..write('boardUuid: $boardUuid, ')
+          ..write('sessionUuid: $sessionUuid, ')
+          ..write('startedAt: $startedAt, ')
+          ..write('endAt: $endAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(uuid, boardUuid, sessionUuid, startedAt, endAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is BoardCombatTableData &&
+          other.uuid == this.uuid &&
+          other.boardUuid == this.boardUuid &&
+          other.sessionUuid == this.sessionUuid &&
+          other.startedAt == this.startedAt &&
+          other.endAt == this.endAt);
+}
+
+class BoardCombatTableCompanion extends UpdateCompanion<BoardCombatTableData> {
+  final Value<String> uuid;
+  final Value<String> boardUuid;
+  final Value<String> sessionUuid;
+  final Value<DateTime> startedAt;
+  final Value<DateTime?> endAt;
+  final Value<int> rowid;
+  const BoardCombatTableCompanion({
+    this.uuid = const Value.absent(),
+    this.boardUuid = const Value.absent(),
+    this.sessionUuid = const Value.absent(),
+    this.startedAt = const Value.absent(),
+    this.endAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  BoardCombatTableCompanion.insert({
+    required String uuid,
+    required String boardUuid,
+    required String sessionUuid,
+    required DateTime startedAt,
+    this.endAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : uuid = Value(uuid),
+        boardUuid = Value(boardUuid),
+        sessionUuid = Value(sessionUuid),
+        startedAt = Value(startedAt);
+  static Insertable<BoardCombatTableData> custom({
+    Expression<String>? uuid,
+    Expression<String>? boardUuid,
+    Expression<String>? sessionUuid,
+    Expression<DateTime>? startedAt,
+    Expression<DateTime>? endAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (uuid != null) 'uuid': uuid,
+      if (boardUuid != null) 'board_uuid': boardUuid,
+      if (sessionUuid != null) 'session_uuid': sessionUuid,
+      if (startedAt != null) 'started_at': startedAt,
+      if (endAt != null) 'end_at': endAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  BoardCombatTableCompanion copyWith(
+      {Value<String>? uuid,
+      Value<String>? boardUuid,
+      Value<String>? sessionUuid,
+      Value<DateTime>? startedAt,
+      Value<DateTime?>? endAt,
+      Value<int>? rowid}) {
+    return BoardCombatTableCompanion(
+      uuid: uuid ?? this.uuid,
+      boardUuid: boardUuid ?? this.boardUuid,
+      sessionUuid: sessionUuid ?? this.sessionUuid,
+      startedAt: startedAt ?? this.startedAt,
+      endAt: endAt ?? this.endAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (uuid.present) {
+      map['uuid'] = Variable<String>(uuid.value);
+    }
+    if (boardUuid.present) {
+      map['board_uuid'] = Variable<String>(boardUuid.value);
+    }
+    if (sessionUuid.present) {
+      map['session_uuid'] = Variable<String>(sessionUuid.value);
+    }
+    if (startedAt.present) {
+      map['started_at'] = Variable<DateTime>(startedAt.value);
+    }
+    if (endAt.present) {
+      map['end_at'] = Variable<DateTime>(endAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('BoardCombatTableCompanion(')
+          ..write('uuid: $uuid, ')
+          ..write('boardUuid: $boardUuid, ')
+          ..write('sessionUuid: $sessionUuid, ')
+          ..write('startedAt: $startedAt, ')
+          ..write('endAt: $endAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 class $BoardClasseCharacterTableTable extends BoardClasseCharacterTable
     with
         TableInfo<$BoardClasseCharacterTableTable,
@@ -4309,13 +4626,16 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $BoardTableTable boardTable = $BoardTableTable(this);
   late final $BoardMaterialTableTable boardMaterialTable =
       $BoardMaterialTableTable(this);
-  late final $BoardGameTableTable boardGameTable = $BoardGameTableTable(this);
+  late final $BoardSessionTableTable boardSessionTable =
+      $BoardSessionTableTable(this);
   late final $BoardLinkTableTable boardLinkTable = $BoardLinkTableTable(this);
   late final $BoardPlayerTableTable boardPlayerTable =
       $BoardPlayerTableTable(this);
   late final $BoardCharacterTableTable boardCharacterTable =
       $BoardCharacterTableTable(this);
   late final $BoardNoteTableTable boardNoteTable = $BoardNoteTableTable(this);
+  late final $BoardCombatTableTable boardCombatTable =
+      $BoardCombatTableTable(this);
   late final $BoardClasseCharacterTableTable boardClasseCharacterTable =
       $BoardClasseCharacterTableTable(this);
   late final GrimoireDAO grimoireDAO = GrimoireDAO(this as AppDatabase);
@@ -4331,11 +4651,12 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         magicCharacterTable,
         boardTable,
         boardMaterialTable,
-        boardGameTable,
+        boardSessionTable,
         boardLinkTable,
         boardPlayerTable,
         boardCharacterTable,
         boardNoteTable,
+        boardCombatTable,
         boardClasseCharacterTable
       ];
   @override
@@ -5159,16 +5480,16 @@ class $$BoardMaterialTableTableOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
-typedef $$BoardGameTableTableCreateCompanionBuilder = BoardGameTableCompanion
-    Function({
+typedef $$BoardSessionTableTableCreateCompanionBuilder
+    = BoardSessionTableCompanion Function({
   required String uuid,
   required String boardUuid,
   required DateTime startedAt,
   Value<DateTime?> endAt,
   Value<int> rowid,
 });
-typedef $$BoardGameTableTableUpdateCompanionBuilder = BoardGameTableCompanion
-    Function({
+typedef $$BoardSessionTableTableUpdateCompanionBuilder
+    = BoardSessionTableCompanion Function({
   Value<String> uuid,
   Value<String> boardUuid,
   Value<DateTime> startedAt,
@@ -5176,23 +5497,23 @@ typedef $$BoardGameTableTableUpdateCompanionBuilder = BoardGameTableCompanion
   Value<int> rowid,
 });
 
-class $$BoardGameTableTableTableManager extends RootTableManager<
+class $$BoardSessionTableTableTableManager extends RootTableManager<
     _$AppDatabase,
-    $BoardGameTableTable,
-    BoardGameTableData,
-    $$BoardGameTableTableFilterComposer,
-    $$BoardGameTableTableOrderingComposer,
-    $$BoardGameTableTableCreateCompanionBuilder,
-    $$BoardGameTableTableUpdateCompanionBuilder> {
-  $$BoardGameTableTableTableManager(
-      _$AppDatabase db, $BoardGameTableTable table)
+    $BoardSessionTableTable,
+    BoardSessionTableData,
+    $$BoardSessionTableTableFilterComposer,
+    $$BoardSessionTableTableOrderingComposer,
+    $$BoardSessionTableTableCreateCompanionBuilder,
+    $$BoardSessionTableTableUpdateCompanionBuilder> {
+  $$BoardSessionTableTableTableManager(
+      _$AppDatabase db, $BoardSessionTableTable table)
       : super(TableManagerState(
           db: db,
           table: table,
           filteringComposer:
-              $$BoardGameTableTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$BoardGameTableTableOrderingComposer(ComposerState(db, table)),
+              $$BoardSessionTableTableFilterComposer(ComposerState(db, table)),
+          orderingComposer: $$BoardSessionTableTableOrderingComposer(
+              ComposerState(db, table)),
           updateCompanionCallback: ({
             Value<String> uuid = const Value.absent(),
             Value<String> boardUuid = const Value.absent(),
@@ -5200,7 +5521,7 @@ class $$BoardGameTableTableTableManager extends RootTableManager<
             Value<DateTime?> endAt = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
-              BoardGameTableCompanion(
+              BoardSessionTableCompanion(
             uuid: uuid,
             boardUuid: boardUuid,
             startedAt: startedAt,
@@ -5214,7 +5535,7 @@ class $$BoardGameTableTableTableManager extends RootTableManager<
             Value<DateTime?> endAt = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
-              BoardGameTableCompanion.insert(
+              BoardSessionTableCompanion.insert(
             uuid: uuid,
             boardUuid: boardUuid,
             startedAt: startedAt,
@@ -5224,9 +5545,9 @@ class $$BoardGameTableTableTableManager extends RootTableManager<
         ));
 }
 
-class $$BoardGameTableTableFilterComposer
-    extends FilterComposer<_$AppDatabase, $BoardGameTableTable> {
-  $$BoardGameTableTableFilterComposer(super.$state);
+class $$BoardSessionTableTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $BoardSessionTableTable> {
+  $$BoardSessionTableTableFilterComposer(super.$state);
   ColumnFilters<String> get uuid => $state.composableBuilder(
       column: $state.table.uuid,
       builder: (column, joinBuilders) =>
@@ -5248,9 +5569,9 @@ class $$BoardGameTableTableFilterComposer
           ColumnFilters(column, joinBuilders: joinBuilders));
 }
 
-class $$BoardGameTableTableOrderingComposer
-    extends OrderingComposer<_$AppDatabase, $BoardGameTableTable> {
-  $$BoardGameTableTableOrderingComposer(super.$state);
+class $$BoardSessionTableTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $BoardSessionTableTable> {
+  $$BoardSessionTableTableOrderingComposer(super.$state);
   ColumnOrderings<String> get uuid => $state.composableBuilder(
       column: $state.table.uuid,
       builder: (column, joinBuilders) =>
@@ -5964,6 +6285,135 @@ class $$BoardNoteTableTableOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
+typedef $$BoardCombatTableTableCreateCompanionBuilder
+    = BoardCombatTableCompanion Function({
+  required String uuid,
+  required String boardUuid,
+  required String sessionUuid,
+  required DateTime startedAt,
+  Value<DateTime?> endAt,
+  Value<int> rowid,
+});
+typedef $$BoardCombatTableTableUpdateCompanionBuilder
+    = BoardCombatTableCompanion Function({
+  Value<String> uuid,
+  Value<String> boardUuid,
+  Value<String> sessionUuid,
+  Value<DateTime> startedAt,
+  Value<DateTime?> endAt,
+  Value<int> rowid,
+});
+
+class $$BoardCombatTableTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $BoardCombatTableTable,
+    BoardCombatTableData,
+    $$BoardCombatTableTableFilterComposer,
+    $$BoardCombatTableTableOrderingComposer,
+    $$BoardCombatTableTableCreateCompanionBuilder,
+    $$BoardCombatTableTableUpdateCompanionBuilder> {
+  $$BoardCombatTableTableTableManager(
+      _$AppDatabase db, $BoardCombatTableTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$BoardCombatTableTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$BoardCombatTableTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<String> uuid = const Value.absent(),
+            Value<String> boardUuid = const Value.absent(),
+            Value<String> sessionUuid = const Value.absent(),
+            Value<DateTime> startedAt = const Value.absent(),
+            Value<DateTime?> endAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              BoardCombatTableCompanion(
+            uuid: uuid,
+            boardUuid: boardUuid,
+            sessionUuid: sessionUuid,
+            startedAt: startedAt,
+            endAt: endAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String uuid,
+            required String boardUuid,
+            required String sessionUuid,
+            required DateTime startedAt,
+            Value<DateTime?> endAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              BoardCombatTableCompanion.insert(
+            uuid: uuid,
+            boardUuid: boardUuid,
+            sessionUuid: sessionUuid,
+            startedAt: startedAt,
+            endAt: endAt,
+            rowid: rowid,
+          ),
+        ));
+}
+
+class $$BoardCombatTableTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $BoardCombatTableTable> {
+  $$BoardCombatTableTableFilterComposer(super.$state);
+  ColumnFilters<String> get uuid => $state.composableBuilder(
+      column: $state.table.uuid,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get boardUuid => $state.composableBuilder(
+      column: $state.table.boardUuid,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get sessionUuid => $state.composableBuilder(
+      column: $state.table.sessionUuid,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<DateTime> get startedAt => $state.composableBuilder(
+      column: $state.table.startedAt,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<DateTime> get endAt => $state.composableBuilder(
+      column: $state.table.endAt,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $$BoardCombatTableTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $BoardCombatTableTable> {
+  $$BoardCombatTableTableOrderingComposer(super.$state);
+  ColumnOrderings<String> get uuid => $state.composableBuilder(
+      column: $state.table.uuid,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get boardUuid => $state.composableBuilder(
+      column: $state.table.boardUuid,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get sessionUuid => $state.composableBuilder(
+      column: $state.table.sessionUuid,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<DateTime> get startedAt => $state.composableBuilder(
+      column: $state.table.startedAt,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<DateTime> get endAt => $state.composableBuilder(
+      column: $state.table.endAt,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
 typedef $$BoardClasseCharacterTableTableCreateCompanionBuilder
     = BoardClasseCharacterTableCompanion Function({
   required String uuid,
@@ -6072,8 +6522,8 @@ class $AppDatabaseManager {
       $$BoardTableTableTableManager(_db, _db.boardTable);
   $$BoardMaterialTableTableTableManager get boardMaterialTable =>
       $$BoardMaterialTableTableTableManager(_db, _db.boardMaterialTable);
-  $$BoardGameTableTableTableManager get boardGameTable =>
-      $$BoardGameTableTableTableManager(_db, _db.boardGameTable);
+  $$BoardSessionTableTableTableManager get boardSessionTable =>
+      $$BoardSessionTableTableTableManager(_db, _db.boardSessionTable);
   $$BoardLinkTableTableTableManager get boardLinkTable =>
       $$BoardLinkTableTableTableManager(_db, _db.boardLinkTable);
   $$BoardPlayerTableTableTableManager get boardPlayerTable =>
@@ -6082,6 +6532,8 @@ class $AppDatabaseManager {
       $$BoardCharacterTableTableTableManager(_db, _db.boardCharacterTable);
   $$BoardNoteTableTableTableManager get boardNoteTable =>
       $$BoardNoteTableTableTableManager(_db, _db.boardNoteTable);
+  $$BoardCombatTableTableTableManager get boardCombatTable =>
+      $$BoardCombatTableTableTableManager(_db, _db.boardCombatTable);
   $$BoardClasseCharacterTableTableTableManager get boardClasseCharacterTable =>
       $$BoardClasseCharacterTableTableTableManager(
           _db, _db.boardClasseCharacterTable);
