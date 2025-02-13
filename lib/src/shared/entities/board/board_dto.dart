@@ -9,4 +9,6 @@ class BoardDriftDto {
   List<BoardLinkTableData> linksData = [];
   List<BoardMaterialTableData> materialsData = [];
   List<BoardNoteTableData> notesData = [];
+  List<BoardSessionTableData> sessionsData = [];
+  List<BoardCombatTableData> combatsData = [];
 }

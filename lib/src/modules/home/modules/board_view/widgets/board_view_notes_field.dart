@@ -42,7 +42,7 @@ class BoardViewNotesField extends StatelessWidget {
 
     final notes = board.notes;
     final favoritedsNotes = notes.where((note) => note.isFavorited);
-    void showNodes() async {
+    void showNotes() async {
       await Navigator.push(
         context,
         MaterialPageRoute(
@@ -84,7 +84,7 @@ class BoardViewNotesField extends StatelessWidget {
             subtitle: notes.isNotEmpty
                 ? 'Você tem ${notes.length.toString().padLeft(2, '0')} anotações${favoritedsNotes.isNotEmpty ? ' sendo ${favoritedsNotes.length.toString().padLeft(2, '0')} delas favoritadas' : ''} sobre essa mesa. Clique aqui para vê-las.'
                 : 'Crie anotações sobre esta mesa e consulte toda vez que precisar',
-            onTap: notes.isNotEmpty ? showNodes : addEditNote,
+            onTap: notes.isNotEmpty ? showNotes : addEditNote,
           ),
         )
       ],

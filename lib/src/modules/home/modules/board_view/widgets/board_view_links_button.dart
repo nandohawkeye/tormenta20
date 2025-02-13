@@ -4,7 +4,6 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view_links/board_view_links_screen.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link.dart';
-import 'package:tormenta20/src/shared/utils/url_utils.dart';
 
 class BoardViewLinksButton extends StatelessWidget {
   const BoardViewLinksButton({super.key, required this.links});
@@ -19,11 +18,7 @@ class BoardViewLinksButton extends StatelessWidget {
         MaterialPageRoute(
           builder: (_) => BoardViewLinks(links: links),
         ),
-      ).then((urlSite) async {
-        if (urlSite != null) {
-          await UrlUtils.lauch(urlSite);
-        }
-      });
+      );
     }
 
     final isEnable = links.isNotEmpty;

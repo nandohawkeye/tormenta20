@@ -6,6 +6,7 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link.dart';
+import 'package:tormenta20/src/shared/utils/url_utils.dart';
 
 class BoardViewLinksCard extends StatelessWidget {
   const BoardViewLinksCard(this.site, {super.key});
@@ -20,7 +21,7 @@ class BoardViewLinksCard extends StatelessWidget {
         color: palette.backgroundLevelOne,
         child: InkWell(
           borderRadius: T20UI.borderRadius,
-          onTap: () => Navigator.pop(context, site.link),
+          onTap: () async => await UrlUtils.lauch(site.link),
           child: Padding(
             padding: const EdgeInsets.all(12),
             child: Row(

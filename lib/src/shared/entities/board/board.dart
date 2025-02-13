@@ -1,4 +1,5 @@
 import 'package:tormenta20/src/shared/entities/board/board_charcter.dart';
+import 'package:tormenta20/src/shared/entities/board/board_combat.dart';
 import 'package:tormenta20/src/shared/entities/board/board_note.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session.dart';
@@ -19,6 +20,7 @@ class Board {
   final List<BoardMaterial> materials;
   final List<BoardLink> links;
   final List<BoardSession> sessions;
+  final List<BoardCombat> combats;
   final List<BoardPlayer> players;
   final List<BoardCharacter> characters;
   final BoardModeType mode;
@@ -53,6 +55,7 @@ class Board {
     required this.notes,
     required this.menaces,
     required this.characters,
+    required this.combats,
   });
 
   @override
@@ -78,7 +81,8 @@ class Board {
       other.characters == characters &&
       other.isFavorited == isFavorited &&
       other.notes == notes &&
-      other.menaces == menaces;
+      other.menaces == menaces &&
+      other.combats == combats;
 
   @override
   int get hashCode =>
@@ -102,5 +106,6 @@ class Board {
       characters.hashCode ^
       isFavorited.hashCode ^
       notes.hashCode ^
-      menaces.hashCode;
+      menaces.hashCode ^
+      combats.hashCode;
 }

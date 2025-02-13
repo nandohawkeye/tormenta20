@@ -9,6 +9,7 @@ import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_vie
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_notes_field.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_options_button.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_players_field.dart';
+import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_sessions.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_text_fields.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
 
@@ -54,6 +55,7 @@ class _BoardViewScreenState extends State<BoardViewScreen> {
                     BoardViewBanner(board),
                     BoardViewTextFields(board),
                     const Divider(),
+                    BoardViewSessions(board),
                     BoardViewNotesField(board),
                     BoardViewPlayersField(board),
                     BoardViewMaterialsField(board),
@@ -61,7 +63,12 @@ class _BoardViewScreenState extends State<BoardViewScreen> {
                   ],
                 ),
               ),
-              BoardViewBottomWidgets(board),
+              BoardViewBottomWidgets(
+                board,
+                createCloseSession: _store.createCloseSession,
+                createCombat: _store.createCloseCombat,
+                showCombat: () {},
+              ),
               BoardViewOptionsButton(board),
             ],
           ),

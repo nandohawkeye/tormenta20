@@ -1,12 +1,14 @@
 import 'package:drift/drift.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
+import 'package:tormenta20/src/shared/entities/board/board_combat_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_dto.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_materials_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
 import 'package:tormenta20/src/shared/entities/board/board_note_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player_adapters.dart';
+import 'package:tormenta20/src/shared/entities/board/board_session_adapters.dart';
 
 abstract class BoardAdapters {
   static BoardTableCompanion toCompanion(Board entity) {
@@ -35,6 +37,10 @@ abstract class BoardAdapters {
     final materials =
         dto.materialsData.map(BoardMaterialsAdapters.fromDriftData).toList();
     final notes = dto.notesData.map(BoardNoteAdapters.fromDriftData).toList();
+    final sessions =
+        dto.sessionsData.map(BoardSessionAdapters.fromDriftData).toList();
+    final combats =
+        dto.combatsData.map(BoardCombatAdapters.fromDriftData).toList();
     return Board(
       uuid: dto.boardData.uuid,
       adventureName: dto.boardData.adventureName,
@@ -54,9 +60,10 @@ abstract class BoardAdapters {
       players: players,
       materials: materials,
       notes: notes,
+      combats: combats,
       menaces: [],
       characters: [],
-      sessions: [],
+      sessions: sessions,
     );
   }
 }

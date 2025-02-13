@@ -12,6 +12,8 @@ import 'package:tormenta20/src/core/database/tables/board_player_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_table.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/entities/board/board_adapters.dart';
+import 'package:tormenta20/src/shared/entities/board/board_combat.dart';
+import 'package:tormenta20/src/shared/entities/board/board_combat_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_dto.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_material.dart';
@@ -21,6 +23,9 @@ import 'package:tormenta20/src/shared/entities/board/board_note_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player_dto.dart';
+import 'package:tormenta20/src/shared/entities/board/board_session.dart';
+import 'package:tormenta20/src/shared/entities/board/board_session_adapters.dart';
+import 'package:tormenta20/src/shared/entities/board/board_session_dto.dart';
 import 'package:tormenta20/src/shared/entities/character_classe.dart';
 import 'package:tormenta20/src/shared/entities/character_classe_adapters.dart';
 import 'package:tormenta20/src/shared/failures/failure.dart';
@@ -40,6 +45,28 @@ part 'board_dao.g.dart';
 ])
 class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
   BoardDAO(super.db);
+
+  Future<Failure?> saveCombat(BoardCombat combat) async {
+    try {
+      await into(boardCombatTable)
+          .insertOnConflictUpdate(BoardCombatAdapters.toCompanion(combat));
+
+      return null;
+    } catch (e) {
+      return Failure(e.toString());
+    }
+  }
+
+  Future<Failure?> saveSession(BoardSession session) async {
+    try {
+      await into(boardSessionTable)
+          .insertOnConflictUpdate(BoardSessionAdapters.toCompanion(session));
+
+      return null;
+    } catch (e) {
+      return Failure(e.toString());
+    }
+  }
 
   Future<Failure?> saveMaterials(List<BoardMaterial> materials) async {
     try {
@@ -192,6 +219,52 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
     }
   }
 
+  Future<({Failure? failure, Stream<List<BoardSession>>? sessions})>
+      watchSessions(String boardUuid) async {
+    try {
+      return (
+        failure: null,
+        sessions: (select(boardSessionTable)
+              ..where((tbl) => tbl.boardUuid.equals(boardUuid)))
+            .join([
+              leftOuterJoin(
+                boardCombatTable,
+                boardTable.uuid.equalsExp(
+                  boardCombatTable.boardUuid,
+                ),
+              ),
+            ])
+            .watch()
+            .map((rows) {
+              Map<String, BoardSessionDto> sessionDto = {};
+
+              for (var row in rows) {
+                final sessionData = row.readTable(boardSessionTable);
+                final combatData = row.readTableOrNull(boardCombatTable);
+
+                if (!(sessionDto.containsKey(sessionData.uuid))) {
+                  sessionDto.addAll(
+                      {sessionData.uuid: BoardSessionDto(data: sessionData)});
+                }
+
+                if (combatData != null &&
+                    !(sessionDto[sessionData.uuid]!
+                        .combats
+                        .any((combat) => combat.uuid == combatData.uuid))) {
+                  sessionDto[sessionData.uuid]!.combats.add(combatData);
+                }
+              }
+
+              return sessionDto.entries
+                  .map((entry) => BoardSessionAdapters.fromDto(entry.value))
+                  .toList();
+            })
+      );
+    } catch (e) {
+      return (failure: Failure(e.toString()), sessions: null);
+    }
+  }
+
   Future<({Failure? failure, Stream<List<BoardNote>>? notes})> watchNotes(
       String boardUuid) async {
     try {
@@ -244,6 +317,18 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
                   boardNoteTable.boardUuid,
                 ),
               ),
+              leftOuterJoin(
+                boardSessionTable,
+                boardTable.uuid.equalsExp(
+                  boardSessionTable.boardUuid,
+                ),
+              ),
+              leftOuterJoin(
+                boardCombatTable,
+                boardTable.uuid.equalsExp(
+                  boardCombatTable.boardUuid,
+                ),
+              ),
             ])
             .watch()
             .map((rows) {
@@ -255,6 +340,8 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
                 final linkData = row.readTableOrNull(boardLinkTable);
                 final materialData = row.readTableOrNull(boardMaterialTable);
                 final noteData = row.readTableOrNull(boardNoteTable);
+                final sessionData = row.readTableOrNull(boardSessionTable);
+                final combatData = row.readTableOrNull(boardCombatTable);
                 final classeCharacterData =
                     row.readTableOrNull(boardClasseCharacterTable);
 
@@ -277,6 +364,20 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
                         .notesData
                         .any((data) => data.uuid == noteData.uuid))) {
                   boardsDTO[boardData.uuid]!.notesData.add(noteData);
+                }
+
+                if (sessionData != null &&
+                    !(boardsDTO[boardData.uuid]!
+                        .sessionsData
+                        .any((data) => data.uuid == sessionData.uuid))) {
+                  boardsDTO[boardData.uuid]!.sessionsData.add(sessionData);
+                }
+
+                if (combatData != null &&
+                    !(boardsDTO[boardData.uuid]!
+                        .combatsData
+                        .any((data) => data.uuid == combatData.uuid))) {
+                  boardsDTO[boardData.uuid]!.combatsData.add(combatData);
                 }
 
                 if (playerData != null &&
@@ -355,6 +456,18 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
                   boardNoteTable.boardUuid,
                 ),
               ),
+              leftOuterJoin(
+                boardSessionTable,
+                boardTable.uuid.equalsExp(
+                  boardSessionTable.boardUuid,
+                ),
+              ),
+              leftOuterJoin(
+                boardCombatTable,
+                boardTable.uuid.equalsExp(
+                  boardCombatTable.boardUuid,
+                ),
+              ),
             ])
             .watch()
             .map(
@@ -367,6 +480,8 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
                   final linkData = row.readTableOrNull(boardLinkTable);
                   final materialData = row.readTableOrNull(boardMaterialTable);
                   final noteData = row.readTableOrNull(boardNoteTable);
+                  final sessionData = row.readTableOrNull(boardSessionTable);
+                  final combatData = row.readTableOrNull(boardCombatTable);
                   final classeCharacterData =
                       row.readTableOrNull(boardClasseCharacterTable);
 
@@ -380,6 +495,20 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
                           .notesData
                           .any((data) => data.uuid == noteData.uuid))) {
                     boardsDTO[boardData.uuid]!.notesData.add(noteData);
+                  }
+
+                  if (sessionData != null &&
+                      !(boardsDTO[boardData.uuid]!
+                          .sessionsData
+                          .any((data) => data.uuid == sessionData.uuid))) {
+                    boardsDTO[boardData.uuid]!.sessionsData.add(sessionData);
+                  }
+
+                  if (combatData != null &&
+                      !(boardsDTO[boardData.uuid]!
+                          .combatsData
+                          .any((data) => data.uuid == combatData.uuid))) {
+                    boardsDTO[boardData.uuid]!.combatsData.add(combatData);
                   }
 
                   if (playerData != null &&

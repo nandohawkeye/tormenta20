@@ -13,6 +13,7 @@ class ScreenImageButton extends StatelessWidget {
     this.imageSize = 60,
     this.titleSize = 16,
     this.subtitleSize = 12,
+    this.hasBorder = false,
   });
 
   final String imageAsset;
@@ -22,10 +23,20 @@ class ScreenImageButton extends StatelessWidget {
   final double imageSize;
   final double titleSize;
   final double subtitleSize;
+  final bool hasBorder;
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: T20UI.borderRadius,
+        side: hasBorder
+            ? BorderSide(
+                color: palette.primary.withOpacity(.4),
+                width: 2,
+              )
+            : BorderSide.none,
+      ),
       child: InkWell(
         borderRadius: T20UI.borderRadius,
         onTap: onTap,

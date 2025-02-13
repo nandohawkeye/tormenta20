@@ -134,7 +134,7 @@ class AddEditBoardController {
       materials: materials,
       links: links,
       level: _level!,
-      players: [],
+      isFavorited: _isFavorited,
       mode: _mode,
       bannerPath: _bannerPath,
       whatsGroupLink: _whatsLink,
@@ -142,11 +142,12 @@ class AddEditBoardController {
       discordServerLink: _dicordLink,
       driveFilesLink: _drivefilesLink,
       desc: _desc,
+      combats: [],
+      players: [],
       sessions: [],
       notes: [],
       menaces: [],
       characters: [],
-      isFavorited: _isFavorited,
     );
 
     final failure = await _dao.saveBoard(

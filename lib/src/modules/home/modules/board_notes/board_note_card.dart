@@ -56,7 +56,7 @@ class BoardNoteCard extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            note.updatedAt.toLabel,
+                            note.updatedAt.formatted,
                             style: TextStyle(
                               fontSize: 12,
                               color: palette.textDisable,
