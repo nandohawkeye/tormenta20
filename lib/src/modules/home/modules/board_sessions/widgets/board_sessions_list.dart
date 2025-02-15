@@ -1,0 +1,28 @@
+import 'package:flutter/material.dart';
+import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/modules/home/modules/board_sessions/widgets/board_sessions_card.dart';
+import 'package:tormenta20/src/shared/entities/board/board_session.dart';
+
+class BoardSessionsList extends StatelessWidget {
+  const BoardSessionsList({super.key, required this.sessions});
+
+  final List<BoardSession> sessions;
+
+  @override
+  Widget build(BuildContext context) {
+    sessions.sort((a, b) => b.startedAt.compareTo(a.startedAt));
+    return Expanded(
+      child: SingleChildScrollView(
+        padding: EdgeInsets.only(
+          left: T20UI.spaceSize - 4,
+          right: T20UI.spaceSize - 4,
+          bottom: T20UI.spaceSize + MediaQuery.of(context).padding.bottom,
+          top: T20UI.spaceSize,
+        ),
+        child: Column(
+          children: [...sessions.map(BoardSessionsCard.new)],
+        ),
+      ),
+    );
+  }
+}

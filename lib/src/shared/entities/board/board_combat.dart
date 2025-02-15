@@ -4,17 +4,20 @@ class BoardCombat {
   final String sessionUuid;
   final DateTime startedAt;
   final DateTime? endAt;
+  final int turn;
 
   BoardCombat({
     required this.uuid,
     required this.boardUuid,
     required this.sessionUuid,
     required this.startedAt,
+    required this.turn,
     this.endAt,
   });
 
   BoardCombat copyWith({
     DateTime? endAt,
+    int? turn,
   }) {
     return BoardCombat(
       uuid: uuid,
@@ -22,6 +25,7 @@ class BoardCombat {
       sessionUuid: sessionUuid,
       startedAt: startedAt,
       endAt: endAt ?? this.endAt,
+      turn: turn ?? this.turn,
     );
   }
 
@@ -34,7 +38,8 @@ class BoardCombat {
         other.boardUuid == boardUuid &&
         other.startedAt == startedAt &&
         other.endAt == endAt &&
-        other.sessionUuid == sessionUuid;
+        other.sessionUuid == sessionUuid &&
+        other.turn == turn;
   }
 
   @override
@@ -43,6 +48,7 @@ class BoardCombat {
         boardUuid.hashCode ^
         startedAt.hashCode ^
         endAt.hashCode ^
-        sessionUuid.hashCode;
+        sessionUuid.hashCode ^
+        turn.hashCode;
   }
 }

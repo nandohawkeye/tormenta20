@@ -10,10 +10,12 @@ class BoardViewSessionInOpenSessionButton extends StatefulWidget {
     super.key,
     required this.startedAt,
     required this.inCombat,
+    required this.onTap,
   });
 
   final DateTime startedAt;
   final bool inCombat;
+  final Function() onTap;
 
   @override
   State<BoardViewSessionInOpenSessionButton> createState() =>
@@ -58,7 +60,7 @@ class _BoardViewSessionInOpenSessionButtonState
       title: 'Jogando $_value',
       subtitle:
           '${widget.inCombat ? 'Combate rolando, boa sorte!' : 'Roleplay acontecendo, boa diversão hein!'}\nClique aqui para ver todas as sessões',
-      onTap: () {},
+      onTap: widget.onTap,
     );
   }
 }

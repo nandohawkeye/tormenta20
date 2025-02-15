@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/modules/home/modules/board_combat/board_combat_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/board_view_store.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_banner.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_bottom_widgets.dart';
@@ -67,7 +68,19 @@ class _BoardViewScreenState extends State<BoardViewScreen> {
                 board,
                 createCloseSession: _store.createCloseSession,
                 createCombat: _store.createCloseCombat,
-                showCombat: () {},
+                showCombat: () {
+                  final currentCombat = _store.getCurrentCombat();
+                  if (currentCombat != null) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => BoardCombatScreen(
+                          combat: currentCombat,
+                        ),
+                      ),
+                    );
+                  }
+                },
               ),
               BoardViewOptionsButton(board),
             ],

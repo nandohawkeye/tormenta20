@@ -45,21 +45,30 @@ class BoardViewPlayersField extends StatelessWidget {
           padding: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
-          child: const BoardViewPlayerOptions(),
+          child: BoardViewPlayerOptions(player),
         ),
-      ).then((result) {
-        if (result == PlayerOptionsType.edit) {
-          addEditPlayer(player);
-        }
+      ).then(
+        (result) {
+          if (result == PlayerOptionsType.edit) {
+            addEditPlayer(player);
+          }
 
-        if (result == PlayerOptionsType.delete) {
-          GetIt.I<AppDatabase>().boardDAO.deleteBoardPlayer(player);
-        }
-      });
+          if (result == PlayerOptionsType.delete) {
+            GetIt.I<AppDatabase>().boardDAO.deleteBoardPlayer(player);
+          }
+
+          if (result == PlayerOptionsType.alive) {
+            GetIt.I<AppDatabase>().boardDAO.saveBoardPlayer(
+                  player.copyWithChangeAlive(isAlive: !player.isAlive),
+                );
+          }
+        },
+      );
     }
 
     final players = board.players;
     players.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
+    players.sort((a, b) => (b.isAlive ? 1 : 0).compareTo((a.isAlive ? 1 : 0)));
 
     return Column(
       mainAxisSize: MainAxisSize.min,

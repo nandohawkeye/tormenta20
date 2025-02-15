@@ -229,8 +229,8 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
             .join([
               leftOuterJoin(
                 boardCombatTable,
-                boardTable.uuid.equalsExp(
-                  boardCombatTable.boardUuid,
+                boardSessionTable.uuid.equalsExp(
+                  boardCombatTable.sessionUuid,
                 ),
               ),
             ])

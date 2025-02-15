@@ -2687,6 +2687,15 @@ class $BoardPlayerTableTable extends BoardPlayerTable
   late final GeneratedColumn<int> defense = GeneratedColumn<int>(
       'defense', aliasedName, false,
       type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _isAliveMeta =
+      const VerificationMeta('isAlive');
+  @override
+  late final GeneratedColumn<bool> isAlive = GeneratedColumn<bool>(
+      'is_alive', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("is_alive" IN (0, 1))'));
   @override
   List<GeneratedColumn> get $columns => [
         uuid,
@@ -2700,7 +2709,8 @@ class $BoardPlayerTableTable extends BoardPlayerTable
         updatedAt,
         life,
         mana,
-        defense
+        defense,
+        isAlive
       ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -2789,6 +2799,12 @@ class $BoardPlayerTableTable extends BoardPlayerTable
     } else if (isInserting) {
       context.missing(_defenseMeta);
     }
+    if (data.containsKey('is_alive')) {
+      context.handle(_isAliveMeta,
+          isAlive.isAcceptableOrUnknown(data['is_alive']!, _isAliveMeta));
+    } else if (isInserting) {
+      context.missing(_isAliveMeta);
+    }
     return context;
   }
 
@@ -2822,6 +2838,8 @@ class $BoardPlayerTableTable extends BoardPlayerTable
           .read(DriftSqlType.int, data['${effectivePrefix}mana'])!,
       defense: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}defense'])!,
+      isAlive: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_alive'])!,
     );
   }
 
@@ -2845,6 +2863,7 @@ class BoardPlayerTableData extends DataClass
   final int life;
   final int mana;
   final int defense;
+  final bool isAlive;
   const BoardPlayerTableData(
       {required this.uuid,
       required this.boardUuid,
@@ -2857,7 +2876,8 @@ class BoardPlayerTableData extends DataClass
       required this.updatedAt,
       required this.life,
       required this.mana,
-      required this.defense});
+      required this.defense,
+      required this.isAlive});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -2877,6 +2897,7 @@ class BoardPlayerTableData extends DataClass
     map['life'] = Variable<int>(life);
     map['mana'] = Variable<int>(mana);
     map['defense'] = Variable<int>(defense);
+    map['is_alive'] = Variable<bool>(isAlive);
     return map;
   }
 
@@ -2898,6 +2919,7 @@ class BoardPlayerTableData extends DataClass
       life: Value(life),
       mana: Value(mana),
       defense: Value(defense),
+      isAlive: Value(isAlive),
     );
   }
 
@@ -2917,6 +2939,7 @@ class BoardPlayerTableData extends DataClass
       life: serializer.fromJson<int>(json['life']),
       mana: serializer.fromJson<int>(json['mana']),
       defense: serializer.fromJson<int>(json['defense']),
+      isAlive: serializer.fromJson<bool>(json['isAlive']),
     );
   }
   @override
@@ -2935,6 +2958,7 @@ class BoardPlayerTableData extends DataClass
       'life': serializer.toJson<int>(life),
       'mana': serializer.toJson<int>(mana),
       'defense': serializer.toJson<int>(defense),
+      'isAlive': serializer.toJson<bool>(isAlive),
     };
   }
 
@@ -2950,7 +2974,8 @@ class BoardPlayerTableData extends DataClass
           DateTime? updatedAt,
           int? life,
           int? mana,
-          int? defense}) =>
+          int? defense,
+          bool? isAlive}) =>
       BoardPlayerTableData(
         uuid: uuid ?? this.uuid,
         boardUuid: boardUuid ?? this.boardUuid,
@@ -2964,6 +2989,7 @@ class BoardPlayerTableData extends DataClass
         life: life ?? this.life,
         mana: mana ?? this.mana,
         defense: defense ?? this.defense,
+        isAlive: isAlive ?? this.isAlive,
       );
   BoardPlayerTableData copyWithCompanion(BoardPlayerTableCompanion data) {
     return BoardPlayerTableData(
@@ -2984,6 +3010,7 @@ class BoardPlayerTableData extends DataClass
       life: data.life.present ? data.life.value : this.life,
       mana: data.mana.present ? data.mana.value : this.mana,
       defense: data.defense.present ? data.defense.value : this.defense,
+      isAlive: data.isAlive.present ? data.isAlive.value : this.isAlive,
     );
   }
 
@@ -3001,7 +3028,8 @@ class BoardPlayerTableData extends DataClass
           ..write('updatedAt: $updatedAt, ')
           ..write('life: $life, ')
           ..write('mana: $mana, ')
-          ..write('defense: $defense')
+          ..write('defense: $defense, ')
+          ..write('isAlive: $isAlive')
           ..write(')'))
         .toString();
   }
@@ -3019,7 +3047,8 @@ class BoardPlayerTableData extends DataClass
       updatedAt,
       life,
       mana,
-      defense);
+      defense,
+      isAlive);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -3035,7 +3064,8 @@ class BoardPlayerTableData extends DataClass
           other.updatedAt == this.updatedAt &&
           other.life == this.life &&
           other.mana == this.mana &&
-          other.defense == this.defense);
+          other.defense == this.defense &&
+          other.isAlive == this.isAlive);
 }
 
 class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
@@ -3051,6 +3081,7 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
   final Value<int> life;
   final Value<int> mana;
   final Value<int> defense;
+  final Value<bool> isAlive;
   final Value<int> rowid;
   const BoardPlayerTableCompanion({
     this.uuid = const Value.absent(),
@@ -3065,6 +3096,7 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
     this.life = const Value.absent(),
     this.mana = const Value.absent(),
     this.defense = const Value.absent(),
+    this.isAlive = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   BoardPlayerTableCompanion.insert({
@@ -3080,6 +3112,7 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
     required int life,
     required int mana,
     required int defense,
+    required bool isAlive,
     this.rowid = const Value.absent(),
   })  : uuid = Value(uuid),
         boardUuid = Value(boardUuid),
@@ -3090,7 +3123,8 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
         updatedAt = Value(updatedAt),
         life = Value(life),
         mana = Value(mana),
-        defense = Value(defense);
+        defense = Value(defense),
+        isAlive = Value(isAlive);
   static Insertable<BoardPlayerTableData> custom({
     Expression<String>? uuid,
     Expression<String>? boardUuid,
@@ -3104,6 +3138,7 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
     Expression<int>? life,
     Expression<int>? mana,
     Expression<int>? defense,
+    Expression<bool>? isAlive,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -3119,6 +3154,7 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
       if (life != null) 'life': life,
       if (mana != null) 'mana': mana,
       if (defense != null) 'defense': defense,
+      if (isAlive != null) 'is_alive': isAlive,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -3136,6 +3172,7 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
       Value<int>? life,
       Value<int>? mana,
       Value<int>? defense,
+      Value<bool>? isAlive,
       Value<int>? rowid}) {
     return BoardPlayerTableCompanion(
       uuid: uuid ?? this.uuid,
@@ -3150,6 +3187,7 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
       life: life ?? this.life,
       mana: mana ?? this.mana,
       defense: defense ?? this.defense,
+      isAlive: isAlive ?? this.isAlive,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -3193,6 +3231,9 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
     if (defense.present) {
       map['defense'] = Variable<int>(defense.value);
     }
+    if (isAlive.present) {
+      map['is_alive'] = Variable<bool>(isAlive.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -3214,6 +3255,7 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
           ..write('life: $life, ')
           ..write('mana: $mana, ')
           ..write('defense: $defense, ')
+          ..write('isAlive: $isAlive, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -4084,6 +4126,11 @@ class $BoardCombatTableTable extends BoardCombatTable
   late final GeneratedColumn<String> sessionUuid = GeneratedColumn<String>(
       'session_uuid', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _turnMeta = const VerificationMeta('turn');
+  @override
+  late final GeneratedColumn<int> turn = GeneratedColumn<int>(
+      'turn', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _startedAtMeta =
       const VerificationMeta('startedAt');
   @override
@@ -4097,7 +4144,7 @@ class $BoardCombatTableTable extends BoardCombatTable
       type: DriftSqlType.dateTime, requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns =>
-      [uuid, boardUuid, sessionUuid, startedAt, endAt];
+      [uuid, boardUuid, sessionUuid, turn, startedAt, endAt];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -4129,6 +4176,12 @@ class $BoardCombatTableTable extends BoardCombatTable
     } else if (isInserting) {
       context.missing(_sessionUuidMeta);
     }
+    if (data.containsKey('turn')) {
+      context.handle(
+          _turnMeta, turn.isAcceptableOrUnknown(data['turn']!, _turnMeta));
+    } else if (isInserting) {
+      context.missing(_turnMeta);
+    }
     if (data.containsKey('started_at')) {
       context.handle(_startedAtMeta,
           startedAt.isAcceptableOrUnknown(data['started_at']!, _startedAtMeta));
@@ -4154,6 +4207,8 @@ class $BoardCombatTableTable extends BoardCombatTable
           .read(DriftSqlType.string, data['${effectivePrefix}board_uuid'])!,
       sessionUuid: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}session_uuid'])!,
+      turn: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}turn'])!,
       startedAt: attachedDatabase.typeMapping
           .read(DriftSqlType.dateTime, data['${effectivePrefix}started_at'])!,
       endAt: attachedDatabase.typeMapping
@@ -4172,12 +4227,14 @@ class BoardCombatTableData extends DataClass
   final String uuid;
   final String boardUuid;
   final String sessionUuid;
+  final int turn;
   final DateTime startedAt;
   final DateTime? endAt;
   const BoardCombatTableData(
       {required this.uuid,
       required this.boardUuid,
       required this.sessionUuid,
+      required this.turn,
       required this.startedAt,
       this.endAt});
   @override
@@ -4186,6 +4243,7 @@ class BoardCombatTableData extends DataClass
     map['uuid'] = Variable<String>(uuid);
     map['board_uuid'] = Variable<String>(boardUuid);
     map['session_uuid'] = Variable<String>(sessionUuid);
+    map['turn'] = Variable<int>(turn);
     map['started_at'] = Variable<DateTime>(startedAt);
     if (!nullToAbsent || endAt != null) {
       map['end_at'] = Variable<DateTime>(endAt);
@@ -4198,6 +4256,7 @@ class BoardCombatTableData extends DataClass
       uuid: Value(uuid),
       boardUuid: Value(boardUuid),
       sessionUuid: Value(sessionUuid),
+      turn: Value(turn),
       startedAt: Value(startedAt),
       endAt:
           endAt == null && nullToAbsent ? const Value.absent() : Value(endAt),
@@ -4211,6 +4270,7 @@ class BoardCombatTableData extends DataClass
       uuid: serializer.fromJson<String>(json['uuid']),
       boardUuid: serializer.fromJson<String>(json['boardUuid']),
       sessionUuid: serializer.fromJson<String>(json['sessionUuid']),
+      turn: serializer.fromJson<int>(json['turn']),
       startedAt: serializer.fromJson<DateTime>(json['startedAt']),
       endAt: serializer.fromJson<DateTime?>(json['endAt']),
     );
@@ -4222,6 +4282,7 @@ class BoardCombatTableData extends DataClass
       'uuid': serializer.toJson<String>(uuid),
       'boardUuid': serializer.toJson<String>(boardUuid),
       'sessionUuid': serializer.toJson<String>(sessionUuid),
+      'turn': serializer.toJson<int>(turn),
       'startedAt': serializer.toJson<DateTime>(startedAt),
       'endAt': serializer.toJson<DateTime?>(endAt),
     };
@@ -4231,12 +4292,14 @@ class BoardCombatTableData extends DataClass
           {String? uuid,
           String? boardUuid,
           String? sessionUuid,
+          int? turn,
           DateTime? startedAt,
           Value<DateTime?> endAt = const Value.absent()}) =>
       BoardCombatTableData(
         uuid: uuid ?? this.uuid,
         boardUuid: boardUuid ?? this.boardUuid,
         sessionUuid: sessionUuid ?? this.sessionUuid,
+        turn: turn ?? this.turn,
         startedAt: startedAt ?? this.startedAt,
         endAt: endAt.present ? endAt.value : this.endAt,
       );
@@ -4246,6 +4309,7 @@ class BoardCombatTableData extends DataClass
       boardUuid: data.boardUuid.present ? data.boardUuid.value : this.boardUuid,
       sessionUuid:
           data.sessionUuid.present ? data.sessionUuid.value : this.sessionUuid,
+      turn: data.turn.present ? data.turn.value : this.turn,
       startedAt: data.startedAt.present ? data.startedAt.value : this.startedAt,
       endAt: data.endAt.present ? data.endAt.value : this.endAt,
     );
@@ -4257,6 +4321,7 @@ class BoardCombatTableData extends DataClass
           ..write('uuid: $uuid, ')
           ..write('boardUuid: $boardUuid, ')
           ..write('sessionUuid: $sessionUuid, ')
+          ..write('turn: $turn, ')
           ..write('startedAt: $startedAt, ')
           ..write('endAt: $endAt')
           ..write(')'))
@@ -4265,7 +4330,7 @@ class BoardCombatTableData extends DataClass
 
   @override
   int get hashCode =>
-      Object.hash(uuid, boardUuid, sessionUuid, startedAt, endAt);
+      Object.hash(uuid, boardUuid, sessionUuid, turn, startedAt, endAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -4273,6 +4338,7 @@ class BoardCombatTableData extends DataClass
           other.uuid == this.uuid &&
           other.boardUuid == this.boardUuid &&
           other.sessionUuid == this.sessionUuid &&
+          other.turn == this.turn &&
           other.startedAt == this.startedAt &&
           other.endAt == this.endAt);
 }
@@ -4281,6 +4347,7 @@ class BoardCombatTableCompanion extends UpdateCompanion<BoardCombatTableData> {
   final Value<String> uuid;
   final Value<String> boardUuid;
   final Value<String> sessionUuid;
+  final Value<int> turn;
   final Value<DateTime> startedAt;
   final Value<DateTime?> endAt;
   final Value<int> rowid;
@@ -4288,6 +4355,7 @@ class BoardCombatTableCompanion extends UpdateCompanion<BoardCombatTableData> {
     this.uuid = const Value.absent(),
     this.boardUuid = const Value.absent(),
     this.sessionUuid = const Value.absent(),
+    this.turn = const Value.absent(),
     this.startedAt = const Value.absent(),
     this.endAt = const Value.absent(),
     this.rowid = const Value.absent(),
@@ -4296,17 +4364,20 @@ class BoardCombatTableCompanion extends UpdateCompanion<BoardCombatTableData> {
     required String uuid,
     required String boardUuid,
     required String sessionUuid,
+    required int turn,
     required DateTime startedAt,
     this.endAt = const Value.absent(),
     this.rowid = const Value.absent(),
   })  : uuid = Value(uuid),
         boardUuid = Value(boardUuid),
         sessionUuid = Value(sessionUuid),
+        turn = Value(turn),
         startedAt = Value(startedAt);
   static Insertable<BoardCombatTableData> custom({
     Expression<String>? uuid,
     Expression<String>? boardUuid,
     Expression<String>? sessionUuid,
+    Expression<int>? turn,
     Expression<DateTime>? startedAt,
     Expression<DateTime>? endAt,
     Expression<int>? rowid,
@@ -4315,6 +4386,7 @@ class BoardCombatTableCompanion extends UpdateCompanion<BoardCombatTableData> {
       if (uuid != null) 'uuid': uuid,
       if (boardUuid != null) 'board_uuid': boardUuid,
       if (sessionUuid != null) 'session_uuid': sessionUuid,
+      if (turn != null) 'turn': turn,
       if (startedAt != null) 'started_at': startedAt,
       if (endAt != null) 'end_at': endAt,
       if (rowid != null) 'rowid': rowid,
@@ -4325,6 +4397,7 @@ class BoardCombatTableCompanion extends UpdateCompanion<BoardCombatTableData> {
       {Value<String>? uuid,
       Value<String>? boardUuid,
       Value<String>? sessionUuid,
+      Value<int>? turn,
       Value<DateTime>? startedAt,
       Value<DateTime?>? endAt,
       Value<int>? rowid}) {
@@ -4332,6 +4405,7 @@ class BoardCombatTableCompanion extends UpdateCompanion<BoardCombatTableData> {
       uuid: uuid ?? this.uuid,
       boardUuid: boardUuid ?? this.boardUuid,
       sessionUuid: sessionUuid ?? this.sessionUuid,
+      turn: turn ?? this.turn,
       startedAt: startedAt ?? this.startedAt,
       endAt: endAt ?? this.endAt,
       rowid: rowid ?? this.rowid,
@@ -4349,6 +4423,9 @@ class BoardCombatTableCompanion extends UpdateCompanion<BoardCombatTableData> {
     }
     if (sessionUuid.present) {
       map['session_uuid'] = Variable<String>(sessionUuid.value);
+    }
+    if (turn.present) {
+      map['turn'] = Variable<int>(turn.value);
     }
     if (startedAt.present) {
       map['started_at'] = Variable<DateTime>(startedAt.value);
@@ -4368,6 +4445,7 @@ class BoardCombatTableCompanion extends UpdateCompanion<BoardCombatTableData> {
           ..write('uuid: $uuid, ')
           ..write('boardUuid: $boardUuid, ')
           ..write('sessionUuid: $sessionUuid, ')
+          ..write('turn: $turn, ')
           ..write('startedAt: $startedAt, ')
           ..write('endAt: $endAt, ')
           ..write('rowid: $rowid')
@@ -5720,6 +5798,7 @@ typedef $$BoardPlayerTableTableCreateCompanionBuilder
   required int life,
   required int mana,
   required int defense,
+  required bool isAlive,
   Value<int> rowid,
 });
 typedef $$BoardPlayerTableTableUpdateCompanionBuilder
@@ -5736,6 +5815,7 @@ typedef $$BoardPlayerTableTableUpdateCompanionBuilder
   Value<int> life,
   Value<int> mana,
   Value<int> defense,
+  Value<bool> isAlive,
   Value<int> rowid,
 });
 
@@ -5769,6 +5849,7 @@ class $$BoardPlayerTableTableTableManager extends RootTableManager<
             Value<int> life = const Value.absent(),
             Value<int> mana = const Value.absent(),
             Value<int> defense = const Value.absent(),
+            Value<bool> isAlive = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               BoardPlayerTableCompanion(
@@ -5784,6 +5865,7 @@ class $$BoardPlayerTableTableTableManager extends RootTableManager<
             life: life,
             mana: mana,
             defense: defense,
+            isAlive: isAlive,
             rowid: rowid,
           ),
           createCompanionCallback: ({
@@ -5799,6 +5881,7 @@ class $$BoardPlayerTableTableTableManager extends RootTableManager<
             required int life,
             required int mana,
             required int defense,
+            required bool isAlive,
             Value<int> rowid = const Value.absent(),
           }) =>
               BoardPlayerTableCompanion.insert(
@@ -5814,6 +5897,7 @@ class $$BoardPlayerTableTableTableManager extends RootTableManager<
             life: life,
             mana: mana,
             defense: defense,
+            isAlive: isAlive,
             rowid: rowid,
           ),
         ));
@@ -5881,6 +5965,11 @@ class $$BoardPlayerTableTableFilterComposer
       column: $state.table.defense,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get isAlive => $state.composableBuilder(
+      column: $state.table.isAlive,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
 }
 
 class $$BoardPlayerTableTableOrderingComposer
@@ -5943,6 +6032,11 @@ class $$BoardPlayerTableTableOrderingComposer
 
   ColumnOrderings<int> get defense => $state.composableBuilder(
       column: $state.table.defense,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get isAlive => $state.composableBuilder(
+      column: $state.table.isAlive,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
@@ -6290,6 +6384,7 @@ typedef $$BoardCombatTableTableCreateCompanionBuilder
   required String uuid,
   required String boardUuid,
   required String sessionUuid,
+  required int turn,
   required DateTime startedAt,
   Value<DateTime?> endAt,
   Value<int> rowid,
@@ -6299,6 +6394,7 @@ typedef $$BoardCombatTableTableUpdateCompanionBuilder
   Value<String> uuid,
   Value<String> boardUuid,
   Value<String> sessionUuid,
+  Value<int> turn,
   Value<DateTime> startedAt,
   Value<DateTime?> endAt,
   Value<int> rowid,
@@ -6325,6 +6421,7 @@ class $$BoardCombatTableTableTableManager extends RootTableManager<
             Value<String> uuid = const Value.absent(),
             Value<String> boardUuid = const Value.absent(),
             Value<String> sessionUuid = const Value.absent(),
+            Value<int> turn = const Value.absent(),
             Value<DateTime> startedAt = const Value.absent(),
             Value<DateTime?> endAt = const Value.absent(),
             Value<int> rowid = const Value.absent(),
@@ -6333,6 +6430,7 @@ class $$BoardCombatTableTableTableManager extends RootTableManager<
             uuid: uuid,
             boardUuid: boardUuid,
             sessionUuid: sessionUuid,
+            turn: turn,
             startedAt: startedAt,
             endAt: endAt,
             rowid: rowid,
@@ -6341,6 +6439,7 @@ class $$BoardCombatTableTableTableManager extends RootTableManager<
             required String uuid,
             required String boardUuid,
             required String sessionUuid,
+            required int turn,
             required DateTime startedAt,
             Value<DateTime?> endAt = const Value.absent(),
             Value<int> rowid = const Value.absent(),
@@ -6349,6 +6448,7 @@ class $$BoardCombatTableTableTableManager extends RootTableManager<
             uuid: uuid,
             boardUuid: boardUuid,
             sessionUuid: sessionUuid,
+            turn: turn,
             startedAt: startedAt,
             endAt: endAt,
             rowid: rowid,
@@ -6371,6 +6471,11 @@ class $$BoardCombatTableTableFilterComposer
 
   ColumnFilters<String> get sessionUuid => $state.composableBuilder(
       column: $state.table.sessionUuid,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get turn => $state.composableBuilder(
+      column: $state.table.turn,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -6400,6 +6505,11 @@ class $$BoardCombatTableTableOrderingComposer
 
   ColumnOrderings<String> get sessionUuid => $state.composableBuilder(
       column: $state.table.sessionUuid,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get turn => $state.composableBuilder(
+      column: $state.table.turn,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 

@@ -15,7 +15,7 @@ class BoardCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final players = board.players;
+    final players = board.players.where((bp) => bp.isAlive).toList();
     players.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
     return Card(
       child: InkWell(

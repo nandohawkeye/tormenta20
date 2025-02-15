@@ -10,6 +10,7 @@ abstract class BoardCombatAdapters {
       startedAt: Value<DateTime>(entity.startedAt),
       sessionUuid: Value<String>(entity.sessionUuid),
       endAt: Value<DateTime?>(entity.endAt),
+      turn: Value<int>(entity.turn),
     );
   }
 
@@ -19,6 +20,7 @@ abstract class BoardCombatAdapters {
       sessionUuid: data.sessionUuid,
       boardUuid: data.boardUuid,
       startedAt: data.startedAt,
+      turn: data.turn,
       endAt: data.endAt,
     );
   }

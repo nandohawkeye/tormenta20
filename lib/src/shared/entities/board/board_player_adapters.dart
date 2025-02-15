@@ -17,6 +17,7 @@ abstract class BoardPlayerAdapters {
       broodIndex: Value<int>(entity.brood.index),
       createdAt: Value<DateTime>(entity.createdAt),
       updatedAt: Value<DateTime>(entity.updatedAt),
+      isAlive: Value<bool>(entity.isAlive),
       life: Value<int>(entity.life),
       mana: Value<int>(entity.mana),
       defense: Value<int>(entity.defense),
@@ -40,6 +41,7 @@ abstract class BoardPlayerAdapters {
       life: dto.data.life,
       mana: dto.data.mana,
       defense: dto.data.defense,
+      isAlive: dto.data.isAlive,
     );
   }
 }

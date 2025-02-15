@@ -13,6 +13,7 @@ class BoardPlayerTable extends Table {
   IntColumn get life => integer()();
   IntColumn get mana => integer()();
   IntColumn get defense => integer()();
+  BoolColumn get isAlive => boolean()();
 
   @override
   Set<Column>? get primaryKey => {uuid};

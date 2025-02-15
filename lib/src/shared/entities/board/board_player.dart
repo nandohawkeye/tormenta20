@@ -15,6 +15,7 @@ class BoardPlayer {
   final int life;
   final int mana;
   final int defense;
+  final bool isAlive;
 
   BoardPlayer({
     this.imagePath,
@@ -30,7 +31,27 @@ class BoardPlayer {
     required this.life,
     required this.mana,
     required this.defense,
+    required this.isAlive,
   });
+
+  BoardPlayer copyWithChangeAlive({required bool isAlive}) {
+    return BoardPlayer(
+      playerName: playerName,
+      imagePath: imagePath,
+      imageAsset: imageAsset,
+      uuid: uuid,
+      boardUuid: boardUuid,
+      characterName: characterName,
+      brood: brood,
+      classes: classes,
+      createdAt: createdAt,
+      updatedAt: DateTime.now(),
+      life: life,
+      mana: mana,
+      defense: defense,
+      isAlive: isAlive,
+    );
+  }
 
   @override
   bool operator ==(other) =>
@@ -47,7 +68,8 @@ class BoardPlayer {
       other.classes == classes &&
       other.life == life &&
       other.mana == mana &&
-      other.defense == defense;
+      other.defense == defense &&
+      other.isAlive == isAlive;
 
   @override
   int get hashCode =>
@@ -63,5 +85,6 @@ class BoardPlayer {
       classes.hashCode ^
       life.hashCode ^
       mana.hashCode ^
-      defense.hashCode;
+      defense.hashCode ^
+      isAlive.hashCode;
 }

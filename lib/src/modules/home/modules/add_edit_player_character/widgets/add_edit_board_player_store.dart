@@ -22,8 +22,10 @@ class AddEditBoardPlayerStore {
       _life = initialValue.life;
       _mana = initialValue.mana;
       _defense = initialValue.defense;
+      _isAlive = initialValue.isAlive;
     } else {
       _characterUuid = const Uuid().v4();
+      _isAlive = true;
     }
   }
 
@@ -32,6 +34,7 @@ class AddEditBoardPlayerStore {
 
   late String _characterUuid;
   late String _boardUuid;
+  late bool _isAlive;
   DateTime? _createdAt;
 
   int? _life;
@@ -115,6 +118,7 @@ class AddEditBoardPlayerStore {
       life: _life!,
       mana: _mana!,
       defense: _defense!,
+      isAlive: _isAlive,
     );
 
     return character;

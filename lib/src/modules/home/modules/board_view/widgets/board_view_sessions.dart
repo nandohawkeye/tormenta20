@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/modules/home/modules/board_sessions/board_sessions_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_session_in_open_session_button.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
@@ -23,11 +24,25 @@ class BoardViewSessions extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
+    void toSession() async {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => BoardSessionsScreen(
+            boardUuid: board.uuid,
+          ),
+        ),
+      );
+    }
+
     final combats = board.combats.where((c) => c.isOpen).toList();
     combats.sort((a, b) => b.startedAt.compareTo(a.startedAt));
     sessions.sort((a, b) => b.startedAt.compareTo(a.startedAt));
 
     final currentSession = sessions.first;
+    final combatsSessions = board.combats
+        .where((cb) => cb.sessionUuid == currentSession.uuid)
+        .toList();
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -39,15 +54,13 @@ class BoardViewSessions extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Labels(combats.isNotEmpty
-                  ? 'Em combate'
-                  : currentSession.isOpen
-                      ? 'Sessão atual'
-                      : 'Ultima sessão: ${currentSession.startedAt.formatted}'),
-              // SimpleButton(
-              //   icon: FontAwesomeIcons.plus,
-              //   onTap: addEditNote,
-              // ),
+              Labels(
+                combats.isNotEmpty
+                    ? 'Em combate'
+                    : currentSession.isOpen
+                        ? 'Sessão atual'
+                        : 'Ultima sessão: ${currentSession.startedAt.formatted}',
+              ),
             ],
           ),
         ),
@@ -62,14 +75,15 @@ class BoardViewSessions extends StatelessWidget {
               ? BoardViewSessionInOpenSessionButton(
                   startedAt: currentSession.startedAt,
                   inCombat: combats.isNotEmpty,
+                  onTap: toSession,
                 )
               : ScreenImageButton(
                   imageAsset: Assets.images.knight.path,
                   title:
                       '${currentSession.isOpen ? 'Jogando há' : 'Tempo jogado'} ${currentSession.duration.toFormattedStringWithHours()}',
                   subtitle:
-                      'Sua última sessão ${combats.isNotEmpty ? 'teve ${combats.length.toString().padLeft(2, '0')} combates' : 'não teve combates'}, clique aqui para ver todas as sessões',
-                  onTap: () {},
+                      'Sua última sessão ${combatsSessions.isNotEmpty ? 'teve ${combatsSessions.length.toString().padLeft(2, '0')} combate${combatsSessions.length > 1 ? 's' : ''}' : 'não teve combates'}, clique aqui para ver todas as sessões',
+                  onTap: toSession,
                 ),
         )
       ],

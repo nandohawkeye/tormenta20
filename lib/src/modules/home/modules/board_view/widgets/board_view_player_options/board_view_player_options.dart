@@ -3,12 +3,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/bottom_sheet_init_board/bottom_sheet_init_board_item.dart';
+import 'package:tormenta20/src/shared/entities/board/board_player.dart';
 import 'package:tormenta20/src/shared/widgets/bottom_sheet_base.dart';
 import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
 class BoardViewPlayerOptions extends StatelessWidget {
-  const BoardViewPlayerOptions({super.key});
+  const BoardViewPlayerOptions(this.player, {super.key});
+
+  final BoardPlayer player;
 
   @override
   Widget build(BuildContext context) {
@@ -44,28 +47,42 @@ class BoardViewPlayerOptions extends StatelessWidget {
               Padding(
                 padding: T20UI.horizontalPadding,
                 child: BottomSheetInitBoardItem(
-                  icon: FontAwesomeIcons.skull,
-                  title: 'Personagem morreu',
-                  subtitle: 'O personagem foi de base',
+                  icon: player.isAlive
+                      ? FontAwesomeIcons.skull
+                      : FontAwesomeIcons.personRays,
+                  title: player.isAlive
+                      ? 'Personagem morreu'
+                      : 'Personagem reviveu',
+                  subtitle: player.isAlive
+                      ? 'O personagem foi de base'
+                      : 'Colocaram o clérigo pra trabalhar',
                   onTap: () => Navigator.pop(
                     context,
-                    PlayerOptionsType.death,
+                    PlayerOptionsType.alive,
                   ),
                 ),
               ),
-              T20UI.spaceHeight,
-              Padding(
-                padding: T20UI.horizontalPadding,
-                child: BottomSheetInitBoardItem(
-                  icon: FontAwesomeIcons.penToSquare,
-                  title: 'Editar personagem',
-                  subtitle: 'Clique para editar as informações do personagem',
-                  onTap: () => Navigator.pop(
-                    context,
-                    PlayerOptionsType.edit,
-                  ),
+              if (player.isAlive)
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    T20UI.spaceHeight,
+                    Padding(
+                      padding: T20UI.horizontalPadding,
+                      child: BottomSheetInitBoardItem(
+                        icon: FontAwesomeIcons.penToSquare,
+                        title: 'Editar personagem',
+                        subtitle:
+                            'Clique para editar as informações do personagem',
+                        onTap: () => Navigator.pop(
+                          context,
+                          PlayerOptionsType.edit,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
               T20UI.spaceHeight,
               Column(
                 mainAxisSize: MainAxisSize.min,
@@ -94,4 +111,4 @@ class BoardViewPlayerOptions extends StatelessWidget {
   }
 }
 
-enum PlayerOptionsType { delete, death, alive, edit }
+enum PlayerOptionsType { delete, alive, edit }

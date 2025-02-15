@@ -25,7 +25,7 @@ class AboutSettings extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: T20UI.spaceSize - 4),
           child: AboutSettingsBackupCard(
             icon: FontAwesomeIcons.fileImport,
-            title: 'Importar arquivo de backup',
+            title: 'Exportar arquivo de backup',
             subtitle:
                 'Salve suas mesas, personagens e glimórios em um local seguro para recuperar depois.',
             onTap: () {},
@@ -48,7 +48,7 @@ class AboutSettings extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: T20UI.spaceSize - 4),
           child: AboutSettingsBackupCard(
             icon: FontAwesomeIcons.fileExport,
-            title: 'Exportar arquivo de backup',
+            title: 'Importar arquivo de backup',
             subtitle: 'Recupere seus arquivos salvos e comece a jogar!',
             onTap: () {},
           ),

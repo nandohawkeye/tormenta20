@@ -9,7 +9,7 @@ import 'package:tormenta20/src/modules/home/modules/magic_selected/magic_selecte
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_utils.dart';
-import 'package:tormenta20/src/shared/widgets/main_button.dart';
+import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
 
 class MagicSelected extends StatefulWidget {
   const MagicSelected({
@@ -42,9 +42,11 @@ class _MagicSelectedState extends State<MagicSelected> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: palette.background,
-      child: Column(
+    return Scaffold(
+      floatingActionButton: SimpleCloseButton(
+        backgroundColor: palette.backgroundLevelTwo,
+      ),
+      body: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -128,6 +130,7 @@ class _MagicSelectedState extends State<MagicSelected> {
                           text: widget.magic.targetAreaEfect,
                         ),
                         MagicSelectedDesc(widget.magic.desc),
+                        T20UI.safeAreaBottom(context, additionalHeight: 50),
                       ],
                     ),
                   ),
@@ -135,20 +138,6 @@ class _MagicSelectedState extends State<MagicSelected> {
               ),
             ),
           ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Divider(),
-              Padding(
-                padding: T20UI.allPadding,
-                child: MainButton(
-                  label: 'Voltar',
-                  onTap: () => Navigator.pop(context),
-                ),
-              )
-            ],
-          ),
-          T20UI.safeAreaBottom(context),
         ],
       ),
     );

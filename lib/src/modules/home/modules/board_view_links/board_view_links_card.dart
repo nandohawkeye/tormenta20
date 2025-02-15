@@ -23,7 +23,7 @@ class BoardViewLinksCard extends StatelessWidget {
           borderRadius: T20UI.borderRadius,
           onTap: () async => await UrlUtils.lauch(site.link),
           child: Padding(
-            padding: const EdgeInsets.all(12),
+            padding: T20UI.allPadding,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
