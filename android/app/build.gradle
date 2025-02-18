@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.hawkeye.tormenta20"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = project.property("android.compileSdk").toString().toInteger()
     ndkVersion = flutter.ndkVersion
 
     compileOptions {

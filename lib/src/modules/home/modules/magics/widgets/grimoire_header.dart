@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
@@ -11,7 +10,6 @@ import 'package:tormenta20/src/modules/home/modules/magics/grimories_store.dart'
 import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/grimoire_card.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
-import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/widgets/screen_image_button.dart';
 
 class GrimoireHeader extends StatelessWidget {
@@ -50,28 +48,9 @@ class GrimoireHeader extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
+        const Padding(
           padding: T20UI.allPadding,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Labels('Grimórios'),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SimpleButton(
-                    icon: FontAwesomeIcons.plus,
-                    onTap: () async => await addGrimoire(),
-                  ),
-                  T20UI.spaceWidth,
-                  SimpleButton(
-                    icon: FontAwesomeIcons.solidFileCode,
-                    onTap: () {},
-                  )
-                ],
-              )
-            ],
-          ),
+          child: Labels('Grimórios'),
         ),
         AnimatedBuilder(
           animation: store,

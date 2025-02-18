@@ -70,7 +70,7 @@ class _AddEditBoardScreenState extends State<AddEditBoardScreen> {
                     scrollController: _scrollController,
                   ),
                   T20UI.spaceHeight,
-                  AddEditBoardSites(
+                  AddEditBoardLinks(
                     _controller,
                     scrollController: _scrollController,
                   ),

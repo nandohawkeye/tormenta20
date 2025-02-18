@@ -3,23 +3,23 @@ import 'package:flutter/services.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 
-class AddEditBoardPlayerDefenseField extends StatefulWidget {
-  const AddEditBoardPlayerDefenseField({
+class InitiativeTextfield extends StatefulWidget {
+  const InitiativeTextfield({
     super.key,
-    this.initialDefense,
+    this.initialInitiative,
     required this.onchange,
   });
 
-  final int? initialDefense;
+  final int? initialInitiative;
   final Function(String?) onchange;
 
   @override
-  State<AddEditBoardPlayerDefenseField> createState() =>
+  State<InitiativeTextfield> createState() =>
       _BottomSheetAddBoardLinkTitleFieldState();
 }
 
 class _BottomSheetAddBoardLinkTitleFieldState
-    extends State<AddEditBoardPlayerDefenseField> {
+    extends State<InitiativeTextfield> {
   late final ValueNotifier<String?> _error;
 
   @override
@@ -52,7 +52,7 @@ class _BottomSheetAddBoardLinkTitleFieldState
             _error.value = _validator(value);
             widget.onchange.call(value);
           },
-          initialValue: widget.initialDefense?.toString(),
+          initialValue: widget.initialInitiative?.toString(),
           style: const TextStyle(fontSize: 16),
           textInputAction: TextInputAction.next,
           keyboardType: TextInputType.number,
@@ -60,7 +60,7 @@ class _BottomSheetAddBoardLinkTitleFieldState
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           validator: _validator,
           decoration: InputDecoration(
-            labelText: 'Defesa',
+            labelText: 'Iniciativa',
             fillColor: palette.backgroundLevelOne,
             helperText: 'obrigatório',
             errorText: error,

@@ -73,7 +73,7 @@ class BoardNoteCard extends StatelessWidget {
                         SimpleButton(
                           icon: FontAwesomeIcons.solidTrashCan,
                           backgroundColor: palette.selected,
-                          iconColor: palette.indicator.withOpacity(.6),
+                          iconColor: palette.onSelected,
                           onTap: () => onRemove(note),
                         ),
                       ],

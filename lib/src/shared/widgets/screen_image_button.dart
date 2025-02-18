@@ -14,6 +14,8 @@ class ScreenImageButton extends StatelessWidget {
     this.titleSize = 16,
     this.subtitleSize = 12,
     this.hasBorder = false,
+    this.background,
+    this.borderRadius,
   });
 
   final String imageAsset;
@@ -24,12 +26,15 @@ class ScreenImageButton extends StatelessWidget {
   final double titleSize;
   final double subtitleSize;
   final bool hasBorder;
+  final Color? background;
+  final BorderRadius? borderRadius;
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: background ?? palette.cardBackground,
       shape: RoundedRectangleBorder(
-        borderRadius: T20UI.borderRadius,
+        borderRadius: borderRadius ?? T20UI.borderRadius,
         side: hasBorder
             ? BorderSide(
                 color: palette.primary.withOpacity(.4),
@@ -38,7 +43,7 @@ class ScreenImageButton extends StatelessWidget {
             : BorderSide.none,
       ),
       child: InkWell(
-        borderRadius: T20UI.borderRadius,
+        borderRadius: borderRadius ?? T20UI.borderRadius,
         onTap: onTap,
         child: Padding(
           padding: T20UI.allPadding,

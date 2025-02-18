@@ -23,29 +23,31 @@ class BoardViewShortcutButton extends StatelessWidget {
     final isEnable = url != null;
 
     return Expanded(
-      child: SizedBox(
-        height: T20UI.inputHeight,
-        child: Card(
-          color: Colors.transparent,
-          shape: RoundedRectangleBorder(
-            borderRadius: T20UI.borderRadius,
-            side: BorderSide(
-              color:
-                  isEnable ? palette.backgroundLevelOne : palette.iconDisable,
-              width: 2,
+      child: Padding(
+        padding: const EdgeInsets.only(right: T20UI.spaceSize / 2),
+        child: SizedBox(
+          height: T20UI.inputHeight,
+          child: Card(
+            color: Colors.transparent,
+            shape: RoundedRectangleBorder(
+              borderRadius: T20UI.borderRadius,
+              side: BorderSide(
+                color: palette.backgroundLevelOne,
+                width: 2,
+              ),
             ),
-          ),
-          child: InkWell(
-            borderRadius: T20UI.borderRadius,
-            onTap: !isEnable ? null : () async => await UrlUtils.lauch(url!),
-            child: type == BoardShortcutsType.whats
-                ? WhatsappSvgIcon(
-                    color: isEnable ? palette.icon : palette.iconDisable,
-                  )
-                : Icon(
-                    BoardShortcutsUtils.handleIcon(type, url ?? ''),
-                    color: isEnable ? palette.icon : palette.iconDisable,
-                  ),
+            child: InkWell(
+              borderRadius: T20UI.borderRadius,
+              onTap: !isEnable ? null : () async => await UrlUtils.lauch(url!),
+              child: type == BoardShortcutsType.whats
+                  ? WhatsappSvgIcon(
+                      color: isEnable ? palette.icon : palette.iconDisable,
+                    )
+                  : Icon(
+                      BoardShortcutsUtils.handleIcon(type, url ?? ''),
+                      color: isEnable ? palette.icon : palette.iconDisable,
+                    ),
+            ),
           ),
         ),
       ),

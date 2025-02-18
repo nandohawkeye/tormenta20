@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 
-class AddEditBoardPlayerNamecharacterField extends StatefulWidget {
-  const AddEditBoardPlayerNamecharacterField({
+class NDTextField extends StatefulWidget {
+  const NDTextField({
     super.key,
-    this.initialTitle,
+    this.initialND,
     required this.onchange,
   });
 
-  final String? initialTitle;
+  final int? initialND;
   final Function(String?) onchange;
 
   @override
-  State<AddEditBoardPlayerNamecharacterField> createState() =>
-      _BottomSheetAddBoardLinkTitleFieldState();
+  State<NDTextField> createState() => _BottomSheetAddBoardLinkTitleFieldState();
 }
 
-class _BottomSheetAddBoardLinkTitleFieldState
-    extends State<AddEditBoardPlayerNamecharacterField> {
+class _BottomSheetAddBoardLinkTitleFieldState extends State<NDTextField> {
   late final ValueNotifier<String?> _error;
 
   @override
@@ -29,7 +28,7 @@ class _BottomSheetAddBoardLinkTitleFieldState
 
   String? _validator(String? value) {
     if ((value ?? '').isEmpty) {
-      return 'Campo obrigatório';
+      return 'obrigatório';
     }
 
     return null;
@@ -51,14 +50,15 @@ class _BottomSheetAddBoardLinkTitleFieldState
             _error.value = _validator(value);
             widget.onchange.call(value);
           },
-          initialValue: widget.initialTitle,
+          initialValue: widget.initialND?.toString(),
           style: const TextStyle(fontSize: 16),
           textInputAction: TextInputAction.next,
-          keyboardType: TextInputType.name,
+          keyboardType: TextInputType.number,
           textCapitalization: TextCapitalization.sentences,
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           validator: _validator,
           decoration: InputDecoration(
-            labelText: 'Personagem',
+            labelText: 'ND',
             fillColor: palette.backgroundLevelOne,
             helperText: 'obrigatório',
             errorText: error,

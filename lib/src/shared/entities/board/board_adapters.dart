@@ -31,7 +31,7 @@ abstract class BoardAdapters {
   }
 
   static Board fromDriftDto(BoardDriftDto dto) {
-    final links = dto.linksData.map(BoardLinkAdapters.fromDriftDto).toList();
+    final links = dto.linksData.map(BoardLinkAdapters.fromDriftData).toList();
     final players =
         dto.playersData.map(BoardPlayerAdapters.fromDriftDto).toList();
     final materials =

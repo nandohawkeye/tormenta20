@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 
-class AddEditBoardPlayerNameField extends StatefulWidget {
-  const AddEditBoardPlayerNameField({
+class NamecharacterTextField extends StatefulWidget {
+  const NamecharacterTextField({
     super.key,
     this.initialTitle,
     required this.onchange,
@@ -13,12 +13,12 @@ class AddEditBoardPlayerNameField extends StatefulWidget {
   final Function(String?) onchange;
 
   @override
-  State<AddEditBoardPlayerNameField> createState() =>
+  State<NamecharacterTextField> createState() =>
       _BottomSheetAddBoardLinkTitleFieldState();
 }
 
 class _BottomSheetAddBoardLinkTitleFieldState
-    extends State<AddEditBoardPlayerNameField> {
+    extends State<NamecharacterTextField> {
   late final ValueNotifier<String?> _error;
 
   @override
@@ -58,7 +58,7 @@ class _BottomSheetAddBoardLinkTitleFieldState
           textCapitalization: TextCapitalization.sentences,
           validator: _validator,
           decoration: InputDecoration(
-            labelText: 'Jogador',
+            labelText: 'Personagem',
             fillColor: palette.backgroundLevelOne,
             helperText: 'obrigatório',
             errorText: error,

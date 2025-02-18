@@ -6,7 +6,6 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_board/add_edit_boar
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_materials/add_edit_baord_material_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_materials/add_edit_board_material_card.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
-import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
 class AddEditBoardMaterials extends StatefulWidget {
@@ -40,17 +39,8 @@ class _AddEditBoardMaterialsState extends State<AddEditBoardMaterials> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: T20UI.horizontalPadding,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Labels('Materiais'),
-              SimpleButton(
-                icon: FontAwesomeIcons.plus,
-                onTap: _store.onSelectFiles,
-              )
-            ],
-          ),
+          padding: T20UI.horizontalPadding.copyWith(top: T20UI.spaceSize),
+          child: const Labels('Materiais'),
         ),
         T20UI.spaceHeight,
         ValueListenableBuilder(
@@ -70,20 +60,38 @@ class _AddEditBoardMaterialsState extends State<AddEditBoardMaterials> {
               );
             }
 
-            return Padding(
-              padding: T20UI.verticalPadding,
-              child: SizedBox(
-                height: 120,
-                child: ListView.separated(
-                  itemCount: list.length,
-                  padding: T20UI.horizontalPadding,
-                  scrollDirection: Axis.horizontal,
-                  separatorBuilder: (_, __) => T20UI.spaceWidth,
-                  itemBuilder: (_, index) => AddEditBoardMaterialCard(
-                    material: list[index],
+            return SizedBox(
+              height: 120,
+              child: ListView.separated(
+                itemCount: list.length + 1,
+                padding: T20UI.horizontalPadding,
+                scrollDirection: Axis.horizontal,
+                separatorBuilder: (_, __) => T20UI.spaceWidth,
+                itemBuilder: (_, index) {
+                  if (index == 0) {
+                    return SizedBox(
+                      height: 120,
+                      width: 120,
+                      child: Card(
+                        child: InkWell(
+                          borderRadius: T20UI.borderRadius,
+                          onTap: _store.onSelectFiles,
+                          child: const Center(
+                            child: Icon(
+                              FontAwesomeIcons.plus,
+                              size: 34,
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+
+                  return AddEditBoardMaterialCard(
+                    material: list[index - 1],
                     onTap: _store.onRemove,
-                  ),
-                ),
+                  );
+                },
               ),
             );
           },

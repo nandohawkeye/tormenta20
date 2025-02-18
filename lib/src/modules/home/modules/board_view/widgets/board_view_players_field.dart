@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
@@ -8,9 +7,9 @@ import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_vie
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_player_options/board_view_player_options.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/character_screen_button.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
-import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player.dart';
+import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 
 class BoardViewPlayersField extends StatelessWidget {
   const BoardViewPlayersField(this.board, {super.key});
@@ -75,64 +74,54 @@ class BoardViewPlayersField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         T20UI.spaceHeight,
-        Padding(
+        const Padding(
           padding: T20UI.horizontalPadding,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Labels('Personagens'),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SimpleButton(
-                    icon: FontAwesomeIcons.plus,
-                    onTap: () => addEditPlayer(null),
-                  ),
-                  T20UI.spaceWidth,
-                  SimpleButton(
-                    icon: FontAwesomeIcons.solidFileCode,
-                    onTap: () {},
-                  ),
-                ],
-              ),
-            ],
-          ),
+          child: Labels('Personagens'),
         ),
         T20UI.spaceHeight,
-        players.isEmpty
-            ? Padding(
-                padding: const EdgeInsets.only(
-                  bottom: T20UI.spaceSize,
-                  right: T20UI.spaceSize - 4,
-                  left: T20UI.spaceSize - 4,
-                ),
-                child: CharacterScreenButton(
+        Padding(
+          padding: const EdgeInsets.only(
+            right: T20UI.spaceSize - 4,
+            left: T20UI.spaceSize - 4,
+          ),
+          child: Card(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CharacterScreenButton(
                   subtitle:
                       'Crie ou adicione um personagem via arquivo para começar a jogar!',
                   onTap: () => addEditPlayer(null),
                 ),
-              )
-            : Padding(
-                padding: const EdgeInsets.only(bottom: T20UI.spaceSize),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    primary: false,
-                    physics: const NeverScrollableScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: T20UI.spaceSize - 4),
-                    itemCount: players.length,
-                    separatorBuilder: T20UI.separatorBuilderVertical,
-                    itemBuilder: (_, index) {
-                      return BoardViewPlayerCard(
-                        player: players[index],
-                        onTap: playerOptions,
-                      );
-                    },
-                  ),
-                ),
-              )
+                if (players.isNotEmpty)
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const DividerLevelTwo(verticalPadding: 0),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ListView.separated(
+                          shrinkWrap: true,
+                          primary: false,
+                          padding: EdgeInsets.zero,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: players.length,
+                          separatorBuilder: (_, __) =>
+                              const DividerLevelTwo(verticalPadding: 0),
+                          itemBuilder: (_, index) {
+                            return BoardViewPlayerCard(
+                              player: players[index],
+                              onTap: playerOptions,
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  )
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }

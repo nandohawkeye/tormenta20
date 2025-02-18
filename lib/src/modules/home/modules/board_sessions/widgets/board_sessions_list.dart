@@ -4,9 +4,14 @@ import 'package:tormenta20/src/modules/home/modules/board_sessions/widgets/board
 import 'package:tormenta20/src/shared/entities/board/board_session.dart';
 
 class BoardSessionsList extends StatelessWidget {
-  const BoardSessionsList({super.key, required this.sessions});
+  const BoardSessionsList({
+    super.key,
+    required this.sessions,
+    required this.createCloseSession,
+  });
 
   final List<BoardSession> sessions;
+  final Function() createCloseSession;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,14 @@ class BoardSessionsList extends StatelessWidget {
           top: T20UI.spaceSize,
         ),
         child: Column(
-          children: [...sessions.map(BoardSessionsCard.new)],
+          children: [
+            ...sessions.map(
+              (session) => BoardSessionsCard(
+                session,
+                createCloseSession: createCloseSession,
+              ),
+            )
+          ],
         ),
       ),
     );

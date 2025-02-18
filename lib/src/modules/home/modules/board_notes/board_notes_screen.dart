@@ -106,6 +106,25 @@ class _BoardNotesScreenState extends State<BoardNotesScreen> {
               animation: _store,
               builder: (_, __) {
                 final notes = _store.notes;
+
+                if (notes.isEmpty) {
+                  return const Center(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(FontAwesomeIcons.ghost),
+                        SizedBox(width: T20UI.spaceSize / 2),
+                        Text(
+                          'Nenhuma anotação',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+
                 notes.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
                 return ListView.separated(
                   padding: const EdgeInsets.only(

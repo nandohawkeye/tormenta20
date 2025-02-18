@@ -23,6 +23,7 @@ class AddEditBoardPlayerStore {
       _mana = initialValue.mana;
       _defense = initialValue.defense;
       _isAlive = initialValue.isAlive;
+      _initiative = initialValue.initiative;
     } else {
       _characterUuid = const Uuid().v4();
       _isAlive = true;
@@ -36,6 +37,11 @@ class AddEditBoardPlayerStore {
   late String _boardUuid;
   late bool _isAlive;
   DateTime? _createdAt;
+
+  int? _initiative;
+  int? get initiative => _initiative;
+  void onChangeInitiative(String? value) =>
+      _initiative = int.parse(value ?? '1');
 
   int? _life;
   int? get life => _life;
@@ -119,6 +125,7 @@ class AddEditBoardPlayerStore {
       mana: _mana!,
       defense: _defense!,
       isAlive: _isAlive,
+      initiative: _initiative!,
     );
 
     return character;

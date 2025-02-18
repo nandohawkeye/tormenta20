@@ -15,7 +15,7 @@ class MagicsHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: T20UI.allPadding,
+      padding: T20UI.verticalPadding.copyWith(left: T20UI.spaceSize),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -27,8 +27,9 @@ class MagicsHeader extends StatelessWidget {
                 animation: store,
                 builder: (_, __) => SimpleButton(
                   icon: FontAwesomeIcons.sliders,
-                  backgroundColor:
-                      store.hasFilterAplied ? palette.selected : null,
+                  backgroundColor: store.hasFilterAplied
+                      ? palette.selected
+                      : palette.background,
                   iconColor: store.hasFilterAplied ? palette.icon : null,
                   onTap: () async {
                     Navigator.push(
@@ -46,11 +47,23 @@ class MagicsHeader extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(width: 16),
-              SimpleButton(
-                icon: FontAwesomeIcons.magnifyingGlass,
-                onTap: () => store.changeSearchEnable(true),
-              )
+              AnimatedBuilder(
+                animation: store,
+                builder: (_, __) {
+                  if (store.searchEnable) {
+                    return const SizedBox.shrink();
+                  }
+
+                  return Padding(
+                    padding: const EdgeInsets.only(left: T20UI.spaceSize),
+                    child: SimpleButton(
+                      icon: FontAwesomeIcons.magnifyingGlass,
+                      backgroundColor: palette.background,
+                      onTap: () => store.changeSearchEnable(true),
+                    ),
+                  );
+                },
+              ),
             ],
           )
         ],

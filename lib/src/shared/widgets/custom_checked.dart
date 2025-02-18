@@ -13,11 +13,13 @@ class CustomChecked extends StatelessWidget {
     this.isEnabledToTap = true,
     this.color,
     this.checkedColor,
+    this.disabledColor,
   });
 
   final Color? color;
   final Color? checkedColor;
   final bool value;
+  final Color? disabledColor;
   final double? size;
   final Function(bool)? onChange;
   final bool isEnabledToTap;
@@ -36,7 +38,8 @@ class CustomChecked extends StatelessWidget {
           width: size,
           duration: T20UI.defaultDurationAnimation,
           decoration: BoxDecoration(
-            color: value ? selectedColor : Colors.transparent,
+            color:
+                value ? selectedColor : (disabledColor ?? Colors.transparent),
             borderRadius: BorderRadius.circular(5),
             border: Border.all(
               width: 1,

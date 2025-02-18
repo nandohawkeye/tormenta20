@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
 
-class BottomSheetAddBoardLinkMainButtons extends StatelessWidget {
-  const BottomSheetAddBoardLinkMainButtons({super.key, required this.onSave});
+class AddEditMenaceScreenBottomButtons extends StatelessWidget {
+  const AddEditMenaceScreenBottomButtons({super.key, required this.onSave});
 
   final Function() onSave;
 
@@ -15,7 +13,7 @@ class BottomSheetAddBoardLinkMainButtons extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const DividerLevelTwo(verticalPadding: 0),
+        const Divider(),
         Padding(
           padding: T20UI.allPadding,
           child: Row(
@@ -27,9 +25,7 @@ class BottomSheetAddBoardLinkMainButtons extends StatelessWidget {
                 ),
               ),
               T20UI.spaceWidth,
-              SimpleCloseButton(
-                backgroundColor: palette.backgroundLevelTwo,
-              )
+              const SimpleCloseButton()
             ],
           ),
         )

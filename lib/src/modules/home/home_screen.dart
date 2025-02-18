@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/home_screen_store.dart';
 import 'package:tormenta20/src/modules/home/modules/about/about_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/init/init_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/magics_screen.dart';
+import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/widgets/app_logo.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -47,6 +49,28 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 42,
                 width: 180,
               ),
+              actions: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    AnimatedBuilder(
+                      animation: _store,
+                      builder: (_, __) {
+                        if (_store.index == 2) {
+                          return const SizedBox.shrink();
+                        }
+
+                        return SimpleButton(
+                          icon: FontAwesomeIcons.solidFileCode,
+                          backgroundColor: palette.background,
+                          iconSize: 20,
+                          onTap: () async {},
+                        );
+                      },
+                    )
+                  ],
+                ),
+              ],
             ),
             body: _pages[_store.index],
             bottomNavigationBar: BottomNavigationBar(

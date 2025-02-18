@@ -27,7 +27,7 @@ class MainButton extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: T20UI.borderRadius,
-          color: backgroundColor ?? palette.accent.withOpacity(.6),
+          color: backgroundColor ?? palette.selected,
         ),
         child: Material(
           color: Colors.transparent,

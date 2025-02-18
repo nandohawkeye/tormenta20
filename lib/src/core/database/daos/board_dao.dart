@@ -15,6 +15,7 @@ import 'package:tormenta20/src/shared/entities/board/board_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_combat.dart';
 import 'package:tormenta20/src/shared/entities/board/board_combat_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_dto.dart';
+import 'package:tormenta20/src/shared/entities/board/board_link.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_material.dart';
 import 'package:tormenta20/src/shared/entities/board/board_materials_adapters.dart';
@@ -85,6 +86,42 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
     try {
       await into(boardNoteTable)
           .insertOnConflictUpdate(BoardNoteAdapters.toCompanion(note));
+
+      return null;
+    } catch (e) {
+      return Failure(e.toString());
+    }
+  }
+
+  Future<Failure?> saveLink(BoardLink link) async {
+    try {
+      await into(boardLinkTable)
+          .insertOnConflictUpdate(BoardLinkAdapters.toCompanion(link));
+
+      return null;
+    } catch (e) {
+      return Failure(e.toString());
+    }
+  }
+
+  Future<Failure?> deleteLink(BoardLink link) async {
+    try {
+      await (delete(boardLinkTable)..where((tbl) => tbl.uuid.equals(link.uuid)))
+          .go();
+
+      return null;
+    } catch (e) {
+      return Failure(e.toString());
+    }
+  }
+
+  Future<Failure?> deleteMaterials(List<String> uuids) async {
+    try {
+      await Future.forEach(uuids, (uuid) async {
+        await (delete(boardMaterialTable)
+              ..where((tbl) => tbl.uuid.equals(uuid)))
+            .go();
+      });
 
       return null;
     } catch (e) {
@@ -277,6 +314,37 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
       );
     } catch (e) {
       return (failure: Failure(e.toString()), notes: null);
+    }
+  }
+
+  Future<({Failure? failure, Stream<List<BoardLink>>? links})> watchLinks(
+      String boardUuid) async {
+    try {
+      return (
+        failure: null,
+        links: (select(boardLinkTable)
+              ..where((tbl) => tbl.boardUuid.equals(boardUuid)))
+            .watch()
+            .map((rows) => rows.map(BoardLinkAdapters.fromDriftData).toList())
+      );
+    } catch (e) {
+      return (failure: Failure(e.toString()), links: null);
+    }
+  }
+
+  Future<({Failure? failure, Stream<List<BoardMaterial>>? materials})>
+      watchMaterials(String boardUuid) async {
+    try {
+      return (
+        failure: null,
+        materials: (select(boardMaterialTable)
+              ..where((tbl) => tbl.boardUuid.equals(boardUuid)))
+            .watch()
+            .map((rows) =>
+                rows.map(BoardMaterialsAdapters.fromDriftData).toList())
+      );
+    } catch (e) {
+      return (failure: Failure(e.toString()), materials: null);
     }
   }
 

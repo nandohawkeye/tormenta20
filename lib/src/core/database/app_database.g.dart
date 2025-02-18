@@ -2687,6 +2687,12 @@ class $BoardPlayerTableTable extends BoardPlayerTable
   late final GeneratedColumn<int> defense = GeneratedColumn<int>(
       'defense', aliasedName, false,
       type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _initiativeMeta =
+      const VerificationMeta('initiative');
+  @override
+  late final GeneratedColumn<int> initiative = GeneratedColumn<int>(
+      'initiative', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _isAliveMeta =
       const VerificationMeta('isAlive');
   @override
@@ -2710,6 +2716,7 @@ class $BoardPlayerTableTable extends BoardPlayerTable
         life,
         mana,
         defense,
+        initiative,
         isAlive
       ];
   @override
@@ -2799,6 +2806,14 @@ class $BoardPlayerTableTable extends BoardPlayerTable
     } else if (isInserting) {
       context.missing(_defenseMeta);
     }
+    if (data.containsKey('initiative')) {
+      context.handle(
+          _initiativeMeta,
+          initiative.isAcceptableOrUnknown(
+              data['initiative']!, _initiativeMeta));
+    } else if (isInserting) {
+      context.missing(_initiativeMeta);
+    }
     if (data.containsKey('is_alive')) {
       context.handle(_isAliveMeta,
           isAlive.isAcceptableOrUnknown(data['is_alive']!, _isAliveMeta));
@@ -2838,6 +2853,8 @@ class $BoardPlayerTableTable extends BoardPlayerTable
           .read(DriftSqlType.int, data['${effectivePrefix}mana'])!,
       defense: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}defense'])!,
+      initiative: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}initiative'])!,
       isAlive: attachedDatabase.typeMapping
           .read(DriftSqlType.bool, data['${effectivePrefix}is_alive'])!,
     );
@@ -2863,6 +2880,7 @@ class BoardPlayerTableData extends DataClass
   final int life;
   final int mana;
   final int defense;
+  final int initiative;
   final bool isAlive;
   const BoardPlayerTableData(
       {required this.uuid,
@@ -2877,6 +2895,7 @@ class BoardPlayerTableData extends DataClass
       required this.life,
       required this.mana,
       required this.defense,
+      required this.initiative,
       required this.isAlive});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -2897,6 +2916,7 @@ class BoardPlayerTableData extends DataClass
     map['life'] = Variable<int>(life);
     map['mana'] = Variable<int>(mana);
     map['defense'] = Variable<int>(defense);
+    map['initiative'] = Variable<int>(initiative);
     map['is_alive'] = Variable<bool>(isAlive);
     return map;
   }
@@ -2919,6 +2939,7 @@ class BoardPlayerTableData extends DataClass
       life: Value(life),
       mana: Value(mana),
       defense: Value(defense),
+      initiative: Value(initiative),
       isAlive: Value(isAlive),
     );
   }
@@ -2939,6 +2960,7 @@ class BoardPlayerTableData extends DataClass
       life: serializer.fromJson<int>(json['life']),
       mana: serializer.fromJson<int>(json['mana']),
       defense: serializer.fromJson<int>(json['defense']),
+      initiative: serializer.fromJson<int>(json['initiative']),
       isAlive: serializer.fromJson<bool>(json['isAlive']),
     );
   }
@@ -2958,6 +2980,7 @@ class BoardPlayerTableData extends DataClass
       'life': serializer.toJson<int>(life),
       'mana': serializer.toJson<int>(mana),
       'defense': serializer.toJson<int>(defense),
+      'initiative': serializer.toJson<int>(initiative),
       'isAlive': serializer.toJson<bool>(isAlive),
     };
   }
@@ -2975,6 +2998,7 @@ class BoardPlayerTableData extends DataClass
           int? life,
           int? mana,
           int? defense,
+          int? initiative,
           bool? isAlive}) =>
       BoardPlayerTableData(
         uuid: uuid ?? this.uuid,
@@ -2989,6 +3013,7 @@ class BoardPlayerTableData extends DataClass
         life: life ?? this.life,
         mana: mana ?? this.mana,
         defense: defense ?? this.defense,
+        initiative: initiative ?? this.initiative,
         isAlive: isAlive ?? this.isAlive,
       );
   BoardPlayerTableData copyWithCompanion(BoardPlayerTableCompanion data) {
@@ -3010,6 +3035,8 @@ class BoardPlayerTableData extends DataClass
       life: data.life.present ? data.life.value : this.life,
       mana: data.mana.present ? data.mana.value : this.mana,
       defense: data.defense.present ? data.defense.value : this.defense,
+      initiative:
+          data.initiative.present ? data.initiative.value : this.initiative,
       isAlive: data.isAlive.present ? data.isAlive.value : this.isAlive,
     );
   }
@@ -3029,6 +3056,7 @@ class BoardPlayerTableData extends DataClass
           ..write('life: $life, ')
           ..write('mana: $mana, ')
           ..write('defense: $defense, ')
+          ..write('initiative: $initiative, ')
           ..write('isAlive: $isAlive')
           ..write(')'))
         .toString();
@@ -3048,6 +3076,7 @@ class BoardPlayerTableData extends DataClass
       life,
       mana,
       defense,
+      initiative,
       isAlive);
   @override
   bool operator ==(Object other) =>
@@ -3065,6 +3094,7 @@ class BoardPlayerTableData extends DataClass
           other.life == this.life &&
           other.mana == this.mana &&
           other.defense == this.defense &&
+          other.initiative == this.initiative &&
           other.isAlive == this.isAlive);
 }
 
@@ -3081,6 +3111,7 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
   final Value<int> life;
   final Value<int> mana;
   final Value<int> defense;
+  final Value<int> initiative;
   final Value<bool> isAlive;
   final Value<int> rowid;
   const BoardPlayerTableCompanion({
@@ -3096,6 +3127,7 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
     this.life = const Value.absent(),
     this.mana = const Value.absent(),
     this.defense = const Value.absent(),
+    this.initiative = const Value.absent(),
     this.isAlive = const Value.absent(),
     this.rowid = const Value.absent(),
   });
@@ -3112,6 +3144,7 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
     required int life,
     required int mana,
     required int defense,
+    required int initiative,
     required bool isAlive,
     this.rowid = const Value.absent(),
   })  : uuid = Value(uuid),
@@ -3124,6 +3157,7 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
         life = Value(life),
         mana = Value(mana),
         defense = Value(defense),
+        initiative = Value(initiative),
         isAlive = Value(isAlive);
   static Insertable<BoardPlayerTableData> custom({
     Expression<String>? uuid,
@@ -3138,6 +3172,7 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
     Expression<int>? life,
     Expression<int>? mana,
     Expression<int>? defense,
+    Expression<int>? initiative,
     Expression<bool>? isAlive,
     Expression<int>? rowid,
   }) {
@@ -3154,6 +3189,7 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
       if (life != null) 'life': life,
       if (mana != null) 'mana': mana,
       if (defense != null) 'defense': defense,
+      if (initiative != null) 'initiative': initiative,
       if (isAlive != null) 'is_alive': isAlive,
       if (rowid != null) 'rowid': rowid,
     });
@@ -3172,6 +3208,7 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
       Value<int>? life,
       Value<int>? mana,
       Value<int>? defense,
+      Value<int>? initiative,
       Value<bool>? isAlive,
       Value<int>? rowid}) {
     return BoardPlayerTableCompanion(
@@ -3187,6 +3224,7 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
       life: life ?? this.life,
       mana: mana ?? this.mana,
       defense: defense ?? this.defense,
+      initiative: initiative ?? this.initiative,
       isAlive: isAlive ?? this.isAlive,
       rowid: rowid ?? this.rowid,
     );
@@ -3231,6 +3269,9 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
     if (defense.present) {
       map['defense'] = Variable<int>(defense.value);
     }
+    if (initiative.present) {
+      map['initiative'] = Variable<int>(initiative.value);
+    }
     if (isAlive.present) {
       map['is_alive'] = Variable<bool>(isAlive.value);
     }
@@ -3255,6 +3296,7 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
           ..write('life: $life, ')
           ..write('mana: $mana, ')
           ..write('defense: $defense, ')
+          ..write('initiative: $initiative, ')
           ..write('isAlive: $isAlive, ')
           ..write('rowid: $rowid')
           ..write(')'))
@@ -5798,6 +5840,7 @@ typedef $$BoardPlayerTableTableCreateCompanionBuilder
   required int life,
   required int mana,
   required int defense,
+  required int initiative,
   required bool isAlive,
   Value<int> rowid,
 });
@@ -5815,6 +5858,7 @@ typedef $$BoardPlayerTableTableUpdateCompanionBuilder
   Value<int> life,
   Value<int> mana,
   Value<int> defense,
+  Value<int> initiative,
   Value<bool> isAlive,
   Value<int> rowid,
 });
@@ -5849,6 +5893,7 @@ class $$BoardPlayerTableTableTableManager extends RootTableManager<
             Value<int> life = const Value.absent(),
             Value<int> mana = const Value.absent(),
             Value<int> defense = const Value.absent(),
+            Value<int> initiative = const Value.absent(),
             Value<bool> isAlive = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
@@ -5865,6 +5910,7 @@ class $$BoardPlayerTableTableTableManager extends RootTableManager<
             life: life,
             mana: mana,
             defense: defense,
+            initiative: initiative,
             isAlive: isAlive,
             rowid: rowid,
           ),
@@ -5881,6 +5927,7 @@ class $$BoardPlayerTableTableTableManager extends RootTableManager<
             required int life,
             required int mana,
             required int defense,
+            required int initiative,
             required bool isAlive,
             Value<int> rowid = const Value.absent(),
           }) =>
@@ -5897,6 +5944,7 @@ class $$BoardPlayerTableTableTableManager extends RootTableManager<
             life: life,
             mana: mana,
             defense: defense,
+            initiative: initiative,
             isAlive: isAlive,
             rowid: rowid,
           ),
@@ -5966,6 +6014,11 @@ class $$BoardPlayerTableTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
+  ColumnFilters<int> get initiative => $state.composableBuilder(
+      column: $state.table.initiative,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
   ColumnFilters<bool> get isAlive => $state.composableBuilder(
       column: $state.table.isAlive,
       builder: (column, joinBuilders) =>
@@ -6032,6 +6085,11 @@ class $$BoardPlayerTableTableOrderingComposer
 
   ColumnOrderings<int> get defense => $state.composableBuilder(
       column: $state.table.defense,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get initiative => $state.composableBuilder(
+      column: $state.table.initiative,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 

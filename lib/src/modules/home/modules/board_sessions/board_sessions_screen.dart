@@ -56,6 +56,7 @@ class _BoardSessionsScreenState extends State<BoardSessionsScreen> {
             builder: (_, __) {
               return BoardSessionsList(
                 sessions: _store.sessions,
+                createCloseSession: _store.createCloseCombat,
               );
             },
           ),

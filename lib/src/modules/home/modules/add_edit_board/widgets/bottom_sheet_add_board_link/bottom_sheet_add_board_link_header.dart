@@ -15,7 +15,7 @@ class BottomSheetAddBoardLinkHeader extends StatelessWidget {
         Padding(
           padding: T20UI.horizontalPadding,
           child: Text(
-            'Site',
+            'Link',
             style: TextStyle(
               fontSize: 18,
               fontFamily: FontFamily.tormenta,

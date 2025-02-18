@@ -1,48 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/widgets/add_edit_board_player_store.dart';
-import 'package:tormenta20/src/shared/widgets/initiative_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/mana_textfield.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/widgets/add_edit_board_player_brood_selector.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/widgets/add_edit_board_player_classes_selector.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/add_edit_menace_store.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_bottom_buttons.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_header.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_tokens.dart';
 import 'package:tormenta20/src/shared/widgets/defense_textfield.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/widgets/add_edit_board_player_header.dart';
+import 'package:tormenta20/src/shared/widgets/initiative_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/life_textfield.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/widgets/add_edit_board_player_main_buttons.dart';
-import 'package:tormenta20/src/shared/widgets/name_character_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/player_name_textfield.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/widgets/add_edit_board_player_tokens.dart';
-import 'package:tormenta20/src/shared/entities/board/board_player.dart';
+import 'package:tormenta20/src/shared/widgets/mana_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/name_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/nd_textfield.dart';
+import 'package:tormenta20/src/shared/entities/menace.dart';
 
-class AddEditBoardPlayerCharacter extends StatefulWidget {
-  const AddEditBoardPlayerCharacter({
-    super.key,
-    this.character,
-    required this.boardUuid,
-  });
+class AddEditMenaceScreen extends StatefulWidget {
+  const AddEditMenaceScreen({super.key, this.menace});
 
-  final BoardPlayer? character;
-  final String boardUuid;
+  final Menace? menace;
 
   @override
-  State<AddEditBoardPlayerCharacter> createState() =>
-      _AddEditBoardPlayerCharacterState();
+  State<AddEditMenaceScreen> createState() => _AddEditMenaceScreenState();
 }
 
-class _AddEditBoardPlayerCharacterState
-    extends State<AddEditBoardPlayerCharacter> {
+class _AddEditMenaceScreenState extends State<AddEditMenaceScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  late final AddEditBoardPlayerStore _store;
+  late final AddEditMenaceStore _store;
 
   @override
   void initState() {
     super.initState();
-    _store = AddEditBoardPlayerStore(
-      widget.character,
-      widget.boardUuid,
-    );
+    _store = AddEditMenaceStore(widget.menace);
   }
 
   @override
@@ -55,7 +43,7 @@ class _AddEditBoardPlayerCharacterState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: kTextTabBarHeight + T20UI.spaceSize),
-            const AddEditBoardPlayerHeader(),
+            const AddEditMenaceScreenHeader(),
             const Divider(),
             Expanded(
               child: SingleChildScrollView(
@@ -64,7 +52,7 @@ class _AddEditBoardPlayerCharacterState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     T20UI.spaceHeight,
-                    AddEditBoardPlayerTokens(
+                    AddEditMenaceScreenTokens(
                       store: _store,
                       size: 80,
                     ),
@@ -81,16 +69,16 @@ class _AddEditBoardPlayerCharacterState
                             child: Row(
                               children: [
                                 Expanded(
-                                  child: PlayerNameTextField(
-                                    onchange: _store.onChangePlayer,
-                                    initialTitle: _store.player,
+                                  child: NameTextField(
+                                    onchange: (_) {},
+                                    initialName: null,
                                   ),
                                 ),
                                 T20UI.spaceWidth,
                                 Expanded(
-                                  child: NamecharacterTextField(
-                                    onchange: _store.onChangeCharacter,
-                                    initialTitle: _store.name,
+                                  child: NDTextField(
+                                    onchange: (_) {},
+                                    initialND: null,
                                   ),
                                 ),
                               ],
@@ -103,15 +91,15 @@ class _AddEditBoardPlayerCharacterState
                               children: [
                                 Expanded(
                                   child: LifeTextField(
-                                    onchange: _store.onChangeLife,
-                                    initialLife: _store.life,
+                                    onchange: (_) {},
+                                    initialLife: null,
                                   ),
                                 ),
                                 T20UI.spaceWidth,
                                 Expanded(
                                   child: ManaTextField(
-                                    onchange: _store.onChangeMana,
-                                    initialMana: _store.mana,
+                                    onchange: (_) {},
+                                    initialMana: null,
                                   ),
                                 ),
                               ],
@@ -124,29 +112,29 @@ class _AddEditBoardPlayerCharacterState
                               children: [
                                 Expanded(
                                   child: InitiativeTextfield(
-                                    onchange: _store.onChangeInitiative,
-                                    initialInitiative: _store.initiative,
+                                    onchange: (_) {},
+                                    initialInitiative: null,
                                   ),
                                 ),
                                 T20UI.spaceWidth,
                                 Expanded(
                                   child: DefenseTextField(
-                                    onchange: _store.onChangeDefense,
-                                    initialDefense: _store.defense,
+                                    onchange: (_) {},
+                                    initialDefense: null,
                                   ),
                                 ),
                               ],
                             ),
                           ),
                           T20UI.spaceHeight,
-                          AddEditBoardPlayerBroodSelector(
-                            store: _store,
-                          ),
-                          T20UI.spaceHeight,
-                          AddEditBoardPlayerClassesSelector(
-                            store: _store,
-                          ),
-                          T20UI.spaceHeight,
+                          // AddEditBoardPlayerBroodSelector(
+                          //   store: _store,
+                          // ),
+                          // T20UI.spaceHeight,
+                          // AddEditBoardPlayerClassesSelector(
+                          //   store: _store,
+                          // ),
+                          // T20UI.spaceHeight,
                         ],
                       ),
                     )
@@ -154,14 +142,14 @@ class _AddEditBoardPlayerCharacterState
                 ),
               ),
             ),
-            AddEditBoardPlayerMainButtons(
+            AddEditMenaceScreenBottomButtons(
               onSave: () {
-                if (_formKey.currentState!.validate()) {
-                  final result = _store.onSave();
-                  if (result != null) {
-                    Navigator.pop(context, result);
-                  }
-                }
+                // if (_formKey.currentState!.validate()) {
+                //   final result = _store.onSave();
+                //   if (result != null) {
+                //     Navigator.pop(context, result);
+                //   }
+                // }
               },
             ),
             T20UI.safeAreaBottom(context)

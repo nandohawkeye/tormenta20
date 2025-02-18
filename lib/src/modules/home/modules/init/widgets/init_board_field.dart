@@ -1,17 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_board/add_edit_board_screen.dart';
-import 'package:tormenta20/src/modules/home/modules/board_view/board_view_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/init/init_store.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/board_card/board_card.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/board_screen_image_button.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
-import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
-import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/extensions/context_ext.dart';
 
 class InitBoardField extends StatefulWidget {
@@ -36,44 +31,9 @@ class _InitBoardFieldState extends State<InitBoardField> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
+        const Padding(
           padding: T20UI.allPadding,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Labels('Mesas'),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SimpleButton(
-                    icon: FontAwesomeIcons.plus,
-                    onTap: () async {
-                      await Navigator.push<Board?>(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const AddEditBoardScreen(),
-                        ),
-                      ).then((board) {
-                        if (board != null) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => BoardViewScreen(initial: board),
-                            ),
-                          );
-                        }
-                      });
-                    },
-                  ),
-                  T20UI.spaceWidth,
-                  SimpleButton(
-                    icon: FontAwesomeIcons.solidFileCode,
-                    onTap: () {},
-                  )
-                ],
-              )
-            ],
-          ),
+          child: Labels('Mesas e aventuras'),
         ),
         AnimatedBuilder(
           animation: _store,

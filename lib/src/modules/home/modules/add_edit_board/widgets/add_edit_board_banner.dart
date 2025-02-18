@@ -63,17 +63,8 @@ class _AddEditBoardBannerState extends State<AddEditBoardBanner> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: T20UI.horizontalPadding,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Labels('Banner'),
-              SimpleButton(
-                icon: FontAwesomeIcons.plus,
-                onTap: _onSelectImage,
-              )
-            ],
-          ),
+          padding: T20UI.horizontalPadding.copyWith(top: T20UI.spaceSize),
+          child: const Labels('Banner'),
         ),
         T20UI.spaceHeight,
         ValueListenableBuilder(
@@ -111,7 +102,7 @@ class _AddEditBoardBannerState extends State<AddEditBoardBanner> {
                                 SimpleButton(
                                   icon: FontAwesomeIcons.solidTrashCan,
                                   backgroundColor: palette.selected,
-                                  iconColor: palette.indicator.withOpacity(.6),
+                                  iconColor: palette.onSelected,
                                   onTap: _onRemoveImage,
                                 )
                               ],

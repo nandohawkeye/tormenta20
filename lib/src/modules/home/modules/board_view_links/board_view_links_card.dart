@@ -7,11 +7,19 @@ import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link.dart';
 import 'package:tormenta20/src/shared/utils/url_utils.dart';
+import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 
 class BoardViewLinksCard extends StatelessWidget {
-  const BoardViewLinksCard(this.site, {super.key});
+  const BoardViewLinksCard(
+    this.link, {
+    super.key,
+    required this.onSelected,
+    required this.onDelete,
+  });
 
-  final BoardLink site;
+  final BoardLink link;
+  final Function(BoardLink) onSelected;
+  final Function(BoardLink) onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -21,43 +29,77 @@ class BoardViewLinksCard extends StatelessWidget {
         color: palette.backgroundLevelOne,
         child: InkWell(
           borderRadius: T20UI.borderRadius,
-          onTap: () async => await UrlUtils.lauch(site.link),
-          child: Padding(
-            padding: T20UI.allPadding,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        site.title,
-                        style: const TextStyle(
-                          fontFamily: FontFamily.tormenta,
-                          fontSize: 20,
-                        ),
+          onTap: () async => await UrlUtils.lauch(link.link),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: T20UI.allPadding,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            link.title,
+                            style: const TextStyle(
+                              fontFamily: FontFamily.tormenta,
+                              fontSize: 20,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            link.link,
+                            style: TextStyle(
+                              color: palette.selected,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 4),
-                      Text(
-                        site.link,
-                        style: TextStyle(
-                          color: palette.textDisable,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                SimpleButton(
-                  icon: FontAwesomeIcons.shareNodes,
-                  backgroundColor: palette.selected,
-                  iconColor: palette.indicator,
-                  onTap: () => Share.share('*${site.title}* \n ${site.link}'),
-                )
-              ],
-            ),
+              ),
+              const DividerLevelTwo(verticalPadding: 0),
+              Padding(
+                padding: T20UI.allPadding,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: SimpleButton(
+                        icon: FontAwesomeIcons.solidTrashCan,
+                        backgroundColor: palette.backgroundLevelTwo,
+                        iconColor: palette.indicator,
+                        onTap: () => onDelete(link),
+                      ),
+                    ),
+                    T20UI.spaceWidth,
+                    Expanded(
+                      child: SimpleButton(
+                        icon: FontAwesomeIcons.solidPenToSquare,
+                        backgroundColor: palette.backgroundLevelTwo,
+                        iconColor: palette.indicator,
+                        onTap: () => onSelected(link),
+                      ),
+                    ),
+                    T20UI.spaceWidth,
+                    Expanded(
+                      child: SimpleButton(
+                        icon: FontAwesomeIcons.shareNodes,
+                        backgroundColor: palette.backgroundLevelTwo,
+                        iconColor: palette.indicator,
+                        onTap: () =>
+                            Share.share('*${link.title}* \n ${link.link}'),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
         ),
       ),

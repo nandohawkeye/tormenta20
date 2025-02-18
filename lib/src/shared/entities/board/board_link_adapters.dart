@@ -12,12 +12,12 @@ abstract class BoardLinkAdapters {
     );
   }
 
-  static BoardLink fromDriftDto(BoardLinkTableData dto) {
+  static BoardLink fromDriftData(BoardLinkTableData data) {
     return BoardLink(
-      uuid: dto.uuid,
-      link: dto.link,
-      boardUuid: dto.boardUuid,
-      title: dto.title,
+      uuid: data.uuid,
+      link: data.link,
+      boardUuid: data.boardUuid,
+      title: data.title,
     );
   }
 }

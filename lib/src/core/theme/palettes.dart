@@ -32,6 +32,7 @@ class PaletteBase {
     required this.appBar,
     required this.dividerLevelTwo,
     required this.selected,
+    required this.onSelected,
     required this.backgroundLevelTwo,
     required this.backgroundLevelThree,
     required this.backgroundLevelFour,
@@ -68,6 +69,7 @@ class PaletteBase {
   final Color unselectedWidget;
 
   final Color selected;
+  final Color onSelected;
   final Color backgroundLevelOne;
   final Color backgroundLevelTwo;
   final Color backgroundLevelThree;
@@ -105,7 +107,8 @@ abstract class Palettes {
         unselectedWidget: const Color(0xFF616161),
         remove: const Color(0xFFDA0000),
         accent: const Color(0xFFCC152A),
-        selected: const Color(0xFFCC152A).withOpacity(.6),
+        selected: const Color(0xFF7A0D19),
+        onSelected: const Color(0xFFFFFFFF),
         backgroundLevelOne: const Color(0xFF212121),
         backgroundLevelTwo: const Color(0xFF424242),
         backgroundLevelThree: const Color(0xFF616161),

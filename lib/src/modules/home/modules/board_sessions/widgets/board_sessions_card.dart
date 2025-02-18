@@ -17,9 +17,14 @@ import 'package:tormenta20/src/shared/extensions/data_ext.dart';
 import 'package:tormenta20/src/shared/extensions/duration_ext.dart';
 
 class BoardSessionsCard extends StatelessWidget {
-  const BoardSessionsCard(this.session, {super.key});
+  const BoardSessionsCard(
+    this.session, {
+    super.key,
+    required this.createCloseSession,
+  });
 
   final BoardSession session;
+  final Function() createCloseSession;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +37,10 @@ class BoardSessionsCard extends StatelessWidget {
     }
 
     if (isOpen) {
-      return BoardSessionCardSessionOpen(session);
+      return BoardSessionCardSessionOpen(
+        session,
+        createCloseSession: createCloseSession,
+      );
     }
 
     return Padding(

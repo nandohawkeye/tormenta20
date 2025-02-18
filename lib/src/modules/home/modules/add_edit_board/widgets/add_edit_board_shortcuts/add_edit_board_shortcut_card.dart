@@ -30,56 +30,61 @@ class AddEditBoardShortcutCard extends StatelessWidget {
         width: double.infinity,
         child: Card(
           color: palette.cardBackground,
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: Row(
-              children: [
-                type == BoardShortcutsType.whats
-                    ? Padding(
-                        padding: const EdgeInsets.only(right: 12, left: 6),
-                        child: WhatsappSvgIcon(
-                          size: 30,
-                          color: palette.selected,
+          child: InkWell(
+            borderRadius: T20UI.borderRadius,
+            onTap: onTap,
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Row(
+                children: [
+                  type == BoardShortcutsType.whats
+                      ? Padding(
+                          padding: const EdgeInsets.only(right: 12, left: 6),
+                          child: WhatsappSvgIcon(
+                            size: 30,
+                            color: palette.selected,
+                          ),
+                        )
+                      : Padding(
+                          padding:
+                              const EdgeInsets.only(right: T20UI.spaceSize),
+                          child: Icon(
+                            BoardShortcutsUtils.handleIcon(type, url),
+                            size: 32,
+                            color: palette.selected,
+                          ),
                         ),
-                      )
-                    : Padding(
-                        padding: const EdgeInsets.only(right: T20UI.spaceSize),
-                        child: Icon(
-                          BoardShortcutsUtils.handleIcon(type, url),
-                          size: 32,
-                          color: palette.selected,
+                  Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          BoardShortcutsUtils.handleLabel(type),
+                          style: TextStyle(
+                            fontFamily: FontFamily.tormenta,
+                            color: palette.selected,
+                          ),
                         ),
-                      ),
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        BoardShortcutsUtils.handleLabel(type),
-                        style: TextStyle(
-                          fontFamily: FontFamily.tormenta,
-                          color: palette.selected,
+                        const SizedBox(height: 4),
+                        Text(
+                          url,
+                          style: TextStyle(
+                            color: palette.textDisable,
+                            fontSize: 12,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        url,
-                        style: TextStyle(
-                          color: palette.textDisable,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                SimpleButton(
-                  icon: FontAwesomeIcons.penToSquare,
-                  backgroundColor: palette.selected,
-                  iconColor: palette.indicator.withOpacity(.6),
-                  onTap: onTap,
-                )
-              ],
+                  SimpleButton(
+                    icon: FontAwesomeIcons.solidPenToSquare,
+                    backgroundColor: palette.selected,
+                    iconColor: palette.onSelected,
+                    onTap: onTap,
+                  )
+                ],
+              ),
             ),
           ),
         ),

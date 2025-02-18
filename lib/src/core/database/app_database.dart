@@ -51,7 +51,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 4;
+  int get schemaVersion => 5;
 
   @override
   MigrationStrategy get migration {
@@ -60,6 +60,7 @@ class AppDatabase extends _$AppDatabase {
         await m.createAll();
       },
       onUpgrade: (Migrator m, int from, int to) async {
+        print('Migrating from $from to $to');
         await customStatement('PRAGMA foreign_keys = OFF');
 
         await transaction(() async {
@@ -72,6 +73,10 @@ class AppDatabase extends _$AppDatabase {
 
           if (from < 4) {
             await m.addColumn(boardCombatTable, boardCombatTable.turn);
+          }
+
+          if (from < 5) {
+            await m.addColumn(boardPlayerTable, boardPlayerTable.initiative);
           }
         });
 

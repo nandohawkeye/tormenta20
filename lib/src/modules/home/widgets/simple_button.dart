@@ -10,6 +10,7 @@ class SimpleButton extends StatelessWidget {
     this.backgroundColor,
     this.iconColor,
     this.iconPadding = EdgeInsets.zero,
+    this.iconSize = 16,
   });
 
   final IconData icon;
@@ -17,6 +18,7 @@ class SimpleButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? iconColor;
   final EdgeInsets iconPadding;
+  final double iconSize;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class SimpleButton extends StatelessWidget {
             padding: iconPadding,
             child: Icon(
               icon,
-              size: 16,
+              size: iconSize,
               color: iconColor ?? palette.accent.withOpacity(.8),
             ),
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/gen/assets.gen.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/add_edit_menace_screen.dart';
 import 'package:tormenta20/src/shared/widgets/screen_slide_images_button.dart';
 
 class ManaceScreenButton extends StatelessWidget {
@@ -13,8 +14,15 @@ class ManaceScreenButton extends StatelessWidget {
       imageAssets: menaces,
       title: 'Ameaças',
       subtitle:
-          'Crie ou se vincule a mesa de um mestre, e comece a se divertir com seus amigos!',
-      onTap: () {},
+          'Crie suas ameaças, e se for mestre vincule-as as suas aventuras.',
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => const AddEditMenaceScreen(),
+          ),
+        );
+      },
     );
   }
 }

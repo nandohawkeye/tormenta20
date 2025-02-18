@@ -13,7 +13,9 @@ class AddEditBoardControllerHeader extends StatelessWidget {
       padding: T20UI.horizontalPadding,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [Labels('${isCreate ? 'Criando' : 'Editando'} mesa')],
+        children: [
+          Labels('${isCreate ? 'Criando' : 'Editando'} mesa e aventura')
+        ],
       ),
     );
   }

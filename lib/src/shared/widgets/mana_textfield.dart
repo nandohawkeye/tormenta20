@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 
-class AddEditBoardPlayerManaField extends StatefulWidget {
-  const AddEditBoardPlayerManaField({
+class ManaTextField extends StatefulWidget {
+  const ManaTextField({
     super.key,
     this.initialMana,
     required this.onchange,
@@ -14,12 +14,11 @@ class AddEditBoardPlayerManaField extends StatefulWidget {
   final Function(String?) onchange;
 
   @override
-  State<AddEditBoardPlayerManaField> createState() =>
+  State<ManaTextField> createState() =>
       _BottomSheetAddBoardLinkTitleFieldState();
 }
 
-class _BottomSheetAddBoardLinkTitleFieldState
-    extends State<AddEditBoardPlayerManaField> {
+class _BottomSheetAddBoardLinkTitleFieldState extends State<ManaTextField> {
   late final ValueNotifier<String?> _error;
 
   @override

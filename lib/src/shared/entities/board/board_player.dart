@@ -16,6 +16,7 @@ class BoardPlayer {
   final int mana;
   final int defense;
   final bool isAlive;
+  final int initiative;
 
   BoardPlayer({
     this.imagePath,
@@ -32,6 +33,7 @@ class BoardPlayer {
     required this.mana,
     required this.defense,
     required this.isAlive,
+    required this.initiative,
   });
 
   BoardPlayer copyWithChangeAlive({required bool isAlive}) {
@@ -50,6 +52,7 @@ class BoardPlayer {
       mana: mana,
       defense: defense,
       isAlive: isAlive,
+      initiative: initiative,
     );
   }
 
@@ -69,7 +72,8 @@ class BoardPlayer {
       other.life == life &&
       other.mana == mana &&
       other.defense == defense &&
-      other.isAlive == isAlive;
+      other.isAlive == isAlive &&
+      other.initiative == initiative;
 
   @override
   int get hashCode =>
@@ -86,5 +90,6 @@ class BoardPlayer {
       life.hashCode ^
       mana.hashCode ^
       defense.hashCode ^
-      isAlive.hashCode;
+      isAlive.hashCode ^
+      initiative.hashCode;
 }

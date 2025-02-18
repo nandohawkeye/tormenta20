@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/add_edit_board_controller.dart';
@@ -7,12 +6,11 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_e
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_sites_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/bottom_sheet_add_board_link/bottom_sheet_add_board_link.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
-import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
-class AddEditBoardSites extends StatefulWidget {
-  const AddEditBoardSites(
+class AddEditBoardLinks extends StatefulWidget {
+  const AddEditBoardLinks(
     this.controller, {
     super.key,
     required this.scrollController,
@@ -22,10 +20,10 @@ class AddEditBoardSites extends StatefulWidget {
   final ScrollController scrollController;
 
   @override
-  State<AddEditBoardSites> createState() => _AddEditBoardSitesState();
+  State<AddEditBoardLinks> createState() => _AddEditBoardLinksState();
 }
 
-class _AddEditBoardSitesState extends State<AddEditBoardSites> {
+class _AddEditBoardLinksState extends State<AddEditBoardLinks> {
   late final AddEditBoardSitesStore _store;
 
   @override
@@ -68,39 +66,25 @@ class _AddEditBoardSitesState extends State<AddEditBoardSites> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: T20UI.horizontalPadding,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Labels('Sites'),
-              Row(
-                children: [
-                  SimpleButton(
-                    icon: FontAwesomeIcons.plus,
-                    onTap: () => addEditSite(null),
-                  ),
-                ],
-              ),
-            ],
+          padding: T20UI.horizontalPadding.copyWith(top: T20UI.spaceSize),
+          child: const Labels('Links'),
+        ),
+        T20UI.spaceHeight,
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: T20UI.spaceSize - 4,
+          ),
+          child: MainButton(
+            label: 'Adicionar link',
+            backgroundColor: palette.cardBackground,
+            onTap: () => addEditSite(null),
           ),
         ),
         T20UI.spaceHeight,
         ValueListenableBuilder(
           valueListenable: _store.sites,
-          builder: (_, sites, __) {
-            final list = sites ?? [];
-            if (list.isEmpty) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: T20UI.spaceSize - 4,
-                ),
-                child: MainButton(
-                  label: 'Adicionar site',
-                  backgroundColor: palette.cardBackground,
-                  onTap: () => addEditSite(null),
-                ),
-              );
-            }
+          builder: (_, links, __) {
+            final list = links ?? [];
 
             return ListView.separated(
               shrinkWrap: true,
