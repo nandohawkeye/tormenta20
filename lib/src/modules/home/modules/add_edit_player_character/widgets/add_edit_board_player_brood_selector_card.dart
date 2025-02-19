@@ -41,14 +41,6 @@ class AddEditBoardPlayerBroodSelectorCard extends StatelessWidget {
                   CharacterUtils.handleBroodTitle(brood.name),
                   style: const TextStyle(fontWeight: FontWeight.w500),
                 ),
-                const SizedBox(height: 2),
-                Text(
-                  CharacterUtils.handleBroodSubtitle(brood.name),
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: palette.textPrimary.withOpacity(.8),
-                  ),
-                )
               ],
             ),
           ),

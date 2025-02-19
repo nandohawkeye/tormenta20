@@ -41,14 +41,6 @@ class AddEditBoardPlayerClassesSelectorCard extends StatelessWidget {
                   CharacterUtils.handleClasseTypeTitle(classeType.name),
                   style: const TextStyle(fontWeight: FontWeight.w500),
                 ),
-                const SizedBox(height: 2),
-                Text(
-                  CharacterUtils.handleClasseTypeSubtitle(classeType.name),
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: palette.textPrimary.withOpacity(.8),
-                  ),
-                )
               ],
             ),
           ),

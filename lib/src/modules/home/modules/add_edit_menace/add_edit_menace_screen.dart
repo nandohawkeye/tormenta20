@@ -6,12 +6,14 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_header.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_tokens.dart';
 import 'package:tormenta20/src/shared/widgets/defense_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/displacement_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/initiative_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/life_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/mana_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/name_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/nd_textfield.dart';
 import 'package:tormenta20/src/shared/entities/menace.dart';
+import 'package:tormenta20/src/shared/widgets/perception_textfield.dart';
 
 class AddEditMenaceScreen extends StatefulWidget {
   const AddEditMenaceScreen({super.key, this.menace});
@@ -119,6 +121,27 @@ class _AddEditMenaceScreenState extends State<AddEditMenaceScreen> {
                                 T20UI.spaceWidth,
                                 Expanded(
                                   child: DefenseTextField(
+                                    onchange: (_) {},
+                                    initialDefense: null,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          T20UI.spaceHeight,
+                          Padding(
+                            padding: T20UI.horizontalPadding,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: PerceptionTextfield(
+                                    onchange: (_) {},
+                                    initialDefense: null,
+                                  ),
+                                ),
+                                T20UI.spaceWidth,
+                                Expanded(
+                                  child: DisplacementTextfield(
                                     onchange: (_) {},
                                     initialDefense: null,
                                   ),

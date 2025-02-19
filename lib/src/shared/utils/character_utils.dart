@@ -2,16 +2,6 @@ import 'package:tormenta20/src/shared/entities/classe_type.dart';
 import 'package:tormenta20/src/shared/extensions/string_ext.dart';
 
 abstract class CharacterUtils {
-  static String handleClasseTypeSubtitle(String value) {
-    if (value.contains('jade')) {
-      return 'Império de jade';
-    } else if (value.contains('ghanor')) {
-      return 'A lenda de Ghanor';
-    } else {
-      return 'Base T20';
-    }
-  }
-
   static String handleAllClassesTypeTitle(Iterable<ClasseType> types) {
     if (types.length == 1) {
       return handleClasseTypeTitle(types.first.name);
@@ -41,19 +31,15 @@ abstract class CharacterUtils {
     }
   }
 
-  static String handleBroodSubtitle(String value) {
-    if (value.contains('jade')) {
-      return 'Império de jade';
-    } else if (value.contains('ghanor')) {
-      return 'A lenda de Ghanor';
-    } else {
-      return 'Base T20';
-    }
-  }
-
   static String handleBroodTitle(String value) {
     if (value.contains('meioelfo')) {
       return 'Meio-elfo';
+    } else if (value.contains('meioorc')) {
+      return 'Meio-orc';
+    } else if (value == 'troganao') {
+      return 'Trog-anão';
+    } else if (value == 'elfodomar') {
+      return 'Elfo-do-mar';
     } else if (value.contains('sereiatritao')) {
       return 'Sereia - Tritão';
     } else if (value.contains('silfide')) {
