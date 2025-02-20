@@ -28,7 +28,7 @@ class _BottomSheetAddBoardLinkTitleFieldState extends State<NameTextField> {
 
   String? _validator(String? value) {
     if ((value ?? '').isEmpty) {
-      return 'Campo obrigatório';
+      return 'obrigatório';
     }
 
     return null;

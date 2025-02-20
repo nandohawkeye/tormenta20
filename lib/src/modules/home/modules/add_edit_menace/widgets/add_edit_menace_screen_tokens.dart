@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_menace/add_edit_menace_store.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/add_edit_menace_controller.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/widgets/add_edit_board_player_file_image_selector.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/widgets/add_edit_board_player_token_card.dart';
 
 class AddEditMenaceScreenTokens extends StatefulWidget {
   const AddEditMenaceScreenTokens({
     super.key,
-    required this.store,
+    required this.controller,
     required this.size,
   });
 
-  final AddEditMenaceStore store;
+  final AddEditMenaceController controller;
   final double size;
 
   @override
@@ -24,26 +24,24 @@ class _AddEditBoardPlayerTokensState extends State<AddEditMenaceScreenTokens> {
   late final ValueNotifier<String?> _filePath;
   void _setFilePath(String value) {
     _assetPath.value = null;
-    // widget.store.onChangeAssetPath(null);
+    widget.controller.changeAsset(null);
     _filePath.value = value;
-    // widget.store.onChangeFilePath(value);
+    widget.controller.changePath(value);
   }
 
   late final ValueNotifier<String?> _assetPath;
   void _setAssetPath(String value) {
     _filePath.value = null;
-    // widget.store.onChangeFilePath(null);
+    widget.controller.changePath(null);
     _assetPath.value = value;
-    // widget.store.onChangeAssetPath(value);
+    widget.controller.changeAsset(value);
   }
 
   @override
   void initState() {
     super.initState();
-    _filePath = ValueNotifier<String?>(null);
-    // _filePath = ValueNotifier<String?>(widget.store.filePath);
-    _assetPath = ValueNotifier<String?>(null);
-    // _assetPath = ValueNotifier<String?>(widget.store.assetPath);
+    _filePath = ValueNotifier<String?>(widget.controller.imagePath);
+    _assetPath = ValueNotifier<String?>(widget.controller.imageAsset);
   }
 
   @override
@@ -82,6 +80,7 @@ class _AddEditBoardPlayerTokensState extends State<AddEditMenaceScreenTokens> {
                     onSelectFile: _setFilePath,
                     filePath: filePath,
                     size: widget.size,
+                    isMenace: true,
                   );
                 }
 
@@ -90,6 +89,7 @@ class _AddEditBoardPlayerTokensState extends State<AddEditMenaceScreenTokens> {
                   selected: assetPath,
                   onTap: _setAssetPath,
                   size: widget.size,
+                  isMenace: true,
                 );
               },
             );

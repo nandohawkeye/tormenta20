@@ -3,23 +3,22 @@ import 'package:flutter/services.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 
-class PerceptionTextfield extends StatefulWidget {
-  const PerceptionTextfield({
+class ResisVonTextfield extends StatefulWidget {
+  const ResisVonTextfield({
     super.key,
-    this.initialPerception,
+    this.initialValue,
     required this.onchange,
   });
 
-  final int? initialPerception;
+  final int? initialValue;
   final Function(String?) onchange;
 
   @override
-  State<PerceptionTextfield> createState() =>
+  State<ResisVonTextfield> createState() =>
       _BottomSheetAddBoardLinkTitleFieldState();
 }
 
-class _BottomSheetAddBoardLinkTitleFieldState
-    extends State<PerceptionTextfield> {
+class _BottomSheetAddBoardLinkTitleFieldState extends State<ResisVonTextfield> {
   late final ValueNotifier<String?> _error;
 
   @override
@@ -52,7 +51,7 @@ class _BottomSheetAddBoardLinkTitleFieldState
             _error.value = _validator(value);
             widget.onchange.call(value);
           },
-          initialValue: widget.initialPerception?.toString(),
+          initialValue: widget.initialValue?.toString(),
           style: const TextStyle(fontSize: 16),
           textInputAction: TextInputAction.next,
           keyboardType: TextInputType.number,
@@ -62,7 +61,7 @@ class _BottomSheetAddBoardLinkTitleFieldState
           ],
           validator: _validator,
           decoration: InputDecoration(
-            labelText: 'Percepção',
+            labelText: 'Resis. Von.',
             fillColor: palette.backgroundLevelOne,
             helperText: 'obrigatório',
             errorText: error,

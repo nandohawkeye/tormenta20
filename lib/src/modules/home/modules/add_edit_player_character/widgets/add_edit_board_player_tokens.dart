@@ -81,6 +81,7 @@ class _AddEditBoardPlayerTokensState extends State<AddEditBoardPlayerTokens> {
                     onSelectFile: _setFilePath,
                     filePath: filePath,
                     size: widget.size,
+                    isMenace: false,
                   );
                 }
 
@@ -89,6 +90,7 @@ class _AddEditBoardPlayerTokensState extends State<AddEditBoardPlayerTokens> {
                   selected: assetPath,
                   onTap: _setAssetPath,
                   size: widget.size,
+                  isMenace: false,
                 );
               },
             );

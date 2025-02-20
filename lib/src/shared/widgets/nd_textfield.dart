@@ -10,7 +10,7 @@ class NDTextField extends StatefulWidget {
     required this.onchange,
   });
 
-  final int? initialND;
+  final String? initialND;
   final Function(String?) onchange;
 
   @override
@@ -50,12 +50,14 @@ class _BottomSheetAddBoardLinkTitleFieldState extends State<NDTextField> {
             _error.value = _validator(value);
             widget.onchange.call(value);
           },
-          initialValue: widget.initialND?.toString(),
+          initialValue: widget.initialND,
           style: const TextStyle(fontSize: 16),
           textInputAction: TextInputAction.next,
-          keyboardType: TextInputType.number,
+          keyboardType: TextInputType.text,
           textCapitalization: TextCapitalization.sentences,
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'[0-9/]')),
+          ],
           validator: _validator,
           decoration: InputDecoration(
             labelText: 'ND',

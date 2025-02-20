@@ -159,6 +159,10 @@ class $AssetsImagesGen {
   AssetGenImage get bordaToken =>
       const AssetGenImage('assets/images/borda_token.png');
 
+  /// File path: assets/images/borda_token_ameaca.png
+  AssetGenImage get bordaTokenAmeaca =>
+      const AssetGenImage('assets/images/borda_token_ameaca.png');
+
   /// Directory path: assets/images/caracters
   $AssetsImagesCaractersGen get caracters => const $AssetsImagesCaractersGen();
 
@@ -204,6 +208,7 @@ class $AssetsImagesGen {
   List<AssetGenImage> get values => [
         banner,
         bordaToken,
+        bordaTokenAmeaca,
         developer,
         fire,
         iconLogoT20,

@@ -9,12 +9,14 @@ class AddEditBoardPlayerTokenCard extends StatelessWidget {
     this.selected,
     required this.onTap,
     required this.size,
+    required this.isMenace,
   });
 
   final String assetPath;
   final String? selected;
   final Function(String) onTap;
   final double size;
+  final bool isMenace;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,11 @@ class AddEditBoardPlayerTokenCard extends StatelessWidget {
                 ),
               ),
             ),
-            if (isSelected) AddEditBoardPlayerTokenCardBord(size: size),
+            if (isSelected)
+              AddEditBoardTokenCardBord(
+                size: size,
+                isMenace: isMenace,
+              ),
             AddEditBoardPlayerTokenCardTag(
               tag: assetPath
                   .split('/')

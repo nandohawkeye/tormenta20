@@ -46,6 +46,7 @@ class InitScreen extends StatelessWidget {
             InitBoardField(),
             InitCharacterField(),
             InitMenaceField(),
+            SizedBox(height: 100),
           ],
         ),
       ),

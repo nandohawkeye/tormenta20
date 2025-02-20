@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_menace/add_edit_menace_store.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/add_edit_menace_controller.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_bottom_buttons.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_header.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_tokens.dart';
-import 'package:tormenta20/src/shared/widgets/defense_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/displacement_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/initiative_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/life_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/mana_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/name_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/nd_textfield.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_stage_one.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_stage_three.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_stage_two.dart';
 import 'package:tormenta20/src/shared/entities/menace.dart';
-import 'package:tormenta20/src/shared/widgets/perception_textfield.dart';
 
 class AddEditMenaceScreen extends StatefulWidget {
   const AddEditMenaceScreen({super.key, this.menace});
@@ -25,14 +19,34 @@ class AddEditMenaceScreen extends StatefulWidget {
 }
 
 class _AddEditMenaceScreenState extends State<AddEditMenaceScreen> {
-  final _formKey = GlobalKey<FormState>();
-
-  late final AddEditMenaceStore _store;
+  final _formKeyStageOne = GlobalKey<FormState>();
+  final _formKeyStageTwo = GlobalKey<FormState>();
+  late final AddEditMenaceController _controller;
+  late final PageController _pageController;
 
   @override
   void initState() {
     super.initState();
-    _store = AddEditMenaceStore(widget.menace);
+    _controller = AddEditMenaceController(widget.menace);
+    _pageController = PageController();
+    _controller.stage.addListener(_stageListener);
+  }
+
+  @override
+  void dispose() {
+    _controller.stage.removeListener(_stageListener);
+    _controller.dispose();
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _stageListener() {
+    final stage = _controller.stage.value;
+    _pageController.animateToPage(
+      stage - 1,
+      duration: T20UI.defaultDurationAnimation,
+      curve: Curves.easeInOut,
+    );
   }
 
   @override
@@ -48,131 +62,72 @@ class _AddEditMenaceScreenState extends State<AddEditMenaceScreen> {
             const AddEditMenaceScreenHeader(),
             const Divider(),
             Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    T20UI.spaceHeight,
-                    AddEditMenaceScreenTokens(
-                      store: _store,
-                      size: 80,
-                    ),
-                    T20UI.spaceHeight,
-                    Form(
-                      key: _formKey,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: T20UI.horizontalPadding,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: NameTextField(
-                                    onchange: (_) {},
-                                    initialName: null,
-                                  ),
-                                ),
-                                T20UI.spaceWidth,
-                                Expanded(
-                                  child: NDTextField(
-                                    onchange: (_) {},
-                                    initialND: null,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          T20UI.spaceHeight,
-                          Padding(
-                            padding: T20UI.horizontalPadding,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: LifeTextField(
-                                    onchange: (_) {},
-                                    initialLife: null,
-                                  ),
-                                ),
-                                T20UI.spaceWidth,
-                                Expanded(
-                                  child: ManaTextField(
-                                    onchange: (_) {},
-                                    initialMana: null,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          T20UI.spaceHeight,
-                          Padding(
-                            padding: T20UI.horizontalPadding,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: InitiativeTextfield(
-                                    onchange: (_) {},
-                                    initialInitiative: null,
-                                  ),
-                                ),
-                                T20UI.spaceWidth,
-                                Expanded(
-                                  child: DefenseTextField(
-                                    onchange: (_) {},
-                                    initialDefense: null,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          T20UI.spaceHeight,
-                          Padding(
-                            padding: T20UI.horizontalPadding,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: PerceptionTextfield(
-                                    onchange: (_) {},
-                                    initialDefense: null,
-                                  ),
-                                ),
-                                T20UI.spaceWidth,
-                                Expanded(
-                                  child: DisplacementTextfield(
-                                    onchange: (_) {},
-                                    initialDefense: null,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          T20UI.spaceHeight,
-                          // AddEditBoardPlayerBroodSelector(
-                          //   store: _store,
-                          // ),
-                          // T20UI.spaceHeight,
-                          // AddEditBoardPlayerClassesSelector(
-                          //   store: _store,
-                          // ),
-                          // T20UI.spaceHeight,
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+              child: PageView(
+                controller: _pageController,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  AddEditMenaceScreenStageOne(
+                    formKey: _formKeyStageOne,
+                    controller: _controller,
+                  ),
+                  AddEditMenaceScreenStageTwo(
+                    controller: _controller,
+                    formKey: _formKeyStageTwo,
+                  ),
+                  AddEditMenaceScreenStageThree(
+                    controller: _controller,
+                  )
+                ],
               ),
             ),
             AddEditMenaceScreenBottomButtons(
+              notifierStage: _controller.stage,
+              notifierPercent: _controller.percent,
               onSave: () {
-                // if (_formKey.currentState!.validate()) {
-                //   final result = _store.onSave();
-                //   if (result != null) {
-                //     Navigator.pop(context, result);
-                //   }
-                // }
+                final stage = _controller.stage.value;
+                if (stage == 1) {
+                  if (_formKeyStageOne.currentState!.validate()) {
+                    _controller.setStage(2);
+                    _controller.setPercent(.4);
+                  }
+                } else if (stage == 2) {
+                  if (_formKeyStageTwo.currentState!.validate()) {
+                    final isValidType = _controller.isValidType();
+                    if (!isValidType) {
+                      return;
+                    }
+
+                    final isValidCreatureSize =
+                        _controller.isValidCreatureSize();
+                    if (!isValidCreatureSize) {
+                      return;
+                    }
+
+                    final isValidCombatRole = _controller.isValidCombatRole();
+                    if (!isValidCombatRole) {
+                      return;
+                    }
+
+                    _controller.setStage(3);
+                    _controller.setPercent(.6);
+                  }
+                } else if (stage == 3) {
+                  final isValidCreatureVision =
+                      _controller.isValidCreatureVision();
+                  if (!isValidCreatureVision) {
+                    return;
+                  }
+
+                  _controller.setPercent(1.0);
+                }
+              },
+              onBack: () {
+                final stage = _controller.stage.value;
+                if (stage == 1) {
+                  Navigator.pop(context);
+                } else {
+                  _controller.setStage(stage - 1);
+                }
               },
             ),
             T20UI.safeAreaBottom(context)

@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/shared/widgets/animated_percent_circular_progress.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
 
 class AddEditMenaceScreenBottomButtons extends StatelessWidget {
-  const AddEditMenaceScreenBottomButtons({super.key, required this.onSave});
+  const AddEditMenaceScreenBottomButtons({
+    super.key,
+    required this.onSave,
+    required this.onBack,
+    required this.notifierStage,
+    required this.notifierPercent,
+  });
 
   final Function() onSave;
+  final Function() onBack;
+  final ValueNotifier<int> notifierStage;
+  final ValueNotifier<double> notifierPercent;
 
   @override
   Widget build(BuildContext context) {
@@ -20,33 +28,24 @@ class AddEditMenaceScreenBottomButtons extends StatelessWidget {
           padding: T20UI.allPadding,
           child: Row(
             children: [
-              SizedBox(
-                width: T20UI.inputHeight,
-                height: T20UI.inputHeight,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    CircularProgressIndicator(
-                      value: .4,
-                      strokeWidth: 8,
-                      strokeAlign: 1,
-                      strokeCap: StrokeCap.round,
-                      color: palette.selected,
-                      backgroundColor: palette.backgroundLevelOne,
-                    ),
-                    const Icon(FontAwesomeIcons.check)
-                  ],
-                ),
-              ),
+              ValueListenableBuilder(
+                  valueListenable: notifierPercent,
+                  builder: (_, percent, __) {
+                    return AnimatedPercentCircularProgress(percent);
+                  }),
               T20UI.spaceWidth,
               Expanded(
-                child: MainButton(
-                  label: 'Próximo',
-                  onTap: onSave,
-                ),
+                child: ValueListenableBuilder(
+                    valueListenable: notifierStage,
+                    builder: (_, stage, __) {
+                      return MainButton(
+                        label: stage < 3 ? 'Próximo' : 'Salvar',
+                        onTap: onSave,
+                      );
+                    }),
               ),
               T20UI.spaceWidth,
-              const SimpleCloseButton()
+              SimpleCloseButton(onTap: onBack)
             ],
           ),
         )

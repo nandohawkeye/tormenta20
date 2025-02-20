@@ -14,11 +14,13 @@ class AddEditBoardPlayerFileImageSelector extends StatelessWidget {
     this.filePath,
     required this.onSelectFile,
     required this.size,
+    required this.isMenace,
   });
 
   final String? filePath;
   final Function(String) onSelectFile;
   final double size;
+  final bool isMenace;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +71,11 @@ class AddEditBoardPlayerFileImageSelector extends StatelessWidget {
                 ),
               ),
             ),
-            if (filePath != null) AddEditBoardPlayerTokenCardBord(size: size),
+            if (filePath != null)
+              AddEditBoardTokenCardBord(
+                size: size,
+                isMenace: isMenace,
+              ),
             const AddEditBoardPlayerTokenCardTag(
               tag: 'Galeria',
             )
