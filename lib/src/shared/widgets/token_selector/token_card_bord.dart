@@ -3,8 +3,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 
-class AddEditBoardTokenCardBord extends StatelessWidget {
-  const AddEditBoardTokenCardBord({
+class TokenCardBord extends StatelessWidget {
+  const TokenCardBord({
     super.key,
     required this.size,
     required this.isMenace,

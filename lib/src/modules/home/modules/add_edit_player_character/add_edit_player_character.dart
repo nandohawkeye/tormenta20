@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/widgets/add_edit_board_player_store.dart';
@@ -12,8 +13,8 @@ import 'package:tormenta20/src/shared/widgets/life_textfield.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/widgets/add_edit_board_player_main_buttons.dart';
 import 'package:tormenta20/src/shared/widgets/name_character_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/player_name_textfield.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/widgets/add_edit_board_player_tokens.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player.dart';
+import 'package:tormenta20/src/shared/widgets/token_selector/token_selector.dart';
 
 class AddEditBoardPlayerCharacter extends StatefulWidget {
   const AddEditBoardPlayerCharacter({
@@ -64,8 +65,15 @@ class _AddEditBoardPlayerCharacterState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     T20UI.spaceHeight,
-                    AddEditBoardPlayerTokens(
-                      store: _store,
+                    TokenSelector(
+                      allTokens: [
+                        ...Assets.tokensLendas.values.map((t) => t.path),
+                        ...Assets.tokens.values.map((t) => t.path)
+                      ],
+                      changeAsset: _store.onChangeAssetPath,
+                      changePath: _store.onChangeFilePath,
+                      initalImageAsset: _store.assetPath,
+                      initialImagePath: _store.filePath,
                       size: 80,
                     ),
                     T20UI.spaceHeight,

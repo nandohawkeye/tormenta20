@@ -197,6 +197,9 @@ class $AssetsImagesGen {
   /// Directory path: assets/images/menaces
   $AssetsImagesMenacesGen get menaces => const $AssetsImagesMenacesGen();
 
+  /// Directory path: assets/images/pantheon
+  $AssetsImagesPantheonGen get pantheon => const $AssetsImagesPantheonGen();
+
   /// File path: assets/images/pdf.png
   AssetGenImage get pdf => const AssetGenImage('assets/images/pdf.png');
 
@@ -821,6 +824,114 @@ class $AssetsImagesMenacesGen {
   /// List of all assets
   List<AssetGenImage> get values =>
       [chimera, cyclops, dragon, hydra, minotaur, sphinx, wolf];
+}
+
+class $AssetsImagesPantheonGen {
+  const $AssetsImagesPantheonGen();
+
+  /// File path: assets/images/pantheon/Aharadak.jpg
+  AssetGenImage get aharadak =>
+      const AssetGenImage('assets/images/pantheon/Aharadak.jpg');
+
+  /// File path: assets/images/pantheon/Allihanna.jpg
+  AssetGenImage get allihanna =>
+      const AssetGenImage('assets/images/pantheon/Allihanna.jpg');
+
+  /// File path: assets/images/pantheon/Arsenal.jpg
+  AssetGenImage get arsenal =>
+      const AssetGenImage('assets/images/pantheon/Arsenal.jpg');
+
+  /// File path: assets/images/pantheon/Azgher.jpg
+  AssetGenImage get azgher =>
+      const AssetGenImage('assets/images/pantheon/Azgher.jpg');
+
+  /// File path: assets/images/pantheon/Hynnin.jpg
+  AssetGenImage get hynnin =>
+      const AssetGenImage('assets/images/pantheon/Hynnin.jpg');
+
+  /// File path: assets/images/pantheon/Kallyadranoch.jpg
+  AssetGenImage get kallyadranoch =>
+      const AssetGenImage('assets/images/pantheon/Kallyadranoch.jpg');
+
+  /// File path: assets/images/pantheon/Khalmir.jpg
+  AssetGenImage get khalmir =>
+      const AssetGenImage('assets/images/pantheon/Khalmir.jpg');
+
+  /// File path: assets/images/pantheon/Lena.jpg
+  AssetGenImage get lena =>
+      const AssetGenImage('assets/images/pantheon/Lena.jpg');
+
+  /// File path: assets/images/pantheon/Lin-Wu.jpg
+  AssetGenImage get linWu =>
+      const AssetGenImage('assets/images/pantheon/Lin-Wu.jpg');
+
+  /// File path: assets/images/pantheon/Marah.jpg
+  AssetGenImage get marah =>
+      const AssetGenImage('assets/images/pantheon/Marah.jpg');
+
+  /// File path: assets/images/pantheon/Megalokk.jpg
+  AssetGenImage get megalokk =>
+      const AssetGenImage('assets/images/pantheon/Megalokk.jpg');
+
+  /// File path: assets/images/pantheon/Nimb.jpg
+  AssetGenImage get nimb =>
+      const AssetGenImage('assets/images/pantheon/Nimb.jpg');
+
+  /// File path: assets/images/pantheon/Oceano.jpg
+  AssetGenImage get oceano =>
+      const AssetGenImage('assets/images/pantheon/Oceano.jpg');
+
+  /// File path: assets/images/pantheon/Ssszaas.jpg
+  AssetGenImage get ssszaas =>
+      const AssetGenImage('assets/images/pantheon/Ssszaas.jpg');
+
+  /// File path: assets/images/pantheon/Tanna-Toh.jpg
+  AssetGenImage get tannaToh =>
+      const AssetGenImage('assets/images/pantheon/Tanna-Toh.jpg');
+
+  /// File path: assets/images/pantheon/Tenebra.jpg
+  AssetGenImage get tenebra =>
+      const AssetGenImage('assets/images/pantheon/Tenebra.jpg');
+
+  /// File path: assets/images/pantheon/Thwor.jpg
+  AssetGenImage get thwor =>
+      const AssetGenImage('assets/images/pantheon/Thwor.jpg');
+
+  /// File path: assets/images/pantheon/Thyatis.jpg
+  AssetGenImage get thyatis =>
+      const AssetGenImage('assets/images/pantheon/Thyatis.jpg');
+
+  /// File path: assets/images/pantheon/Valkaria.jpg
+  AssetGenImage get valkaria =>
+      const AssetGenImage('assets/images/pantheon/Valkaria.jpg');
+
+  /// File path: assets/images/pantheon/Wynna.jpg
+  AssetGenImage get wynna =>
+      const AssetGenImage('assets/images/pantheon/Wynna.jpg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [
+        aharadak,
+        allihanna,
+        arsenal,
+        azgher,
+        hynnin,
+        kallyadranoch,
+        khalmir,
+        lena,
+        linWu,
+        marah,
+        megalokk,
+        nimb,
+        oceano,
+        ssszaas,
+        tannaToh,
+        tenebra,
+        thwor,
+        thyatis,
+        valkaria,
+        wynna
+      ];
 }
 
 class Assets {

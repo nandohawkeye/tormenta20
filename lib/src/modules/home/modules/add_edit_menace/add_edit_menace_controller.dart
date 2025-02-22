@@ -1,7 +1,10 @@
+// ignore_for_file: prefer_final_fields
+
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/shared/entities/combat_role.dart';
 import 'package:tormenta20/src/shared/entities/creature_size.dart';
-import 'package:tormenta20/src/shared/entities/creature_vision.dart';
+import 'package:tormenta20/src/shared/entities/general_skill.dart';
+import 'package:tormenta20/src/shared/entities/magic/magic_menace.dart';
 import 'package:tormenta20/src/shared/entities/menace.dart';
 import 'package:tormenta20/src/shared/entities/menace_type.dart';
 import 'package:uuid/uuid.dart';
@@ -13,13 +16,16 @@ class AddEditMenaceController {
     if (menace != null) {
       _uuid = menace.uuid;
       _type = menace.type;
-      _creatureVision = menace.vision;
+      _divinityId = menace.divinityId;
+      _displacement = menace.displacement;
+      _senses = menace.senses;
       _imagePath = menace.imagePath;
       _imageAsset = menace.imageAsset;
       _name = menace.name;
       _nd = menace.nd;
       _life = menace.life;
       _mana = menace.mana;
+      _casterInfos = menace.casterInfos;
       _initiative = menace.initiative;
       _defense = menace.defense;
       _perception = menace.perception;
@@ -34,6 +40,8 @@ class AddEditMenaceController {
       _charisma = menace.charisma;
       _creatureSize = menace.creatureSize;
       _combatRole = menace.combatRole;
+      _generalSkills.addAll(menace.generalSkills);
+      _magics.addAll(menace.magics);
       //TODO refactor displacements
       // _displacement = menace.displacements;
     } else {
@@ -42,6 +50,7 @@ class AddEditMenaceController {
   }
 
   late final String _uuid;
+  String get uuid => _uuid;
 
   late final ValueNotifier<int> stage;
   void setStage(int value) => stage.value = value;
@@ -106,24 +115,17 @@ class AddEditMenaceController {
     }
   }
 
-  final ValueNotifier<bool> errorCreatureVision = ValueNotifier<bool>(false);
-  void setErrorCreatureVision(bool value) => errorCreatureVision.value = value;
+  String? _desc;
+  String? get desc => _desc;
+  void changeDesc(String? value) => _desc = value;
 
-  CreatureVision? _creatureVision;
-  CreatureVision? get creatureVision => _creatureVision;
-  void changeCreatureVision(CreatureVision value) {
-    _creatureVision = value;
-    errorCreatureVision.value = false;
-  }
+  String? _extraInfos;
+  String? get extraInfos => _extraInfos;
+  void changeExtraInfos(String? value) => _extraInfos = value;
 
-  bool isValidCreatureVision() {
-    if (_creatureVision == null) {
-      errorCreatureVision.value = true;
-      return false;
-    } else {
-      return true;
-    }
-  }
+  String? _senses;
+  String? get senses => _senses;
+  void changeSenses(String? value) => _senses = value;
 
   String? _imagePath;
   String? get imagePath => _imagePath;
@@ -136,6 +138,10 @@ class AddEditMenaceController {
   String? _name;
   String? get name => _name;
   void changeName(String? value) => _name = value;
+
+  String? _displacement;
+  String? get displacement => _displacement;
+  void changeDisplacement(String? value) => _displacement = value;
 
   String? _nd;
   String? get nd => _nd;
@@ -295,12 +301,37 @@ class AddEditMenaceController {
     _charisma = int.parse(value!);
   }
 
+  int? _divinityId;
+  int? get divinityId => _divinityId;
+  void changeDivinityId(int? value) => _divinityId = value;
+
+  String? _casterInfos;
+  String? get casterInfos => _casterInfos;
+  void changeCasterInfos(String? value) => _casterInfos = value;
+
+  List<GeneralSkill> _generalSkills = [];
+  List<GeneralSkill> get generalSkills => _generalSkills;
+  List<String> _generalSkillsToDelete = [];
+  void addGeneralSkill(GeneralSkill value) => _generalSkills.add(value);
+  void removeGeneralSkill(GeneralSkill value) {
+    _generalSkills.remove(value);
+    _generalSkillsToDelete.add(value.uuid);
+  }
+
+  List<MagicMenace> _magics = [];
+  List<MagicMenace> get magics => _magics;
+  List<String> _magicsToDelete = [];
+  void addMagic(MagicMenace value) => _magics.add(value);
+  void removeMagic(MagicMenace value) {
+    _magics.remove(value);
+    _magicsToDelete.add(value.uuid);
+  }
+
   dispose() {
     stage.dispose();
     percent.dispose();
     errorValidadeType.dispose();
     errorCreatureSize.dispose();
-    errorCreatureVision.dispose();
     errorCombatRole.dispose();
   }
 }

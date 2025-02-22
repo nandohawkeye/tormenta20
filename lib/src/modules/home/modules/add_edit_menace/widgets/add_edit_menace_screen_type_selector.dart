@@ -43,7 +43,7 @@ class _AddEditBoardPlayerBroodSelectorState
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          height: (95 * MediaQuery.of(context).textScaler.scale(1)),
+          height: (95),
           child: Stack(
             children: [
               Padding(
@@ -89,8 +89,7 @@ class _AddEditBoardPlayerBroodSelectorState
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: SizedBox(
-                    height: T20UI.inputHeight *
-                        MediaQuery.of(context).textScaler.scale(1),
+                    height: T20UI.inputHeight,
                     width: double.infinity,
                     child: ValueListenableBuilder(
                         valueListenable: _typeSelected,
@@ -99,7 +98,7 @@ class _AddEditBoardPlayerBroodSelectorState
                             shrinkWrap: true,
                             padding: const EdgeInsets.only(
                               left: T20UI.spaceSize + 10,
-                              right: T20UI.spaceSize,
+                              right: T20UI.spaceSize + 10,
                             ),
                             scrollDirection: Axis.horizontal,
                             separatorBuilder: T20UI.separatorBuilderHorizontal,

@@ -2,21 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 
-class NDTextField extends StatefulWidget {
-  const NDTextField({
+class AddEditGeneralSkillsTitleTextfield extends StatefulWidget {
+  const AddEditGeneralSkillsTitleTextfield({
     super.key,
-    this.initialND,
+    this.initialTitle,
     required this.onchange,
   });
 
-  final String? initialND;
+  final String? initialTitle;
   final Function(String?) onchange;
 
   @override
-  State<NDTextField> createState() => _BottomSheetAddBoardLinkTitleFieldState();
+  State<AddEditGeneralSkillsTitleTextfield> createState() =>
+      _BottomSheetAddBoardLinkTitleFieldState();
 }
 
-class _BottomSheetAddBoardLinkTitleFieldState extends State<NDTextField> {
+class _BottomSheetAddBoardLinkTitleFieldState
+    extends State<AddEditGeneralSkillsTitleTextfield> {
   late final ValueNotifier<String?> _error;
 
   @override
@@ -49,15 +51,15 @@ class _BottomSheetAddBoardLinkTitleFieldState extends State<NDTextField> {
             _error.value = _validator(value);
             widget.onchange.call(value);
           },
-          initialValue: widget.initialND,
+          initialValue: widget.initialTitle,
           style: const TextStyle(fontSize: 16),
           textInputAction: TextInputAction.next,
-          keyboardType: TextInputType.text,
+          keyboardType: TextInputType.name,
           textCapitalization: TextCapitalization.sentences,
           validator: _validator,
           decoration: InputDecoration(
-            labelText: 'ND',
-            fillColor: palette.backgroundLevelOne,
+            labelText: 'Título',
+            fillColor: palette.backgroundLevelTwo,
             helperText: 'obrigatório',
             errorText: error,
             helperStyle: TextStyle(color: palette.textDisable),

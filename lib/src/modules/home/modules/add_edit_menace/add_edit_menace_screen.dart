@@ -84,6 +84,7 @@ class _AddEditMenaceScreenState extends State<AddEditMenaceScreen> {
               notifierStage: _controller.stage,
               notifierPercent: _controller.percent,
               onSave: () {
+                FocusScope.of(context).unfocus();
                 final stage = _controller.stage.value;
                 if (stage == 1) {
                   if (_formKeyStageOne.currentState!.validate()) {
@@ -112,12 +113,6 @@ class _AddEditMenaceScreenState extends State<AddEditMenaceScreen> {
                     _controller.setPercent(.6);
                   }
                 } else if (stage == 3) {
-                  final isValidCreatureVision =
-                      _controller.isValidCreatureVision();
-                  if (!isValidCreatureVision) {
-                    return;
-                  }
-
                   _controller.setPercent(1.0);
                 }
               },

@@ -97,6 +97,7 @@ flutter:
     - assets/interface/
     - assets/images/caracters/
     - assets/images/menaces/
+    - assets/images/pantheon/
     - assets/tokens/
     - assets/tokens_lendas/
     - assets/icons/

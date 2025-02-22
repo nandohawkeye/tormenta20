@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/widgets/add_edit_board_player_token_card_bord.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/widgets/add_edit_board_player_token_card_tag.dart';
+import 'package:tormenta20/src/shared/widgets/token_selector/token_card_bord.dart';
+import 'package:tormenta20/src/shared/widgets/token_selector/token_card_tag.dart';
 
-class AddEditBoardPlayerTokenCard extends StatelessWidget {
-  const AddEditBoardPlayerTokenCard({
+class TokenCard extends StatelessWidget {
+  const TokenCard({
     super.key,
     required this.assetPath,
     this.selected,
@@ -21,7 +21,10 @@ class AddEditBoardPlayerTokenCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isSelected = assetPath == selected;
+    final label =
+        assetPath.split('/').last.replaceAll('_', ' ').replaceAll('.png', '');
     return InkWell(
+      borderRadius: BorderRadius.circular(20000),
       onTap: () => onTap(assetPath),
       child: SizedBox(
         height: size + 10,
@@ -43,16 +46,12 @@ class AddEditBoardPlayerTokenCard extends StatelessWidget {
               ),
             ),
             if (isSelected)
-              AddEditBoardTokenCardBord(
+              TokenCardBord(
                 size: size,
                 isMenace: isMenace,
               ),
-            AddEditBoardPlayerTokenCardTag(
-              tag: assetPath
-                  .split('/')
-                  .last
-                  .replaceAll('_', ' ')
-                  .replaceAll('.png', ''),
+            TokenCardTag(
+              tag: label == 'Anao' ? 'Anão' : label,
             )
           ],
         ),

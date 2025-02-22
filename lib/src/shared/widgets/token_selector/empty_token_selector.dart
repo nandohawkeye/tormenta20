@@ -1,41 +1,28 @@
-import 'dart:io';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get_it/get_it.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/widgets/token_selector/token_card_bord.dart';
 import 'package:tormenta20/src/shared/widgets/token_selector/token_card_tag.dart';
-import 'package:tormenta20/src/shared/widgets/error_image_placeholder.dart';
 
-class AddEditBoardPlayerFileImageSelector extends StatelessWidget {
-  const AddEditBoardPlayerFileImageSelector({
+class EmptyTokenSelector extends StatelessWidget {
+  const EmptyTokenSelector({
     super.key,
-    this.filePath,
-    required this.onSelectFile,
+    required this.onEmpty,
     required this.size,
     required this.isMenace,
+    required this.isEmpty,
   });
 
-  final String? filePath;
-  final Function(String) onSelectFile;
+  final Function() onEmpty;
   final double size;
+  final bool isEmpty;
   final bool isMenace;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(20000),
-      onTap: () async {
-        FilePickerResult? result =
-            await GetIt.I<FilePicker>().pickFiles(type: FileType.image);
-
-        final path = result?.files.single.path;
-
-        if (path != null) {
-          onSelectFile.call(path);
-        }
-      },
+      onTap: onEmpty,
       child: SizedBox(
         height: size + 10,
         width: size + 10,
@@ -53,32 +40,21 @@ class AddEditBoardPlayerFileImageSelector extends StatelessWidget {
                       shape: BoxShape.circle,
                       color: palette.backgroundLevelOne,
                     ),
-                    child: filePath != null
-                        ? ClipOval(
-                            child: Image.file(
-                              File(filePath!),
-                              height: size,
-                              width: size,
-                              fit: BoxFit.cover,
-                              errorBuilder: (_, __, ___) =>
-                                  const ErrorImagePlaceholder(),
-                            ),
-                          )
-                        : Icon(
-                            FontAwesomeIcons.solidImage,
-                            color: palette.selected,
-                          ),
+                    child: Icon(
+                      FontAwesomeIcons.xmark,
+                      color: palette.selected,
+                    ),
                   ),
                 ),
               ),
             ),
-            if (filePath != null)
+            if (isEmpty)
               TokenCardBord(
                 size: size,
                 isMenace: isMenace,
               ),
             const TokenCardTag(
-              tag: 'Galeria',
+              tag: 'Vazio',
             )
           ],
         ),

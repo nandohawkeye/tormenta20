@@ -98,7 +98,7 @@ class _AddEditBoardPlayerBroodSelectorState
                             shrinkWrap: true,
                             padding: const EdgeInsets.only(
                               left: T20UI.spaceSize + 10,
-                              right: T20UI.spaceSize,
+                              right: T20UI.spaceSize + 10,
                             ),
                             scrollDirection: Axis.horizontal,
                             separatorBuilder: T20UI.separatorBuilderHorizontal,

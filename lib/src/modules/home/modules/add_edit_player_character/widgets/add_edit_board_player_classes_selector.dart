@@ -97,8 +97,7 @@ class _AddEditBoardPlayerClassesSelectorState
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: SizedBox(
-                    height: T20UI.inputHeight *
-                        MediaQuery.of(context).textScaler.scale(1),
+                    height: T20UI.inputHeight,
                     width: double.infinity,
                     child: ValueListenableBuilder(
                       valueListenable: _selectedClasses,
@@ -108,7 +107,7 @@ class _AddEditBoardPlayerClassesSelectorState
                           shrinkWrap: true,
                           padding: const EdgeInsets.only(
                             left: T20UI.spaceSize + 10,
-                            right: T20UI.spaceSize,
+                            right: T20UI.spaceSize + 10,
                           ),
                           scrollDirection: Axis.horizontal,
                           separatorBuilder: T20UI.separatorBuilderHorizontal,

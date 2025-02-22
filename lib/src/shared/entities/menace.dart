@@ -1,11 +1,13 @@
 import 'package:tormenta20/src/shared/entities/combat_role.dart';
 import 'package:tormenta20/src/shared/entities/creature_size.dart';
-import 'package:tormenta20/src/shared/entities/creature_vision.dart';
+import 'package:tormenta20/src/shared/entities/general_skill.dart';
+import 'package:tormenta20/src/shared/entities/magic/magic_menace.dart';
 import 'package:tormenta20/src/shared/entities/menace_type.dart';
 
 class Menace {
   final String? imagePath;
   final String? imageAsset;
+  final String? displacement;
   final String name;
   final String nd;
   final String uuid;
@@ -29,17 +31,28 @@ class Menace {
   final MenaceType type;
   final CreatureSize creatureSize;
   final CombatRole combatRole;
-  final CreatureVision vision;
+  final String? senses;
+  final int? divinityId;
+  final List<GeneralSkill> generalSkills;
+  final String? casterInfos;
+  final List<MagicMenace> magics;
 
-  final String displacements;
   final List<String> actions;
   final List<String> expertises;
   final List<String> treasures;
-  final List<String> weaknesses;
+  final List<String> equipments;
+  final String? desc;
+  final String? extraInfos;
 
   Menace({
     this.imagePath,
     this.imageAsset,
+    this.displacement,
+    this.desc,
+    this.extraInfos,
+    this.divinityId,
+    this.casterInfos,
+    required this.magics,
     required this.uuid,
     required this.name,
     required this.nd,
@@ -51,12 +64,11 @@ class Menace {
     required this.defense,
     required this.life,
     required this.mana,
-    required this.displacements,
     required this.actions,
     required this.expertises,
     required this.treasures,
-    required this.vision,
-    required this.weaknesses,
+    required this.senses,
+    required this.generalSkills,
     required this.fortResistence,
     required this.refResistence,
     required this.vonResistence,
@@ -66,6 +78,7 @@ class Menace {
     required this.dexterity,
     required this.intelligence,
     required this.wisdom,
+    required this.equipments,
   });
 
   @override
@@ -85,10 +98,10 @@ class Menace {
       other.actions == actions &&
       other.expertises == expertises &&
       other.treasures == treasures &&
-      other.vision == vision &&
+      other.senses == senses &&
       other.imagePath == imagePath &&
       other.imageAsset == imageAsset &&
-      other.weaknesses == weaknesses &&
+      other.generalSkills == generalSkills &&
       other.fortResistence == fortResistence &&
       other.refResistence == refResistence &&
       other.vonResistence == vonResistence &&
@@ -97,7 +110,13 @@ class Menace {
       other.constitution == constitution &&
       other.dexterity == dexterity &&
       other.wisdom == wisdom &&
-      other.charisma == charisma;
+      other.charisma == charisma &&
+      other.equipments == equipments &&
+      other.desc == desc &&
+      other.extraInfos == extraInfos &&
+      other.divinityId == divinityId &&
+      other.casterInfos == casterInfos &&
+      other.magics == magics;
 
   @override
   int get hashCode =>
@@ -115,10 +134,10 @@ class Menace {
       actions.hashCode ^
       expertises.hashCode ^
       treasures.hashCode ^
-      vision.hashCode ^
+      senses.hashCode ^
       imagePath.hashCode ^
       imageAsset.hashCode ^
-      weaknesses.hashCode ^
+      generalSkills.hashCode ^
       fortResistence.hashCode ^
       refResistence.hashCode ^
       vonResistence.hashCode ^
@@ -127,7 +146,13 @@ class Menace {
       constitution.hashCode ^
       dexterity.hashCode ^
       wisdom.hashCode ^
-      charisma.hashCode;
+      charisma.hashCode ^
+      equipments.hashCode ^
+      desc.hashCode ^
+      extraInfos.hashCode ^
+      divinityId.hashCode ^
+      casterInfos.hashCode ^
+      magics.hashCode;
 }
 
 // básicos pra salvar de uma ameaça é o nome e ND, tipo e tamanho, papel de combate, 
