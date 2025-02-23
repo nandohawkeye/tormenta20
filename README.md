@@ -2,6 +2,8 @@
 
 Este é um projeto feito por um fã de RPG's de mesa e de Tormenta 20 para fãs de RPG's de mesa e de Tormenta 20, com o intuito de fomentar a  ao redor de uma mesa, e de ser um complemento e não um substituto aos livros de Tormenta 20.
 
+![Tela inicial do app](docs/splash.png)
+
 Tormenta 20 pertence a Jambo Editora, Todos os direitos sobre a marca Tormenta 20 são reservados a editora.
 
 ## ⚠️ Avisos
