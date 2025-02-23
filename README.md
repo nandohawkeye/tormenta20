@@ -2,10 +2,12 @@
 
 Este é um projeto feito por um fã de RPG's de mesa e de Tormenta 20 para fãs de RPG's de mesa e de Tormenta 20, com o intuito de fomentar a  ao redor de uma mesa, e de ser um complemento e não um substituto aos livros de Tormenta 20.
 
-<img src="docs/splash.png" alt="Splash" width="250"/>
-<img src="docs/home.png" alt="Início" width="250"/>
-<img src="docs/magias.png" alt="Magias" width="250"/>
-<img src="docs/about.png" alt="Sobre" width="250"/>
+<div style="display: flex; flex-wrap: wrap;">
+  <img src="docs/splash.png" alt="Splash" style="width: 30%; margin-right: 10px;"/>
+  <img src="docs/home.png" alt="Início" style="width: 30%; margin-right: 10px;"/>
+  <img src="docs/magias.png" alt="Magias" style="width: 30%; margin-right: 10px;"/>
+  <img src="docs/about.png" alt="Sobre" style="width: 30%;"/>
+</div>
 
 Tormenta 20 pertence a Jambo Editora, Todos os direitos sobre a marca Tormenta 20 são reservados a editora.
 
