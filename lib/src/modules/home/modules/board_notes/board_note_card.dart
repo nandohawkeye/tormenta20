@@ -51,8 +51,11 @@ class BoardNoteCard extends StatelessWidget {
                         children: [
                           Text(
                             note.note,
+                            maxLines: 200000,
                             style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w500),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                           const SizedBox(height: 8),
                           Text(

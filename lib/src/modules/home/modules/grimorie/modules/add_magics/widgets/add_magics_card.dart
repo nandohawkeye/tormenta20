@@ -15,6 +15,7 @@ class AddMagicsCard extends StatelessWidget {
     required this.onTap,
     required this.searchFilter,
     required this.disabledMagics,
+    required this.multiSelect,
   });
 
   final Magic magic;
@@ -22,6 +23,7 @@ class AddMagicsCard extends StatelessWidget {
   final String searchFilter;
   final List<Magic> disabledMagics;
   final Function(Magic) onTap;
+  final bool multiSelect;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,15 @@ class AddMagicsCard extends StatelessWidget {
       child: Card(
         child: InkWell(
           borderRadius: T20UI.borderRadius,
-          onTap: isDisable ? null : () => onTap(magic),
+          onTap: isDisable
+              ? null
+              : () {
+                  if (multiSelect) {
+                    onTap(magic);
+                  } else {
+                    Navigator.pop(context, magic);
+                  }
+                },
           enableFeedback: false,
           onLongPress: isDisable
               ? null
@@ -98,10 +108,11 @@ class AddMagicsCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                CustomChecked(
-                  value: selectedMagics.contains(magic),
-                  isEnabledToTap: false,
-                )
+                if (multiSelect)
+                  CustomChecked(
+                    value: selectedMagics.contains(magic),
+                    isEnabledToTap: false,
+                  )
               ],
             ),
           ),

@@ -7,6 +7,7 @@ import 'package:tormenta20/src/shared/entities/general_skill.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_menace.dart';
 import 'package:tormenta20/src/shared/entities/menace.dart';
 import 'package:tormenta20/src/shared/entities/menace_type.dart';
+import 'package:tormenta20/src/shared/entities/treasure_type.dart';
 import 'package:uuid/uuid.dart';
 
 class AddEditMenaceController {
@@ -42,6 +43,7 @@ class AddEditMenaceController {
       _combatRole = menace.combatRole;
       _generalSkills.addAll(menace.generalSkills);
       _magics.addAll(menace.magics);
+      _treasureType = menace.treasures ?? TreasureType.none;
       //TODO refactor displacements
       // _displacement = menace.displacements;
     } else {
@@ -326,6 +328,10 @@ class AddEditMenaceController {
     _magics.remove(value);
     _magicsToDelete.add(value.uuid);
   }
+
+  TreasureType? _treasureType;
+  TreasureType? get treasureType => _treasureType;
+  void changeTreasureType(TreasureType value) => _treasureType = value;
 
   dispose() {
     stage.dispose();

@@ -70,6 +70,7 @@ class _AddEditBoardPlayerCharacterState
                         ...Assets.tokensLendas.values.map((t) => t.path),
                         ...Assets.tokens.values.map((t) => t.path)
                       ],
+                      isMenace: false,
                       changeAsset: _store.onChangeAssetPath,
                       changePath: _store.onChangeFilePath,
                       initalImageAsset: _store.assetPath,

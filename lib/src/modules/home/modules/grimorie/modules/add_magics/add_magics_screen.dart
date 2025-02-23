@@ -8,9 +8,14 @@ import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic.dart';
 
 class AddMagicsScreen extends StatefulWidget {
-  const AddMagicsScreen({super.key, required this.initialMagics});
+  const AddMagicsScreen({
+    super.key,
+    required this.initialMagics,
+    this.multiSelect = true,
+  });
 
   final List<Magic> initialMagics;
+  final bool multiSelect;
 
   @override
   State<AddMagicsScreen> createState() => _AddMagicsScreenState();
@@ -41,9 +46,10 @@ class _AddMagicsScreenState extends State<AddMagicsScreen> {
         children: [
           const SizedBox(height: kToolbarHeight),
           T20UI.spaceHeight,
-          const Padding(
+          Padding(
             padding: T20UI.horizontalPadding,
-            child: Labels('Selecione as magias'),
+            child: Labels(
+                'Selecione ${widget.multiSelect ? 'as magias' : 'a magia'}'),
           ),
           T20UI.spaceHeight,
           const Divider(),
@@ -66,6 +72,7 @@ class _AddMagicsScreenState extends State<AddMagicsScreen> {
                         searchFilter: _store.searchFilter,
                         disabledMagics: _store.disabledMagics,
                         selectedMagics: _store.selectedMagics,
+                        multiSelect: widget.multiSelect,
                         onTap: _store.onSelectMagic,
                       ),
                     ),

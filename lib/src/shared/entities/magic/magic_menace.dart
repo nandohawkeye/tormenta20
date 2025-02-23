@@ -6,6 +6,7 @@ class MagicMenace {
   final int? pm;
   final int? cd;
   final String? damageDices;
+  final String? extraDamageDices;
   final int? bonusDamageValue;
   final int magicBaseId;
 
@@ -14,6 +15,7 @@ class MagicMenace {
     this.cd,
     this.damageDices,
     this.bonusDamageValue,
+    this.extraDamageDices,
     required this.name,
     required this.uuid,
     required this.menaceUuid,
@@ -32,7 +34,8 @@ class MagicMenace {
       other.menaceUuid == menaceUuid &&
       other.resumedDesc == resumedDesc &&
       other.magicBaseId == magicBaseId &&
-      other.name == name;
+      other.name == name &&
+      other.extraDamageDices == extraDamageDices;
 
   @override
   int get hashCode =>
@@ -44,5 +47,6 @@ class MagicMenace {
       menaceUuid.hashCode ^
       resumedDesc.hashCode ^
       magicBaseId.hashCode ^
-      name.hashCode;
+      name.hashCode ^
+      extraDamageDices.hashCode;
 }

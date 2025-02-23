@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/add_edit_menace_controller.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_magic_menace_bottom_sheet/add_edit_magic_menace_bottom_sheet.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_magics_field_card.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_menace.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
@@ -36,6 +37,24 @@ class _AddEditBoardPlayerBroodSelectorState
     }
   }
 
+  void _onAdd(MagicMenace? magic) async {
+    await showModalBottomSheet<MagicMenace?>(
+      isScrollControlled: true,
+      isDismissible: true,
+      enableDrag: false,
+      context: context,
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: AddEditMagicMenaceBottomSheet(
+          magic: magic,
+          menaceUuid: widget.controller.uuid,
+        ),
+      ),
+    ).then(_add);
+  }
+
   void _remove(MagicMenace value) {
     List<MagicMenace> oldValues = _selecteds.value;
     oldValues.remove(value);
@@ -53,24 +72,6 @@ class _AddEditBoardPlayerBroodSelectorState
   void dispose() {
     _selecteds.dispose();
     super.dispose();
-  }
-
-  void _onAdd(MagicMenace? skill) async {
-    // await showModalBottomSheet<GeneralSkill?>(
-    //   isScrollControlled: true,
-    //   isDismissible: true,
-    //   enableDrag: false,
-    //   context: context,
-    //   builder: (context) => Padding(
-    //     padding: EdgeInsets.only(
-    //       bottom: MediaQuery.of(context).viewInsets.bottom,
-    //     ),
-    //     child: AddEditGeneralSkillsBottomSheet(
-    //       skill: skill,
-    //       menaceUuid: widget.controller.uuid,
-    //     ),
-    //   ),
-    // ).then(_add);
   }
 
   @override

@@ -13,6 +13,7 @@ class TokenSelector extends StatefulWidget {
     required this.changePath,
     this.initialImagePath,
     this.initalImageAsset,
+    required this.isMenace,
   });
 
   final double size;
@@ -21,6 +22,7 @@ class TokenSelector extends StatefulWidget {
   final Function(String?) changePath;
   final String? initialImagePath;
   final String? initalImageAsset;
+  final bool isMenace;
 
   @override
   State<TokenSelector> createState() => _AddEditBoardPlayerTokensState();
@@ -86,7 +88,7 @@ class _AddEditBoardPlayerTokensState extends State<TokenSelector> {
                 if (index == 0) {
                   return EmptyTokenSelector(
                     isEmpty: isEmpty,
-                    isMenace: true,
+                    isMenace: widget.isMenace,
                     onEmpty: _onEmpty,
                     size: widget.size,
                   );
@@ -97,7 +99,7 @@ class _AddEditBoardPlayerTokensState extends State<TokenSelector> {
                     onSelectFile: _setFilePath,
                     filePath: filePath,
                     size: widget.size,
-                    isMenace: true,
+                    isMenace: widget.isMenace,
                   );
                 }
 
@@ -106,7 +108,7 @@ class _AddEditBoardPlayerTokensState extends State<TokenSelector> {
                   selected: assetPath,
                   onTap: _setAssetPath,
                   size: widget.size,
-                  isMenace: true,
+                  isMenace: widget.isMenace,
                 );
               },
             );

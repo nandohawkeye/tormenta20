@@ -3,6 +3,7 @@ import 'package:tormenta20/src/shared/entities/creature_size.dart';
 import 'package:tormenta20/src/shared/entities/general_skill.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_menace.dart';
 import 'package:tormenta20/src/shared/entities/menace_type.dart';
+import 'package:tormenta20/src/shared/entities/treasure_type.dart';
 
 class Menace {
   final String? imagePath;
@@ -35,12 +36,14 @@ class Menace {
   final int? divinityId;
   final List<GeneralSkill> generalSkills;
   final String? casterInfos;
-  final List<MagicMenace> magics;
+  //padrão, metade, doblo, na rolagem pra dinheiro e item
+  final TreasureType? treasures;
 
+  final List<MagicMenace> magics;
   final List<String> actions;
   final List<String> expertises;
-  final List<String> treasures;
   final List<String> equipments;
+
   final String? desc;
   final String? extraInfos;
 
@@ -52,6 +55,7 @@ class Menace {
     this.extraInfos,
     this.divinityId,
     this.casterInfos,
+    this.treasures,
     required this.magics,
     required this.uuid,
     required this.name,
@@ -66,7 +70,6 @@ class Menace {
     required this.mana,
     required this.actions,
     required this.expertises,
-    required this.treasures,
     required this.senses,
     required this.generalSkills,
     required this.fortResistence,

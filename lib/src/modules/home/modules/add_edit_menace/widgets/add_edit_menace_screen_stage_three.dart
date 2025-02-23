@@ -3,6 +3,7 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/add_edit_menace_controller.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_general_skills_field.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_magics_field.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_type_treasure_selector.dart';
 import 'package:tormenta20/src/shared/widgets/caster_infos_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/divinity_selector/divinity_selector.dart';
 import 'package:tormenta20/src/shared/widgets/displacements_textfield.dart';
@@ -27,6 +28,8 @@ class AddEditMenaceScreenStageThree extends StatelessWidget {
             onSelectDivinity: controller.changeDivinityId,
             initialDivinityId: controller.divinityId,
           ),
+          T20UI.spaceHeight,
+          AddEditMenaceScreenTypeTreasureSelector(controller: controller),
           T20UI.spaceHeight,
           Padding(
             padding: T20UI.horizontalPadding,

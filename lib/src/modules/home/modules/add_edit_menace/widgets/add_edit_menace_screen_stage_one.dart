@@ -40,6 +40,7 @@ class AddEditMenaceScreenStageOne extends StatelessWidget {
             changePath: controller.changePath,
             initalImageAsset: controller.imageAsset,
             initialImagePath: controller.imagePath,
+            isMenace: true,
             size: 80,
           ),
           T20UI.spaceHeight,
