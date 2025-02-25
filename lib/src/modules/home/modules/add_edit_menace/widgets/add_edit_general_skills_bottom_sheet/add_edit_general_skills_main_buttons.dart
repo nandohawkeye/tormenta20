@@ -32,7 +32,8 @@ class AddEditGeneralSkillsMainButtons extends StatelessWidget {
               )
             ],
           ),
-        )
+        ),
+        T20UI.safeAreaBottom(context)
       ],
     );
   }

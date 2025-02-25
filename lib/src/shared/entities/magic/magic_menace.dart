@@ -7,14 +7,14 @@ class MagicMenace {
   final int? cd;
   final String? damageDices;
   final String? extraDamageDices;
-  final int? bonusDamageValue;
+  final int? mediumDamageValue;
   final int magicBaseId;
 
   MagicMenace({
     this.pm,
     this.cd,
     this.damageDices,
-    this.bonusDamageValue,
+    this.mediumDamageValue,
     this.extraDamageDices,
     required this.name,
     required this.uuid,
@@ -29,7 +29,7 @@ class MagicMenace {
       other.pm == pm &&
       other.cd == cd &&
       other.damageDices == damageDices &&
-      other.bonusDamageValue == bonusDamageValue &&
+      other.mediumDamageValue == mediumDamageValue &&
       other.uuid == uuid &&
       other.menaceUuid == menaceUuid &&
       other.resumedDesc == resumedDesc &&
@@ -42,7 +42,7 @@ class MagicMenace {
       pm.hashCode ^
       cd.hashCode ^
       damageDices.hashCode ^
-      bonusDamageValue.hashCode ^
+      mediumDamageValue.hashCode ^
       uuid.hashCode ^
       menaceUuid.hashCode ^
       resumedDesc.hashCode ^

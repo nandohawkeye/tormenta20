@@ -4,9 +4,10 @@ import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/add_edit_menace_controller.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_bottom_buttons.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_header.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_stage_one.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_stage_three.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_stage_two.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_stages/add_edit_menace_screen_stage_four.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_stages/add_edit_menace_screen_stage_one.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_stages/add_edit_menace_screen_stage_three.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_stages/add_edit_menace_screen_stage_two.dart';
 import 'package:tormenta20/src/shared/entities/menace.dart';
 
 class AddEditMenaceScreen extends StatefulWidget {
@@ -76,6 +77,9 @@ class _AddEditMenaceScreenState extends State<AddEditMenaceScreen> {
                   ),
                   AddEditMenaceScreenStageThree(
                     controller: _controller,
+                  ),
+                  AddEditMenaceScreenStageFour(
+                    controller: _controller,
                   )
                 ],
               ),
@@ -89,7 +93,7 @@ class _AddEditMenaceScreenState extends State<AddEditMenaceScreen> {
                 if (stage == 1) {
                   if (_formKeyStageOne.currentState!.validate()) {
                     _controller.setStage(2);
-                    _controller.setPercent(.4);
+                    _controller.setPercent(.3);
                   }
                 } else if (stage == 2) {
                   if (_formKeyStageTwo.currentState!.validate()) {
@@ -113,6 +117,9 @@ class _AddEditMenaceScreenState extends State<AddEditMenaceScreen> {
                     _controller.setPercent(.6);
                   }
                 } else if (stage == 3) {
+                  _controller.setPercent(.8);
+                  _controller.setStage(4);
+                } else if (stage == 4) {
                   _controller.setPercent(1.0);
                 }
               },

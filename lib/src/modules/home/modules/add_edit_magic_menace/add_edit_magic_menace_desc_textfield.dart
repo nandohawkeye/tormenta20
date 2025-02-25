@@ -61,7 +61,6 @@ class _BottomSheetAddBoardLinkTitleFieldState
           validator: _validator,
           decoration: InputDecoration(
             labelText: 'Descrição resumida',
-            fillColor: palette.backgroundLevelTwo,
             helperText: 'obrigatório',
             errorText: error,
             helperStyle: TextStyle(color: palette.textDisable),

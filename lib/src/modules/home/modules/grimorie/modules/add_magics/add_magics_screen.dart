@@ -78,7 +78,10 @@ class _AddMagicsScreenState extends State<AddMagicsScreen> {
                     ),
             ),
           ),
-          AddMagicScreenBottomWidgets(_store)
+          AddMagicScreenBottomWidgets(
+            _store,
+            multiSelect: widget.multiSelect,
+          )
         ],
       ),
     );

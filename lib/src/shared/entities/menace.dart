@@ -38,9 +38,10 @@ class Menace {
   final String? casterInfos;
   //padrão, metade, doblo, na rolagem pra dinheiro e item
   final TreasureType? treasures;
-
   final List<MagicMenace> magics;
+
   final List<String> actions;
+
   final List<String> expertises;
   final List<String> equipments;
 

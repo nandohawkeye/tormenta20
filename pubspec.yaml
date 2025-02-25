@@ -54,6 +54,7 @@ dependencies:
   url_launcher: 6.3.0
   flutter_cached_pdfview: 0.4.3
   qr_flutter: 4.1.0
+  collection: 1.18.0
 
   
   path: ^1.8.3

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/modules/add_magics/add_magics_screen.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/magics_service.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
@@ -26,16 +27,35 @@ class _AddEditMagicMenaceSelectMagicFieldState
     extends State<AddEditMagicMenaceSelectMagicField> {
   late final ValueNotifier<Magic?> _magicSelected;
   void _setMagicSelected(Magic? value) {
+    print('magic ${value?.name}');
     if (value == null) return;
 
     _magicSelected.value = value;
+    widget.onSelectMagic(value);
   }
 
   @override
   void initState() {
     super.initState();
     _magicSelected = ValueNotifier<Magic?>(null);
-    if (widget.initialMagicBaseId != null) {}
+    _addInitialMagic();
+  }
+
+  @override
+  void dispose() {
+    _magicSelected.dispose();
+    super.dispose();
+  }
+
+  void _addInitialMagic() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.initialMagicBaseId != null) {
+        final magic = MagicsService()
+            .getAllMagics()
+            .firstWhere((magic) => magic.id == widget.initialMagicBaseId);
+        _setMagicSelected(magic);
+      }
+    });
   }
 
   void _onSelectMagic(Magic? magic) async {
@@ -67,7 +87,7 @@ class _AddEditMagicMenaceSelectMagicFieldState
             return MainButton(
               label: selected == null ? 'Selecionar magia' : selected.name,
               backgroundColor:
-                  hasError ? palette.selected : palette.backgroundLevelTwo,
+                  hasError ? palette.selected : palette.backgroundLevelOne,
               onTap: () => _onSelectMagic(selected),
             );
           },

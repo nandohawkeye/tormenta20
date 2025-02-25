@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/add_edit_menace_controller.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_magic_menace_bottom_sheet/add_edit_magic_menace_bottom_sheet.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_magic_menace/add_edit_magic_menace_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_magics_field_card.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_menace.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
@@ -38,21 +38,30 @@ class _AddEditBoardPlayerBroodSelectorState
   }
 
   void _onAdd(MagicMenace? magic) async {
-    await showModalBottomSheet<MagicMenace?>(
-      isScrollControlled: true,
-      isDismissible: true,
-      enableDrag: false,
-      context: context,
-      builder: (context) => Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
-        child: AddEditMagicMenaceBottomSheet(
+    await Navigator.push<MagicMenace?>(
+      context,
+      MaterialPageRoute(
+        builder: (_) => AddEditMagicMenaceScreen(
           magic: magic,
           menaceUuid: widget.controller.uuid,
         ),
       ),
     ).then(_add);
+    // await showModalBottomSheet<MagicMenace?>(
+    //   isScrollControlled: true,
+    //   isDismissible: true,
+    //   enableDrag: false,
+    //   context: context,
+    //   builder: (context) => Padding(
+    //     padding: EdgeInsets.only(
+    //       bottom: MediaQuery.of(context).viewInsets.bottom,
+    //     ),
+    //     child: AddEditMagicMenaceBottomSheet(
+    //       magic: magic,
+    //       menaceUuid: widget.controller.uuid,
+    //     ),
+    //   ),
+    // ).then(_add);
   }
 
   void _remove(MagicMenace value) {

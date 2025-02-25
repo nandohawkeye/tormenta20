@@ -25,7 +25,6 @@ class PmTextfield extends StatelessWidget {
       inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))],
       decoration: InputDecoration(
         labelText: 'PM',
-        fillColor: palette.backgroundLevelTwo,
         helperStyle: TextStyle(color: palette.textDisable),
         contentPadding: const EdgeInsets.symmetric(
           vertical: 6,

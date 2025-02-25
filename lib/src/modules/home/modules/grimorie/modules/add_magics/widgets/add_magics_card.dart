@@ -31,7 +31,8 @@ class AddMagicsCard extends StatelessWidget {
         .toLowerCase()
         .replaceAllDiacritics()
         .contains((searchFilter.toLowerCase().replaceAllDiacritics()));
-    final isDisable = disabledMagics.any((m) => m.id == magic.id);
+    final isDisable =
+        multiSelect ? disabledMagics.any((m) => m.id == magic.id) : false;
     final bool hasInTarget =
         searchFilter.isEmpty ? false : compareText(magic.targetAreaEfect);
     final bool hasInDesc =
@@ -108,9 +109,13 @@ class AddMagicsCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                if (multiSelect)
+                if ((!multiSelect &&
+                        disabledMagics.any((m) => m.id == magic.id)) ||
+                    multiSelect)
                   CustomChecked(
-                    value: selectedMagics.contains(magic),
+                    value: multiSelect
+                        ? selectedMagics.contains(magic)
+                        : disabledMagics.any((m) => m.id == magic.id),
                     isEnabledToTap: false,
                   )
               ],

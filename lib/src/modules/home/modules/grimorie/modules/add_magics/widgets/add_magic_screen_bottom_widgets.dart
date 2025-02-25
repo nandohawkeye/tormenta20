@@ -9,9 +9,11 @@ import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
 
 class AddMagicScreenBottomWidgets extends StatelessWidget {
-  const AddMagicScreenBottomWidgets(this.store, {super.key});
+  const AddMagicScreenBottomWidgets(this.store,
+      {super.key, required this.multiSelect});
 
   final AddMagicsStore store;
+  final bool multiSelect;
 
   @override
   Widget build(BuildContext context) {
@@ -103,18 +105,24 @@ class AddMagicScreenBottomWidgets extends StatelessWidget {
         const Divider(),
         Padding(
           padding: T20UI.allPadding,
-          child: Row(
-            children: [
-              Expanded(
-                child: MainButton(
-                  label: 'Confirmar',
-                  onTap: () => Navigator.pop(context, store.selectedMagics),
+          child: multiSelect
+              ? Row(
+                  children: [
+                    Expanded(
+                      child: MainButton(
+                        label: 'Confirmar',
+                        onTap: () =>
+                            Navigator.pop(context, store.selectedMagics),
+                      ),
+                    ),
+                    T20UI.spaceWidth,
+                    SimpleCloseButton(backgroundColor: palette.cardBackground)
+                  ],
+                )
+              : MainButton(
+                  label: 'Voltar',
+                  onTap: () => Navigator.pop(context),
                 ),
-              ),
-              T20UI.spaceWidth,
-              SimpleCloseButton(backgroundColor: palette.cardBackground)
-            ],
-          ),
         ),
         T20UI.safeAreaBottom(context)
       ],
