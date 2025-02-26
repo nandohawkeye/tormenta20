@@ -73,7 +73,6 @@ class _AddEditBoardPlayerBroodSelectorState
                             children: [
                               Text(
                                 'Papel de combate: ${type == null ? '' : CombatRoleUtils.handleTitle(type.name)}',
-                                textScaler: TextScaler.linear(1),
                               ),
                               const SizedBox(
                                 height: T20UI.inputHeight + 12,

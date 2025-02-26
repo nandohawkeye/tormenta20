@@ -27,7 +27,6 @@ class _AddEditMagicMenaceSelectMagicFieldState
     extends State<AddEditMagicMenaceSelectMagicField> {
   late final ValueNotifier<Magic?> _magicSelected;
   void _setMagicSelected(Magic? value) {
-    print('magic ${value?.name}');
     if (value == null) return;
 
     _magicSelected.value = value;

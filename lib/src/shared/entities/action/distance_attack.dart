@@ -1,7 +1,7 @@
 import 'package:tormenta20/src/shared/entities/action/action.dart';
 import 'package:tormenta20/src/shared/entities/action/action_type.dart';
 
-class DistanceAttack extends Action {
+class DistanceAttack extends ActionEnt {
   DistanceAttack({
     required super.uuid,
     required super.parentUuid,

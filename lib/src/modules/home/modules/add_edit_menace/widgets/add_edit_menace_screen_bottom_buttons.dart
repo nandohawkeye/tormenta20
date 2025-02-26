@@ -39,7 +39,7 @@ class AddEditMenaceScreenBottomButtons extends StatelessWidget {
                     valueListenable: notifierStage,
                     builder: (_, stage, __) {
                       return MainButton(
-                        label: stage < 3 ? 'Próximo' : 'Salvar',
+                        label: stage < 4 ? 'Próximo' : 'Salvar',
                         onTap: onSave,
                       );
                     }),

@@ -129,7 +129,7 @@ class _AddEditBoardPlayerBroodSelectorState
             valueListenable: widget.controller.errorCreatureSize,
             builder: (_, hasError, __) {
               return Text(
-                hasError ? 'campo obrigatório' : 'obrigatório',
+                'obrigatório',
                 style: TextStyle(
                     fontSize: 12,
                     color: hasError ? palette.accent : palette.textDisable),

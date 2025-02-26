@@ -2,30 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_menace/add_edit_menace_controller.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_magic_menace/add_edit_magic_menace_screen.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_magics_field_card.dart';
-import 'package:tormenta20/src/shared/entities/magic/magic_menace.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_action/add_edit_action_screen.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/selector_secundary_simple_button.dart';
+import 'package:tormenta20/src/shared/entities/action/action.dart';
 
-class AddEditMenaceScreenMagicsField extends StatefulWidget {
-  const AddEditMenaceScreenMagicsField({super.key, required this.controller});
+class AddEditActionField extends StatefulWidget {
+  const AddEditActionField({
+    super.key,
+    required this.initialActions,
+    required this.onAdd,
+    required this.onRemove,
+    required this.parentUuid,
+  });
 
-  final AddEditMenaceController controller;
+  final List<ActionEnt> initialActions;
+  final String parentUuid;
+  final Function(ActionEnt) onAdd;
+  final Function(ActionEnt) onRemove;
 
   @override
-  State<AddEditMenaceScreenMagicsField> createState() =>
+  State<AddEditActionField> createState() =>
       _AddEditBoardPlayerBroodSelectorState();
 }
 
-class _AddEditBoardPlayerBroodSelectorState
-    extends State<AddEditMenaceScreenMagicsField> {
-  late final ValueNotifier<List<MagicMenace>> _selecteds;
-  void _add(MagicMenace? value) {
+class _AddEditBoardPlayerBroodSelectorState extends State<AddEditActionField> {
+  late final ValueNotifier<List<ActionEnt>> _selecteds;
+  void _add(ActionEnt? value) {
     if (value == null) return;
 
-    List<MagicMenace> oldValues = _selecteds.value;
+    List<ActionEnt> oldValues = _selecteds.value;
 
     if (oldValues.any((old) => old.uuid == value.uuid)) {
       final index = oldValues.indexWhere((old) => old.uuid == value.uuid);
@@ -33,33 +39,33 @@ class _AddEditBoardPlayerBroodSelectorState
       _selecteds.value = [...oldValues];
     } else {
       _selecteds.value = [value, ...oldValues];
-      widget.controller.addMagic(value);
+      widget.onAdd(value);
     }
   }
 
-  void _onAdd(MagicMenace? magic) async {
-    await Navigator.push<MagicMenace?>(
+  void _onAdd(ActionEnt? action) async {
+    await Navigator.push<ActionEnt?>(
       context,
       MaterialPageRoute(
-        builder: (_) => AddEditMagicMenaceScreen(
-          magic: magic,
-          menaceUuid: widget.controller.uuid,
+        builder: (_) => AddEditActionScreen(
+          action: action,
+          menaceUuid: widget.parentUuid,
         ),
       ),
     ).then(_add);
   }
 
-  void _remove(MagicMenace value) {
-    List<MagicMenace> oldValues = _selecteds.value;
+  void _remove(ActionEnt value) {
+    List<ActionEnt> oldValues = _selecteds.value;
     oldValues.remove(value);
     _selecteds.value = [...oldValues];
-    widget.controller.removeMagic(value);
+    widget.onRemove(value);
   }
 
   @override
   void initState() {
     super.initState();
-    _selecteds = ValueNotifier<List<MagicMenace>>(widget.controller.magics);
+    _selecteds = ValueNotifier<List<ActionEnt>>(widget.initialActions);
   }
 
   @override
@@ -94,7 +100,7 @@ class _AddEditBoardPlayerBroodSelectorState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Magias'),
+                          Text('Ações'),
                           SizedBox(height: T20UI.inputHeight + 12)
                         ],
                       ),
@@ -140,11 +146,13 @@ class _AddEditBoardPlayerBroodSelectorState
                                   onTap: () => _onAdd(null),
                                 );
                               }
-                              return AddEditMenaceScreenMagicsFieldCard(
-                                magicMenace: list[index - 1],
-                                onRemove: _remove,
-                                onTap: _onAdd,
-                              );
+
+                              return SizedBox();
+                              // return AddEditMenaceScreenMagicsFieldCard(
+                              //   magicMenace: list[index - 1],
+                              //   onRemove: _remove,
+                              //   onTap: _onAdd,
+                              // );
                             },
                           );
                         }),

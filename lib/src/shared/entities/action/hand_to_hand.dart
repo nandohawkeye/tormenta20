@@ -1,7 +1,7 @@
 import 'package:tormenta20/src/shared/entities/action/action.dart';
 import 'package:tormenta20/src/shared/entities/action/action_type.dart';
 
-class HandToHand extends Action {
+class HandToHand extends ActionEnt {
   HandToHand({
     required super.uuid,
     required super.parentUuid,

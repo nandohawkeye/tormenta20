@@ -1,6 +1,6 @@
 import 'package:tormenta20/src/shared/entities/action/action_type.dart';
 
-class Action {
+class ActionEnt {
   final String uuid;
   final String parentUuid;
   final String title;
@@ -15,7 +15,7 @@ class Action {
   final int? criticalMultiplier;
   final String? equipament;
 
-  Action({
+  ActionEnt({
     required this.uuid,
     required this.parentUuid,
     required this.title,
@@ -33,7 +33,7 @@ class Action {
 
   @override
   bool operator ==(other) =>
-      other is Action &&
+      other is ActionEnt &&
       other.uuid == uuid &&
       other.parentUuid == parentUuid &&
       other.title == title &&
