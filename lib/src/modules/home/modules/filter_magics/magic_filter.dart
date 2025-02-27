@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/modules/home/modules/filter_magics/magic_filter_bottom_widgets.dart';
 import 'package:tormenta20/src/modules/home/modules/filter_magics/magic_filter_duration.dart';
 import 'package:tormenta20/src/modules/home/modules/filter_magics/magic_filter_executions.dart';
-import 'package:tormenta20/src/modules/home/modules/filter_magics/magic_filter_header.dart';
 import 'package:tormenta20/src/modules/home/modules/filter_magics/magic_filter_ranges.dart';
 import 'package:tormenta20/src/modules/home/modules/filter_magics/magic_filter_resistences.dart';
 import 'package:tormenta20/src/modules/home/modules/filter_magics/magic_filter_schools.dart';
 import 'package:tormenta20/src/modules/home/modules/filter_magics/magic_filter_store.dart';
 import 'package:tormenta20/src/modules/home/modules/filter_magics/magic_filter_types.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_filter_dto.dart';
+import 'package:tormenta20/src/shared/entities/screen_save_main_buttons.dart';
+import 'package:tormenta20/src/shared/widgets/screen_header.dart';
 
 class MagicFilter extends StatefulWidget {
   const MagicFilter({super.key, required this.dto});
@@ -43,8 +43,7 @@ class _MagicFilterState extends State<MagicFilter> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: kTextTabBarHeight + T20UI.spaceSize),
-          const MagicFilterHeader(),
+          const ScreenHeader(label: 'Filtros ativos'),
           const Divider(),
           Expanded(
             child: SingleChildScrollView(
@@ -100,8 +99,13 @@ class _MagicFilterState extends State<MagicFilter> {
               ),
             ),
           ),
-          MagicFilterBottomsheetBottomWidgets(store: _store),
-          T20UI.safeAreaBottom(context),
+          ScreenSaveMainButtons(
+            label: 'Confirmar',
+            onSave: () {
+              final result = _store.onConfirmChanges();
+              Navigator.pop(context, result);
+            },
+          ),
         ],
       ),
     );
