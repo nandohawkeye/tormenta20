@@ -4,8 +4,8 @@ import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/modules/add_magics/widgets/add_magic_screen_bottom_widgets.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/modules/add_magics/widgets/add_magics_card.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/modules/add_magics/add_magics_store.dart';
-import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic.dart';
+import 'package:tormenta20/src/shared/widgets/screen_header.dart';
 
 class AddMagicsScreen extends StatefulWidget {
   const AddMagicsScreen({
@@ -44,14 +44,9 @@ class _AddMagicsScreenState extends State<AddMagicsScreen> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: kToolbarHeight),
-          T20UI.spaceHeight,
-          Padding(
-            padding: T20UI.horizontalPadding,
-            child: Labels(
-                'Selecione ${widget.multiSelect ? 'as magias' : 'a magia'}'),
-          ),
-          T20UI.spaceHeight,
+          ScreenHeader(
+              label:
+                  'Selecione ${widget.multiSelect ? 'as magias' : 'a magia'}'),
           const Divider(),
           Expanded(
             child: AnimatedBuilder(

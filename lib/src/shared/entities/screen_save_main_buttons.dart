@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
 
-class AddEditBoardPlayerMainButtons extends StatelessWidget {
-  const AddEditBoardPlayerMainButtons({super.key, required this.onSave});
+class ScreenSaveMainButtons extends StatelessWidget {
+  const ScreenSaveMainButtons({
+    super.key,
+    required this.onSave,
+    this.extraRightWidgets,
+    this.onTap,
+    this.label = 'Salvar',
+    this.extraLeftWidgets,
+  });
 
+  final String label;
   final Function() onSave;
+  final Function()? onTap;
+  final List<Widget>? extraLeftWidgets;
+  final List<Widget>? extraRightWidgets;
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +30,23 @@ class AddEditBoardPlayerMainButtons extends StatelessWidget {
           padding: T20UI.allPadding,
           child: Row(
             children: [
+              ...?extraLeftWidgets,
               Expanded(
                 child: MainButton(
-                  label: 'Salvar',
+                  label: label,
                   onTap: onSave,
                 ),
               ),
               T20UI.spaceWidth,
-              const SimpleCloseButton()
+              ...?extraRightWidgets,
+              SimpleCloseButton(
+                onTap: onTap,
+                backgroundColor: palette.backgroundLevelOne,
+              )
             ],
           ),
-        )
+        ),
+        T20UI.safeAreaBottom(context)
       ],
     );
   }

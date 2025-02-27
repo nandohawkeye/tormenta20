@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_action/add_edit_action_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_action/widgets/add_edit_action_type_attack_action_selector.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_action/widgets/add_edit_type_action_field/add_edit_type_action_field.dart';
 import 'package:tormenta20/src/shared/entities/action/action.dart';
-import 'package:tormenta20/src/shared/entities/simple_save_main_buttons.dart';
+import 'package:tormenta20/src/shared/entities/screen_save_main_buttons.dart';
 import 'package:tormenta20/src/shared/widgets/add_edit_critical_field/add_edit_critical_field.dart';
 import 'package:tormenta20/src/shared/widgets/add_edit_dices_field/add_edit_dices_field.dart';
 import 'package:tormenta20/src/shared/widgets/cd_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/desc_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 import 'package:tormenta20/src/shared/widgets/medio_damage_value_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/name_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/pm_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/screen_header.dart';
 import 'package:tormenta20/src/shared/widgets/select_equipament_field/select_equipament_field.dart';
 
 class AddEditActionScreen extends StatefulWidget {
@@ -52,26 +51,8 @@ class _AddEditActionScreenState extends State<AddEditActionScreen> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: kTextTabBarHeight + T20UI.spaceSize),
-                T20UI.spaceHeight,
-                Padding(
-                  padding: T20UI.horizontalPadding,
-                  child: Text(
-                    'Ação',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: FontFamily.tormenta,
-                    ),
-                  ),
-                ),
-                T20UI.spaceHeight,
-              ],
-            ),
-            const DividerLevelTwo(verticalPadding: 0),
+            const ScreenHeader(label: 'Ação'),
+            const Divider(),
             Expanded(
               child: SingleChildScrollView(
                 child: Form(
@@ -169,7 +150,7 @@ class _AddEditActionScreenState extends State<AddEditActionScreen> {
                 ),
               ),
             ),
-            SimpleSaveMainButtons(
+            ScreenSaveMainButtons(
               onSave: () {
                 // final isMagicValid = _store.isMagicValid();
 

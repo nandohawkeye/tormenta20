@@ -1,0 +1,1 @@
+enum ShieldType { light, heavy }

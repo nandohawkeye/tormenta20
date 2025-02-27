@@ -3,14 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/add_edit_board_controller.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_board/add_edit_board_controller_header.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_banner.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_shortcuts/add_edit_board_shortcuts.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_main_buttons.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_materials/add_edit_board_materials.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_sites.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_text_field.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
+import 'package:tormenta20/src/shared/entities/screen_save_main_buttons.dart';
+import 'package:tormenta20/src/shared/widgets/screen_header.dart';
 
 class AddEditBoardScreen extends StatefulWidget {
   const AddEditBoardScreen({super.key, this.initialBoard});
@@ -43,18 +43,19 @@ class _AddEditBoardScreenState extends State<AddEditBoardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: kToolbarHeight),
-          T20UI.spaceHeight,
+          ScreenHeader(
+            label:
+                '${widget.initialBoard == null ? 'Criando' : 'Editando'} mesa e aventura',
+          ),
+          const Divider(),
           Expanded(
             child: SingleChildScrollView(
               controller: _scrollController,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AddEditBoardControllerHeader(
-                    isCreate: widget.initialBoard == null,
-                  ),
                   T20UI.spaceHeight,
                   AddEditBoardTextFields(
                     formKey: _formKey,
@@ -79,7 +80,7 @@ class _AddEditBoardScreenState extends State<AddEditBoardScreen> {
               ),
             ),
           ),
-          AddEditBoardMainButtons(
+          ScreenSaveMainButtons(
             onSave: () async {
               _scrollController.animateTo(
                 _scrollController.position.minScrollExtent,

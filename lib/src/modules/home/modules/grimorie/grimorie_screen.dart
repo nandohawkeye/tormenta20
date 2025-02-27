@@ -16,8 +16,7 @@ import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic.dart';
-import 'package:tormenta20/src/shared/widgets/main_button.dart';
-import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
+import 'package:tormenta20/src/shared/entities/screen_save_main_buttons.dart';
 
 class GrimorieScreen extends StatefulWidget {
   const GrimorieScreen({super.key, required this.grimoire});
@@ -84,14 +83,14 @@ class _GrimorieScreenState extends State<GrimorieScreen> {
                           width: 20,
                           child: SvgPicture.asset(
                             _store.grimoire.iconAsset,
-                            color: Color(_store.grimoire.colorInt),
+                            color: palette.icon,
                           ),
                         ),
                         const SizedBox(width: 6),
                         Labels(
                           _store.grimoire.name,
                           maxLines: 2,
-                          textColor: Color(_store.grimoire.colorInt),
+                          fontSize: 24,
                         ),
                       ],
                     ),
@@ -105,6 +104,7 @@ class _GrimorieScreenState extends State<GrimorieScreen> {
                     child: SimpleButton(
                       backgroundColor: palette.background,
                       icon: FontAwesomeIcons.solidTrashCan,
+                      iconColor: palette.selected,
                       onTap: () async {
                         await showModalBottomSheet<bool?>(
                           isScrollControlled: true,
@@ -139,6 +139,7 @@ class _GrimorieScreenState extends State<GrimorieScreen> {
                       backgroundColor: palette.background,
                       iconPadding: const EdgeInsets.only(left: 4, bottom: 2),
                       icon: FontAwesomeIcons.solidPenToSquare,
+                      iconColor: palette.selected,
                       onTap: () async {
                         await Navigator.push(
                           context,
@@ -196,39 +197,7 @@ class _GrimorieScreenState extends State<GrimorieScreen> {
               ),
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: ColoredBox(
-              color: palette.background,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Divider(),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: T20UI.spaceSize,
-                      left: T20UI.spaceSize,
-                      right: T20UI.spaceSize,
-                      bottom: MediaQuery.of(context).padding.bottom +
-                          T20UI.spaceSize,
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: MainButton(
-                            label: "Adicionar magias",
-                            onTap: addMagic,
-                          ),
-                        ),
-                        T20UI.spaceWidth,
-                        const SimpleCloseButton()
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
+          ScreenSaveMainButtons(label: "Adicionar magias", onSave: addMagic),
         ],
       ),
     );

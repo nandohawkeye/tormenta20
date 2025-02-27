@@ -2,9 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 
 class ScrollAnimatedIntCount extends StatefulWidget {
-  const ScrollAnimatedIntCount({super.key, required this.count});
+  const ScrollAnimatedIntCount({
+    super.key,
+    required this.count,
+    required this.width,
+    required this.height,
+    this.textStyle,
+  });
 
   final int count;
+  final double width;
+  final double height;
+  final TextStyle? textStyle;
 
   @override
   State<ScrollAnimatedIntCount> createState() => _ScrollAnimatedIntCountState();
@@ -69,8 +78,8 @@ class _ScrollAnimatedIntCountState extends State<ScrollAnimatedIntCount> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(countStr.length, (index) {
           return SizedBox(
-            width: 40,
-            height: 60,
+            width: widget.width,
+            height: widget.height,
             child: ListWheelScrollView.useDelegate(
               controller: _controllers[index],
               physics: const NeverScrollableScrollPhysics(),
@@ -83,8 +92,7 @@ class _ScrollAnimatedIntCountState extends State<ScrollAnimatedIntCount> {
                     child: Text(
                       digit.toString(),
                       key: ValueKey<int>(digit),
-                      style: const TextStyle(
-                          fontSize: 50, fontWeight: FontWeight.bold),
+                      style: widget.textStyle,
                     ),
                   ),
                 ),

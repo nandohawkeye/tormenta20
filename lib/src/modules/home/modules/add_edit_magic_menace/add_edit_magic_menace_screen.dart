@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_general_skills_bottom_sheet/add_edit_general_skills_main_buttons.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_magic_menace/add_edit_magic_menace_desc_textfield.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_magic_menace/add_edit_magic_menace_select_magic_field.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_magic_menace/add_edit_magic_menace_store.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_menace.dart';
+import 'package:tormenta20/src/shared/entities/screen_save_main_buttons.dart';
 import 'package:tormenta20/src/shared/widgets/add_edit_dices_field/add_edit_dices_field.dart';
 import 'package:tormenta20/src/shared/widgets/cd_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 import 'package:tormenta20/src/shared/widgets/medio_damage_value_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/pm_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/screen_header.dart';
 
 class AddEditMagicMenaceScreen extends StatefulWidget {
   const AddEditMagicMenaceScreen({
@@ -54,26 +53,8 @@ class _AddEditGeneralSkillsBottomSheetState
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: kTextTabBarHeight + T20UI.spaceSize),
-                T20UI.spaceHeight,
-                Padding(
-                  padding: T20UI.horizontalPadding,
-                  child: Text(
-                    'Magia da ameaça',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: FontFamily.tormenta,
-                    ),
-                  ),
-                ),
-                T20UI.spaceHeight,
-              ],
-            ),
-            const DividerLevelTwo(verticalPadding: 0),
+            const ScreenHeader(label: 'Magia da ameaça'),
+            const Divider(),
             T20UI.spaceHeight,
             Expanded(
               child: Form(
@@ -143,7 +124,7 @@ class _AddEditGeneralSkillsBottomSheetState
                 ),
               ),
             ),
-            AddEditGeneralSkillsMainButtons(
+            ScreenSaveMainButtons(
               onSave: () {
                 final isMagicValid = _store.isMagicValid();
 

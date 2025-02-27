@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_settings_backup_card.dart';
-import 'package:tormenta20/src/modules/home/modules/about/widgets/about_settings_user_name_card.dart';
-import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 
 class AboutSettings extends StatelessWidget {
   const AboutSettings({super.key});
@@ -14,13 +12,6 @@ class AboutSettings extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const AboutSettingsUserNameCard(),
-        T20UI.spaceHeight,
-        const Padding(
-          padding: T20UI.horizontalPadding,
-          child: Labels('Backups'),
-        ),
-        T20UI.spaceHeight,
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: T20UI.spaceSize - 4),
           child: AboutSettingsBackupCard(

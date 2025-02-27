@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/bottom_sheet_add_board_link/bottom_sheet_add_board_link.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view_links/board_view_links_store.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view_links/board_view_links_card.dart';
-import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link.dart';
-import 'package:tormenta20/src/shared/widgets/main_button.dart';
-import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
+import 'package:tormenta20/src/shared/entities/screen_save_main_buttons.dart';
+import 'package:tormenta20/src/shared/widgets/screen_header.dart';
 
 class BoardViewLinks extends StatefulWidget {
   const BoardViewLinks({super.key, required this.boardUuid});
@@ -66,19 +64,7 @@ class _BoardViewLinksState extends State<BoardViewLinks> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: kTextTabBarHeight + T20UI.spaceSize),
-              const Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  T20UI.spaceHeight,
-                  Padding(
-                    padding: T20UI.horizontalPadding,
-                    child: Labels('Links'),
-                  ),
-                  T20UI.spaceHeight,
-                ],
-              ),
+              const ScreenHeader(label: 'Links'),
               const Divider(),
               Expanded(
                 child: links.isEmpty
@@ -119,38 +105,9 @@ class _BoardViewLinksState extends State<BoardViewLinks> {
                         ),
                       ),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: ColoredBox(
-                  color: palette.background,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Divider(),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: T20UI.spaceSize,
-                          left: T20UI.spaceSize,
-                          right: T20UI.spaceSize,
-                          bottom: MediaQuery.of(context).padding.bottom +
-                              T20UI.spaceSize,
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: MainButton(
-                                label: "Adicionar link",
-                                onTap: () => _addEditSite(null),
-                              ),
-                            ),
-                            T20UI.spaceWidth,
-                            const SimpleCloseButton()
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+              ScreenSaveMainButtons(
+                label: 'Adicionar link',
+                onSave: () => _addEditSite(null),
               )
             ],
           ),

@@ -40,7 +40,7 @@ class AboutCustomTabBar extends StatelessWidget {
                 currentPage: currentPage,
               ),
               AboutCustomTabBarItem(
-                title: 'Configurações',
+                title: 'Backups',
                 page: 1,
                 changePage: changePage,
                 currentPage: currentPage,

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/modules/home/widgets/labels.dart';
-import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
 
-class AddGrimorieBottomsheetHeader extends StatelessWidget {
-  const AddGrimorieBottomsheetHeader(this.initialGrimoire, {super.key});
+class ScreenHeader extends StatelessWidget {
+  const ScreenHeader({super.key, required this.label});
 
-  final Grimoire? initialGrimoire;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +13,17 @@ class AddGrimorieBottomsheetHeader extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const SizedBox(height: kTextTabBarHeight),
         T20UI.spaceHeight,
         Padding(
           padding: T20UI.horizontalPadding,
-          child: Labels(
-              '${initialGrimoire != null ? 'Editando' : 'Criando'} grimório'),
+          child: Text(
+            label,
+            style: const TextStyle(
+              fontSize: 24,
+              fontFamily: FontFamily.tormenta,
+            ),
+          ),
         ),
         T20UI.spaceHeight,
       ],

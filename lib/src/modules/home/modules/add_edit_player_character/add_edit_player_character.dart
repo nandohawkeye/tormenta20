@@ -3,17 +3,17 @@ import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/widgets/add_edit_board_player_store.dart';
+import 'package:tormenta20/src/shared/entities/screen_save_main_buttons.dart';
 import 'package:tormenta20/src/shared/widgets/initiative_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/mana_textfield.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/widgets/add_edit_board_player_brood_selector.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/widgets/add_edit_board_player_classes_selector.dart';
 import 'package:tormenta20/src/shared/widgets/defense_textfield.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/widgets/add_edit_board_player_header.dart';
 import 'package:tormenta20/src/shared/widgets/life_textfield.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/widgets/add_edit_board_player_main_buttons.dart';
 import 'package:tormenta20/src/shared/widgets/name_character_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/player_name_textfield.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player.dart';
+import 'package:tormenta20/src/shared/widgets/screen_header.dart';
 import 'package:tormenta20/src/shared/widgets/token_selector/token_selector.dart';
 
 class AddEditBoardPlayerCharacter extends StatefulWidget {
@@ -55,8 +55,7 @@ class _AddEditBoardPlayerCharacterState
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: kTextTabBarHeight + T20UI.spaceSize),
-            const AddEditBoardPlayerHeader(),
+            const ScreenHeader(label: 'Jogador / Personagem'),
             const Divider(),
             Expanded(
               child: SingleChildScrollView(
@@ -163,7 +162,7 @@ class _AddEditBoardPlayerCharacterState
                 ),
               ),
             ),
-            AddEditBoardPlayerMainButtons(
+            ScreenSaveMainButtons(
               onSave: () {
                 if (_formKey.currentState!.validate()) {
                   final result = _store.onSave();
@@ -173,7 +172,6 @@ class _AddEditBoardPlayerCharacterState
                 }
               },
             ),
-            T20UI.safeAreaBottom(context)
           ],
         ),
       ),

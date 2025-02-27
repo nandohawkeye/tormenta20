@@ -3,15 +3,13 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie_color_field.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie_desc_field.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie_header.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie_icon_field.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie_name_field.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_character.dart';
-import 'package:tormenta20/src/shared/widgets/main_button.dart';
-import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
+import 'package:tormenta20/src/shared/entities/screen_save_main_buttons.dart';
+import 'package:tormenta20/src/shared/widgets/screen_header.dart';
 import 'package:uuid/uuid.dart';
 
 class AddGrimorieBottomsheet extends StatefulWidget {
@@ -33,11 +31,10 @@ class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
   late final ValueNotifier<String?> _name;
   late final ValueNotifier<String?> _desc;
   late final ValueNotifier<String?> _errorName;
-  late final ValueNotifier<int> _colorInt;
   late final ValueNotifier<String> _iconAsset;
   String? _validName(String? value) {
     if (value?.isEmpty ?? true) {
-      return 'O nome é obrigatório!';
+      return 'obrigatório!';
     }
 
     return null;
@@ -52,8 +49,7 @@ class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
     _name = ValueNotifier<String?>(widget.initialGrimoire?.name);
     _desc = ValueNotifier<String?>(widget.initialGrimoire?.desc);
     _errorName = ValueNotifier<String?>(null);
-    _colorInt =
-        ValueNotifier<int>(widget.initialGrimoire?.colorInt ?? 0xFFCC152A);
+
     _iconAsset =
         ValueNotifier<String>(widget.initialGrimoire?.iconAsset ?? 'book');
   }
@@ -74,8 +70,9 @@ class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: kToolbarHeight + T20UI.spaceSize),
-          AddGrimorieBottomsheetHeader(widget.initialGrimoire),
+          ScreenHeader(
+              label:
+                  '${widget.initialGrimoire == null ? 'Criando' : 'Editando'} Grimório'),
           const Divider(),
           Expanded(
             child: SingleChildScrollView(
@@ -94,52 +91,31 @@ class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
                   T20UI.spaceHeight,
                   AddGrimorieBottomsheetDescField(desc: _desc),
                   T20UI.spaceHeight,
-                  AddGrimorieBottomsheetColorField(colorInt: _colorInt),
-                  T20UI.spaceHeight,
                   AddGrimorieBottomsheetIconField(iconAsset: _iconAsset)
                 ],
               ),
             ),
           ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Divider(),
-              Padding(
-                padding: T20UI.allPadding,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: MainButton(
-                        label:
-                            widget.initialGrimoire != null ? 'Salvar' : 'Criar',
-                        onTap: () {
-                          if (_formKey.currentState?.validate() ?? false) {
-                            final now = DateTime.now();
-                            final Grimoire grimoire = Grimoire(
-                              uuid: _uuid!,
-                              name: _name.value ?? '',
-                              desc: _desc.value,
-                              createdAt: _createdAt ?? now,
-                              updatedAt: now,
-                              magicsCharacters: _magics,
-                              iconAsset: _iconAsset.value,
-                              colorInt: _colorInt.value,
-                            );
+          ScreenSaveMainButtons(
+            label: widget.initialGrimoire != null ? 'Salvar' : 'Criar',
+            onSave: () {
+              if (_formKey.currentState?.validate() ?? false) {
+                final now = DateTime.now();
+                final Grimoire grimoire = Grimoire(
+                  uuid: _uuid!,
+                  name: _name.value ?? '',
+                  desc: _desc.value,
+                  createdAt: _createdAt ?? now,
+                  updatedAt: now,
+                  magicsCharacters: _magics,
+                  iconAsset: _iconAsset.value,
+                  colorInt: 0xFFCC152A,
+                );
 
-                            Navigator.pop(context, grimoire);
-                          }
-                        },
-                      ),
-                    ),
-                    T20UI.spaceWidth,
-                    const SimpleCloseButton()
-                  ],
-                ),
-              )
-            ],
+                Navigator.pop(context, grimoire);
+              }
+            },
           ),
-          T20UI.safeAreaBottom(context),
         ],
       ),
     );

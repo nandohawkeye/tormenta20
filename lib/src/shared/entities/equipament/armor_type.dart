@@ -1,0 +1,1 @@
+enum ArmorType { light, heavy }

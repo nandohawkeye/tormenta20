@@ -3,12 +3,12 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/add_edit_menace_controller.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_bottom_buttons.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_header.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_stages/add_edit_menace_screen_stage_four.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_stages/add_edit_menace_screen_stage_one.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_stages/add_edit_menace_screen_stage_three.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_stages/add_edit_menace_screen_stage_two.dart';
 import 'package:tormenta20/src/shared/entities/menace.dart';
+import 'package:tormenta20/src/shared/widgets/screen_header.dart';
 
 class AddEditMenaceScreen extends StatefulWidget {
   const AddEditMenaceScreen({super.key, this.menace});
@@ -59,8 +59,7 @@ class _AddEditMenaceScreenState extends State<AddEditMenaceScreen> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: kTextTabBarHeight + T20UI.spaceSize),
-            const AddEditMenaceScreenHeader(),
+            const ScreenHeader(label: 'Ameaça'),
             const Divider(),
             Expanded(
               child: PageView(

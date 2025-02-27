@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/board_combat/board_combat_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/board_sessions/widgets/board_sessions_list.dart';
 import 'package:tormenta20/src/modules/home/modules/board_sessions/board_sessions_store.dart';
 import 'package:tormenta20/src/modules/home/modules/board_sessions/widgets/board_sessions_screen_bottom_widgets.dart';
-import 'package:tormenta20/src/modules/home/widgets/labels.dart';
+import 'package:tormenta20/src/shared/widgets/screen_header.dart';
 
 class BoardSessionsScreen extends StatefulWidget {
   const BoardSessionsScreen({super.key, required this.boardUuid});
@@ -37,19 +36,7 @@ class _BoardSessionsScreenState extends State<BoardSessionsScreen> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: kTextTabBarHeight + T20UI.spaceSize),
-          const Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              T20UI.spaceHeight,
-              Padding(
-                padding: T20UI.horizontalPadding,
-                child: Labels('Sessões'),
-              ),
-              T20UI.spaceHeight,
-            ],
-          ),
+          const ScreenHeader(label: 'Sessões'),
           const Divider(),
           AnimatedBuilder(
             animation: _store,
