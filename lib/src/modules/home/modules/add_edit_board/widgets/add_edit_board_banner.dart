@@ -121,7 +121,7 @@ class _AddEditBoardBannerState extends State<AddEditBoardBanner> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: T20UI.spaceSize - 4,
+                      horizontal: T20UI.screenContentSpaceSize,
                     ),
                     child: MainButton(
                       label: 'Selecionar banner',
@@ -131,7 +131,7 @@ class _AddEditBoardBannerState extends State<AddEditBoardBanner> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
-                      top: T20UI.spaceSize / 2,
+                      top: T20UI.smallSpaceSize,
                       left: T20UI.spaceSize + 8,
                     ),
                     child: Text(

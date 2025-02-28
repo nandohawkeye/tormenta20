@@ -13,7 +13,9 @@ class AboutSettings extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: T20UI.spaceSize - 4),
+          padding: const EdgeInsets.symmetric(
+            horizontal: T20UI.screenContentSpaceSize,
+          ),
           child: AboutSettingsBackupCard(
             icon: FontAwesomeIcons.fileImport,
             title: 'Exportar arquivo de backup',
@@ -36,7 +38,9 @@ class AboutSettings extends StatelessWidget {
         ),
         T20UI.spaceHeight,
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: T20UI.spaceSize - 4),
+          padding: const EdgeInsets.symmetric(
+            horizontal: T20UI.screenContentSpaceSize,
+          ),
           child: AboutSettingsBackupCard(
             icon: FontAwesomeIcons.fileExport,
             title: 'Importar arquivo de backup',

@@ -91,7 +91,7 @@ class _BoardSessionCardSessionOpenState
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(FontAwesomeIcons.diceD20, size: 16),
-                    SizedBox(width: T20UI.spaceSize / 2),
+                    SizedBox(width: T20UI.smallSpaceSize),
                     Text(
                       'Sessão atual',
                       style: TextStyle(
@@ -99,7 +99,7 @@ class _BoardSessionCardSessionOpenState
                         fontSize: 18,
                       ),
                     ),
-                    SizedBox(width: T20UI.spaceSize / 2),
+                    SizedBox(width: T20UI.smallSpaceSize),
                     Icon(FontAwesomeIcons.dice, size: 16)
                   ],
                 ),

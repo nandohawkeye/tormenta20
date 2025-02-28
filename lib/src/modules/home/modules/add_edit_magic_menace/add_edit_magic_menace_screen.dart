@@ -65,7 +65,7 @@ class _AddEditGeneralSkillsBottomSheetState
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: T20UI.horizontalPadding,
+                      padding: T20UI.horizontallScreenPadding,
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [

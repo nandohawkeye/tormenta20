@@ -28,7 +28,7 @@ class MagicFilterItem extends StatelessWidget {
             label,
             style: const TextStyle(fontSize: 16),
           ),
-          const SizedBox(width: T20UI.spaceSize / 2),
+          const SizedBox(width: T20UI.smallSpaceSize),
           CustomChecked(
             value: checked,
             isEnabledToTap: false,

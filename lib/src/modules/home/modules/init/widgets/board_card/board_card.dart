@@ -68,7 +68,7 @@ class BoardCard extends StatelessWidget {
                         color: palette.textDisable,
                       ),
                     ),
-                    const SizedBox(height: T20UI.spaceSize / 2),
+                    const SizedBox(height: T20UI.smallSpaceSize),
                     BoardCardPlayersTokens(
                       players: players,
                       width: width,

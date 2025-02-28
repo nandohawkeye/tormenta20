@@ -29,30 +29,45 @@ class AddEditMenaceScreenStageThree extends StatelessWidget {
             initialDivinityId: controller.divinityId,
           ),
           T20UI.spaceHeight,
-          AddEditMenaceScreenTypeTreasureSelector(controller: controller),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: T20UI.smallSpaceSize),
+            child:
+                AddEditMenaceScreenTypeTreasureSelector(controller: controller),
+          ),
           T20UI.spaceHeight,
           Padding(
-            padding: T20UI.horizontalPadding,
+            padding:
+                const EdgeInsets.symmetric(horizontal: T20UI.smallSpaceSize),
             child: DisplacementsTextfield(
               onchange: controller.changeDisplacement,
               initialValue: controller.displacement,
             ),
           ),
           T20UI.spaceHeight,
-          AddEditMenaceScreenGeneralSkillsField(
-            controller: controller,
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: T20UI.smallSpaceSize),
+            child: AddEditMenaceScreenGeneralSkillsField(
+              controller: controller,
+            ),
           ),
           T20UI.spaceHeight,
           Padding(
-            padding: T20UI.horizontalPadding,
+            padding:
+                const EdgeInsets.symmetric(horizontal: T20UI.smallSpaceSize),
             child: CasterInfosTextfield(
               onchange: controller.changeCasterInfos,
               initialValue: controller.casterInfos,
             ),
           ),
           T20UI.spaceHeight,
-          AddEditMenaceScreenMagicsField(
-            controller: controller,
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: T20UI.smallSpaceSize),
+            child: AddEditMenaceScreenMagicsField(
+              controller: controller,
+            ),
           ),
           SizedBox(height: MediaQuery.of(context).viewInsets.bottom),
         ],

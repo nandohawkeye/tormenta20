@@ -19,7 +19,9 @@ class AddEditAttackActionTypeActionSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: T20UI.horizontalPadding,
+      padding: const EdgeInsets.symmetric(
+        horizontal: T20UI.screenContentSpaceSize,
+      ),
       child: Card(
         color: palette.backgroundLevelOne,
         child: Column(
@@ -28,17 +30,17 @@ class AddEditAttackActionTypeActionSelector extends StatelessWidget {
           children: [
             const Padding(
               padding: EdgeInsets.only(
-                left: T20UI.spaceSize,
-                top: T20UI.spaceSize / 2,
-                bottom: T20UI.spaceSize / 2,
+                left: T20UI.screenContentSpaceSize,
+                top: T20UI.smallSpaceSize,
+                bottom: T20UI.smallSpaceSize,
               ),
               child: Text('Ataque'),
             ),
             Padding(
               padding: const EdgeInsets.only(
-                left: T20UI.spaceSize / 2,
-                right: T20UI.spaceSize / 2,
-                bottom: T20UI.spaceSize / 2,
+                left: T20UI.smallSpaceSize,
+                right: T20UI.smallSpaceSize,
+                bottom: T20UI.smallSpaceSize,
               ),
               child: SizedBox(
                 height: T20UI.inputHeight,
@@ -53,7 +55,7 @@ class AddEditAttackActionTypeActionSelector extends StatelessWidget {
                           iconColor: palette.accent,
                           onTap: () => _changeType(ActionEnt),
                         ),
-                        const SizedBox(width: T20UI.spaceSize / 2),
+                        const SizedBox(width: T20UI.smallSpaceSize),
                         Expanded(
                           child: AddEditActionTypeAttackActionSelectorCard(
                             value: HandToHand,
@@ -62,7 +64,7 @@ class AddEditAttackActionTypeActionSelector extends StatelessWidget {
                             valueSelected: selected,
                           ),
                         ),
-                        const SizedBox(width: T20UI.spaceSize / 2),
+                        const SizedBox(width: T20UI.smallSpaceSize),
                         Expanded(
                           child: AddEditActionTypeAttackActionSelectorCard(
                             value: DistanceAttack,

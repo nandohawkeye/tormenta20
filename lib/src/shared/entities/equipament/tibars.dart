@@ -6,10 +6,11 @@ class Tibars extends Equipment implements Spaceable {
   final int silver;
   final int bronze;
 
-  Tibars(
-    this.gold,
-    this.silver,
-    this.bronze, {
+  Tibars({
+    super.storedIn,
+    required this.gold,
+    required this.silver,
+    required this.bronze,
     required super.uuid,
     required super.parentUuid,
   }) : super(name: 'Tibares');
@@ -25,7 +26,8 @@ class Tibars extends Equipment implements Spaceable {
       other.gold == gold &&
       other.silver == silver &&
       other.bronze == bronze &&
-      other.spaceOcuped == spaceOcuped;
+      other.spaceOcuped == spaceOcuped &&
+      other.storedIn == storedIn;
 
   @override
   int get hashCode =>
@@ -35,5 +37,6 @@ class Tibars extends Equipment implements Spaceable {
       gold.hashCode ^
       silver.hashCode ^
       bronze.hashCode ^
-      spaceOcuped.hashCode;
+      spaceOcuped.hashCode ^
+      storedIn.hashCode;
 }

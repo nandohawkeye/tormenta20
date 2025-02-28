@@ -78,9 +78,9 @@ class _AddEditDicesFieldState extends State<AddEditDicesField> {
         children: [
           Padding(
             padding: const EdgeInsets.only(
-              left: T20UI.spaceSize,
-              top: T20UI.spaceSize / 2,
-              bottom: T20UI.spaceSize / 2,
+              left: T20UI.screenContentSpaceSize,
+              top: T20UI.smallSpaceSize,
+              bottom: T20UI.smallSpaceSize,
             ),
             child: Text('Dados ${widget.isExtra ? 'extra' : ''}'),
           ),
@@ -98,11 +98,11 @@ class _AddEditDicesFieldState extends State<AddEditDicesField> {
                   child: ListView.separated(
                     itemCount: dices.length,
                     padding: const EdgeInsets.symmetric(
-                        horizontal: T20UI.spaceSize / 2),
+                        horizontal: T20UI.smallSpaceSize),
                     scrollDirection: Axis.horizontal,
                     separatorBuilder: (_, __) => const Padding(
                       padding: EdgeInsetsDirectional.symmetric(
-                          horizontal: T20UI.spaceSize / 2),
+                          horizontal: T20UI.smallSpaceSize),
                       child: Center(child: Icon(FontAwesomeIcons.plus)),
                     ),
                     itemBuilder: (_, index) => AddEditDicesFieldCard(
@@ -116,9 +116,9 @@ class _AddEditDicesFieldState extends State<AddEditDicesField> {
           ),
           Padding(
             padding: const EdgeInsets.only(
-                left: T20UI.spaceSize / 2,
-                right: T20UI.spaceSize / 2,
-                bottom: T20UI.spaceSize / 2),
+                left: T20UI.smallSpaceSize,
+                right: T20UI.smallSpaceSize,
+                bottom: T20UI.smallSpaceSize),
             child: Row(
               children: [
                 Expanded(
@@ -142,7 +142,7 @@ class _AddEditDicesFieldState extends State<AddEditDicesField> {
                     ),
                   ),
                 ),
-                const SizedBox(width: T20UI.spaceSize / 2),
+                const SizedBox(width: T20UI.smallSpaceSize),
                 Expanded(
                   child: TextFormField(
                     controller: _dicesEditController,
@@ -165,7 +165,7 @@ class _AddEditDicesFieldState extends State<AddEditDicesField> {
                     ),
                   ),
                 ),
-                const SizedBox(width: T20UI.spaceSize / 2),
+                const SizedBox(width: T20UI.smallSpaceSize),
                 SimpleButton(
                   icon: FontAwesomeIcons.plus,
                   backgroundColor: palette.backgroundLevelTwo,

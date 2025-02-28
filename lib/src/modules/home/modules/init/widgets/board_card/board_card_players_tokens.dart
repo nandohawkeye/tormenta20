@@ -35,7 +35,7 @@ class BoardCardPlayersTokens extends StatelessWidget {
     return FittedBox(
       fit: BoxFit.scaleDown,
       child: Padding(
-        padding: const EdgeInsets.only(bottom: T20UI.spaceSize / 2),
+        padding: const EdgeInsets.only(bottom: T20UI.smallSpaceSize),
         child: SizedBox(
           height: (40 * context.realTextScale),
           width: width,

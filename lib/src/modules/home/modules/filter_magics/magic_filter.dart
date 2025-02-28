@@ -48,8 +48,8 @@ class _MagicFilterState extends State<MagicFilter> {
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.only(
-                left: T20UI.spaceSize - 4,
-                right: T20UI.spaceSize - 4,
+                left: T20UI.screenContentSpaceSize,
+                right: T20UI.screenContentSpaceSize,
                 bottom: T20UI.spaceSize,
                 top: T20UI.spaceSize,
               ),

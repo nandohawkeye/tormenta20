@@ -34,7 +34,8 @@ class MagicSelectedGrimories extends StatelessWidget {
                     child: ListView.separated(
                       shrinkWrap: true,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: T20UI.spaceSize - 4),
+                        horizontal: T20UI.screenContentSpaceSize,
+                      ),
                       scrollDirection: Axis.horizontal,
                       itemCount: store.grimories.length,
                       separatorBuilder: T20UI.separatorBuilderHorizontal,

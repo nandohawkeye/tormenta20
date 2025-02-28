@@ -114,7 +114,7 @@ class BoardSessionsCard extends StatelessWidget {
                             color: palette.selected,
                           ),
                         ),
-                        const SizedBox(width: T20UI.spaceSize / 2),
+                        const SizedBox(width: T20UI.smallSpaceSize),
                         Icon(
                           FontAwesomeIcons.shieldHalved,
                           size: 16,

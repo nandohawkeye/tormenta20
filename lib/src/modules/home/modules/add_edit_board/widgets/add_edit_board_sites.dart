@@ -72,7 +72,7 @@ class _AddEditBoardLinksState extends State<AddEditBoardLinks> {
         T20UI.spaceHeight,
         Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: T20UI.spaceSize - 4,
+            horizontal: T20UI.screenContentSpaceSize,
           ),
           child: MainButton(
             label: 'Adicionar link',

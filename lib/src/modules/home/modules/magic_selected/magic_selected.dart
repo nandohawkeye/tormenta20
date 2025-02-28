@@ -6,9 +6,9 @@ import 'package:tormenta20/src/modules/home/modules/magic_selected/magic_selecte
 import 'package:tormenta20/src/modules/home/modules/magic_selected/magic_selected_item.dart';
 import 'package:tormenta20/src/modules/home/modules/magic_selected/magic_selected_store.dart';
 import 'package:tormenta20/src/modules/home/modules/magic_selected/magic_selected_grimories.dart';
-import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_utils.dart';
+import 'package:tormenta20/src/shared/widgets/screen_header.dart';
 import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
 
 class MagicSelected extends StatefulWidget {
@@ -50,12 +50,7 @@ class _MagicSelectedState extends State<MagicSelected> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: kTextTabBarHeight + (T20UI.spaceSize * 2)),
-          Padding(
-            padding: T20UI.horizontalPadding,
-            child: Labels(widget.magic.name),
-          ),
-          T20UI.spaceHeight,
+          ScreenHeader(label: widget.magic.name),
           const Divider(),
           MagicSelectedGrimories(
             magic: widget.magic,
@@ -71,7 +66,8 @@ class _MagicSelectedState extends State<MagicSelected> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: T20UI.spaceSize - 4),
+                      horizontal: T20UI.screenContentSpaceSize,
+                    ),
                     child: Wrap(
                       runSpacing: T20UI.spaceSize,
                       spacing: T20UI.spaceSize,

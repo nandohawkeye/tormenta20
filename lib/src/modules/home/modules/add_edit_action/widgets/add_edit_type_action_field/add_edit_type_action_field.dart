@@ -21,7 +21,9 @@ class AddEditTypeActionField extends StatelessWidget {
           child: Stack(
             children: [
               Padding(
-                padding: T20UI.horizontalPadding,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: T20UI.screenContentSpaceSize,
+                ),
                 child: SizedBox(
                   width: double.infinity,
                   child: DecoratedBox(
@@ -30,8 +32,10 @@ class AddEditTypeActionField extends StatelessWidget {
                       color: palette.backgroundLevelOne,
                     ),
                     child: const Padding(
-                      padding:
-                          EdgeInsets.only(top: T20UI.spaceSize / 2, left: 12),
+                      padding: EdgeInsets.only(
+                        top: T20UI.smallSpaceSize,
+                        left: T20UI.screenContentSpaceSize,
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -56,8 +60,10 @@ class AddEditTypeActionField extends StatelessWidget {
                           return ListView.separated(
                             shrinkWrap: true,
                             padding: const EdgeInsets.only(
-                              left: T20UI.spaceSize + 10,
-                              right: T20UI.spaceSize + 10,
+                              left: T20UI.screenContentSpaceSize +
+                                  T20UI.smallSpaceSize,
+                              right: T20UI.screenContentSpaceSize +
+                                  T20UI.smallSpaceSize,
                             ),
                             scrollDirection: Axis.horizontal,
                             separatorBuilder: T20UI.separatorBuilderHorizontal,

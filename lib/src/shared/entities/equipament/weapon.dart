@@ -25,6 +25,9 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
 
   Weapon({
     this.desc,
+    super.storedIn,
+    super.improvements,
+    super.specialMaterials,
     required super.uuid,
     required super.parentUuid,
     required super.name,
@@ -71,7 +74,10 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
       other.isUnarmed == isUnarmed &&
       other.spaceOcuped == spaceOcuped &&
       other._space == _space &&
-      other._wieldableType == _wieldableType;
+      other._wieldableType == _wieldableType &&
+      other.storedIn == storedIn &&
+      other.improvements == improvements &&
+      other.specialMaterials == specialMaterials;
 
   @override
   int get hashCode =>
@@ -93,5 +99,8 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
       isUnarmed.hashCode ^
       spaceOcuped.hashCode ^
       _space.hashCode ^
-      _wieldableType.hashCode;
+      _wieldableType.hashCode ^
+      storedIn.hashCode ^
+      improvements.hashCode ^
+      specialMaterials.hashCode;
 }

@@ -47,9 +47,9 @@ final ThemeData theme = ThemeData(
   dividerTheme: DividerThemeData(
     color: palette.divider,
     space: 1,
-    indent: 0,
-    endIndent: 0,
+    indent: T20UI.screenContentSpaceSize,
     thickness: 1,
+    endIndent: T20UI.screenContentSpaceSize,
   ),
   iconTheme: IconThemeData(color: palette.icon, size: T20UI.iconSize),
   cardTheme: CardTheme(

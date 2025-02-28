@@ -20,6 +20,9 @@ class Armor extends Equipment implements Spaceable {
     required this.defenseBonus,
     required this.penalty,
     this.desc,
+    super.storedIn,
+    super.improvements,
+    super.specialMaterials,
   }) : _space = spaceOcuped;
 
   @override
@@ -36,7 +39,10 @@ class Armor extends Equipment implements Spaceable {
       other.price == price &&
       other.defenseBonus == defenseBonus &&
       other.penalty == penalty &&
-      other.desc == desc;
+      other.desc == desc &&
+      other.storedIn == storedIn &&
+      other.improvements == improvements &&
+      other.specialMaterials == specialMaterials;
 
   @override
   int get hashCode =>
@@ -48,5 +54,8 @@ class Armor extends Equipment implements Spaceable {
       price.hashCode ^
       defenseBonus.hashCode ^
       penalty.hashCode ^
-      desc.hashCode;
+      desc.hashCode ^
+      storedIn.hashCode ^
+      improvements.hashCode ^
+      specialMaterials.hashCode;
 }

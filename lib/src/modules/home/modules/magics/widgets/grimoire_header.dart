@@ -58,8 +58,8 @@ class GrimoireHeader extends StatelessWidget {
               ? Padding(
                   padding: const EdgeInsets.only(
                     bottom: T20UI.spaceSize,
-                    right: T20UI.spaceSize - 4,
-                    left: T20UI.spaceSize - 4,
+                    right: T20UI.screenContentSpaceSize,
+                    left: T20UI.screenContentSpaceSize,
                   ),
                   child: ScreenImageButton(
                     imageAsset: Assets.images.spellbook.path,
@@ -74,7 +74,8 @@ class GrimoireHeader extends StatelessWidget {
                   child: ListView.separated(
                     shrinkWrap: true,
                     padding: const EdgeInsets.symmetric(
-                        horizontal: T20UI.spaceSize - 4),
+                      horizontal: T20UI.screenContentSpaceSize,
+                    ),
                     scrollDirection: Axis.horizontal,
                     itemCount: store.grimories.length,
                     separatorBuilder: T20UI.separatorBuilderHorizontal,

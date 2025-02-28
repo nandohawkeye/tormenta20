@@ -86,8 +86,8 @@ class BoardViewMaterialCard extends StatelessWidget {
               ),
               if (mode == ShowBoardMaterialBottomSheetMode.delete)
                 Positioned(
-                  top: T20UI.spaceSize / 2,
-                  right: T20UI.spaceSize / 2,
+                  top: T20UI.smallSpaceSize,
+                  right: T20UI.smallSpaceSize,
                   child: CustomChecked(
                     value: isSelectedToDelete,
                     isEnabledToTap: false,

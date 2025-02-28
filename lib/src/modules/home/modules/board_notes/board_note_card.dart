@@ -37,8 +37,8 @@ class BoardNoteCard extends StatelessWidget {
               onTap: () => onSelected(note),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                  vertical: T20UI.spaceSize / 2,
-                  horizontal: T20UI.spaceSize / 2,
+                  vertical: T20UI.smallSpaceSize,
+                  horizontal: T20UI.smallSpaceSize,
                 ).copyWith(left: T20UI.spaceSize),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

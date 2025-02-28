@@ -4,12 +4,16 @@ import 'package:tormenta20/src/core/theme/palettes.dart';
 abstract class T20UI {
   static const double inputHeight = 48;
   static const double inputBorderRadius = 12;
-  static const double listSpaceSize = 8;
+  static const double smallSpaceSize = 8;
   static const double spaceSize = 16;
+  static const double screenContentSpaceSize = spaceSize - 4;
   static const double iconSize = 18;
   static const Duration defaultDurationAnimation = Duration(milliseconds: 200);
   static ShapeBorder bottomSheetShape =
       ContinuousRectangleBorder(borderRadius: BorderRadius.circular(0));
+
+  static const EdgeInsets horizontallScreenPadding =
+      EdgeInsets.symmetric(horizontal: screenContentSpaceSize);
 
   static const EdgeInsets formFieldContentPadding =
       EdgeInsets.symmetric(horizontal: spaceSize, vertical: 14.8);
@@ -35,8 +39,8 @@ abstract class T20UI {
   static const Widget spaceWidth = SizedBox(width: spaceSize);
   static const Widget spaceHeight = SizedBox(height: spaceSize);
 
-  static const Widget spaceWidthList = SizedBox(width: listSpaceSize);
-  static const Widget spaceHeightList = SizedBox(height: listSpaceSize);
+  static const Widget spaceWidthList = SizedBox(width: smallSpaceSize);
+  static const Widget spaceHeightList = SizedBox(height: smallSpaceSize);
 
   static const EdgeInsets allPadding = EdgeInsets.all(spaceSize);
 
@@ -61,7 +65,7 @@ abstract class T20UI {
   static Widget separatorBuilderVertical(_, __) =>
       const SizedBox(height: spaceSize);
   static Widget separatorBuilderHorizontal(_, __) =>
-      const SizedBox(width: spaceSize);
+      const SizedBox(width: smallSpaceSize);
   static Border cardBorder(PaletteBase pallete) =>
       Border.all(color: pallete.cardStroke);
   static BorderRadius borderRadius = BorderRadius.circular(inputBorderRadius);

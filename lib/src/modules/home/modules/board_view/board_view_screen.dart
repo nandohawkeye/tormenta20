@@ -74,8 +74,8 @@ class _BoardViewScreenState extends State<BoardViewScreen> {
                         Padding(
                           padding: EdgeInsets.only(
                             bottom: T20UI.spaceSize,
-                            right: T20UI.spaceSize - 4,
-                            left: T20UI.spaceSize - 4,
+                            right: T20UI.screenContentSpaceSize,
+                            left: T20UI.screenContentSpaceSize,
                           ),
                           child: ManaceScreenButton(),
                         ),

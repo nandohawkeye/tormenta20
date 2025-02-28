@@ -85,7 +85,7 @@ class _AddEditBoardPlayerBroodSelectorState extends State<AddEditActionField> {
           child: Stack(
             children: [
               Padding(
-                padding: T20UI.horizontalPadding,
+                padding: T20UI.horizontallScreenPadding,
                 child: SizedBox(
                   width: double.infinity,
                   child: AnimatedContainer(
@@ -95,8 +95,10 @@ class _AddEditBoardPlayerBroodSelectorState extends State<AddEditActionField> {
                       color: palette.backgroundLevelOne,
                     ),
                     child: const Padding(
-                      padding:
-                          EdgeInsets.only(top: T20UI.spaceSize / 2, left: 12),
+                      padding: EdgeInsets.only(
+                        top: T20UI.smallSpaceSize,
+                        left: T20UI.screenContentSpaceSize,
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -121,7 +123,9 @@ class _AddEditBoardPlayerBroodSelectorState extends State<AddEditActionField> {
                           if (list.isEmpty) {
                             return Padding(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: T20UI.spaceSize + 10),
+                                horizontal: T20UI.smallSpaceSize +
+                                    T20UI.screenContentSpaceSize,
+                              ),
                               child: MainButton(
                                 label: 'Adicionar',
                                 backgroundColor: palette.backgroundLevelTwo,
@@ -133,8 +137,8 @@ class _AddEditBoardPlayerBroodSelectorState extends State<AddEditActionField> {
                           return ListView.separated(
                             shrinkWrap: true,
                             padding: const EdgeInsets.only(
-                              left: T20UI.spaceSize + 10,
-                              right: T20UI.spaceSize + 10,
+                              left: T20UI.smallSpaceSize,
+                              right: T20UI.smallSpaceSize,
                             ),
                             scrollDirection: Axis.horizontal,
                             separatorBuilder: T20UI.separatorBuilderHorizontal,

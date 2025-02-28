@@ -24,7 +24,7 @@ class BoardViewShortcutButton extends StatelessWidget {
 
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.only(right: T20UI.spaceSize / 2),
+        padding: const EdgeInsets.only(right: T20UI.smallSpaceSize),
         child: SizedBox(
           height: T20UI.inputHeight,
           child: Card(

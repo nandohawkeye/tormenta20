@@ -76,7 +76,9 @@ class _AddEditBoardPlayerClassesSelectorState
                           ),
                           child: Padding(
                             padding: const EdgeInsets.only(
-                                top: T20UI.spaceSize / 2, left: 12),
+                              top: T20UI.smallSpaceSize,
+                              left: T20UI.screenContentSpaceSize,
+                            ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

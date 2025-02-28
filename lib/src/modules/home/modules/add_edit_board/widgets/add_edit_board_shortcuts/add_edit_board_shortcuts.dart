@@ -95,7 +95,7 @@ class _AddEditBoardShortcutsState extends State<AddEditBoardShortcuts> {
             if (shortcuts.isEmpty) {
               return Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: T20UI.spaceSize - 4,
+                  horizontal: T20UI.screenContentSpaceSize,
                 ),
                 child: MainButton(
                   label: 'Adicionar atalhos',

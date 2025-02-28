@@ -19,6 +19,7 @@ class ScreenHeader extends StatelessWidget {
           padding: T20UI.horizontalPadding,
           child: Text(
             label,
+            maxLines: 2,
             style: const TextStyle(
               fontSize: 24,
               fontFamily: FontFamily.tormenta,

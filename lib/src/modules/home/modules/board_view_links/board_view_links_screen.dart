@@ -73,7 +73,7 @@ class _BoardViewLinksState extends State<BoardViewLinks> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(FontAwesomeIcons.ghost),
-                            SizedBox(width: T20UI.spaceSize / 2),
+                            SizedBox(width: T20UI.smallSpaceSize),
                             Text(
                               'Nenhum link',
                               style: TextStyle(
@@ -85,8 +85,8 @@ class _BoardViewLinksState extends State<BoardViewLinks> {
                       )
                     : SingleChildScrollView(
                         padding: EdgeInsets.only(
-                          left: T20UI.spaceSize - 4,
-                          right: T20UI.spaceSize - 4,
+                          left: T20UI.screenContentSpaceSize,
+                          right: T20UI.screenContentSpaceSize,
                           bottom: T20UI.spaceSize +
                               MediaQuery.of(context).padding.bottom,
                           top: T20UI.spaceSize,

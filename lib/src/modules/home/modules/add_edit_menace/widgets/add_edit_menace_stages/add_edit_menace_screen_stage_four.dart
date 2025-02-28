@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/add_edit_menace_controller.dart';
 import 'package:tormenta20/src/shared/widgets/add_edit_action_field/add_edit_action_field.dart';
+import 'package:tormenta20/src/shared/widgets/add_edit_equipament_field/add_edit_equipament_field.dart';
 
 class AddEditMenaceScreenStageFour extends StatelessWidget {
   const AddEditMenaceScreenStageFour({
@@ -18,6 +19,13 @@ class AddEditMenaceScreenStageFour extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          T20UI.spaceHeight,
+          AddEditEquipamentField(
+            initialEquipaments: [],
+            onAdd: (_) {},
+            onRemove: (_) {},
+            parentUuid: '',
+          ),
           T20UI.spaceHeight,
           AddEditActionField(
             initialActions: [],

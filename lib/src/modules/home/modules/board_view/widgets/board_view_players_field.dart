@@ -81,8 +81,8 @@ class BoardViewPlayersField extends StatelessWidget {
         T20UI.spaceHeight,
         Padding(
           padding: const EdgeInsets.only(
-            right: T20UI.spaceSize - 4,
-            left: T20UI.spaceSize - 4,
+            right: T20UI.screenContentSpaceSize,
+            left: T20UI.screenContentSpaceSize,
           ),
           child: Card(
             child: Column(

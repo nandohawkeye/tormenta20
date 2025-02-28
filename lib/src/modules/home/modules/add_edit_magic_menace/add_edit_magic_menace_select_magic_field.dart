@@ -94,7 +94,7 @@ class _AddEditMagicMenaceSelectMagicFieldState
         Padding(
           padding: const EdgeInsets.only(
             left: T20UI.spaceSize,
-            top: T20UI.spaceSize / 2,
+            top: T20UI.smallSpaceSize,
           ),
           child: ValueListenableBuilder(
             valueListenable: widget.hasError,

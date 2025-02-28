@@ -25,8 +25,7 @@ class AddEditMenaceScreenStageTwo extends StatelessWidget {
         children: [
           T20UI.spaceHeight,
           Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: T20UI.spaceSize - 4),
+            padding: T20UI.horizontallScreenPadding,
             child: Form(
               key: formKey,
               child: Column(

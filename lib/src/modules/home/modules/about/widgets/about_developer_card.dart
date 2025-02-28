@@ -13,7 +13,8 @@ class AboutDeveloperCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: T20UI.spaceSize - 4),
+      padding:
+          const EdgeInsets.symmetric(horizontal: T20UI.screenContentSpaceSize),
       child: Card(
         margin: EdgeInsets.zero,
         child: Column(
@@ -37,7 +38,7 @@ class AboutDeveloperCard extends StatelessWidget {
                 );
               },
               child: Padding(
-                padding: const EdgeInsets.all(T20UI.spaceSize / 2),
+                padding: const EdgeInsets.all(T20UI.smallSpaceSize),
                 child: Row(
                   children: [
                     SizedBox(
@@ -59,7 +60,7 @@ class AboutDeveloperCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(width: T20UI.spaceSize / 2),
+                    const SizedBox(width: T20UI.smallSpaceSize),
                     Expanded(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,

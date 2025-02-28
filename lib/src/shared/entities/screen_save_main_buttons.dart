@@ -9,14 +9,14 @@ class ScreenSaveMainButtons extends StatelessWidget {
     super.key,
     required this.onSave,
     this.extraRightWidgets,
-    this.onTap,
-    this.label = 'Salvar',
+    this.onBack,
+    this.label,
     this.extraLeftWidgets,
   });
 
-  final String label;
+  final String? label;
   final Function() onSave;
-  final Function()? onTap;
+  final Function()? onBack;
   final List<Widget>? extraLeftWidgets;
   final List<Widget>? extraRightWidgets;
 
@@ -33,14 +33,14 @@ class ScreenSaveMainButtons extends StatelessWidget {
               ...?extraLeftWidgets,
               Expanded(
                 child: MainButton(
-                  label: label,
+                  label: label ?? 'Salvar',
                   onTap: onSave,
                 ),
               ),
               T20UI.spaceWidth,
               ...?extraRightWidgets,
               SimpleCloseButton(
-                onTap: onTap,
+                onTap: onBack,
                 backgroundColor: palette.backgroundLevelOne,
               )
             ],

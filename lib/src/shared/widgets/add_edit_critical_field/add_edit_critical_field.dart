@@ -27,17 +27,18 @@ class AddEditCriticalField extends StatelessWidget {
         children: [
           const Padding(
             padding: EdgeInsets.only(
-              left: T20UI.spaceSize,
-              top: T20UI.spaceSize / 2,
-              bottom: T20UI.spaceSize / 2,
+              left: T20UI.screenContentSpaceSize,
+              top: T20UI.smallSpaceSize,
+              bottom: T20UI.smallSpaceSize,
             ),
             child: Text('Crítico'),
           ),
           Padding(
             padding: const EdgeInsets.only(
-                left: T20UI.spaceSize / 2,
-                right: T20UI.spaceSize / 2,
-                bottom: T20UI.spaceSize / 2),
+              left: T20UI.smallSpaceSize,
+              right: T20UI.smallSpaceSize,
+              bottom: T20UI.smallSpaceSize,
+            ),
             child: Row(
               children: [
                 Expanded(
@@ -62,7 +63,7 @@ class AddEditCriticalField extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: T20UI.spaceSize / 2),
+                const SizedBox(width: T20UI.smallSpaceSize),
                 Expanded(
                   child: TextFormField(
                     initialValue: initialMultiplier,

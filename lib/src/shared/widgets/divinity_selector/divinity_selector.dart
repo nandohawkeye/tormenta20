@@ -58,7 +58,8 @@ class _AddEditBoardPlayerBroodSelectorState extends State<DivinitySelector> {
           child: Stack(
             children: [
               Padding(
-                padding: T20UI.horizontalPadding,
+                padding: const EdgeInsets.symmetric(
+                    horizontal: T20UI.smallSpaceSize),
                 child: SizedBox(
                   width: double.infinity,
                   child: AnimatedBuilder(
@@ -73,7 +74,9 @@ class _AddEditBoardPlayerBroodSelectorState extends State<DivinitySelector> {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              top: T20UI.spaceSize / 2, left: 12),
+                            top: T20UI.smallSpaceSize,
+                            left: T20UI.screenContentSpaceSize,
+                          ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -103,8 +106,8 @@ class _AddEditBoardPlayerBroodSelectorState extends State<DivinitySelector> {
                         return ListView.separated(
                           shrinkWrap: true,
                           padding: const EdgeInsets.only(
-                            left: T20UI.spaceSize + 10,
-                            right: T20UI.spaceSize + 10,
+                            left: T20UI.smallSpaceSize + T20UI.smallSpaceSize,
+                            right: T20UI.smallSpaceSize + T20UI.smallSpaceSize,
                           ),
                           scrollDirection: Axis.horizontal,
                           separatorBuilder: T20UI.separatorBuilderHorizontal,

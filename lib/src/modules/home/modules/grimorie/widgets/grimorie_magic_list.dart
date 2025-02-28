@@ -37,8 +37,8 @@ class GrimorieMagicList extends StatelessWidget {
         if (magics.isEmpty) {
           return Padding(
             padding: const EdgeInsets.only(
-              left: T20UI.spaceSize - 4,
-              right: T20UI.spaceSize - 4,
+              left: T20UI.screenContentSpaceSize,
+              right: T20UI.screenContentSpaceSize,
             ),
             child: ScreenImageButton(
               imageAsset: Assets.images.fire.path,
@@ -54,9 +54,9 @@ class GrimorieMagicList extends StatelessWidget {
           shrinkWrap: true,
           primary: false,
           padding: const EdgeInsets.only(
-            bottom: T20UI.spaceSize - 4,
-            left: T20UI.spaceSize - 4,
-            right: T20UI.spaceSize - 4,
+            bottom: T20UI.screenContentSpaceSize,
+            left: T20UI.screenContentSpaceSize,
+            right: T20UI.screenContentSpaceSize,
           ),
           physics: const NeverScrollableScrollPhysics(),
           itemCount: store.grimoire.magicsCharacters.length,

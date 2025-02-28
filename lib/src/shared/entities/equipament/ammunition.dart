@@ -10,6 +10,9 @@ class Ammunition extends Equipment implements Spaceable {
     required super.uuid,
     required super.parentUuid,
     required super.name,
+    super.storedIn,
+    super.improvements,
+    super.specialMaterials,
     required this.quantity,
     required this.price,
     this.desc,
@@ -26,7 +29,8 @@ class Ammunition extends Equipment implements Spaceable {
       other.name == name &&
       other.quantity == quantity &&
       other.price == price &&
-      other.desc == desc;
+      other.desc == desc &&
+      other.storedIn == storedIn;
 
   @override
   int get hashCode =>
@@ -35,5 +39,6 @@ class Ammunition extends Equipment implements Spaceable {
       name.hashCode ^
       quantity.hashCode ^
       price.hashCode ^
-      desc.hashCode;
+      desc.hashCode ^
+      storedIn.hashCode;
 }

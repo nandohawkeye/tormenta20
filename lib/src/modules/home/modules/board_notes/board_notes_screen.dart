@@ -113,7 +113,7 @@ class _BoardNotesScreenState extends State<BoardNotesScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Icon(FontAwesomeIcons.ghost),
-                        SizedBox(width: T20UI.spaceSize / 2),
+                        SizedBox(width: T20UI.smallSpaceSize),
                         Text(
                           'Nenhuma anotação',
                           style: TextStyle(
@@ -128,8 +128,8 @@ class _BoardNotesScreenState extends State<BoardNotesScreen> {
                 notes.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
                 return ListView.separated(
                   padding: const EdgeInsets.only(
-                    left: T20UI.spaceSize - 4,
-                    right: T20UI.spaceSize - 4,
+                    left: T20UI.screenContentSpaceSize,
+                    right: T20UI.screenContentSpaceSize,
                     bottom: T20UI.spaceSize,
                     top: T20UI.spaceSize,
                   ),

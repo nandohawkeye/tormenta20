@@ -30,7 +30,7 @@ class AddEditBoardTextFields extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: T20UI.spaceSize - 4,
+                  horizontal: T20UI.screenContentSpaceSize,
                 ),
                 child: Row(
                   children: [
@@ -53,7 +53,7 @@ class AddEditBoardTextFields extends StatelessWidget {
               T20UI.spaceHeight,
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: T20UI.spaceSize - 4,
+                  horizontal: T20UI.screenContentSpaceSize,
                 ),
                 child: AddEditBoardAdventureField(
                   controller.changeAdventure,
@@ -66,7 +66,7 @@ class AddEditBoardTextFields extends StatelessWidget {
         T20UI.spaceHeight,
         Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: T20UI.spaceSize - 4,
+            horizontal: T20UI.screenContentSpaceSize,
           ),
           child: AddEditBoardDescField(
             controller.changeDesc,

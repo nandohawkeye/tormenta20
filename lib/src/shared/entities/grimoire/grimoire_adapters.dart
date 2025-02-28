@@ -12,7 +12,6 @@ abstract class GrimoireAdapters {
       name: Value<String>(entity.name),
       desc: Value<String?>(entity.desc),
       iconAsset: Value<String>(entity.iconAsset),
-      colorInt: Value<int>(entity.colorInt),
       createdAt: Value<DateTime>(entity.createdAt),
       updatedAt: Value<DateTime>(entity.updatedAt),
     );
@@ -24,7 +23,6 @@ abstract class GrimoireAdapters {
       name: dto.grimoireData.name,
       desc: dto.grimoireData.desc,
       iconAsset: dto.grimoireData.iconAsset,
-      colorInt: dto.grimoireData.colorInt,
       createdAt: dto.grimoireData.createdAt,
       updatedAt: dto.grimoireData.updatedAt,
       magicsCharacters:
@@ -42,7 +40,6 @@ abstract class GrimoireAdapters {
       updatedAt: DateTime.now(),
       magicsCharacters: magicsCharacters,
       iconAsset: other.iconAsset,
-      colorInt: other.colorInt,
     );
   }
 }

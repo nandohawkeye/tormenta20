@@ -37,8 +37,8 @@ class GrimoireCard extends StatelessWidget {
                 borderRadius: T20UI.borderRadius,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: T20UI.spaceSize - 4,
-                      vertical: T20UI.spaceSize / 2),
+                      horizontal: T20UI.screenContentSpaceSize,
+                      vertical: T20UI.smallSpaceSize),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -53,7 +53,7 @@ class GrimoireCard extends StatelessWidget {
                                 width: 20,
                                 child: SvgPicture.asset(
                                   grimoire.iconAsset,
-                                  color: Color(grimoire.colorInt),
+                                  color: palette.selected,
                                 ),
                               ),
                               const SizedBox(width: 6),
@@ -61,7 +61,7 @@ class GrimoireCard extends StatelessWidget {
                                 grimoire.name,
                                 style: TextStyle(
                                   fontFamily: FontFamily.tormenta,
-                                  color: Color(grimoire.colorInt),
+                                  color: palette.selected,
                                   fontSize: 18,
                                 ),
                               ),

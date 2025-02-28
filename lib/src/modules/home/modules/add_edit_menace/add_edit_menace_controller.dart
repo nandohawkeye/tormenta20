@@ -44,8 +44,6 @@ class AddEditMenaceController {
       _generalSkills.addAll(menace.generalSkills);
       _magics.addAll(menace.magics);
       _treasureType = menace.treasures ?? TreasureType.none;
-      //TODO refactor displacements
-      // _displacement = menace.displacements;
     } else {
       _uuid = const Uuid().v4();
     }

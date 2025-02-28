@@ -79,7 +79,9 @@ class _AddEditBoardPlayerBroodSelectorState
           child: Stack(
             children: [
               Padding(
-                padding: T20UI.horizontalPadding,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: T20UI.screenContentSpaceSize,
+                ),
                 child: SizedBox(
                   width: double.infinity,
                   child: AnimatedContainer(
@@ -89,8 +91,10 @@ class _AddEditBoardPlayerBroodSelectorState
                       color: palette.backgroundLevelOne,
                     ),
                     child: const Padding(
-                      padding:
-                          EdgeInsets.only(top: T20UI.spaceSize / 2, left: 12),
+                      padding: EdgeInsets.only(
+                        top: T20UI.smallSpaceSize,
+                        left: T20UI.screenContentSpaceSize,
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -111,7 +115,9 @@ class _AddEditBoardPlayerBroodSelectorState
                     width: double.infinity,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: T20UI.spaceSize + 10),
+                        horizontal:
+                            T20UI.screenContentSpaceSize + T20UI.smallSpaceSize,
+                      ),
                       child: MainButton(
                         label: 'Selecionar',
                         backgroundColor: palette.backgroundLevelTwo,

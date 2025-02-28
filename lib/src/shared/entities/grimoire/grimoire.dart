@@ -7,7 +7,6 @@ class Grimoire {
   final DateTime createdAt;
   final DateTime updatedAt;
   final String iconAsset;
-  final int colorInt;
   final List<MagicCharacter> magicsCharacters;
 
   Grimoire({
@@ -18,7 +17,6 @@ class Grimoire {
     required this.updatedAt,
     required this.magicsCharacters,
     required this.iconAsset,
-    required this.colorInt,
   });
 
   @override
@@ -30,7 +28,6 @@ class Grimoire {
       other.updatedAt == updatedAt &&
       other.uuid == uuid &&
       other.iconAsset == iconAsset &&
-      other.colorInt == colorInt &&
       other.magicsCharacters == magicsCharacters;
 
   @override
@@ -41,6 +38,5 @@ class Grimoire {
       updatedAt.hashCode ^
       uuid.hashCode ^
       magicsCharacters.hashCode ^
-      iconAsset.hashCode ^
-      colorInt.hashCode;
+      iconAsset.hashCode;
 }

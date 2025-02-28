@@ -26,10 +26,10 @@ class MagicFilterExecutions extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.only(
-          left: T20UI.spaceSize - 4,
+          left: T20UI.screenContentSpaceSize,
           right: T20UI.spaceSize,
-          bottom: T20UI.spaceSize / 2,
-          top: T20UI.spaceSize / 2,
+          bottom: T20UI.smallSpaceSize,
+          top: T20UI.smallSpaceSize,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,

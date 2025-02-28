@@ -28,7 +28,6 @@ class MagicSelectedGrimorieCard extends StatelessWidget {
         color: palette.backgroundLevelOne,
         child: InkWell(
           borderRadius: T20UI.borderRadius,
-          splashColor: Color(grimoire.colorInt).withOpacity(.4),
           onTap: () => onTap(grimoire),
           child: SizedBox(
             height: T20UI.inputHeight,
@@ -41,7 +40,7 @@ class MagicSelectedGrimorieCard extends StatelessWidget {
                     width: 20,
                     child: SvgPicture.asset(
                       grimoire.iconAsset,
-                      color: Color(grimoire.colorInt),
+                      color: palette.selected,
                     ),
                   ),
                   const SizedBox(width: 6),
@@ -49,13 +48,12 @@ class MagicSelectedGrimorieCard extends StatelessWidget {
                     grimoire.name,
                     style: TextStyle(
                       fontFamily: 'tormenta',
-                      color: Color(grimoire.colorInt),
+                      color: palette.selected,
                       fontSize: 18,
                     ),
                   ),
                   T20UI.spaceWidth,
                   CustomChecked(
-                    color: Color(grimoire.colorInt).withOpacity(.6),
                     value:
                         grimoire.magicsCharacters.any((m) => m.id == magic.id),
                     isEnabledToTap: false,

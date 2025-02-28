@@ -132,7 +132,6 @@ class _GrimorieScreenState extends State<GrimorieScreen> {
                       },
                     ),
                   ),
-                  T20UI.spaceWidth,
                   FittedBox(
                     fit: BoxFit.scaleDown,
                     child: SimpleButton(
@@ -165,7 +164,8 @@ class _GrimorieScreenState extends State<GrimorieScreen> {
                 ? const Divider()
                 : Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: T20UI.spaceSize - 4),
+                      horizontal: T20UI.screenContentSpaceSize,
+                    ),
                     child: SizedBox(
                       width: double.infinity,
                       child: Card(

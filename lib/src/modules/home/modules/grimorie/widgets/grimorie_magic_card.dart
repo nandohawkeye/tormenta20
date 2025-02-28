@@ -30,9 +30,9 @@ class GrimorieMagicCard extends StatelessWidget {
         borderRadius: T20UI.borderRadius,
         child: Padding(
           padding: const EdgeInsets.only(
-            top: T20UI.spaceSize / 2,
-            bottom: T20UI.spaceSize / 2,
-            right: T20UI.spaceSize / 2,
+            top: T20UI.smallSpaceSize,
+            bottom: T20UI.smallSpaceSize,
+            right: T20UI.smallSpaceSize,
             left: T20UI.spaceSize,
           ),
           child: Row(
@@ -46,7 +46,7 @@ class GrimorieMagicCard extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(width: T20UI.spaceSize / 2),
+              const SizedBox(width: T20UI.smallSpaceSize),
               Flexible(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -65,7 +65,7 @@ class GrimorieMagicCard extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(width: T20UI.spaceSize / 2),
+              const SizedBox(width: T20UI.smallSpaceSize),
               Card(
                 color: palette.primary.withOpacity(.2),
                 child: InkWell(

@@ -13,7 +13,9 @@ class AboutPublisherCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: T20UI.spaceSize - 4),
+      padding: const EdgeInsets.symmetric(
+        horizontal: T20UI.screenContentSpaceSize,
+      ),
       child: Card(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -24,7 +26,7 @@ class AboutPublisherCard extends StatelessWidget {
               onTap: () async =>
                   await UrlUtils.lauch('https://jamboeditora.com.br'),
               child: Padding(
-                padding: const EdgeInsets.all(T20UI.spaceSize / 2),
+                padding: const EdgeInsets.all(T20UI.smallSpaceSize),
                 child: Row(
                   children: [
                     SizedBox(
@@ -46,7 +48,7 @@ class AboutPublisherCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(width: T20UI.spaceSize / 2),
+                    const SizedBox(width: T20UI.smallSpaceSize),
                     Expanded(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,

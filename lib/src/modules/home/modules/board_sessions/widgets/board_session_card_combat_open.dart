@@ -54,7 +54,7 @@ class BoardSessionCardCombatOpen extends StatelessWidget {
                       fontSize: 16,
                     ),
                   ),
-                  const SizedBox(width: T20UI.spaceSize / 2),
+                  const SizedBox(width: T20UI.smallSpaceSize),
                   const Icon(FontAwesomeIcons.shieldHalved, size: 14)
                 ],
               ),

@@ -43,8 +43,9 @@ class ShowBoardMaterialsBottomsheetList extends StatelessWidget {
               width: double.infinity,
               child: ListView.separated(
                 shrinkWrap: true,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: T20UI.spaceSize - 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: T20UI.screenContentSpaceSize,
+                ),
                 scrollDirection: Axis.horizontal,
                 itemCount: materials.length,
                 separatorBuilder: T20UI.separatorBuilderHorizontal,

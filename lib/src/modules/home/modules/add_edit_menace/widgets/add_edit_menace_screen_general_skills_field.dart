@@ -86,26 +86,25 @@ class _AddEditBoardPlayerBroodSelectorState
           height: (95),
           child: Stack(
             children: [
-              Padding(
-                padding: T20UI.horizontalPadding,
-                child: SizedBox(
-                  width: double.infinity,
-                  child: AnimatedContainer(
-                    duration: T20UI.defaultDurationAnimation,
-                    decoration: BoxDecoration(
-                      borderRadius: T20UI.borderRadius,
-                      color: palette.backgroundLevelOne,
+              SizedBox(
+                width: double.infinity,
+                child: AnimatedContainer(
+                  duration: T20UI.defaultDurationAnimation,
+                  decoration: BoxDecoration(
+                    borderRadius: T20UI.borderRadius,
+                    color: palette.backgroundLevelOne,
+                  ),
+                  child: const Padding(
+                    padding: EdgeInsets.only(
+                      top: T20UI.smallSpaceSize,
+                      left: T20UI.screenContentSpaceSize,
                     ),
-                    child: const Padding(
-                      padding:
-                          EdgeInsets.only(top: T20UI.spaceSize / 2, left: 12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Hábilidades gerais'),
-                          SizedBox(height: T20UI.inputHeight + 12)
-                        ],
-                      ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Hábilidades gerais'),
+                        SizedBox(height: T20UI.inputHeight + 12)
+                      ],
                     ),
                   ),
                 ),
@@ -123,7 +122,7 @@ class _AddEditBoardPlayerBroodSelectorState
                           if (list.isEmpty) {
                             return Padding(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: T20UI.spaceSize + 10),
+                                  horizontal: T20UI.smallSpaceSize),
                               child: MainButton(
                                 label: 'Adicionar',
                                 backgroundColor: palette.backgroundLevelTwo,
@@ -135,8 +134,8 @@ class _AddEditBoardPlayerBroodSelectorState
                           return ListView.separated(
                             shrinkWrap: true,
                             padding: const EdgeInsets.only(
-                              left: T20UI.spaceSize + 10,
-                              right: T20UI.spaceSize + 10,
+                              left: T20UI.smallSpaceSize,
+                              right: T20UI.smallSpaceSize,
                             ),
                             scrollDirection: Axis.horizontal,
                             separatorBuilder: T20UI.separatorBuilderHorizontal,

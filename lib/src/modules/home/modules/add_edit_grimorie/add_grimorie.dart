@@ -109,7 +109,6 @@ class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
                   updatedAt: now,
                   magicsCharacters: _magics,
                   iconAsset: _iconAsset.value,
-                  colorInt: 0xFFCC152A,
                 );
 
                 Navigator.pop(context, grimoire);

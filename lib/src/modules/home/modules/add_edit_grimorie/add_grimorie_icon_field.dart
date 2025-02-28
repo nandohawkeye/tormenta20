@@ -19,10 +19,10 @@ class AddGrimorieBottomsheetIconField extends StatelessWidget {
           color: palette.backgroundLevelOne,
           child: Padding(
             padding: const EdgeInsets.only(
-              top: T20UI.spaceSize / 2,
-              bottom: T20UI.spaceSize - 4,
-              left: T20UI.spaceSize - 4,
-              right: T20UI.spaceSize - 4,
+              top: T20UI.smallSpaceSize,
+              bottom: T20UI.screenContentSpaceSize,
+              left: T20UI.screenContentSpaceSize,
+              right: T20UI.screenContentSpaceSize,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +31,9 @@ class AddGrimorieBottomsheetIconField extends StatelessWidget {
                   'Icone',
                   style: TextStyle(fontSize: 16),
                 ),
-                const SizedBox(height: T20UI.spaceSize - 4),
+                const SizedBox(
+                  height: T20UI.screenContentSpaceSize,
+                ),
                 Center(
                   child: ValueListenableBuilder(
                     valueListenable: iconAsset,
