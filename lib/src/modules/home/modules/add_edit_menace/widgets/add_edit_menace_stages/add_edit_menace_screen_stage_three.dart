@@ -30,15 +30,13 @@ class AddEditMenaceScreenStageThree extends StatelessWidget {
           ),
           T20UI.spaceHeight,
           Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: T20UI.smallSpaceSize),
+            padding: T20UI.horizontallScreenPadding,
             child:
                 AddEditMenaceScreenTypeTreasureSelector(controller: controller),
           ),
           T20UI.spaceHeight,
           Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: T20UI.smallSpaceSize),
+            padding: T20UI.horizontallScreenPadding,
             child: DisplacementsTextfield(
               onchange: controller.changeDisplacement,
               initialValue: controller.displacement,
@@ -46,28 +44,22 @@ class AddEditMenaceScreenStageThree extends StatelessWidget {
           ),
           T20UI.spaceHeight,
           Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: T20UI.smallSpaceSize),
+            padding: T20UI.horizontallScreenPadding,
             child: AddEditMenaceScreenGeneralSkillsField(
               controller: controller,
             ),
           ),
           T20UI.spaceHeight,
           Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: T20UI.smallSpaceSize),
+            padding: T20UI.horizontallScreenPadding,
             child: CasterInfosTextfield(
               onchange: controller.changeCasterInfos,
               initialValue: controller.casterInfos,
             ),
           ),
           T20UI.spaceHeight,
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: T20UI.smallSpaceSize),
-            child: AddEditMenaceScreenMagicsField(
-              controller: controller,
-            ),
+          AddEditMenaceScreenMagicsField(
+            controller: controller,
           ),
           SizedBox(height: MediaQuery.of(context).viewInsets.bottom),
         ],

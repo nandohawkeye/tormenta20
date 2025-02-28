@@ -78,25 +78,28 @@ class _AddEditBoardPlayerBroodSelectorState
           height: (95),
           child: Stack(
             children: [
-              SizedBox(
-                width: double.infinity,
-                child: AnimatedContainer(
-                  duration: T20UI.defaultDurationAnimation,
-                  decoration: BoxDecoration(
-                    borderRadius: T20UI.borderRadius,
-                    color: palette.backgroundLevelOne,
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.only(
-                      top: T20UI.smallSpaceSize,
-                      left: T20UI.screenContentSpaceSize,
+              Padding(
+                padding: T20UI.horizontallScreenPadding,
+                child: SizedBox(
+                  width: double.infinity,
+                  child: AnimatedContainer(
+                    duration: T20UI.defaultDurationAnimation,
+                    decoration: BoxDecoration(
+                      borderRadius: T20UI.borderRadius,
+                      color: palette.backgroundLevelOne,
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Magias'),
-                        SizedBox(height: T20UI.inputHeight + 12)
-                      ],
+                    child: const Padding(
+                      padding: EdgeInsets.only(
+                        top: T20UI.smallSpaceSize,
+                        left: T20UI.screenContentSpaceSize,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Magias'),
+                          SizedBox(height: T20UI.inputHeight + 12)
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -126,8 +129,10 @@ class _AddEditBoardPlayerBroodSelectorState
                           return ListView.separated(
                             shrinkWrap: true,
                             padding: const EdgeInsets.only(
-                              left: T20UI.smallSpaceSize,
-                              right: T20UI.smallSpaceSize,
+                              left: T20UI.smallSpaceSize +
+                                  T20UI.screenContentSpaceSize,
+                              right: T20UI.smallSpaceSize +
+                                  T20UI.screenContentSpaceSize,
                             ),
                             scrollDirection: Axis.horizontal,
                             separatorBuilder: T20UI.separatorBuilderHorizontal,

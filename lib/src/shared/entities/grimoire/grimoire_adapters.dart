@@ -12,6 +12,7 @@ abstract class GrimoireAdapters {
       name: Value<String>(entity.name),
       desc: Value<String?>(entity.desc),
       iconAsset: Value<String>(entity.iconAsset),
+      colorInt: const Value<int>(0xFF000000),
       createdAt: Value<DateTime>(entity.createdAt),
       updatedAt: Value<DateTime>(entity.updatedAt),
     );

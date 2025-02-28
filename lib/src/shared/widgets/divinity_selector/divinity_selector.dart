@@ -58,8 +58,7 @@ class _AddEditBoardPlayerBroodSelectorState extends State<DivinitySelector> {
           child: Stack(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: T20UI.smallSpaceSize),
+                padding: T20UI.horizontallScreenPadding,
                 child: SizedBox(
                   width: double.infinity,
                   child: AnimatedBuilder(
@@ -106,8 +105,10 @@ class _AddEditBoardPlayerBroodSelectorState extends State<DivinitySelector> {
                         return ListView.separated(
                           shrinkWrap: true,
                           padding: const EdgeInsets.only(
-                            left: T20UI.smallSpaceSize + T20UI.smallSpaceSize,
-                            right: T20UI.smallSpaceSize + T20UI.smallSpaceSize,
+                            left: T20UI.screenContentSpaceSize +
+                                T20UI.smallSpaceSize,
+                            right: T20UI.screenContentSpaceSize +
+                                T20UI.smallSpaceSize,
                           ),
                           scrollDirection: Axis.horizontal,
                           separatorBuilder: T20UI.separatorBuilderHorizontal,
