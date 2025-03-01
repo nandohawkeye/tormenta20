@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_magic_menace/add_edit_magic_menace_desc_textfield.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_magic_menace/add_edit_magic_menace_select_magic_field.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_magic_menace/add_edit_magic_menace_store.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_menace.dart';
-import 'package:tormenta20/src/shared/entities/screen_save_main_buttons.dart';
 import 'package:tormenta20/src/shared/widgets/add_edit_dices_field/add_edit_dices_field.dart';
 import 'package:tormenta20/src/shared/widgets/cd_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/medio_damage_value_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/pm_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/screen_header.dart';
+import 'package:tormenta20/src/shared/widgets/screen_base.dart';
 
 class AddEditMagicMenaceScreen extends StatefulWidget {
   const AddEditMagicMenaceScreen({
@@ -46,97 +44,82 @@ class _AddEditGeneralSkillsBottomSheetState
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: palette.background,
-      child: SizedBox(
+    return ScreenBase(
+      label: 'Magia da ameaça',
+      onSave: () {
+        final isMagicValid = _store.isMagicValid();
+
+        if (!isMagicValid) return;
+
+        if (_formKey.currentState!.validate()) {
+          final magic = _store.onSave();
+
+          Navigator.pop(context, magic);
+        }
+      },
+      body: Form(
+        key: _formKey,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const ScreenHeader(label: 'Magia da ameaça'),
-            const Divider(),
-            T20UI.spaceHeight,
-            Expanded(
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: T20UI.horizontallScreenPadding,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          AddEditMagicMenaceSelectMagicField(
-                            onSelectMagic: (magic) {
-                              _store.setMagicBaseId(magic.id);
-                              _store.setMagicName(magic.name);
-                            },
-                            initialMagicBaseId: widget.magic?.magicBaseId,
-                            hasError: _store.magicHasError,
-                          ),
-                          T20UI.spaceHeight,
-                          AddEditMagicMenaceDescTextfield(
-                            onchange: _store.setDesc,
-                            initialDesc: widget.magic?.resumedDesc,
-                          ),
-                          T20UI.spaceHeight,
-                          Row(
-                            children: [
-                              Expanded(
-                                child: PmTextfield(
-                                  onchange: _store.setPm,
-                                  initialValue: widget.magic?.pm,
-                                ),
-                              ),
-                              T20UI.spaceWidth,
-                              Expanded(
-                                child: CdTextfield(
-                                  onchange: _store.setCd,
-                                  initialValue: widget.magic?.cd,
-                                ),
-                              )
-                            ],
-                          ),
-                          T20UI.spaceHeight,
-                          AddEditDicesField(
-                            initialValue: widget.magic?.damageDices,
-                            onChangeValues: _store.onChangeDice,
-                          ),
-                          T20UI.spaceHeight,
-                          AddEditDicesField(
-                            isExtra: true,
-                            initialValue: widget.magic?.extraDamageDices,
-                            onChangeValues: _store.onChangeExtraDice,
-                          ),
-                          T20UI.spaceHeight,
-                          MedioDamageValueTextfield(
-                            onchange: _store.setMediumDamage,
-                            initialValue: widget.magic?.mediumDamageValue,
-                          )
-                        ],
+            Padding(
+              padding: T20UI.horizontallScreenPadding,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  AddEditMagicMenaceSelectMagicField(
+                    onSelectMagic: (magic) {
+                      _store.setMagicBaseId(magic.id);
+                      _store.setMagicName(magic.name);
+                    },
+                    initialMagicBaseId: widget.magic?.magicBaseId,
+                    hasError: _store.magicHasError,
+                  ),
+                  T20UI.spaceHeight,
+                  AddEditMagicMenaceDescTextfield(
+                    onchange: _store.setDesc,
+                    initialDesc: widget.magic?.resumedDesc,
+                  ),
+                  T20UI.spaceHeight,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: PmTextfield(
+                          onchange: _store.setPm,
+                          initialValue: widget.magic?.pm,
+                        ),
                       ),
-                    ),
-                    T20UI.spaceHeight,
-                  ],
-                ),
+                      T20UI.spaceWidth,
+                      Expanded(
+                        child: CdTextfield(
+                          onchange: _store.setCd,
+                          initialValue: widget.magic?.cd,
+                        ),
+                      )
+                    ],
+                  ),
+                  T20UI.spaceHeight,
+                  AddEditDicesField(
+                    initialValue: widget.magic?.damageDices,
+                    onChangeValues: _store.onChangeDice,
+                  ),
+                  T20UI.spaceHeight,
+                  AddEditDicesField(
+                    isExtra: true,
+                    initialValue: widget.magic?.extraDamageDices,
+                    onChangeValues: _store.onChangeExtraDice,
+                  ),
+                  T20UI.spaceHeight,
+                  MedioDamageValueTextfield(
+                    onchange: _store.setMediumDamage,
+                    initialValue: widget.magic?.mediumDamageValue,
+                  )
+                ],
               ),
             ),
-            ScreenSaveMainButtons(
-              onSave: () {
-                final isMagicValid = _store.isMagicValid();
-
-                if (!isMagicValid) return;
-
-                if (_formKey.currentState!.validate()) {
-                  final magic = _store.onSave();
-
-                  Navigator.pop(context, magic);
-                }
-              },
-            ),
+            T20UI.spaceHeight,
           ],
         ),
       ),

@@ -1,7 +1,7 @@
 import 'package:tormenta20/src/shared/extensions/string_ext.dart';
 
 abstract class ActionTypeUtils {
-  static String handleMenaceTitle(String value) {
+  static String handleTitle(String value) {
     if (value.contains('passive')) {
       return 'Passiva';
     } else if (value.contains('free')) {

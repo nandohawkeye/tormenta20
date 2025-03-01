@@ -2,14 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie_desc_field.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie_icon_field.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie_name_field.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_character.dart';
-import 'package:tormenta20/src/shared/entities/screen_save_main_buttons.dart';
-import 'package:tormenta20/src/shared/widgets/screen_header.dart';
+import 'package:tormenta20/src/shared/utils/default_input_validator.dart';
+import 'package:tormenta20/src/shared/widgets/screen_base.dart';
 import 'package:uuid/uuid.dart';
 
 class AddGrimorieBottomsheet extends StatefulWidget {
@@ -32,13 +31,6 @@ class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
   late final ValueNotifier<String?> _desc;
   late final ValueNotifier<String?> _errorName;
   late final ValueNotifier<String> _iconAsset;
-  String? _validName(String? value) {
-    if (value?.isEmpty ?? true) {
-      return 'obrigatório!';
-    }
-
-    return null;
-  }
 
   @override
   void initState() {
@@ -64,57 +56,41 @@ class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: palette.background,
-      child: Column(
+    return ScreenBase(
+      label:
+          '${widget.initialGrimoire == null ? 'Criando' : 'Editando'} Grimório',
+      onSaveLabel: widget.initialGrimoire != null ? 'Salvar' : 'Criar',
+      onSave: () {
+        if (_formKey.currentState?.validate() ?? false) {
+          final now = DateTime.now();
+          final Grimoire grimoire = Grimoire(
+            uuid: _uuid!,
+            name: _name.value ?? '',
+            desc: _desc.value,
+            createdAt: _createdAt ?? now,
+            updatedAt: now,
+            magicsCharacters: _magics,
+            iconAsset: _iconAsset.value,
+          );
+
+          Navigator.pop(context, grimoire);
+        }
+      },
+      body: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          ScreenHeader(
-              label:
-                  '${widget.initialGrimoire == null ? 'Criando' : 'Editando'} Grimório'),
-          const Divider(),
-          Expanded(
-            child: SingleChildScrollView(
-              padding: T20UI.verticalPadding,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  AddGrimorieBottomsheetNameField(
-                    validator: _validName,
-                    formKey: _formKey,
-                    name: _name,
-                    errorName: _errorName,
-                  ),
-                  T20UI.spaceHeight,
-                  AddGrimorieBottomsheetDescField(desc: _desc),
-                  T20UI.spaceHeight,
-                  AddGrimorieBottomsheetIconField(iconAsset: _iconAsset)
-                ],
-              ),
-            ),
+          AddGrimorieBottomsheetNameField(
+            validator: DefaultInputValidator.valid,
+            formKey: _formKey,
+            name: _name,
+            errorName: _errorName,
           ),
-          ScreenSaveMainButtons(
-            label: widget.initialGrimoire != null ? 'Salvar' : 'Criar',
-            onSave: () {
-              if (_formKey.currentState?.validate() ?? false) {
-                final now = DateTime.now();
-                final Grimoire grimoire = Grimoire(
-                  uuid: _uuid!,
-                  name: _name.value ?? '',
-                  desc: _desc.value,
-                  createdAt: _createdAt ?? now,
-                  updatedAt: now,
-                  magicsCharacters: _magics,
-                  iconAsset: _iconAsset.value,
-                );
-
-                Navigator.pop(context, grimoire);
-              }
-            },
-          ),
+          T20UI.spaceHeight,
+          AddGrimorieBottomsheetDescField(desc: _desc),
+          T20UI.spaceHeight,
+          AddGrimorieBottomsheetIconField(iconAsset: _iconAsset)
         ],
       ),
     );

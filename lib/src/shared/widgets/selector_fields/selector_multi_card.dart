@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/shared/entities/menace_type.dart';
-import 'package:tormenta20/src/shared/utils/menace_utils.dart';
+import 'package:tormenta20/src/shared/utils/selector_item_utils.dart';
 
-class AddEditMenaceScreenTypeSelectorCard extends StatelessWidget {
-  const AddEditMenaceScreenTypeSelectorCard({
+class SelectorMultiCard<T> extends StatelessWidget {
+  const SelectorMultiCard({
     super.key,
-    required this.menace,
-    this.selected,
+    required this.type,
+    required this.selecteds,
     required this.onTap,
+    required this.handleTitle,
   });
 
-  final MenaceType menace;
-  final MenaceType? selected;
-  final Function(MenaceType) onTap;
+  final T type;
+  final List<T> selecteds;
+  final Function(T) onTap;
+  final String Function(String) handleTitle;
 
   @override
   Widget build(BuildContext context) {
-    final isSelected = menace == selected;
+    final isSelected = selecteds.contains(type);
 
     return AnimatedContainer(
       height: T20UI.inputHeight * MediaQuery.of(context).textScaler.scale(1),
@@ -29,7 +30,7 @@ class AddEditMenaceScreenTypeSelectorCard extends StatelessWidget {
       ),
       child: InkWell(
         borderRadius: T20UI.borderRadius,
-        onTap: () => onTap(menace),
+        onTap: () => onTap(type),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Center(
@@ -38,7 +39,7 @@ class AddEditMenaceScreenTypeSelectorCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  MenaceUtils.handleMenaceTitle(menace.name),
+                  SelectorItemUtils.title<T>(type, handleTitle),
                   style: const TextStyle(fontWeight: FontWeight.w500),
                 ),
               ],

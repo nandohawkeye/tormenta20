@@ -114,7 +114,8 @@ final ThemeData theme = ThemeData(
     floatingLabelStyle: TextStyle(color: palette.textPrimary, fontSize: 14),
     suffixStyle: TextStyle(color: palette.textPrimary, fontSize: 14),
     prefixStyle: TextStyle(color: palette.textPrimary, fontSize: 14),
-    errorStyle: TextStyle(color: palette.error, fontSize: 12),
+    errorStyle: TextStyle(
+        color: palette.error, fontSize: 12, fontWeight: FontWeight.bold),
     helperStyle: TextStyle(color: palette.textPrimary, fontSize: 12),
     contentPadding: T20UI.formFieldContentPadding,
     suffixIconColor: palette.textDisable,

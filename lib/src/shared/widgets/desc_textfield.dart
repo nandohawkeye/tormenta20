@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/shared/utils/default_input_validator.dart';
 
 class DescTextfield extends StatefulWidget {
   const DescTextfield({
     super.key,
     this.initialDesc,
     required this.onchange,
+    this.isObrigatory = true,
   });
 
   final String? initialDesc;
   final Function(String?) onchange;
+  final bool isObrigatory;
 
   @override
   State<DescTextfield> createState() =>
@@ -26,14 +29,6 @@ class _BottomSheetAddBoardLinkTitleFieldState extends State<DescTextfield> {
     _error = ValueNotifier<String?>(null);
   }
 
-  String? _validator(String? value) {
-    if ((value ?? '').isEmpty) {
-      return 'obrigatório';
-    }
-
-    return null;
-  }
-
   @override
   void dispose() {
     _error.dispose();
@@ -47,7 +42,10 @@ class _BottomSheetAddBoardLinkTitleFieldState extends State<DescTextfield> {
       builder: (_, error, __) {
         return TextFormField(
           onChanged: (value) {
-            _error.value = _validator(value);
+            if (widget.isObrigatory) {
+              _error.value = DefaultInputValidator.valid(value);
+            }
+
             widget.onchange.call(value);
           },
           initialValue: widget.initialDesc,
@@ -55,13 +53,13 @@ class _BottomSheetAddBoardLinkTitleFieldState extends State<DescTextfield> {
           textInputAction: TextInputAction.newline,
           keyboardType: TextInputType.name,
           textCapitalization: TextCapitalization.sentences,
-          validator: _validator,
+          validator: widget.isObrigatory ? DefaultInputValidator.valid : null,
           minLines: 1,
           maxLines: 4,
           decoration: InputDecoration(
             labelText: 'Descrição',
             fillColor: palette.backgroundLevelOne,
-            helperText: 'obrigatório',
+            helperText: widget.isObrigatory ? 'obrigatório' : null,
             errorText: error,
             helperStyle: TextStyle(color: palette.textDisable),
             contentPadding: const EdgeInsets.symmetric(

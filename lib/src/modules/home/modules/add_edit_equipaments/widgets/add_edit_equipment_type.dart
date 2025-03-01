@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_equipaments/widgets/add_edit_equipment_type_card.dart';
 import 'package:tormenta20/src/shared/entities/equipament/adventurer_backpack.dart';
 import 'package:tormenta20/src/shared/entities/equipament/ammunition.dart';
 import 'package:tormenta20/src/shared/entities/equipament/armor.dart';
@@ -10,6 +7,8 @@ import 'package:tormenta20/src/shared/entities/equipament/general_item.dart';
 import 'package:tormenta20/src/shared/entities/equipament/saddlebag.dart';
 import 'package:tormenta20/src/shared/entities/equipament/shield.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon.dart';
+import 'package:tormenta20/src/shared/utils/equipment_type_utils.dart';
+import 'package:tormenta20/src/shared/widgets/selector_fields/selector_only_field.dart';
 
 class AddEditEquipamentType extends StatefulWidget {
   const AddEditEquipamentType({super.key});
@@ -54,75 +53,18 @@ class _AddEditBoardPlayerBroodSelectorState
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          height: (95),
-          child: Stack(
-            children: [
-              Padding(
-                padding: T20UI.horizontalPadding,
-                child: SizedBox(
-                  width: double.infinity,
-                  child: AnimatedContainer(
-                    duration: T20UI.defaultDurationAnimation,
-                    decoration: BoxDecoration(
-                      borderRadius: T20UI.borderRadius,
-                      color: palette.backgroundLevelOne,
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.only(
-                        top: T20UI.smallSpaceSize,
-                        left: T20UI.screenContentSpaceSize,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Tipos'),
-                          SizedBox(height: T20UI.inputHeight + 12)
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: SizedBox(
-                    height: T20UI.inputHeight,
-                    width: double.infinity,
-                    child: ValueListenableBuilder(
-                        valueListenable: _selected,
-                        builder: (_, selected, __) {
-                          return ListView.separated(
-                            shrinkWrap: true,
-                            padding: const EdgeInsets.only(
-                              left: T20UI.spaceSize + 10,
-                              right: T20UI.spaceSize + 10,
-                            ),
-                            scrollDirection: Axis.horizontal,
-                            separatorBuilder: T20UI.separatorBuilderHorizontal,
-                            itemCount: _types.length,
-                            itemBuilder: (_, index) {
-                              return AddEditEquipmentTypeCard(
-                                type: _types[index],
-                                selected: selected,
-                                onTap: _setSelected,
-                              );
-                            },
-                          );
-                        }),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-      ],
+    return ValueListenableBuilder(
+      valueListenable: _selected,
+      builder: (_, selected, __) {
+        return SelectorOnlyField<Type>(
+          label: 'Tipos de equipamento',
+          handleTitle: EquipmentTypeUtils.handleTitle,
+          itens: _types,
+          onTap: _setSelected,
+          selected: selected,
+          isObrigatory: true,
+        );
+      },
     );
   }
 }

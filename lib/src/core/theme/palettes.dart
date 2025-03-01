@@ -90,7 +90,7 @@ abstract class Palettes {
         inputColor: const Color(0xFF212121),
         canceled: const Color(0xFFDC4740),
         concluded: const Color(0xFF328D43),
-        error: const Color(0xFFCB5247),
+        error: const Color(0xFF7A0D19),
         onAccent: const Color(0xFFFFFFFF),
         secundaryCTA: Colors.transparent,
         onSecundaryCTA: const Color(0xFF000000),

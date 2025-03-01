@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/shared/entities/brood.dart';
-import 'package:tormenta20/src/shared/utils/character_utils.dart';
+import 'package:tormenta20/src/shared/entities/equipament/weapon_purpose.dart';
+import 'package:tormenta20/src/shared/utils/equipament_weapon_purpose_utils.dart';
 
-class AddEditBoardPlayerBroodSelectorCard extends StatelessWidget {
-  const AddEditBoardPlayerBroodSelectorCard({
+class AddEditEquipmentPurposeTypeCard extends StatelessWidget {
+  const AddEditEquipmentPurposeTypeCard({
     super.key,
-    required this.brood,
-    this.selected,
+    required this.type,
+    required this.selected,
     required this.onTap,
   });
 
-  final Brood brood;
-  final Brood? selected;
-  final Function(Brood) onTap;
+  final WeaponPurpose type;
+  final WeaponPurpose? selected;
+  final Function(WeaponPurpose) onTap;
 
   @override
   Widget build(BuildContext context) {
-    final isSelected = brood == selected;
+    final isSelected = selected == type;
 
     return AnimatedContainer(
       height: T20UI.inputHeight * MediaQuery.of(context).textScaler.scale(1),
@@ -29,7 +29,7 @@ class AddEditBoardPlayerBroodSelectorCard extends StatelessWidget {
       ),
       child: InkWell(
         borderRadius: T20UI.borderRadius,
-        onTap: () => onTap(brood),
+        onTap: () => onTap(type),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Center(
@@ -38,7 +38,7 @@ class AddEditBoardPlayerBroodSelectorCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  CharacterUtils.handleBroodTitle(brood.name),
+                  EquipamentWeaponPurposeUtils.handleTitle(type.name),
                   style: const TextStyle(fontWeight: FontWeight.w500),
                 ),
               ],

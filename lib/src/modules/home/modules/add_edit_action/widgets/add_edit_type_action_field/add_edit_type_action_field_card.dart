@@ -38,7 +38,7 @@ class AddEditTypeActionFieldCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  ActionTypeUtils.handleMenaceTitle(type.name),
+                  ActionTypeUtils.handleTitle(type.name),
                   style: const TextStyle(fontWeight: FontWeight.w500),
                 ),
               ],

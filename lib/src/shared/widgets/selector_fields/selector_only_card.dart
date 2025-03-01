@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/shared/entities/classe_type.dart';
-import 'package:tormenta20/src/shared/utils/character_utils.dart';
+import 'package:tormenta20/src/shared/utils/selector_item_utils.dart';
 
-class AddEditBoardPlayerClassesSelectorCard extends StatelessWidget {
-  const AddEditBoardPlayerClassesSelectorCard({
+class SelectorOnlyCard<T> extends StatelessWidget {
+  const SelectorOnlyCard({
     super.key,
-    required this.classeType,
-    required this.selecteds,
+    required this.type,
+    required this.selected,
     required this.onTap,
+    required this.handleTitle,
   });
 
-  final ClasseType classeType;
-  final List<ClasseType> selecteds;
-  final Function(ClasseType) onTap;
+  final T type;
+  final T? selected;
+  final Function(T) onTap;
+  final String Function(String) handleTitle;
 
   @override
   Widget build(BuildContext context) {
-    final isSelected = selecteds.any((s) => s == classeType);
+    final isSelected = selected == type;
 
     return AnimatedContainer(
       height: T20UI.inputHeight * MediaQuery.of(context).textScaler.scale(1),
@@ -29,7 +30,7 @@ class AddEditBoardPlayerClassesSelectorCard extends StatelessWidget {
       ),
       child: InkWell(
         borderRadius: T20UI.borderRadius,
-        onTap: () => onTap(classeType),
+        onTap: () => onTap(type),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Center(
@@ -38,7 +39,7 @@ class AddEditBoardPlayerClassesSelectorCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  CharacterUtils.handleClasseTypeTitle(classeType.name),
+                  SelectorItemUtils.title<T>(type, handleTitle),
                   style: const TextStyle(fontWeight: FontWeight.w500),
                 ),
               ],

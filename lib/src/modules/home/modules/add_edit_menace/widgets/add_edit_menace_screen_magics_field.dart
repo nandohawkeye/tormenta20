@@ -117,7 +117,9 @@ class _AddEditBoardPlayerBroodSelectorState
                           if (list.isEmpty) {
                             return Padding(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: T20UI.smallSpaceSize),
+                                horizontal: T20UI.screenContentSpaceSize +
+                                    T20UI.smallSpaceSize,
+                              ),
                               child: MainButton(
                                 label: 'Adicionar',
                                 backgroundColor: palette.backgroundLevelTwo,

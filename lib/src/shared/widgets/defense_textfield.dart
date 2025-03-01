@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/shared/utils/default_input_validator.dart';
 
 class DefenseTextField extends StatefulWidget {
   const DefenseTextField({
@@ -27,14 +28,6 @@ class _BottomSheetAddBoardLinkTitleFieldState extends State<DefenseTextField> {
     _error = ValueNotifier<String?>(null);
   }
 
-  String? _validator(String? value) {
-    if ((value ?? '').isEmpty) {
-      return 'obrigatório';
-    }
-
-    return null;
-  }
-
   @override
   void dispose() {
     _error.dispose();
@@ -48,7 +41,7 @@ class _BottomSheetAddBoardLinkTitleFieldState extends State<DefenseTextField> {
       builder: (_, error, __) {
         return TextFormField(
           onChanged: (value) {
-            _error.value = _validator(value);
+            _error.value = DefaultInputValidator.valid(value);
             widget.onchange.call(value);
           },
           initialValue: widget.initialDefense?.toString(),
@@ -57,7 +50,7 @@ class _BottomSheetAddBoardLinkTitleFieldState extends State<DefenseTextField> {
           keyboardType: TextInputType.number,
           textCapitalization: TextCapitalization.sentences,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-          validator: _validator,
+          validator: DefaultInputValidator.valid,
           decoration: InputDecoration(
             labelText: 'Defesa',
             fillColor: palette.backgroundLevelOne,

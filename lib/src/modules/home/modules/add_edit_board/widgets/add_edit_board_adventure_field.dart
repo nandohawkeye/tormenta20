@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/shared/utils/default_input_validator.dart';
 
 class AddEditBoardAdventureField extends StatefulWidget {
   const AddEditBoardAdventureField(this.onChanged,
@@ -28,13 +29,6 @@ class _BoardNameFieldState extends State<AddEditBoardAdventureField> {
     super.dispose();
   }
 
-  String? _validate(String? value) {
-    if (value?.isEmpty ?? false) {
-      return 'Campo obrigatório';
-    }
-    return null;
-  }
-
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
@@ -43,12 +37,12 @@ class _BoardNameFieldState extends State<AddEditBoardAdventureField> {
         return TextFormField(
           initialValue: widget.initialValue,
           onChanged: (value) {
-            _errorNotifier.value = _validate(value);
+            _errorNotifier.value = DefaultInputValidator.valid(value);
             widget.onChanged.call(value);
           },
           style: const TextStyle(fontSize: 16),
           textCapitalization: TextCapitalization.sentences,
-          validator: _validate,
+          validator: DefaultInputValidator.valid,
           decoration: InputDecoration(
             labelText: 'Aventura',
             fillColor: palette.cardBackground,

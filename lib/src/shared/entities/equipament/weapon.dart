@@ -1,5 +1,6 @@
 import 'package:tormenta20/src/shared/entities/equipament/Wieldable_type.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
+import 'package:tormenta20/src/shared/entities/equipament/equipment_weapon_range_type.dart';
 import 'package:tormenta20/src/shared/entities/equipament/spaceable.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon_proficiency.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon_purpose.dart';
@@ -11,12 +12,12 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
   final double _space;
   final WieldableType _wieldableType;
   final WeaponPurpose purpose;
-  final double price;
+  final double? price;
   final WeaponProficiency proficiency;
   final String dicesDamage;
   final int critical;
   final int criticalMultiplier;
-  final int range;
+  final EquipmentWeaponRangeType rangeIndex;
   final WeaponType type;
   final String skillsIndex;
   final bool isNatural;
@@ -28,23 +29,23 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
     super.storedIn,
     super.improvements,
     super.specialMaterials,
+    required this.type,
     required super.uuid,
     required super.parentUuid,
     required super.name,
-    required this.type,
-    required this.steps,
-    required this.critical,
-    required this.range,
-    required this.criticalMultiplier,
-    required this.dicesDamage,
-    required this.price,
     required this.purpose,
+    required WieldableType wieldableType,
     required this.proficiency,
     required this.skillsIndex,
+    required this.steps,
+    required this.critical,
+    required this.criticalMultiplier,
+    required this.rangeIndex,
+    required this.dicesDamage,
+    this.price,
     required this.isNatural,
     required this.isUnarmed,
     required double spaceOcuped,
-    required WieldableType wieldableType,
   })  : _space = spaceOcuped,
         _wieldableType = wieldableType;
 
@@ -64,7 +65,7 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
       other.steps == steps &&
       other.spaceOcuped == spaceOcuped &&
       other.critical == critical &&
-      other.range == range &&
+      other.rangeIndex == rangeIndex &&
       other.criticalMultiplier == criticalMultiplier &&
       other.price == price &&
       other.purpose == purpose &&
@@ -89,7 +90,7 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
       steps.hashCode ^
       spaceOcuped.hashCode ^
       critical.hashCode ^
-      range.hashCode ^
+      rangeIndex.hashCode ^
       criticalMultiplier.hashCode ^
       price.hashCode ^
       purpose.hashCode ^

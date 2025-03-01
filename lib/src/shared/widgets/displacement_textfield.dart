@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/formatters/displacement_input_formatter.dart';
+import 'package:tormenta20/src/shared/utils/default_input_validator.dart';
 
 class DisplacementTextfield extends StatefulWidget {
   const DisplacementTextfield({
@@ -28,14 +29,6 @@ class _BottomSheetAddBoardLinkTitleFieldState
     _error = ValueNotifier<String?>(null);
   }
 
-  String? _validator(String? value) {
-    if ((value ?? '').isEmpty) {
-      return 'obrigatório';
-    }
-
-    return null;
-  }
-
   @override
   void dispose() {
     _error.dispose();
@@ -51,7 +44,7 @@ class _BottomSheetAddBoardLinkTitleFieldState
           onChanged: (value) {
             final valueClean =
                 value.replaceAll(',', '.').replaceAll('m', '').trim();
-            _error.value = _validator(valueClean);
+            _error.value = DefaultInputValidator.valid(valueClean);
             widget.onchange.call(valueClean);
           },
           initialValue: widget.initialDisplacement?.toString(),
@@ -60,7 +53,7 @@ class _BottomSheetAddBoardLinkTitleFieldState
           keyboardType: TextInputType.number,
           textCapitalization: TextCapitalization.sentences,
           inputFormatters: [DisplacementInputFormatter()],
-          validator: _validator,
+          validator: DefaultInputValidator.valid,
           decoration: InputDecoration(
             labelText: 'Deslocamento',
             fillColor: palette.backgroundLevelOne,

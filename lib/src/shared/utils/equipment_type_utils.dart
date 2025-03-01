@@ -1,7 +1,7 @@
 import 'package:tormenta20/src/shared/extensions/string_ext.dart';
 
 abstract class EquipmentTypeUtils {
-  static String handleMenaceTitle(String value) {
+  static String handleTitle(String value) {
     if (value.contains('Weapon')) {
       return 'Arma';
     } else if (value.contains('Ammunition')) {
