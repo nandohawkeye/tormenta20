@@ -44,7 +44,7 @@ class GrimorieMagicList extends StatelessWidget {
               imageAsset: Assets.images.fire.path,
               title: 'Adicionar magia',
               subtitle:
-                  'Adicione uma magia ao seu glimório para depois utilizá-las durantes seus combates.',
+                  'Adicione uma magia ao seu grimório para depois utilizá-las durantes seus combates.',
               onTap: addMagic,
             ),
           );

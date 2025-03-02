@@ -93,7 +93,7 @@ class _BoardViewSessionInOpenSessionButtonState
                           style: TextStyle(
                             color: palette.primary.withOpacity(.6),
                             fontFamily: FontFamily.tormenta,
-                            fontSize: 16,
+                            fontSize: 18,
                           ),
                         ),
                         const SizedBox(height: 6),
@@ -101,7 +101,7 @@ class _BoardViewSessionInOpenSessionButtonState
                           '${widget.inCombat ? 'Combate rolando, boa sorte!' : 'Roleplay acontecendo, boa diversão hein!'}\nClique aqui para ver todas as sessões',
                           maxLines: 4,
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 14,
                             color: palette.textSecundary,
                           ),
                         )

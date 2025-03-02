@@ -20,7 +20,7 @@ class AboutSettings extends StatelessWidget {
             icon: FontAwesomeIcons.fileImport,
             title: 'Exportar arquivo de backup',
             subtitle:
-                'Salve suas mesas, personagens e glimórios em um local seguro para recuperar depois.',
+                'Salve suas mesas, personagens e grimórios em um local seguro para recuperar depois.',
             onTap: () {},
           ),
         ),

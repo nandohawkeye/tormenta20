@@ -13,8 +13,8 @@ class ScreenSlideImagesButton extends StatefulWidget {
     required this.subtitle,
     required this.onTap,
     this.imageSize = 60,
-    this.titleSize = 16,
-    this.subtitleSize = 12,
+    this.titleSize = 18,
+    this.subtitleSize = 14,
   });
 
   final List<String> imageAssets;

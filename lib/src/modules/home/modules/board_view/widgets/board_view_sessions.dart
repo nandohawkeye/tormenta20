@@ -102,7 +102,7 @@ class BoardViewSessions extends StatelessWidget {
               : ScreenImageButton(
                   imageAsset: Assets.images.knight.path,
                   title:
-                      '${currentSession.isOpen ? 'Jogando há' : 'Tempo jogado'} ${currentSession.duration.toFormattedStringWithHours()}',
+                      '${currentSession.isOpen ? 'Jogando há' : 'Duração'} ${currentSession.duration.toFormattedStringWithHours()}',
                   subtitle:
                       'Sua última sessão ${combatsSessions.isNotEmpty ? 'teve ${combatsSessions.length.toString().padLeft(2, '0')} combate${combatsSessions.length > 1 ? 's' : ''}' : 'não teve combates'}, clique aqui para ver todas as sessões',
                   onTap: toSession,
