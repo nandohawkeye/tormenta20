@@ -88,7 +88,7 @@ class _ScreenSlideImagesButtonState extends State<ScreenSlideImagesButton> {
                       Text(
                         widget.title,
                         style: TextStyle(
-                          color: palette.selected,
+                          color: palette.accent,
                           fontFamily: FontFamily.tormenta,
                           fontSize: widget.titleSize,
                         ),

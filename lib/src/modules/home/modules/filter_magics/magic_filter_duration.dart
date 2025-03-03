@@ -39,14 +39,14 @@ class MagicFilterDuration extends StatelessWidget {
               children: [
                 Icon(
                   FontAwesomeIcons.hourglassHalf,
-                  color: palette.selected,
+                  color: palette.accent,
                   size: 12,
                 ),
                 const SizedBox(width: 6),
                 Text(
                   'Durações:',
                   style: TextStyle(
-                    color: palette.selected,
+                    color: palette.accent,
                     fontWeight: FontWeight.w500,
                     fontSize: 12,
                   ),

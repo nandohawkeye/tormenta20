@@ -31,7 +31,7 @@ class AnimatedVerticalCountText extends StatelessWidget {
           fontSize: 24,
           fontFamily: FontFamily.tormenta,
           fontWeight: FontWeight.bold,
-          color: palette.selected,
+          color: palette.accent,
         ),
       ),
     );

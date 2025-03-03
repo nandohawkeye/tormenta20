@@ -23,14 +23,16 @@ class GrimorieStore extends ChangeNotifier {
         .then((resp) {
       if (resp.grimoires != null) {
         _sub ??= resp.grimoires!.listen((data) {
-          _grimoire = data.first;
-          notifyListeners();
+          if (data.isNotEmpty) {
+            _grimoire = data.first;
+            notifyListeners();
+          }
         });
       }
     });
   }
 
-  late Grimoire _grimoire;
+  Grimoire _grimoire;
   Grimoire get grimoire => _grimoire;
   void updateGrimorie(Grimoire value) async {
     await GetIt.I<AppDatabase>().grimoireDAO.insertGrimoire(value);

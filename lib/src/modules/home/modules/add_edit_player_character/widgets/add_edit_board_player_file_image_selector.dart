@@ -66,7 +66,7 @@ class AddEditBoardPlayerFileImageSelector extends StatelessWidget {
                           )
                         : Icon(
                             FontAwesomeIcons.solidImage,
-                            color: palette.selected,
+                            color: palette.accent,
                           ),
                   ),
                 ),

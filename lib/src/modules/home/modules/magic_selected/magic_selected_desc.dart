@@ -27,7 +27,7 @@ class MagicSelectedDesc extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 2),
                   child: Icon(
                     FontAwesomeIcons.scroll,
-                    color: palette.selected,
+                    color: palette.accent,
                     size: 14,
                   ),
                 ),
@@ -36,7 +36,7 @@ class MagicSelectedDesc extends StatelessWidget {
                   child: Text(
                     'Descrição:',
                     style: TextStyle(
-                      color: palette.selected,
+                      color: palette.accent,
                       fontWeight: FontWeight.w500,
                     ),
                   ),

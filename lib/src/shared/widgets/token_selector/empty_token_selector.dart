@@ -42,7 +42,7 @@ class EmptyTokenSelector extends StatelessWidget {
                     ),
                     child: Icon(
                       FontAwesomeIcons.xmark,
-                      color: palette.selected,
+                      color: palette.accent,
                     ),
                   ),
                 ),

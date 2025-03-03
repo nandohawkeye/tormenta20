@@ -63,7 +63,7 @@ class AddEditBoardShortcutCard extends StatelessWidget {
                           BoardShortcutsUtils.handleLabel(type),
                           style: TextStyle(
                             fontFamily: FontFamily.tormenta,
-                            color: palette.selected,
+                            color: palette.accent,
                           ),
                         ),
                         const SizedBox(height: 4),

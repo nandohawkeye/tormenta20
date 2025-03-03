@@ -54,7 +54,7 @@ class BoardViewLinksCard extends StatelessWidget {
                           Text(
                             link.link,
                             style: TextStyle(
-                              color: palette.selected,
+                              color: palette.accent,
                               fontWeight: FontWeight.w600,
                             ),
                           ),

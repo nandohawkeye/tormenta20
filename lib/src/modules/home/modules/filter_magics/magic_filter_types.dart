@@ -38,14 +38,14 @@ class MagicFilterTypes extends StatelessWidget {
               children: [
                 Icon(
                   FontAwesomeIcons.hatWizard,
-                  color: palette.selected,
+                  color: palette.accent,
                   size: 12,
                 ),
                 const SizedBox(width: 6),
                 Text(
                   'Tipos:',
                   style: TextStyle(
-                    color: palette.selected,
+                    color: palette.accent,
                     fontWeight: FontWeight.w500,
                     fontSize: 12,
                   ),

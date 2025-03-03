@@ -29,7 +29,7 @@ class MagicSelectedItem extends StatelessWidget {
               padding: const EdgeInsets.only(top: 2),
               child: Icon(
                 icon,
-                color: palette.selected,
+                color: palette.accent,
                 size: 14,
               ),
             ),
@@ -39,7 +39,7 @@ class MagicSelectedItem extends StatelessWidget {
                 TextSpan(
                   text: preffix,
                   style: TextStyle(
-                    color: palette.selected,
+                    color: palette.accent,
                     fontWeight: FontWeight.w500,
                   ),
                   children: [

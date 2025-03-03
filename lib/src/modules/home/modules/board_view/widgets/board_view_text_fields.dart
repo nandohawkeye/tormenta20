@@ -24,7 +24,7 @@ class BoardViewTextFields extends StatelessWidget {
               fontSize: 24,
               fontFamily: FontFamily.tormenta,
               fontWeight: FontWeight.w500,
-              color: palette.selected,
+              color: palette.accent,
             ),
           ),
           const SizedBox(height: 4),

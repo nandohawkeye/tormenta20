@@ -53,7 +53,7 @@ class GrimoireCard extends StatelessWidget {
                                 width: 20,
                                 child: SvgPicture.asset(
                                   grimoire.iconAsset,
-                                  color: palette.selected,
+                                  color: palette.accent,
                                 ),
                               ),
                               const SizedBox(width: 6),
@@ -61,7 +61,7 @@ class GrimoireCard extends StatelessWidget {
                                 grimoire.name,
                                 style: TextStyle(
                                   fontFamily: FontFamily.tormenta,
-                                  color: palette.selected,
+                                  color: palette.accent,
                                   fontSize: 18,
                                 ),
                               ),

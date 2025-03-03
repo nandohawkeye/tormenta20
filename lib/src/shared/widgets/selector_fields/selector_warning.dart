@@ -26,7 +26,7 @@ class SelectorWarning extends StatelessWidget {
           hasError ? 'Obrigatório!' : helpText ?? 'obrigatório',
           style: TextStyle(
             fontSize: 12,
-            color: hasError ? palette.selected : palette.textDisable,
+            color: hasError ? palette.accent : palette.textDisable,
             fontWeight: hasError ? FontWeight.bold : FontWeight.normal,
           ),
         ),

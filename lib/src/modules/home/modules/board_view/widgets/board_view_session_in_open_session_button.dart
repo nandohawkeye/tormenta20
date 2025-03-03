@@ -91,7 +91,7 @@ class _BoardViewSessionInOpenSessionButtonState
                         Text(
                           'Jogando $_value',
                           style: TextStyle(
-                            color: palette.primary.withOpacity(.6),
+                            color: palette.accent,
                             fontFamily: FontFamily.tormenta,
                             fontSize: 18,
                           ),

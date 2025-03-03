@@ -23,7 +23,7 @@ class AboutLabel extends StatelessWidget {
                     text: 'imaginação e a diversão',
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      color: palette.selected,
+                      color: palette.accent,
                     ),
                   ),
                   const TextSpan(
@@ -34,7 +34,7 @@ class AboutLabel extends StatelessWidget {
                         'Tormenta 20 é um produto da Jambô Editora e seus respectivos criadores, todos os direitos reservados.',
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      color: palette.selected,
+                      color: palette.accent,
                     ),
                   ),
                   const TextSpan(

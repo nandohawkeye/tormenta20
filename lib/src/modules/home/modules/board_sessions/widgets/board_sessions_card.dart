@@ -102,7 +102,7 @@ class BoardSessionsCard extends StatelessWidget {
                       children: [
                         SvgPicture.asset(
                           Assets.icons.sword,
-                          color: palette.selected,
+                          color: palette.accent,
                           height: 22,
                         ),
                         const SizedBox(width: 4),
@@ -111,14 +111,14 @@ class BoardSessionsCard extends StatelessWidget {
                           style: TextStyle(
                             fontFamily: FontFamily.tormenta,
                             fontSize: 18,
-                            color: palette.selected,
+                            color: palette.accent,
                           ),
                         ),
                         const SizedBox(width: T20UI.smallSpaceSize),
                         Icon(
                           FontAwesomeIcons.shieldHalved,
                           size: 16,
-                          color: palette.selected,
+                          color: palette.accent,
                         )
                       ],
                     ),

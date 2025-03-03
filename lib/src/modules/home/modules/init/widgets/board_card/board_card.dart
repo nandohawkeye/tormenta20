@@ -57,7 +57,7 @@ class BoardCard extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: FontFamily.tormenta,
                         fontSize: 18,
-                        color: palette.selected,
+                        color: palette.accent,
                       ),
                     ),
                     Text(

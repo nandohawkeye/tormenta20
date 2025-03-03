@@ -63,7 +63,7 @@ class ScreenImageButton extends StatelessWidget {
                     Text(
                       title,
                       style: TextStyle(
-                        color: palette.primary.withOpacity(.6),
+                        color: palette.accent,
                         fontFamily: FontFamily.tormenta,
                         fontSize: titleSize,
                       ),

@@ -48,7 +48,7 @@ class AddEditBoardSiteCard extends StatelessWidget {
                           link.title,
                           style: TextStyle(
                             fontFamily: FontFamily.tormenta,
-                            color: palette.selected,
+                            color: palette.accent,
                           ),
                         ),
                         const SizedBox(height: 4),

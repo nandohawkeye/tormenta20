@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_final_fields
 
 import 'package:flutter/material.dart';
+import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie_desc_field.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie_icon_field.dart';
@@ -42,8 +43,8 @@ class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
     _desc = ValueNotifier<String?>(widget.initialGrimoire?.desc);
     _errorName = ValueNotifier<String?>(null);
 
-    _iconAsset =
-        ValueNotifier<String>(widget.initialGrimoire?.iconAsset ?? 'book');
+    _iconAsset = ValueNotifier<String>(
+        widget.initialGrimoire?.iconAsset ?? Assets.icons.book);
   }
 
   @override

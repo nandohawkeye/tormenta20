@@ -37,7 +37,7 @@ class AboutSettingsBackupCard extends StatelessWidget {
                     Text(
                       title,
                       style: TextStyle(
-                        color: palette.selected,
+                        color: palette.accent,
                         fontFamily: FontFamily.tormenta,
                         fontSize: 16,
                       ),
@@ -47,7 +47,7 @@ class AboutSettingsBackupCard extends StatelessWidget {
                       subtitle,
                       maxLines: 4,
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 14,
                         color: palette.textSecundary,
                       ),
                     )

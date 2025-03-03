@@ -103,7 +103,7 @@ class _AddEditMagicMenaceSelectMagicFieldState
                 hasError ? 'Obrigatório!' : 'obrigatório',
                 style: TextStyle(
                   fontSize: 12,
-                  color: hasError ? palette.selected : palette.textDisable,
+                  color: hasError ? palette.accent : palette.textDisable,
                 ),
               );
             },

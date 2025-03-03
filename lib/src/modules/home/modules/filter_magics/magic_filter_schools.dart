@@ -39,14 +39,14 @@ class MagicFilterSchools extends StatelessWidget {
               children: [
                 Icon(
                   FontAwesomeIcons.school,
-                  color: palette.selected,
+                  color: palette.accent,
                   size: 12,
                 ),
                 const SizedBox(width: 6),
                 Text(
                   'Escolas:',
                   style: TextStyle(
-                    color: palette.selected,
+                    color: palette.accent,
                     fontWeight: FontWeight.w500,
                     fontSize: 12,
                   ),
