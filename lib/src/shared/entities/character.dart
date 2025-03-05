@@ -1,9 +1,10 @@
 import 'package:tormenta20/src/shared/entities/brood.dart';
 import 'package:tormenta20/src/shared/entities/character_classe.dart';
 import 'package:tormenta20/src/shared/entities/divinity.dart';
+import 'package:tormenta20/src/shared/entities/entity_base.dart';
 import 'package:tormenta20/src/shared/entities/origin.dart';
 
-class Character {
+class Character extends EntityBase {
   final String uuid;
   final String name;
   final String? imagefilePath;
@@ -46,4 +47,10 @@ class Character {
       origins.hashCode ^
       brood.hashCode ^
       imageAsset.hashCode;
+
+  @override
+  String get exibitionLabel => name;
+
+  @override
+  get primaryKey => uuid;
 }

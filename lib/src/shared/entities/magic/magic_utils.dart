@@ -1,5 +1,5 @@
 abstract class MagicUtils {
-  static Map<String, String> schollLabels = {
+  static const Map<String, String> schollLabels = {
     'Abjuracao': 'Abjuração',
     'Adivinhacao': 'Adivinhação',
     'Convocacao': 'Convocação',
@@ -8,7 +8,7 @@ abstract class MagicUtils {
     'Transmutacao': 'Transmutação',
   };
 
-  static Map<String, String> executionsLabels = {
+  static const Map<String, String> executionsLabels = {
     'Padrao': 'Padrão',
     'Reacao': 'Reação',
     'umaHora': 'Uma hora',
@@ -17,13 +17,13 @@ abstract class MagicUtils {
     'dezMinutos': '10 minutos',
   };
 
-  static Map<String, String> rangesLabels = {
+  static const Map<String, String> rangesLabels = {
     'Medio': 'Médio',
     'doisKm': '2Km',
     'vejaTexto': 'Veja texto'
   };
 
-  static Map<String, String> durationLabels = {
+  static const Map<String, String> durationLabels = {
     'Instantanea': 'Instantânea',
     'UmDia': 'Um dia',
     'UmaRodada': 'Uma rodada',

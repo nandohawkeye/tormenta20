@@ -37,7 +37,7 @@ class _AddEditGeneralSkillsBottomSheetState
   @override
   void initState() {
     super.initState();
-    _setTitle(widget.skill?.title);
+    _setTitle(widget.skill?.name);
     _setDesc(widget.skill?.desc);
   }
 
@@ -88,7 +88,7 @@ class _AddEditGeneralSkillsBottomSheetState
                           children: [
                             AddEditGeneralSkillsTitleTextfield(
                               onchange: _setTitle,
-                              initialTitle: widget.skill?.title,
+                              initialTitle: widget.skill?.name,
                             ),
                             T20UI.spaceHeight,
                             AddEditGeneralSkillsDescTextfield(
@@ -108,7 +108,7 @@ class _AddEditGeneralSkillsBottomSheetState
                       final newSkill = GeneralSkill(
                         parentUuid: widget.menaceUuid,
                         uuid: widget.skill?.uuid ?? const Uuid().v4(),
-                        title: _title!,
+                        name: _title!,
                         desc: _desc!,
                       );
 

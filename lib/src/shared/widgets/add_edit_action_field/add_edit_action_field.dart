@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_action/add_edit_action_screen.dart';
+import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
+import 'package:tormenta20/src/shared/widgets/add_edit_action_field/add_edit_action_card.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/selector_secundary_simple_button.dart';
 import 'package:tormenta20/src/shared/entities/action/action.dart';
@@ -14,9 +16,11 @@ class AddEditActionField extends StatefulWidget {
     required this.onAdd,
     required this.onRemove,
     required this.parentUuid,
+    required this.getEquipaments,
   });
 
   final List<ActionEnt> initialActions;
+  final List<Equipment> Function() getEquipaments;
   final String parentUuid;
   final Function(ActionEnt) onAdd;
   final Function(ActionEnt) onRemove;
@@ -44,11 +48,13 @@ class _AddEditBoardPlayerBroodSelectorState extends State<AddEditActionField> {
   }
 
   void _onAdd(ActionEnt? action) async {
+    final equipments = widget.getEquipaments();
     await Navigator.push<ActionEnt?>(
       context,
       MaterialPageRoute(
         builder: (_) => AddEditActionScreen(
-          action: action,
+          initialAction: action,
+          equipments: equipments,
           menaceUuid: widget.parentUuid,
         ),
       ),
@@ -137,8 +143,10 @@ class _AddEditBoardPlayerBroodSelectorState extends State<AddEditActionField> {
                           return ListView.separated(
                             shrinkWrap: true,
                             padding: const EdgeInsets.only(
-                              left: T20UI.smallSpaceSize,
-                              right: T20UI.smallSpaceSize,
+                              left: T20UI.smallSpaceSize +
+                                  T20UI.screenContentSpaceSize,
+                              right: T20UI.smallSpaceSize +
+                                  T20UI.screenContentSpaceSize,
                             ),
                             scrollDirection: Axis.horizontal,
                             separatorBuilder: T20UI.separatorBuilderHorizontal,
@@ -151,12 +159,11 @@ class _AddEditBoardPlayerBroodSelectorState extends State<AddEditActionField> {
                                 );
                               }
 
-                              return SizedBox();
-                              // return AddEditMenaceScreenMagicsFieldCard(
-                              //   magicMenace: list[index - 1],
-                              //   onRemove: _remove,
-                              //   onTap: _onAdd,
-                              // );
+                              return AddEditActionCard(
+                                action: list[index - 1],
+                                onRemove: _remove,
+                                onTap: _onAdd,
+                              );
                             },
                           );
                         }),

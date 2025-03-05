@@ -12,8 +12,8 @@ class AddEditMagicMenaceStore {
       setPm(magic.pm?.toString());
       setCd(magic.cd?.toString());
       setMagicBaseId(magic.magicBaseId);
-      _setDiceMacro(magic.damageDices);
-      _setExtraDiceMacro(magic.extraDamageDices);
+      _setDice(magic.damageDices);
+      _setExtraDice(magic.extraDamageDices);
       setMediumDamage(magic.mediumDamageValue?.toString());
     } else {
       _uuid = const Uuid().v4();
@@ -25,12 +25,12 @@ class AddEditMagicMenaceStore {
   late String _uuid;
   late final String _menaceUuid;
 
-  String? _dicesMacro;
-  void _setDiceMacro(String? value) => _dicesMacro = value;
+  String? _dices;
+  void _setDice(String? value) => _dices = value;
   void onChangeDice(List<RoolDice> dices) {
     int index = 0;
     if (dices.isEmpty) {
-      _setDiceMacro(null);
+      _setDice(null);
       return;
     }
 
@@ -46,16 +46,16 @@ class AddEditMagicMenaceStore {
       index++;
     }
 
-    _setDiceMacro(formatted);
+    _setDice(formatted);
   }
 
-  String? _extraDicesMacro;
-  void _setExtraDiceMacro(String? value) => _extraDicesMacro = value;
+  String? _extraDices;
+  void _setExtraDice(String? value) => _extraDices = value;
   void onChangeExtraDice(List<RoolDice> dices) {
     int index = 0;
 
     if (dices.isEmpty) {
-      _setExtraDiceMacro(null);
+      _setExtraDice(null);
       return;
     }
 
@@ -71,7 +71,7 @@ class AddEditMagicMenaceStore {
       index++;
     }
 
-    _setExtraDiceMacro(formatted);
+    _setExtraDice(formatted);
   }
 
   int? _magicBaseId;
@@ -132,8 +132,8 @@ class AddEditMagicMenaceStore {
       magicBaseId: _magicBaseId!,
       cd: _cd,
       pm: _pm,
-      damageDices: _dicesMacro,
-      extraDamageDices: _extraDicesMacro,
+      damageDices: _dices,
+      extraDamageDices: _extraDices,
       mediumDamageValue: _mediumDamage,
     );
   }

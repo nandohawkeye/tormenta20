@@ -4,7 +4,7 @@ import 'package:tormenta20/src/shared/entities/equipament/spaceable.dart';
 class Ammunition extends Equipment implements Spaceable {
   final int quantity;
   final String? desc;
-  final double price;
+  final double? price;
 
   Ammunition({
     required super.uuid,
@@ -12,7 +12,7 @@ class Ammunition extends Equipment implements Spaceable {
     required super.name,
     super.storedIn,
     super.improvements,
-    super.specialMaterials,
+    super.specialMaterial,
     required this.quantity,
     required this.price,
     this.desc,

@@ -1,4 +1,6 @@
-class Divinity {
+import 'package:tormenta20/src/shared/entities/entity_base.dart';
+
+class Divinity extends EntityBase {
   final int id;
   final String name;
   final String assetPath;
@@ -18,4 +20,10 @@ class Divinity {
 
   @override
   int get hashCode => id.hashCode ^ assetPath.hashCode ^ name.hashCode;
+
+  @override
+  String get exibitionLabel => name;
+
+  @override
+  get primaryKey => id;
 }

@@ -2,13 +2,13 @@ import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/entities/equipament/has_space.dart';
 
 class Backpack extends Equipment implements HasSpace {
-  final double price;
+  final double? price;
   final String? suffix;
 
   Backpack({
     required super.uuid,
     required super.parentUuid,
-    required this.price,
+    this.price,
     this.suffix,
   }) : super(name: 'Mochila${suffix ?? ''}');
 

@@ -1,11 +1,14 @@
+import 'package:tormenta20/src/shared/entities/action/action.dart';
 import 'package:tormenta20/src/shared/entities/combat_role.dart';
 import 'package:tormenta20/src/shared/entities/creature_size.dart';
+import 'package:tormenta20/src/shared/entities/entity_base.dart';
+import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/entities/general_skill.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_menace.dart';
 import 'package:tormenta20/src/shared/entities/menace_type.dart';
 import 'package:tormenta20/src/shared/entities/treasure_type.dart';
 
-class Menace {
+class Menace extends EntityBase {
   final String? imagePath;
   final String? imageAsset;
   final String? displacement;
@@ -36,14 +39,13 @@ class Menace {
   final int? divinityId;
   final List<GeneralSkill> generalSkills;
   final String? casterInfos;
-  //padrão, metade, doblo, na rolagem pra dinheiro e item
+  //na mecanica de rolagem, rolar um d100 pra dinheiro e item
   final TreasureType? treasures;
   final List<MagicMenace> magics;
-
-  final List<String> actions;
+  final List<Equipment> equipments;
+  final List<ActionEnt> actions;
 
   final List<String> expertises;
-  final List<String> equipments;
 
   final String? desc;
   final String? extraInfos;
@@ -157,4 +159,10 @@ class Menace {
       divinityId.hashCode ^
       casterInfos.hashCode ^
       magics.hashCode;
+
+  @override
+  String get exibitionLabel => name;
+
+  @override
+  get primaryKey => uuid;
 }

@@ -1,4 +1,6 @@
-class RoolDice {
+import 'package:tormenta20/src/shared/entities/entity_base.dart';
+
+class RoolDice extends EntityBase {
   final String uuid;
   final String quantity;
   final String dice;
@@ -21,4 +23,10 @@ class RoolDice {
 
   @override
   int get hashCode => uuid.hashCode ^ quantity.hashCode ^ dice.hashCode;
+
+  @override
+  String get exibitionLabel => toString();
+
+  @override
+  get primaryKey => uuid;
 }

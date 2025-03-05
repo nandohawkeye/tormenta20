@@ -29,7 +29,7 @@ class AddEditMenaceScreenStageThree extends StatelessWidget {
             initialDivinityId: controller.divinityId,
           ),
           T20UI.spaceHeight,
-          AddEditMenaceScreenTypeTreasureSelector(controller: controller),
+          AddEditMenaceScreenTypeTreasureSelector(controller.treasureTypeStore),
           T20UI.spaceHeight,
           Padding(
             padding: T20UI.horizontallScreenPadding,

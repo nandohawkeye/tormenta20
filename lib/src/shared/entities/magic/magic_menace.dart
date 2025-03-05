@@ -1,4 +1,6 @@
-class MagicMenace {
+import 'package:tormenta20/src/shared/entities/entity_base.dart';
+
+class MagicMenace extends EntityBase {
   final String uuid;
   final String resumedDesc;
   final String menaceUuid;
@@ -49,4 +51,10 @@ class MagicMenace {
       magicBaseId.hashCode ^
       name.hashCode ^
       extraDamageDices.hashCode;
+
+  @override
+  String get exibitionLabel => name;
+
+  @override
+  get primaryKey => uuid;
 }

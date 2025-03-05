@@ -17,8 +17,8 @@ class AddEditCriticalField extends StatelessWidget {
 
   final bool isObrigatory;
   final bool hasError;
-  final String? initialValue;
-  final String? initialMultiplier;
+  final int? initialValue;
+  final int? initialMultiplier;
   final Function(String) onChangeValue;
   final Function(String) onChangeMultiplier;
 
@@ -28,79 +28,90 @@ class AddEditCriticalField extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Card(
-          color: palette.backgroundLevelOne,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(
-                  left: T20UI.screenContentSpaceSize,
-                  top: T20UI.smallSpaceSize,
-                  bottom: T20UI.smallSpaceSize,
-                ),
-                child: Text('Crítico'),
+        Padding(
+          padding: T20UI.horizontallScreenPadding,
+          child: AnimatedContainer(
+            duration: T20UI.defaultDurationAnimation,
+            decoration: BoxDecoration(
+              color: palette.backgroundLevelOne,
+              borderRadius: T20UI.borderRadius,
+              border: Border.all(
+                width: 2,
+                color: hasError ? palette.accent : palette.backgroundLevelOne,
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: T20UI.smallSpaceSize,
-                  right: T20UI.smallSpaceSize,
-                  bottom: T20UI.smallSpaceSize,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(
+                    left: T20UI.screenContentSpaceSize,
+                    top: T20UI.smallSpaceSize,
+                    bottom: T20UI.smallSpaceSize,
+                  ),
+                  child: Text('Crítico'),
                 ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        initialValue: initialValue,
-                        onChanged: onChangeValue,
-                        style: const TextStyle(fontSize: 16),
-                        textInputAction: TextInputAction.next,
-                        keyboardType: TextInputType.number,
-                        textCapitalization: TextCapitalization.sentences,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
-                        ],
-                        decoration: InputDecoration(
-                          labelText: 'Valor',
-                          fillColor: palette.backgroundLevelTwo,
-                          helperStyle: TextStyle(color: palette.textDisable),
-                          contentPadding: const EdgeInsets.symmetric(
-                            vertical: 6,
-                            horizontal: T20UI.spaceSize,
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: T20UI.smallSpaceSize,
+                    right: T20UI.smallSpaceSize,
+                    bottom: T20UI.smallSpaceSize,
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          initialValue: initialValue?.toString(),
+                          onChanged: onChangeValue,
+                          style: const TextStyle(fontSize: 16),
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.number,
+                          textCapitalization: TextCapitalization.sentences,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
+                          ],
+                          decoration: InputDecoration(
+                            labelText: 'Valor',
+                            fillColor: palette.backgroundLevelTwo,
+                            helperStyle: TextStyle(color: palette.textDisable),
+                            contentPadding: const EdgeInsets.symmetric(
+                              vertical: 6,
+                              horizontal: T20UI.spaceSize,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(width: T20UI.smallSpaceSize),
-                    Expanded(
-                      child: TextFormField(
-                        initialValue: initialMultiplier,
-                        onChanged: onChangeMultiplier,
-                        style: const TextStyle(fontSize: 16),
-                        textInputAction: TextInputAction.next,
-                        keyboardType: TextInputType.number,
-                        textCapitalization: TextCapitalization.sentences,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
-                        ],
-                        decoration: InputDecoration(
-                          labelText: 'Multiplicador',
-                          prefix:
-                              const Text('x', style: TextStyle(fontSize: 16)),
-                          fillColor: palette.backgroundLevelTwo,
-                          helperStyle: TextStyle(color: palette.textDisable),
-                          contentPadding: const EdgeInsets.symmetric(
-                            vertical: 6,
-                            horizontal: T20UI.spaceSize,
+                      const SizedBox(width: T20UI.smallSpaceSize),
+                      Expanded(
+                        child: TextFormField(
+                          initialValue: initialMultiplier?.toString(),
+                          onChanged: onChangeMultiplier,
+                          style: const TextStyle(fontSize: 16),
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.number,
+                          textCapitalization: TextCapitalization.sentences,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
+                          ],
+                          decoration: InputDecoration(
+                            labelText: 'Multiplicador',
+                            prefix:
+                                const Text('x', style: TextStyle(fontSize: 16)),
+                            fillColor: palette.backgroundLevelTwo,
+                            helperStyle: TextStyle(color: palette.textDisable),
+                            contentPadding: const EdgeInsets.symmetric(
+                              vertical: 6,
+                              horizontal: T20UI.spaceSize,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              )
-            ],
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
         SelectorWarning(

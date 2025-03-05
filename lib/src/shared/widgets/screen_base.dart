@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/shared/entities/screen_save_main_buttons.dart';
+import 'package:tormenta20/src/shared/widgets/screen_save_main_buttons.dart';
 import 'package:tormenta20/src/shared/widgets/screen_header.dart';
 
 class ScreenBase extends StatelessWidget {
@@ -13,10 +13,12 @@ class ScreenBase extends StatelessWidget {
     this.onBack,
     this.onSaveLabel,
     this.extraLeftWidgets,
+    this.scrollController,
   });
 
   final Widget body;
   final String label;
+  final ScrollController? scrollController;
   final Function() onSave;
   final List<Widget>? extraRightWidgets;
   final Function()? onBack;
@@ -33,7 +35,12 @@ class ScreenBase extends StatelessWidget {
         children: [
           ScreenHeader(label: label),
           const Divider(),
-          Expanded(child: SingleChildScrollView(child: body)),
+          Expanded(
+            child: SingleChildScrollView(
+              controller: scrollController,
+              child: body,
+            ),
+          ),
           ScreenSaveMainButtons(
             onSave: onSave,
             extraLeftWidgets: extraLeftWidgets,

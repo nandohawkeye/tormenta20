@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/add_edit_menace_controller.dart';
 import 'package:tormenta20/src/shared/widgets/add_edit_action_field/add_edit_action_field.dart';
-import 'package:tormenta20/src/shared/widgets/add_edit_equipament_field/add_edit_equipament_field.dart';
+import 'package:tormenta20/src/shared/widgets/add_edit_equipament_field/add_edit_equipment_field.dart';
+import 'package:tormenta20/src/shared/widgets/desc_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/extra_infos_textfield.dart';
 
 class AddEditMenaceScreenStageFour extends StatelessWidget {
   const AddEditMenaceScreenStageFour({
@@ -21,17 +23,36 @@ class AddEditMenaceScreenStageFour extends StatelessWidget {
         children: [
           T20UI.spaceHeight,
           AddEditEquipamentField(
-            initialEquipaments: [],
-            onAdd: (_) {},
-            onRemove: (_) {},
-            parentUuid: '',
+            initialEquipaments: controller.equipments,
+            onAdd: controller.addEquipment,
+            onRemove: controller.removeEquipment,
+            parentUuid: controller.menaceUuid,
           ),
           T20UI.spaceHeight,
           AddEditActionField(
-            initialActions: [],
-            onAdd: (_) {},
-            onRemove: (_) {},
-            parentUuid: '',
+            initialActions: controller.actions,
+            getEquipaments: () => controller.equipments,
+            onAdd: controller.addAction,
+            onRemove: controller.removeAction,
+            parentUuid: controller.menaceUuid,
+          ),
+          T20UI.spaceHeight,
+          Padding(
+            padding: T20UI.horizontallScreenPadding,
+            child: DescTextfield(
+              initialDesc: controller.desc,
+              onchange: controller.changeDesc,
+              isObrigatory: false,
+            ),
+          ),
+          T20UI.spaceHeight,
+          Padding(
+            padding: T20UI.horizontallScreenPadding,
+            child: ExtraInfosTextfield(
+              isObrigatory: false,
+              initialValue: controller.extraInfos,
+              onchange: controller.changeExtraInfos,
+            ),
           ),
           T20UI.spaceHeight,
           SizedBox(height: MediaQuery.of(context).viewInsets.bottom),

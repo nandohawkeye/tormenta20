@@ -5,7 +5,7 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/botto
 import 'package:tormenta20/src/modules/home/modules/board_view_links/board_view_links_store.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view_links/board_view_links_card.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link.dart';
-import 'package:tormenta20/src/shared/entities/screen_save_main_buttons.dart';
+import 'package:tormenta20/src/shared/widgets/screen_save_main_buttons.dart';
 import 'package:tormenta20/src/shared/widgets/screen_header.dart';
 
 class BoardViewLinks extends StatefulWidget {

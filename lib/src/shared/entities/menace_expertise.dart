@@ -1,4 +1,6 @@
-class MenaceExpertise {
+import 'package:tormenta20/src/shared/entities/entity_base.dart';
+
+class MenaceExpertise extends EntityBase {
   final String uuid;
   final String name;
   final String menaceUuid;
@@ -29,4 +31,10 @@ class MenaceExpertise {
       menaceUuid.hashCode ^
       expertiseParentId.hashCode ^
       value.hashCode;
+
+  @override
+  String get exibitionLabel => name;
+
+  @override
+  get primaryKey => uuid;
 }

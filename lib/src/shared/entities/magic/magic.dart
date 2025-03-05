@@ -1,3 +1,4 @@
+import 'package:tormenta20/src/shared/entities/entity_base.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_circle.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_duration.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_execution.dart';
@@ -5,7 +6,7 @@ import 'package:tormenta20/src/shared/entities/magic/magic_range.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_school.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_type.dart';
 
-class Magic {
+class Magic extends EntityBase {
   final String name;
   final String desc;
   final MagicCircle circle;
@@ -64,4 +65,10 @@ class Magic {
       targetAreaEfect.hashCode ^
       id.hashCode ^
       publication.hashCode;
+
+  @override
+  String get exibitionLabel => name;
+
+  @override
+  get primaryKey => id;
 }

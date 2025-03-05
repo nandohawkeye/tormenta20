@@ -1,9 +1,11 @@
 import 'package:tormenta20/src/shared/entities/action/action_type.dart';
+import 'package:tormenta20/src/shared/entities/entity_base.dart';
+import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 
-class ActionEnt {
+class ActionEnt extends EntityBase {
   final String uuid;
   final String parentUuid;
-  final String title;
+  final String name;
   final String desc;
   final ActionType type;
   final int? pm;
@@ -13,12 +15,12 @@ class ActionEnt {
   final int? mediumDamageValue;
   final int? critical;
   final int? criticalMultiplier;
-  final String? equipament;
+  final Equipment? equipament;
 
   ActionEnt({
     required this.uuid,
     required this.parentUuid,
-    required this.title,
+    required this.name,
     required this.desc,
     required this.type,
     this.pm,
@@ -36,7 +38,7 @@ class ActionEnt {
       other is ActionEnt &&
       other.uuid == uuid &&
       other.parentUuid == parentUuid &&
-      other.title == title &&
+      other.name == name &&
       other.desc == desc &&
       other.type == type &&
       other.pm == pm &&
@@ -52,7 +54,7 @@ class ActionEnt {
   int get hashCode =>
       uuid.hashCode ^
       parentUuid.hashCode ^
-      title.hashCode ^
+      name.hashCode ^
       desc.hashCode ^
       type.hashCode ^
       pm.hashCode ^
@@ -63,4 +65,10 @@ class ActionEnt {
       critical.hashCode ^
       criticalMultiplier.hashCode ^
       equipament.hashCode;
+
+  @override
+  String get exibitionLabel => name;
+
+  @override
+  get primaryKey => uuid;
 }

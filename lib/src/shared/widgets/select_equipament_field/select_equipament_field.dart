@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/shared/entities/general_skill.dart';
+import 'package:tormenta20/src/modules/home/modules/select_equipments/select_equipments_screen.dart';
+import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
+import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
 class SelectEquipamentField extends StatefulWidget {
-  const SelectEquipamentField({super.key});
+  const SelectEquipamentField({
+    super.key,
+    required this.equipaments,
+    required this.onchange,
+    this.initialSelected,
+  });
+
+  final List<Equipment> equipaments;
+  final Equipment? initialSelected;
+  final Function(Equipment?) onchange;
 
   @override
   State<SelectEquipamentField> createState() =>
@@ -14,58 +27,43 @@ class SelectEquipamentField extends StatefulWidget {
 
 class _AddEditBoardPlayerBroodSelectorState
     extends State<SelectEquipamentField> {
-  // late final ValueNotifier<List<GeneralSkill>> _selecteds;
-  // void _add(GeneralSkill? value) {
-  //   if (value == null) return;
-
-  //   List<GeneralSkill> oldValues = _selecteds.value;
-
-  //   if (oldValues.any((old) => old.uuid == value.uuid)) {
-  //     final index = oldValues.indexWhere((old) => old.uuid == value.uuid);
-  //     oldValues[index] = value;
-  //     _selecteds.value = [...oldValues];
-  //   } else {
-  //     _selecteds.value = [value, ...oldValues];
-  //     widget.controller.addGeneralSkill(value);
-  //   }
-  // }
-
-  // void _remove(GeneralSkill value) {
-  //   List<GeneralSkill> oldValues = _selecteds.value;
-  //   oldValues.remove(value);
-  //   _selecteds.value = [...oldValues];
-  //   widget.controller.removeGeneralSkill(value);
-  // }
+  late final ValueNotifier<Equipment?> _selected;
+  void _onChange(Equipment? value) {
+    _selected.value = value;
+    widget.onchange(value);
+  }
 
   @override
   void initState() {
     super.initState();
-    // _selecteds =
-    //     ValueNotifier<List<GeneralSkill>>(widget.controller.generalSkills);
+    _selected = ValueNotifier<Equipment?>(widget.initialSelected);
   }
 
   @override
   void dispose() {
-    // _selecteds.dispose();
+    _selected.dispose();
     super.dispose();
   }
 
-  void _onAdd(GeneralSkill? skill) async {
-    // await showModalBottomSheet<GeneralSkill?>(
-    //   isScrollControlled: true,
-    //   isDismissible: true,
-    //   enableDrag: false,
-    //   context: context,
-    //   builder: (context) => Padding(
-    //     padding: EdgeInsets.only(
-    //       bottom: MediaQuery.of(context).viewInsets.bottom,
-    //     ),
-    //     child: AddEditGeneralSkillsBottomSheet(
-    //       skill: skill,
-    //       menaceUuid: widget.controller.uuid,
-    //     ),
-    //   ),
-    // ).then(_add);
+  void _onAdd(Equipment? equipament) async {
+    if (widget.equipaments.isNotEmpty && widget.equipaments.length == 1) {
+      _onChange(widget.equipaments.first);
+      return;
+    }
+
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => SelectEquipmentsScreen(
+          equipaments: widget.equipaments,
+          initialSelected: equipament,
+        ),
+      ),
+    ).then((result) {
+      if (result != null) {
+        _onChange(result);
+      }
+    });
   }
 
   @override
@@ -74,61 +72,83 @@ class _AddEditBoardPlayerBroodSelectorState
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          height: (95),
-          child: Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: T20UI.screenContentSpaceSize,
-                ),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: AnimatedContainer(
-                    duration: T20UI.defaultDurationAnimation,
-                    decoration: BoxDecoration(
-                      borderRadius: T20UI.borderRadius,
-                      color: palette.backgroundLevelOne,
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.only(
-                        top: T20UI.smallSpaceSize,
-                        left: T20UI.screenContentSpaceSize,
+        Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: T20UI.screenContentSpaceSize,
+              ),
+              child: SizedBox(
+                width: double.infinity,
+                child: AnimatedContainer(
+                  duration: T20UI.defaultDurationAnimation,
+                  decoration: BoxDecoration(
+                    borderRadius: T20UI.borderRadius,
+                    color: palette.backgroundLevelOne,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(
+                          top: T20UI.smallSpaceSize,
+                          left: T20UI.screenContentSpaceSize,
+                          bottom: T20UI.smallSpaceSize,
+                        ),
+                        child: Text('Equipamento'),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Equipamento'),
-                          SizedBox(height: T20UI.inputHeight + 12)
-                        ],
-                      ),
-                    ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                                horizontal: T20UI.smallSpaceSize)
+                            .copyWith(
+                          bottom: T20UI.smallSpaceSize,
+                        ),
+                        child: ValueListenableBuilder(
+                          valueListenable: _selected,
+                          builder: (_, selected, __) {
+                            return SizedBox(
+                              height: T20UI.inputHeight,
+                              width: double.infinity,
+                              child: Row(
+                                children: [
+                                  if (selected != null)
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                        right: T20UI.smallSpaceSize,
+                                      ),
+                                      child: SimpleButton(
+                                        icon: FontAwesomeIcons.solidTrashCan,
+                                        backgroundColor:
+                                            palette.backgroundLevelTwo,
+                                        iconColor: palette.accent,
+                                        onTap: () => _onChange(null),
+                                      ),
+                                    ),
+                                  Expanded(
+                                    child: MainButton(
+                                      label: selected == null
+                                          ? 'Selecionar'
+                                          : selected.name,
+                                      fontFamily: selected == null
+                                          ? FontFamily.tormenta
+                                          : null,
+                                      backgroundColor:
+                                          palette.backgroundLevelTwo,
+                                      onTap: () => _onAdd(selected),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: SizedBox(
-                    height: T20UI.inputHeight,
-                    width: double.infinity,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal:
-                            T20UI.screenContentSpaceSize + T20UI.smallSpaceSize,
-                      ),
-                      child: MainButton(
-                        label: 'Selecionar',
-                        backgroundColor: palette.backgroundLevelTwo,
-                        onTap: () => _onAdd(null),
-                      ),
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
+            ),
+          ],
         ),
       ],
     );

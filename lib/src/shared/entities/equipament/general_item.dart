@@ -5,7 +5,7 @@ import 'package:tormenta20/src/shared/entities/equipament/spaceable.dart';
 class GeneralItem extends Equipment implements Spaceable {
   final String? desc;
   final double _space;
-  final double price;
+  final double? price;
   final GeneralItemType type;
 
   GeneralItem({
@@ -14,11 +14,11 @@ class GeneralItem extends Equipment implements Spaceable {
     required super.parentUuid,
     required super.name,
     required double spaceOcuped,
-    required this.price,
+    this.price,
     required this.type,
     super.storedIn,
     super.improvements,
-    super.specialMaterials,
+    super.specialMaterial,
   }) : _space = spaceOcuped;
 
   @override
@@ -34,7 +34,7 @@ class GeneralItem extends Equipment implements Spaceable {
       other.price == price &&
       other.storedIn == storedIn &&
       other.improvements == improvements &&
-      other.specialMaterials == specialMaterials;
+      other.specialMaterial == specialMaterial;
 
   @override
   int get hashCode =>
@@ -46,5 +46,5 @@ class GeneralItem extends Equipment implements Spaceable {
       price.hashCode ^
       storedIn.hashCode ^
       improvements.hashCode ^
-      specialMaterials.hashCode;
+      specialMaterial.hashCode;
 }

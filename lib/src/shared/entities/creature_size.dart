@@ -1,6 +1,7 @@
 import 'package:tormenta20/src/shared/entities/creature_size_category.dart';
+import 'package:tormenta20/src/shared/entities/entity_base.dart';
 
-class CreatureSize {
+class CreatureSize extends EntityBase {
   final CreatureSizeCategory category;
   final double space;
   final int stealthModifier;
@@ -29,4 +30,10 @@ class CreatureSize {
       space.hashCode ^
       stealthModifier.hashCode ^
       maneuverModifier.hashCode;
+
+  @override
+  String get exibitionLabel => category.name;
+
+  @override
+  get primaryKey => id;
 }

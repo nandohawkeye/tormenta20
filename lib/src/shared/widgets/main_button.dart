@@ -11,6 +11,7 @@ class MainButton extends StatelessWidget {
     this.backgroundColor,
     this.textColor,
     this.icon,
+    this.fontFamily = FontFamily.tormenta,
   });
 
   final String label;
@@ -18,6 +19,7 @@ class MainButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? textColor;
   final IconData? icon;
+  final String? fontFamily;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +57,7 @@ class MainButton extends StatelessWidget {
                         fontSize: 16,
                         color: textColor,
                         fontWeight: FontWeight.w500,
-                        fontFamily: FontFamily.tormenta,
+                        fontFamily: fontFamily,
                       ),
                     ),
                   ],

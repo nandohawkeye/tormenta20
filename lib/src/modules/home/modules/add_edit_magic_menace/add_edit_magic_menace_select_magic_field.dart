@@ -100,7 +100,7 @@ class _AddEditMagicMenaceSelectMagicFieldState
             valueListenable: widget.hasError,
             builder: (_, hasError, __) {
               return Text(
-                hasError ? 'Obrigatório!' : 'obrigatório',
+                hasError ? 'É obrigatório!' : 'obrigatório',
                 style: TextStyle(
                   fontSize: 12,
                   color: hasError ? palette.accent : palette.textDisable,

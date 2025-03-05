@@ -1,10 +1,13 @@
-class Equipment {
+import 'package:tormenta20/src/shared/entities/entity_base.dart';
+import 'package:tormenta20/src/shared/entities/equipament/special_material_types.dart';
+
+class Equipment extends EntityBase {
   final String uuid;
   final String parentUuid;
   final String name;
   final String? storedIn;
   final String? improvements;
-  final String? specialMaterials;
+  final SpecialMaterialTypes? specialMaterial;
 
   Equipment({
     required this.uuid,
@@ -12,7 +15,7 @@ class Equipment {
     required this.name,
     this.storedIn,
     this.improvements,
-    this.specialMaterials,
+    this.specialMaterial,
   });
 
   @override
@@ -23,7 +26,7 @@ class Equipment {
       other.name == name &&
       other.storedIn == storedIn &&
       other.improvements == improvements &&
-      other.specialMaterials == specialMaterials;
+      other.specialMaterial == specialMaterial;
 
   @override
   int get hashCode =>
@@ -32,5 +35,11 @@ class Equipment {
       name.hashCode ^
       storedIn.hashCode ^
       improvements.hashCode ^
-      specialMaterials.hashCode;
+      specialMaterial.hashCode;
+
+  @override
+  String get exibitionLabel => name;
+
+  @override
+  get primaryKey => uuid;
 }

@@ -8,7 +8,7 @@ import 'package:tormenta20/src/modules/home/modules/board_view/widgets/valid_cre
 import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/entities/board/board_combat_ext.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session_ext.dart';
-import 'package:tormenta20/src/shared/entities/screen_save_main_buttons.dart';
+import 'package:tormenta20/src/shared/widgets/screen_save_main_buttons.dart';
 
 class BoardViewBottomWidgets extends StatelessWidget {
   const BoardViewBottomWidgets(

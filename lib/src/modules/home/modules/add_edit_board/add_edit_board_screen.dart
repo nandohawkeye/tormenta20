@@ -9,7 +9,7 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_e
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_sites.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_text_field.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
-import 'package:tormenta20/src/shared/entities/screen_save_main_buttons.dart';
+import 'package:tormenta20/src/shared/widgets/screen_save_main_buttons.dart';
 import 'package:tormenta20/src/shared/widgets/screen_header.dart';
 
 class AddEditBoardScreen extends StatefulWidget {

@@ -16,7 +16,7 @@ import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic.dart';
-import 'package:tormenta20/src/shared/entities/screen_save_main_buttons.dart';
+import 'package:tormenta20/src/shared/widgets/screen_save_main_buttons.dart';
 
 class GrimorieScreen extends StatefulWidget {
   const GrimorieScreen({super.key, required this.grimoire});

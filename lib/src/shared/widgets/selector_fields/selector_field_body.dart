@@ -22,7 +22,11 @@ class SelectorFieldBody extends StatelessWidget {
           duration: T20UI.defaultDurationAnimation,
           decoration: BoxDecoration(
             borderRadius: T20UI.borderRadius,
-            color: hasError ? palette.error : palette.backgroundLevelOne,
+            border: Border.all(
+              color: hasError ? palette.accent : palette.backgroundLevelOne,
+              width: 2,
+            ),
+            color: palette.backgroundLevelOne,
           ),
           child: Padding(
             padding: const EdgeInsets.only(

@@ -116,16 +116,12 @@ class AppDatabase extends _$AppDatabase {
   }
 }
 
-Future<File> get getAsyncFile async {
-  final dbFolder = await getApplicationDocumentsDirectory();
-  final file = File(p.join(dbFolder.path, 'db.sqlite'));
-  return file;
-}
-
 LazyDatabase _openConnection() {
-  return LazyDatabase(() async {
-    final dbFolder = await getApplicationDocumentsDirectory();
-    final file = File(p.join(dbFolder.path, 'db.sqlite'));
-    return NativeDatabase(file);
-  });
+  return LazyDatabase(
+    () async {
+      final dbFolder = await getApplicationDocumentsDirectory();
+      final file = File(p.join(dbFolder.path, 'db.sqlite'));
+      return NativeDatabase(file);
+    },
+  );
 }

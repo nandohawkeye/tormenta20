@@ -17,11 +17,13 @@ class AddEditDicesField extends StatefulWidget {
     this.isObrigatory = false,
     this.initialValue,
     required this.onChangeValues,
+    this.helpText,
   });
 
   final bool isExtra;
   final bool isObrigatory;
   final bool hasError;
+  final String? helpText;
   final String? initialValue;
   final Function(List<RoolDice>) onChangeValues;
 
@@ -79,127 +81,164 @@ class _AddEditDicesFieldState extends State<AddEditDicesField> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Card(
-          color: palette.backgroundLevelOne,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: T20UI.screenContentSpaceSize,
-                  top: T20UI.smallSpaceSize,
-                  bottom: T20UI.smallSpaceSize,
+        Stack(
+          children: [
+            Padding(
+              padding: T20UI.horizontallScreenPadding,
+              child: AnimatedContainer(
+                duration: T20UI.defaultDurationAnimation,
+                decoration: BoxDecoration(
+                  color: palette.backgroundLevelOne,
+                  borderRadius: T20UI.borderRadius,
+                  border: Border.all(
+                    width: 2,
+                    color: widget.hasError
+                        ? palette.accent
+                        : palette.backgroundLevelOne,
+                  ),
                 ),
-                child: Text('Dados ${widget.isExtra ? 'extra' : ''}'),
-              ),
-              ValueListenableBuilder(
-                valueListenable: _roolDices,
-                builder: (_, dices, __) {
-                  if (dices.isEmpty) {
-                    return const SizedBox.shrink();
-                  }
-
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: T20UI.spaceSize),
-                    child: SizedBox(
-                      height: T20UI.inputHeight,
-                      child: ListView.separated(
-                        itemCount: dices.length,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: T20UI.smallSpaceSize),
-                        scrollDirection: Axis.horizontal,
-                        separatorBuilder: (_, __) => const Padding(
-                          padding: EdgeInsetsDirectional.symmetric(
-                              horizontal: T20UI.smallSpaceSize),
-                          child: Center(child: Icon(FontAwesomeIcons.plus)),
-                        ),
-                        itemBuilder: (_, index) => AddEditDicesFieldCard(
-                          dice: dices[index],
-                          onRemove: _removeDice,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: T20UI.smallSpaceSize,
-                    right: T20UI.smallSpaceSize,
-                    bottom: T20UI.smallSpaceSize),
-                child: Row(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: TextFormField(
-                        controller: _quantEditController,
-                        style: const TextStyle(fontSize: 16),
-                        textInputAction: TextInputAction.next,
-                        keyboardType: TextInputType.number,
-                        textCapitalization: TextCapitalization.sentences,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
-                        ],
-                        decoration: InputDecoration(
-                          labelText: 'Quantidade',
-                          fillColor: palette.backgroundLevelTwo,
-                          helperStyle: TextStyle(color: palette.textDisable),
-                          contentPadding: const EdgeInsets.symmetric(
-                            vertical: 6,
-                            horizontal: T20UI.spaceSize,
-                          ),
-                        ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: T20UI.screenContentSpaceSize,
+                        top: T20UI.smallSpaceSize,
+                        bottom: T20UI.smallSpaceSize,
                       ),
+                      child: Text('Dados ${widget.isExtra ? 'extra' : ''}'),
                     ),
-                    const SizedBox(width: T20UI.smallSpaceSize),
-                    Expanded(
-                      child: TextFormField(
-                        controller: _dicesEditController,
-                        style: const TextStyle(fontSize: 16),
-                        textInputAction: TextInputAction.next,
-                        keyboardType: TextInputType.number,
-                        textCapitalization: TextCapitalization.sentences,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
-                        ],
-                        decoration: InputDecoration(
-                          labelText: 'Dado',
-                          prefix:
-                              const Text('D', style: TextStyle(fontSize: 16)),
-                          fillColor: palette.backgroundLevelTwo,
-                          helperStyle: TextStyle(color: palette.textDisable),
-                          contentPadding: const EdgeInsets.symmetric(
-                            vertical: 6,
-                            horizontal: T20UI.spaceSize,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: T20UI.smallSpaceSize),
-                    SimpleButton(
-                      icon: FontAwesomeIcons.plus,
-                      backgroundColor: palette.backgroundLevelTwo,
-                      iconColor: palette.accent,
-                      onTap: () {
-                        final quantity = _quantEditController.text;
-                        final diceValue = _dicesEditController.text;
+                    ValueListenableBuilder(
+                      valueListenable: _roolDices,
+                      builder: (_, dices, __) {
+                        if (dices.isEmpty) {
+                          return const SizedBox.shrink();
+                        }
 
-                        if (quantity.isEmpty || diceValue.isEmpty) return;
-
-                        final dice =
-                            RoolDiceAdapters.create(quantity, diceValue);
-                        _addDice(dice);
+                        return const SizedBox(height: T20UI.inputHeight + 12);
                       },
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: T20UI.smallSpaceSize,
+                        right: T20UI.smallSpaceSize,
+                        bottom: T20UI.smallSpaceSize,
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                              controller: _quantEditController,
+                              style: const TextStyle(fontSize: 16),
+                              textInputAction: TextInputAction.next,
+                              keyboardType: TextInputType.number,
+                              textCapitalization: TextCapitalization.sentences,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                    RegExp(r'[0-9]'))
+                              ],
+                              decoration: InputDecoration(
+                                labelText: 'Quantidade',
+                                fillColor: palette.backgroundLevelTwo,
+                                helperStyle:
+                                    TextStyle(color: palette.textDisable),
+                                contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 6,
+                                  horizontal: T20UI.spaceSize,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: T20UI.smallSpaceSize),
+                          Expanded(
+                            child: TextFormField(
+                              controller: _dicesEditController,
+                              style: const TextStyle(fontSize: 16),
+                              textInputAction: TextInputAction.next,
+                              keyboardType: TextInputType.number,
+                              textCapitalization: TextCapitalization.sentences,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                    RegExp(r'[0-9]'))
+                              ],
+                              decoration: InputDecoration(
+                                labelText: 'Dado',
+                                prefix: const Text('D',
+                                    style: TextStyle(fontSize: 16)),
+                                fillColor: palette.backgroundLevelTwo,
+                                helperStyle:
+                                    TextStyle(color: palette.textDisable),
+                                contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 6,
+                                  horizontal: T20UI.spaceSize,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: T20UI.smallSpaceSize),
+                          SimpleButton(
+                            icon: FontAwesomeIcons.plus,
+                            backgroundColor: palette.backgroundLevelTwo,
+                            iconColor: palette.accent,
+                            onTap: () {
+                              final quantity = _quantEditController.text;
+                              final diceValue = _dicesEditController.text;
+
+                              if (quantity.isEmpty || diceValue.isEmpty) return;
+
+                              final dice =
+                                  RoolDiceAdapters.create(quantity, diceValue);
+                              _addDice(dice);
+                            },
+                          )
+                        ],
+                      ),
                     )
                   ],
                 ),
-              )
-            ],
-          ),
+              ),
+            ),
+            ValueListenableBuilder(
+              valueListenable: _roolDices,
+              builder: (_, dices, __) {
+                if (dices.isEmpty) {
+                  return const SizedBox.shrink();
+                }
+
+                return Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: T20UI.spaceSize,
+                    top: T20UI.spaceSize * 2,
+                    left: T20UI.screenContentSpaceSize,
+                  ),
+                  child: SizedBox(
+                    height: T20UI.inputHeight,
+                    child: ListView.separated(
+                      itemCount: dices.length,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: T20UI.smallSpaceSize),
+                      scrollDirection: Axis.horizontal,
+                      separatorBuilder: (_, __) => const Padding(
+                        padding: EdgeInsetsDirectional.symmetric(
+                            horizontal: T20UI.smallSpaceSize),
+                        child: Center(child: Icon(FontAwesomeIcons.plus)),
+                      ),
+                      itemBuilder: (_, index) => AddEditDicesFieldCard(
+                        dice: dices[index],
+                        onRemove: _removeDice,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            )
+          ],
         ),
         SelectorWarning(
           isObrigatory: widget.isObrigatory,
           hasError: widget.hasError,
+          helpText: widget.helpText,
         )
       ],
     );

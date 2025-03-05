@@ -43,7 +43,7 @@ class _AddEditBoardPlayerBroodSelectorState
       MaterialPageRoute(
         builder: (_) => AddEditMagicMenaceScreen(
           magic: magic,
-          menaceUuid: widget.controller.uuid,
+          menaceUuid: widget.controller.menaceUuid,
         ),
       ),
     ).then(_add);

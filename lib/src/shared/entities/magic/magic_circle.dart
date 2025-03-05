@@ -1,4 +1,6 @@
-class MagicCircle {
+import 'package:tormenta20/src/shared/entities/entity_base.dart';
+
+class MagicCircle extends EntityBase {
   final int level;
   final int pm;
 
@@ -10,4 +12,10 @@ class MagicCircle {
 
   @override
   int get hashCode => level.hashCode ^ pm.hashCode;
+
+  @override
+  String get exibitionLabel => '$level˚';
+
+  @override
+  get primaryKey => level;
 }

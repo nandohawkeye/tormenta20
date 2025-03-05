@@ -26,7 +26,7 @@ abstract class T20UI {
 
   static InputBorder errorBorder(PaletteBase palette) => OutlineInputBorder(
         borderRadius: borderRadius,
-        borderSide: BorderSide(color: palette.error),
+        borderSide: BorderSide(color: palette.accent, width: 2),
         gapPadding: 0,
       );
 

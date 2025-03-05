@@ -4,10 +4,13 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 
 class OcupedSpacesTextfield extends StatelessWidget {
-  const OcupedSpacesTextfield(
-      {super.key, this.initialValue, required this.onchange});
+  const OcupedSpacesTextfield({
+    super.key,
+    this.initialValue,
+    required this.onchange,
+  });
 
-  final int? initialValue;
+  final double? initialValue;
   final Function(String?) onchange;
 
   @override

@@ -5,7 +5,7 @@ import 'package:tormenta20/src/shared/entities/equipament/spaceable.dart';
 class Armor extends Equipment implements Spaceable {
   final double _space;
   final ArmorType type;
-  final double price;
+  final double? price;
   final int defenseBonus;
   final int penalty;
   final String? desc;
@@ -16,13 +16,13 @@ class Armor extends Equipment implements Spaceable {
     required super.name,
     required double spaceOcuped,
     required this.type,
-    required this.price,
+    this.price,
     required this.defenseBonus,
     required this.penalty,
     this.desc,
     super.storedIn,
     super.improvements,
-    super.specialMaterials,
+    super.specialMaterial,
   }) : _space = spaceOcuped;
 
   @override
@@ -42,7 +42,7 @@ class Armor extends Equipment implements Spaceable {
       other.desc == desc &&
       other.storedIn == storedIn &&
       other.improvements == improvements &&
-      other.specialMaterials == specialMaterials;
+      other.specialMaterial == specialMaterial;
 
   @override
   int get hashCode =>
@@ -57,5 +57,5 @@ class Armor extends Equipment implements Spaceable {
       desc.hashCode ^
       storedIn.hashCode ^
       improvements.hashCode ^
-      specialMaterials.hashCode;
+      specialMaterial.hashCode;
 }

@@ -1,14 +1,14 @@
 // ignore_for_file: prefer_final_fields
 
-import 'package:flutter/material.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/widgets/stores/add_edit_board_player_brood_store.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/widgets/stores/add_edit_board_player_classes_store.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player.dart';
-import 'package:tormenta20/src/shared/entities/brood.dart';
 import 'package:tormenta20/src/shared/entities/character_classe.dart';
 import 'package:tormenta20/src/shared/entities/classe_type.dart';
 import 'package:uuid/uuid.dart';
 
-class AddEditBoardPlayerStore {
-  AddEditBoardPlayerStore(BoardPlayer? initialValue, String boardUuid) {
+class AddEditBoardPlayerController {
+  AddEditBoardPlayerController(BoardPlayer? initialValue, String boardUuid) {
     _boardUuid = boardUuid;
     if (initialValue != null) {
       _createdAt = initialValue.createdAt;
@@ -17,21 +17,23 @@ class AddEditBoardPlayerStore {
       _player = initialValue.playerName;
       _assetPath = initialValue.imageAsset;
       _filePath = initialValue.imagePath;
-      _brood = initialValue.brood;
-      _classes.addAll(initialValue.classes);
+      broodStore = AddEditBoardPlayerBroodStore(initialValue.brood);
+      _classes = initialValue.classes;
+      classesStore = AddEditBoardPlayerClassesStore(
+          initialValue.classes.map((c) => c.type).toList());
       _life = initialValue.life;
       _mana = initialValue.mana;
       _defense = initialValue.defense;
       _isAlive = initialValue.isAlive;
       _initiative = initialValue.initiative;
     } else {
+      broodStore = AddEditBoardPlayerBroodStore(null);
+      classesStore = AddEditBoardPlayerClassesStore([]);
+
       _characterUuid = const Uuid().v4();
       _isAlive = true;
     }
   }
-
-  final ValueNotifier<bool> errorValidadeBrood = ValueNotifier<bool>(false);
-  final ValueNotifier<bool> errorValidadeClasses = ValueNotifier<bool>(false);
 
   late String _characterUuid;
   late String _boardUuid;
@@ -71,19 +73,19 @@ class AddEditBoardPlayerStore {
   String? get filePath => _filePath;
   void onChangeFilePath(String? value) => _filePath = value;
 
-  Brood? _brood;
-  Brood? get brood => _brood;
-  void onChangeBrood(Brood value) {
-    _brood = value;
-    errorValidadeBrood.value = false;
-  }
+  late final AddEditBoardPlayerBroodStore broodStore;
 
+  late final AddEditBoardPlayerClassesStore classesStore;
   List<CharacterClasse> _classes = [];
   List<CharacterClasse> get classes => _classes;
-  void onAddClasse(ClasseType value) {
-    errorValidadeClasses.value = false;
+  void onAddClasse(ClasseType? value) {
+    if (value == null) {
+      return;
+    }
+
     if (_classes.any((c) => c.type == value)) {
       _classes.removeWhere((cr) => cr.type == value);
+      classesStore.remove(value);
     } else {
       final classe = CharacterClasse(
         type: value,
@@ -91,20 +93,16 @@ class AddEditBoardPlayerStore {
         playerUuid: _characterUuid,
       );
       _classes.add(classe);
+      classesStore.put(value);
     }
   }
 
   BoardPlayer? onSave() {
-    errorValidadeBrood.value = false;
-    errorValidadeClasses.value = false;
-
-    if (_brood == null) {
-      errorValidadeBrood.value = true;
+    if (!broodStore.validate()) {
       return null;
     }
 
-    if (_classes.isEmpty) {
-      errorValidadeClasses.value = true;
+    if (!classesStore.validate()) {
       return null;
     }
 
@@ -117,7 +115,7 @@ class AddEditBoardPlayerStore {
       uuid: _characterUuid,
       boardUuid: _boardUuid,
       characterName: _characterName!,
-      brood: _brood!,
+      brood: broodStore.data!,
       createdAt: _createdAt ?? updatedAt,
       updatedAt: updatedAt,
       classes: _classes,
@@ -129,5 +127,9 @@ class AddEditBoardPlayerStore {
     );
 
     return character;
+  }
+
+  dispose() {
+    broodStore.dispose();
   }
 }

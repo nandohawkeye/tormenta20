@@ -64,12 +64,12 @@ class _AddEditGeneralSkillsBottomSheetState
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Padding(
-              padding: T20UI.horizontallScreenPadding,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  AddEditMagicMenaceSelectMagicField(
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: T20UI.horizontallScreenPadding,
+                  child: AddEditMagicMenaceSelectMagicField(
                     onSelectMagic: (magic) {
                       _store.setMagicBaseId(magic.id);
                       _store.setMagicName(magic.name);
@@ -77,13 +77,19 @@ class _AddEditGeneralSkillsBottomSheetState
                     initialMagicBaseId: widget.magic?.magicBaseId,
                     hasError: _store.magicHasError,
                   ),
-                  T20UI.spaceHeight,
-                  AddEditMagicMenaceDescTextfield(
+                ),
+                T20UI.spaceHeight,
+                Padding(
+                  padding: T20UI.horizontallScreenPadding,
+                  child: AddEditMagicMenaceDescTextfield(
                     onchange: _store.setDesc,
                     initialDesc: widget.magic?.resumedDesc,
                   ),
-                  T20UI.spaceHeight,
-                  Row(
+                ),
+                T20UI.spaceHeight,
+                Padding(
+                  padding: T20UI.horizontallScreenPadding,
+                  child: Row(
                     children: [
                       Expanded(
                         child: PmTextfield(
@@ -100,24 +106,27 @@ class _AddEditGeneralSkillsBottomSheetState
                       )
                     ],
                   ),
-                  T20UI.spaceHeight,
-                  AddEditDicesField(
-                    initialValue: widget.magic?.damageDices,
-                    onChangeValues: _store.onChangeDice,
-                  ),
-                  T20UI.spaceHeight,
-                  AddEditDicesField(
-                    isExtra: true,
-                    initialValue: widget.magic?.extraDamageDices,
-                    onChangeValues: _store.onChangeExtraDice,
-                  ),
-                  T20UI.spaceHeight,
-                  MedioDamageValueTextfield(
+                ),
+                T20UI.spaceHeight,
+                AddEditDicesField(
+                  initialValue: widget.magic?.damageDices,
+                  onChangeValues: _store.onChangeDice,
+                ),
+                T20UI.spaceHeight,
+                AddEditDicesField(
+                  isExtra: true,
+                  initialValue: widget.magic?.extraDamageDices,
+                  onChangeValues: _store.onChangeExtraDice,
+                ),
+                T20UI.spaceHeight,
+                Padding(
+                  padding: T20UI.horizontallScreenPadding,
+                  child: MedioDamageValueTextfield(
                     onchange: _store.setMediumDamage,
                     initialValue: widget.magic?.mediumDamageValue,
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
             T20UI.spaceHeight,
           ],

@@ -14,21 +14,21 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
   final WeaponPurpose purpose;
   final double? price;
   final WeaponProficiency proficiency;
-  final String dicesDamage;
+  final String dices;
   final int critical;
   final int criticalMultiplier;
-  final EquipmentWeaponRangeType rangeIndex;
+  final EquipmentWeaponRangeType range;
   final WeaponType type;
-  final String skillsIndex;
+  final String? skillIndexes;
   final bool isNatural;
   final bool isUnarmed;
-  final int steps;
+  final int? steps;
 
   Weapon({
     this.desc,
     super.storedIn,
     super.improvements,
-    super.specialMaterials,
+    super.specialMaterial,
     required this.type,
     required super.uuid,
     required super.parentUuid,
@@ -36,12 +36,12 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
     required this.purpose,
     required WieldableType wieldableType,
     required this.proficiency,
-    required this.skillsIndex,
-    required this.steps,
+    this.skillIndexes,
+    this.steps,
     required this.critical,
     required this.criticalMultiplier,
-    required this.rangeIndex,
-    required this.dicesDamage,
+    required this.range,
+    required this.dices,
     this.price,
     required this.isNatural,
     required this.isUnarmed,
@@ -65,12 +65,12 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
       other.steps == steps &&
       other.spaceOcuped == spaceOcuped &&
       other.critical == critical &&
-      other.rangeIndex == rangeIndex &&
+      other.range == range &&
       other.criticalMultiplier == criticalMultiplier &&
       other.price == price &&
       other.purpose == purpose &&
       other.proficiency == proficiency &&
-      other.skillsIndex == skillsIndex &&
+      other.skillIndexes == skillIndexes &&
       other.isNatural == isNatural &&
       other.isUnarmed == isUnarmed &&
       other.spaceOcuped == spaceOcuped &&
@@ -78,7 +78,7 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
       other._wieldableType == _wieldableType &&
       other.storedIn == storedIn &&
       other.improvements == improvements &&
-      other.specialMaterials == specialMaterials;
+      other.specialMaterial == specialMaterial;
 
   @override
   int get hashCode =>
@@ -90,12 +90,12 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
       steps.hashCode ^
       spaceOcuped.hashCode ^
       critical.hashCode ^
-      rangeIndex.hashCode ^
+      range.hashCode ^
       criticalMultiplier.hashCode ^
       price.hashCode ^
       purpose.hashCode ^
       proficiency.hashCode ^
-      skillsIndex.hashCode ^
+      skillIndexes.hashCode ^
       isNatural.hashCode ^
       isUnarmed.hashCode ^
       spaceOcuped.hashCode ^
@@ -103,5 +103,5 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
       _wieldableType.hashCode ^
       storedIn.hashCode ^
       improvements.hashCode ^
-      specialMaterials.hashCode;
+      specialMaterial.hashCode;
 }

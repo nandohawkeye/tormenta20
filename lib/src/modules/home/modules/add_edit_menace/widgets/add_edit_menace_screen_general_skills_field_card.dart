@@ -35,7 +35,7 @@ class AddEditMenaceScreenGeneralSkillsFieldCard extends StatelessWidget {
             children: [
               T20UI.spaceWidth,
               Text(
-                skill.title,
+                skill.name,
                 style: const TextStyle(fontWeight: FontWeight.w500),
               ),
               T20UI.spaceWidth,

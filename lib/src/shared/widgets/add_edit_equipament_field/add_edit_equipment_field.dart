@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_equipaments/add_edit_equipaments.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_equipaments/add_edit_equipments_screen.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
+import 'package:tormenta20/src/shared/widgets/add_edit_equipament_field/add_edit_equimpment_feld_card.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/selector_secundary_simple_button.dart';
 
@@ -48,7 +49,7 @@ class _AddEditBoardPlayerBroodSelectorState
     await Navigator.push<Equipment?>(
       context,
       MaterialPageRoute(
-        builder: (_) => AddEditEquipaments(
+        builder: (_) => AddEditEquipmentsScreen(
           equipament: equipament,
           menaceUuid: widget.parentUuid,
         ),
@@ -119,48 +120,50 @@ class _AddEditBoardPlayerBroodSelectorState
                     height: T20UI.inputHeight,
                     width: double.infinity,
                     child: ValueListenableBuilder(
-                        valueListenable: _selecteds,
-                        builder: (_, list, __) {
-                          if (list.isEmpty) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: T20UI.smallSpaceSize +
-                                    T20UI.screenContentSpaceSize,
-                              ),
-                              child: MainButton(
-                                label: 'Adicionar',
-                                backgroundColor: palette.backgroundLevelTwo,
-                                onTap: () => _onAdd(null),
-                              ),
-                            );
-                          }
-
-                          return ListView.separated(
-                            shrinkWrap: true,
-                            padding: const EdgeInsets.only(
-                              left: T20UI.smallSpaceSize,
-                              right: T20UI.smallSpaceSize,
+                      valueListenable: _selecteds,
+                      builder: (_, list, __) {
+                        if (list.isEmpty) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: T20UI.smallSpaceSize +
+                                  T20UI.screenContentSpaceSize,
                             ),
-                            scrollDirection: Axis.horizontal,
-                            separatorBuilder: T20UI.separatorBuilderHorizontal,
-                            itemCount: list.length + 1,
-                            itemBuilder: (_, index) {
-                              if (index == 0) {
-                                return SelectorSecundarySimpleButton(
-                                  icon: FontAwesomeIcons.plus,
-                                  onTap: () => _onAdd(null),
-                                );
-                              }
-
-                              return SizedBox();
-                              // return AddEditMenaceScreenMagicsFieldCard(
-                              //   magicMenace: list[index - 1],
-                              //   onRemove: _remove,
-                              //   onTap: _onAdd,
-                              // );
-                            },
+                            child: MainButton(
+                              label: 'Adicionar',
+                              backgroundColor: palette.backgroundLevelTwo,
+                              onTap: () => _onAdd(null),
+                            ),
                           );
-                        }),
+                        }
+
+                        return ListView.separated(
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.only(
+                            left: T20UI.screenContentSpaceSize +
+                                T20UI.smallSpaceSize,
+                            right: T20UI.screenContentSpaceSize +
+                                T20UI.smallSpaceSize,
+                          ),
+                          scrollDirection: Axis.horizontal,
+                          separatorBuilder: T20UI.separatorBuilderHorizontal,
+                          itemCount: list.length + 1,
+                          itemBuilder: (_, index) {
+                            if (index == 0) {
+                              return SelectorSecundarySimpleButton(
+                                icon: FontAwesomeIcons.plus,
+                                onTap: () => _onAdd(null),
+                              );
+                            }
+
+                            return AddEditEquimpmentFeldCard(
+                              equipment: list[index - 1],
+                              onRemove: _remove,
+                              onTap: _onAdd,
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ),
                 ),
               )

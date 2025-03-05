@@ -5,7 +5,7 @@ class HandToHand extends ActionEnt {
   HandToHand({
     required super.uuid,
     required super.parentUuid,
-    required super.title,
+    required super.name,
     required super.desc,
     super.cd,
     super.pm,
@@ -22,7 +22,7 @@ class HandToHand extends ActionEnt {
       other is HandToHand &&
       other.uuid == uuid &&
       other.parentUuid == parentUuid &&
-      other.title == title &&
+      other.name == name &&
       other.desc == desc &&
       other.type == type &&
       other.pm == pm &&
@@ -38,7 +38,7 @@ class HandToHand extends ActionEnt {
   int get hashCode =>
       uuid.hashCode ^
       parentUuid.hashCode ^
-      title.hashCode ^
+      name.hashCode ^
       desc.hashCode ^
       type.hashCode ^
       pm.hashCode ^

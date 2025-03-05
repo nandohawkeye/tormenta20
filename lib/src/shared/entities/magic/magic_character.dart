@@ -54,4 +54,7 @@ class MagicCharacter extends Magic {
       uuid.hashCode ^
       grimoireUUid.hashCode ^
       publication.hashCode;
+
+  @override
+  get primaryKey => uuid;
 }

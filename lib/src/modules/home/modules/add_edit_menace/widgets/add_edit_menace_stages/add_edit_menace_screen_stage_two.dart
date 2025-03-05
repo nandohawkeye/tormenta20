@@ -92,17 +92,11 @@ class AddEditMenaceScreenStageTwo extends StatelessWidget {
             ),
           ),
           T20UI.spaceHeight,
-          AddEditMenaceScreenTypeSelector(
-            controller: controller,
-          ),
+          AddEditMenaceScreenTypeSelector(controller.typeStore),
           T20UI.spaceHeight,
-          AddEditMenaceScreenCreatureSizeSelector(
-            controller: controller,
-          ),
+          AddEditMenaceScreenCreatureSizeSelector(controller.sizeStore),
           T20UI.spaceHeight,
-          AddEditMenaceScreenCombateRoleSelector(
-            controller: controller,
-          ),
+          AddEditMenaceScreenCombateRoleSelector(controller.combateRoleStore),
           T20UI.spaceHeight,
           SizedBox(height: MediaQuery.of(context).viewInsets.bottom),
         ],

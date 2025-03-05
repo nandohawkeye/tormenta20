@@ -5,7 +5,7 @@ class DistanceAttack extends ActionEnt {
   DistanceAttack({
     required super.uuid,
     required super.parentUuid,
-    required super.title,
+    required super.name,
     required super.desc,
     super.cd,
     super.pm,
@@ -22,7 +22,7 @@ class DistanceAttack extends ActionEnt {
       other is DistanceAttack &&
       other.uuid == uuid &&
       other.parentUuid == parentUuid &&
-      other.title == title &&
+      other.name == name &&
       other.desc == desc &&
       other.type == type &&
       other.pm == pm &&
@@ -38,7 +38,7 @@ class DistanceAttack extends ActionEnt {
   int get hashCode =>
       uuid.hashCode ^
       parentUuid.hashCode ^
-      title.hashCode ^
+      name.hashCode ^
       desc.hashCode ^
       type.hashCode ^
       pm.hashCode ^

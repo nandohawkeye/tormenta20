@@ -21,7 +21,6 @@ class PmTextfield extends StatelessWidget {
       style: const TextStyle(fontSize: 16),
       textInputAction: TextInputAction.next,
       keyboardType: TextInputType.number,
-      textCapitalization: TextCapitalization.sentences,
       inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))],
       decoration: InputDecoration(
         labelText: 'PM',

@@ -1,12 +1,15 @@
 // ignore_for_file: prefer_final_fields
 
 import 'package:flutter/material.dart';
-import 'package:tormenta20/src/shared/entities/combat_role.dart';
-import 'package:tormenta20/src/shared/entities/creature_size.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_edit_menace_combate_role_store.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_edit_menace_size_store.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_edit_menace_treasure_type_store.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_edit_menace_type_store.dart';
+import 'package:tormenta20/src/shared/entities/action/action.dart';
+import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/entities/general_skill.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_menace.dart';
 import 'package:tormenta20/src/shared/entities/menace.dart';
-import 'package:tormenta20/src/shared/entities/menace_type.dart';
 import 'package:tormenta20/src/shared/entities/treasure_type.dart';
 import 'package:uuid/uuid.dart';
 
@@ -16,7 +19,6 @@ class AddEditMenaceController {
     percent = ValueNotifier<double>(0.0);
     if (menace != null) {
       _uuid = menace.uuid;
-      _type = menace.type;
       _divinityId = menace.divinityId;
       _displacement = menace.displacement;
       _senses = menace.senses;
@@ -39,18 +41,28 @@ class AddEditMenaceController {
       _intelligence = menace.intelligence;
       _wisdom = menace.wisdom;
       _charisma = menace.charisma;
-      _creatureSize = menace.creatureSize;
-      _combatRole = menace.combatRole;
+      _desc = menace.desc;
+      _extraInfos = menace.extraInfos;
       _generalSkills.addAll(menace.generalSkills);
       _magics.addAll(menace.magics);
-      _treasureType = menace.treasures ?? TreasureType.none;
+      _equipments.addAll(menace.equipments);
+      _actions.addAll(menace.actions);
+      treasureTypeStore =
+          AddEditMenaceTreasureTypeStore(menace.treasures ?? TreasureType.none);
+      combateRoleStore = AddEditMenaceCombateRoleStore(menace.combatRole);
+      sizeStore = AddEditMenaceSizeStore(menace.creatureSize);
+      typeStore = AddEditMenaceTypeStore(menace.type);
     } else {
+      treasureTypeStore = AddEditMenaceTreasureTypeStore(TreasureType.none);
+      typeStore = AddEditMenaceTypeStore(null);
+      sizeStore = AddEditMenaceSizeStore(null);
+      combateRoleStore = AddEditMenaceCombateRoleStore(null);
       _uuid = const Uuid().v4();
     }
   }
 
   late final String _uuid;
-  String get uuid => _uuid;
+  String get menaceUuid => _uuid;
 
   late final ValueNotifier<int> stage;
   void setStage(int value) => stage.value = value;
@@ -58,62 +70,16 @@ class AddEditMenaceController {
   late final ValueNotifier<double> percent;
   void setPercent(double value) => percent.value = value;
 
-  final ValueNotifier<bool> errorValidadeType = ValueNotifier<bool>(false);
-  void setErroValidadeType(bool value) => errorValidadeType.value = value;
+  late final AddEditMenaceTreasureTypeStore treasureTypeStore;
 
-  MenaceType? _type;
-  MenaceType? get type => _type;
-  void changeType(MenaceType value) {
-    _type = value;
-    errorValidadeType.value = false;
-  }
+  late final AddEditMenaceTypeStore typeStore;
+  bool isValidType() => typeStore.validate();
 
-  bool isValidType() {
-    if (_type == null) {
-      errorValidadeType.value = true;
-      return false;
-    } else {
-      return true;
-    }
-  }
+  late final AddEditMenaceCombateRoleStore combateRoleStore;
+  bool isValidCombatRole() => combateRoleStore.validate();
 
-  final ValueNotifier<bool> errorCombatRole = ValueNotifier<bool>(false);
-  void setErrorCombatRole(bool value) => errorCombatRole.value = value;
-
-  CombatRole? _combatRole;
-  CombatRole? get combatRole => _combatRole;
-  void changeCombatRole(CombatRole value) {
-    _combatRole = value;
-    errorCombatRole.value = false;
-  }
-
-  bool isValidCombatRole() {
-    if (_combatRole == null) {
-      errorCombatRole.value = true;
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  final ValueNotifier<bool> errorCreatureSize = ValueNotifier<bool>(false);
-  void setErrorCreatureSize(bool value) => errorCreatureSize.value = value;
-
-  CreatureSize? _creatureSize;
-  CreatureSize? get creatureSize => _creatureSize;
-  void changeCreatureSize(CreatureSize value) {
-    _creatureSize = value;
-    errorCreatureSize.value = false;
-  }
-
-  bool isValidCreatureSize() {
-    if (_creatureSize == null) {
-      errorCreatureSize.value = true;
-      return false;
-    } else {
-      return true;
-    }
-  }
+  late final AddEditMenaceSizeStore sizeStore;
+  bool isValidCreatureSize() => sizeStore.validate();
 
   String? _desc;
   String? get desc => _desc;
@@ -327,15 +293,30 @@ class AddEditMenaceController {
     _magicsToDelete.add(value.uuid);
   }
 
-  TreasureType? _treasureType;
-  TreasureType? get treasureType => _treasureType;
-  void changeTreasureType(TreasureType value) => _treasureType = value;
+  List<Equipment> _equipments = [];
+  List<Equipment> get equipments => _equipments;
+  List<String> _equipmentToDelete = [];
+  void addEquipment(Equipment value) => _equipments.add(value);
+  void removeEquipment(Equipment value) {
+    _equipments.remove(value);
+    _equipmentToDelete.add(value.uuid);
+  }
+
+  List<ActionEnt> _actions = [];
+  List<ActionEnt> get actions => _actions;
+  List<String> _actionToDelete = [];
+  void addAction(ActionEnt value) => _actions.add(value);
+  void removeAction(ActionEnt value) {
+    _actions.remove(value);
+    _actionToDelete.add(value.uuid);
+  }
 
   dispose() {
+    treasureTypeStore.dispose();
     stage.dispose();
     percent.dispose();
-    errorValidadeType.dispose();
-    errorCreatureSize.dispose();
-    errorCombatRole.dispose();
+    typeStore.dispose();
+    sizeStore.dispose();
+    combateRoleStore.dispose();
   }
 }

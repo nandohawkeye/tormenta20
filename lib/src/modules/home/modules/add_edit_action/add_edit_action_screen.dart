@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_action/add_edit_action_store.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_action/add_edit_action_controller.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_action/widgets/add_edit_action_type_attack_action_selector.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_action/widgets/add_edit_type_action_field/add_edit_type_action_field.dart';
 import 'package:tormenta20/src/shared/entities/action/action.dart';
+import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/widgets/add_edit_critical_field/add_edit_critical_field.dart';
 import 'package:tormenta20/src/shared/widgets/add_edit_dices_field/add_edit_dices_field.dart';
 import 'package:tormenta20/src/shared/widgets/cd_textfield.dart';
@@ -15,10 +16,16 @@ import 'package:tormenta20/src/shared/widgets/screen_base.dart';
 import 'package:tormenta20/src/shared/widgets/select_equipament_field/select_equipament_field.dart';
 
 class AddEditActionScreen extends StatefulWidget {
-  const AddEditActionScreen({super.key, this.action, required this.menaceUuid});
+  const AddEditActionScreen({
+    super.key,
+    this.initialAction,
+    required this.menaceUuid,
+    required this.equipments,
+  });
 
-  final ActionEnt? action;
+  final ActionEnt? initialAction;
   final String menaceUuid;
+  final List<Equipment> equipments;
 
   @override
   State<AddEditActionScreen> createState() => _AddEditActionScreenState();
@@ -26,17 +33,23 @@ class AddEditActionScreen extends StatefulWidget {
 
 class _AddEditActionScreenState extends State<AddEditActionScreen> {
   final _formKey = GlobalKey<FormState>();
-  late final AddEditActionStore _store;
+  late final AddEditActionController _controller;
+  late final ScrollController _scrollController;
 
   @override
   void initState() {
     super.initState();
-    _store = AddEditActionStore();
+    _scrollController = ScrollController();
+    _controller = AddEditActionController(
+      widget.initialAction,
+      widget.menaceUuid,
+    );
   }
 
   @override
   void dispose() {
-    _store.dispose();
+    _scrollController.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -44,6 +57,7 @@ class _AddEditActionScreenState extends State<AddEditActionScreen> {
   Widget build(BuildContext context) {
     return ScreenBase(
       label: 'Ação',
+      scrollController: _scrollController,
       body: Form(
         key: _formKey,
         child: Column(
@@ -52,28 +66,30 @@ class _AddEditActionScreenState extends State<AddEditActionScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             T20UI.spaceHeight,
-            AddEditAttackActionTypeActionSelector(
-              store: _store,
-            ),
-            T20UI.spaceHeight,
-            AddEditTypeActionField(
-              store: _store,
-            ),
-            T20UI.spaceHeight,
             Padding(
               padding: T20UI.horizontallScreenPadding,
               child: NameTextField(
-                onchange: (_) {},
-                initialName: null,
+                onchange: _controller.onChangeName,
+                initialName: _controller.name,
               ),
             ),
             T20UI.spaceHeight,
             Padding(
               padding: T20UI.horizontallScreenPadding,
               child: DescTextfield(
-                onchange: (_) {},
-                initialDesc: null,
+                onchange: _controller.onChangeDesc,
+                initialDesc: _controller.desc,
               ),
+            ),
+            T20UI.spaceHeight,
+            AddEditAttackActionTypeActionSelector(
+              store: _controller.classTypeStore,
+              onChange: _controller.changeAttackActionType,
+            ),
+            T20UI.spaceHeight,
+            AddEditTypeActionField(
+              store: _controller.typeStore,
+              onChange: _controller.onChangeType,
             ),
             T20UI.spaceHeight,
             Padding(
@@ -82,71 +98,70 @@ class _AddEditActionScreenState extends State<AddEditActionScreen> {
                 children: [
                   Expanded(
                     child: PmTextfield(
-                      onchange: (_) {},
-                      initialValue: null,
+                      onchange: _controller.setPm,
+                      initialValue: _controller.pm,
                     ),
                   ),
                   T20UI.spaceWidth,
                   Expanded(
                     child: CdTextfield(
-                      onchange: (_) {},
-                      initialValue: null,
+                      onchange: _controller.setCd,
+                      initialValue: _controller.cd,
                     ),
                   )
                 ],
               ),
             ),
             T20UI.spaceHeight,
-            Padding(
-              padding: T20UI.horizontallScreenPadding,
-              child: AddEditDicesField(
-                initialValue: null,
-                onChangeValues: (_) {},
-              ),
+            SelectEquipamentField(
+              equipaments: widget.equipments,
+              initialSelected: _controller.equipment,
+              onchange: _controller.onChangeEquipemt,
             ),
             T20UI.spaceHeight,
-            Padding(
-              padding: T20UI.horizontallScreenPadding,
-              child: AddEditDicesField(
-                isExtra: true,
-                initialValue: null,
-                onChangeValues: (_) {},
-              ),
+            AddEditDicesField(
+              initialValue: _controller.dices,
+              onChangeValues: _controller.onChangeDice,
+              helpText: 'Esses dados substituiem os do equipamento!',
             ),
             T20UI.spaceHeight,
-            Padding(
-              padding: T20UI.horizontallScreenPadding,
-              child: AddEditCriticalField(
-                initialMultiplier: null,
-                initialValue: null,
-                onChangeMultiplier: (_) {},
-                onChangeValue: (_) {},
-              ),
+            AddEditDicesField(
+              isExtra: true,
+              initialValue: _controller.extraDices,
+              onChangeValues: _controller.onChangeExtraDice,
+            ),
+            T20UI.spaceHeight,
+            AddEditCriticalField(
+              initialMultiplier: _controller.criticalMultiplier,
+              initialValue: _controller.critical,
+              onChangeMultiplier: _controller.changeCriticalMultiplier,
+              onChangeValue: _controller.changeCritical,
             ),
             T20UI.spaceHeight,
             Padding(
               padding: T20UI.horizontallScreenPadding,
               child: MedioDamageValueTextfield(
-                initialValue: null,
-                onchange: (_) {},
+                initialValue: _controller.mediumDamage,
+                onchange: _controller.setMediumDamage,
               ),
             ),
-            T20UI.spaceHeight,
-            const SelectEquipamentField(),
             T20UI.spaceHeight,
           ],
         ),
       ),
       onSave: () {
-        // final isMagicValid = _store.isMagicValid();
+        _scrollController.animateTo(
+          0,
+          duration: T20UI.defaultDurationAnimation,
+          curve: Curves.easeIn,
+        );
+        if (_formKey.currentState!.validate()) {
+          final action = _controller.onSave();
 
-        // if (!isMagicValid) return;
-
-        // if (_formKey.currentState!.validate()) {
-        //   final magic = _store.onSave();
-
-        //   Navigator.pop(context, magic);
-        // }
+          if (action != null) {
+            Navigator.pop(context, action);
+          }
+        }
       },
     );
   }

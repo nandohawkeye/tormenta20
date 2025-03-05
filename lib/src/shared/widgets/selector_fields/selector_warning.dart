@@ -23,7 +23,7 @@ class SelectorWarning extends StatelessWidget {
           top: T20UI.smallSpaceSize,
         ),
         child: Text(
-          hasError ? 'Obrigatório!' : helpText ?? 'obrigatório',
+          hasError ? 'É obrigatório!' : helpText ?? 'obrigatório',
           style: TextStyle(
             fontSize: 12,
             color: hasError ? palette.accent : palette.textDisable,

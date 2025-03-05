@@ -1,6 +1,7 @@
+import 'package:tormenta20/src/shared/entities/entity_base.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_character.dart';
 
-class Grimoire {
+class Grimoire extends EntityBase {
   final String uuid;
   final String name;
   final String? desc;
@@ -39,4 +40,10 @@ class Grimoire {
       uuid.hashCode ^
       magicsCharacters.hashCode ^
       iconAsset.hashCode;
+
+  @override
+  String get exibitionLabel => name;
+
+  @override
+  get primaryKey => uuid;
 }

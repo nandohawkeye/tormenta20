@@ -70,7 +70,7 @@ class _AddEditBoardPlayerBroodSelectorState
         ),
         child: AddEditGeneralSkillsBottomSheet(
           skill: skill,
-          menaceUuid: widget.controller.uuid,
+          menaceUuid: widget.controller.menaceUuid,
         ),
       ),
     ).then(_add);
@@ -162,7 +162,7 @@ class _AddEditBoardPlayerBroodSelectorState
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 6, left: 36),
+          padding: const EdgeInsets.only(top: 6, left: 18),
           child: Text(
             'Ex: Cura Acelerada, vulnerabilidade a...',
             style: TextStyle(
