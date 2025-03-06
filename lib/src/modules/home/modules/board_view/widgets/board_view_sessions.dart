@@ -9,7 +9,6 @@ import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/entities/board/board_combat_ext.dart';
 import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session_ext.dart';
-import 'package:tormenta20/src/shared/extensions/data_ext.dart';
 import 'package:tormenta20/src/shared/extensions/duration_ext.dart';
 import 'package:tormenta20/src/shared/widgets/screen_image_button.dart';
 
@@ -57,13 +56,13 @@ class BoardViewSessions extends StatelessWidget {
     }
 
     final combats = board.combats.where((c) => c.isOpen).toList();
+    final sessionsDurations = sessions.map((s) => s.duration);
+    final totalDurationSessions =
+        sessionsDurations.fold(Duration.zero, (a, b) => a + b);
     combats.sort((a, b) => b.startedAt.compareTo(a.startedAt));
     sessions.sort((a, b) => b.startedAt.compareTo(a.startedAt));
 
     final currentSession = sessions.first;
-    final combatsSessions = board.combats
-        .where((cb) => cb.sessionUuid == currentSession.uuid)
-        .toList();
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -80,7 +79,7 @@ class BoardViewSessions extends StatelessWidget {
                     ? 'Em combate'
                     : currentSession.isOpen
                         ? 'Sessão atual'
-                        : 'Ultima sessão: ${currentSession.startedAt.formatted}',
+                        : 'Sessões',
               ),
             ],
           ),
@@ -102,9 +101,9 @@ class BoardViewSessions extends StatelessWidget {
               : ScreenImageButton(
                   imageAsset: Assets.images.knight.path,
                   title:
-                      '${currentSession.isOpen ? 'Jogando há' : 'Duração'} ${currentSession.duration.toFormattedStringWithHours()}',
+                      'Total ${totalDurationSessions.toFormattedStringWithHours()}',
                   subtitle:
-                      'Sua última sessão ${combatsSessions.isNotEmpty ? 'teve ${combatsSessions.length.toString().padLeft(2, '0')} combate${combatsSessions.length > 1 ? 's' : ''}' : 'não teve combates'}, clique aqui para ver todas as sessões',
+                      'Esta mesa já teve ${sessions.length.toString().padLeft(2, '0')} sessões, clique aqui para ver todas',
                   onTap: toSession,
                 ),
         )

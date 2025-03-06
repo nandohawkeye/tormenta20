@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/shared/widgets/selector_fields/selector_warning.dart';
+import 'package:tormenta20/src/shared/widgets/warning_widget.dart';
 
 class AddEditCriticalField extends StatelessWidget {
   const AddEditCriticalField({
@@ -114,7 +114,7 @@ class AddEditCriticalField extends StatelessWidget {
             ),
           ),
         ),
-        SelectorWarning(
+        WarningWidget(
           isObrigatory: isObrigatory,
           hasError: hasError,
         )

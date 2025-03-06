@@ -5,10 +5,10 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_equipaments/widgets
 import 'package:tormenta20/src/modules/home/modules/add_edit_equipaments/widgets/add_edit_equipment_improvement_type_field.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_equipaments/widgets/add_edit_equipment_screen_item.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_equipaments/widgets/add_edit_equipment_special_materials_type_field.dart';
-import 'package:tormenta20/src/shared/widgets/desc_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/name_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/ocuped_spaces_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/price_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/desc_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/name_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/ocuped_spaces_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/price_textfield.dart';
 
 class GeneralItemWidgetsGroup extends StatelessWidget {
   const GeneralItemWidgetsGroup(this.controller, this.hasInited, {super.key});

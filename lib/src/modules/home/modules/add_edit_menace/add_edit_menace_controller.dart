@@ -1,14 +1,16 @@
 // ignore_for_file: prefer_final_fields
 
 import 'package:flutter/material.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_edit_menace_actions_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_edit_menace_combate_role_store.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_edit_menace_equipments_store.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_edit_menace_expertises_store.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_edit_menace_magics_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_edit_menace_size_store.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_edit_menace_skills_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_edit_menace_treasure_type_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_edit_menace_type_store.dart';
-import 'package:tormenta20/src/shared/entities/action/action.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
-import 'package:tormenta20/src/shared/entities/general_skill.dart';
-import 'package:tormenta20/src/shared/entities/magic/magic_menace.dart';
 import 'package:tormenta20/src/shared/entities/menace.dart';
 import 'package:tormenta20/src/shared/entities/treasure_type.dart';
 import 'package:uuid/uuid.dart';
@@ -43,20 +45,26 @@ class AddEditMenaceController {
       _charisma = menace.charisma;
       _desc = menace.desc;
       _extraInfos = menace.extraInfos;
-      _generalSkills.addAll(menace.generalSkills);
-      _magics.addAll(menace.magics);
-      _equipments.addAll(menace.equipments);
-      _actions.addAll(menace.actions);
       treasureTypeStore =
           AddEditMenaceTreasureTypeStore(menace.treasures ?? TreasureType.none);
       combateRoleStore = AddEditMenaceCombateRoleStore(menace.combatRole);
       sizeStore = AddEditMenaceSizeStore(menace.creatureSize);
       typeStore = AddEditMenaceTypeStore(menace.type);
+      expertisesStore = AddEditMenaceExpertisesStore(menace.expertises);
+      skillsStore = AddEditMenaceSkillsStore(menace.generalSkills);
+      magicsStore = AddEditMenaceMagicsStore(menace.magics);
+      equipmentsStore = AddEditMenaceEquipmentsStore(menace.equipments);
+      actionsStore = AddEditMenaceActionsStore(menace.actions);
     } else {
       treasureTypeStore = AddEditMenaceTreasureTypeStore(TreasureType.none);
       typeStore = AddEditMenaceTypeStore(null);
       sizeStore = AddEditMenaceSizeStore(null);
       combateRoleStore = AddEditMenaceCombateRoleStore(null);
+      expertisesStore = AddEditMenaceExpertisesStore([]);
+      skillsStore = AddEditMenaceSkillsStore([]);
+      magicsStore = AddEditMenaceMagicsStore([]);
+      equipmentsStore = AddEditMenaceEquipmentsStore([]);
+      actionsStore = AddEditMenaceActionsStore([]);
       _uuid = const Uuid().v4();
     }
   }
@@ -71,6 +79,11 @@ class AddEditMenaceController {
   void setPercent(double value) => percent.value = value;
 
   late final AddEditMenaceTreasureTypeStore treasureTypeStore;
+
+  List<String> _expertiseToDelete = [];
+
+  void addToDeleteExpertise(String value) => _expertiseToDelete.add(value);
+  late final AddEditMenaceExpertisesStore expertisesStore;
 
   late final AddEditMenaceTypeStore typeStore;
   bool isValidType() => typeStore.validate();
@@ -275,41 +288,22 @@ class AddEditMenaceController {
   String? get casterInfos => _casterInfos;
   void changeCasterInfos(String? value) => _casterInfos = value;
 
-  List<GeneralSkill> _generalSkills = [];
-  List<GeneralSkill> get generalSkills => _generalSkills;
-  List<String> _generalSkillsToDelete = [];
-  void addGeneralSkill(GeneralSkill value) => _generalSkills.add(value);
-  void removeGeneralSkill(GeneralSkill value) {
-    _generalSkills.remove(value);
-    _generalSkillsToDelete.add(value.uuid);
-  }
+  late final AddEditMenaceSkillsStore skillsStore;
+  List<String> _skillToDelete = [];
+  void addSkillToDelete(String value) => _skillToDelete.add(value);
 
-  List<MagicMenace> _magics = [];
-  List<MagicMenace> get magics => _magics;
-  List<String> _magicsToDelete = [];
-  void addMagic(MagicMenace value) => _magics.add(value);
-  void removeMagic(MagicMenace value) {
-    _magics.remove(value);
-    _magicsToDelete.add(value.uuid);
-  }
+  late final AddEditMenaceMagicsStore magicsStore;
+  List<String> _magicToDelete = [];
+  void addMagicToDelete(String value) => _magicToDelete.add(value);
 
-  List<Equipment> _equipments = [];
-  List<Equipment> get equipments => _equipments;
+  late final AddEditMenaceEquipmentsStore equipmentsStore;
   List<String> _equipmentToDelete = [];
-  void addEquipment(Equipment value) => _equipments.add(value);
-  void removeEquipment(Equipment value) {
-    _equipments.remove(value);
-    _equipmentToDelete.add(value.uuid);
-  }
+  void addEquipmentToDelete(String value) => _equipmentToDelete.add(value);
+  List<Equipment> getEquipaments() => equipmentsStore.data;
 
-  List<ActionEnt> _actions = [];
-  List<ActionEnt> get actions => _actions;
-  List<String> _actionToDelete = [];
-  void addAction(ActionEnt value) => _actions.add(value);
-  void removeAction(ActionEnt value) {
-    _actions.remove(value);
-    _actionToDelete.add(value.uuid);
-  }
+  late final AddEditMenaceActionsStore actionsStore;
+  List<String> _actionsToDelete = [];
+  void addActionsToDelete(String value) => _actionsToDelete.add(value);
 
   dispose() {
     treasureTypeStore.dispose();
@@ -318,5 +312,10 @@ class AddEditMenaceController {
     typeStore.dispose();
     sizeStore.dispose();
     combateRoleStore.dispose();
+    expertisesStore.dispose();
+    skillsStore.dispose();
+    magicsStore.dispose();
+    equipmentsStore.dispose();
+    actionsStore.dispose();
   }
 }

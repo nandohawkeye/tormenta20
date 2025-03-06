@@ -7,7 +7,7 @@ import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/rool_dice.dart';
 import 'package:tormenta20/src/shared/entities/rool_dice_adapters.dart';
 import 'package:tormenta20/src/shared/widgets/add_edit_dices_field/add_edit_dices_field_card.dart';
-import 'package:tormenta20/src/shared/widgets/selector_fields/selector_warning.dart';
+import 'package:tormenta20/src/shared/widgets/warning_widget.dart';
 
 class AddEditDicesField extends StatefulWidget {
   const AddEditDicesField({
@@ -235,7 +235,7 @@ class _AddEditDicesFieldState extends State<AddEditDicesField> {
             )
           ],
         ),
-        SelectorWarning(
+        WarningWidget(
           isObrigatory: widget.isObrigatory,
           hasError: widget.hasError,
           helpText: widget.helpText,

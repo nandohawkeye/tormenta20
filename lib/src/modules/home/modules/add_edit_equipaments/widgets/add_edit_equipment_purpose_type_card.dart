@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon_purpose.dart';
-import 'package:tormenta20/src/shared/utils/equipament_weapon_purpose_utils.dart';
+import 'package:tormenta20/src/shared/utils/equipment/equipament_weapon_purpose_utils.dart';
 
 class AddEditEquipmentPurposeTypeCard extends StatelessWidget {
   const AddEditEquipmentPurposeTypeCard({

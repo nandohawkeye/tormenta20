@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon_proficiency.dart';
-import 'package:tormenta20/src/shared/utils/equipment_proficiency_type_utils.dart';
+import 'package:tormenta20/src/shared/utils/equipment/equipment_proficiency_type_utils.dart';
 import 'package:tormenta20/src/shared/widgets/selector_fields/selector_only_field.dart';
 import 'package:tormenta20/src/shared/widgets/selector_fields/selector_only_store.dart';
 

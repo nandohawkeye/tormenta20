@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/shared/entities/equipament/improvement_types.dart';
-import 'package:tormenta20/src/shared/utils/equipment_improvement_type_utils.dart';
+import 'package:tormenta20/src/shared/utils/equipment/equipment_improvement_type_utils.dart';
 import 'package:tormenta20/src/shared/widgets/selector_fields/selector_multi_field.dart';
 import 'package:tormenta20/src/shared/widgets/selector_fields/selector_multi_store.dart';
 

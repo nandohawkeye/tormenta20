@@ -4,7 +4,7 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_menace/add_edit_men
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_combate_role_selector.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_creature_size_selector.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_screen_type_selector.dart';
-import 'package:tormenta20/src/shared/widgets/atribute_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/atribute_textfield.dart';
 
 class AddEditMenaceScreenStageTwo extends StatelessWidget {
   const AddEditMenaceScreenStageTwo({

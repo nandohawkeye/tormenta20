@@ -7,11 +7,11 @@ import 'package:tormenta20/src/shared/entities/action/action.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/widgets/add_edit_critical_field/add_edit_critical_field.dart';
 import 'package:tormenta20/src/shared/widgets/add_edit_dices_field/add_edit_dices_field.dart';
-import 'package:tormenta20/src/shared/widgets/cd_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/desc_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/medio_damage_value_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/name_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/pm_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/cd_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/desc_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/medio_damage_value_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/name_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/pm_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/screen_base.dart';
 import 'package:tormenta20/src/shared/widgets/select_equipament_field/select_equipament_field.dart';
 

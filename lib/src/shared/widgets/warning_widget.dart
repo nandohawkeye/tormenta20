@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 
-class SelectorWarning extends StatelessWidget {
-  const SelectorWarning({
+class WarningWidget extends StatelessWidget {
+  const WarningWidget({
     super.key,
     required this.isObrigatory,
     this.helpText,

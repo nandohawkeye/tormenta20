@@ -3,7 +3,7 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_equipaments/add_edit_equipments_controller.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_equipaments/widgets/add_edit_equipment_screen_item.dart';
 
-import 'package:tormenta20/src/shared/widgets/price_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/price_textfield.dart';
 
 class AdventureBackpackWidgetsGroup extends StatelessWidget {
   const AdventureBackpackWidgetsGroup(this.controller, this.hasInited,

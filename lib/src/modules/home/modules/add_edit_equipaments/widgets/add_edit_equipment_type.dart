@@ -7,7 +7,7 @@ import 'package:tormenta20/src/shared/entities/equipament/general_item.dart';
 import 'package:tormenta20/src/shared/entities/equipament/saddlebag.dart';
 import 'package:tormenta20/src/shared/entities/equipament/shield.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon.dart';
-import 'package:tormenta20/src/shared/utils/equipment_type_utils.dart';
+import 'package:tormenta20/src/shared/utils/equipment/equipment_type_utils.dart';
 import 'package:tormenta20/src/shared/widgets/selector_fields/selector_only_field.dart';
 import 'package:tormenta20/src/shared/widgets/selector_fields/selector_only_store.dart';
 

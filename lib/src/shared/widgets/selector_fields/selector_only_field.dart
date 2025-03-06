@@ -4,7 +4,7 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/shared/widgets/selector_fields/selector_field_body.dart';
 import 'package:tormenta20/src/shared/widgets/selector_fields/selector_only_card.dart';
 import 'package:tormenta20/src/shared/widgets/selector_fields/selector_only_store.dart';
-import 'package:tormenta20/src/shared/widgets/selector_fields/selector_warning.dart';
+import 'package:tormenta20/src/shared/widgets/warning_widget.dart';
 import 'package:tormenta20/src/shared/widgets/selector_secundary_simple_button.dart';
 
 class SelectorOnlyField<T> extends StatelessWidget {
@@ -103,7 +103,7 @@ class SelectorOnlyField<T> extends StatelessWidget {
           animation: store,
           builder: (_, __) {
             final hasError = store.hasError;
-            return SelectorWarning(
+            return WarningWidget(
               hasError: hasError,
               isObrigatory: isObrigatory,
               helpText: helpText,

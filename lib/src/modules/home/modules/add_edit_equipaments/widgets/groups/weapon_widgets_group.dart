@@ -12,12 +12,12 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_equipaments/widgets
 import 'package:tormenta20/src/modules/home/modules/add_edit_equipaments/widgets/add_edit_weapon_range_type.dart';
 import 'package:tormenta20/src/shared/widgets/add_edit_critical_field/add_edit_critical_field.dart';
 import 'package:tormenta20/src/shared/widgets/add_edit_dices_field/add_edit_dices_field.dart';
-import 'package:tormenta20/src/shared/widgets/desc_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/name_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/ocuped_spaces_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/price_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/desc_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/name_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/ocuped_spaces_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/price_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/selector_fields/selector_checkable.dart';
-import 'package:tormenta20/src/shared/widgets/steps_weapon_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/steps_weapon_textfield.dart';
 
 class WeaponWidgetsGroup extends StatelessWidget {
   const WeaponWidgetsGroup(this.controller, this.hasInited, {super.key});

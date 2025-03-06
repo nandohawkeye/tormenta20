@@ -2,8 +2,10 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:tormenta20/src/shared/entities/entity_base.dart';
+import 'package:tormenta20/src/shared/stores/validate_store.dart';
 
-abstract class SelectorMultiStore<T> extends ChangeNotifier {
+abstract class SelectorMultiStore<T> extends ChangeNotifier
+    implements ValidateStore {
   SelectorMultiStore(List<T> inicialValue) {
     if (inicialValue.isNotEmpty) {
       _data.addAll(inicialValue);
@@ -57,6 +59,7 @@ abstract class SelectorMultiStore<T> extends ChangeNotifier {
   bool _hasError = false;
   bool get hasError => _hasError;
 
+  @override
   bool validate() {
     if (_data.isEmpty) {
       _hasError = true;

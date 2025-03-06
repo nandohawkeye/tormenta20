@@ -3,18 +3,18 @@ import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/add_edit_menace_controller.dart';
 import 'package:tormenta20/src/shared/widgets/token_selector/token_selector.dart';
-import 'package:tormenta20/src/shared/widgets/defense_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/defense_textfield.dart';
 
-import 'package:tormenta20/src/shared/widgets/initiative_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/life_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/mana_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/name_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/nd_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/perception_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/resis_fort_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/resis_ref_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/resis_von_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/senses_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/initiative_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/life_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/mana_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/name_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/nd_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/perception_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/resis_fort_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/resis_ref_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/resis_von_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/senses_textfield.dart';
 
 class AddEditMenaceScreenStageOne extends StatelessWidget {
   const AddEditMenaceScreenStageOne({

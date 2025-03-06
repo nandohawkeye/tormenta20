@@ -3,6 +3,7 @@ import 'package:tormenta20/src/shared/entities/combat_role.dart';
 import 'package:tormenta20/src/shared/entities/creature_size.dart';
 import 'package:tormenta20/src/shared/entities/entity_base.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
+import 'package:tormenta20/src/shared/entities/expertise/expertise.dart';
 import 'package:tormenta20/src/shared/entities/general_skill.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_menace.dart';
 import 'package:tormenta20/src/shared/entities/menace_type.dart';
@@ -44,11 +45,10 @@ class Menace extends EntityBase {
   final List<MagicMenace> magics;
   final List<Equipment> equipments;
   final List<ActionEnt> actions;
-
-  final List<String> expertises;
-
   final String? desc;
   final String? extraInfos;
+
+  final List<Expertise> expertises;
 
   Menace({
     this.imagePath,

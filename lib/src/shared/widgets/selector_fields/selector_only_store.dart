@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:tormenta20/src/shared/stores/validate_store.dart';
 
-abstract class SelectorOnlyStore<T> extends ChangeNotifier {
+abstract class SelectorOnlyStore<T> extends ChangeNotifier
+    implements ValidateStore {
   SelectorOnlyStore(T? initialValue) {
     if (initialValue != null) {
       _data = initialValue;
@@ -21,6 +23,7 @@ abstract class SelectorOnlyStore<T> extends ChangeNotifier {
   bool _hasError = false;
   bool get hasError => _hasError;
 
+  @override
   bool validate() {
     if (_data == null) {
       _hasError = true;

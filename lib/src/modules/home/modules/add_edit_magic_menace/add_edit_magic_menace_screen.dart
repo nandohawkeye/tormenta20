@@ -5,9 +5,9 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_magic_menace/add_ed
 import 'package:tormenta20/src/modules/home/modules/add_edit_magic_menace/add_edit_magic_menace_store.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_menace.dart';
 import 'package:tormenta20/src/shared/widgets/add_edit_dices_field/add_edit_dices_field.dart';
-import 'package:tormenta20/src/shared/widgets/cd_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/medio_damage_value_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/pm_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/cd_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/medio_damage_value_textfield.dart';
+import 'package:tormenta20/src/shared/widgets/textfields/pm_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/screen_base.dart';
 
 class AddEditMagicMenaceScreen extends StatefulWidget {
