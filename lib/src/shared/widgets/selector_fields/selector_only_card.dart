@@ -10,12 +10,14 @@ class SelectorOnlyCard<T> extends StatelessWidget {
     required this.selected,
     required this.onTap,
     required this.handleTitle,
+    this.backgroundColor,
   });
 
   final T type;
   final T? selected;
   final Function(T) onTap;
   final String Function(String) handleTitle;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,9 @@ class SelectorOnlyCard<T> extends StatelessWidget {
       duration: T20UI.defaultDurationAnimation,
       decoration: BoxDecoration(
         borderRadius: T20UI.borderRadius,
-        color: isSelected ? palette.selected : palette.backgroundLevelTwo,
+        color: isSelected
+            ? palette.selected
+            : (backgroundColor ?? palette.backgroundLevelTwo),
       ),
       child: InkWell(
         borderRadius: T20UI.borderRadius,

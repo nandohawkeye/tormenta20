@@ -21,10 +21,12 @@ class BoardSessionsCard extends StatelessWidget {
     this.session, {
     super.key,
     required this.createCloseSession,
+    required this.updatedSession,
   });
 
   final BoardSession session;
   final Function() createCloseSession;
+  final Function(BoardSession) updatedSession;
 
   @override
   Widget build(BuildContext context) {
@@ -40,21 +42,71 @@ class BoardSessionsCard extends StatelessWidget {
       return BoardSessionCardSessionOpen(
         session,
         createCloseSession: createCloseSession,
+        updatedSession: updatedSession,
       );
     }
+
+    final isTheSameDay = session.startedAt.isTheSameDay(session.endAt);
 
     return Padding(
       padding: const EdgeInsets.only(bottom: T20UI.spaceSize),
       child: Card(
         color: palette.backgroundLevelOne,
-        child: Padding(
-          padding: T20UI.allPadding,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            T20UI.spaceHeight,
+            if (session.combats.isNotEmpty)
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        Assets.icons.sword,
+                        color: palette.accent,
+                        height: 22,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        'Combates',
+                        style: TextStyle(
+                          fontFamily: FontFamily.tormenta,
+                          fontSize: 18,
+                          color: palette.accent,
+                        ),
+                      ),
+                      const SizedBox(width: T20UI.smallSpaceSize),
+                      Icon(
+                        FontAwesomeIcons.shieldHalved,
+                        size: 16,
+                        color: palette.accent,
+                      )
+                    ],
+                  ),
+                  T20UI.spaceHeight,
+                  ListView.separated(
+                    padding: T20UI.horizontallScreenPadding,
+                    shrinkWrap: true,
+                    primary: false,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: session.combats.length,
+                    separatorBuilder: T20UI.separatorBuilderVertical,
+                    itemBuilder: (_, index) {
+                      return BoardSessionCombatCard(
+                          combat: session.combats[index]);
+                    },
+                  ),
+                  T20UI.spaceHeight,
+                ],
+              ),
+            Padding(
+              padding: T20UI.horizontalPadding,
+              child: Row(
                 children: [
                   Text(
                     session.startedAt.formatted,
@@ -64,13 +116,19 @@ class BoardSessionsCard extends StatelessWidget {
                     ),
                   ),
                   if (session.endAt != null)
-                    Icon(
-                      FontAwesomeIcons.arrowsLeftRight,
-                      color: palette.disable,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: T20UI.smallSpaceSize),
+                      child: Icon(
+                        FontAwesomeIcons.arrowsLeftRight,
+                        color: palette.disable,
+                      ),
                     ),
                   if (session.endAt != null)
                     Text(
-                      '${session.endAt?.formatted}',
+                      isTheSameDay
+                          ? '${session.endAt?.formattedHourAndMinute}'
+                          : '${session.endAt?.formatted}',
                       style: const TextStyle(
                         fontFamily: FontFamily.tormenta,
                         fontSize: 18,
@@ -78,8 +136,11 @@ class BoardSessionsCard extends StatelessWidget {
                     )
                 ],
               ),
-              if (session.endAt != null)
-                Column(
+            ),
+            if (session.endAt != null)
+              Padding(
+                padding: T20UI.horizontalPadding,
+                child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -90,55 +151,9 @@ class BoardSessionsCard extends StatelessWidget {
                     ),
                   ],
                 ),
-              if (session.combats.isNotEmpty)
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    T20UI.spaceHeight,
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          Assets.icons.sword,
-                          color: palette.accent,
-                          height: 22,
-                        ),
-                        const SizedBox(width: 4),
-                        Text(
-                          'Combates',
-                          style: TextStyle(
-                            fontFamily: FontFamily.tormenta,
-                            fontSize: 18,
-                            color: palette.accent,
-                          ),
-                        ),
-                        const SizedBox(width: T20UI.smallSpaceSize),
-                        Icon(
-                          FontAwesomeIcons.shieldHalved,
-                          size: 16,
-                          color: palette.accent,
-                        )
-                      ],
-                    ),
-                    T20UI.spaceHeight,
-                    ListView.separated(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      primary: false,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: session.combats.length,
-                      separatorBuilder: T20UI.separatorBuilderVertical,
-                      itemBuilder: (_, index) {
-                        return BoardSessionCombatCard(
-                            combat: session.combats[index]);
-                      },
-                    )
-                  ],
-                )
-            ],
-          ),
+              ),
+            T20UI.spaceHeight,
+          ],
         ),
       ),
     );

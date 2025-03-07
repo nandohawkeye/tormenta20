@@ -11,7 +11,7 @@ extension DataExt on DateTime {
       return 'Ontem ás $hourMinute';
     }
 
-    return '${day.toString().padLeft(2, '0')}/${month.toString().padLeft(2, '0')}/$year ás $hourMinute';
+    return '${day.toString().padLeft(2, '0')}/${month.toString().padLeft(2, '0')}/${resumedYear(year)} ás $hourMinute';
   }
 
   bool isToday() {
@@ -26,4 +26,12 @@ extension DataExt on DateTime {
         month == yesterday.month &&
         year == yesterday.year;
   }
+
+  String get formattedHourAndMinute =>
+      '${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}';
+
+  String resumedYear(int year) => '${year.toString()[2]}${year.toString()[3]}';
+
+  bool isTheSameDay(DateTime? other) =>
+      day == other?.day && month == other?.month && year == other?.year;
 }

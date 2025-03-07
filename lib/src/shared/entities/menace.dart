@@ -47,7 +47,6 @@ class Menace extends EntityBase {
   final List<ActionEnt> actions;
   final String? desc;
   final String? extraInfos;
-
   final List<Expertise> expertises;
 
   Menace({

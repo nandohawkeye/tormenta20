@@ -18,6 +18,8 @@ class SelectorOnlyField<T> extends StatelessWidget {
     this.helpText,
     required this.store,
     this.onChange,
+    this.bodyColor,
+    this.cardColor,
   });
 
   final String label;
@@ -28,6 +30,8 @@ class SelectorOnlyField<T> extends StatelessWidget {
   final SelectorOnlyStore<T> store;
   final String? helpText;
   final String Function(String) handleTitle;
+  final Color? bodyColor;
+  final Color? cardColor;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +49,7 @@ class SelectorOnlyField<T> extends StatelessWidget {
                   final hasError = store.hasError;
                   return SelectorFieldBody(
                     label: label,
+                    backgroundColor: bodyColor,
                     hasError: hasError,
                   );
                 },
@@ -88,6 +93,7 @@ class SelectorOnlyField<T> extends StatelessWidget {
                               type: itens[index - (hasRemoveAll ? 1 : 0)],
                               selected: selected,
                               onTap: onChange ?? store.onChange,
+                              backgroundColor: cardColor,
                             );
                           },
                         );

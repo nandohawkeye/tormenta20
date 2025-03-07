@@ -1,17 +1,21 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace_expertise/add_edit_menace_expertise_card.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace_expertise/add_edit_menace_expertise_store.dart';
-import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace_expertise/widgets/add_edit_menace_create_expertise_bottomsheet.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace_expertise/widgets/add_edit_menace_selected_expertise_bottomsheet.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise.dart';
+import 'package:tormenta20/src/shared/entities/expertise/expertise_base.dart';
 import 'package:tormenta20/src/shared/widgets/screen_base.dart';
 
 class AddEditMenaceExpertiseScreen extends StatefulWidget {
-  const AddEditMenaceExpertiseScreen({super.key, this.expertise});
+  const AddEditMenaceExpertiseScreen(
+      {super.key, this.expertise, required this.parentUuid});
 
   final Expertise? expertise;
+  final String parentUuid;
 
   @override
   State<AddEditMenaceExpertiseScreen> createState() =>
@@ -24,21 +28,83 @@ class _AddEditMenaceExpertiseScreenState
   @override
   void initState() {
     super.initState();
-    store = AddEditMenaceExpertiseStore(widget.expertise);
+    store = AddEditMenaceExpertiseStore();
+    if (widget.expertise != null) {
+      _callBottomSheets(widget.expertise!);
+    }
+  }
+
+  void _callBottomSheets(Expertise base) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (base.id == 0) {
+        _onCreate(base);
+      } else {
+        _onTap(base);
+      }
+    });
+  }
+
+  void _onTap(ExpertiseBase base) async {
+    await showModalBottomSheet<Expertise?>(
+      isScrollControlled: true,
+      isDismissible: widget.expertise == null,
+      enableDrag: false,
+      context: context,
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: AddEditMenaceSelectedExpertiseBottomsheet(
+          expertiseBase: base,
+          parentUuid: widget.parentUuid,
+          expertiseUuid: widget.expertise?.uuid,
+          valueFinal: widget.expertise?.valueFinal,
+        ),
+      ),
+    ).then((result) {
+      if (result == null) {
+        if (widget.expertise != null) {
+          Navigator.pop(context);
+        }
+      } else {
+        Navigator.pop(context, result);
+      }
+    });
+  }
+
+  void _onCreate(ExpertiseBase? base) async {
+    await showModalBottomSheet<Expertise?>(
+      isScrollControlled: true,
+      isDismissible: widget.expertise == null,
+      enableDrag: false,
+      context: context,
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: AddEditMenaceCreateExpertiseBottomsheet(
+          expertiseBase: base,
+          parentUuid: widget.parentUuid,
+          expertiseUuid: widget.expertise?.uuid,
+          valueFinal: widget.expertise?.valueFinal,
+        ),
+      ),
+    ).then((result) {
+      if (result == null) {
+        if (widget.expertise != null) {
+          Navigator.pop(context);
+        }
+      } else {
+        Navigator.pop(context, result);
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return ScreenBase(
       label: 'Pericías',
-      extraRightWidgets: [
-        SimpleButton(
-          iconColor: palette.onSelected,
-          icon: FontAwesomeIcons.plus,
-          onTap: () {},
-        ),
-        T20UI.spaceWidth,
-      ],
+      onSaveLabel: 'Criar',
       body: ListView.separated(
         shrinkWrap: true,
         primary: false,
@@ -52,12 +118,11 @@ class _AddEditMenaceExpertiseScreenState
         itemBuilder: (_, index) {
           return AddEditMenaceExpertiseCard(
             expertise: store.expertises[index],
-            selected: store.selected,
-            onTap: (_) {},
+            onTap: _onTap,
           );
         },
       ),
-      onSave: () {},
+      onSave: () => _onCreate(null),
     );
   }
 }

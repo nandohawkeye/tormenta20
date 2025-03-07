@@ -42,7 +42,13 @@ class Expertise extends ExpertiseBase {
       parentUuid.hashCode;
 
   @override
-  String get exibitionLabel => name;
+  String get exibitionLabel {
+    if (valueFinal == null) {
+      return name;
+    }
+
+    return '$name - $valueFinal';
+  }
 
   @override
   get primaryKey => uuid;

@@ -8,10 +8,12 @@ class BoardSessionsList extends StatelessWidget {
     super.key,
     required this.sessions,
     required this.createCloseSession,
+    required this.updatedSession,
   });
 
   final List<BoardSession> sessions;
   final Function() createCloseSession;
+  final Function(BoardSession) updatedSession;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class BoardSessionsList extends StatelessWidget {
             ...sessions.map(
               (session) => BoardSessionsCard(
                 session,
+                updatedSession: updatedSession,
                 createCloseSession: createCloseSession,
               ),
             )

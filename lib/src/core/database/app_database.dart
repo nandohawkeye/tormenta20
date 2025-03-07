@@ -51,7 +51,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 5;
+  int get schemaVersion => 8;
 
   @override
   MigrationStrategy get migration {
@@ -63,22 +63,37 @@ class AppDatabase extends _$AppDatabase {
         print('Migrating from $from to $to');
         await customStatement('PRAGMA foreign_keys = OFF');
 
-        await transaction(() async {
-          if (from < 3) {
-            for (var table in allTables) {
-              await m.deleteTable(table.actualTableName);
-              await m.createTable(table);
+        await transaction(
+          () async {
+            if (from < 3) {
+              for (var table in allTables) {
+                await m.deleteTable(table.actualTableName);
+                await m.createTable(table);
+              }
             }
-          }
 
-          if (from < 4) {
-            await m.addColumn(boardCombatTable, boardCombatTable.turn);
-          }
+            if (from < 4) {
+              await m.addColumn(boardCombatTable, boardCombatTable.turn);
+            }
 
-          if (from < 5) {
-            await m.addColumn(boardPlayerTable, boardPlayerTable.initiative);
-          }
-        });
+            if (from < 5) {
+              await m.addColumn(boardPlayerTable, boardPlayerTable.initiative);
+            }
+
+            if (from < 6) {
+              await m.alterTable(TableMigration(grimoireTable));
+            }
+
+            if (from < 7) {
+              await m.alterTable(TableMigration(boardSessionTable));
+            }
+
+            if (from < 8) {
+              await m.addColumn(
+                  boardSessionTable, boardSessionTable.environmentIndex);
+            }
+          },
+        );
 
         // Assert that the schema is valid after migrations
         if (kDebugMode) {

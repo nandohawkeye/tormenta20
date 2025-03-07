@@ -30,12 +30,6 @@ class $GrimoireTableTable extends GrimoireTable
   late final GeneratedColumn<String> iconAsset = GeneratedColumn<String>(
       'icon_asset', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _colorIntMeta =
-      const VerificationMeta('colorInt');
-  @override
-  late final GeneratedColumn<int> colorInt = GeneratedColumn<int>(
-      'color_int', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _createdAtMeta =
       const VerificationMeta('createdAt');
   @override
@@ -50,7 +44,7 @@ class $GrimoireTableTable extends GrimoireTable
       type: DriftSqlType.dateTime, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
-      [uuid, name, desc, iconAsset, colorInt, createdAt, updatedAt];
+      [uuid, name, desc, iconAsset, createdAt, updatedAt];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -83,12 +77,6 @@ class $GrimoireTableTable extends GrimoireTable
     } else if (isInserting) {
       context.missing(_iconAssetMeta);
     }
-    if (data.containsKey('color_int')) {
-      context.handle(_colorIntMeta,
-          colorInt.isAcceptableOrUnknown(data['color_int']!, _colorIntMeta));
-    } else if (isInserting) {
-      context.missing(_colorIntMeta);
-    }
     if (data.containsKey('created_at')) {
       context.handle(_createdAtMeta,
           createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
@@ -118,8 +106,6 @@ class $GrimoireTableTable extends GrimoireTable
           .read(DriftSqlType.string, data['${effectivePrefix}desc']),
       iconAsset: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}icon_asset'])!,
-      colorInt: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}color_int'])!,
       createdAt: attachedDatabase.typeMapping
           .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
       updatedAt: attachedDatabase.typeMapping
@@ -139,7 +125,6 @@ class GrimoireTableData extends DataClass
   final String name;
   final String? desc;
   final String iconAsset;
-  final int colorInt;
   final DateTime createdAt;
   final DateTime updatedAt;
   const GrimoireTableData(
@@ -147,7 +132,6 @@ class GrimoireTableData extends DataClass
       required this.name,
       this.desc,
       required this.iconAsset,
-      required this.colorInt,
       required this.createdAt,
       required this.updatedAt});
   @override
@@ -159,7 +143,6 @@ class GrimoireTableData extends DataClass
       map['desc'] = Variable<String>(desc);
     }
     map['icon_asset'] = Variable<String>(iconAsset);
-    map['color_int'] = Variable<int>(colorInt);
     map['created_at'] = Variable<DateTime>(createdAt);
     map['updated_at'] = Variable<DateTime>(updatedAt);
     return map;
@@ -171,7 +154,6 @@ class GrimoireTableData extends DataClass
       name: Value(name),
       desc: desc == null && nullToAbsent ? const Value.absent() : Value(desc),
       iconAsset: Value(iconAsset),
-      colorInt: Value(colorInt),
       createdAt: Value(createdAt),
       updatedAt: Value(updatedAt),
     );
@@ -185,7 +167,6 @@ class GrimoireTableData extends DataClass
       name: serializer.fromJson<String>(json['name']),
       desc: serializer.fromJson<String?>(json['desc']),
       iconAsset: serializer.fromJson<String>(json['iconAsset']),
-      colorInt: serializer.fromJson<int>(json['colorInt']),
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
       updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
     );
@@ -198,7 +179,6 @@ class GrimoireTableData extends DataClass
       'name': serializer.toJson<String>(name),
       'desc': serializer.toJson<String?>(desc),
       'iconAsset': serializer.toJson<String>(iconAsset),
-      'colorInt': serializer.toJson<int>(colorInt),
       'createdAt': serializer.toJson<DateTime>(createdAt),
       'updatedAt': serializer.toJson<DateTime>(updatedAt),
     };
@@ -209,7 +189,6 @@ class GrimoireTableData extends DataClass
           String? name,
           Value<String?> desc = const Value.absent(),
           String? iconAsset,
-          int? colorInt,
           DateTime? createdAt,
           DateTime? updatedAt}) =>
       GrimoireTableData(
@@ -217,7 +196,6 @@ class GrimoireTableData extends DataClass
         name: name ?? this.name,
         desc: desc.present ? desc.value : this.desc,
         iconAsset: iconAsset ?? this.iconAsset,
-        colorInt: colorInt ?? this.colorInt,
         createdAt: createdAt ?? this.createdAt,
         updatedAt: updatedAt ?? this.updatedAt,
       );
@@ -227,7 +205,6 @@ class GrimoireTableData extends DataClass
       name: data.name.present ? data.name.value : this.name,
       desc: data.desc.present ? data.desc.value : this.desc,
       iconAsset: data.iconAsset.present ? data.iconAsset.value : this.iconAsset,
-      colorInt: data.colorInt.present ? data.colorInt.value : this.colorInt,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
       updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
     );
@@ -240,7 +217,6 @@ class GrimoireTableData extends DataClass
           ..write('name: $name, ')
           ..write('desc: $desc, ')
           ..write('iconAsset: $iconAsset, ')
-          ..write('colorInt: $colorInt, ')
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt')
           ..write(')'))
@@ -249,7 +225,7 @@ class GrimoireTableData extends DataClass
 
   @override
   int get hashCode =>
-      Object.hash(uuid, name, desc, iconAsset, colorInt, createdAt, updatedAt);
+      Object.hash(uuid, name, desc, iconAsset, createdAt, updatedAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -258,7 +234,6 @@ class GrimoireTableData extends DataClass
           other.name == this.name &&
           other.desc == this.desc &&
           other.iconAsset == this.iconAsset &&
-          other.colorInt == this.colorInt &&
           other.createdAt == this.createdAt &&
           other.updatedAt == this.updatedAt);
 }
@@ -268,7 +243,6 @@ class GrimoireTableCompanion extends UpdateCompanion<GrimoireTableData> {
   final Value<String> name;
   final Value<String?> desc;
   final Value<String> iconAsset;
-  final Value<int> colorInt;
   final Value<DateTime> createdAt;
   final Value<DateTime> updatedAt;
   final Value<int> rowid;
@@ -277,7 +251,6 @@ class GrimoireTableCompanion extends UpdateCompanion<GrimoireTableData> {
     this.name = const Value.absent(),
     this.desc = const Value.absent(),
     this.iconAsset = const Value.absent(),
-    this.colorInt = const Value.absent(),
     this.createdAt = const Value.absent(),
     this.updatedAt = const Value.absent(),
     this.rowid = const Value.absent(),
@@ -287,14 +260,12 @@ class GrimoireTableCompanion extends UpdateCompanion<GrimoireTableData> {
     required String name,
     this.desc = const Value.absent(),
     required String iconAsset,
-    required int colorInt,
     required DateTime createdAt,
     required DateTime updatedAt,
     this.rowid = const Value.absent(),
   })  : uuid = Value(uuid),
         name = Value(name),
         iconAsset = Value(iconAsset),
-        colorInt = Value(colorInt),
         createdAt = Value(createdAt),
         updatedAt = Value(updatedAt);
   static Insertable<GrimoireTableData> custom({
@@ -302,7 +273,6 @@ class GrimoireTableCompanion extends UpdateCompanion<GrimoireTableData> {
     Expression<String>? name,
     Expression<String>? desc,
     Expression<String>? iconAsset,
-    Expression<int>? colorInt,
     Expression<DateTime>? createdAt,
     Expression<DateTime>? updatedAt,
     Expression<int>? rowid,
@@ -312,7 +282,6 @@ class GrimoireTableCompanion extends UpdateCompanion<GrimoireTableData> {
       if (name != null) 'name': name,
       if (desc != null) 'desc': desc,
       if (iconAsset != null) 'icon_asset': iconAsset,
-      if (colorInt != null) 'color_int': colorInt,
       if (createdAt != null) 'created_at': createdAt,
       if (updatedAt != null) 'updated_at': updatedAt,
       if (rowid != null) 'rowid': rowid,
@@ -324,7 +293,6 @@ class GrimoireTableCompanion extends UpdateCompanion<GrimoireTableData> {
       Value<String>? name,
       Value<String?>? desc,
       Value<String>? iconAsset,
-      Value<int>? colorInt,
       Value<DateTime>? createdAt,
       Value<DateTime>? updatedAt,
       Value<int>? rowid}) {
@@ -333,7 +301,6 @@ class GrimoireTableCompanion extends UpdateCompanion<GrimoireTableData> {
       name: name ?? this.name,
       desc: desc ?? this.desc,
       iconAsset: iconAsset ?? this.iconAsset,
-      colorInt: colorInt ?? this.colorInt,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       rowid: rowid ?? this.rowid,
@@ -355,9 +322,6 @@ class GrimoireTableCompanion extends UpdateCompanion<GrimoireTableData> {
     if (iconAsset.present) {
       map['icon_asset'] = Variable<String>(iconAsset.value);
     }
-    if (colorInt.present) {
-      map['color_int'] = Variable<int>(colorInt.value);
-    }
     if (createdAt.present) {
       map['created_at'] = Variable<DateTime>(createdAt.value);
     }
@@ -377,7 +341,6 @@ class GrimoireTableCompanion extends UpdateCompanion<GrimoireTableData> {
           ..write('name: $name, ')
           ..write('desc: $desc, ')
           ..write('iconAsset: $iconAsset, ')
-          ..write('colorInt: $colorInt, ')
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
           ..write('rowid: $rowid')
@@ -2087,6 +2050,12 @@ class $BoardSessionTableTable extends BoardSessionTable
   late final GeneratedColumn<String> boardUuid = GeneratedColumn<String>(
       'board_uuid', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _environmentIndexMeta =
+      const VerificationMeta('environmentIndex');
+  @override
+  late final GeneratedColumn<int> environmentIndex = GeneratedColumn<int>(
+      'environment_index', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
   static const VerificationMeta _startedAtMeta =
       const VerificationMeta('startedAt');
   @override
@@ -2099,7 +2068,8 @@ class $BoardSessionTableTable extends BoardSessionTable
       'end_at', aliasedName, true,
       type: DriftSqlType.dateTime, requiredDuringInsert: false);
   @override
-  List<GeneratedColumn> get $columns => [uuid, boardUuid, startedAt, endAt];
+  List<GeneratedColumn> get $columns =>
+      [uuid, boardUuid, environmentIndex, startedAt, endAt];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -2122,6 +2092,12 @@ class $BoardSessionTableTable extends BoardSessionTable
           boardUuid.isAcceptableOrUnknown(data['board_uuid']!, _boardUuidMeta));
     } else if (isInserting) {
       context.missing(_boardUuidMeta);
+    }
+    if (data.containsKey('environment_index')) {
+      context.handle(
+          _environmentIndexMeta,
+          environmentIndex.isAcceptableOrUnknown(
+              data['environment_index']!, _environmentIndexMeta));
     }
     if (data.containsKey('started_at')) {
       context.handle(_startedAtMeta,
@@ -2146,6 +2122,8 @@ class $BoardSessionTableTable extends BoardSessionTable
           .read(DriftSqlType.string, data['${effectivePrefix}uuid'])!,
       boardUuid: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}board_uuid'])!,
+      environmentIndex: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}environment_index']),
       startedAt: attachedDatabase.typeMapping
           .read(DriftSqlType.dateTime, data['${effectivePrefix}started_at'])!,
       endAt: attachedDatabase.typeMapping
@@ -2163,11 +2141,13 @@ class BoardSessionTableData extends DataClass
     implements Insertable<BoardSessionTableData> {
   final String uuid;
   final String boardUuid;
+  final int? environmentIndex;
   final DateTime startedAt;
   final DateTime? endAt;
   const BoardSessionTableData(
       {required this.uuid,
       required this.boardUuid,
+      this.environmentIndex,
       required this.startedAt,
       this.endAt});
   @override
@@ -2175,6 +2155,9 @@ class BoardSessionTableData extends DataClass
     final map = <String, Expression>{};
     map['uuid'] = Variable<String>(uuid);
     map['board_uuid'] = Variable<String>(boardUuid);
+    if (!nullToAbsent || environmentIndex != null) {
+      map['environment_index'] = Variable<int>(environmentIndex);
+    }
     map['started_at'] = Variable<DateTime>(startedAt);
     if (!nullToAbsent || endAt != null) {
       map['end_at'] = Variable<DateTime>(endAt);
@@ -2186,6 +2169,9 @@ class BoardSessionTableData extends DataClass
     return BoardSessionTableCompanion(
       uuid: Value(uuid),
       boardUuid: Value(boardUuid),
+      environmentIndex: environmentIndex == null && nullToAbsent
+          ? const Value.absent()
+          : Value(environmentIndex),
       startedAt: Value(startedAt),
       endAt:
           endAt == null && nullToAbsent ? const Value.absent() : Value(endAt),
@@ -2198,6 +2184,7 @@ class BoardSessionTableData extends DataClass
     return BoardSessionTableData(
       uuid: serializer.fromJson<String>(json['uuid']),
       boardUuid: serializer.fromJson<String>(json['boardUuid']),
+      environmentIndex: serializer.fromJson<int?>(json['environmentIndex']),
       startedAt: serializer.fromJson<DateTime>(json['startedAt']),
       endAt: serializer.fromJson<DateTime?>(json['endAt']),
     );
@@ -2208,6 +2195,7 @@ class BoardSessionTableData extends DataClass
     return <String, dynamic>{
       'uuid': serializer.toJson<String>(uuid),
       'boardUuid': serializer.toJson<String>(boardUuid),
+      'environmentIndex': serializer.toJson<int?>(environmentIndex),
       'startedAt': serializer.toJson<DateTime>(startedAt),
       'endAt': serializer.toJson<DateTime?>(endAt),
     };
@@ -2216,11 +2204,15 @@ class BoardSessionTableData extends DataClass
   BoardSessionTableData copyWith(
           {String? uuid,
           String? boardUuid,
+          Value<int?> environmentIndex = const Value.absent(),
           DateTime? startedAt,
           Value<DateTime?> endAt = const Value.absent()}) =>
       BoardSessionTableData(
         uuid: uuid ?? this.uuid,
         boardUuid: boardUuid ?? this.boardUuid,
+        environmentIndex: environmentIndex.present
+            ? environmentIndex.value
+            : this.environmentIndex,
         startedAt: startedAt ?? this.startedAt,
         endAt: endAt.present ? endAt.value : this.endAt,
       );
@@ -2228,6 +2220,9 @@ class BoardSessionTableData extends DataClass
     return BoardSessionTableData(
       uuid: data.uuid.present ? data.uuid.value : this.uuid,
       boardUuid: data.boardUuid.present ? data.boardUuid.value : this.boardUuid,
+      environmentIndex: data.environmentIndex.present
+          ? data.environmentIndex.value
+          : this.environmentIndex,
       startedAt: data.startedAt.present ? data.startedAt.value : this.startedAt,
       endAt: data.endAt.present ? data.endAt.value : this.endAt,
     );
@@ -2238,6 +2233,7 @@ class BoardSessionTableData extends DataClass
     return (StringBuffer('BoardSessionTableData(')
           ..write('uuid: $uuid, ')
           ..write('boardUuid: $boardUuid, ')
+          ..write('environmentIndex: $environmentIndex, ')
           ..write('startedAt: $startedAt, ')
           ..write('endAt: $endAt')
           ..write(')'))
@@ -2245,13 +2241,15 @@ class BoardSessionTableData extends DataClass
   }
 
   @override
-  int get hashCode => Object.hash(uuid, boardUuid, startedAt, endAt);
+  int get hashCode =>
+      Object.hash(uuid, boardUuid, environmentIndex, startedAt, endAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is BoardSessionTableData &&
           other.uuid == this.uuid &&
           other.boardUuid == this.boardUuid &&
+          other.environmentIndex == this.environmentIndex &&
           other.startedAt == this.startedAt &&
           other.endAt == this.endAt);
 }
@@ -2260,12 +2258,14 @@ class BoardSessionTableCompanion
     extends UpdateCompanion<BoardSessionTableData> {
   final Value<String> uuid;
   final Value<String> boardUuid;
+  final Value<int?> environmentIndex;
   final Value<DateTime> startedAt;
   final Value<DateTime?> endAt;
   final Value<int> rowid;
   const BoardSessionTableCompanion({
     this.uuid = const Value.absent(),
     this.boardUuid = const Value.absent(),
+    this.environmentIndex = const Value.absent(),
     this.startedAt = const Value.absent(),
     this.endAt = const Value.absent(),
     this.rowid = const Value.absent(),
@@ -2273,6 +2273,7 @@ class BoardSessionTableCompanion
   BoardSessionTableCompanion.insert({
     required String uuid,
     required String boardUuid,
+    this.environmentIndex = const Value.absent(),
     required DateTime startedAt,
     this.endAt = const Value.absent(),
     this.rowid = const Value.absent(),
@@ -2282,6 +2283,7 @@ class BoardSessionTableCompanion
   static Insertable<BoardSessionTableData> custom({
     Expression<String>? uuid,
     Expression<String>? boardUuid,
+    Expression<int>? environmentIndex,
     Expression<DateTime>? startedAt,
     Expression<DateTime>? endAt,
     Expression<int>? rowid,
@@ -2289,6 +2291,7 @@ class BoardSessionTableCompanion
     return RawValuesInsertable({
       if (uuid != null) 'uuid': uuid,
       if (boardUuid != null) 'board_uuid': boardUuid,
+      if (environmentIndex != null) 'environment_index': environmentIndex,
       if (startedAt != null) 'started_at': startedAt,
       if (endAt != null) 'end_at': endAt,
       if (rowid != null) 'rowid': rowid,
@@ -2298,12 +2301,14 @@ class BoardSessionTableCompanion
   BoardSessionTableCompanion copyWith(
       {Value<String>? uuid,
       Value<String>? boardUuid,
+      Value<int?>? environmentIndex,
       Value<DateTime>? startedAt,
       Value<DateTime?>? endAt,
       Value<int>? rowid}) {
     return BoardSessionTableCompanion(
       uuid: uuid ?? this.uuid,
       boardUuid: boardUuid ?? this.boardUuid,
+      environmentIndex: environmentIndex ?? this.environmentIndex,
       startedAt: startedAt ?? this.startedAt,
       endAt: endAt ?? this.endAt,
       rowid: rowid ?? this.rowid,
@@ -2318,6 +2323,9 @@ class BoardSessionTableCompanion
     }
     if (boardUuid.present) {
       map['board_uuid'] = Variable<String>(boardUuid.value);
+    }
+    if (environmentIndex.present) {
+      map['environment_index'] = Variable<int>(environmentIndex.value);
     }
     if (startedAt.present) {
       map['started_at'] = Variable<DateTime>(startedAt.value);
@@ -2336,6 +2344,7 @@ class BoardSessionTableCompanion
     return (StringBuffer('BoardSessionTableCompanion(')
           ..write('uuid: $uuid, ')
           ..write('boardUuid: $boardUuid, ')
+          ..write('environmentIndex: $environmentIndex, ')
           ..write('startedAt: $startedAt, ')
           ..write('endAt: $endAt, ')
           ..write('rowid: $rowid')
@@ -4790,7 +4799,6 @@ typedef $$GrimoireTableTableCreateCompanionBuilder = GrimoireTableCompanion
   required String name,
   Value<String?> desc,
   required String iconAsset,
-  required int colorInt,
   required DateTime createdAt,
   required DateTime updatedAt,
   Value<int> rowid,
@@ -4801,7 +4809,6 @@ typedef $$GrimoireTableTableUpdateCompanionBuilder = GrimoireTableCompanion
   Value<String> name,
   Value<String?> desc,
   Value<String> iconAsset,
-  Value<int> colorInt,
   Value<DateTime> createdAt,
   Value<DateTime> updatedAt,
   Value<int> rowid,
@@ -4828,7 +4835,6 @@ class $$GrimoireTableTableTableManager extends RootTableManager<
             Value<String> name = const Value.absent(),
             Value<String?> desc = const Value.absent(),
             Value<String> iconAsset = const Value.absent(),
-            Value<int> colorInt = const Value.absent(),
             Value<DateTime> createdAt = const Value.absent(),
             Value<DateTime> updatedAt = const Value.absent(),
             Value<int> rowid = const Value.absent(),
@@ -4838,7 +4844,6 @@ class $$GrimoireTableTableTableManager extends RootTableManager<
             name: name,
             desc: desc,
             iconAsset: iconAsset,
-            colorInt: colorInt,
             createdAt: createdAt,
             updatedAt: updatedAt,
             rowid: rowid,
@@ -4848,7 +4853,6 @@ class $$GrimoireTableTableTableManager extends RootTableManager<
             required String name,
             Value<String?> desc = const Value.absent(),
             required String iconAsset,
-            required int colorInt,
             required DateTime createdAt,
             required DateTime updatedAt,
             Value<int> rowid = const Value.absent(),
@@ -4858,7 +4862,6 @@ class $$GrimoireTableTableTableManager extends RootTableManager<
             name: name,
             desc: desc,
             iconAsset: iconAsset,
-            colorInt: colorInt,
             createdAt: createdAt,
             updatedAt: updatedAt,
             rowid: rowid,
@@ -4886,11 +4889,6 @@ class $$GrimoireTableTableFilterComposer
 
   ColumnFilters<String> get iconAsset => $state.composableBuilder(
       column: $state.table.iconAsset,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get colorInt => $state.composableBuilder(
-      column: $state.table.colorInt,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -4925,11 +4923,6 @@ class $$GrimoireTableTableOrderingComposer
 
   ColumnOrderings<String> get iconAsset => $state.composableBuilder(
       column: $state.table.iconAsset,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get colorInt => $state.composableBuilder(
-      column: $state.table.colorInt,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
@@ -5604,6 +5597,7 @@ typedef $$BoardSessionTableTableCreateCompanionBuilder
     = BoardSessionTableCompanion Function({
   required String uuid,
   required String boardUuid,
+  Value<int?> environmentIndex,
   required DateTime startedAt,
   Value<DateTime?> endAt,
   Value<int> rowid,
@@ -5612,6 +5606,7 @@ typedef $$BoardSessionTableTableUpdateCompanionBuilder
     = BoardSessionTableCompanion Function({
   Value<String> uuid,
   Value<String> boardUuid,
+  Value<int?> environmentIndex,
   Value<DateTime> startedAt,
   Value<DateTime?> endAt,
   Value<int> rowid,
@@ -5637,6 +5632,7 @@ class $$BoardSessionTableTableTableManager extends RootTableManager<
           updateCompanionCallback: ({
             Value<String> uuid = const Value.absent(),
             Value<String> boardUuid = const Value.absent(),
+            Value<int?> environmentIndex = const Value.absent(),
             Value<DateTime> startedAt = const Value.absent(),
             Value<DateTime?> endAt = const Value.absent(),
             Value<int> rowid = const Value.absent(),
@@ -5644,6 +5640,7 @@ class $$BoardSessionTableTableTableManager extends RootTableManager<
               BoardSessionTableCompanion(
             uuid: uuid,
             boardUuid: boardUuid,
+            environmentIndex: environmentIndex,
             startedAt: startedAt,
             endAt: endAt,
             rowid: rowid,
@@ -5651,6 +5648,7 @@ class $$BoardSessionTableTableTableManager extends RootTableManager<
           createCompanionCallback: ({
             required String uuid,
             required String boardUuid,
+            Value<int?> environmentIndex = const Value.absent(),
             required DateTime startedAt,
             Value<DateTime?> endAt = const Value.absent(),
             Value<int> rowid = const Value.absent(),
@@ -5658,6 +5656,7 @@ class $$BoardSessionTableTableTableManager extends RootTableManager<
               BoardSessionTableCompanion.insert(
             uuid: uuid,
             boardUuid: boardUuid,
+            environmentIndex: environmentIndex,
             startedAt: startedAt,
             endAt: endAt,
             rowid: rowid,
@@ -5675,6 +5674,11 @@ class $$BoardSessionTableTableFilterComposer
 
   ColumnFilters<String> get boardUuid => $state.composableBuilder(
       column: $state.table.boardUuid,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get environmentIndex => $state.composableBuilder(
+      column: $state.table.environmentIndex,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -5699,6 +5703,11 @@ class $$BoardSessionTableTableOrderingComposer
 
   ColumnOrderings<String> get boardUuid => $state.composableBuilder(
       column: $state.table.boardUuid,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get environmentIndex => $state.composableBuilder(
+      column: $state.table.environmentIndex,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 

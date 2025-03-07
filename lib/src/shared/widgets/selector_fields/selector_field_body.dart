@@ -7,10 +7,12 @@ class SelectorFieldBody extends StatelessWidget {
     super.key,
     required this.label,
     this.hasError = false,
+    this.backgroundColor,
   });
 
   final String label;
   final bool hasError;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class SelectorFieldBody extends StatelessWidget {
               color: hasError ? palette.accent : palette.backgroundLevelOne,
               width: 2,
             ),
-            color: palette.backgroundLevelOne,
+            color: backgroundColor ?? palette.backgroundLevelOne,
           ),
           child: Padding(
             padding: const EdgeInsets.only(

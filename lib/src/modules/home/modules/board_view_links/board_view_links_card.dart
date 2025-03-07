@@ -96,6 +96,15 @@ class BoardViewLinksCard extends StatelessWidget {
                             Share.share('*${link.title}* \n ${link.link}'),
                       ),
                     ),
+                    T20UI.spaceWidth,
+                    Expanded(
+                      child: SimpleButton(
+                        icon: FontAwesomeIcons.link,
+                        backgroundColor: palette.backgroundLevelTwo,
+                        iconColor: palette.indicator,
+                        onTap: () async => await UrlUtils.lauch(link.link),
+                      ),
+                    ),
                   ],
                 ),
               )

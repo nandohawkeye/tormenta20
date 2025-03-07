@@ -18,15 +18,16 @@ class AddEditMenaceExpertiseField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void onAdd(Expertise? expertise) {
-      Navigator.push(
+    void onAdd(Expertise? expertise) async {
+      await Navigator.push<Expertise?>(
         context,
         MaterialPageRoute(
           builder: (_) => AddEditMenaceExpertiseScreen(
             expertise: expertise,
+            parentUuid: menaceUuid,
           ),
         ),
-      );
+      ).then(store.put);
     }
 
     return AddMultiField(

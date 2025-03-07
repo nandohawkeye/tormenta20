@@ -35,6 +35,10 @@ class BoardSessionsStore extends ChangeNotifier {
   BoardSession? get currentSession =>
       _sessions.firstWhereOrNull((s) => s.isOpen);
 
+  void updateSession(BoardSession session) async {
+    await _dao.saveSession(session);
+  }
+
   void createCloseSession() async {
     if (currentSession == null) {
       final session = BoardSession(

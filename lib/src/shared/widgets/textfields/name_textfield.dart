@@ -8,10 +8,12 @@ class NameTextField extends StatefulWidget {
     super.key,
     this.initialName,
     required this.onchange,
+    this.fillColor,
   });
 
   final String? initialName;
   final Function(String?) onchange;
+  final Color? fillColor;
 
   @override
   State<NameTextField> createState() =>
@@ -51,7 +53,7 @@ class _BottomSheetAddBoardLinkTitleFieldState extends State<NameTextField> {
           validator: DefaultInputValidator.valid,
           decoration: InputDecoration(
             labelText: 'Nome',
-            fillColor: palette.backgroundLevelOne,
+            fillColor: widget.fillColor ?? palette.backgroundLevelOne,
             helperText: 'obrigatório',
             errorText: error,
             helperStyle: TextStyle(color: palette.textDisable),

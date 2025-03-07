@@ -5,17 +5,25 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/modules/home/modules/board_sessions/widgets/edit_session_environment_bottomsheet/edit_session_environment_bottomsheet.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/valid_create_close_combat_bottomsheet/valid_create_close_combat_bottomsheet.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session.dart';
+import 'package:tormenta20/src/shared/entities/board/session_environment.dart';
 import 'package:tormenta20/src/shared/extensions/duration_ext.dart';
+import 'package:tormenta20/src/shared/utils/session_environment_utils.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
 class BoardSessionCardSessionOpen extends StatefulWidget {
-  const BoardSessionCardSessionOpen(this.session,
-      {super.key, required this.createCloseSession});
+  const BoardSessionCardSessionOpen(
+    this.session, {
+    super.key,
+    required this.createCloseSession,
+    required this.updatedSession,
+  });
 
   final BoardSession session;
   final Function() createCloseSession;
+  final Function(BoardSession) updatedSession;
 
   @override
   State<BoardSessionCardSessionOpen> createState() =>
@@ -38,7 +46,7 @@ class _BoardSessionCardSessionOpenState
       _timer ??= Timer.periodic(const Duration(seconds: 1), (_) {
         setState(() {
           _value =
-              'Jogando - ${DateTime.now().difference(widget.session.startedAt).toFormattedStringWithHours()}';
+              '${SessionEnvironmentUtils.handleTitle(widget.session.environment?.name ?? 'Jogando')} - ${DateTime.now().difference(widget.session.startedAt).toFormattedStringWithHours()}';
         });
       });
     });
@@ -51,7 +59,7 @@ class _BoardSessionCardSessionOpenState
     super.dispose();
   }
 
-  void createCloseSessionBottomsheet() async {
+  void _createCloseSessionBottomsheet() async {
     await showModalBottomSheet<bool?>(
       isScrollControlled: true,
       isDismissible: true,
@@ -70,6 +78,26 @@ class _BoardSessionCardSessionOpenState
     });
   }
 
+  void _changeSessionEnvironment() async {
+    await showModalBottomSheet<SessionEnvironment?>(
+      isScrollControlled: true,
+      isDismissible: true,
+      enableDrag: false,
+      context: context,
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: EditSessionEnvironmentBottomsheet(session: widget.session),
+      ),
+    ).then((result) async {
+      if (result != null) {
+        final upSession = widget.session.copyWith(environment: result);
+        widget.updatedSession(upSession);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -79,44 +107,48 @@ class _BoardSessionCardSessionOpenState
             borderRadius: T20UI.borderRadius,
             side: BorderSide(width: 2, color: palette.accent.withOpacity(.4))),
         color: palette.backgroundLevelOne,
-        child: Padding(
-          padding: T20UI.allPadding,
-          child: SizedBox(
-            width: double.infinity,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(FontAwesomeIcons.diceD20, size: 16),
-                    SizedBox(width: T20UI.smallSpaceSize),
-                    Text(
-                      'Sessão atual',
-                      style: TextStyle(
-                        fontFamily: FontFamily.tormenta,
-                        fontSize: 18,
+        child: InkWell(
+          borderRadius: T20UI.borderRadius,
+          onTap: _changeSessionEnvironment,
+          child: Padding(
+            padding: T20UI.allPadding,
+            child: SizedBox(
+              width: double.infinity,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(FontAwesomeIcons.diceD20, size: 16),
+                      SizedBox(width: T20UI.smallSpaceSize),
+                      Text(
+                        'Sessão atual',
+                        style: TextStyle(
+                          fontFamily: FontFamily.tormenta,
+                          fontSize: 18,
+                        ),
                       ),
-                    ),
-                    SizedBox(width: T20UI.smallSpaceSize),
-                    Icon(FontAwesomeIcons.dice, size: 16)
-                  ],
-                ),
-                T20UI.spaceHeight,
-                Text(
-                  _value,
-                  style: const TextStyle(
-                    fontFamily: FontFamily.tormenta,
-                    fontSize: 16,
+                      SizedBox(width: T20UI.smallSpaceSize),
+                      Icon(FontAwesomeIcons.dice, size: 16)
+                    ],
                   ),
-                ),
-                T20UI.spaceHeight,
-                MainButton(
-                  label: 'Iníciar combate',
-                  onTap: createCloseSessionBottomsheet,
-                )
-              ],
+                  T20UI.spaceHeight,
+                  Text(
+                    _value,
+                    style: const TextStyle(
+                      fontFamily: FontFamily.tormenta,
+                      fontSize: 16,
+                    ),
+                  ),
+                  T20UI.spaceHeight,
+                  MainButton(
+                    label: 'Iníciar combate',
+                    onTap: _createCloseSessionBottomsheet,
+                  )
+                ],
+              ),
             ),
           ),
         ),

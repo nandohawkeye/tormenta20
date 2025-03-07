@@ -305,6 +305,47 @@ class AddEditMenaceController {
   List<String> _actionsToDelete = [];
   void addActionsToDelete(String value) => _actionsToDelete.add(value);
 
+  Menace onSave() {
+    final menace = Menace(
+      uuid: _uuid,
+      name: _name!,
+      nd: _nd!,
+      initiative: _initiative!,
+      perception: _perception!,
+      defense: _defense!,
+      life: _life!,
+      mana: _mana!,
+      type: typeStore.data!,
+      creatureSize: sizeStore.data!,
+      combatRole: combateRoleStore.data!,
+      strength: _strength!,
+      charisma: _charisma!,
+      constitution: _constitution!,
+      dexterity: _dexterity!,
+      intelligence: _intelligence!,
+      wisdom: _wisdom!,
+      fortResistence: _resisFort!,
+      refResistence: _resisRef!,
+      vonResistence: _resisVon!,
+      senses: _senses,
+      desc: _desc,
+      imageAsset: _imageAsset,
+      imagePath: _imagePath,
+      casterInfos: _casterInfos,
+      displacement: _displacement,
+      extraInfos: _extraInfos,
+      divinityId: _divinityId,
+      treasures: treasureTypeStore.data,
+      actions: actionsStore.data,
+      expertises: expertisesStore.data,
+      magics: magicsStore.data,
+      generalSkills: skillsStore.data,
+      equipments: equipmentsStore.data,
+    );
+
+    return menace;
+  }
+
   dispose() {
     treasureTypeStore.dispose();
     stage.dispose();
