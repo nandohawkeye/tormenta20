@@ -67,6 +67,7 @@ unlinked_spec.ds
 **/android/key.properties
 *.properties
 *.jks
+android/app/google-services.json
 
 # iOS/XCode related
 **/ios/**/*.mode1v3
@@ -96,6 +97,8 @@ unlinked_spec.ds
 **/ios/Flutter/flutter_export_environment.sh
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
+ios/Runner/GoogleService-Info.plist
+
 
 # macOS
 **/macos/Flutter/GeneratedPluginRegistrant.swift
@@ -126,6 +129,8 @@ lib/gen/**
 !/dev/ci/**/Gemfile.lock
 
 .vscode/
+
+
 
 
 

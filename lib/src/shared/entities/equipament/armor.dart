@@ -21,7 +21,7 @@ class Armor extends Equipment implements Spaceable {
     required this.penalty,
     this.desc,
     super.storedIn,
-    super.improvements,
+    required super.improvements,
     super.specialMaterial,
   }) : _space = spaceOcuped;
 

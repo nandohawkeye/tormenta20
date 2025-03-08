@@ -8,6 +8,7 @@ class Saddlebag extends Equipment implements HasSpace {
     required super.uuid,
     required super.parentUuid,
     this.price,
+    super.improvements = const [],
   }) : super(name: 'Alforja');
 
   @override

@@ -147,6 +147,7 @@ class AddEditBoardController {
       sessions: [],
       notes: [],
       menaces: [],
+      menacesLinkToBoard: [],
       characters: [],
     );
 

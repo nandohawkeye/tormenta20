@@ -17,11 +17,9 @@ import 'package:tormenta20/src/shared/entities/equipament/armor.dart';
 import 'package:tormenta20/src/shared/entities/equipament/backpack.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/entities/equipament/general_item.dart';
-import 'package:tormenta20/src/shared/entities/equipament/improvement_type_adapter.dart';
 import 'package:tormenta20/src/shared/entities/equipament/saddlebag.dart';
 import 'package:tormenta20/src/shared/entities/equipament/shield.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon.dart';
-import 'package:tormenta20/src/shared/entities/equipament/weapon_skills_adapter.dart';
 import 'package:tormenta20/src/shared/entities/rool_dice.dart';
 import 'package:uuid/uuid.dart';
 
@@ -48,9 +46,9 @@ class AddEditEquipmentsController {
       _uuid = initial.uuid;
       _name = initial.name;
       _storedIn = initial.storedIn;
-      final improviments =
-          ImprovementTypeAdapter.fromString(initial.improvements);
-      improvementTypeStore = AddEditEquipmentImprovementTypeStore(improviments);
+
+      improvementTypeStore =
+          AddEditEquipmentImprovementTypeStore(initial.improvements);
       materialTypeStore =
           AddEditEquipmentSpecialMaterialTypeStore(initial.specialMaterial);
 
@@ -72,8 +70,7 @@ class AddEditEquipmentsController {
         weaponTypeStore = AddEditEquipmentWeaponTypeStore(initial.type);
         wieldableTypeStore =
             AddEditEquipmentWieldableTypeStore(initial.wieldableType);
-        final skills = WeaponSkillsAdapter.fromString(initial.skillIndexes);
-        skillTypeStore = AddEditWeaponSkillTypeStore(skills);
+        skillTypeStore = AddEditWeaponSkillTypeStore(initial.skills);
         errorDices = ValueNotifier<bool>(false);
         errorCritical = ValueNotifier<bool>(false);
       }
@@ -116,9 +113,9 @@ class AddEditEquipmentsController {
         typeStore = AddEditEquipmentTypeStore(Backpack);
       }
 
-      if (initial is AdventurerBackpack) {
+      if (initial is AdventureBackpack) {
         _price = initial.price;
-        typeStore = AddEditEquipmentTypeStore(AdventurerBackpack);
+        typeStore = AddEditEquipmentTypeStore(AdventureBackpack);
       }
 
       if (initial is Saddlebag) {
@@ -385,15 +382,14 @@ class AddEditEquipmentsController {
         parentUuid: _parentUuid,
         desc: _desc,
         storedIn: _storedIn,
-        improvements:
-            ImprovementTypeAdapter.toStringValue(improvementTypeStore.data),
+        improvements: improvementTypeStore.data,
         specialMaterial: materialTypeStore.data,
         type: weaponTypeStore.data!,
         price: _price,
         purpose: purposeTypeStore.data!,
         wieldableType: wieldableTypeStore.data!,
         proficiency: proficiencyTypeStore.data!,
-        skillIndexes: WeaponSkillsAdapter.toStringValue(skillTypeStore.data),
+        skills: skillTypeStore.data,
         steps: _steps,
         critical: _critical!,
         criticalMultiplier: _criticalMultiplier!,
@@ -412,8 +408,7 @@ class AddEditEquipmentsController {
         name: _name!,
         desc: _desc,
         storedIn: _storedIn,
-        improvements:
-            ImprovementTypeAdapter.toStringValue(improvementTypeStore.data),
+        improvements: improvementTypeStore.data,
         specialMaterial: materialTypeStore.data,
         spaceOcuped: _ocupadeSpace ?? 0,
         type: armorTypeStore.data!,
@@ -430,8 +425,7 @@ class AddEditEquipmentsController {
         name: _name!,
         desc: _desc,
         storedIn: _storedIn,
-        improvements:
-            ImprovementTypeAdapter.toStringValue(improvementTypeStore.data),
+        improvements: improvementTypeStore.data,
         specialMaterial: materialTypeStore.data,
         spaceOcuped: _ocupadeSpace ?? 0,
         type: shieldTypeStore.data!,
@@ -448,8 +442,7 @@ class AddEditEquipmentsController {
         name: _name!,
         desc: _desc,
         storedIn: _storedIn,
-        improvements:
-            ImprovementTypeAdapter.toStringValue(improvementTypeStore.data),
+        improvements: improvementTypeStore.data,
         specialMaterial: materialTypeStore.data,
         spaceOcuped: _ocupadeSpace ?? 0,
         type: generalItemTypeStore.data!,
@@ -464,8 +457,7 @@ class AddEditEquipmentsController {
         name: _name!,
         desc: _desc,
         storedIn: _storedIn,
-        improvements:
-            ImprovementTypeAdapter.toStringValue(improvementTypeStore.data),
+        improvements: improvementTypeStore.data,
         specialMaterial: materialTypeStore.data,
         quantity: _quantity!,
         price: _price,
@@ -480,8 +472,8 @@ class AddEditEquipmentsController {
       );
 
       return backpack;
-    } else if (typeStore.data == AdventurerBackpack) {
-      final adventureBackpack = AdventurerBackpack(
+    } else if (typeStore.data == AdventureBackpack) {
+      final adventureBackpack = AdventureBackpack(
         uuid: _uuid,
         parentUuid: _parentUuid,
         price: _price,
@@ -502,8 +494,7 @@ class AddEditEquipmentsController {
         parentUuid: _parentUuid,
         name: _name ?? 'Desconhecido',
         storedIn: _storedIn,
-        improvements:
-            ImprovementTypeAdapter.toStringValue(improvementTypeStore.data),
+        improvements: improvementTypeStore.data,
         specialMaterial: materialTypeStore.data,
       );
 

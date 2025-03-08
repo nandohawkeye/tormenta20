@@ -3,6 +3,11 @@ import 'package:tormenta20/src/shared/entities/magic/magic.dart';
 class MagicCharacter extends Magic {
   final String uuid;
   final String grimoireUUid;
+  final int? pm;
+  final int? cd;
+  final String? damageDices;
+  final String? extraDamageDices;
+  final int? mediumDamageValue;
   MagicCharacter({
     required this.uuid,
     required this.grimoireUUid,
@@ -18,6 +23,11 @@ class MagicCharacter extends Magic {
     required super.resistence,
     required super.targetAreaEfect,
     required super.publication,
+    this.pm,
+    this.cd,
+    this.damageDices,
+    this.extraDamageDices,
+    this.mediumDamageValue,
   });
 
   @override
@@ -36,7 +46,12 @@ class MagicCharacter extends Magic {
       other.uuid == uuid &&
       other.id == id &&
       other.grimoireUUid == grimoireUUid &&
-      other.publication == publication;
+      other.pm == pm &&
+      other.cd == cd &&
+      other.damageDices == damageDices &&
+      other.publication == publication &&
+      other.extraDamageDices == extraDamageDices &&
+      other.mediumDamageValue == mediumDamageValue;
 
   @override
   int get hashCode =>
@@ -53,7 +68,12 @@ class MagicCharacter extends Magic {
       id.hashCode ^
       uuid.hashCode ^
       grimoireUUid.hashCode ^
-      publication.hashCode;
+      publication.hashCode ^
+      pm.hashCode ^
+      cd.hashCode ^
+      damageDices.hashCode ^
+      extraDamageDices.hashCode ^
+      mediumDamageValue.hashCode;
 
   @override
   get primaryKey => uuid;

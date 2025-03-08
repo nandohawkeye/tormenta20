@@ -15,6 +15,7 @@ class HandToHand extends ActionEnt {
     super.equipament,
     super.extraDamageDices,
     super.mediumDamageValue,
+    super.equipamentUuid,
   }) : super(type: ActionType.standard);
 
   @override
@@ -32,7 +33,8 @@ class HandToHand extends ActionEnt {
       other.mediumDamageValue == mediumDamageValue &&
       other.critical == critical &&
       other.criticalMultiplier == criticalMultiplier &&
-      other.equipament == equipament;
+      other.equipament == equipament &&
+      other.equipamentUuid == equipamentUuid;
 
   @override
   int get hashCode =>
@@ -48,5 +50,6 @@ class HandToHand extends ActionEnt {
       mediumDamageValue.hashCode ^
       critical.hashCode ^
       criticalMultiplier.hashCode ^
-      equipament.hashCode;
+      equipament.hashCode ^
+      equipamentUuid.hashCode;
 }

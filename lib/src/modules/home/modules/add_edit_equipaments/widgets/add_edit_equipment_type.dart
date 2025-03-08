@@ -30,7 +30,7 @@ class AddEditEquipamentType extends StatelessWidget {
     Shield,
     GeneralItem,
     Backpack,
-    AdventurerBackpack,
+    AdventureBackpack,
     Saddlebag,
   ];
 

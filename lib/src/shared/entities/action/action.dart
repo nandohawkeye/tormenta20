@@ -16,6 +16,7 @@ class ActionEnt extends EntityBase {
   final int? critical;
   final int? criticalMultiplier;
   final Equipment? equipament;
+  final String? equipamentUuid;
 
   ActionEnt({
     required this.uuid,
@@ -31,6 +32,7 @@ class ActionEnt extends EntityBase {
     this.critical,
     this.criticalMultiplier,
     this.equipament,
+    this.equipamentUuid,
   });
 
   @override
@@ -48,7 +50,8 @@ class ActionEnt extends EntityBase {
       other.mediumDamageValue == mediumDamageValue &&
       other.critical == critical &&
       other.criticalMultiplier == criticalMultiplier &&
-      other.equipament == equipament;
+      other.equipament == equipament &&
+      other.equipamentUuid == equipamentUuid;
 
   @override
   int get hashCode =>
@@ -64,7 +67,8 @@ class ActionEnt extends EntityBase {
       mediumDamageValue.hashCode ^
       critical.hashCode ^
       criticalMultiplier.hashCode ^
-      equipament.hashCode;
+      equipament.hashCode ^
+      equipamentUuid.hashCode;
 
   @override
   String get exibitionLabel => name;

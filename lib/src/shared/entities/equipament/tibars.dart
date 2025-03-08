@@ -13,6 +13,7 @@ class Tibars extends Equipment implements Spaceable {
     required this.bronze,
     required super.uuid,
     required super.parentUuid,
+    super.improvements = const [],
   }) : super(name: 'Tibares');
 
   @override

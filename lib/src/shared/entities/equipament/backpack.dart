@@ -10,6 +10,7 @@ class Backpack extends Equipment implements HasSpace {
     required super.parentUuid,
     this.price,
     this.suffix,
+    super.improvements = const [],
   }) : super(name: 'Mochila${suffix ?? ''}');
 
   @override

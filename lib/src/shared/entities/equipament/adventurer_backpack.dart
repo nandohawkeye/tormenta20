@@ -1,10 +1,10 @@
 import 'package:tormenta20/src/shared/entities/equipament/backpack.dart';
 
-class AdventurerBackpack extends Backpack {
-  AdventurerBackpack({
+class AdventureBackpack extends Backpack {
+  AdventureBackpack({
     required super.uuid,
     required super.parentUuid,
-    required super.price,
+    super.price,
   }) : super(suffix: ' de aventureiro');
 
   @override
@@ -15,7 +15,7 @@ class AdventurerBackpack extends Backpack {
 
   @override
   bool operator ==(other) =>
-      other is AdventurerBackpack &&
+      other is AdventureBackpack &&
       other.uuid == uuid &&
       other.parentUuid == parentUuid &&
       other.name == name &&

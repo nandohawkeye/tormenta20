@@ -7,6 +7,7 @@ import 'package:tormenta20/src/shared/entities/board/board_link.dart';
 import 'package:tormenta20/src/shared/entities/board/board_material.dart';
 import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
 import 'package:tormenta20/src/shared/entities/menace.dart';
+import 'package:tormenta20/src/shared/entities/menace_link_board.dart';
 
 class Board {
   final String uuid;
@@ -27,6 +28,7 @@ class Board {
   final bool isFavorited;
   final List<BoardNote> notes;
   final List<Menace> menaces;
+  final List<MenaceLinkBoard> menacesLinkToBoard;
 
   final String? whatsGroupLink;
   final String? telegramGroupLink;
@@ -54,6 +56,7 @@ class Board {
     required this.isFavorited,
     required this.notes,
     required this.menaces,
+    required this.menacesLinkToBoard,
     required this.characters,
     required this.combats,
   });
@@ -82,7 +85,8 @@ class Board {
       other.isFavorited == isFavorited &&
       other.notes == notes &&
       other.menaces == menaces &&
-      other.combats == combats;
+      other.combats == combats &&
+      other.menacesLinkToBoard == menacesLinkToBoard;
 
   @override
   int get hashCode =>
@@ -107,5 +111,6 @@ class Board {
       isFavorited.hashCode ^
       notes.hashCode ^
       menaces.hashCode ^
-      combats.hashCode;
+      combats.hashCode ^
+      menacesLinkToBoard.hashCode;
 }

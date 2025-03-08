@@ -1,6 +1,6 @@
 import 'package:tormenta20/src/shared/entities/action/action.dart';
 import 'package:tormenta20/src/shared/entities/combat_role.dart';
-import 'package:tormenta20/src/shared/entities/creature_size.dart';
+import 'package:tormenta20/src/shared/entities/creature_size_category.dart';
 import 'package:tormenta20/src/shared/entities/entity_base.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise.dart';
@@ -21,32 +21,29 @@ class Menace extends EntityBase {
   final int defense;
   final int life;
   final int mana;
-
   final int fortResistence;
   final int refResistence;
   final int vonResistence;
-
   final int strength;
   final int dexterity;
   final int constitution;
   final int intelligence;
   final int wisdom;
   final int charisma;
-
   final MenaceType type;
-  final CreatureSize creatureSize;
+  final CreatureSizeCategory creatureSize;
   final CombatRole combatRole;
   final String? senses;
   final int? divinityId;
-  final List<GeneralSkill> generalSkills;
   final String? casterInfos;
+  final String? desc;
+  final String? extraInfos;
   //na mecanica de rolagem, rolar um d100 pra dinheiro e item
   final TreasureType? treasures;
+  final List<GeneralSkill> generalSkills;
   final List<MagicMenace> magics;
   final List<Equipment> equipments;
   final List<ActionEnt> actions;
-  final String? desc;
-  final String? extraInfos;
   final List<Expertise> expertises;
 
   Menace({

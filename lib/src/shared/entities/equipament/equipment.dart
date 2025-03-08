@@ -1,4 +1,5 @@
 import 'package:tormenta20/src/shared/entities/entity_base.dart';
+import 'package:tormenta20/src/shared/entities/equipament/improvement_types.dart';
 import 'package:tormenta20/src/shared/entities/equipament/special_material_types.dart';
 
 class Equipment extends EntityBase {
@@ -6,7 +7,7 @@ class Equipment extends EntityBase {
   final String parentUuid;
   final String name;
   final String? storedIn;
-  final String? improvements;
+  final List<ImprovementTypes> improvements;
   final SpecialMaterialTypes? specialMaterial;
 
   Equipment({
@@ -14,7 +15,7 @@ class Equipment extends EntityBase {
     required this.parentUuid,
     required this.name,
     this.storedIn,
-    this.improvements,
+    required this.improvements,
     this.specialMaterial,
   });
 

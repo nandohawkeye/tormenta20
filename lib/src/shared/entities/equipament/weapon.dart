@@ -4,6 +4,7 @@ import 'package:tormenta20/src/shared/entities/equipament/equipment_weapon_range
 import 'package:tormenta20/src/shared/entities/equipament/spaceable.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon_proficiency.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon_purpose.dart';
+import 'package:tormenta20/src/shared/entities/equipament/weapon_skills.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon_type.dart';
 import 'package:tormenta20/src/shared/entities/equipament/wieldable.dart';
 
@@ -19,7 +20,7 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
   final int criticalMultiplier;
   final EquipmentWeaponRangeType range;
   final WeaponType type;
-  final String? skillIndexes;
+  final List<WeaponSkills> skills;
   final bool isNatural;
   final bool isUnarmed;
   final int? steps;
@@ -27,7 +28,7 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
   Weapon({
     this.desc,
     super.storedIn,
-    super.improvements,
+    required super.improvements,
     super.specialMaterial,
     required this.type,
     required super.uuid,
@@ -36,7 +37,7 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
     required this.purpose,
     required WieldableType wieldableType,
     required this.proficiency,
-    this.skillIndexes,
+    required this.skills,
     this.steps,
     required this.critical,
     required this.criticalMultiplier,
@@ -70,7 +71,7 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
       other.price == price &&
       other.purpose == purpose &&
       other.proficiency == proficiency &&
-      other.skillIndexes == skillIndexes &&
+      other.skills == skills &&
       other.isNatural == isNatural &&
       other.isUnarmed == isUnarmed &&
       other.spaceOcuped == spaceOcuped &&
@@ -95,7 +96,7 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
       price.hashCode ^
       purpose.hashCode ^
       proficiency.hashCode ^
-      skillIndexes.hashCode ^
+      skills.hashCode ^
       isNatural.hashCode ^
       isUnarmed.hashCode ^
       spaceOcuped.hashCode ^

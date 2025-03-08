@@ -96,7 +96,7 @@ class _AddEditActionScreenState extends State<AddEditEquipmentsScreen> {
                   SaddbackWidgetsGroup(_controller, _hasInited),
                 if (type == Backpack)
                   BackpackWidgetsGroup(_controller, _hasInited),
-                if (type == AdventurerBackpack)
+                if (type == AdventureBackpack)
                   AdventureBackpackWidgetsGroup(_controller, _hasInited),
               ],
             );

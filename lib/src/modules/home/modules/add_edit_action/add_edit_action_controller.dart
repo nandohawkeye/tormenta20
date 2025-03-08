@@ -185,6 +185,7 @@ class AddEditActionController {
         critical: _critical,
         criticalMultiplier: _criticalMultiplier,
         equipament: _equipment,
+        equipamentUuid: _equipment?.uuid,
       );
     }
 
@@ -202,6 +203,7 @@ class AddEditActionController {
         critical: _critical,
         criticalMultiplier: _criticalMultiplier,
         equipament: _equipment,
+        equipamentUuid: _equipment?.uuid,
       );
     }
 
@@ -219,6 +221,7 @@ class AddEditActionController {
       critical: _critical,
       criticalMultiplier: _criticalMultiplier,
       equipament: _equipment,
+      equipamentUuid: _equipment?.uuid,
     );
   }
 

@@ -17,7 +17,7 @@ class GeneralItem extends Equipment implements Spaceable {
     this.price,
     required this.type,
     super.storedIn,
-    super.improvements,
+    required super.improvements,
     super.specialMaterial,
   }) : _space = spaceOcuped;
 

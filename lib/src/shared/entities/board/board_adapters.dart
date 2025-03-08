@@ -62,6 +62,7 @@ abstract class BoardAdapters {
       notes: notes,
       combats: combats,
       menaces: [],
+      menacesLinkToBoard: [],
       characters: [],
       sessions: sessions,
     );

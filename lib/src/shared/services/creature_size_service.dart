@@ -44,6 +44,21 @@ class CreatureSizeService {
     category: CreatureSizeCategory.colossal,
   );
 
-  List<CreatureSize> getCreaturesSized() =>
-      [_tiny, _small, _medium, _big, _huge, _colossal];
+  List<CreatureSize> getCreaturesSized() => [
+        _tiny,
+        _small,
+        _medium,
+        _big,
+        _huge,
+        _colossal,
+      ];
+
+  CreatureSize getSizedFromCategory(CreatureSizeCategory category) => [
+        _tiny,
+        _small,
+        _medium,
+        _big,
+        _huge,
+        _colossal
+      ].firstWhere((c) => c.category == category);
 }

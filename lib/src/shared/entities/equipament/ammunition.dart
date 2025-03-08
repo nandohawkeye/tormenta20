@@ -11,7 +11,7 @@ class Ammunition extends Equipment implements Spaceable {
     required super.parentUuid,
     required super.name,
     super.storedIn,
-    super.improvements,
+    required super.improvements,
     super.specialMaterial,
     required this.quantity,
     required this.price,
