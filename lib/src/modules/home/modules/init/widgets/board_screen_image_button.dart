@@ -7,6 +7,7 @@ import 'package:tormenta20/src/modules/home/modules/board_view/board_view_screen
 import 'package:tormenta20/src/modules/home/modules/init/widgets/bottom_sheet_init_board/bottom_sheet_init_board.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
+import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/screen_image_button.dart';
 
 class BoardScreenImageButton extends StatelessWidget {
@@ -20,17 +21,9 @@ class BoardScreenImageButton extends StatelessWidget {
       subtitle:
           'Crie ou se vincule a mesa de um mestre, e comece a se divertir com seus amigos!',
       onTap: () async {
-        await showModalBottomSheet<BoardModeType?>(
-          isScrollControlled: true,
-          isDismissible: true,
-          enableDrag: false,
+        await BottomsheetUtils.show<BoardModeType?>(
           context: context,
-          builder: (context) => Padding(
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-            ),
-            child: const BottomSheetInitBoard(),
-          ),
+          child: const BottomSheetInitBoard(),
         ).then((result) async {
           if (result != null) {
             if (result == BoardModeType.master) {

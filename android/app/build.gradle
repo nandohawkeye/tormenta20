@@ -5,6 +5,18 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
 }
 
+project(':receive_sharing_intent').afterEvaluate {
+    project(':receive_sharing_intent').android {
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_17
+            targetCompatibility JavaVersion.VERSION_17
+        }
+        kotlinOptions {
+            jvmTarget = '17'
+        }
+    }
+}
+
 android {
     namespace = "com.hawkeye.tormenta20"
     compileSdk = project.property("android.compileSdk").toString().toInteger()

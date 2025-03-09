@@ -16,6 +16,7 @@ import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic.dart';
+import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/screen_save_main_buttons.dart';
 
 class GrimorieScreen extends StatefulWidget {
@@ -106,17 +107,9 @@ class _GrimorieScreenState extends State<GrimorieScreen> {
                       icon: FontAwesomeIcons.solidTrashCan,
                       iconColor: palette.selected,
                       onTap: () async {
-                        await showModalBottomSheet<bool?>(
-                          isScrollControlled: true,
-                          isDismissible: true,
-                          enableDrag: false,
+                        await BottomsheetUtils.show<bool?>(
                           context: context,
-                          builder: (context) => Padding(
-                            padding: EdgeInsets.only(
-                              bottom: MediaQuery.of(context).viewInsets.bottom,
-                            ),
-                            child: const DeleteGrimorieBottomsheet(),
-                          ),
+                          child: const DeleteGrimorieBottomsheet(),
                         ).then((result) async {
                           if (result != null && result) {
                             await GetIt.I<AppDatabase>()

@@ -1,5 +1,9 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/home_screen_store.dart';
 import 'package:tormenta20/src/modules/home/modules/about/about_screen.dart';
@@ -19,6 +23,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late final HomeScreenStore _store;
+  late StreamSubscription _intentSub;
 
   static const _pages = <Widget>[
     InitScreen(),
@@ -30,11 +35,25 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _store = HomeScreenStore();
+
+    _intentSub = ReceiveSharingIntent.instance.getMediaStream().listen(
+        (List<SharedMediaFile> value) {
+      if (kDebugMode) print('compartinhado app aberto: $value');
+    }, onError: (err) {
+      if (kDebugMode) print("Erro ao receber arquivo: $err");
+    });
+
+    ReceiveSharingIntent.instance
+        .getInitialMedia()
+        .then((List<SharedMediaFile> value) {
+      if (kDebugMode) print('compartinhado app ao abrir: $value');
+    });
   }
 
   @override
   void dispose() {
     _store.dispose();
+    _intentSub.cancel();
     super.dispose();
   }
 

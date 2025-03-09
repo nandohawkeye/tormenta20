@@ -14,7 +14,7 @@ final ThemeData theme = ThemeData(
   primaryColor: palette.inputColor,
   indicatorColor: palette.indicator,
   canvasColor: Colors.transparent,
-  splashColor: palette.accent.withOpacity(.4),
+  splashColor: palette.accent.withValues(alpha: .4),
   colorScheme: ColorScheme.light(
     primary: palette.primary,
     secondary: palette.secondary,

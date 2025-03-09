@@ -63,7 +63,7 @@ class _BoardViewSessionInOpenSessionButtonState
       shape: RoundedRectangleBorder(
         borderRadius: T20UI.borderRadius,
         side: BorderSide(
-          color: palette.primary.withOpacity(.4),
+          color: palette.primary.withValues(alpha: .4),
           width: 2,
         ),
       ),

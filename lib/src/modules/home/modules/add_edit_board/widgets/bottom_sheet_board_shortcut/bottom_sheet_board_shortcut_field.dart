@@ -52,7 +52,7 @@ class _BottomSheetBoardShortcutFieldState
 
     _animation = ColorTween(
       begin: palette.textPrimary,
-      end: palette.accent.withOpacity(.8),
+      end: palette.accent.withValues(alpha: .8),
     ).animate(_controller);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {

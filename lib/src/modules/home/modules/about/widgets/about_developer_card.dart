@@ -5,6 +5,7 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_developer_card_links.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/coffee_bottomsheet/coffee_bottomsheet.dart';
+import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 
 class AboutDeveloperCard extends StatelessWidget {
@@ -24,17 +25,9 @@ class AboutDeveloperCard extends StatelessWidget {
             InkWell(
               borderRadius: T20UI.borderRadius,
               onTap: () async {
-                await showModalBottomSheet(
-                  isScrollControlled: true,
-                  isDismissible: true,
-                  enableDrag: false,
+                await BottomsheetUtils.show(
                   context: context,
-                  builder: (context) => Padding(
-                    padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom,
-                    ),
-                    child: const CoffeeBottomsheet(),
-                  ),
+                  child: const CoffeeBottomsheet(),
                 );
               },
               child: Padding(

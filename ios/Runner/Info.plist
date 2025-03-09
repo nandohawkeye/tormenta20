@@ -51,5 +51,43 @@
 	<string>com.whatsapp</string>
 	<string>whatsapp</string>
 	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeIdentifier</key>
+			<string>com.hawkeye.tormenta20.t20</string>  <!-- Identificador único -->
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>  <!-- Tipo de dado genérico -->
+			</array>
+			<key>UTTypeDescription</key>
+			<string>T20 Custom File</string>  <!-- Nome do tipo de arquivo -->
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>t20</string>  <!-- Extensão do arquivo -->
+				</array>
+				<key>public.mime-type</key>
+				<string>application/t20</string>  <!-- MIME Type -->
+			</dict>
+		</dict>
+	</array>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Backup File</string>  
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.json</string> 
+				<string>com.hawkeye.tormenta20.t20</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

@@ -42,7 +42,7 @@ class DivinitySelectorCard extends StatelessWidget {
                       height: T20UI.inputHeight,
                       width: T20UI.inputHeight,
                       child: ColoredBox(
-                        color: palette.selected.withOpacity(.7),
+                        color: palette.selected.withValues(alpha: .7),
                       ),
                     ),
                   ),

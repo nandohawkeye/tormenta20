@@ -104,39 +104,6 @@ class BoardSessionsCard extends StatelessWidget {
                   T20UI.spaceHeight,
                 ],
               ),
-            Padding(
-              padding: T20UI.horizontalPadding,
-              child: Row(
-                children: [
-                  Text(
-                    session.startedAt.formatted,
-                    style: const TextStyle(
-                      fontFamily: FontFamily.tormenta,
-                      fontSize: 18,
-                    ),
-                  ),
-                  if (session.endAt != null)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: T20UI.smallSpaceSize),
-                      child: Icon(
-                        FontAwesomeIcons.arrowsLeftRight,
-                        color: palette.disable,
-                      ),
-                    ),
-                  if (session.endAt != null)
-                    Text(
-                      isTheSameDay
-                          ? '${session.endAt?.formattedHourAndMinute}'
-                          : '${session.endAt?.formatted}',
-                      style: const TextStyle(
-                        fontFamily: FontFamily.tormenta,
-                        fontSize: 18,
-                      ),
-                    )
-                ],
-              ),
-            ),
             if (session.endAt != null)
               Padding(
                 padding: T20UI.horizontalPadding,
@@ -144,14 +111,36 @@ class BoardSessionsCard extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    T20UI.spaceHeight,
                     Text(
                       'Duração: ${session.duration.toFormattedStringWithHours()}',
-                      style: const TextStyle(fontWeight: FontWeight.w500),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontFamily: FontFamily.tormenta,
+                        fontSize: 18,
+                      ),
                     ),
+                    T20UI.spaceHeight,
                   ],
                 ),
               ),
+            Padding(
+              padding: T20UI.horizontalPadding,
+              child: Row(
+                children: [
+                  Text(
+                    session.startedAt.formatted,
+                    style: const TextStyle(),
+                  ),
+                  if (session.endAt != null)
+                    Text(
+                      isTheSameDay
+                          ? ' até ${session.endAt?.formattedHourAndMinute}'
+                          : ' até ${session.endAt?.formatted}',
+                      style: const TextStyle(),
+                    )
+                ],
+              ),
+            ),
             T20UI.spaceHeight,
           ],
         ),

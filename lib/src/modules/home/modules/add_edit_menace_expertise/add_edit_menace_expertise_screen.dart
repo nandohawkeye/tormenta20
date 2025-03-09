@@ -8,6 +8,7 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_menace_expertise/wi
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace_expertise/widgets/add_edit_menace_selected_expertise_bottomsheet.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise_base.dart';
+import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/screen_base.dart';
 
 class AddEditMenaceExpertiseScreen extends StatefulWidget {
@@ -45,21 +46,14 @@ class _AddEditMenaceExpertiseScreenState
   }
 
   void _onTap(ExpertiseBase base) async {
-    await showModalBottomSheet<Expertise?>(
-      isScrollControlled: true,
+    await BottomsheetUtils.show<Expertise?>(
       isDismissible: widget.expertise == null,
-      enableDrag: false,
       context: context,
-      builder: (context) => Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
-        child: AddEditMenaceSelectedExpertiseBottomsheet(
-          expertiseBase: base,
-          parentUuid: widget.parentUuid,
-          expertiseUuid: widget.expertise?.uuid,
-          valueFinal: widget.expertise?.valueFinal,
-        ),
+      child: AddEditMenaceSelectedExpertiseBottomsheet(
+        expertiseBase: base,
+        parentUuid: widget.parentUuid,
+        expertiseUuid: widget.expertise?.uuid,
+        valueFinal: widget.expertise?.valueFinal,
       ),
     ).then((result) {
       if (result == null) {
@@ -73,21 +67,14 @@ class _AddEditMenaceExpertiseScreenState
   }
 
   void _onCreate(ExpertiseBase? base) async {
-    await showModalBottomSheet<Expertise?>(
-      isScrollControlled: true,
+    await BottomsheetUtils.show<Expertise?>(
       isDismissible: widget.expertise == null,
-      enableDrag: false,
       context: context,
-      builder: (context) => Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
-        child: AddEditMenaceCreateExpertiseBottomsheet(
-          expertiseBase: base,
-          parentUuid: widget.parentUuid,
-          expertiseUuid: widget.expertise?.uuid,
-          valueFinal: widget.expertise?.valueFinal,
-        ),
+      child: AddEditMenaceCreateExpertiseBottomsheet(
+        expertiseBase: base,
+        parentUuid: widget.parentUuid,
+        expertiseUuid: widget.expertise?.uuid,
+        valueFinal: widget.expertise?.valueFinal,
       ),
     ).then((result) {
       if (result == null) {

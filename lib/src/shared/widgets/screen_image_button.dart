@@ -37,7 +37,7 @@ class ScreenImageButton extends StatelessWidget {
         borderRadius: borderRadius ?? T20UI.borderRadius,
         side: hasBorder
             ? BorderSide(
-                color: palette.primary.withOpacity(.4),
+                color: palette.primary.withValues(alpha: .4),
                 width: 2,
               )
             : BorderSide.none,

@@ -10,6 +10,7 @@ import 'package:tormenta20/src/shared/entities/board/board_combat_ext.dart';
 import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session_ext.dart';
 import 'package:tormenta20/src/shared/extensions/duration_ext.dart';
+import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/screen_image_button.dart';
 
 class BoardViewSessions extends StatelessWidget {
@@ -21,17 +22,9 @@ class BoardViewSessions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void createCloseCombatBottomsheet() async {
-      await showModalBottomSheet<bool?>(
-        isScrollControlled: true,
-        isDismissible: true,
-        enableDrag: false,
+      await BottomsheetUtils.show<bool?>(
         context: context,
-        builder: (context) => Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          child: const ValidCreateCloseCombatBottomsheet(hasInited: false),
-        ),
+        child: const ValidCreateCloseCombatBottomsheet(hasInited: false),
       ).then((result) async {
         if (result != null && result) {
           createCombat();

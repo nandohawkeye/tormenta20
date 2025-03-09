@@ -53,7 +53,7 @@ class BoardViewNoteAddEditBottomsheetBottomButtons extends StatelessWidget {
                         color: Colors.transparent,
                         child: InkWell(
                           borderRadius: T20UI.borderRadius,
-                          splashColor: palette.accent.withOpacity(.4),
+                          splashColor: palette.accent.withValues(alpha: .4),
                           onTap: changeFavorited,
                           child: Icon(
                             isFavorited

@@ -7,6 +7,7 @@ import 'package:tormenta20/src/modules/home/modules/board_view/widgets/valid_cre
 import 'package:tormenta20/src/shared/entities/board/board_combat_ext.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session_ext.dart';
+import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
 
@@ -30,17 +31,9 @@ class BoardSessionsScreenBottomWidgets extends StatelessWidget {
     final hasSessionOpen = session != null && session!.isOpen;
 
     void createCloseSessionBottomsheet() async {
-      await showModalBottomSheet<bool?>(
-        isScrollControlled: true,
-        isDismissible: true,
-        enableDrag: false,
+      await BottomsheetUtils.show<bool?>(
         context: context,
-        builder: (context) => Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          child: ValidCreateCloseSessionBottomsheet(hasInited: hasSessionOpen),
-        ),
+        child: ValidCreateCloseSessionBottomsheet(hasInited: hasSessionOpen),
       ).then((result) async {
         if (result != null && result) {
           createCloseSession();

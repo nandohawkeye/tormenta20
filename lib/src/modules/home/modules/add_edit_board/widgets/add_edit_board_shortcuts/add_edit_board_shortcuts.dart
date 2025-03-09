@@ -7,6 +7,7 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/botto
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/shared/entities/board/board_shortcut_types.dart';
 import 'package:tormenta20/src/shared/entities/board/board_shortcuts_dto.dart';
+import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
 class AddEditBoardShortcuts extends StatefulWidget {
@@ -59,21 +60,13 @@ class _AddEditBoardShortcutsState extends State<AddEditBoardShortcuts> {
   }
 
   void _onChangeShortcuts() async {
-    await showModalBottomSheet<BoardShortcutsDto?>(
-      isScrollControlled: true,
-      isDismissible: true,
-      enableDrag: false,
+    await BottomsheetUtils.show<BoardShortcutsDto?>(
       context: context,
-      builder: (context) => Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
-        child: BottomSheetBoardShortcuts(
-          whatsLink: widget.controller.whatsLink,
-          dicordLink: widget.controller.dicordLink,
-          telegramLink: widget.controller.telegramLink,
-          drivefilesLink: widget.controller.drivefilesLink,
-        ),
+      child: BottomSheetBoardShortcuts(
+        whatsLink: widget.controller.whatsLink,
+        dicordLink: widget.controller.dicordLink,
+        telegramLink: widget.controller.telegramLink,
+        drivefilesLink: widget.controller.drivefilesLink,
       ),
     ).then(_setShortCuts);
   }

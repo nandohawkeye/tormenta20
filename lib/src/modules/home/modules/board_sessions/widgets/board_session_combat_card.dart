@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
@@ -15,6 +14,7 @@ class BoardSessionCombatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isTheSameDay = combat.startedAt.isTheSameDay(combat.endAt);
     return Card(
       shape: RoundedRectangleBorder(
           borderRadius: T20UI.borderRadius,
@@ -26,37 +26,11 @@ class BoardSessionCombatCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  combat.startedAt.formatted,
-                  style: const TextStyle(
-                    fontFamily: FontFamily.tormenta,
-                    fontSize: 16,
-                  ),
-                ),
-                if (combat.endAt != null)
-                  Icon(
-                    FontAwesomeIcons.arrowsLeftRight,
-                    color: palette.disable,
-                  ),
-                if (combat.endAt != null)
-                  Text(
-                    '${combat.endAt?.formatted}',
-                    style: const TextStyle(
-                      fontFamily: FontFamily.tormenta,
-                      fontSize: 16,
-                    ),
-                  )
-              ],
-            ),
             if (combat.endAt != null)
               Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  T20UI.spaceHeight,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -64,20 +38,39 @@ class BoardSessionCombatCard extends StatelessWidget {
                         'Duração: ${combat.duration.toFormattedStringWithHours()}',
                         style: const TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: 12,
+                          fontFamily: FontFamily.tormenta,
+                          fontSize: 16,
                         ),
                       ),
                       Text(
                         '${combat.turn}º turno',
                         style: const TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: 12,
+                          fontFamily: FontFamily.tormenta,
+                          fontSize: 16,
                         ),
                       ),
                     ],
                   ),
+                  T20UI.spaceHeight,
                 ],
               ),
+            Row(
+              children: [
+                Text(
+                  combat.startedAt.formatted,
+                  style: TextStyle(fontSize: 12, color: palette.textSecundary),
+                ),
+                if (combat.endAt != null)
+                  Text(
+                    isTheSameDay
+                        ? ' até ${combat.endAt?.formattedHourAndMinute}'
+                        : ' até ${combat.endAt?.formatted}',
+                    style:
+                        TextStyle(fontSize: 12, color: palette.textSecundary),
+                  )
+              ],
+            ),
           ],
         ),
       ),

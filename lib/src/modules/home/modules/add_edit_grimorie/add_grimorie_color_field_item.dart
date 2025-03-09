@@ -18,7 +18,7 @@ class AddGrimorieBottomsheetColorFieldItem extends StatelessWidget {
     final isSelected = colorInt == colorSelected;
     return InkWell(
       borderRadius: BorderRadius.circular(10),
-      splashColor: Color(colorInt).withOpacity(.4),
+      splashColor: Color(colorInt).withValues(alpha: .4),
       onTap: () => onSelectColor(colorInt),
       child: Opacity(
         opacity: isSelected ? 1 : .2,
@@ -31,7 +31,7 @@ class AddGrimorieBottomsheetColorFieldItem extends StatelessWidget {
               border: Border.all(
                 color: isSelected
                     ? Color(colorInt)
-                    : palette.textPrimary.withOpacity(.5),
+                    : palette.textPrimary.withValues(alpha: .5),
                 width: 2,
               ),
             ),

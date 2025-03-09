@@ -4,6 +4,7 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/show_board_materials_bottomsheet/show_board_materials_bottomsheet.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
+import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 
 class BordViewMaterialsButton extends StatelessWidget {
   const BordViewMaterialsButton({super.key, required this.board});
@@ -13,18 +14,10 @@ class BordViewMaterialsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void openMaterials() async {
-      await showModalBottomSheet<bool?>(
-        isScrollControlled: true,
-        isDismissible: true,
-        enableDrag: false,
+      await BottomsheetUtils.show<bool?>(
         context: context,
-        builder: (context) => Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          child: ShowBoardMaterialsBottomsheet(
-            boardUuid: board.uuid,
-          ),
+        child: ShowBoardMaterialsBottomsheet(
+          boardUuid: board.uuid,
         ),
       );
     }

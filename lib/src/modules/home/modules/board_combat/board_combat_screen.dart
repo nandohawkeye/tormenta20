@@ -8,6 +8,7 @@ import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/valid_create_close_combat_bottomsheet/valid_create_close_combat_bottomsheet.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/shared/entities/board/board_combat.dart';
+import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
 
@@ -61,20 +62,10 @@ class BoardCombatScreen extends StatelessWidget {
                           child: MainButton(
                             label: 'Encerrar combate',
                             onTap: () async {
-                              await showModalBottomSheet<bool?>(
-                                isScrollControlled: true,
-                                isDismissible: true,
-                                enableDrag: false,
+                              await BottomsheetUtils.show<bool?>(
                                 context: context,
-                                builder: (context) => Padding(
-                                  padding: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context)
-                                        .viewInsets
-                                        .bottom,
-                                  ),
-                                  child:
-                                      const ValidCreateCloseCombatBottomsheet(
-                                          hasInited: true),
+                                child: const ValidCreateCloseCombatBottomsheet(
+                                  hasInited: true,
                                 ),
                               ).then((result) async {
                                 if (result != null && result) {

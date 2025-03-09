@@ -6,7 +6,7 @@ abstract class T20UI {
   static const double inputBorderRadius = 12;
   static const double smallSpaceSize = 8;
   static const double spaceSize = 16;
-  static const double screenContentSpaceSize = spaceSize - 4;
+  static const double screenContentSpaceSize = 16;
   static const double iconSize = 18;
   static const Duration defaultDurationAnimation = Duration(milliseconds: 200);
   static ShapeBorder bottomSheetShape =
@@ -45,7 +45,7 @@ abstract class T20UI {
   static const EdgeInsets allPadding = EdgeInsets.all(spaceSize);
 
   static const EdgeInsets horizontalPadding =
-      EdgeInsets.symmetric(horizontal: spaceSize);
+      EdgeInsets.symmetric(horizontal: 20);
 
   static const EdgeInsets verticalPadding =
       EdgeInsets.symmetric(vertical: spaceSize);

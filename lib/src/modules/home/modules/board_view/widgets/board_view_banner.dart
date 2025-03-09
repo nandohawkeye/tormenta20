@@ -67,7 +67,8 @@ class BoardViewBanner extends StatelessWidget {
                     padding: T20UI.horizontalPadding,
                     child: DecoratedBox(
                       decoration: BoxDecoration(
-                          color: palette.backgroundLevelTwo.withOpacity(.4),
+                          color:
+                              palette.backgroundLevelTwo.withValues(alpha: .4),
                           borderRadius: T20UI.borderRadius),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(

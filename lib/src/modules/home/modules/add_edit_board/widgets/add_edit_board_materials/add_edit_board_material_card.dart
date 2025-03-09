@@ -58,7 +58,7 @@ class AddEditBoardMaterialCard extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 child: Icon(
                   FontAwesomeIcons.solidTrashCan,
-                  color: palette.indicator.withOpacity(.85),
+                  color: palette.indicator.withValues(alpha: .85),
                   size: 14,
                 ),
               ),

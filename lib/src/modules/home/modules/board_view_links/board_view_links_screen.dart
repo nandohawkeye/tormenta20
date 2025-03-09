@@ -5,6 +5,7 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/botto
 import 'package:tormenta20/src/modules/home/modules/board_view_links/board_view_links_store.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view_links/board_view_links_card.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link.dart';
+import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/screen_save_main_buttons.dart';
 import 'package:tormenta20/src/shared/widgets/screen_header.dart';
 
@@ -33,19 +34,11 @@ class _BoardViewLinksState extends State<BoardViewLinks> {
   }
 
   void _addEditSite(BoardLink? link) async {
-    await showModalBottomSheet<BoardLink?>(
-      isScrollControlled: true,
-      isDismissible: true,
-      enableDrag: false,
+    await BottomsheetUtils.show<BoardLink?>(
       context: context,
-      builder: (context) => Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
-        child: BottomSheetAddBoardLink(
-          link: link,
-          boardUuid: widget.boardUuid,
-        ),
+      child: BottomSheetAddBoardLink(
+        link: link,
+        boardUuid: widget.boardUuid,
       ),
     ).then(_store.add);
   }

@@ -11,6 +11,7 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_menace_stages/add_edit_menace_screen_stage_two.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/cancel_menace_confirm_bottomsheet.dart';
 import 'package:tormenta20/src/shared/entities/menace.dart';
+import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/screen_header.dart';
 
 class AddEditMenaceScreen extends StatefulWidget {
@@ -54,17 +55,9 @@ class _AddEditMenaceScreenState extends State<AddEditMenaceScreen> {
   }
 
   Future<void> _confirmCancelMenace() async {
-    await showModalBottomSheet<bool?>(
-      isScrollControlled: true,
-      isDismissible: true,
-      enableDrag: false,
+    await BottomsheetUtils.show<bool?>(
       context: context,
-      builder: (context) => Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
-        child: const CancelMenaceConfirmBottomsheet(),
-      ),
+      child: const CancelMenaceConfirmBottomsheet(),
     ).then((result) async {
       if (result != null && result) {
         Navigator.pop(context);

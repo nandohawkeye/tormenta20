@@ -42,8 +42,9 @@ class MagicCirclesSelectorItem extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 6),
                 child: Text(
                   '${circle.level}˚',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
+                    color: palette.textPrimary,
                     fontWeight: FontWeight.w500,
                   ),
                 ),

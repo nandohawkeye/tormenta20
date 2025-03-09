@@ -11,6 +11,7 @@ import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_vie
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/board/board_note.dart';
+import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
 
@@ -39,19 +40,11 @@ class _BoardNotesScreenState extends State<BoardNotesScreen> {
   }
 
   void _addEditNote(BoardNote? initial) async {
-    await showModalBottomSheet<BoardNote?>(
-      isScrollControlled: true,
-      isDismissible: true,
-      enableDrag: false,
+    await BottomsheetUtils.show<BoardNote?>(
       context: context,
-      builder: (context) => Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
-        child: BoardViewNoteAddEditBottomsheet(
-          boardUuid: widget.boardUuid,
-          note: initial,
-        ),
+      child: BoardViewNoteAddEditBottomsheet(
+        boardUuid: widget.boardUuid,
+        note: initial,
       ),
     ).then((note) {
       if (note != null) {
@@ -61,17 +54,9 @@ class _BoardNotesScreenState extends State<BoardNotesScreen> {
   }
 
   void _deleteNote(BoardNote note) async {
-    await showModalBottomSheet<bool?>(
-      isScrollControlled: true,
-      isDismissible: true,
-      enableDrag: false,
+    await BottomsheetUtils.show<bool?>(
       context: context,
-      builder: (context) => Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
-        child: const DeleteNoteBottomsheet(),
-      ),
+      child: const DeleteNoteBottomsheet(),
     ).then((result) async {
       if (result != null) {
         await GetIt.I<AppDatabase>().boardDAO.deleteNote(note);

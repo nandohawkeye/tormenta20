@@ -31,14 +31,14 @@ class SimpleButton extends StatelessWidget {
         color: backgroundColor ?? palette.backgroundLevelOne,
         child: InkWell(
           borderRadius: T20UI.borderRadius,
-          splashColor: palette.accent.withOpacity(.4),
+          splashColor: palette.accent.withValues(alpha: .4),
           onTap: onTap,
           child: Padding(
             padding: iconPadding,
             child: Icon(
               icon,
               size: iconSize,
-              color: iconColor ?? palette.accent.withOpacity(.8),
+              color: iconColor ?? palette.accent.withValues(alpha: .8),
             ),
           ),
         ),

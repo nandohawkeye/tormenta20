@@ -23,7 +23,7 @@ class SimpleCloseButton extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             borderRadius: T20UI.borderRadius,
-            splashColor: palette.accent.withOpacity(.4),
+            splashColor: palette.accent.withValues(alpha: .4),
             onTap: onTap ?? () => Navigator.pop(context),
             child: Icon(
               FontAwesomeIcons.chevronLeft,

@@ -9,6 +9,7 @@ import 'package:tormenta20/src/modules/home/modules/init/widgets/character_scree
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player.dart';
+import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 
 class BoardViewPlayersField extends StatelessWidget {
@@ -35,17 +36,9 @@ class BoardViewPlayersField extends StatelessWidget {
     }
 
     void playerOptions(BoardPlayer player) async {
-      await showModalBottomSheet<PlayerOptionsType?>(
-        isScrollControlled: true,
-        isDismissible: true,
-        enableDrag: false,
+      await BottomsheetUtils.show<PlayerOptionsType?>(
         context: context,
-        builder: (context) => Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          child: BoardViewPlayerOptions(player),
-        ),
+        child: BoardViewPlayerOptions(player),
       ).then(
         (result) {
           if (result == PlayerOptionsType.edit) {

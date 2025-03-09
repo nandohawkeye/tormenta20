@@ -11,6 +11,7 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_board/add_edit_boar
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_options_bottomsheet/board_view_options_bottomsheet.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/confirm_delete_board_bottomsheet.dart/confirm_delete_board_bottomsheet.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
+import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 
 class BoardViewOptionsButton extends StatefulWidget {
   const BoardViewOptionsButton(this.board, {super.key});
@@ -64,19 +65,11 @@ class _BoardViewOptionsButtonState extends State<BoardViewOptionsButton> {
               color: Colors.transparent,
               child: InkWell(
                 borderRadius: T20UI.borderRadius,
-                splashColor: palette.accent.withOpacity(.4),
+                splashColor: palette.accent.withValues(alpha: .4),
                 onTap: () async {
-                  await showModalBottomSheet<BordViewOptionType?>(
-                    isScrollControlled: true,
-                    isDismissible: true,
-                    enableDrag: false,
+                  BottomsheetUtils.show<BordViewOptionType?>(
                     context: context,
-                    builder: (context) => Padding(
-                      padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).viewInsets.bottom,
-                      ),
-                      child: const BoardViewOptionsBottomsheet(),
-                    ),
+                    child: const BoardViewOptionsBottomsheet(),
                   ).then((result) async {
                     if (result == BordViewOptionType.edit) {
                       Navigator.push(
@@ -89,17 +82,9 @@ class _BoardViewOptionsButtonState extends State<BoardViewOptionsButton> {
                     }
 
                     if (result == BordViewOptionType.delete) {
-                      await showModalBottomSheet<bool?>(
-                        isScrollControlled: true,
-                        isDismissible: true,
-                        enableDrag: false,
+                      await BottomsheetUtils.show<bool?>(
                         context: context,
-                        builder: (context) => Padding(
-                          padding: EdgeInsets.only(
-                            bottom: MediaQuery.of(context).viewInsets.bottom,
-                          ),
-                          child: const ConfirmDeleteBoardBottomsheet(),
-                        ),
+                        child: const ConfirmDeleteBoardBottomsheet(),
                       ).then((result) async {
                         if (result != null) {
                           await GetIt.I<AppDatabase>()

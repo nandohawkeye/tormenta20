@@ -67,7 +67,7 @@ class GrimorieMagicCard extends StatelessWidget {
               ),
               const SizedBox(width: T20UI.smallSpaceSize),
               Card(
-                color: palette.primary.withOpacity(.2),
+                color: palette.primary.withValues(alpha: .2),
                 child: InkWell(
                   onTap: () => onRemove(magic),
                   borderRadius: T20UI.borderRadius,
@@ -76,7 +76,7 @@ class GrimorieMagicCard extends StatelessWidget {
                     child: Icon(
                       FontAwesomeIcons.solidTrashCan,
                       size: 16,
-                      color: palette.primary.withOpacity(.8),
+                      color: palette.primary.withValues(alpha: .8),
                     ),
                   ),
                 ),
