@@ -24,11 +24,7 @@ class MagicCirclesSelectorItem extends StatelessWidget {
         duration: T20UI.defaultDurationAnimation,
         decoration: BoxDecoration(
           borderRadius: T20UI.borderRadius,
-          border: Border.all(
-            width: 2,
-            color: isSelected ? Colors.transparent : palette.cardBackground,
-          ),
-          color: isSelected ? palette.selected : Colors.transparent,
+          color: isSelected ? palette.selected : palette.backgroundLevelOne,
         ),
         child: Material(
           color: Colors.transparent,
@@ -39,7 +35,7 @@ class MagicCirclesSelectorItem extends StatelessWidget {
               padding: T20UI.horizontalPadding,
               child: Center(
                   child: Padding(
-                padding: const EdgeInsets.only(left: 6),
+                padding: const EdgeInsets.only(left: 5),
                 child: Text(
                   '${circle.level}˚',
                   style: TextStyle(

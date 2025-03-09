@@ -17,7 +17,7 @@ class MagicCirclesSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: T20UI.horizontalPadding,
+      padding: T20UI.horizontallScreenPadding,
       child: SizedBox(
         height: T20UI.inputHeight,
         width: double.infinity,
