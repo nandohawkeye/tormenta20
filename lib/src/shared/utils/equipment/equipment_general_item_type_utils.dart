@@ -1,6 +1,6 @@
 import 'package:tormenta20/src/shared/extensions/string_ext.dart';
 
-abstract class EquipmentGenealItemTypeUtils {
+abstract class EquipmentGeneralItemTypeUtils {
   static String handleTitle(String value) {
     if (value.contains('adventure')) {
       return 'Equipamento de aventura';

@@ -1,4 +1,5 @@
 import 'package:tormenta20/src/shared/entities/expertise/expertise_base.dart';
+import 'package:tormenta20/src/shared/extensions/string_ext.dart';
 
 class Expertise extends ExpertiseBase {
   final String uuid;
@@ -47,7 +48,7 @@ class Expertise extends ExpertiseBase {
       return name;
     }
 
-    return '$name - $valueFinal';
+    return '${name.capitalize()} $valueFinal';
   }
 
   @override

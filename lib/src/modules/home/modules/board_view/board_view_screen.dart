@@ -7,7 +7,6 @@ import 'package:tormenta20/src/modules/home/modules/board_combat/board_combat_sc
 import 'package:tormenta20/src/modules/home/modules/board_view/board_view_store.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_banner.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_bottom_widgets.dart';
-import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_options_button.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_players_field.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_sessions.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_text_fields.dart';
@@ -102,7 +101,6 @@ class _BoardViewScreenState extends State<BoardViewScreen> {
                   }
                 },
               ),
-              BoardViewOptionsButton(board),
             ],
           ),
         );

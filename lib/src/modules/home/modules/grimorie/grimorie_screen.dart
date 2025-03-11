@@ -12,6 +12,7 @@ import 'package:tormenta20/src/modules/home/modules/grimorie/modules/add_magics/
 import 'package:tormenta20/src/modules/home/modules/grimorie/widgets/delete_grimorie_bottom_sheet/delete_grimorie_bottomsheet.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/widgets/grimorie_magic_list.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie_screen.dart';
+import 'package:tormenta20/src/modules/home/modules/grimorie/widgets/grimorie_options_bottomsheet/grimorie_options_bottomsheet.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
@@ -98,59 +99,9 @@ class _GrimorieScreenState extends State<GrimorieScreen> {
                   ),
                 ),
               ),
-              Row(
-                children: [
-                  FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: SimpleButton(
-                      backgroundColor: palette.background,
-                      icon: FontAwesomeIcons.solidTrashCan,
-                      iconColor: palette.selected,
-                      onTap: () async {
-                        await BottomsheetUtils.show<bool?>(
-                          context: context,
-                          child: const DeleteGrimorieBottomsheet(),
-                        ).then((result) async {
-                          if (result != null && result) {
-                            await GetIt.I<AppDatabase>()
-                                .grimoireDAO
-                                .deleteGrimoire(_store.grimoire)
-                                .then((failure) {
-                              if (failure == null) {
-                                Navigator.pop(context);
-                              }
-                            });
-                          }
-                        });
-                      },
-                    ),
-                  ),
-                  FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: SimpleButton(
-                      backgroundColor: palette.background,
-                      iconPadding: const EdgeInsets.only(left: 4, bottom: 2),
-                      icon: FontAwesomeIcons.solidPenToSquare,
-                      iconColor: palette.selected,
-                      onTap: () async {
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => AddGrimorieScreen(
-                                initialGrimoire: _store.grimoire),
-                          ),
-                        ).then((result) async {
-                          if (result != null) {
-                            _store.updateGrimorie(result);
-                          }
-                        });
-                      },
-                    ),
-                  ),
-                ],
-              )
             ],
           ),
+          T20UI.spaceHeight,
           AnimatedBuilder(
             animation: _store,
             builder: (_, __) => (_store.grimoire.desc?.isEmpty ?? true)
@@ -161,13 +112,12 @@ class _GrimorieScreenState extends State<GrimorieScreen> {
                     ),
                     child: SizedBox(
                       width: double.infinity,
-                      child: Card(
-                        child: Padding(
-                          padding: T20UI.allPadding,
-                          child: Text(
-                            _store.grimoire.desc ?? '',
-                            maxLines: 2000000,
-                          ),
+                      child: Text(
+                        _store.grimoire.desc ?? '',
+                        maxLines: 2000000,
+                        style: TextStyle(
+                          color: palette.textSecundary,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
@@ -190,7 +140,55 @@ class _GrimorieScreenState extends State<GrimorieScreen> {
               ),
             ),
           ),
-          ScreenSaveMainButtons(label: "Adicionar magias", onSave: addMagic),
+          ScreenSaveMainButtons(
+            label: "Adicionar magias",
+            onSave: addMagic,
+            extraRightWidgets: [
+              SimpleButton(
+                icon: FontAwesomeIcons.bars,
+                iconColor: palette.icon,
+                onTap: () {
+                  BottomsheetUtils.show<grimorieOption?>(
+                    context: context,
+                    child: const GrimorieOptionsBottomsheet(),
+                  ).then((result) async {
+                    if (result == grimorieOption.delete) {
+                      await BottomsheetUtils.show<bool?>(
+                        context: context,
+                        child: const DeleteGrimorieBottomsheet(),
+                      ).then((result) async {
+                        if (result != null && result) {
+                          await GetIt.I<AppDatabase>()
+                              .grimoireDAO
+                              .deleteGrimoire(_store.grimoire)
+                              .then((failure) {
+                            if (failure == null) {
+                              Navigator.pop(context);
+                            }
+                          });
+                        }
+                      });
+                    }
+
+                    if (result == grimorieOption.edit) {
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => AddGrimorieScreen(
+                              initialGrimoire: _store.grimoire),
+                        ),
+                      ).then((result) async {
+                        if (result != null) {
+                          _store.updateGrimorie(result);
+                        }
+                      });
+                    }
+                  });
+                },
+              ),
+              T20UI.spaceWidth,
+            ],
+          ),
         ],
       ),
     );

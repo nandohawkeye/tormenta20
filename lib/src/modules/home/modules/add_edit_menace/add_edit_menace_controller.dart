@@ -84,7 +84,11 @@ class AddEditMenaceController {
   late final AddEditMenaceTreasureTypeStore treasureTypeStore;
 
   List<String> _expertisesToDelete = [];
-  void addToDeleteExpertise(String value) => _expertisesToDelete.add(value);
+  void addToDeleteExpertise(String value) {
+    print('to delete: $value');
+    _expertisesToDelete.add(value);
+  }
+
   late final AddEditMenaceExpertisesStore expertisesStore;
 
   late final AddEditMenaceTypeStore typeStore;
@@ -300,7 +304,10 @@ class AddEditMenaceController {
 
   late final AddEditMenaceEquipmentsStore equipmentsStore;
   List<Equipment> _equipmentsToDelete = [];
-  void addEquipmentToDelete(Equipment value) => _equipmentsToDelete.add(value);
+  void addEquipmentToDelete(Equipment value) {
+    _equipmentsToDelete.add(value);
+  }
+
   List<Equipment> getEquipaments() => equipmentsStore.data;
 
   late final AddEditMenaceActionsStore actionsStore;
@@ -308,6 +315,7 @@ class AddEditMenaceController {
   void addActionsToDelete(ActionEnt value) => _actionsToDelete.add(value);
 
   Future<Menace?> onSave() async {
+    print('${expertisesStore.data}');
     final menace = Menace(
       uuid: _uuid,
       name: _name!,

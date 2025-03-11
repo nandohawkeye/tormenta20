@@ -9,6 +9,20 @@ final palette = Palettes.dark();
 
 final ThemeData theme = ThemeData(
   useMaterial3: false,
+  // inkWellTheme: InkWellThemeData(
+  //     splashColor: Colors.purple.withOpacity(0.5),
+  //     overlayColor: MaterialStateProperty.resolveWith(
+  //       (states) {
+  //         if (states.contains(MaterialState.pressed)) {
+  //           return Colors.orange.withOpacity(0.5);
+  //         }
+  //         if (states.contains(MaterialState.hovered)) {
+  //           return Colors.blue.withOpacity(0.2);
+  //         }
+  //         return null;
+  //       },
+  //     )),
+  // splashFactory:InkRipple.splashFactory,
   brightness: Brightness.light,
   scaffoldBackgroundColor: palette.background,
   primaryColor: palette.inputColor,

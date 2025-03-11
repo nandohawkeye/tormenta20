@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/modules/home/modules/init/widgets/menace_card/menace_card_image.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/add_edit_menace_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/menace/menace_store.dart';
+import 'package:tormenta20/src/modules/home/modules/menace/widgets/menace_action_card.dart';
 import 'package:tormenta20/src/modules/home/modules/menace/widgets/menace_atributes.dart';
+import 'package:tormenta20/src/modules/home/modules/menace/widgets/menace_equipment_card.dart';
+import 'package:tormenta20/src/modules/home/modules/menace/widgets/menace_expertises.dart';
+import 'package:tormenta20/src/modules/home/modules/menace/widgets/menace_header_image.dart';
+import 'package:tormenta20/src/modules/home/modules/menace/widgets/menace_header_infos.dart';
+import 'package:tormenta20/src/modules/home/modules/menace/widgets/menace_magic_card.dart';
+import 'package:tormenta20/src/modules/home/modules/menace/widgets/menace_skill_card.dart';
+import 'package:tormenta20/src/modules/home/modules/menace/widgets/menace_valid_text.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/menace.dart';
-import 'package:tormenta20/src/shared/utils/combat_role_utils.dart';
-import 'package:tormenta20/src/shared/utils/creature_size_utils.dart';
-import 'package:tormenta20/src/shared/utils/menace_utils.dart';
-import 'package:tormenta20/src/shared/utils/treasure_type_utils.dart';
 import 'package:tormenta20/src/shared/widgets/screen_base.dart';
 
 class MenaceScreen extends StatefulWidget {
@@ -47,140 +51,15 @@ class _MenaceScreenState extends State<MenaceScreen> {
           label: '${menace.name} - ND ${menace.nd}',
           onSaveLabel: 'Adicionar á mesa',
           body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               T20UI.spaceHeight,
               Row(
                 children: [
                   T20UI.smallSpaceWidth,
-                  MenaceCardImage(
-                    menace,
-                    size: 80,
-                  ),
+                  MenaceHeaderImage(menace),
                   T20UI.spaceWidth,
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 4),
-                      Text(
-                        '${CombatRoleUtils.handleTitle(menace.combatRole.name)} - ${MenaceUtils.handleMenaceTitle(menace.type.name)} - ${CreatureSizeUtils.handleTitle(menace.creatureSize.name)}',
-                        style: TextStyle(
-                            color: palette.textSecundary,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      const SizedBox(height: 4),
-                      Row(
-                        children: [
-                          Text(
-                            'FORT: ${menace.fortResistence} - REF: ${menace.refResistence} - VON: ${menace.vonResistence}',
-                            maxLines: 2,
-                            style: TextStyle(
-                                color: palette.textSecundary,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 4),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            FontAwesomeIcons.shieldHalved,
-                            size: 14,
-                            color: palette.textSecundary,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            menace.defense.toString().padLeft(2, '0'),
-                            maxLines: 2,
-                            style: TextStyle(
-                                color: palette.textSecundary,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          T20UI.spaceWidth,
-                          Icon(
-                            FontAwesomeIcons.solidHeart,
-                            size: 14,
-                            color: palette.textSecundary,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            menace.life.toString().padLeft(2, '0'),
-                            maxLines: 2,
-                            style: TextStyle(
-                                color: palette.textSecundary,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          T20UI.spaceWidth,
-                          Icon(
-                            FontAwesomeIcons.handSparkles,
-                            size: 14,
-                            color: palette.textSecundary,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            menace.mana.toString().padLeft(2, '0'),
-                            maxLines: 2,
-                            style: TextStyle(
-                                color: palette.textSecundary,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          T20UI.spaceWidth,
-                          Icon(
-                            FontAwesomeIcons.personRunning,
-                            size: 14,
-                            color: palette.textSecundary,
-                          ),
-                          const SizedBox(width: 2),
-                          Text(
-                            menace.initiative.toString().padLeft(2, '0'),
-                            maxLines: 2,
-                            style: TextStyle(
-                                color: palette.textSecundary,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 4),
-                      Row(
-                        children: [
-                          Icon(
-                            FontAwesomeIcons.solidGem,
-                            size: 14,
-                            color: palette.textSecundary,
-                          ),
-                          const SizedBox(width: 2),
-                          Text(
-                            TreasureTypeUtils.handleMenaceTitle(
-                                menace.treasures?.name ?? 'none'),
-                            maxLines: 2,
-                            style: TextStyle(
-                                color: palette.textSecundary,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          T20UI.spaceWidth,
-                          if (menace.displacement?.isNotEmpty ?? false)
-                            Row(
-                              children: [
-                                Icon(
-                                  FontAwesomeIcons.personWalking,
-                                  size: 14,
-                                  color: palette.textSecundary,
-                                ),
-                                const SizedBox(width: 2),
-                                Text(
-                                  menace.displacement ?? '',
-                                  maxLines: 2,
-                                  style: TextStyle(
-                                      color: palette.textSecundary,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ],
-                            )
-                        ],
-                      )
-                    ],
-                  )
+                  MenaceHeaderInfos(menace),
                 ],
               ),
               T20UI.spaceHeight,
@@ -190,15 +69,65 @@ class _MenaceScreenState extends State<MenaceScreen> {
                 padding: T20UI.horizontallScreenPadding,
                 child: MenaceAtributes(menace),
               ),
+              if (menace.desc != null || menace.extraInfos != null)
+                const Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    T20UI.spaceHeight,
+                    Divider(),
+                  ],
+                ),
+              MenaceValidText(value: menace.desc),
+              MenaceValidText(
+                value: menace.extraInfos,
+                textColor: palette.textSecundary,
+              ),
+              if (menace.actions.isNotEmpty)
+                Column(
+                  children: [
+                    const Divider(),
+                    ...menace.actions.map(MenaceActionCard.new),
+                  ],
+                ),
+              if (menace.generalSkills.isNotEmpty)
+                Column(
+                  children: [
+                    const Divider(),
+                    ...menace.generalSkills.map(MenaceSkillCard.new),
+                  ],
+                ),
+              if (menace.magics.isNotEmpty)
+                Column(
+                  children: [
+                    const Divider(),
+                    ...menace.magics.map(MenaceMagicCard.new),
+                  ],
+                ),
+              if (menace.equipments.isNotEmpty)
+                Column(
+                  children: [
+                    const Divider(),
+                    ...menace.equipments.map(MenaceEquipmentCard.new),
+                  ],
+                ),
+              MenaceExpertises(menace),
               T20UI.spaceHeight,
-              const Divider(),
             ],
           ),
           extraRightWidgets: [
             SimpleButton(
               icon: FontAwesomeIcons.bars,
               iconColor: palette.icon,
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => AddEditMenaceScreen(
+                      menace: menace,
+                    ),
+                  ),
+                );
+              },
             ),
             T20UI.spaceWidth,
           ],

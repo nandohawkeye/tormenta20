@@ -35,18 +35,19 @@ class Menace extends EntityBase {
   final MenaceType type;
   final CreatureSizeCategory creatureSize;
   final CombatRole combatRole;
-  final String? senses;
   final int? divinityId;
-  final String? casterInfos;
   final String? desc;
-  final String? extraInfos;
   //na mecanica de rolagem, rolar um d100 pra dinheiro e item
   final TreasureType? treasures;
+  final String? senses;
+  final String? casterInfos;
+  final String? extraInfos;
+  final List<Expertise> expertises;
+  final List<ActionEnt> actions;
   final List<GeneralSkill> generalSkills;
   final List<MagicMenace> magics;
+
   final List<Equipment> equipments;
-  final List<ActionEnt> actions;
-  final List<Expertise> expertises;
   final List<MenaceLinkBoard> boardsLinkeds;
   final List<Board> boards;
 

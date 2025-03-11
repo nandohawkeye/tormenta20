@@ -89,6 +89,7 @@ class AddEditEquipmentsController {
         _penalty = initial.penalty;
         typeStore = AddEditEquipmentTypeStore(Armor);
         armorTypeStore = AddEditEquipmentArmorTypeStore(initial.type);
+        skillTypeStore = AddEditWeaponSkillTypeStore(initial.skills);
       }
 
       if (initial is Shield) {
@@ -415,6 +416,7 @@ class AddEditEquipmentsController {
         price: _price,
         defenseBonus: _defenseBonus!,
         penalty: _penalty!,
+        skills: skillTypeStore.data,
       );
 
       return armor;

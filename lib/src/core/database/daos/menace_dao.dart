@@ -83,14 +83,102 @@ class MenaceDAO extends DatabaseAccessor<AppDatabase> with _$MenaceDAOMixin {
     try {
       return (
         failure: null,
-        menace: (select(menaceTable)
-              ..where((tbl) => tbl.uuid.equals(uuid))
-              ..limit(1))
+        menace: (select(menaceTable)..where((tbl) => tbl.uuid.equals(uuid)))
             .join([
               leftOuterJoin(
                 menaceLinkBoardTable,
                 menaceTable.uuid.equalsExp(
                   menaceLinkBoardTable.menaceUuid,
+                ),
+              ),
+              leftOuterJoin(
+                generalSkillTable,
+                menaceTable.uuid.equalsExp(
+                  generalSkillTable.parentUuid,
+                ),
+              ),
+              leftOuterJoin(
+                magicMenaceTable,
+                menaceTable.uuid.equalsExp(
+                  magicMenaceTable.menaceUuid,
+                ),
+              ),
+              leftOuterJoin(
+                expertiseTable,
+                menaceTable.uuid.equalsExp(
+                  expertiseTable.parentUuid,
+                ),
+              ),
+              leftOuterJoin(
+                actionTable,
+                menaceTable.uuid.equalsExp(
+                  actionTable.parentUuid,
+                ),
+              ),
+              leftOuterJoin(
+                actionHandToHandTable,
+                menaceTable.uuid.equalsExp(
+                  actionHandToHandTable.parentUuid,
+                ),
+              ),
+              leftOuterJoin(
+                actionDistanceAttackTable,
+                menaceTable.uuid.equalsExp(
+                  actionDistanceAttackTable.parentUuid,
+                ),
+              ),
+              leftOuterJoin(
+                equipmentTable,
+                menaceTable.uuid.equalsExp(
+                  equipmentTable.parentUuid,
+                ),
+              ),
+              leftOuterJoin(
+                adventureBackpackTable,
+                menaceTable.uuid.equalsExp(
+                  adventureBackpackTable.parentUuid,
+                ),
+              ),
+              leftOuterJoin(
+                backpackTable,
+                menaceTable.uuid.equalsExp(
+                  backpackTable.parentUuid,
+                ),
+              ),
+              leftOuterJoin(
+                ammunitionTable,
+                menaceTable.uuid.equalsExp(
+                  ammunitionTable.parentUuid,
+                ),
+              ),
+              leftOuterJoin(
+                armorTable,
+                menaceTable.uuid.equalsExp(
+                  armorTable.parentUuid,
+                ),
+              ),
+              leftOuterJoin(
+                generalItemTable,
+                menaceTable.uuid.equalsExp(
+                  generalItemTable.parentUuid,
+                ),
+              ),
+              leftOuterJoin(
+                saddlebagTable,
+                menaceTable.uuid.equalsExp(
+                  saddlebagTable.parentUuid,
+                ),
+              ),
+              leftOuterJoin(
+                shieldTable,
+                menaceTable.uuid.equalsExp(
+                  shieldTable.parentUuid,
+                ),
+              ),
+              leftOuterJoin(
+                weaponTable,
+                menaceTable.uuid.equalsExp(
+                  weaponTable.parentUuid,
                 ),
               ),
             ])
@@ -521,7 +609,7 @@ class MenaceDAO extends DatabaseAccessor<AppDatabase> with _$MenaceDAOMixin {
 
           if (actions.isNotEmpty) {
             batch.insertAllOnConflictUpdate(
-              actionDistanceAttackTable,
+              actionTable,
               actions.map(ActionAdapters.toDriftCompanion),
             );
           }
