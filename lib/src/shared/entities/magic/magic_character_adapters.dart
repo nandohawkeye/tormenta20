@@ -46,6 +46,11 @@ abstract class MagicCharacterAdapters {
       resistence: data.resistence,
       targetAreaEfect: data.targetAreaEfect,
       publication: data.publication,
+      pm: data.pm,
+      cd: data.cd,
+      damageDices: data.damageDices,
+      extraDamageDices: data.extraDamageDices,
+      mediumDamageValue: data.mediumDamageValue,
     );
   }
 
@@ -65,6 +70,11 @@ abstract class MagicCharacterAdapters {
       resistence: Value<String>(entity.resistence),
       targetAreaEfect: Value<String>(entity.targetAreaEfect),
       publication: Value<String>(entity.publication),
+      pm: Value<int?>(entity.pm),
+      cd: Value<int?>(entity.cd),
+      damageDices: Value<String?>(entity.damageDices),
+      extraDamageDices: Value<String?>(entity.extraDamageDices),
+      mediumDamageValue: Value<int?>(entity.mediumDamageValue),
     );
   }
 }

@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/modules/home/modules/about/about_store.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_settings_backup_card.dart';
+import 'package:tormenta20/src/modules/home/modules/about/widgets/about_settings_selector_mode/about_settings_selector_mode.dart';
+import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 
 class AboutSettings extends StatelessWidget {
-  const AboutSettings({super.key});
+  const AboutSettings(this.store, {super.key});
+
+  final AboutStore store;
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +43,25 @@ class AboutSettings extends StatelessWidget {
         ),
         T20UI.spaceHeight,
         Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: T20UI.screenContentSpaceSize,
-          ),
+          padding: T20UI.horizontallScreenPadding,
           child: AboutSettingsBackupCard(
             icon: FontAwesomeIcons.fileExport,
             title: 'Importar arquivo de backup',
             subtitle: 'Recupere seus arquivos salvos e comece a jogar!',
             onTap: () {},
           ),
+        ),
+        T20UI.spaceHeight,
+        const Divider(),
+        T20UI.spaceHeight,
+        const Padding(
+          padding: T20UI.horizontalPadding,
+          child: Labels('Modo'),
+        ),
+        T20UI.spaceHeight,
+        Padding(
+          padding: T20UI.horizontallScreenPadding,
+          child: AboutSettingsSelectorMode(store),
         ),
         SizedBox(
           height: MediaQuery.of(context).padding.bottom + T20UI.spaceSize,

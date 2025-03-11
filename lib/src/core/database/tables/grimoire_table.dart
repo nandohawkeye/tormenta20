@@ -5,6 +5,10 @@ class GrimoireTable extends Table {
   TextColumn get name => text()();
   TextColumn get desc => text().nullable()();
   TextColumn get iconAsset => text()();
+  //TODO convert to all dates for interger
+  // IntColumn get data => integer()();
+  // DateTime.fromMillisecondsSinceEpoch(tarefa.data),
+  // data.millisecondsSinceEpoch
   DateTimeColumn get createdAt => dateTime()();
   DateTimeColumn get updatedAt => dateTime()();
 

@@ -75,6 +75,11 @@ class GrimorieStore extends ChangeNotifier {
     });
   }
 
+  void setupMagic(MagicCharacter magic) async {
+    print('magic: ${magic.cd}');
+    await GetIt.I<AppDatabase>().magicCharacterDAO.insertMagic(magic);
+  }
+
   @override
   void dispose() {
     _sub?.cancel();

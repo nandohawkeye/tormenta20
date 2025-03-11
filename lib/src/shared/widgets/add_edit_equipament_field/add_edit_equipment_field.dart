@@ -13,7 +13,7 @@ class AddEditEquipamentField extends StatelessWidget {
   });
 
   final AddMultiStore<Equipment> store;
-  final Function(String) onAddDeleteList;
+  final Function(Equipment) onAddDeleteList;
   final String menaceUuid;
 
   @override
@@ -35,7 +35,7 @@ class AddEditEquipamentField extends StatelessWidget {
       store: store,
       onAdd: onAdd,
       onRemove: (value) {
-        onAddDeleteList(value.primaryKey);
+        onAddDeleteList(value);
         store.remove(value);
       },
     );

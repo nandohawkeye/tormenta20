@@ -30,6 +30,36 @@ class MagicCharacter extends Magic {
     this.mediumDamageValue,
   });
 
+  MagicCharacter copyWith({
+    int? pm,
+    int? cd,
+    String? damageDices,
+    String? extraDamageDices,
+    int? mediumDamageValue,
+  }) {
+    return MagicCharacter(
+      uuid: uuid,
+      grimoireUUid: grimoireUUid,
+      id: id,
+      name: name,
+      desc: desc,
+      circle: circle,
+      type: type,
+      school: school,
+      execution: execution,
+      duration: duration,
+      range: range,
+      resistence: resistence,
+      targetAreaEfect: targetAreaEfect,
+      publication: publication,
+      pm: pm ?? this.pm,
+      cd: cd ?? this.cd,
+      damageDices: damageDices ?? this.damageDices,
+      extraDamageDices: extraDamageDices ?? this.extraDamageDices,
+      mediumDamageValue: mediumDamageValue ?? this.mediumDamageValue,
+    );
+  }
+
   @override
   bool operator ==(other) =>
       other is MagicCharacter &&

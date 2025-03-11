@@ -11,7 +11,7 @@ import 'package:tormenta20/src/modules/home/modules/grimorie/grimorie_store.dart
 import 'package:tormenta20/src/modules/home/modules/grimorie/modules/add_magics/add_magics_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/widgets/delete_grimorie_bottom_sheet/delete_grimorie_bottomsheet.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/widgets/grimorie_magic_list.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie_screen.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
@@ -136,7 +136,7 @@ class _GrimorieScreenState extends State<GrimorieScreen> {
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => AddGrimorieBottomsheet(
+                            builder: (_) => AddGrimorieScreen(
                                 initialGrimoire: _store.grimoire),
                           ),
                         ).then((result) async {

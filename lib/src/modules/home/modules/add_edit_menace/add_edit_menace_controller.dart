@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_final_fields
 
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_edit_menace_actions_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_edit_menace_combate_role_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_edit_menace_equipments_store.dart';
@@ -10,6 +12,7 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_e
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_edit_menace_skills_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_edit_menace_treasure_type_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_edit_menace_type_store.dart';
+import 'package:tormenta20/src/shared/entities/action/action.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/entities/menace.dart';
 import 'package:tormenta20/src/shared/entities/treasure_type.dart';
@@ -80,9 +83,8 @@ class AddEditMenaceController {
 
   late final AddEditMenaceTreasureTypeStore treasureTypeStore;
 
-  List<String> _expertiseToDelete = [];
-
-  void addToDeleteExpertise(String value) => _expertiseToDelete.add(value);
+  List<String> _expertisesToDelete = [];
+  void addToDeleteExpertise(String value) => _expertisesToDelete.add(value);
   late final AddEditMenaceExpertisesStore expertisesStore;
 
   late final AddEditMenaceTypeStore typeStore;
@@ -289,23 +291,23 @@ class AddEditMenaceController {
   void changeCasterInfos(String? value) => _casterInfos = value;
 
   late final AddEditMenaceSkillsStore skillsStore;
-  List<String> _skillToDelete = [];
-  void addSkillToDelete(String value) => _skillToDelete.add(value);
+  List<String> _skillsToDelete = [];
+  void addSkillToDelete(String value) => _skillsToDelete.add(value);
 
   late final AddEditMenaceMagicsStore magicsStore;
-  List<String> _magicToDelete = [];
-  void addMagicToDelete(String value) => _magicToDelete.add(value);
+  List<String> _magicsToDelete = [];
+  void addMagicToDelete(String value) => _magicsToDelete.add(value);
 
   late final AddEditMenaceEquipmentsStore equipmentsStore;
-  List<String> _equipmentToDelete = [];
-  void addEquipmentToDelete(String value) => _equipmentToDelete.add(value);
+  List<Equipment> _equipmentsToDelete = [];
+  void addEquipmentToDelete(Equipment value) => _equipmentsToDelete.add(value);
   List<Equipment> getEquipaments() => equipmentsStore.data;
 
   late final AddEditMenaceActionsStore actionsStore;
-  List<String> _actionsToDelete = [];
-  void addActionsToDelete(String value) => _actionsToDelete.add(value);
+  List<ActionEnt> _actionsToDelete = [];
+  void addActionsToDelete(ActionEnt value) => _actionsToDelete.add(value);
 
-  Menace onSave() {
+  Future<Menace?> onSave() async {
     final menace = Menace(
       uuid: _uuid,
       name: _name!,
@@ -341,9 +343,24 @@ class AddEditMenaceController {
       magics: magicsStore.data,
       generalSkills: skillsStore.data,
       equipments: equipmentsStore.data,
+      boards: [],
+      boardsLinkeds: [],
     );
 
-    return menace;
+    final result = await GetIt.I<AppDatabase>().menaceDAO.saveMenace(
+          entity: menace,
+          magicsToDelete: _magicsToDelete,
+          skillsToDelete: _skillsToDelete,
+          expertisesToDelete: _expertisesToDelete,
+          actionsToDelete: _actionsToDelete,
+          equipmentsToDelete: _equipmentsToDelete,
+        );
+
+    if (result == null) {
+      return menace;
+    }
+
+    return null;
   }
 
   dispose() {

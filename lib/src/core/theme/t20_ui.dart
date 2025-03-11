@@ -39,10 +39,11 @@ abstract class T20UI {
   static const Widget spaceWidth = SizedBox(width: spaceSize);
   static const Widget spaceHeight = SizedBox(height: spaceSize);
 
-  static const Widget spaceWidthList = SizedBox(width: smallSpaceSize);
-  static const Widget spaceHeightList = SizedBox(height: smallSpaceSize);
+  static const Widget smallSpaceWidth = SizedBox(width: smallSpaceSize);
+  static const Widget smallSpaceHeight = SizedBox(height: smallSpaceSize);
 
   static const EdgeInsets allPadding = EdgeInsets.all(spaceSize);
+  static const EdgeInsets allSmallPadding = EdgeInsets.all(smallSpaceSize);
 
   static const EdgeInsets horizontalPadding =
       EdgeInsets.symmetric(horizontal: 20);

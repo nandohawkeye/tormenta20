@@ -12,16 +12,16 @@ import 'package:tormenta20/src/shared/utils/default_input_validator.dart';
 import 'package:tormenta20/src/shared/widgets/screen_base.dart';
 import 'package:uuid/uuid.dart';
 
-class AddGrimorieBottomsheet extends StatefulWidget {
-  const AddGrimorieBottomsheet({super.key, this.initialGrimoire});
+class AddGrimorieScreen extends StatefulWidget {
+  const AddGrimorieScreen({super.key, this.initialGrimoire});
 
   final Grimoire? initialGrimoire;
 
   @override
-  State<AddGrimorieBottomsheet> createState() => _AddGrimorieBottomsheetState();
+  State<AddGrimorieScreen> createState() => _AddGrimorieScreenState();
 }
 
-class _AddGrimorieBottomsheetState extends State<AddGrimorieBottomsheet> {
+class _AddGrimorieScreenState extends State<AddGrimorieScreen> {
   final _formKey = GlobalKey<FormState>();
 
   String? _uuid;

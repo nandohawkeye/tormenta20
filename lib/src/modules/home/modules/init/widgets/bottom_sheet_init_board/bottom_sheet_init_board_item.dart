@@ -12,7 +12,7 @@ class BottomSheetInitBoardItem extends StatelessWidget {
     required this.onTap,
     this.titleSize = 16,
     this.iconSize = 30,
-    this.subtitleSize = 12,
+    this.subtitleSize = 14,
   });
 
   final IconData icon;
@@ -36,9 +36,10 @@ class BottomSheetInitBoardItem extends StatelessWidget {
             color: palette.backgroundLevelTwo,
           ),
           child: Padding(
-            padding: T20UI.allPadding,
+            padding: T20UI.allSmallPadding,
             child: Row(
               children: [
+                T20UI.smallSpaceWidth,
                 Icon(
                   icon,
                   size: iconSize,
@@ -52,7 +53,7 @@ class BottomSheetInitBoardItem extends StatelessWidget {
                       Text(
                         title,
                         style: TextStyle(
-                          color: palette.primary,
+                          color: palette.accent,
                           fontFamily: FontFamily.tormenta,
                           fontSize: titleSize,
                         ),
@@ -62,7 +63,6 @@ class BottomSheetInitBoardItem extends StatelessWidget {
                         maxLines: 4,
                         style: TextStyle(
                           fontSize: subtitleSize,
-                          color: palette.textSecundary,
                         ),
                       )
                     ],

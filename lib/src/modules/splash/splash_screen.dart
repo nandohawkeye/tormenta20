@@ -30,8 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
     getIt.registerSingletonAsync<GrimoriesStore>(
         () async => GrimoriesStore().init());
 
-    getIt.registerSingletonAsync<InitBoardStore>(
-        () async => InitBoardStore().init());
+    getIt.registerSingletonAsync<InitStore>(() async => InitStore().init());
 
     await getIt.allReady();
 

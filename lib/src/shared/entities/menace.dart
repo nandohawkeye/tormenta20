@@ -1,4 +1,5 @@
 import 'package:tormenta20/src/shared/entities/action/action.dart';
+import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/entities/combat_role.dart';
 import 'package:tormenta20/src/shared/entities/creature_size_category.dart';
 import 'package:tormenta20/src/shared/entities/entity_base.dart';
@@ -6,6 +7,7 @@ import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise.dart';
 import 'package:tormenta20/src/shared/entities/general_skill.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_menace.dart';
+import 'package:tormenta20/src/shared/entities/menace_link_board.dart';
 import 'package:tormenta20/src/shared/entities/menace_type.dart';
 import 'package:tormenta20/src/shared/entities/treasure_type.dart';
 
@@ -45,6 +47,8 @@ class Menace extends EntityBase {
   final List<Equipment> equipments;
   final List<ActionEnt> actions;
   final List<Expertise> expertises;
+  final List<MenaceLinkBoard> boardsLinkeds;
+  final List<Board> boards;
 
   Menace({
     this.imagePath,
@@ -81,6 +85,8 @@ class Menace extends EntityBase {
     required this.intelligence,
     required this.wisdom,
     required this.equipments,
+    required this.boardsLinkeds,
+    required this.boards,
   });
 
   @override
@@ -118,7 +124,9 @@ class Menace extends EntityBase {
       other.extraInfos == extraInfos &&
       other.divinityId == divinityId &&
       other.casterInfos == casterInfos &&
-      other.magics == magics;
+      other.magics == magics &&
+      other.boardsLinkeds == boardsLinkeds &&
+      other.boards == boards;
 
   @override
   int get hashCode =>
@@ -154,7 +162,9 @@ class Menace extends EntityBase {
       extraInfos.hashCode ^
       divinityId.hashCode ^
       casterInfos.hashCode ^
-      magics.hashCode;
+      magics.hashCode ^
+      boardsLinkeds.hashCode ^
+      boards.hashCode;
 
   @override
   String get exibitionLabel => name;

@@ -15,7 +15,7 @@ class AddEditActionField extends StatelessWidget {
   });
 
   final AddMultiStore<ActionEnt> store;
-  final Function(String) onAddDeleteList;
+  final Function(ActionEnt) onAddDeleteList;
   final String menaceUuid;
   final List<Equipment> Function() getEquipaments;
 
@@ -40,7 +40,7 @@ class AddEditActionField extends StatelessWidget {
       store: store,
       onAdd: onAdd,
       onRemove: (value) {
-        onAddDeleteList(value.primaryKey);
+        onAddDeleteList(value);
         store.remove(value);
       },
     );

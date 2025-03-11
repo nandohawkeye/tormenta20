@@ -30,6 +30,34 @@ abstract class BoardAdapters {
     );
   }
 
+  static Board fromDriftData(BoardTableData data) {
+    return Board(
+      uuid: data.uuid,
+      adventureName: data.adventureName,
+      name: data.name,
+      createdAt: data.createdAt,
+      updatedAt: data.updatedAt,
+      level: data.level,
+      mode: BoardModeType.values[data.modeIndex],
+      isFavorited: data.isFavorited,
+      bannerPath: data.bannerPath,
+      desc: data.desc,
+      whatsGroupLink: data.whatsGroupLink,
+      telegramGroupLink: data.telegramGroupLink,
+      discordServerLink: data.discordServerLink,
+      driveFilesLink: data.driveFilesLink,
+      links: [],
+      players: [],
+      materials: [],
+      notes: [],
+      combats: [],
+      menaces: [],
+      menacesLinkToBoard: [],
+      characters: [],
+      sessions: [],
+    );
+  }
+
   static Board fromDriftDto(BoardDriftDto dto) {
     final links = dto.linksData.map(BoardLinkAdapters.fromDriftData).toList();
     final players =

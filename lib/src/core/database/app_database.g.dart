@@ -14661,9 +14661,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         expertiseTable,
         menaceLinkBoardTable
       ];
-  @override
-  DriftDatabaseOptions get options =>
-      const DriftDatabaseOptions(storeDateTimeAsText: true);
 }
 
 typedef $$GrimoireTableTableCreateCompanionBuilder = GrimoireTableCompanion

@@ -7,7 +7,7 @@ import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/grimorie_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/grimories_store.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/grimoire_card.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/shared/widgets/screen_image_button.dart';
@@ -23,7 +23,7 @@ class GrimoireHeader extends StatelessWidget {
       await Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (_) => const AddGrimorieBottomsheet(initialGrimoire: null),
+          builder: (_) => const AddGrimorieScreen(initialGrimoire: null),
         ),
       ).then((result) async {
         if (result != null) {

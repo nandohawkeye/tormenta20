@@ -8,27 +8,39 @@ class TokenCardBord extends StatelessWidget {
     super.key,
     required this.size,
     required this.isMenace,
+    this.withAnimate = true,
   });
 
   final double size;
   final bool isMenace;
+  final bool withAnimate;
 
   @override
   Widget build(BuildContext context) {
     final asset =
         isMenace ? Assets.images.bordaTokenAmeaca : Assets.images.bordaToken;
-    return Align(
-      alignment: Alignment.topCenter,
-      child: AnimationConfiguration.synchronized(
-        child: FadeInAnimation(
-          duration: T20UI.defaultDurationAnimation,
-          child: asset.image(
-            height: size + 5,
-            width: size + 5,
-            fit: BoxFit.cover,
+
+    final base = asset.image(
+      height: size + 5,
+      width: size + 5,
+      fit: BoxFit.cover,
+    );
+
+    if (withAnimate) {
+      return Align(
+        alignment: Alignment.topCenter,
+        child: AnimationConfiguration.synchronized(
+          child: FadeInAnimation(
+            duration: T20UI.defaultDurationAnimation,
+            child: base,
           ),
         ),
-      ),
+      );
+    }
+
+    return Align(
+      alignment: Alignment.topCenter,
+      child: base,
     );
   }
 }

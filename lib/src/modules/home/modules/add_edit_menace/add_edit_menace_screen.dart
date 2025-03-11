@@ -113,7 +113,7 @@ class _AddEditMenaceScreenState extends State<AddEditMenaceScreen> {
               AddEditMenaceScreenBottomButtons(
                 notifierStage: _controller.stage,
                 notifierPercent: _controller.percent,
-                onSave: () {
+                onSave: () async {
                   FocusScope.of(context).unfocus();
                   final stage = _controller.stage.value;
                   if (stage == 1) {
@@ -147,8 +147,10 @@ class _AddEditMenaceScreenState extends State<AddEditMenaceScreen> {
                     _controller.setStage(4);
                   } else if (stage == 4) {
                     _controller.setPercent(1.0);
-                    final menace = _controller.onSave();
-                    print('menace: $menace');
+                    final menace = await _controller.onSave();
+                    if (menace != null) {
+                      Navigator.pop(context, menace);
+                    }
                   }
                 },
                 onBack: () async {

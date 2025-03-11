@@ -4,6 +4,8 @@ import 'package:get_it/get_it.dart';
 import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/modules/home/modules/about/about_store.dart';
+import 'package:tormenta20/src/modules/home/modules/init/init_store.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/grimories_store.dart';
 import 'package:tormenta20/src/modules/splash/splash_screen.dart';
 
@@ -46,8 +48,12 @@ class _AppState extends State<App> with WidgetsBindingObserver {
 
   void _disposeDependencies() async {
     GetIt.I<AppDatabase>().close();
+    GetIt.I<AboutStore>().dispose();
+    GetIt.I<InitStore>().dispose();
     GetIt.I<GrimoriesStore>().dispose();
     await GetIt.I.unregister<GrimoriesStore>();
+    await GetIt.I.unregister<AboutStore>();
+    await GetIt.I.unregister<InitStore>();
   }
 
   @override

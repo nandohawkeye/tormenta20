@@ -1,14 +1,28 @@
 import 'package:drift/drift.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
+import 'package:tormenta20/src/shared/entities/action/action.dart';
 import 'package:tormenta20/src/shared/entities/action/action_adapters.dart';
+import 'package:tormenta20/src/shared/entities/action/distance_adapters.dart';
+import 'package:tormenta20/src/shared/entities/action/hand_to_hand_adapters.dart';
+import 'package:tormenta20/src/shared/entities/board/board_adapters.dart';
 import 'package:tormenta20/src/shared/entities/combat_role.dart';
 import 'package:tormenta20/src/shared/entities/creature_size_category.dart';
+import 'package:tormenta20/src/shared/entities/equipament/adventure_backpack_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/ammunition_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/armor_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/backpack_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/general_item_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/saddlebag_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/shield_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/weapon_adapters.dart';
 import 'package:tormenta20/src/shared/entities/menace_drift_dto.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise_adapters.dart';
 import 'package:tormenta20/src/shared/entities/general_skill_adapters.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_menace_adapters.dart';
 import 'package:tormenta20/src/shared/entities/menace.dart';
+import 'package:tormenta20/src/shared/entities/menace_link_board_adapters.dart';
 import 'package:tormenta20/src/shared/entities/menace_type.dart';
 import 'package:tormenta20/src/shared/entities/treasure_type.dart';
 
@@ -17,6 +31,23 @@ abstract class MenaceAdapters {
     final treasures = dto.data.treasureTypeIndex == null
         ? null
         : TreasureType.values[dto.data.treasureTypeIndex!];
+
+    List<ActionEnt> actions = [];
+    actions.addAll(dto.actions.map(ActionAdapters.fromDriftData));
+    actions
+        .addAll(dto.attackDistances.map(DistanceAttackAdapters.fromDriftData));
+    actions.addAll(dto.handToHands.map(HandToHandAdapters.fromDriftData));
+    List<Equipment> equipments = [];
+    equipments.addAll(dto.equipments.map(EquipmentAdapters.fromDriftData));
+    equipments.addAll(
+        dto.adventureBackpacks.map(AdventureBackpackAdapters.fromDriftData));
+    equipments.addAll(dto.backpacks.map(BackpackAdapters.fromDriftData));
+    equipments.addAll(dto.ammunitions.map(AmmunitionAdapters.fromDriftData));
+    equipments.addAll(dto.armors.map(ArmorAdapters.fromDriftData));
+    equipments.addAll(dto.generalItens.map(GeneralItemAdapters.fromDriftData));
+    equipments.addAll(dto.saddlebags.map(SaddlebagAdapters.fromDriftData));
+    equipments.addAll(dto.shields.map(ShieldAdapters.fromDriftData));
+    equipments.addAll(dto.weapons.map(WeaponAdapters.fromDriftData));
     return Menace(
       uuid: dto.data.uuid,
       type: MenaceType.values[dto.data.typeIndex],
@@ -48,11 +79,14 @@ abstract class MenaceAdapters {
       treasures: treasures,
       displacement: dto.data.displacement,
       magics: dto.magics.map(MagicMenaceAdapters.fromDriftData).toList(),
-      actions: dto.actions.map(ActionAdapters.fromDriftData).toList(),
-      equipments: dto.equipments.map(EquipmentAdapters.fromDriftData).toList(),
       expertises: dto.expertises.map(ExpertiseAdapters.fromDriftData).toList(),
+      boards: dto.boards.map(BoardAdapters.fromDriftData).toList(),
       generalSkills:
           dto.generalSkills.map(GeneralSkillAdapters.fromDriftData).toList(),
+      boardsLinkeds:
+          dto.boardsLinkeds.map(MenaceLinkBoardAdapters.fromDriftData).toList(),
+      actions: actions,
+      equipments: equipments,
     );
   }
 
@@ -95,6 +129,8 @@ abstract class MenaceAdapters {
       equipments: [],
       expertises: [],
       generalSkills: [],
+      boards: [],
+      boardsLinkeds: [],
     );
   }
 

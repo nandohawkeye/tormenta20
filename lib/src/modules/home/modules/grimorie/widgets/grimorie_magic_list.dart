@@ -65,6 +65,7 @@ class GrimorieMagicList extends StatelessWidget {
             return GrimorieMagicCard(
               magic: store.grimoire.magicsCharacters[index],
               onRemove: store.removeMagic,
+              onSetup: store.setupMagic,
             );
           },
         );

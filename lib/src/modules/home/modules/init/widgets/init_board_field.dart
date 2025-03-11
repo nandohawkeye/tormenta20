@@ -17,12 +17,12 @@ class InitBoardField extends StatefulWidget {
 }
 
 class _InitBoardFieldState extends State<InitBoardField> {
-  late final InitBoardStore _store;
+  late final InitStore _store;
 
   @override
   void initState() {
     super.initState();
-    _store = GetIt.I<InitBoardStore>();
+    _store = GetIt.I<InitStore>();
   }
 
   @override
@@ -38,7 +38,7 @@ class _InitBoardFieldState extends State<InitBoardField> {
         AnimatedBuilder(
           animation: _store,
           builder: (_, __) {
-            final boards = _store.data;
+            final boards = _store.boards;
 
             if (boards.isEmpty) {
               return const Padding(
