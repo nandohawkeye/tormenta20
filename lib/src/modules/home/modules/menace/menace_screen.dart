@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/add_edit_menace_screen.dart';
@@ -13,7 +12,6 @@ import 'package:tormenta20/src/modules/home/modules/menace/widgets/menace_header
 import 'package:tormenta20/src/modules/home/modules/menace/widgets/menace_magic_card.dart';
 import 'package:tormenta20/src/modules/home/modules/menace/widgets/menace_skill_card.dart';
 import 'package:tormenta20/src/modules/home/modules/menace/widgets/menace_valid_text.dart';
-import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/menace.dart';
 import 'package:tormenta20/src/shared/widgets/screen_base.dart';
 
@@ -49,7 +47,7 @@ class _MenaceScreenState extends State<MenaceScreen> {
         final menace = _store.menace;
         return ScreenBase(
           label: '${menace.name} - ND ${menace.nd}',
-          onSaveLabel: 'Adicionar á mesa',
+          onSaveLabel: 'Opções',
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -69,11 +67,11 @@ class _MenaceScreenState extends State<MenaceScreen> {
                 padding: T20UI.horizontallScreenPadding,
                 child: MenaceAtributes(menace),
               ),
+              T20UI.spaceHeight,
               if (menace.desc != null || menace.extraInfos != null)
                 const Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    T20UI.spaceHeight,
                     Divider(),
                   ],
                 ),
@@ -114,24 +112,16 @@ class _MenaceScreenState extends State<MenaceScreen> {
               T20UI.spaceHeight,
             ],
           ),
-          extraRightWidgets: [
-            SimpleButton(
-              icon: FontAwesomeIcons.bars,
-              iconColor: palette.icon,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => AddEditMenaceScreen(
-                      menace: menace,
-                    ),
-                  ),
-                );
-              },
-            ),
-            T20UI.spaceWidth,
-          ],
-          onSave: () {},
+          onSave: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => AddEditMenaceScreen(
+                  menace: menace,
+                ),
+              ),
+            );
+          },
         );
       },
     );

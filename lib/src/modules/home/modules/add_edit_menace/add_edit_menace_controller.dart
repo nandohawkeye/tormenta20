@@ -85,7 +85,6 @@ class AddEditMenaceController {
 
   List<String> _expertisesToDelete = [];
   void addToDeleteExpertise(String value) {
-    print('to delete: $value');
     _expertisesToDelete.add(value);
   }
 
@@ -315,7 +314,6 @@ class AddEditMenaceController {
   void addActionsToDelete(ActionEnt value) => _actionsToDelete.add(value);
 
   Future<Menace?> onSave() async {
-    print('${expertisesStore.data}');
     final menace = Menace(
       uuid: _uuid,
       name: _name!,

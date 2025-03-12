@@ -5,7 +5,6 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_equipaments/widgets
 import 'package:tormenta20/src/modules/home/modules/add_edit_equipaments/widgets/add_edit_equipment_improvement_type_field.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_equipaments/widgets/add_edit_equipment_screen_item.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_equipaments/widgets/add_edit_equipment_special_materials_type_field.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_equipaments/widgets/add_edit_equipment_weapon_skill_type_field.dart';
 import 'package:tormenta20/src/shared/widgets/textfields/bonus_defense_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/textfields/desc_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/textfields/name_textfield.dart';
@@ -65,8 +64,6 @@ class ArmorWidgetsGroup extends StatelessWidget {
               onchange: controller.changePrice,
             ),
           ),
-          T20UI.spaceHeight,
-          AddEditEquipmentWeaponSkillTypeField(controller.skillTypeStore),
           T20UI.spaceHeight,
           Padding(
             padding: T20UI.horizontallScreenPadding,

@@ -13,8 +13,6 @@ class ArmorTable extends Table {
   IntColumn get typeIndex => integer()();
   IntColumn get defenseBonus => integer()();
   IntColumn get penalty => integer()();
-  //TODO colocar essa nova coluna
-  // TextColumn get skillIndexes => text().nullable()();
 
   @override
   Set<Column>? get primaryKey => {uuid};

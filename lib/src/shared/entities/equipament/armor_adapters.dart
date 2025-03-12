@@ -23,8 +23,6 @@ abstract class ArmorAdapters {
       improvements: ImprovementTypeAdapter.fromString(data.improvements),
       specialMaterial: specialMaterial,
       storedIn: data.storedIn,
-      //TODO puxar e converter da tabela aqui
-      skills: [],
     );
   }
 
