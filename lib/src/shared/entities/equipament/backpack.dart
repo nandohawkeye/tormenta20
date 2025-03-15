@@ -14,6 +14,19 @@ class Backpack extends Equipment implements HasSpace {
   }) : super(name: 'Mochila${suffix ?? ''}');
 
   @override
+  Backpack cloneWith({
+    required String uuid,
+    required String parentUuid,
+  }) {
+    return Backpack(
+      uuid: uuid,
+      parentUuid: parentUuid,
+      price: price,
+      suffix: suffix,
+    );
+  }
+
+  @override
   int get normalSpaces => 10;
 
   @override

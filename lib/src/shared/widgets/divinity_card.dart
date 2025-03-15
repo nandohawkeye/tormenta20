@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/shared/services/divinities_service.dart';
 
 class DivinityCard extends StatelessWidget {
@@ -17,7 +16,7 @@ class DivinityCard extends StatelessWidget {
         DivinitiesService().getDivinities().firstWhere((d) => d.id == id);
 
     return ClipRRect(
-      borderRadius: T20UI.borderRadius,
+      borderRadius: BorderRadius.circular(8),
       child: SizedBox(
         height: 30,
         width: 30,

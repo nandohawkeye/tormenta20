@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
-import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie_screen.dart';
@@ -57,8 +56,7 @@ class _MagicsScreenState extends State<MagicsScreen> {
                   ).then(
                     (result) async {
                       if (result != null) {
-                        await GetIt.I<AppDatabase>()
-                            .grimoireDAO
+                        await _grimoriesStore
                             .insertGrimoire(result)
                             .then((failure) {
                           if (failure == null) {

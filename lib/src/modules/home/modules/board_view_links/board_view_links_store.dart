@@ -3,8 +3,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:get_it/get_it.dart';
-import 'package:tormenta20/src/core/database/app_database.dart';
+import 'package:tormenta20/src/modules/home/modules/board_view_links/board_view_links_storage_service.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link.dart';
 
 class BoardLinksStore extends ChangeNotifier {
@@ -13,9 +12,10 @@ class BoardLinksStore extends ChangeNotifier {
   }
 
   StreamSubscription? _subscription;
+  final _storageService = BoardViewLinksStorageService();
 
   void _initWatch(String boardUuid) async {
-    await GetIt.I<AppDatabase>().boardDAO.watchLinks(boardUuid).then((resp) {
+    await _storageService.watchLinks(boardUuid).then((resp) {
       if (resp.links != null) {
         _subscription ?? resp.links?.listen(_setNotes);
       }
@@ -41,11 +41,11 @@ class BoardLinksStore extends ChangeNotifier {
   void add(BoardLink? value) async {
     if (value == null) return;
 
-    await GetIt.I<AppDatabase>().boardDAO.saveLink(value);
+    await _storageService.saveLink(value);
   }
 
   void deleteLink(BoardLink value) async =>
-      await GetIt.I<AppDatabase>().boardDAO.deleteLink(value);
+      await _storageService.deleteLink(value);
 
   @override
   void dispose() {

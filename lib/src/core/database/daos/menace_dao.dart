@@ -350,14 +350,34 @@ class MenaceDAO extends DatabaseAccessor<AppDatabase> with _$MenaceDAOMixin {
     try {
       return (
         failure: null,
-        menaces: (select(menaceTable))
+        menaces: (select(menaceTable)
+              ..addColumns([
+                menaceTable.name,
+                menaceTable.uuid,
+                menaceTable.nd,
+                menaceTable.initiative,
+                menaceTable.defense,
+                menaceTable.life,
+                menaceTable.mana,
+                menaceTable.typeIndex,
+                menaceTable.createdAt,
+                menaceTable.updatedAt,
+                menaceTable.creatureSizeIndex,
+                menaceTable.combateRoleIndex,
+                menaceTable.imageAsset,
+                menaceTable.imagePath,
+              ])
+              ..orderBy([
+                (t) => OrderingTerm(
+                    expression: menaceTable.updatedAt, mode: OrderingMode.desc)
+              ]))
             .join([
               leftOuterJoin(
                 menaceLinkBoardTable,
                 menaceTable.uuid.equalsExp(
                   menaceLinkBoardTable.menaceUuid,
                 ),
-              ),
+              )
             ])
             .watch()
             .map((rows) {
@@ -390,10 +410,16 @@ class MenaceDAO extends DatabaseAccessor<AppDatabase> with _$MenaceDAOMixin {
     }
   }
 
-  Future<Failure?> addLinkMenaceBoard({required MenaceLinkBoard entity}) async {
+  Future<Failure?> addLinksMenaceBoard(
+      {required List<MenaceLinkBoard> entities}) async {
     try {
-      into(menaceLinkBoardTable).insertOnConflictUpdate(
-        MenaceLinkBoardAdapters.toDriftCompanion(entity),
+      await batch(
+        (batch) {
+          batch.insertAllOnConflictUpdate(
+            menaceLinkBoardTable,
+            entities.map(MenaceLinkBoardAdapters.toDriftCompanion),
+          );
+        },
       );
 
       return null;
@@ -407,10 +433,12 @@ class MenaceDAO extends DatabaseAccessor<AppDatabase> with _$MenaceDAOMixin {
   }
 
   Future<Failure?> removeLinkMenaceBoard(
-      {required MenaceLinkBoard entity}) async {
+      {required String boardUuid, required String menaceUuid}) async {
     try {
       await (delete(menaceLinkBoardTable)
-            ..where((tbl) => tbl.uuid.equals(entity.uuid)))
+            ..where((tbl) =>
+                tbl.boardUuid.equals(boardUuid) &
+                tbl.menaceUuid.equals(menaceUuid)))
           .go();
 
       return null;
@@ -490,6 +518,10 @@ class MenaceDAO extends DatabaseAccessor<AppDatabase> with _$MenaceDAOMixin {
 
         await (delete(equipmentTable)
               ..where((tbl) => tbl.parentUuid.equals(entity.uuid)))
+            .go();
+
+        await (delete(menaceLinkBoardTable)
+              ..where((tbl) => tbl.menaceUuid.equals(entity.uuid)))
             .go();
       }
 

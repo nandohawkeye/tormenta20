@@ -33,14 +33,12 @@ class MenaceSkillCard extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                'Habilidade - ${skill.desc}',
+                skill.desc,
                 maxLines: 2000,
               ),
-              T20UI.spaceHeight,
             ],
           ),
         ),
-        const Divider(),
       ],
     );
   }

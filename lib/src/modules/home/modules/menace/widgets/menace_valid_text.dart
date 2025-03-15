@@ -14,16 +14,23 @@ class MenaceValidText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (value?.isNotEmpty ?? false) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: T20UI.spaceSize,
-          horizontal: T20UI.screenContentSpaceSize,
-        ),
-        child: Text(
-          value ?? '',
-          maxLines: 20000,
-          style: TextStyle(fontSize: 16, color: textColor),
-        ),
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: T20UI.spaceSize,
+              horizontal: T20UI.screenContentSpaceSize,
+            ),
+            child: Text(
+              value ?? '',
+              maxLines: 20000,
+              style: TextStyle(fontSize: 16, color: textColor),
+            ),
+          ),
+          const Divider()
+        ],
       );
     }
 

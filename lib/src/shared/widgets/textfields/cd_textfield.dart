@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
 
 class CdTextfield extends StatelessWidget {
   const CdTextfield({
@@ -23,13 +21,8 @@ class CdTextfield extends StatelessWidget {
       keyboardType: TextInputType.number,
       textCapitalization: TextCapitalization.sentences,
       inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))],
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         labelText: 'CD',
-        helperStyle: TextStyle(color: palette.textDisable),
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 6,
-          horizontal: T20UI.spaceSize,
-        ),
       ),
     );
   }

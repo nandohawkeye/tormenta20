@@ -37,10 +37,6 @@ class AddMagicScreenBottomWidgets extends StatelessWidget {
                       fillColor: palette.backgroundLevelOne,
                       hintStyle:
                           TextStyle(fontSize: 16, color: palette.textPrimary),
-                      contentPadding: const EdgeInsets.symmetric(
-                        vertical: 9,
-                        horizontal: T20UI.spaceSize,
-                      ),
                     ),
                   ),
                 ),

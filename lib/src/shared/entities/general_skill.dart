@@ -13,6 +13,18 @@ class GeneralSkill extends EntityBase {
     required this.parentUuid,
   });
 
+  GeneralSkill cloneWith({
+    required String uuid,
+    required String parentUuid,
+  }) {
+    return GeneralSkill(
+      uuid: uuid,
+      name: name,
+      desc: desc,
+      parentUuid: parentUuid,
+    );
+  }
+
   @override
   bool operator ==(other) =>
       other is GeneralSkill &&

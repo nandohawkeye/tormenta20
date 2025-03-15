@@ -1,10 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/modules/home/modules/board_combat/board_combat_store.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/valid_create_close_combat_bottomsheet/valid_create_close_combat_bottomsheet.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/shared/entities/board/board_combat.dart';
@@ -12,10 +11,23 @@ import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
 
-class BoardCombatScreen extends StatelessWidget {
+class BoardCombatScreen extends StatefulWidget {
   const BoardCombatScreen({super.key, required this.combat});
 
   final BoardCombat combat;
+
+  @override
+  State<BoardCombatScreen> createState() => _BoardCombatScreenState();
+}
+
+class _BoardCombatScreenState extends State<BoardCombatScreen> {
+  late final BoardCombatStore _store;
+
+  @override
+  void initState() {
+    super.initState();
+    _store = BoardCombatStore();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,11 +81,9 @@ class BoardCombatScreen extends StatelessWidget {
                                 ),
                               ).then((result) async {
                                 if (result != null && result) {
-                                  final currentCombat =
-                                      combat.copyWith(endAt: DateTime.now());
-                                  await GetIt.I<AppDatabase>()
-                                      .boardDAO
-                                      .saveCombat(currentCombat);
+                                  final currentCombat = widget.combat
+                                      .copyWith(endAt: DateTime.now());
+                                  await _store.saveCombat(currentCombat);
                                   Navigator.pop(context);
                                 }
                               });

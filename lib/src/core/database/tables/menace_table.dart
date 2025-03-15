@@ -30,6 +30,8 @@ class MenaceTable extends Table {
   IntColumn get creatureSizeIndex => integer()();
   IntColumn get combateRoleIndex => integer()();
   IntColumn get treasureTypeIndex => integer().nullable()();
+  IntColumn get createdAt => integer()();
+  IntColumn get updatedAt => integer()();
 
   @override
   Set<Column>? get primaryKey => {uuid};

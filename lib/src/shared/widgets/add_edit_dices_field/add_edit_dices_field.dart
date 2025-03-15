@@ -141,12 +141,6 @@ class _AddEditDicesFieldState extends State<AddEditDicesField> {
                               decoration: InputDecoration(
                                 labelText: 'Quantidade',
                                 fillColor: palette.backgroundLevelTwo,
-                                helperStyle:
-                                    TextStyle(color: palette.textDisable),
-                                contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 6,
-                                  horizontal: T20UI.spaceSize,
-                                ),
                               ),
                             ),
                           ),
@@ -167,12 +161,6 @@ class _AddEditDicesFieldState extends State<AddEditDicesField> {
                                 prefix: const Text('D',
                                     style: TextStyle(fontSize: 16)),
                                 fillColor: palette.backgroundLevelTwo,
-                                helperStyle:
-                                    TextStyle(color: palette.textDisable),
-                                contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 6,
-                                  horizontal: T20UI.spaceSize,
-                                ),
                               ),
                             ),
                           ),

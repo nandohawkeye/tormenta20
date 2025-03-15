@@ -6,8 +6,8 @@ import 'package:path/path.dart' as p;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/show_board_materials_bottomsheet/show_board_materials_bottomsheet.dart';
+import 'package:tormenta20/src/modules/home/modules/board_view/widgets/show_board_materials_bottomsheet/show_board_materials_bottomsheet_storage_service.dart';
 import 'package:tormenta20/src/shared/entities/board/board_material.dart';
 import 'package:tormenta20/src/shared/entities/board/board_material_types.dart';
 import 'package:tormenta20/src/shared/utils/file_utils.dart';
@@ -15,7 +15,7 @@ import 'package:uuid/uuid.dart';
 
 class ShowBoardMaterialsBottomsheetStore extends ChangeNotifier {
   ShowBoardMaterialsBottomsheetStore(this._boardUuid) {
-    _dao.watchMaterials(_boardUuid).then((resp) {
+    _storageService.watchMaterials(_boardUuid).then((resp) {
       if (resp.materials != null) {
         _sub = resp.materials?.listen(_putMaterials);
       }
@@ -25,7 +25,7 @@ class ShowBoardMaterialsBottomsheetStore extends ChangeNotifier {
   late String _boardUuid;
 
   StreamSubscription? _sub;
-  final _dao = GetIt.I<AppDatabase>().boardDAO;
+  final _storageService = ShowBoardMaterialsBottomsheetStorageService();
 
   ShowBoardMaterialBottomSheetMode _mode = ShowBoardMaterialBottomSheetMode.add;
   ShowBoardMaterialBottomSheetMode get mode => _mode;
@@ -87,11 +87,12 @@ class ShowBoardMaterialsBottomsheetStore extends ChangeNotifier {
         }
       }
 
-      await _dao.saveMaterials(newsMaterials);
+      await _storageService.saveMaterials(newsMaterials);
     }
   }
 
-  void deleteMaterials() async => await _dao.deleteMaterials(_materialToDelete);
+  void deleteMaterials() async =>
+      await _storageService.deleteMaterials(_materialToDelete);
 
   @override
   void dispose() {

@@ -3,8 +3,6 @@
 import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/widgets/stores/add_edit_board_player_brood_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/widgets/stores/add_edit_board_player_classes_store.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player.dart';
-import 'package:tormenta20/src/shared/entities/character_classe.dart';
-import 'package:tormenta20/src/shared/entities/classe_type.dart';
 import 'package:uuid/uuid.dart';
 
 class AddEditBoardPlayerController {
@@ -18,9 +16,7 @@ class AddEditBoardPlayerController {
       _assetPath = initialValue.imageAsset;
       _filePath = initialValue.imagePath;
       broodStore = AddEditBoardPlayerBroodStore(initialValue.brood);
-      _classes = initialValue.classes;
-      classesStore = AddEditBoardPlayerClassesStore(
-          initialValue.classes.map((c) => c.type).toList());
+      classesStore = AddEditBoardPlayerClassesStore(initialValue.classes);
       _life = initialValue.life;
       _mana = initialValue.mana;
       _defense = initialValue.defense;
@@ -76,26 +72,6 @@ class AddEditBoardPlayerController {
   late final AddEditBoardPlayerBroodStore broodStore;
 
   late final AddEditBoardPlayerClassesStore classesStore;
-  List<CharacterClasse> _classes = [];
-  List<CharacterClasse> get classes => _classes;
-  void onAddClasse(ClasseType? value) {
-    if (value == null) {
-      return;
-    }
-
-    if (_classes.any((c) => c.type == value)) {
-      _classes.removeWhere((cr) => cr.type == value);
-      classesStore.remove(value);
-    } else {
-      final classe = CharacterClasse(
-        type: value,
-        uuid: const Uuid().v4(),
-        playerUuid: _characterUuid,
-      );
-      _classes.add(classe);
-      classesStore.put(value);
-    }
-  }
 
   BoardPlayer? onSave() {
     if (!broodStore.validate()) {
@@ -118,7 +94,7 @@ class AddEditBoardPlayerController {
       brood: broodStore.data!,
       createdAt: _createdAt ?? updatedAt,
       updatedAt: updatedAt,
-      classes: _classes,
+      classes: classesStore.data,
       life: _life!,
       mana: _mana!,
       defense: _defense!,

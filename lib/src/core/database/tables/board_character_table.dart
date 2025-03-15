@@ -8,8 +8,9 @@ class BoardCharacterTable extends Table {
   TextColumn get imagePath => text().nullable()();
   TextColumn get imageAsset => text().nullable()();
   IntColumn get broodIndex => integer()();
-  DateTimeColumn get createdAt => dateTime()();
-  DateTimeColumn get updatedAt => dateTime()();
+  IntColumn get createdAt => integer()();
+  IntColumn get updatedAt => integer()();
+  TextColumn get classeIndexes => text()();
 
   @override
   Set<Column>? get primaryKey => {uuid};

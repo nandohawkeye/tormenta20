@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 
 class PriceTextfield extends StatelessWidget {
@@ -24,11 +23,6 @@ class PriceTextfield extends StatelessWidget {
         labelText: 'Preço',
         prefix: const Text('T\$ ', style: TextStyle(fontSize: 16)),
         fillColor: palette.backgroundLevelOne,
-        helperStyle: TextStyle(color: palette.textDisable),
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 6,
-          horizontal: T20UI.spaceSize,
-        ),
       ),
     );
   }

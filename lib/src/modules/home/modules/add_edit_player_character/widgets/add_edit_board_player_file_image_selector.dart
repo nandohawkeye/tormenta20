@@ -15,12 +15,14 @@ class AddEditBoardPlayerFileImageSelector extends StatelessWidget {
     required this.onSelectFile,
     required this.size,
     required this.isMenace,
+    this.colorBase,
   });
 
   final String? filePath;
   final Function(String) onSelectFile;
   final double size;
   final bool isMenace;
+  final Color? colorBase;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +53,7 @@ class AddEditBoardPlayerFileImageSelector extends StatelessWidget {
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: palette.backgroundLevelOne,
+                      color: colorBase ?? palette.backgroundLevelOne,
                     ),
                     child: filePath != null
                         ? ClipOval(

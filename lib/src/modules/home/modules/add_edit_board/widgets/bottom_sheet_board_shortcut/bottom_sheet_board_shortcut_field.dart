@@ -104,11 +104,6 @@ class _BottomSheetBoardShortcutFieldState
                       },
                     ),
                     helperText: widget.helperText,
-                    helperStyle: TextStyle(color: palette.textDisable),
-                    contentPadding: const EdgeInsets.symmetric(
-                      vertical: 6,
-                      horizontal: T20UI.spaceSize,
-                    ),
                   ),
                 ),
               ),

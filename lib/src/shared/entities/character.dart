@@ -1,5 +1,5 @@
 import 'package:tormenta20/src/shared/entities/brood.dart';
-import 'package:tormenta20/src/shared/entities/character_classe.dart';
+import 'package:tormenta20/src/shared/entities/classe_type.dart';
 import 'package:tormenta20/src/shared/entities/divinity.dart';
 import 'package:tormenta20/src/shared/entities/entity_base.dart';
 import 'package:tormenta20/src/shared/entities/origin.dart';
@@ -11,7 +11,7 @@ class Character extends EntityBase {
   final String? imageAsset;
   final List<Origin> origins;
   final Brood brood;
-  final List<CharacterClasse> classes;
+  final List<ClasseType> classes;
   final Divinity? divinity;
 
   Character({

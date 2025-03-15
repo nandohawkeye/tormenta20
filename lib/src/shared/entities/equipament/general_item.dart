@@ -22,6 +22,25 @@ class GeneralItem extends Equipment implements Spaceable {
   }) : _space = spaceOcuped;
 
   @override
+  GeneralItem cloneWith({
+    required String uuid,
+    required String parentUuid,
+  }) {
+    return GeneralItem(
+      uuid: uuid,
+      parentUuid: parentUuid,
+      name: name,
+      spaceOcuped: _space,
+      price: price,
+      type: type,
+      desc: desc,
+      storedIn: storedIn,
+      improvements: improvements,
+      specialMaterial: specialMaterial,
+    );
+  }
+
+  @override
   double get spaceOcuped => _space;
 
   @override

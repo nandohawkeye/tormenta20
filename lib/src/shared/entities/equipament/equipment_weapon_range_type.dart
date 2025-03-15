@@ -1,1 +1,1 @@
-enum EquipmentWeaponRangeType { short, medium, long }
+enum EquipmentWeaponRangeType { handToHand, short, medium, long }

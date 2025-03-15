@@ -34,7 +34,8 @@ class BottomSheetInitBoard extends StatelessWidget {
                 child: BottomSheetInitBoardItem(
                   icon: FontAwesomeIcons.plus,
                   title: 'Criar',
-                  subtitle: 'Sou um mestre e quero criar uma mesa',
+                  subtitle:
+                      'Sou um mestre e quero criar uma mesa para me divertir com a galera',
                   onTap: () => Navigator.pop(
                     context,
                     BoardModeType.master,

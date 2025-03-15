@@ -3,8 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get_it/get_it.dart';
-import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/grimorie_store.dart';
@@ -158,10 +156,7 @@ class _GrimorieScreenState extends State<GrimorieScreen> {
                         child: const DeleteGrimorieBottomsheet(),
                       ).then((result) async {
                         if (result != null && result) {
-                          await GetIt.I<AppDatabase>()
-                              .grimoireDAO
-                              .deleteGrimoire(_store.grimoire)
-                              .then((failure) {
+                          await _store.deleteGrimoire().then((failure) {
                             if (failure == null) {
                               Navigator.pop(context);
                             }

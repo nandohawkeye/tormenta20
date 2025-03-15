@@ -33,15 +33,15 @@ class $GrimoireTableTable extends GrimoireTable
   static const VerificationMeta _createdAtMeta =
       const VerificationMeta('createdAt');
   @override
-  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+  late final GeneratedColumn<int> createdAt = GeneratedColumn<int>(
       'created_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _updatedAtMeta =
       const VerificationMeta('updatedAt');
   @override
-  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+  late final GeneratedColumn<int> updatedAt = GeneratedColumn<int>(
       'updated_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+      type: DriftSqlType.int, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
       [uuid, name, desc, iconAsset, createdAt, updatedAt];
@@ -107,9 +107,9 @@ class $GrimoireTableTable extends GrimoireTable
       iconAsset: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}icon_asset'])!,
       createdAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+          .read(DriftSqlType.int, data['${effectivePrefix}created_at'])!,
       updatedAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}updated_at'])!,
+          .read(DriftSqlType.int, data['${effectivePrefix}updated_at'])!,
     );
   }
 
@@ -125,8 +125,8 @@ class GrimoireTableData extends DataClass
   final String name;
   final String? desc;
   final String iconAsset;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final int createdAt;
+  final int updatedAt;
   const GrimoireTableData(
       {required this.uuid,
       required this.name,
@@ -143,8 +143,8 @@ class GrimoireTableData extends DataClass
       map['desc'] = Variable<String>(desc);
     }
     map['icon_asset'] = Variable<String>(iconAsset);
-    map['created_at'] = Variable<DateTime>(createdAt);
-    map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['created_at'] = Variable<int>(createdAt);
+    map['updated_at'] = Variable<int>(updatedAt);
     return map;
   }
 
@@ -167,8 +167,8 @@ class GrimoireTableData extends DataClass
       name: serializer.fromJson<String>(json['name']),
       desc: serializer.fromJson<String?>(json['desc']),
       iconAsset: serializer.fromJson<String>(json['iconAsset']),
-      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
-      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      createdAt: serializer.fromJson<int>(json['createdAt']),
+      updatedAt: serializer.fromJson<int>(json['updatedAt']),
     );
   }
   @override
@@ -179,8 +179,8 @@ class GrimoireTableData extends DataClass
       'name': serializer.toJson<String>(name),
       'desc': serializer.toJson<String?>(desc),
       'iconAsset': serializer.toJson<String>(iconAsset),
-      'createdAt': serializer.toJson<DateTime>(createdAt),
-      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'createdAt': serializer.toJson<int>(createdAt),
+      'updatedAt': serializer.toJson<int>(updatedAt),
     };
   }
 
@@ -189,8 +189,8 @@ class GrimoireTableData extends DataClass
           String? name,
           Value<String?> desc = const Value.absent(),
           String? iconAsset,
-          DateTime? createdAt,
-          DateTime? updatedAt}) =>
+          int? createdAt,
+          int? updatedAt}) =>
       GrimoireTableData(
         uuid: uuid ?? this.uuid,
         name: name ?? this.name,
@@ -243,8 +243,8 @@ class GrimoireTableCompanion extends UpdateCompanion<GrimoireTableData> {
   final Value<String> name;
   final Value<String?> desc;
   final Value<String> iconAsset;
-  final Value<DateTime> createdAt;
-  final Value<DateTime> updatedAt;
+  final Value<int> createdAt;
+  final Value<int> updatedAt;
   final Value<int> rowid;
   const GrimoireTableCompanion({
     this.uuid = const Value.absent(),
@@ -260,8 +260,8 @@ class GrimoireTableCompanion extends UpdateCompanion<GrimoireTableData> {
     required String name,
     this.desc = const Value.absent(),
     required String iconAsset,
-    required DateTime createdAt,
-    required DateTime updatedAt,
+    required int createdAt,
+    required int updatedAt,
     this.rowid = const Value.absent(),
   })  : uuid = Value(uuid),
         name = Value(name),
@@ -273,8 +273,8 @@ class GrimoireTableCompanion extends UpdateCompanion<GrimoireTableData> {
     Expression<String>? name,
     Expression<String>? desc,
     Expression<String>? iconAsset,
-    Expression<DateTime>? createdAt,
-    Expression<DateTime>? updatedAt,
+    Expression<int>? createdAt,
+    Expression<int>? updatedAt,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -293,8 +293,8 @@ class GrimoireTableCompanion extends UpdateCompanion<GrimoireTableData> {
       Value<String>? name,
       Value<String?>? desc,
       Value<String>? iconAsset,
-      Value<DateTime>? createdAt,
-      Value<DateTime>? updatedAt,
+      Value<int>? createdAt,
+      Value<int>? updatedAt,
       Value<int>? rowid}) {
     return GrimoireTableCompanion(
       uuid: uuid ?? this.uuid,
@@ -323,10 +323,10 @@ class GrimoireTableCompanion extends UpdateCompanion<GrimoireTableData> {
       map['icon_asset'] = Variable<String>(iconAsset.value);
     }
     if (createdAt.present) {
-      map['created_at'] = Variable<DateTime>(createdAt.value);
+      map['created_at'] = Variable<int>(createdAt.value);
     }
     if (updatedAt.present) {
-      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+      map['updated_at'] = Variable<int>(updatedAt.value);
     }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
@@ -1307,15 +1307,15 @@ class $BoardTableTable extends BoardTable
   static const VerificationMeta _createdAtMeta =
       const VerificationMeta('createdAt');
   @override
-  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+  late final GeneratedColumn<int> createdAt = GeneratedColumn<int>(
       'created_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _updatedAtMeta =
       const VerificationMeta('updatedAt');
   @override
-  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+  late final GeneratedColumn<int> updatedAt = GeneratedColumn<int>(
       'updated_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _whatsGroupLinkMeta =
       const VerificationMeta('whatsGroupLink');
   @override
@@ -1486,9 +1486,9 @@ class $BoardTableTable extends BoardTable
       desc: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}desc']),
       createdAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+          .read(DriftSqlType.int, data['${effectivePrefix}created_at'])!,
       updatedAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}updated_at'])!,
+          .read(DriftSqlType.int, data['${effectivePrefix}updated_at'])!,
       whatsGroupLink: attachedDatabase.typeMapping.read(
           DriftSqlType.string, data['${effectivePrefix}whats_group_link']),
       telegramGroupLink: attachedDatabase.typeMapping.read(
@@ -1516,8 +1516,8 @@ class BoardTableData extends DataClass implements Insertable<BoardTableData> {
   final String adventureName;
   final String? bannerPath;
   final String? desc;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final int createdAt;
+  final int updatedAt;
   final String? whatsGroupLink;
   final String? telegramGroupLink;
   final String? discordServerLink;
@@ -1552,8 +1552,8 @@ class BoardTableData extends DataClass implements Insertable<BoardTableData> {
     if (!nullToAbsent || desc != null) {
       map['desc'] = Variable<String>(desc);
     }
-    map['created_at'] = Variable<DateTime>(createdAt);
-    map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['created_at'] = Variable<int>(createdAt);
+    map['updated_at'] = Variable<int>(updatedAt);
     if (!nullToAbsent || whatsGroupLink != null) {
       map['whats_group_link'] = Variable<String>(whatsGroupLink);
     }
@@ -1610,8 +1610,8 @@ class BoardTableData extends DataClass implements Insertable<BoardTableData> {
       adventureName: serializer.fromJson<String>(json['adventureName']),
       bannerPath: serializer.fromJson<String?>(json['bannerPath']),
       desc: serializer.fromJson<String?>(json['desc']),
-      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
-      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      createdAt: serializer.fromJson<int>(json['createdAt']),
+      updatedAt: serializer.fromJson<int>(json['updatedAt']),
       whatsGroupLink: serializer.fromJson<String?>(json['whatsGroupLink']),
       telegramGroupLink:
           serializer.fromJson<String?>(json['telegramGroupLink']),
@@ -1632,8 +1632,8 @@ class BoardTableData extends DataClass implements Insertable<BoardTableData> {
       'adventureName': serializer.toJson<String>(adventureName),
       'bannerPath': serializer.toJson<String?>(bannerPath),
       'desc': serializer.toJson<String?>(desc),
-      'createdAt': serializer.toJson<DateTime>(createdAt),
-      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'createdAt': serializer.toJson<int>(createdAt),
+      'updatedAt': serializer.toJson<int>(updatedAt),
       'whatsGroupLink': serializer.toJson<String?>(whatsGroupLink),
       'telegramGroupLink': serializer.toJson<String?>(telegramGroupLink),
       'discordServerLink': serializer.toJson<String?>(discordServerLink),
@@ -1650,8 +1650,8 @@ class BoardTableData extends DataClass implements Insertable<BoardTableData> {
           String? adventureName,
           Value<String?> bannerPath = const Value.absent(),
           Value<String?> desc = const Value.absent(),
-          DateTime? createdAt,
-          DateTime? updatedAt,
+          int? createdAt,
+          int? updatedAt,
           Value<String?> whatsGroupLink = const Value.absent(),
           Value<String?> telegramGroupLink = const Value.absent(),
           Value<String?> discordServerLink = const Value.absent(),
@@ -1775,8 +1775,8 @@ class BoardTableCompanion extends UpdateCompanion<BoardTableData> {
   final Value<String> adventureName;
   final Value<String?> bannerPath;
   final Value<String?> desc;
-  final Value<DateTime> createdAt;
-  final Value<DateTime> updatedAt;
+  final Value<int> createdAt;
+  final Value<int> updatedAt;
   final Value<String?> whatsGroupLink;
   final Value<String?> telegramGroupLink;
   final Value<String?> discordServerLink;
@@ -1808,8 +1808,8 @@ class BoardTableCompanion extends UpdateCompanion<BoardTableData> {
     required String adventureName,
     this.bannerPath = const Value.absent(),
     this.desc = const Value.absent(),
-    required DateTime createdAt,
-    required DateTime updatedAt,
+    required int createdAt,
+    required int updatedAt,
     this.whatsGroupLink = const Value.absent(),
     this.telegramGroupLink = const Value.absent(),
     this.discordServerLink = const Value.absent(),
@@ -1832,8 +1832,8 @@ class BoardTableCompanion extends UpdateCompanion<BoardTableData> {
     Expression<String>? adventureName,
     Expression<String>? bannerPath,
     Expression<String>? desc,
-    Expression<DateTime>? createdAt,
-    Expression<DateTime>? updatedAt,
+    Expression<int>? createdAt,
+    Expression<int>? updatedAt,
     Expression<String>? whatsGroupLink,
     Expression<String>? telegramGroupLink,
     Expression<String>? discordServerLink,
@@ -1868,8 +1868,8 @@ class BoardTableCompanion extends UpdateCompanion<BoardTableData> {
       Value<String>? adventureName,
       Value<String?>? bannerPath,
       Value<String?>? desc,
-      Value<DateTime>? createdAt,
-      Value<DateTime>? updatedAt,
+      Value<int>? createdAt,
+      Value<int>? updatedAt,
       Value<String?>? whatsGroupLink,
       Value<String?>? telegramGroupLink,
       Value<String?>? discordServerLink,
@@ -1920,10 +1920,10 @@ class BoardTableCompanion extends UpdateCompanion<BoardTableData> {
       map['desc'] = Variable<String>(desc.value);
     }
     if (createdAt.present) {
-      map['created_at'] = Variable<DateTime>(createdAt.value);
+      map['created_at'] = Variable<int>(createdAt.value);
     }
     if (updatedAt.present) {
-      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+      map['updated_at'] = Variable<int>(updatedAt.value);
     }
     if (whatsGroupLink.present) {
       map['whats_group_link'] = Variable<String>(whatsGroupLink.value);
@@ -2878,15 +2878,15 @@ class $BoardPlayerTableTable extends BoardPlayerTable
   static const VerificationMeta _createdAtMeta =
       const VerificationMeta('createdAt');
   @override
-  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+  late final GeneratedColumn<int> createdAt = GeneratedColumn<int>(
       'created_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _updatedAtMeta =
       const VerificationMeta('updatedAt');
   @override
-  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+  late final GeneratedColumn<int> updatedAt = GeneratedColumn<int>(
       'updated_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _lifeMeta = const VerificationMeta('life');
   @override
   late final GeneratedColumn<int> life = GeneratedColumn<int>(
@@ -2918,6 +2918,12 @@ class $BoardPlayerTableTable extends BoardPlayerTable
       requiredDuringInsert: true,
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('CHECK ("is_alive" IN (0, 1))'));
+  static const VerificationMeta _classeIndexesMeta =
+      const VerificationMeta('classeIndexes');
+  @override
+  late final GeneratedColumn<String> classeIndexes = GeneratedColumn<String>(
+      'classe_indexes', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [
         uuid,
@@ -2933,7 +2939,8 @@ class $BoardPlayerTableTable extends BoardPlayerTable
         mana,
         defense,
         initiative,
-        isAlive
+        isAlive,
+        classeIndexes
       ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -3036,6 +3043,14 @@ class $BoardPlayerTableTable extends BoardPlayerTable
     } else if (isInserting) {
       context.missing(_isAliveMeta);
     }
+    if (data.containsKey('classe_indexes')) {
+      context.handle(
+          _classeIndexesMeta,
+          classeIndexes.isAcceptableOrUnknown(
+              data['classe_indexes']!, _classeIndexesMeta));
+    } else if (isInserting) {
+      context.missing(_classeIndexesMeta);
+    }
     return context;
   }
 
@@ -3060,9 +3075,9 @@ class $BoardPlayerTableTable extends BoardPlayerTable
       broodIndex: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}brood_index'])!,
       createdAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+          .read(DriftSqlType.int, data['${effectivePrefix}created_at'])!,
       updatedAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}updated_at'])!,
+          .read(DriftSqlType.int, data['${effectivePrefix}updated_at'])!,
       life: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}life'])!,
       mana: attachedDatabase.typeMapping
@@ -3073,6 +3088,8 @@ class $BoardPlayerTableTable extends BoardPlayerTable
           .read(DriftSqlType.int, data['${effectivePrefix}initiative'])!,
       isAlive: attachedDatabase.typeMapping
           .read(DriftSqlType.bool, data['${effectivePrefix}is_alive'])!,
+      classeIndexes: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}classe_indexes'])!,
     );
   }
 
@@ -3091,13 +3108,14 @@ class BoardPlayerTableData extends DataClass
   final String? imagePath;
   final String? imageAsset;
   final int broodIndex;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final int createdAt;
+  final int updatedAt;
   final int life;
   final int mana;
   final int defense;
   final int initiative;
   final bool isAlive;
+  final String classeIndexes;
   const BoardPlayerTableData(
       {required this.uuid,
       required this.boardUuid,
@@ -3112,7 +3130,8 @@ class BoardPlayerTableData extends DataClass
       required this.mana,
       required this.defense,
       required this.initiative,
-      required this.isAlive});
+      required this.isAlive,
+      required this.classeIndexes});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -3127,13 +3146,14 @@ class BoardPlayerTableData extends DataClass
       map['image_asset'] = Variable<String>(imageAsset);
     }
     map['brood_index'] = Variable<int>(broodIndex);
-    map['created_at'] = Variable<DateTime>(createdAt);
-    map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['created_at'] = Variable<int>(createdAt);
+    map['updated_at'] = Variable<int>(updatedAt);
     map['life'] = Variable<int>(life);
     map['mana'] = Variable<int>(mana);
     map['defense'] = Variable<int>(defense);
     map['initiative'] = Variable<int>(initiative);
     map['is_alive'] = Variable<bool>(isAlive);
+    map['classe_indexes'] = Variable<String>(classeIndexes);
     return map;
   }
 
@@ -3157,6 +3177,7 @@ class BoardPlayerTableData extends DataClass
       defense: Value(defense),
       initiative: Value(initiative),
       isAlive: Value(isAlive),
+      classeIndexes: Value(classeIndexes),
     );
   }
 
@@ -3171,13 +3192,14 @@ class BoardPlayerTableData extends DataClass
       imagePath: serializer.fromJson<String?>(json['imagePath']),
       imageAsset: serializer.fromJson<String?>(json['imageAsset']),
       broodIndex: serializer.fromJson<int>(json['broodIndex']),
-      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
-      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      createdAt: serializer.fromJson<int>(json['createdAt']),
+      updatedAt: serializer.fromJson<int>(json['updatedAt']),
       life: serializer.fromJson<int>(json['life']),
       mana: serializer.fromJson<int>(json['mana']),
       defense: serializer.fromJson<int>(json['defense']),
       initiative: serializer.fromJson<int>(json['initiative']),
       isAlive: serializer.fromJson<bool>(json['isAlive']),
+      classeIndexes: serializer.fromJson<String>(json['classeIndexes']),
     );
   }
   @override
@@ -3191,13 +3213,14 @@ class BoardPlayerTableData extends DataClass
       'imagePath': serializer.toJson<String?>(imagePath),
       'imageAsset': serializer.toJson<String?>(imageAsset),
       'broodIndex': serializer.toJson<int>(broodIndex),
-      'createdAt': serializer.toJson<DateTime>(createdAt),
-      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'createdAt': serializer.toJson<int>(createdAt),
+      'updatedAt': serializer.toJson<int>(updatedAt),
       'life': serializer.toJson<int>(life),
       'mana': serializer.toJson<int>(mana),
       'defense': serializer.toJson<int>(defense),
       'initiative': serializer.toJson<int>(initiative),
       'isAlive': serializer.toJson<bool>(isAlive),
+      'classeIndexes': serializer.toJson<String>(classeIndexes),
     };
   }
 
@@ -3209,13 +3232,14 @@ class BoardPlayerTableData extends DataClass
           Value<String?> imagePath = const Value.absent(),
           Value<String?> imageAsset = const Value.absent(),
           int? broodIndex,
-          DateTime? createdAt,
-          DateTime? updatedAt,
+          int? createdAt,
+          int? updatedAt,
           int? life,
           int? mana,
           int? defense,
           int? initiative,
-          bool? isAlive}) =>
+          bool? isAlive,
+          String? classeIndexes}) =>
       BoardPlayerTableData(
         uuid: uuid ?? this.uuid,
         boardUuid: boardUuid ?? this.boardUuid,
@@ -3231,6 +3255,7 @@ class BoardPlayerTableData extends DataClass
         defense: defense ?? this.defense,
         initiative: initiative ?? this.initiative,
         isAlive: isAlive ?? this.isAlive,
+        classeIndexes: classeIndexes ?? this.classeIndexes,
       );
   BoardPlayerTableData copyWithCompanion(BoardPlayerTableCompanion data) {
     return BoardPlayerTableData(
@@ -3254,6 +3279,9 @@ class BoardPlayerTableData extends DataClass
       initiative:
           data.initiative.present ? data.initiative.value : this.initiative,
       isAlive: data.isAlive.present ? data.isAlive.value : this.isAlive,
+      classeIndexes: data.classeIndexes.present
+          ? data.classeIndexes.value
+          : this.classeIndexes,
     );
   }
 
@@ -3273,7 +3301,8 @@ class BoardPlayerTableData extends DataClass
           ..write('mana: $mana, ')
           ..write('defense: $defense, ')
           ..write('initiative: $initiative, ')
-          ..write('isAlive: $isAlive')
+          ..write('isAlive: $isAlive, ')
+          ..write('classeIndexes: $classeIndexes')
           ..write(')'))
         .toString();
   }
@@ -3293,7 +3322,8 @@ class BoardPlayerTableData extends DataClass
       mana,
       defense,
       initiative,
-      isAlive);
+      isAlive,
+      classeIndexes);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -3311,7 +3341,8 @@ class BoardPlayerTableData extends DataClass
           other.mana == this.mana &&
           other.defense == this.defense &&
           other.initiative == this.initiative &&
-          other.isAlive == this.isAlive);
+          other.isAlive == this.isAlive &&
+          other.classeIndexes == this.classeIndexes);
 }
 
 class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
@@ -3322,13 +3353,14 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
   final Value<String?> imagePath;
   final Value<String?> imageAsset;
   final Value<int> broodIndex;
-  final Value<DateTime> createdAt;
-  final Value<DateTime> updatedAt;
+  final Value<int> createdAt;
+  final Value<int> updatedAt;
   final Value<int> life;
   final Value<int> mana;
   final Value<int> defense;
   final Value<int> initiative;
   final Value<bool> isAlive;
+  final Value<String> classeIndexes;
   final Value<int> rowid;
   const BoardPlayerTableCompanion({
     this.uuid = const Value.absent(),
@@ -3345,6 +3377,7 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
     this.defense = const Value.absent(),
     this.initiative = const Value.absent(),
     this.isAlive = const Value.absent(),
+    this.classeIndexes = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   BoardPlayerTableCompanion.insert({
@@ -3355,13 +3388,14 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
     this.imagePath = const Value.absent(),
     this.imageAsset = const Value.absent(),
     required int broodIndex,
-    required DateTime createdAt,
-    required DateTime updatedAt,
+    required int createdAt,
+    required int updatedAt,
     required int life,
     required int mana,
     required int defense,
     required int initiative,
     required bool isAlive,
+    required String classeIndexes,
     this.rowid = const Value.absent(),
   })  : uuid = Value(uuid),
         boardUuid = Value(boardUuid),
@@ -3374,7 +3408,8 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
         mana = Value(mana),
         defense = Value(defense),
         initiative = Value(initiative),
-        isAlive = Value(isAlive);
+        isAlive = Value(isAlive),
+        classeIndexes = Value(classeIndexes);
   static Insertable<BoardPlayerTableData> custom({
     Expression<String>? uuid,
     Expression<String>? boardUuid,
@@ -3383,13 +3418,14 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
     Expression<String>? imagePath,
     Expression<String>? imageAsset,
     Expression<int>? broodIndex,
-    Expression<DateTime>? createdAt,
-    Expression<DateTime>? updatedAt,
+    Expression<int>? createdAt,
+    Expression<int>? updatedAt,
     Expression<int>? life,
     Expression<int>? mana,
     Expression<int>? defense,
     Expression<int>? initiative,
     Expression<bool>? isAlive,
+    Expression<String>? classeIndexes,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -3407,6 +3443,7 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
       if (defense != null) 'defense': defense,
       if (initiative != null) 'initiative': initiative,
       if (isAlive != null) 'is_alive': isAlive,
+      if (classeIndexes != null) 'classe_indexes': classeIndexes,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -3419,13 +3456,14 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
       Value<String?>? imagePath,
       Value<String?>? imageAsset,
       Value<int>? broodIndex,
-      Value<DateTime>? createdAt,
-      Value<DateTime>? updatedAt,
+      Value<int>? createdAt,
+      Value<int>? updatedAt,
       Value<int>? life,
       Value<int>? mana,
       Value<int>? defense,
       Value<int>? initiative,
       Value<bool>? isAlive,
+      Value<String>? classeIndexes,
       Value<int>? rowid}) {
     return BoardPlayerTableCompanion(
       uuid: uuid ?? this.uuid,
@@ -3442,6 +3480,7 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
       defense: defense ?? this.defense,
       initiative: initiative ?? this.initiative,
       isAlive: isAlive ?? this.isAlive,
+      classeIndexes: classeIndexes ?? this.classeIndexes,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -3471,10 +3510,10 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
       map['brood_index'] = Variable<int>(broodIndex.value);
     }
     if (createdAt.present) {
-      map['created_at'] = Variable<DateTime>(createdAt.value);
+      map['created_at'] = Variable<int>(createdAt.value);
     }
     if (updatedAt.present) {
-      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+      map['updated_at'] = Variable<int>(updatedAt.value);
     }
     if (life.present) {
       map['life'] = Variable<int>(life.value);
@@ -3490,6 +3529,9 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
     }
     if (isAlive.present) {
       map['is_alive'] = Variable<bool>(isAlive.value);
+    }
+    if (classeIndexes.present) {
+      map['classe_indexes'] = Variable<String>(classeIndexes.value);
     }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
@@ -3514,6 +3556,7 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
           ..write('defense: $defense, ')
           ..write('initiative: $initiative, ')
           ..write('isAlive: $isAlive, ')
+          ..write('classeIndexes: $classeIndexes, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -3570,15 +3613,21 @@ class $BoardCharacterTableTable extends BoardCharacterTable
   static const VerificationMeta _createdAtMeta =
       const VerificationMeta('createdAt');
   @override
-  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+  late final GeneratedColumn<int> createdAt = GeneratedColumn<int>(
       'created_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _updatedAtMeta =
       const VerificationMeta('updatedAt');
   @override
-  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+  late final GeneratedColumn<int> updatedAt = GeneratedColumn<int>(
       'updated_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _classeIndexesMeta =
+      const VerificationMeta('classeIndexes');
+  @override
+  late final GeneratedColumn<String> classeIndexes = GeneratedColumn<String>(
+      'classe_indexes', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [
         uuid,
@@ -3589,7 +3638,8 @@ class $BoardCharacterTableTable extends BoardCharacterTable
         imageAsset,
         broodIndex,
         createdAt,
-        updatedAt
+        updatedAt,
+        classeIndexes
       ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -3660,6 +3710,14 @@ class $BoardCharacterTableTable extends BoardCharacterTable
     } else if (isInserting) {
       context.missing(_updatedAtMeta);
     }
+    if (data.containsKey('classe_indexes')) {
+      context.handle(
+          _classeIndexesMeta,
+          classeIndexes.isAcceptableOrUnknown(
+              data['classe_indexes']!, _classeIndexesMeta));
+    } else if (isInserting) {
+      context.missing(_classeIndexesMeta);
+    }
     return context;
   }
 
@@ -3685,9 +3743,11 @@ class $BoardCharacterTableTable extends BoardCharacterTable
       broodIndex: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}brood_index'])!,
       createdAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+          .read(DriftSqlType.int, data['${effectivePrefix}created_at'])!,
       updatedAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}updated_at'])!,
+          .read(DriftSqlType.int, data['${effectivePrefix}updated_at'])!,
+      classeIndexes: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}classe_indexes'])!,
     );
   }
 
@@ -3706,8 +3766,9 @@ class BoardCharacterTableData extends DataClass
   final String? imagePath;
   final String? imageAsset;
   final int broodIndex;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final int createdAt;
+  final int updatedAt;
+  final String classeIndexes;
   const BoardCharacterTableData(
       {required this.uuid,
       required this.boardUuid,
@@ -3717,7 +3778,8 @@ class BoardCharacterTableData extends DataClass
       this.imageAsset,
       required this.broodIndex,
       required this.createdAt,
-      required this.updatedAt});
+      required this.updatedAt,
+      required this.classeIndexes});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -3732,8 +3794,9 @@ class BoardCharacterTableData extends DataClass
       map['image_asset'] = Variable<String>(imageAsset);
     }
     map['brood_index'] = Variable<int>(broodIndex);
-    map['created_at'] = Variable<DateTime>(createdAt);
-    map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['created_at'] = Variable<int>(createdAt);
+    map['updated_at'] = Variable<int>(updatedAt);
+    map['classe_indexes'] = Variable<String>(classeIndexes);
     return map;
   }
 
@@ -3752,6 +3815,7 @@ class BoardCharacterTableData extends DataClass
       broodIndex: Value(broodIndex),
       createdAt: Value(createdAt),
       updatedAt: Value(updatedAt),
+      classeIndexes: Value(classeIndexes),
     );
   }
 
@@ -3766,8 +3830,9 @@ class BoardCharacterTableData extends DataClass
       imagePath: serializer.fromJson<String?>(json['imagePath']),
       imageAsset: serializer.fromJson<String?>(json['imageAsset']),
       broodIndex: serializer.fromJson<int>(json['broodIndex']),
-      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
-      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      createdAt: serializer.fromJson<int>(json['createdAt']),
+      updatedAt: serializer.fromJson<int>(json['updatedAt']),
+      classeIndexes: serializer.fromJson<String>(json['classeIndexes']),
     );
   }
   @override
@@ -3781,8 +3846,9 @@ class BoardCharacterTableData extends DataClass
       'imagePath': serializer.toJson<String?>(imagePath),
       'imageAsset': serializer.toJson<String?>(imageAsset),
       'broodIndex': serializer.toJson<int>(broodIndex),
-      'createdAt': serializer.toJson<DateTime>(createdAt),
-      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'createdAt': serializer.toJson<int>(createdAt),
+      'updatedAt': serializer.toJson<int>(updatedAt),
+      'classeIndexes': serializer.toJson<String>(classeIndexes),
     };
   }
 
@@ -3794,8 +3860,9 @@ class BoardCharacterTableData extends DataClass
           Value<String?> imagePath = const Value.absent(),
           Value<String?> imageAsset = const Value.absent(),
           int? broodIndex,
-          DateTime? createdAt,
-          DateTime? updatedAt}) =>
+          int? createdAt,
+          int? updatedAt,
+          String? classeIndexes}) =>
       BoardCharacterTableData(
         uuid: uuid ?? this.uuid,
         boardUuid: boardUuid ?? this.boardUuid,
@@ -3806,6 +3873,7 @@ class BoardCharacterTableData extends DataClass
         broodIndex: broodIndex ?? this.broodIndex,
         createdAt: createdAt ?? this.createdAt,
         updatedAt: updatedAt ?? this.updatedAt,
+        classeIndexes: classeIndexes ?? this.classeIndexes,
       );
   BoardCharacterTableData copyWithCompanion(BoardCharacterTableCompanion data) {
     return BoardCharacterTableData(
@@ -3823,6 +3891,9 @@ class BoardCharacterTableData extends DataClass
           data.broodIndex.present ? data.broodIndex.value : this.broodIndex,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
       updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      classeIndexes: data.classeIndexes.present
+          ? data.classeIndexes.value
+          : this.classeIndexes,
     );
   }
 
@@ -3837,14 +3908,15 @@ class BoardCharacterTableData extends DataClass
           ..write('imageAsset: $imageAsset, ')
           ..write('broodIndex: $broodIndex, ')
           ..write('createdAt: $createdAt, ')
-          ..write('updatedAt: $updatedAt')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('classeIndexes: $classeIndexes')
           ..write(')'))
         .toString();
   }
 
   @override
   int get hashCode => Object.hash(uuid, boardUuid, characterName, playerName,
-      imagePath, imageAsset, broodIndex, createdAt, updatedAt);
+      imagePath, imageAsset, broodIndex, createdAt, updatedAt, classeIndexes);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -3857,7 +3929,8 @@ class BoardCharacterTableData extends DataClass
           other.imageAsset == this.imageAsset &&
           other.broodIndex == this.broodIndex &&
           other.createdAt == this.createdAt &&
-          other.updatedAt == this.updatedAt);
+          other.updatedAt == this.updatedAt &&
+          other.classeIndexes == this.classeIndexes);
 }
 
 class BoardCharacterTableCompanion
@@ -3869,8 +3942,9 @@ class BoardCharacterTableCompanion
   final Value<String?> imagePath;
   final Value<String?> imageAsset;
   final Value<int> broodIndex;
-  final Value<DateTime> createdAt;
-  final Value<DateTime> updatedAt;
+  final Value<int> createdAt;
+  final Value<int> updatedAt;
+  final Value<String> classeIndexes;
   final Value<int> rowid;
   const BoardCharacterTableCompanion({
     this.uuid = const Value.absent(),
@@ -3882,6 +3956,7 @@ class BoardCharacterTableCompanion
     this.broodIndex = const Value.absent(),
     this.createdAt = const Value.absent(),
     this.updatedAt = const Value.absent(),
+    this.classeIndexes = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   BoardCharacterTableCompanion.insert({
@@ -3892,8 +3967,9 @@ class BoardCharacterTableCompanion
     this.imagePath = const Value.absent(),
     this.imageAsset = const Value.absent(),
     required int broodIndex,
-    required DateTime createdAt,
-    required DateTime updatedAt,
+    required int createdAt,
+    required int updatedAt,
+    required String classeIndexes,
     this.rowid = const Value.absent(),
   })  : uuid = Value(uuid),
         boardUuid = Value(boardUuid),
@@ -3901,7 +3977,8 @@ class BoardCharacterTableCompanion
         playerName = Value(playerName),
         broodIndex = Value(broodIndex),
         createdAt = Value(createdAt),
-        updatedAt = Value(updatedAt);
+        updatedAt = Value(updatedAt),
+        classeIndexes = Value(classeIndexes);
   static Insertable<BoardCharacterTableData> custom({
     Expression<String>? uuid,
     Expression<String>? boardUuid,
@@ -3910,8 +3987,9 @@ class BoardCharacterTableCompanion
     Expression<String>? imagePath,
     Expression<String>? imageAsset,
     Expression<int>? broodIndex,
-    Expression<DateTime>? createdAt,
-    Expression<DateTime>? updatedAt,
+    Expression<int>? createdAt,
+    Expression<int>? updatedAt,
+    Expression<String>? classeIndexes,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -3924,6 +4002,7 @@ class BoardCharacterTableCompanion
       if (broodIndex != null) 'brood_index': broodIndex,
       if (createdAt != null) 'created_at': createdAt,
       if (updatedAt != null) 'updated_at': updatedAt,
+      if (classeIndexes != null) 'classe_indexes': classeIndexes,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -3936,8 +4015,9 @@ class BoardCharacterTableCompanion
       Value<String?>? imagePath,
       Value<String?>? imageAsset,
       Value<int>? broodIndex,
-      Value<DateTime>? createdAt,
-      Value<DateTime>? updatedAt,
+      Value<int>? createdAt,
+      Value<int>? updatedAt,
+      Value<String>? classeIndexes,
       Value<int>? rowid}) {
     return BoardCharacterTableCompanion(
       uuid: uuid ?? this.uuid,
@@ -3949,6 +4029,7 @@ class BoardCharacterTableCompanion
       broodIndex: broodIndex ?? this.broodIndex,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
+      classeIndexes: classeIndexes ?? this.classeIndexes,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -3978,10 +4059,13 @@ class BoardCharacterTableCompanion
       map['brood_index'] = Variable<int>(broodIndex.value);
     }
     if (createdAt.present) {
-      map['created_at'] = Variable<DateTime>(createdAt.value);
+      map['created_at'] = Variable<int>(createdAt.value);
     }
     if (updatedAt.present) {
-      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+      map['updated_at'] = Variable<int>(updatedAt.value);
+    }
+    if (classeIndexes.present) {
+      map['classe_indexes'] = Variable<String>(classeIndexes.value);
     }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
@@ -4001,6 +4085,7 @@ class BoardCharacterTableCompanion
           ..write('broodIndex: $broodIndex, ')
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
+          ..write('classeIndexes: $classeIndexes, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -4041,15 +4126,15 @@ class $BoardNoteTableTable extends BoardNoteTable
   static const VerificationMeta _createdAtMeta =
       const VerificationMeta('createdAt');
   @override
-  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+  late final GeneratedColumn<int> createdAt = GeneratedColumn<int>(
       'created_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _updatedAtMeta =
       const VerificationMeta('updatedAt');
   @override
-  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+  late final GeneratedColumn<int> updatedAt = GeneratedColumn<int>(
       'updated_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+      type: DriftSqlType.int, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
       [uuid, boardUuid, note, isFavorited, createdAt, updatedAt];
@@ -4119,9 +4204,9 @@ class $BoardNoteTableTable extends BoardNoteTable
       isFavorited: attachedDatabase.typeMapping
           .read(DriftSqlType.bool, data['${effectivePrefix}is_favorited'])!,
       createdAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+          .read(DriftSqlType.int, data['${effectivePrefix}created_at'])!,
       updatedAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}updated_at'])!,
+          .read(DriftSqlType.int, data['${effectivePrefix}updated_at'])!,
     );
   }
 
@@ -4137,8 +4222,8 @@ class BoardNoteTableData extends DataClass
   final String boardUuid;
   final String note;
   final bool isFavorited;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final int createdAt;
+  final int updatedAt;
   const BoardNoteTableData(
       {required this.uuid,
       required this.boardUuid,
@@ -4153,8 +4238,8 @@ class BoardNoteTableData extends DataClass
     map['board_uuid'] = Variable<String>(boardUuid);
     map['note'] = Variable<String>(note);
     map['is_favorited'] = Variable<bool>(isFavorited);
-    map['created_at'] = Variable<DateTime>(createdAt);
-    map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['created_at'] = Variable<int>(createdAt);
+    map['updated_at'] = Variable<int>(updatedAt);
     return map;
   }
 
@@ -4177,8 +4262,8 @@ class BoardNoteTableData extends DataClass
       boardUuid: serializer.fromJson<String>(json['boardUuid']),
       note: serializer.fromJson<String>(json['note']),
       isFavorited: serializer.fromJson<bool>(json['isFavorited']),
-      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
-      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      createdAt: serializer.fromJson<int>(json['createdAt']),
+      updatedAt: serializer.fromJson<int>(json['updatedAt']),
     );
   }
   @override
@@ -4189,8 +4274,8 @@ class BoardNoteTableData extends DataClass
       'boardUuid': serializer.toJson<String>(boardUuid),
       'note': serializer.toJson<String>(note),
       'isFavorited': serializer.toJson<bool>(isFavorited),
-      'createdAt': serializer.toJson<DateTime>(createdAt),
-      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'createdAt': serializer.toJson<int>(createdAt),
+      'updatedAt': serializer.toJson<int>(updatedAt),
     };
   }
 
@@ -4199,8 +4284,8 @@ class BoardNoteTableData extends DataClass
           String? boardUuid,
           String? note,
           bool? isFavorited,
-          DateTime? createdAt,
-          DateTime? updatedAt}) =>
+          int? createdAt,
+          int? updatedAt}) =>
       BoardNoteTableData(
         uuid: uuid ?? this.uuid,
         boardUuid: boardUuid ?? this.boardUuid,
@@ -4254,8 +4339,8 @@ class BoardNoteTableCompanion extends UpdateCompanion<BoardNoteTableData> {
   final Value<String> boardUuid;
   final Value<String> note;
   final Value<bool> isFavorited;
-  final Value<DateTime> createdAt;
-  final Value<DateTime> updatedAt;
+  final Value<int> createdAt;
+  final Value<int> updatedAt;
   final Value<int> rowid;
   const BoardNoteTableCompanion({
     this.uuid = const Value.absent(),
@@ -4271,8 +4356,8 @@ class BoardNoteTableCompanion extends UpdateCompanion<BoardNoteTableData> {
     required String boardUuid,
     required String note,
     required bool isFavorited,
-    required DateTime createdAt,
-    required DateTime updatedAt,
+    required int createdAt,
+    required int updatedAt,
     this.rowid = const Value.absent(),
   })  : uuid = Value(uuid),
         boardUuid = Value(boardUuid),
@@ -4285,8 +4370,8 @@ class BoardNoteTableCompanion extends UpdateCompanion<BoardNoteTableData> {
     Expression<String>? boardUuid,
     Expression<String>? note,
     Expression<bool>? isFavorited,
-    Expression<DateTime>? createdAt,
-    Expression<DateTime>? updatedAt,
+    Expression<int>? createdAt,
+    Expression<int>? updatedAt,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -4305,8 +4390,8 @@ class BoardNoteTableCompanion extends UpdateCompanion<BoardNoteTableData> {
       Value<String>? boardUuid,
       Value<String>? note,
       Value<bool>? isFavorited,
-      Value<DateTime>? createdAt,
-      Value<DateTime>? updatedAt,
+      Value<int>? createdAt,
+      Value<int>? updatedAt,
       Value<int>? rowid}) {
     return BoardNoteTableCompanion(
       uuid: uuid ?? this.uuid,
@@ -4335,10 +4420,10 @@ class BoardNoteTableCompanion extends UpdateCompanion<BoardNoteTableData> {
       map['is_favorited'] = Variable<bool>(isFavorited.value);
     }
     if (createdAt.present) {
-      map['created_at'] = Variable<DateTime>(createdAt.value);
+      map['created_at'] = Variable<int>(createdAt.value);
     }
     if (updatedAt.present) {
-      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+      map['updated_at'] = Variable<int>(updatedAt.value);
     }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
@@ -4712,247 +4797,6 @@ class BoardCombatTableCompanion extends UpdateCompanion<BoardCombatTableData> {
   }
 }
 
-class $BoardClasseCharacterTableTable extends BoardClasseCharacterTable
-    with
-        TableInfo<$BoardClasseCharacterTableTable,
-            BoardClasseCharacterTableData> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  $BoardClasseCharacterTableTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _uuidMeta = const VerificationMeta('uuid');
-  @override
-  late final GeneratedColumn<String> uuid = GeneratedColumn<String>(
-      'uuid', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _playerUuidMeta =
-      const VerificationMeta('playerUuid');
-  @override
-  late final GeneratedColumn<String> playerUuid = GeneratedColumn<String>(
-      'player_uuid', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _typeIndexMeta =
-      const VerificationMeta('typeIndex');
-  @override
-  late final GeneratedColumn<int> typeIndex = GeneratedColumn<int>(
-      'type_index', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  @override
-  List<GeneratedColumn> get $columns => [uuid, playerUuid, typeIndex];
-  @override
-  String get aliasedName => _alias ?? actualTableName;
-  @override
-  String get actualTableName => $name;
-  static const String $name = 'board_classe_character_table';
-  @override
-  VerificationContext validateIntegrity(
-      Insertable<BoardClasseCharacterTableData> instance,
-      {bool isInserting = false}) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('uuid')) {
-      context.handle(
-          _uuidMeta, uuid.isAcceptableOrUnknown(data['uuid']!, _uuidMeta));
-    } else if (isInserting) {
-      context.missing(_uuidMeta);
-    }
-    if (data.containsKey('player_uuid')) {
-      context.handle(
-          _playerUuidMeta,
-          playerUuid.isAcceptableOrUnknown(
-              data['player_uuid']!, _playerUuidMeta));
-    } else if (isInserting) {
-      context.missing(_playerUuidMeta);
-    }
-    if (data.containsKey('type_index')) {
-      context.handle(_typeIndexMeta,
-          typeIndex.isAcceptableOrUnknown(data['type_index']!, _typeIndexMeta));
-    } else if (isInserting) {
-      context.missing(_typeIndexMeta);
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {uuid};
-  @override
-  BoardClasseCharacterTableData map(Map<String, dynamic> data,
-      {String? tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return BoardClasseCharacterTableData(
-      uuid: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}uuid'])!,
-      playerUuid: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}player_uuid'])!,
-      typeIndex: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}type_index'])!,
-    );
-  }
-
-  @override
-  $BoardClasseCharacterTableTable createAlias(String alias) {
-    return $BoardClasseCharacterTableTable(attachedDatabase, alias);
-  }
-}
-
-class BoardClasseCharacterTableData extends DataClass
-    implements Insertable<BoardClasseCharacterTableData> {
-  final String uuid;
-  final String playerUuid;
-  final int typeIndex;
-  const BoardClasseCharacterTableData(
-      {required this.uuid, required this.playerUuid, required this.typeIndex});
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['uuid'] = Variable<String>(uuid);
-    map['player_uuid'] = Variable<String>(playerUuid);
-    map['type_index'] = Variable<int>(typeIndex);
-    return map;
-  }
-
-  BoardClasseCharacterTableCompanion toCompanion(bool nullToAbsent) {
-    return BoardClasseCharacterTableCompanion(
-      uuid: Value(uuid),
-      playerUuid: Value(playerUuid),
-      typeIndex: Value(typeIndex),
-    );
-  }
-
-  factory BoardClasseCharacterTableData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return BoardClasseCharacterTableData(
-      uuid: serializer.fromJson<String>(json['uuid']),
-      playerUuid: serializer.fromJson<String>(json['playerUuid']),
-      typeIndex: serializer.fromJson<int>(json['typeIndex']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'uuid': serializer.toJson<String>(uuid),
-      'playerUuid': serializer.toJson<String>(playerUuid),
-      'typeIndex': serializer.toJson<int>(typeIndex),
-    };
-  }
-
-  BoardClasseCharacterTableData copyWith(
-          {String? uuid, String? playerUuid, int? typeIndex}) =>
-      BoardClasseCharacterTableData(
-        uuid: uuid ?? this.uuid,
-        playerUuid: playerUuid ?? this.playerUuid,
-        typeIndex: typeIndex ?? this.typeIndex,
-      );
-  BoardClasseCharacterTableData copyWithCompanion(
-      BoardClasseCharacterTableCompanion data) {
-    return BoardClasseCharacterTableData(
-      uuid: data.uuid.present ? data.uuid.value : this.uuid,
-      playerUuid:
-          data.playerUuid.present ? data.playerUuid.value : this.playerUuid,
-      typeIndex: data.typeIndex.present ? data.typeIndex.value : this.typeIndex,
-    );
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('BoardClasseCharacterTableData(')
-          ..write('uuid: $uuid, ')
-          ..write('playerUuid: $playerUuid, ')
-          ..write('typeIndex: $typeIndex')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(uuid, playerUuid, typeIndex);
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is BoardClasseCharacterTableData &&
-          other.uuid == this.uuid &&
-          other.playerUuid == this.playerUuid &&
-          other.typeIndex == this.typeIndex);
-}
-
-class BoardClasseCharacterTableCompanion
-    extends UpdateCompanion<BoardClasseCharacterTableData> {
-  final Value<String> uuid;
-  final Value<String> playerUuid;
-  final Value<int> typeIndex;
-  final Value<int> rowid;
-  const BoardClasseCharacterTableCompanion({
-    this.uuid = const Value.absent(),
-    this.playerUuid = const Value.absent(),
-    this.typeIndex = const Value.absent(),
-    this.rowid = const Value.absent(),
-  });
-  BoardClasseCharacterTableCompanion.insert({
-    required String uuid,
-    required String playerUuid,
-    required int typeIndex,
-    this.rowid = const Value.absent(),
-  })  : uuid = Value(uuid),
-        playerUuid = Value(playerUuid),
-        typeIndex = Value(typeIndex);
-  static Insertable<BoardClasseCharacterTableData> custom({
-    Expression<String>? uuid,
-    Expression<String>? playerUuid,
-    Expression<int>? typeIndex,
-    Expression<int>? rowid,
-  }) {
-    return RawValuesInsertable({
-      if (uuid != null) 'uuid': uuid,
-      if (playerUuid != null) 'player_uuid': playerUuid,
-      if (typeIndex != null) 'type_index': typeIndex,
-      if (rowid != null) 'rowid': rowid,
-    });
-  }
-
-  BoardClasseCharacterTableCompanion copyWith(
-      {Value<String>? uuid,
-      Value<String>? playerUuid,
-      Value<int>? typeIndex,
-      Value<int>? rowid}) {
-    return BoardClasseCharacterTableCompanion(
-      uuid: uuid ?? this.uuid,
-      playerUuid: playerUuid ?? this.playerUuid,
-      typeIndex: typeIndex ?? this.typeIndex,
-      rowid: rowid ?? this.rowid,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (uuid.present) {
-      map['uuid'] = Variable<String>(uuid.value);
-    }
-    if (playerUuid.present) {
-      map['player_uuid'] = Variable<String>(playerUuid.value);
-    }
-    if (typeIndex.present) {
-      map['type_index'] = Variable<int>(typeIndex.value);
-    }
-    if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('BoardClasseCharacterTableCompanion(')
-          ..write('uuid: $uuid, ')
-          ..write('playerUuid: $playerUuid, ')
-          ..write('typeIndex: $typeIndex, ')
-          ..write('rowid: $rowid')
-          ..write(')'))
-        .toString();
-  }
-}
-
 class $MenaceTableTable extends MenaceTable
     with TableInfo<$MenaceTableTable, MenaceTableData> {
   @override
@@ -5125,6 +4969,18 @@ class $MenaceTableTable extends MenaceTable
   late final GeneratedColumn<int> treasureTypeIndex = GeneratedColumn<int>(
       'treasure_type_index', aliasedName, true,
       type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<int> createdAt = GeneratedColumn<int>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _updatedAtMeta =
+      const VerificationMeta('updatedAt');
+  @override
+  late final GeneratedColumn<int> updatedAt = GeneratedColumn<int>(
+      'updated_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [
         uuid,
@@ -5155,7 +5011,9 @@ class $MenaceTableTable extends MenaceTable
         typeIndex,
         creatureSizeIndex,
         combateRoleIndex,
-        treasureTypeIndex
+        treasureTypeIndex,
+        createdAt,
+        updatedAt
       ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -5352,6 +5210,18 @@ class $MenaceTableTable extends MenaceTable
           treasureTypeIndex.isAcceptableOrUnknown(
               data['treasure_type_index']!, _treasureTypeIndexMeta));
     }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(_updatedAtMeta,
+          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
+    } else if (isInserting) {
+      context.missing(_updatedAtMeta);
+    }
     return context;
   }
 
@@ -5419,6 +5289,10 @@ class $MenaceTableTable extends MenaceTable
           DriftSqlType.int, data['${effectivePrefix}combate_role_index'])!,
       treasureTypeIndex: attachedDatabase.typeMapping.read(
           DriftSqlType.int, data['${effectivePrefix}treasure_type_index']),
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}created_at'])!,
+      updatedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}updated_at'])!,
     );
   }
 
@@ -5458,6 +5332,8 @@ class MenaceTableData extends DataClass implements Insertable<MenaceTableData> {
   final int creatureSizeIndex;
   final int combateRoleIndex;
   final int? treasureTypeIndex;
+  final int createdAt;
+  final int updatedAt;
   const MenaceTableData(
       {required this.uuid,
       required this.name,
@@ -5487,7 +5363,9 @@ class MenaceTableData extends DataClass implements Insertable<MenaceTableData> {
       required this.typeIndex,
       required this.creatureSizeIndex,
       required this.combateRoleIndex,
-      this.treasureTypeIndex});
+      this.treasureTypeIndex,
+      required this.createdAt,
+      required this.updatedAt});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -5538,6 +5416,8 @@ class MenaceTableData extends DataClass implements Insertable<MenaceTableData> {
     if (!nullToAbsent || treasureTypeIndex != null) {
       map['treasure_type_index'] = Variable<int>(treasureTypeIndex);
     }
+    map['created_at'] = Variable<int>(createdAt);
+    map['updated_at'] = Variable<int>(updatedAt);
     return map;
   }
 
@@ -5587,6 +5467,8 @@ class MenaceTableData extends DataClass implements Insertable<MenaceTableData> {
       treasureTypeIndex: treasureTypeIndex == null && nullToAbsent
           ? const Value.absent()
           : Value(treasureTypeIndex),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
     );
   }
 
@@ -5623,6 +5505,8 @@ class MenaceTableData extends DataClass implements Insertable<MenaceTableData> {
       creatureSizeIndex: serializer.fromJson<int>(json['creatureSizeIndex']),
       combateRoleIndex: serializer.fromJson<int>(json['combateRoleIndex']),
       treasureTypeIndex: serializer.fromJson<int?>(json['treasureTypeIndex']),
+      createdAt: serializer.fromJson<int>(json['createdAt']),
+      updatedAt: serializer.fromJson<int>(json['updatedAt']),
     );
   }
   @override
@@ -5658,6 +5542,8 @@ class MenaceTableData extends DataClass implements Insertable<MenaceTableData> {
       'creatureSizeIndex': serializer.toJson<int>(creatureSizeIndex),
       'combateRoleIndex': serializer.toJson<int>(combateRoleIndex),
       'treasureTypeIndex': serializer.toJson<int?>(treasureTypeIndex),
+      'createdAt': serializer.toJson<int>(createdAt),
+      'updatedAt': serializer.toJson<int>(updatedAt),
     };
   }
 
@@ -5690,7 +5576,9 @@ class MenaceTableData extends DataClass implements Insertable<MenaceTableData> {
           int? typeIndex,
           int? creatureSizeIndex,
           int? combateRoleIndex,
-          Value<int?> treasureTypeIndex = const Value.absent()}) =>
+          Value<int?> treasureTypeIndex = const Value.absent(),
+          int? createdAt,
+          int? updatedAt}) =>
       MenaceTableData(
         uuid: uuid ?? this.uuid,
         name: name ?? this.name,
@@ -5724,6 +5612,8 @@ class MenaceTableData extends DataClass implements Insertable<MenaceTableData> {
         treasureTypeIndex: treasureTypeIndex.present
             ? treasureTypeIndex.value
             : this.treasureTypeIndex,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
       );
   MenaceTableData copyWithCompanion(MenaceTableCompanion data) {
     return MenaceTableData(
@@ -5780,6 +5670,8 @@ class MenaceTableData extends DataClass implements Insertable<MenaceTableData> {
       treasureTypeIndex: data.treasureTypeIndex.present
           ? data.treasureTypeIndex.value
           : this.treasureTypeIndex,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
     );
   }
 
@@ -5814,7 +5706,9 @@ class MenaceTableData extends DataClass implements Insertable<MenaceTableData> {
           ..write('typeIndex: $typeIndex, ')
           ..write('creatureSizeIndex: $creatureSizeIndex, ')
           ..write('combateRoleIndex: $combateRoleIndex, ')
-          ..write('treasureTypeIndex: $treasureTypeIndex')
+          ..write('treasureTypeIndex: $treasureTypeIndex, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt')
           ..write(')'))
         .toString();
   }
@@ -5849,7 +5743,9 @@ class MenaceTableData extends DataClass implements Insertable<MenaceTableData> {
         typeIndex,
         creatureSizeIndex,
         combateRoleIndex,
-        treasureTypeIndex
+        treasureTypeIndex,
+        createdAt,
+        updatedAt
       ]);
   @override
   bool operator ==(Object other) =>
@@ -5883,7 +5779,9 @@ class MenaceTableData extends DataClass implements Insertable<MenaceTableData> {
           other.typeIndex == this.typeIndex &&
           other.creatureSizeIndex == this.creatureSizeIndex &&
           other.combateRoleIndex == this.combateRoleIndex &&
-          other.treasureTypeIndex == this.treasureTypeIndex);
+          other.treasureTypeIndex == this.treasureTypeIndex &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt);
 }
 
 class MenaceTableCompanion extends UpdateCompanion<MenaceTableData> {
@@ -5916,6 +5814,8 @@ class MenaceTableCompanion extends UpdateCompanion<MenaceTableData> {
   final Value<int> creatureSizeIndex;
   final Value<int> combateRoleIndex;
   final Value<int?> treasureTypeIndex;
+  final Value<int> createdAt;
+  final Value<int> updatedAt;
   final Value<int> rowid;
   const MenaceTableCompanion({
     this.uuid = const Value.absent(),
@@ -5947,6 +5847,8 @@ class MenaceTableCompanion extends UpdateCompanion<MenaceTableData> {
     this.creatureSizeIndex = const Value.absent(),
     this.combateRoleIndex = const Value.absent(),
     this.treasureTypeIndex = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   MenaceTableCompanion.insert({
@@ -5979,6 +5881,8 @@ class MenaceTableCompanion extends UpdateCompanion<MenaceTableData> {
     required int creatureSizeIndex,
     required int combateRoleIndex,
     this.treasureTypeIndex = const Value.absent(),
+    required int createdAt,
+    required int updatedAt,
     this.rowid = const Value.absent(),
   })  : uuid = Value(uuid),
         name = Value(name),
@@ -5999,7 +5903,9 @@ class MenaceTableCompanion extends UpdateCompanion<MenaceTableData> {
         charisma = Value(charisma),
         typeIndex = Value(typeIndex),
         creatureSizeIndex = Value(creatureSizeIndex),
-        combateRoleIndex = Value(combateRoleIndex);
+        combateRoleIndex = Value(combateRoleIndex),
+        createdAt = Value(createdAt),
+        updatedAt = Value(updatedAt);
   static Insertable<MenaceTableData> custom({
     Expression<String>? uuid,
     Expression<String>? name,
@@ -6030,6 +5936,8 @@ class MenaceTableCompanion extends UpdateCompanion<MenaceTableData> {
     Expression<int>? creatureSizeIndex,
     Expression<int>? combateRoleIndex,
     Expression<int>? treasureTypeIndex,
+    Expression<int>? createdAt,
+    Expression<int>? updatedAt,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -6062,6 +5970,8 @@ class MenaceTableCompanion extends UpdateCompanion<MenaceTableData> {
       if (creatureSizeIndex != null) 'creature_size_index': creatureSizeIndex,
       if (combateRoleIndex != null) 'combate_role_index': combateRoleIndex,
       if (treasureTypeIndex != null) 'treasure_type_index': treasureTypeIndex,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -6096,6 +6006,8 @@ class MenaceTableCompanion extends UpdateCompanion<MenaceTableData> {
       Value<int>? creatureSizeIndex,
       Value<int>? combateRoleIndex,
       Value<int?>? treasureTypeIndex,
+      Value<int>? createdAt,
+      Value<int>? updatedAt,
       Value<int>? rowid}) {
     return MenaceTableCompanion(
       uuid: uuid ?? this.uuid,
@@ -6127,6 +6039,8 @@ class MenaceTableCompanion extends UpdateCompanion<MenaceTableData> {
       creatureSizeIndex: creatureSizeIndex ?? this.creatureSizeIndex,
       combateRoleIndex: combateRoleIndex ?? this.combateRoleIndex,
       treasureTypeIndex: treasureTypeIndex ?? this.treasureTypeIndex,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -6221,6 +6135,12 @@ class MenaceTableCompanion extends UpdateCompanion<MenaceTableData> {
     if (treasureTypeIndex.present) {
       map['treasure_type_index'] = Variable<int>(treasureTypeIndex.value);
     }
+    if (createdAt.present) {
+      map['created_at'] = Variable<int>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<int>(updatedAt.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -6259,6 +6179,8 @@ class MenaceTableCompanion extends UpdateCompanion<MenaceTableData> {
           ..write('creatureSizeIndex: $creatureSizeIndex, ')
           ..write('combateRoleIndex: $combateRoleIndex, ')
           ..write('treasureTypeIndex: $treasureTypeIndex, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -14574,6 +14496,228 @@ class MenaceLinkBoardTableCompanion
   }
 }
 
+class $ConfigTableTable extends ConfigTable
+    with TableInfo<$ConfigTableTable, ConfigTableData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ConfigTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(1));
+  static const VerificationMeta _modeIndexMeta =
+      const VerificationMeta('modeIndex');
+  @override
+  late final GeneratedColumn<int> modeIndex = GeneratedColumn<int>(
+      'mode_index', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _showApresetationMeta =
+      const VerificationMeta('showApresetation');
+  @override
+  late final GeneratedColumn<bool> showApresetation = GeneratedColumn<bool>(
+      'show_apresetation', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'CHECK ("show_apresetation" IN (0, 1))'),
+      defaultValue: const Constant(false));
+  @override
+  List<GeneratedColumn> get $columns => [id, modeIndex, showApresetation];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'config_table';
+  @override
+  VerificationContext validateIntegrity(Insertable<ConfigTableData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('mode_index')) {
+      context.handle(_modeIndexMeta,
+          modeIndex.isAcceptableOrUnknown(data['mode_index']!, _modeIndexMeta));
+    }
+    if (data.containsKey('show_apresetation')) {
+      context.handle(
+          _showApresetationMeta,
+          showApresetation.isAcceptableOrUnknown(
+              data['show_apresetation']!, _showApresetationMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  ConfigTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ConfigTableData(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      modeIndex: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}mode_index'])!,
+      showApresetation: attachedDatabase.typeMapping.read(
+          DriftSqlType.bool, data['${effectivePrefix}show_apresetation'])!,
+    );
+  }
+
+  @override
+  $ConfigTableTable createAlias(String alias) {
+    return $ConfigTableTable(attachedDatabase, alias);
+  }
+}
+
+class ConfigTableData extends DataClass implements Insertable<ConfigTableData> {
+  final int id;
+  final int modeIndex;
+  final bool showApresetation;
+  const ConfigTableData(
+      {required this.id,
+      required this.modeIndex,
+      required this.showApresetation});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['mode_index'] = Variable<int>(modeIndex);
+    map['show_apresetation'] = Variable<bool>(showApresetation);
+    return map;
+  }
+
+  ConfigTableCompanion toCompanion(bool nullToAbsent) {
+    return ConfigTableCompanion(
+      id: Value(id),
+      modeIndex: Value(modeIndex),
+      showApresetation: Value(showApresetation),
+    );
+  }
+
+  factory ConfigTableData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ConfigTableData(
+      id: serializer.fromJson<int>(json['id']),
+      modeIndex: serializer.fromJson<int>(json['modeIndex']),
+      showApresetation: serializer.fromJson<bool>(json['showApresetation']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'modeIndex': serializer.toJson<int>(modeIndex),
+      'showApresetation': serializer.toJson<bool>(showApresetation),
+    };
+  }
+
+  ConfigTableData copyWith({int? id, int? modeIndex, bool? showApresetation}) =>
+      ConfigTableData(
+        id: id ?? this.id,
+        modeIndex: modeIndex ?? this.modeIndex,
+        showApresetation: showApresetation ?? this.showApresetation,
+      );
+  ConfigTableData copyWithCompanion(ConfigTableCompanion data) {
+    return ConfigTableData(
+      id: data.id.present ? data.id.value : this.id,
+      modeIndex: data.modeIndex.present ? data.modeIndex.value : this.modeIndex,
+      showApresetation: data.showApresetation.present
+          ? data.showApresetation.value
+          : this.showApresetation,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ConfigTableData(')
+          ..write('id: $id, ')
+          ..write('modeIndex: $modeIndex, ')
+          ..write('showApresetation: $showApresetation')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, modeIndex, showApresetation);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ConfigTableData &&
+          other.id == this.id &&
+          other.modeIndex == this.modeIndex &&
+          other.showApresetation == this.showApresetation);
+}
+
+class ConfigTableCompanion extends UpdateCompanion<ConfigTableData> {
+  final Value<int> id;
+  final Value<int> modeIndex;
+  final Value<bool> showApresetation;
+  const ConfigTableCompanion({
+    this.id = const Value.absent(),
+    this.modeIndex = const Value.absent(),
+    this.showApresetation = const Value.absent(),
+  });
+  ConfigTableCompanion.insert({
+    this.id = const Value.absent(),
+    this.modeIndex = const Value.absent(),
+    this.showApresetation = const Value.absent(),
+  });
+  static Insertable<ConfigTableData> custom({
+    Expression<int>? id,
+    Expression<int>? modeIndex,
+    Expression<bool>? showApresetation,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (modeIndex != null) 'mode_index': modeIndex,
+      if (showApresetation != null) 'show_apresetation': showApresetation,
+    });
+  }
+
+  ConfigTableCompanion copyWith(
+      {Value<int>? id, Value<int>? modeIndex, Value<bool>? showApresetation}) {
+    return ConfigTableCompanion(
+      id: id ?? this.id,
+      modeIndex: modeIndex ?? this.modeIndex,
+      showApresetation: showApresetation ?? this.showApresetation,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (modeIndex.present) {
+      map['mode_index'] = Variable<int>(modeIndex.value);
+    }
+    if (showApresetation.present) {
+      map['show_apresetation'] = Variable<bool>(showApresetation.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ConfigTableCompanion(')
+          ..write('id: $id, ')
+          ..write('modeIndex: $modeIndex, ')
+          ..write('showApresetation: $showApresetation')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -14593,8 +14737,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $BoardNoteTableTable boardNoteTable = $BoardNoteTableTable(this);
   late final $BoardCombatTableTable boardCombatTable =
       $BoardCombatTableTable(this);
-  late final $BoardClasseCharacterTableTable boardClasseCharacterTable =
-      $BoardClasseCharacterTableTable(this);
   late final $MenaceTableTable menaceTable = $MenaceTableTable(this);
   late final $AdventureBackpackTableTable adventureBackpackTable =
       $AdventureBackpackTableTable(this);
@@ -14621,11 +14763,13 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $ExpertiseTableTable expertiseTable = $ExpertiseTableTable(this);
   late final $MenaceLinkBoardTableTable menaceLinkBoardTable =
       $MenaceLinkBoardTableTable(this);
+  late final $ConfigTableTable configTable = $ConfigTableTable(this);
   late final GrimoireDAO grimoireDAO = GrimoireDAO(this as AppDatabase);
   late final BoardDAO boardDAO = BoardDAO(this as AppDatabase);
   late final MagicCharacterDAO magicCharacterDAO =
       MagicCharacterDAO(this as AppDatabase);
   late final MenaceDAO menaceDAO = MenaceDAO(this as AppDatabase);
+  late final ConfigDAO configDAO = ConfigDAO(this as AppDatabase);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -14641,7 +14785,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         boardCharacterTable,
         boardNoteTable,
         boardCombatTable,
-        boardClasseCharacterTable,
         menaceTable,
         adventureBackpackTable,
         equipmentTable,
@@ -14659,7 +14802,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         actionHandToHandTable,
         actionDistanceAttackTable,
         expertiseTable,
-        menaceLinkBoardTable
+        menaceLinkBoardTable,
+        configTable
       ];
 }
 
@@ -14669,8 +14813,8 @@ typedef $$GrimoireTableTableCreateCompanionBuilder = GrimoireTableCompanion
   required String name,
   Value<String?> desc,
   required String iconAsset,
-  required DateTime createdAt,
-  required DateTime updatedAt,
+  required int createdAt,
+  required int updatedAt,
   Value<int> rowid,
 });
 typedef $$GrimoireTableTableUpdateCompanionBuilder = GrimoireTableCompanion
@@ -14679,8 +14823,8 @@ typedef $$GrimoireTableTableUpdateCompanionBuilder = GrimoireTableCompanion
   Value<String> name,
   Value<String?> desc,
   Value<String> iconAsset,
-  Value<DateTime> createdAt,
-  Value<DateTime> updatedAt,
+  Value<int> createdAt,
+  Value<int> updatedAt,
   Value<int> rowid,
 });
 
@@ -14705,8 +14849,8 @@ class $$GrimoireTableTableTableManager extends RootTableManager<
             Value<String> name = const Value.absent(),
             Value<String?> desc = const Value.absent(),
             Value<String> iconAsset = const Value.absent(),
-            Value<DateTime> createdAt = const Value.absent(),
-            Value<DateTime> updatedAt = const Value.absent(),
+            Value<int> createdAt = const Value.absent(),
+            Value<int> updatedAt = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               GrimoireTableCompanion(
@@ -14723,8 +14867,8 @@ class $$GrimoireTableTableTableManager extends RootTableManager<
             required String name,
             Value<String?> desc = const Value.absent(),
             required String iconAsset,
-            required DateTime createdAt,
-            required DateTime updatedAt,
+            required int createdAt,
+            required int updatedAt,
             Value<int> rowid = const Value.absent(),
           }) =>
               GrimoireTableCompanion.insert(
@@ -14762,12 +14906,12 @@ class $$GrimoireTableTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<DateTime> get createdAt => $state.composableBuilder(
+  ColumnFilters<int> get createdAt => $state.composableBuilder(
       column: $state.table.createdAt,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<DateTime> get updatedAt => $state.composableBuilder(
+  ColumnFilters<int> get updatedAt => $state.composableBuilder(
       column: $state.table.updatedAt,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
@@ -14796,12 +14940,12 @@ class $$GrimoireTableTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<DateTime> get createdAt => $state.composableBuilder(
+  ColumnOrderings<int> get createdAt => $state.composableBuilder(
       column: $state.table.createdAt,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<DateTime> get updatedAt => $state.composableBuilder(
+  ColumnOrderings<int> get updatedAt => $state.composableBuilder(
       column: $state.table.updatedAt,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
@@ -15168,8 +15312,8 @@ typedef $$BoardTableTableCreateCompanionBuilder = BoardTableCompanion Function({
   required String adventureName,
   Value<String?> bannerPath,
   Value<String?> desc,
-  required DateTime createdAt,
-  required DateTime updatedAt,
+  required int createdAt,
+  required int updatedAt,
   Value<String?> whatsGroupLink,
   Value<String?> telegramGroupLink,
   Value<String?> discordServerLink,
@@ -15185,8 +15329,8 @@ typedef $$BoardTableTableUpdateCompanionBuilder = BoardTableCompanion Function({
   Value<String> adventureName,
   Value<String?> bannerPath,
   Value<String?> desc,
-  Value<DateTime> createdAt,
-  Value<DateTime> updatedAt,
+  Value<int> createdAt,
+  Value<int> updatedAt,
   Value<String?> whatsGroupLink,
   Value<String?> telegramGroupLink,
   Value<String?> discordServerLink,
@@ -15219,8 +15363,8 @@ class $$BoardTableTableTableManager extends RootTableManager<
             Value<String> adventureName = const Value.absent(),
             Value<String?> bannerPath = const Value.absent(),
             Value<String?> desc = const Value.absent(),
-            Value<DateTime> createdAt = const Value.absent(),
-            Value<DateTime> updatedAt = const Value.absent(),
+            Value<int> createdAt = const Value.absent(),
+            Value<int> updatedAt = const Value.absent(),
             Value<String?> whatsGroupLink = const Value.absent(),
             Value<String?> telegramGroupLink = const Value.absent(),
             Value<String?> discordServerLink = const Value.absent(),
@@ -15253,8 +15397,8 @@ class $$BoardTableTableTableManager extends RootTableManager<
             required String adventureName,
             Value<String?> bannerPath = const Value.absent(),
             Value<String?> desc = const Value.absent(),
-            required DateTime createdAt,
-            required DateTime updatedAt,
+            required int createdAt,
+            required int updatedAt,
             Value<String?> whatsGroupLink = const Value.absent(),
             Value<String?> telegramGroupLink = const Value.absent(),
             Value<String?> discordServerLink = const Value.absent(),
@@ -15320,12 +15464,12 @@ class $$BoardTableTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<DateTime> get createdAt => $state.composableBuilder(
+  ColumnFilters<int> get createdAt => $state.composableBuilder(
       column: $state.table.createdAt,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<DateTime> get updatedAt => $state.composableBuilder(
+  ColumnFilters<int> get updatedAt => $state.composableBuilder(
       column: $state.table.updatedAt,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
@@ -15394,12 +15538,12 @@ class $$BoardTableTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<DateTime> get createdAt => $state.composableBuilder(
+  ColumnOrderings<int> get createdAt => $state.composableBuilder(
       column: $state.table.createdAt,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<DateTime> get updatedAt => $state.composableBuilder(
+  ColumnOrderings<int> get updatedAt => $state.composableBuilder(
       column: $state.table.updatedAt,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
@@ -15794,13 +15938,14 @@ typedef $$BoardPlayerTableTableCreateCompanionBuilder
   Value<String?> imagePath,
   Value<String?> imageAsset,
   required int broodIndex,
-  required DateTime createdAt,
-  required DateTime updatedAt,
+  required int createdAt,
+  required int updatedAt,
   required int life,
   required int mana,
   required int defense,
   required int initiative,
   required bool isAlive,
+  required String classeIndexes,
   Value<int> rowid,
 });
 typedef $$BoardPlayerTableTableUpdateCompanionBuilder
@@ -15812,13 +15957,14 @@ typedef $$BoardPlayerTableTableUpdateCompanionBuilder
   Value<String?> imagePath,
   Value<String?> imageAsset,
   Value<int> broodIndex,
-  Value<DateTime> createdAt,
-  Value<DateTime> updatedAt,
+  Value<int> createdAt,
+  Value<int> updatedAt,
   Value<int> life,
   Value<int> mana,
   Value<int> defense,
   Value<int> initiative,
   Value<bool> isAlive,
+  Value<String> classeIndexes,
   Value<int> rowid,
 });
 
@@ -15847,13 +15993,14 @@ class $$BoardPlayerTableTableTableManager extends RootTableManager<
             Value<String?> imagePath = const Value.absent(),
             Value<String?> imageAsset = const Value.absent(),
             Value<int> broodIndex = const Value.absent(),
-            Value<DateTime> createdAt = const Value.absent(),
-            Value<DateTime> updatedAt = const Value.absent(),
+            Value<int> createdAt = const Value.absent(),
+            Value<int> updatedAt = const Value.absent(),
             Value<int> life = const Value.absent(),
             Value<int> mana = const Value.absent(),
             Value<int> defense = const Value.absent(),
             Value<int> initiative = const Value.absent(),
             Value<bool> isAlive = const Value.absent(),
+            Value<String> classeIndexes = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               BoardPlayerTableCompanion(
@@ -15871,6 +16018,7 @@ class $$BoardPlayerTableTableTableManager extends RootTableManager<
             defense: defense,
             initiative: initiative,
             isAlive: isAlive,
+            classeIndexes: classeIndexes,
             rowid: rowid,
           ),
           createCompanionCallback: ({
@@ -15881,13 +16029,14 @@ class $$BoardPlayerTableTableTableManager extends RootTableManager<
             Value<String?> imagePath = const Value.absent(),
             Value<String?> imageAsset = const Value.absent(),
             required int broodIndex,
-            required DateTime createdAt,
-            required DateTime updatedAt,
+            required int createdAt,
+            required int updatedAt,
             required int life,
             required int mana,
             required int defense,
             required int initiative,
             required bool isAlive,
+            required String classeIndexes,
             Value<int> rowid = const Value.absent(),
           }) =>
               BoardPlayerTableCompanion.insert(
@@ -15905,6 +16054,7 @@ class $$BoardPlayerTableTableTableManager extends RootTableManager<
             defense: defense,
             initiative: initiative,
             isAlive: isAlive,
+            classeIndexes: classeIndexes,
             rowid: rowid,
           ),
         ));
@@ -15948,12 +16098,12 @@ class $$BoardPlayerTableTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<DateTime> get createdAt => $state.composableBuilder(
+  ColumnFilters<int> get createdAt => $state.composableBuilder(
       column: $state.table.createdAt,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<DateTime> get updatedAt => $state.composableBuilder(
+  ColumnFilters<int> get updatedAt => $state.composableBuilder(
       column: $state.table.updatedAt,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
@@ -15980,6 +16130,11 @@ class $$BoardPlayerTableTableFilterComposer
 
   ColumnFilters<bool> get isAlive => $state.composableBuilder(
       column: $state.table.isAlive,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get classeIndexes => $state.composableBuilder(
+      column: $state.table.classeIndexes,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 }
@@ -16022,12 +16177,12 @@ class $$BoardPlayerTableTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<DateTime> get createdAt => $state.composableBuilder(
+  ColumnOrderings<int> get createdAt => $state.composableBuilder(
       column: $state.table.createdAt,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<DateTime> get updatedAt => $state.composableBuilder(
+  ColumnOrderings<int> get updatedAt => $state.composableBuilder(
       column: $state.table.updatedAt,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
@@ -16056,6 +16211,11 @@ class $$BoardPlayerTableTableOrderingComposer
       column: $state.table.isAlive,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get classeIndexes => $state.composableBuilder(
+      column: $state.table.classeIndexes,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
 typedef $$BoardCharacterTableTableCreateCompanionBuilder
@@ -16067,8 +16227,9 @@ typedef $$BoardCharacterTableTableCreateCompanionBuilder
   Value<String?> imagePath,
   Value<String?> imageAsset,
   required int broodIndex,
-  required DateTime createdAt,
-  required DateTime updatedAt,
+  required int createdAt,
+  required int updatedAt,
+  required String classeIndexes,
   Value<int> rowid,
 });
 typedef $$BoardCharacterTableTableUpdateCompanionBuilder
@@ -16080,8 +16241,9 @@ typedef $$BoardCharacterTableTableUpdateCompanionBuilder
   Value<String?> imagePath,
   Value<String?> imageAsset,
   Value<int> broodIndex,
-  Value<DateTime> createdAt,
-  Value<DateTime> updatedAt,
+  Value<int> createdAt,
+  Value<int> updatedAt,
+  Value<String> classeIndexes,
   Value<int> rowid,
 });
 
@@ -16110,8 +16272,9 @@ class $$BoardCharacterTableTableTableManager extends RootTableManager<
             Value<String?> imagePath = const Value.absent(),
             Value<String?> imageAsset = const Value.absent(),
             Value<int> broodIndex = const Value.absent(),
-            Value<DateTime> createdAt = const Value.absent(),
-            Value<DateTime> updatedAt = const Value.absent(),
+            Value<int> createdAt = const Value.absent(),
+            Value<int> updatedAt = const Value.absent(),
+            Value<String> classeIndexes = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               BoardCharacterTableCompanion(
@@ -16124,6 +16287,7 @@ class $$BoardCharacterTableTableTableManager extends RootTableManager<
             broodIndex: broodIndex,
             createdAt: createdAt,
             updatedAt: updatedAt,
+            classeIndexes: classeIndexes,
             rowid: rowid,
           ),
           createCompanionCallback: ({
@@ -16134,8 +16298,9 @@ class $$BoardCharacterTableTableTableManager extends RootTableManager<
             Value<String?> imagePath = const Value.absent(),
             Value<String?> imageAsset = const Value.absent(),
             required int broodIndex,
-            required DateTime createdAt,
-            required DateTime updatedAt,
+            required int createdAt,
+            required int updatedAt,
+            required String classeIndexes,
             Value<int> rowid = const Value.absent(),
           }) =>
               BoardCharacterTableCompanion.insert(
@@ -16148,6 +16313,7 @@ class $$BoardCharacterTableTableTableManager extends RootTableManager<
             broodIndex: broodIndex,
             createdAt: createdAt,
             updatedAt: updatedAt,
+            classeIndexes: classeIndexes,
             rowid: rowid,
           ),
         ));
@@ -16191,13 +16357,18 @@ class $$BoardCharacterTableTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<DateTime> get createdAt => $state.composableBuilder(
+  ColumnFilters<int> get createdAt => $state.composableBuilder(
       column: $state.table.createdAt,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<DateTime> get updatedAt => $state.composableBuilder(
+  ColumnFilters<int> get updatedAt => $state.composableBuilder(
       column: $state.table.updatedAt,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get classeIndexes => $state.composableBuilder(
+      column: $state.table.classeIndexes,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 }
@@ -16240,13 +16411,18 @@ class $$BoardCharacterTableTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<DateTime> get createdAt => $state.composableBuilder(
+  ColumnOrderings<int> get createdAt => $state.composableBuilder(
       column: $state.table.createdAt,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<DateTime> get updatedAt => $state.composableBuilder(
+  ColumnOrderings<int> get updatedAt => $state.composableBuilder(
       column: $state.table.updatedAt,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get classeIndexes => $state.composableBuilder(
+      column: $state.table.classeIndexes,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
@@ -16257,8 +16433,8 @@ typedef $$BoardNoteTableTableCreateCompanionBuilder = BoardNoteTableCompanion
   required String boardUuid,
   required String note,
   required bool isFavorited,
-  required DateTime createdAt,
-  required DateTime updatedAt,
+  required int createdAt,
+  required int updatedAt,
   Value<int> rowid,
 });
 typedef $$BoardNoteTableTableUpdateCompanionBuilder = BoardNoteTableCompanion
@@ -16267,8 +16443,8 @@ typedef $$BoardNoteTableTableUpdateCompanionBuilder = BoardNoteTableCompanion
   Value<String> boardUuid,
   Value<String> note,
   Value<bool> isFavorited,
-  Value<DateTime> createdAt,
-  Value<DateTime> updatedAt,
+  Value<int> createdAt,
+  Value<int> updatedAt,
   Value<int> rowid,
 });
 
@@ -16294,8 +16470,8 @@ class $$BoardNoteTableTableTableManager extends RootTableManager<
             Value<String> boardUuid = const Value.absent(),
             Value<String> note = const Value.absent(),
             Value<bool> isFavorited = const Value.absent(),
-            Value<DateTime> createdAt = const Value.absent(),
-            Value<DateTime> updatedAt = const Value.absent(),
+            Value<int> createdAt = const Value.absent(),
+            Value<int> updatedAt = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               BoardNoteTableCompanion(
@@ -16312,8 +16488,8 @@ class $$BoardNoteTableTableTableManager extends RootTableManager<
             required String boardUuid,
             required String note,
             required bool isFavorited,
-            required DateTime createdAt,
-            required DateTime updatedAt,
+            required int createdAt,
+            required int updatedAt,
             Value<int> rowid = const Value.absent(),
           }) =>
               BoardNoteTableCompanion.insert(
@@ -16351,12 +16527,12 @@ class $$BoardNoteTableTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<DateTime> get createdAt => $state.composableBuilder(
+  ColumnFilters<int> get createdAt => $state.composableBuilder(
       column: $state.table.createdAt,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<DateTime> get updatedAt => $state.composableBuilder(
+  ColumnFilters<int> get updatedAt => $state.composableBuilder(
       column: $state.table.updatedAt,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
@@ -16385,12 +16561,12 @@ class $$BoardNoteTableTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<DateTime> get createdAt => $state.composableBuilder(
+  ColumnOrderings<int> get createdAt => $state.composableBuilder(
       column: $state.table.createdAt,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<DateTime> get updatedAt => $state.composableBuilder(
+  ColumnOrderings<int> get updatedAt => $state.composableBuilder(
       column: $state.table.updatedAt,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
@@ -16541,103 +16717,6 @@ class $$BoardCombatTableTableOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
-typedef $$BoardClasseCharacterTableTableCreateCompanionBuilder
-    = BoardClasseCharacterTableCompanion Function({
-  required String uuid,
-  required String playerUuid,
-  required int typeIndex,
-  Value<int> rowid,
-});
-typedef $$BoardClasseCharacterTableTableUpdateCompanionBuilder
-    = BoardClasseCharacterTableCompanion Function({
-  Value<String> uuid,
-  Value<String> playerUuid,
-  Value<int> typeIndex,
-  Value<int> rowid,
-});
-
-class $$BoardClasseCharacterTableTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $BoardClasseCharacterTableTable,
-    BoardClasseCharacterTableData,
-    $$BoardClasseCharacterTableTableFilterComposer,
-    $$BoardClasseCharacterTableTableOrderingComposer,
-    $$BoardClasseCharacterTableTableCreateCompanionBuilder,
-    $$BoardClasseCharacterTableTableUpdateCompanionBuilder> {
-  $$BoardClasseCharacterTableTableTableManager(
-      _$AppDatabase db, $BoardClasseCharacterTableTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer: $$BoardClasseCharacterTableTableFilterComposer(
-              ComposerState(db, table)),
-          orderingComposer: $$BoardClasseCharacterTableTableOrderingComposer(
-              ComposerState(db, table)),
-          updateCompanionCallback: ({
-            Value<String> uuid = const Value.absent(),
-            Value<String> playerUuid = const Value.absent(),
-            Value<int> typeIndex = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              BoardClasseCharacterTableCompanion(
-            uuid: uuid,
-            playerUuid: playerUuid,
-            typeIndex: typeIndex,
-            rowid: rowid,
-          ),
-          createCompanionCallback: ({
-            required String uuid,
-            required String playerUuid,
-            required int typeIndex,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              BoardClasseCharacterTableCompanion.insert(
-            uuid: uuid,
-            playerUuid: playerUuid,
-            typeIndex: typeIndex,
-            rowid: rowid,
-          ),
-        ));
-}
-
-class $$BoardClasseCharacterTableTableFilterComposer
-    extends FilterComposer<_$AppDatabase, $BoardClasseCharacterTableTable> {
-  $$BoardClasseCharacterTableTableFilterComposer(super.$state);
-  ColumnFilters<String> get uuid => $state.composableBuilder(
-      column: $state.table.uuid,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get playerUuid => $state.composableBuilder(
-      column: $state.table.playerUuid,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get typeIndex => $state.composableBuilder(
-      column: $state.table.typeIndex,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-}
-
-class $$BoardClasseCharacterTableTableOrderingComposer
-    extends OrderingComposer<_$AppDatabase, $BoardClasseCharacterTableTable> {
-  $$BoardClasseCharacterTableTableOrderingComposer(super.$state);
-  ColumnOrderings<String> get uuid => $state.composableBuilder(
-      column: $state.table.uuid,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get playerUuid => $state.composableBuilder(
-      column: $state.table.playerUuid,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get typeIndex => $state.composableBuilder(
-      column: $state.table.typeIndex,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-}
-
 typedef $$MenaceTableTableCreateCompanionBuilder = MenaceTableCompanion
     Function({
   required String uuid,
@@ -16669,6 +16748,8 @@ typedef $$MenaceTableTableCreateCompanionBuilder = MenaceTableCompanion
   required int creatureSizeIndex,
   required int combateRoleIndex,
   Value<int?> treasureTypeIndex,
+  required int createdAt,
+  required int updatedAt,
   Value<int> rowid,
 });
 typedef $$MenaceTableTableUpdateCompanionBuilder = MenaceTableCompanion
@@ -16702,6 +16783,8 @@ typedef $$MenaceTableTableUpdateCompanionBuilder = MenaceTableCompanion
   Value<int> creatureSizeIndex,
   Value<int> combateRoleIndex,
   Value<int?> treasureTypeIndex,
+  Value<int> createdAt,
+  Value<int> updatedAt,
   Value<int> rowid,
 });
 
@@ -16751,6 +16834,8 @@ class $$MenaceTableTableTableManager extends RootTableManager<
             Value<int> creatureSizeIndex = const Value.absent(),
             Value<int> combateRoleIndex = const Value.absent(),
             Value<int?> treasureTypeIndex = const Value.absent(),
+            Value<int> createdAt = const Value.absent(),
+            Value<int> updatedAt = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               MenaceTableCompanion(
@@ -16783,6 +16868,8 @@ class $$MenaceTableTableTableManager extends RootTableManager<
             creatureSizeIndex: creatureSizeIndex,
             combateRoleIndex: combateRoleIndex,
             treasureTypeIndex: treasureTypeIndex,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
             rowid: rowid,
           ),
           createCompanionCallback: ({
@@ -16815,6 +16902,8 @@ class $$MenaceTableTableTableManager extends RootTableManager<
             required int creatureSizeIndex,
             required int combateRoleIndex,
             Value<int?> treasureTypeIndex = const Value.absent(),
+            required int createdAt,
+            required int updatedAt,
             Value<int> rowid = const Value.absent(),
           }) =>
               MenaceTableCompanion.insert(
@@ -16847,6 +16936,8 @@ class $$MenaceTableTableTableManager extends RootTableManager<
             creatureSizeIndex: creatureSizeIndex,
             combateRoleIndex: combateRoleIndex,
             treasureTypeIndex: treasureTypeIndex,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
             rowid: rowid,
           ),
         ));
@@ -16999,6 +17090,16 @@ class $$MenaceTableTableFilterComposer
       column: $state.table.treasureTypeIndex,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get createdAt => $state.composableBuilder(
+      column: $state.table.createdAt,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get updatedAt => $state.composableBuilder(
+      column: $state.table.updatedAt,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
 }
 
 class $$MenaceTableTableOrderingComposer
@@ -17146,6 +17247,16 @@ class $$MenaceTableTableOrderingComposer
 
   ColumnOrderings<int> get treasureTypeIndex => $state.composableBuilder(
       column: $state.table.treasureTypeIndex,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get createdAt => $state.composableBuilder(
+      column: $state.table.createdAt,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get updatedAt => $state.composableBuilder(
+      column: $state.table.updatedAt,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
@@ -20439,6 +20550,96 @@ class $$MenaceLinkBoardTableTableOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
+typedef $$ConfigTableTableCreateCompanionBuilder = ConfigTableCompanion
+    Function({
+  Value<int> id,
+  Value<int> modeIndex,
+  Value<bool> showApresetation,
+});
+typedef $$ConfigTableTableUpdateCompanionBuilder = ConfigTableCompanion
+    Function({
+  Value<int> id,
+  Value<int> modeIndex,
+  Value<bool> showApresetation,
+});
+
+class $$ConfigTableTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $ConfigTableTable,
+    ConfigTableData,
+    $$ConfigTableTableFilterComposer,
+    $$ConfigTableTableOrderingComposer,
+    $$ConfigTableTableCreateCompanionBuilder,
+    $$ConfigTableTableUpdateCompanionBuilder> {
+  $$ConfigTableTableTableManager(_$AppDatabase db, $ConfigTableTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$ConfigTableTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$ConfigTableTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<int> modeIndex = const Value.absent(),
+            Value<bool> showApresetation = const Value.absent(),
+          }) =>
+              ConfigTableCompanion(
+            id: id,
+            modeIndex: modeIndex,
+            showApresetation: showApresetation,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<int> modeIndex = const Value.absent(),
+            Value<bool> showApresetation = const Value.absent(),
+          }) =>
+              ConfigTableCompanion.insert(
+            id: id,
+            modeIndex: modeIndex,
+            showApresetation: showApresetation,
+          ),
+        ));
+}
+
+class $$ConfigTableTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $ConfigTableTable> {
+  $$ConfigTableTableFilterComposer(super.$state);
+  ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get modeIndex => $state.composableBuilder(
+      column: $state.table.modeIndex,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get showApresetation => $state.composableBuilder(
+      column: $state.table.showApresetation,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $$ConfigTableTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $ConfigTableTable> {
+  $$ConfigTableTableOrderingComposer(super.$state);
+  ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get modeIndex => $state.composableBuilder(
+      column: $state.table.modeIndex,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get showApresetation => $state.composableBuilder(
+      column: $state.table.showApresetation,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
 class $AppDatabaseManager {
   final _$AppDatabase _db;
   $AppDatabaseManager(this._db);
@@ -20462,9 +20663,6 @@ class $AppDatabaseManager {
       $$BoardNoteTableTableTableManager(_db, _db.boardNoteTable);
   $$BoardCombatTableTableTableManager get boardCombatTable =>
       $$BoardCombatTableTableTableManager(_db, _db.boardCombatTable);
-  $$BoardClasseCharacterTableTableTableManager get boardClasseCharacterTable =>
-      $$BoardClasseCharacterTableTableTableManager(
-          _db, _db.boardClasseCharacterTable);
   $$MenaceTableTableTableManager get menaceTable =>
       $$MenaceTableTableTableManager(_db, _db.menaceTable);
   $$AdventureBackpackTableTableTableManager get adventureBackpackTable =>
@@ -20503,4 +20701,6 @@ class $AppDatabaseManager {
       $$ExpertiseTableTableTableManager(_db, _db.expertiseTable);
   $$MenaceLinkBoardTableTableTableManager get menaceLinkBoardTable =>
       $$MenaceLinkBoardTableTableTableManager(_db, _db.menaceLinkBoardTable);
+  $$ConfigTableTableTableManager get configTable =>
+      $$ConfigTableTableTableManager(_db, _db.configTable);
 }

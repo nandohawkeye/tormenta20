@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/utils/default_input_validator.dart';
 
@@ -62,11 +61,6 @@ class _BottomSheetAddBoardLinkTitleFieldState extends State<QuantityTextfield> {
             fillColor: palette.backgroundLevelOne,
             helperText: widget.isObrigatory ? 'obrigatório' : null,
             errorText: error,
-            helperStyle: TextStyle(color: palette.textDisable),
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: 6,
-              horizontal: T20UI.spaceSize,
-            ),
           ),
         );
       },

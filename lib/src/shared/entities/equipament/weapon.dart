@@ -51,6 +51,36 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
         _wieldableType = wieldableType;
 
   @override
+  Weapon cloneWith({
+    required String uuid,
+    required String parentUuid,
+  }) {
+    return Weapon(
+      desc: desc,
+      storedIn: storedIn,
+      improvements: improvements,
+      specialMaterial: specialMaterial,
+      type: type,
+      uuid: uuid,
+      parentUuid: parentUuid,
+      name: name,
+      purpose: purpose,
+      wieldableType: _wieldableType,
+      proficiency: proficiency,
+      skills: skills,
+      steps: steps,
+      critical: critical,
+      criticalMultiplier: criticalMultiplier,
+      range: range,
+      dices: dices,
+      price: price,
+      isNatural: isNatural,
+      isUnarmed: isUnarmed,
+      spaceOcuped: _space,
+    );
+  }
+
+  @override
   double get spaceOcuped => _space;
 
   @override

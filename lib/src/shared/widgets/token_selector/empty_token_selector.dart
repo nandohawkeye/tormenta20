@@ -11,12 +11,14 @@ class EmptyTokenSelector extends StatelessWidget {
     required this.size,
     required this.isMenace,
     required this.isEmpty,
+    this.colorBase,
   });
 
   final Function() onEmpty;
   final double size;
   final bool isEmpty;
   final bool isMenace;
+  final Color? colorBase;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class EmptyTokenSelector extends StatelessWidget {
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: palette.backgroundLevelOne,
+                      color: colorBase ?? palette.backgroundLevelOne,
                     ),
                     child: Icon(
                       FontAwesomeIcons.xmark,

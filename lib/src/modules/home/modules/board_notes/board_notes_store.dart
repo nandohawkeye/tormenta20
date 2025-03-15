@@ -3,8 +3,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:get_it/get_it.dart';
-import 'package:tormenta20/src/core/database/app_database.dart';
+import 'package:tormenta20/src/modules/home/modules/board_notes/board_note_storage_service.dart';
 import 'package:tormenta20/src/shared/entities/board/board_note.dart';
 
 class BoardNotesStore extends ChangeNotifier {
@@ -14,8 +13,18 @@ class BoardNotesStore extends ChangeNotifier {
 
   StreamSubscription? _subscription;
 
+  final _storageService = BoardNoteStorageService();
+
+  Future<void> saveNote(BoardNote note) async {
+    await _storageService.saveNote(note);
+  }
+
+  Future<void> deleteNote(BoardNote note) async {
+    await _storageService.deleteNote(note);
+  }
+
   void _initWatch(String boardUuid) async {
-    await GetIt.I<AppDatabase>().boardDAO.watchNotes(boardUuid).then((resp) {
+    await _storageService.watchNotes(boardUuid).then((resp) {
       if (resp.notes != null) {
         _subscription ?? resp.notes?.listen(_setNotes);
       }

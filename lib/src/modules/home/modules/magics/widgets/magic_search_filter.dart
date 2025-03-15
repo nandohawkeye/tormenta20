@@ -47,10 +47,6 @@ class MagicSearchFilter extends StatelessWidget {
                                 color: palette.accent,
                               ),
                             ),
-                            contentPadding: const EdgeInsets.symmetric(
-                              vertical: 9,
-                              horizontal: T20UI.spaceSize,
-                            ),
                           ),
                         ),
                       ),

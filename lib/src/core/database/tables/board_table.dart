@@ -8,8 +8,8 @@ class BoardTable extends Table {
   TextColumn get adventureName => text()();
   TextColumn get bannerPath => text().nullable()();
   TextColumn get desc => text().nullable()();
-  DateTimeColumn get createdAt => dateTime()();
-  DateTimeColumn get updatedAt => dateTime()();
+  IntColumn get createdAt => integer()();
+  IntColumn get updatedAt => integer()();
   TextColumn get whatsGroupLink => text().nullable()();
   TextColumn get telegramGroupLink => text().nullable()();
   TextColumn get discordServerLink => text().nullable()();

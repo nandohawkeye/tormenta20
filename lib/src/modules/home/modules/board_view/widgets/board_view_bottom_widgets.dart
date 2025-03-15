@@ -2,9 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get_it/get_it.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/add_edit_board_screen.dart';
@@ -16,6 +14,7 @@ import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/entities/board/board_combat_ext.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session_ext.dart';
+import 'package:tormenta20/src/shared/failures/failure.dart';
 import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/screen_save_main_buttons.dart';
 
@@ -25,11 +24,13 @@ class BoardViewBottomWidgets extends StatelessWidget {
     super.key,
     required this.createCloseSession,
     required this.showCombat,
+    required this.deleteBoard,
   });
 
   final Board board;
   final Function() createCloseSession;
   final Function() showCombat;
+  final Future<Failure?> Function(Board board) deleteBoard;
 
   @override
   Widget build(BuildContext context) {
@@ -89,10 +90,7 @@ class BoardViewBottomWidgets extends StatelessWidget {
                           child: const ConfirmDeleteBoardBottomsheet(),
                         ).then((result) async {
                           if (result != null) {
-                            await GetIt.I<AppDatabase>()
-                                .boardDAO
-                                .deleteBoard(board)
-                                .then((failure) {
+                            await deleteBoard(board).then((failure) {
                               if (failure == null) {
                                 Navigator.pop(context);
                               }

@@ -12,9 +12,7 @@ extension StringExtensions on String {
     );
   }
 
-  // put here your mapping, this cover chars corresponding to regex [À-ž]
   static const _diacriticsMapping = {
-    //[À-ÿ]
     'À': 'A',
     'Á': 'A',
     'Â': 'A',
@@ -38,7 +36,7 @@ extension StringExtensions on String {
     'Ô': 'O',
     'Õ': 'O',
     'Ö': 'O',
-    '×': 'x', //math multiplication
+    '×': 'x',
     'Ø': 'O',
     'Ù': 'U',
     'Ú': 'U',
@@ -70,7 +68,7 @@ extension StringExtensions on String {
     'ô': 'o',
     'õ': 'o',
     'ö': 'o',
-    '÷': ' ', //math division
+    '÷': ' ',
     'ø': 'o',
     'ù': 'u',
     'ú': 'u',
@@ -79,7 +77,6 @@ extension StringExtensions on String {
     'ý': 'y',
     'þ': 'th',
     'ÿ': 'y',
-    //[Ā-ž] EuropeanLatin
     'Ā': 'A',
     'ā': 'a',
     'Ă': 'A',

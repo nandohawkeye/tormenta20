@@ -14,6 +14,18 @@ class AdventureBackpack extends Backpack {
   int get normalSpaces => 12;
 
   @override
+  AdventureBackpack cloneWith({
+    required String uuid,
+    required String parentUuid,
+  }) {
+    return AdventureBackpack(
+      uuid: uuid,
+      parentUuid: parentUuid,
+      price: price,
+    );
+  }
+
+  @override
   bool operator ==(other) =>
       other is AdventureBackpack &&
       other.uuid == uuid &&

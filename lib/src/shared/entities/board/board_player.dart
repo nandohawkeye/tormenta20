@@ -1,5 +1,5 @@
 import 'package:tormenta20/src/shared/entities/brood.dart';
-import 'package:tormenta20/src/shared/entities/character_classe.dart';
+import 'package:tormenta20/src/shared/entities/classe_type.dart';
 
 class BoardPlayer {
   final String playerName;
@@ -9,7 +9,7 @@ class BoardPlayer {
   final String boardUuid;
   final String characterName;
   final Brood brood;
-  final List<CharacterClasse> classes;
+  final List<ClasseType> classes;
   final DateTime createdAt;
   final DateTime updatedAt;
   final int life;

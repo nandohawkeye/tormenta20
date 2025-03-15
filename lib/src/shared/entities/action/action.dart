@@ -35,6 +35,28 @@ class ActionEnt extends EntityBase {
     this.equipamentUuid,
   });
 
+  ActionEnt cloneWith({
+    required String uuid,
+    required String parentUuid,
+  }) {
+    return ActionEnt(
+      uuid: uuid,
+      parentUuid: parentUuid,
+      name: name,
+      desc: desc,
+      type: type,
+      pm: pm,
+      cd: cd,
+      damageDices: damageDices,
+      extraDamageDices: extraDamageDices,
+      mediumDamageValue: mediumDamageValue,
+      critical: critical,
+      criticalMultiplier: criticalMultiplier,
+      equipament: equipament,
+      equipamentUuid: equipamentUuid,
+    );
+  }
+
   @override
   bool operator ==(other) =>
       other is ActionEnt &&

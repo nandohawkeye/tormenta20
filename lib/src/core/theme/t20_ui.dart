@@ -15,8 +15,10 @@ abstract class T20UI {
   static const EdgeInsets horizontallScreenPadding =
       EdgeInsets.symmetric(horizontal: screenContentSpaceSize);
 
-  static const EdgeInsets formFieldContentPadding =
-      EdgeInsets.symmetric(horizontal: spaceSize, vertical: 14.8);
+  static const EdgeInsets formFieldContentPadding = EdgeInsets.symmetric(
+    vertical: 6,
+    horizontal: T20UI.spaceSize,
+  );
 
   static ShapeBorder defaultShapeBorder(PaletteBase palette) =>
       RoundedRectangleBorder(

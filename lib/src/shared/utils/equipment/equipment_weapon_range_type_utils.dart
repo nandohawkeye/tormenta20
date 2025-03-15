@@ -8,6 +8,8 @@ abstract class EquipmentWeaponRangeTypeUtils {
       return 'Médio';
     } else if (value.contains('long')) {
       return 'Longo';
+    } else if (value.contains('handToHand')) {
+      return 'Corpo-à-corpo';
     } else {
       return value.capitalize().trim();
     }

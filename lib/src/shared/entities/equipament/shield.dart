@@ -26,6 +26,27 @@ class Shield extends Equipment implements Spaceable {
   }) : _space = spaceOcuped;
 
   @override
+  Shield cloneWith({
+    required String uuid,
+    required String parentUuid,
+  }) {
+    return Shield(
+      uuid: uuid,
+      parentUuid: parentUuid,
+      name: name,
+      spaceOcuped: _space,
+      type: type,
+      price: price,
+      defenseBonus: defenseBonus,
+      penalty: penalty,
+      desc: desc,
+      storedIn: storedIn,
+      improvements: improvements,
+      specialMaterial: specialMaterial,
+    );
+  }
+
+  @override
   double get spaceOcuped => _space;
 
   @override

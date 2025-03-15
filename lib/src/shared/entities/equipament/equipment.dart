@@ -19,6 +19,20 @@ class Equipment extends EntityBase {
     this.specialMaterial,
   });
 
+  Equipment cloneWith({
+    required String uuid,
+    required String parentUuid,
+  }) {
+    return Equipment(
+      uuid: uuid,
+      parentUuid: parentUuid,
+      name: name,
+      storedIn: storedIn,
+      improvements: improvements,
+      specialMaterial: specialMaterial,
+    );
+  }
+
   @override
   bool operator ==(other) =>
       other is Equipment &&

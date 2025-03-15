@@ -25,6 +25,24 @@ class MagicMenace extends EntityBase {
     required this.magicBaseId,
   });
 
+  MagicMenace cloneWith({
+    required String uuid,
+    required String menaceUuid,
+  }) {
+    return MagicMenace(
+      uuid: uuid,
+      menaceUuid: menaceUuid,
+      name: name,
+      resumedDesc: resumedDesc,
+      magicBaseId: magicBaseId,
+      pm: pm,
+      cd: cd,
+      damageDices: damageDices,
+      extraDamageDices: extraDamageDices,
+      mediumDamageValue: mediumDamageValue,
+    );
+  }
+
   @override
   bool operator ==(other) =>
       other is MagicMenace &&

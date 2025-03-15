@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_final_fields
 
-import 'package:get_it/get_it.dart';
-import 'package:tormenta20/src/core/database/app_database.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_board/add_edit_board_storage_service.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link.dart';
 import 'package:tormenta20/src/shared/entities/board/board_material.dart';
@@ -35,11 +34,12 @@ class AddEditBoardController {
         title: 'Mapa de Arton',
         link: 'https://mapadearton.fichasdenimb.com.br',
       ));
-      _dicordLink = 'https://discord.gg/9DcyWYXR';
     }
   }
 
-  final _dao = GetIt.I<AppDatabase>().boardDAO;
+  final _storageService = AddEditBoardStorageService();
+
+  // final _dao = GetIt.I<AppDatabase>().boardDAO;
 
   DateTime? _createdAt;
 
@@ -151,8 +151,8 @@ class AddEditBoardController {
       characters: [],
     );
 
-    final failure = await _dao.saveBoard(
-      entity: board,
+    final failure = await _storageService.saveBoard(
+      board: board,
       materialsToDelete: _materialsToDelete,
       linksToDelete: _linksToDelete,
     );

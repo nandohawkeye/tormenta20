@@ -51,8 +51,6 @@ class _InitBoardFieldState extends State<InitBoardField> {
               );
             }
 
-            boards.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
-
             return SizedBox(
               height: 225 * context.realTextScale,
               width: double.infinity,

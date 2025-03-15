@@ -1,8 +1,7 @@
 // ignore_for_file: prefer_final_fields
 
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:tormenta20/src/core/database/app_database.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/add_edit_menace_storage_service.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_edit_menace_actions_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_edit_menace_combate_role_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/stores/add_edit_menace_equipments_store.dart';
@@ -23,6 +22,7 @@ class AddEditMenaceController {
     stage = ValueNotifier<int>(1);
     percent = ValueNotifier<double>(0.0);
     if (menace != null) {
+      _createdAt = menace.createdAt;
       _uuid = menace.uuid;
       _divinityId = menace.divinityId;
       _displacement = menace.displacement;
@@ -71,6 +71,8 @@ class AddEditMenaceController {
       _uuid = const Uuid().v4();
     }
   }
+
+  DateTime? _createdAt;
 
   late final String _uuid;
   String get menaceUuid => _uuid;
@@ -313,8 +315,13 @@ class AddEditMenaceController {
   List<ActionEnt> _actionsToDelete = [];
   void addActionsToDelete(ActionEnt value) => _actionsToDelete.add(value);
 
+  final _storageService = AddEditMenaceStorageService();
+
   Future<Menace?> onSave() async {
+    final updatedAt = DateTime.now();
     final menace = Menace(
+      createdAt: _createdAt ?? updatedAt,
+      updatedAt: updatedAt,
       uuid: _uuid,
       name: _name!,
       nd: _nd!,
@@ -353,14 +360,14 @@ class AddEditMenaceController {
       boardsLinkeds: [],
     );
 
-    final result = await GetIt.I<AppDatabase>().menaceDAO.saveMenace(
-          entity: menace,
-          magicsToDelete: _magicsToDelete,
-          skillsToDelete: _skillsToDelete,
-          expertisesToDelete: _expertisesToDelete,
-          actionsToDelete: _actionsToDelete,
-          equipmentsToDelete: _equipmentsToDelete,
-        );
+    final result = await _storageService.saveMenace(
+      menace: menace,
+      magicsToDelete: _magicsToDelete,
+      skillsToDelete: _skillsToDelete,
+      expertisesToDelete: _expertisesToDelete,
+      actionsToDelete: _actionsToDelete,
+      equipmentsToDelete: _equipmentsToDelete,
+    );
 
     if (result == null) {
       return menace;

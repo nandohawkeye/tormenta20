@@ -12,12 +12,12 @@ import 'package:tormenta20/src/shared/entities/menace_link_board.dart';
 class Board {
   final String uuid;
   final String name;
-  final String? bannerPath;
   final String adventureName;
-  final String? desc;
-  final int level;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final String? bannerPath;
+  final String? desc;
+  final int? level;
   final List<BoardMaterial> materials;
   final List<BoardLink> links;
   final List<BoardSession> sessions;

@@ -7,8 +7,8 @@ abstract class BoardNoteAdapters {
     return BoardNote(
       uuid: data.uuid,
       note: data.note,
-      createdAt: data.createdAt,
-      updatedAt: data.updatedAt,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(data.createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data.updatedAt),
       boardUuid: data.boardUuid,
       isFavorited: data.isFavorited,
     );
@@ -20,8 +20,8 @@ abstract class BoardNoteAdapters {
       boardUuid: Value<String>(entity.boardUuid),
       note: Value<String>(entity.note),
       isFavorited: Value<bool>(entity.isFavorited),
-      createdAt: Value<DateTime>(entity.createdAt),
-      updatedAt: Value<DateTime>(entity.updatedAt),
+      createdAt: Value<int>(entity.createdAt.millisecondsSinceEpoch),
+      updatedAt: Value<int>(entity.updatedAt.millisecondsSinceEpoch),
     );
   }
 }

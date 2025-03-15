@@ -12,6 +12,7 @@ class ScreenSaveMainButtons extends StatelessWidget {
     this.onBack,
     this.label,
     this.extraLeftWidgets,
+    this.extraTopWidgets,
   });
 
   final String? label;
@@ -19,12 +20,14 @@ class ScreenSaveMainButtons extends StatelessWidget {
   final Function()? onBack;
   final List<Widget>? extraLeftWidgets;
   final List<Widget>? extraRightWidgets;
+  final List<Widget>? extraTopWidgets;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+        ...?extraTopWidgets,
         const Divider(),
         Padding(
           padding: T20UI.allPadding,

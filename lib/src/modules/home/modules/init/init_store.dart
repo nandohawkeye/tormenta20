@@ -2,23 +2,23 @@
 
 import 'dart:async';
 import 'package:flutter/foundation.dart';
-import 'package:get_it/get_it.dart';
-import 'package:tormenta20/src/core/database/app_database.dart';
+import 'package:tormenta20/src/modules/home/modules/init/init_storage_service.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/entities/menace.dart';
 
 class InitStore extends ChangeNotifier {
   StreamSubscription? _subBoards;
   StreamSubscription? _subMenaces;
+  final _storageService = InitStorageService();
 
   Future<InitStore> init() async {
-    await GetIt.I<AppDatabase>().boardDAO.watchBoards().then((resp) {
+    _storageService.watchBoards().then((resp) {
       if (resp.boards != null) {
         _subBoards ??= resp.boards?.listen(_setBoards);
       }
     });
 
-    await GetIt.I<AppDatabase>().menaceDAO.watchMenaces().then((resp) {
+    _storageService.watchMenaces().then((resp) {
       if (resp.menaces != null) {
         _subMenaces ??= resp.menaces?.listen(_setMenaces);
       }

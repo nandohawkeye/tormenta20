@@ -12,6 +12,18 @@ class Saddlebag extends Equipment implements HasSpace {
   }) : super(name: 'Alforja');
 
   @override
+  Saddlebag cloneWith({
+    required String uuid,
+    required String parentUuid,
+  }) {
+    return Saddlebag(
+      uuid: uuid,
+      parentUuid: parentUuid,
+      price: price,
+    );
+  }
+
+  @override
   int get maxSpaces => 10;
 
   @override

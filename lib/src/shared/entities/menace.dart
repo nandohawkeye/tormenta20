@@ -12,29 +12,29 @@ import 'package:tormenta20/src/shared/entities/menace_type.dart';
 import 'package:tormenta20/src/shared/entities/treasure_type.dart';
 
 class Menace extends EntityBase {
-  final String? imagePath;
-  final String? imageAsset;
-  final String? displacement;
   final String name;
   final String nd;
   final String uuid;
   final int initiative;
-  final int perception;
   final int defense;
   final int life;
   final int mana;
-  final int fortResistence;
-  final int refResistence;
-  final int vonResistence;
-  final int strength;
-  final int dexterity;
-  final int constitution;
-  final int intelligence;
-  final int wisdom;
-  final int charisma;
   final MenaceType type;
   final CreatureSizeCategory creatureSize;
   final CombatRole combatRole;
+  final String? imagePath;
+  final String? imageAsset;
+  final String? displacement;
+  final int? perception;
+  final int? fortResistence;
+  final int? refResistence;
+  final int? vonResistence;
+  final int? strength;
+  final int? dexterity;
+  final int? constitution;
+  final int? intelligence;
+  final int? wisdom;
+  final int? charisma;
   final int? divinityId;
   final String? desc;
   //na mecanica de rolagem, rolar um d100 pra dinheiro e item
@@ -46,10 +46,65 @@ class Menace extends EntityBase {
   final List<ActionEnt> actions;
   final List<GeneralSkill> generalSkills;
   final List<MagicMenace> magics;
-
   final List<Equipment> equipments;
   final List<MenaceLinkBoard> boardsLinkeds;
   final List<Board> boards;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  Menace cloneWith({
+    required String? imagePath,
+    required String? imageAsset,
+    required String name,
+    required String uuid,
+    required List<MagicMenace> magics,
+    required List<ActionEnt> actions,
+    required List<Equipment> equipments,
+    required List<GeneralSkill> generalSkills,
+    required List<Expertise> expertises,
+  }) {
+    final createdAt = DateTime.now();
+    return Menace(
+      uuid: uuid,
+      name: name,
+      createdAt: createdAt,
+      updatedAt: createdAt,
+      imagePath: imagePath,
+      imageAsset: imageAsset,
+      magics: magics,
+      actions: actions,
+      equipments: equipments,
+      generalSkills: generalSkills,
+      expertises: expertises,
+      displacement: displacement,
+      desc: desc,
+      extraInfos: extraInfos,
+      divinityId: divinityId,
+      casterInfos: casterInfos,
+      treasures: treasures,
+      nd: nd,
+      type: type,
+      creatureSize: creatureSize,
+      combatRole: combatRole,
+      initiative: initiative,
+      perception: perception,
+      defense: defense,
+      life: life,
+      mana: mana,
+      senses: senses,
+      fortResistence: fortResistence,
+      refResistence: refResistence,
+      vonResistence: vonResistence,
+      strength: strength,
+      charisma: charisma,
+      constitution: constitution,
+      dexterity: dexterity,
+      intelligence: intelligence,
+      wisdom: wisdom,
+      boardsLinkeds: [],
+      boards: [],
+    );
+  }
 
   Menace({
     this.imagePath,
@@ -88,6 +143,8 @@ class Menace extends EntityBase {
     required this.equipments,
     required this.boardsLinkeds,
     required this.boards,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   @override

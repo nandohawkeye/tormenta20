@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 
 class AddEditBoardDescField extends StatelessWidget {
@@ -21,10 +20,6 @@ class AddEditBoardDescField extends StatelessWidget {
       decoration: InputDecoration(
         labelText: 'Descrição',
         fillColor: palette.cardBackground,
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 9,
-          horizontal: T20UI.spaceSize,
-        ),
       ),
     );
   }

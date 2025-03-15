@@ -1,9 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:tormenta20/gen/assets.gen.dart';
-import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/grimorie_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/grimories_store.dart';
@@ -27,10 +25,7 @@ class GrimoireHeader extends StatelessWidget {
         ),
       ).then((result) async {
         if (result != null) {
-          await GetIt.I<AppDatabase>()
-              .grimoireDAO
-              .insertGrimoire(result)
-              .then((failure) {
+          await store.insertGrimoire(result).then((failure) {
             if (failure == null) {
               Navigator.push(
                 context,

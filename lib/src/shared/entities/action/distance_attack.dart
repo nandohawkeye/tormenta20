@@ -19,6 +19,28 @@ class DistanceAttack extends ActionEnt {
   }) : super(type: ActionType.standard);
 
   @override
+  DistanceAttack cloneWith({
+    required String uuid,
+    required String parentUuid,
+  }) {
+    return DistanceAttack(
+      uuid: uuid,
+      parentUuid: parentUuid,
+      name: name,
+      desc: desc,
+      pm: pm,
+      cd: cd,
+      damageDices: damageDices,
+      extraDamageDices: extraDamageDices,
+      mediumDamageValue: mediumDamageValue,
+      critical: critical,
+      criticalMultiplier: criticalMultiplier,
+      equipament: equipament,
+      equipamentUuid: equipamentUuid,
+    );
+  }
+
+  @override
   bool operator ==(other) =>
       other is DistanceAttack &&
       other.uuid == uuid &&

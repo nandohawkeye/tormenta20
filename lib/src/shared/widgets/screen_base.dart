@@ -14,6 +14,7 @@ class ScreenBase extends StatelessWidget {
     this.onSaveLabel,
     this.extraLeftWidgets,
     this.scrollController,
+    this.extraTopWidgets,
   });
 
   final Widget body;
@@ -24,6 +25,7 @@ class ScreenBase extends StatelessWidget {
   final Function()? onBack;
   final String? onSaveLabel;
   final List<Widget>? extraLeftWidgets;
+  final List<Widget>? extraTopWidgets;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +47,7 @@ class ScreenBase extends StatelessWidget {
             onSave: onSave,
             extraLeftWidgets: extraLeftWidgets,
             extraRightWidgets: extraRightWidgets,
+            extraTopWidgets: extraTopWidgets,
             label: onSaveLabel,
             onBack: onBack,
           )

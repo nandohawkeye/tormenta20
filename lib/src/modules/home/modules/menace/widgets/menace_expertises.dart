@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/modules/home/modules/menace/widgets/menace_empty_itens.dart';
+import 'package:tormenta20/src/modules/home/modules/menace/widgets/menace_expertise_card.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise.dart';
-import 'package:tormenta20/src/shared/entities/menace.dart';
-import 'package:tormenta20/src/shared/widgets/view_fields/view_fields.dart';
 
 class MenaceExpertises extends StatelessWidget {
-  const MenaceExpertises(this.menace, {super.key});
+  const MenaceExpertises(this.itens, {super.key});
 
-  final Menace menace;
+  final List<Expertise> itens;
 
   @override
   Widget build(BuildContext context) {
-    if (menace.expertises.isEmpty) {
-      return const SizedBox.shrink();
+    if (itens.isEmpty) {
+      return const MenaceEmptyItens('Sem pericías');
     }
 
-    return ViewFields<Expertise>(
-      label: 'Pericías',
-      itens: menace.expertises,
-      handleTitle: (value) => value,
+    return AnimationConfiguration.synchronized(
+      duration: T20UI.defaultDurationAnimation,
+      child: FadeInAnimation(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [...itens.map(MenaceExpertiseCard.new)],
+        ),
+      ),
     );
   }
 }

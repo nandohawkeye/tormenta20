@@ -12,8 +12,8 @@ abstract class BoardCharacterAdapters {
       imagePath: Value<String?>(entity.imagePath),
       imageAsset: Value<String?>(entity.imageAsset),
       broodIndex: Value<int>(entity.brood.index),
-      createdAt: Value<DateTime>(entity.createdAt),
-      updatedAt: Value<DateTime>(entity.updatedAt),
+      createdAt: Value<int>(entity.createdAt.millisecondsSinceEpoch),
+      updatedAt: Value<int>(entity.updatedAt.millisecondsSinceEpoch),
     );
   }
 }

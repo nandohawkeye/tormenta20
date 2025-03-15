@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get_it/get_it.dart';
-import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/board_notes/board_note_card.dart';
@@ -46,9 +44,9 @@ class _BoardNotesScreenState extends State<BoardNotesScreen> {
         boardUuid: widget.boardUuid,
         note: initial,
       ),
-    ).then((note) {
+    ).then((note) async {
       if (note != null) {
-        GetIt.I<AppDatabase>().boardDAO.saveNote(note);
+        await _store.saveNote(note);
       }
     });
   }
@@ -59,7 +57,7 @@ class _BoardNotesScreenState extends State<BoardNotesScreen> {
       child: const DeleteNoteBottomsheet(),
     ).then((result) async {
       if (result != null) {
-        await GetIt.I<AppDatabase>().boardDAO.deleteNote(note);
+        await _store.deleteNote(note);
       }
     });
   }
@@ -139,25 +137,25 @@ class _BoardNotesScreenState extends State<BoardNotesScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: AnimatedBuilder(
-                        animation: _store,
-                        builder: (_, __) {
-                          final onliFavoriteds = _store.onliFavoriteds;
-                          return MainButton(
-                            label: onliFavoriteds
-                                ? 'Mostrar todas'
-                                : 'Só favoritos',
-                            onTap: _store.changeOnlyFavorited,
-                          );
-                        },
+                      child: MainButton(
+                        label: 'Criar',
+                        onTap: () => _addEditNote(null),
                       ),
                     ),
                     T20UI.spaceWidth,
-                    SimpleButton(
-                      icon: FontAwesomeIcons.plus,
-                      backgroundColor: palette.selected,
-                      iconColor: palette.indicator,
-                      onTap: () => _addEditNote(null),
+                    AnimatedBuilder(
+                      animation: _store,
+                      builder: (_, __) {
+                        final onliFavoriteds = _store.onliFavoriteds;
+                        return SimpleButton(
+                          icon: onliFavoriteds
+                              ? FontAwesomeIcons.star
+                              : FontAwesomeIcons.solidStar,
+                          backgroundColor: palette.selected,
+                          iconColor: palette.indicator,
+                          onTap: _store.changeOnlyFavorited,
+                        );
+                      },
                     ),
                     T20UI.spaceWidth,
                     const SimpleCloseButton()

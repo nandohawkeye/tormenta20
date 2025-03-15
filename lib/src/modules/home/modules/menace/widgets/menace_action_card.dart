@@ -55,7 +55,7 @@ class MenaceActionCard extends StatelessWidget {
                 ),
               const SizedBox(height: 4),
               Text(
-                'Ação - ${((action is HandToHand) || (action is DistanceAttack)) ? '${action.name} - ' : ''}${action.desc}',
+                '${((action is HandToHand) || (action is DistanceAttack)) ? '${action.name} - ' : ''}${action.desc}',
                 maxLines: 2000,
               ),
               if ((action.damageDices != null) ||
@@ -98,11 +98,9 @@ class MenaceActionCard extends StatelessWidget {
                     ),
                 ],
               ),
-              T20UI.spaceHeight,
             ],
           ),
         ),
-        const Divider(),
       ],
     );
   }

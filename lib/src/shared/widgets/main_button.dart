@@ -11,6 +11,7 @@ class MainButton extends StatelessWidget {
     this.backgroundColor,
     this.textColor,
     this.icon,
+    this.isEnable = true,
     this.fontFamily = FontFamily.tormenta,
   });
 
@@ -20,6 +21,7 @@ class MainButton extends StatelessWidget {
   final Color? textColor;
   final IconData? icon;
   final String? fontFamily;
+  final bool isEnable;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class MainButton extends StatelessWidget {
           child: InkWell(
             borderRadius: T20UI.borderRadius,
             splashColor: palette.selected,
-            onTap: onTap,
+            onTap: isEnable ? onTap : null,
             child: Center(
               child: Padding(
                 padding: EdgeInsets.only(right: icon != null ? 10 : 0),

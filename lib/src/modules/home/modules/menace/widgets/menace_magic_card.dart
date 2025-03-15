@@ -36,7 +36,7 @@ class MenaceMagicCard extends StatelessWidget {
                 ),
               const SizedBox(height: 4),
               Text(
-                'Magia - ${magic.resumedDesc}',
+                magic.resumedDesc,
                 maxLines: 2000,
               ),
               if ((magic.damageDices != null) ||
@@ -79,11 +79,9 @@ class MenaceMagicCard extends StatelessWidget {
                     ),
                 ],
               ),
-              T20UI.spaceHeight,
             ],
           ),
         ),
-        const Divider(),
       ],
     );
   }

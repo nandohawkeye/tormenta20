@@ -74,11 +74,6 @@ class AddEditCriticalField extends StatelessWidget {
                           decoration: InputDecoration(
                             labelText: 'Valor',
                             fillColor: palette.backgroundLevelTwo,
-                            helperStyle: TextStyle(color: palette.textDisable),
-                            contentPadding: const EdgeInsets.symmetric(
-                              vertical: 6,
-                              horizontal: T20UI.spaceSize,
-                            ),
                           ),
                         ),
                       ),
@@ -99,11 +94,6 @@ class AddEditCriticalField extends StatelessWidget {
                             prefix:
                                 const Text('x', style: TextStyle(fontSize: 16)),
                             fillColor: palette.backgroundLevelTwo,
-                            helperStyle: TextStyle(color: palette.textDisable),
-                            contentPadding: const EdgeInsets.symmetric(
-                              vertical: 6,
-                              horizontal: T20UI.spaceSize,
-                            ),
                           ),
                         ),
                       ),

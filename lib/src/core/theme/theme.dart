@@ -130,7 +130,11 @@ final ThemeData theme = ThemeData(
     prefixStyle: TextStyle(color: palette.textPrimary, fontSize: 14),
     errorStyle: TextStyle(
         color: palette.accent, fontSize: 12, fontWeight: FontWeight.bold),
-    helperStyle: TextStyle(color: palette.textPrimary, fontSize: 12),
+    helperStyle: TextStyle(
+      color: palette.textDisable,
+      fontSize: 12,
+      fontWeight: FontWeight.w500,
+    ),
     contentPadding: T20UI.formFieldContentPadding,
     suffixIconColor: palette.textDisable,
     errorBorder: T20UI.errorBorder(palette),

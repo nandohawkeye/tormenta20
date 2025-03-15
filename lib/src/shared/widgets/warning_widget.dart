@@ -27,7 +27,7 @@ class WarningWidget extends StatelessWidget {
           style: TextStyle(
             fontSize: 12,
             color: hasError ? palette.accent : palette.textDisable,
-            fontWeight: hasError ? FontWeight.bold : FontWeight.normal,
+            fontWeight: hasError ? FontWeight.bold : FontWeight.w500,
           ),
         ),
       );

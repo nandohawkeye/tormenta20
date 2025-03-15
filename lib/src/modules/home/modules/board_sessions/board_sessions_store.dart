@@ -2,10 +2,8 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:collection/collection.dart';
-
-import 'package:tormenta20/src/core/database/app_database.dart';
+import 'package:tormenta20/src/modules/home/modules/board_sessions/board_sessions_storage_service.dart';
 import 'package:tormenta20/src/shared/entities/board/board_combat.dart';
 import 'package:tormenta20/src/shared/entities/board/board_combat_ext.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session.dart';
@@ -14,7 +12,7 @@ import 'package:uuid/uuid.dart';
 
 class BoardSessionsStore extends ChangeNotifier {
   BoardSessionsStore(this._boardUuid) {
-    _dao.watchSessions(_boardUuid).then((resp) {
+    _storageService.watchSessions(_boardUuid).then((resp) {
       if (resp.sessions != null) {
         _sub ??= resp.sessions?.listen(_putSessions);
       }
@@ -23,7 +21,7 @@ class BoardSessionsStore extends ChangeNotifier {
 
   late final String _boardUuid;
   StreamSubscription? _sub;
-  final _dao = GetIt.I<AppDatabase>().boardDAO;
+  final _storageService = BoardSessionsStorageService();
 
   List<BoardSession> _sessions = [];
   List<BoardSession> get sessions => _sessions;
@@ -36,7 +34,7 @@ class BoardSessionsStore extends ChangeNotifier {
       _sessions.firstWhereOrNull((s) => s.isOpen);
 
   void updateSession(BoardSession session) async {
-    await _dao.saveSession(session);
+    await _storageService.saveSession(session);
   }
 
   void createCloseSession() async {
@@ -48,12 +46,12 @@ class BoardSessionsStore extends ChangeNotifier {
         combats: [],
       );
 
-      await _dao.saveSession(session);
+      await _storageService.saveSession(session);
       return;
     }
 
     final closeSession = currentSession!.copyWith(endAt: DateTime.now());
-    await _dao.saveSession(closeSession);
+    await _storageService.saveSession(closeSession);
   }
 
   void createCloseCombat() async {
@@ -64,7 +62,7 @@ class BoardSessionsStore extends ChangeNotifier {
     if (combats.isNotEmpty) {
       combats.sort((a, b) => b.startedAt.compareTo(a.startedAt));
       final currentCombat = combats.first.copyWith(endAt: DateTime.now());
-      await _dao.saveCombat(currentCombat);
+      await _storageService.saveCombat(currentCombat);
       return;
     }
 
@@ -75,7 +73,7 @@ class BoardSessionsStore extends ChangeNotifier {
       startedAt: DateTime.now(),
       turn: 1,
     );
-    await _dao.saveCombat(combat);
+    await _storageService.saveCombat(combat);
   }
 
   BoardCombat? getCurrentCombat() {

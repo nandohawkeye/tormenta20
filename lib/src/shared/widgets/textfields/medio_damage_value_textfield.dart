@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 
 class MedioDamageValueTextfield extends StatelessWidget {
@@ -24,13 +23,8 @@ class MedioDamageValueTextfield extends StatelessWidget {
       textCapitalization: TextCapitalization.sentences,
       inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))],
       decoration: InputDecoration(
-        labelText: 'Média de dano',
+        labelText: 'Bônus de dano',
         fillColor: palette.backgroundLevelOne,
-        helperStyle: TextStyle(color: palette.textDisable),
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 6,
-          horizontal: T20UI.spaceSize,
-        ),
       ),
     );
   }

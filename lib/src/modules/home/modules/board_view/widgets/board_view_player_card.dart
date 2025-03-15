@@ -88,7 +88,7 @@ class BoardViewPlayerCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        '${CharacterUtils.handleBroodTitle(player.brood.name)} - ${CharacterUtils.handleAllClassesTypeTitle(player.classes.map((c) => c.type))}',
+                        '${CharacterUtils.handleBroodTitle(player.brood.name)} - ${CharacterUtils.handleAllClassesTypeTitle(player.classes)}',
                         maxLines: 2,
                         style: const TextStyle(fontSize: 12),
                       ),

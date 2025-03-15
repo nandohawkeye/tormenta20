@@ -19,6 +19,28 @@ class HandToHand extends ActionEnt {
   }) : super(type: ActionType.standard);
 
   @override
+  HandToHand cloneWith({
+    required String uuid,
+    required String parentUuid,
+  }) {
+    return HandToHand(
+      uuid: uuid,
+      parentUuid: parentUuid,
+      name: name,
+      desc: desc,
+      pm: pm,
+      cd: cd,
+      damageDices: damageDices,
+      extraDamageDices: extraDamageDices,
+      mediumDamageValue: mediumDamageValue,
+      critical: critical,
+      criticalMultiplier: criticalMultiplier,
+      equipament: equipament,
+      equipamentUuid: equipamentUuid,
+    );
+  }
+
+  @override
   bool operator ==(other) =>
       other is HandToHand &&
       other.uuid == uuid &&

@@ -1,23 +1,28 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:tormenta20/src/core/database/app_database.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/grimories_storage_service.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
+import 'package:tormenta20/src/shared/failures/failure.dart';
 
 class GrimoriesStore extends ChangeNotifier {
   StreamSubscription? _sub;
+  final _storageService = GrimoriesStorageService();
 
   Future<GrimoriesStore> init() async {
-    GetIt.I<AppDatabase>().grimoireDAO.getAllGrimoires().then((resp) {
+    _storageService.getAllGrimoires().then((resp) {
       _changeGrimories(resp.grimoires);
     });
     _setSub();
     return this;
   }
 
+  Future<Failure?> insertGrimoire(Grimoire entity) {
+    return _storageService.insertGrimoire(entity);
+  }
+
   void _setSub() async {
-    await GetIt.I<AppDatabase>().grimoireDAO.watchAllGrimoires().then((resp) {
+    await _storageService.watchAllGrimoires().then((resp) {
       if (resp.grimoires != null) {
         _sub ??= resp.grimoires!.listen((data) {
           _changeGrimories(data);

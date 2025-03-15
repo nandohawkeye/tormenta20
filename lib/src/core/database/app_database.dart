@@ -5,6 +5,7 @@ import 'package:drift/native.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+import 'package:tormenta20/src/core/database/daos/config_dao.dart';
 import 'package:tormenta20/src/core/database/daos/grimoire_dao.dart';
 import 'package:tormenta20/src/core/database/daos/magic_character_dao.dart';
 import 'package:tormenta20/src/core/database/daos/menace_dao.dart';
@@ -16,10 +17,10 @@ import 'package:tormenta20/src/core/database/tables/ammunition_table.dart';
 import 'package:tormenta20/src/core/database/tables/armor_table.dart';
 import 'package:tormenta20/src/core/database/tables/backpack_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_character_table.dart';
-import 'package:tormenta20/src/core/database/tables/board_classe_caracter_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_combat_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_note_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_player_table.dart';
+import 'package:tormenta20/src/core/database/tables/config_table.dart';
 import 'package:tormenta20/src/core/database/tables/equipment_table.dart';
 import 'package:tormenta20/src/core/database/tables/expertise_table.dart';
 import 'package:tormenta20/src/core/database/tables/general_item_table.dart';
@@ -58,7 +59,6 @@ part 'app_database.g.dart';
     BoardCharacterTable,
     BoardNoteTable,
     BoardCombatTable,
-    BoardClasseCharacterTable,
     MenaceTable,
     AdventureBackpackTable,
     EquipmentTable,
@@ -77,19 +77,21 @@ part 'app_database.g.dart';
     ActionDistanceAttackTable,
     ExpertiseTable,
     MenaceLinkBoardTable,
+    ConfigTable,
   ],
   daos: [
     GrimoireDAO,
     BoardDAO,
     MagicCharacterDAO,
     MenaceDAO,
+    ConfigDAO,
   ],
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 10;
+  int get schemaVersion => 12;
 
   @override
   MigrationStrategy get migration {
@@ -161,6 +163,23 @@ class AppDatabase extends _$AppDatabase {
                   magicCharacterTable, magicCharacterTable.damageDices);
               await m.addColumn(
                   magicCharacterTable, magicCharacterTable.extraDamageDices);
+            }
+
+            if (from < 11) {
+              await m.addColumn(menaceTable, menaceTable.createdAt);
+              await m.addColumn(menaceTable, menaceTable.updatedAt);
+              await m.alterTable(TableMigration(boardNoteTable));
+              await m.alterTable(TableMigration(boardCharacterTable));
+              await m.alterTable(TableMigration(boardPlayerTable));
+              await m.alterTable(TableMigration(boardTable));
+              await m.createTable(configTable);
+            }
+
+            if (from < 12) {
+              await m.addColumn(
+                  boardPlayerTable, boardPlayerTable.classeIndexes);
+              await m.addColumn(
+                  boardCharacterTable, boardCharacterTable.classeIndexes);
             }
           },
         );

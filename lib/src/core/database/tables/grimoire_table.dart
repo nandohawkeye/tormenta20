@@ -9,8 +9,8 @@ class GrimoireTable extends Table {
   // IntColumn get data => integer()();
   // DateTime.fromMillisecondsSinceEpoch(tarefa.data),
   // data.millisecondsSinceEpoch
-  DateTimeColumn get createdAt => dateTime()();
-  DateTimeColumn get updatedAt => dateTime()();
+  IntColumn get createdAt => integer()();
+  IntColumn get updatedAt => integer()();
 
   @override
   Set<Column>? get primaryKey => {uuid};

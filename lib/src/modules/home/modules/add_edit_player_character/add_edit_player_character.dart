@@ -156,7 +156,6 @@ class _AddEditBoardPlayerCharacterState
                 T20UI.spaceHeight,
                 AddEditBoardPlayerClassesSelector(
                   _controller.classesStore,
-                  onTap: _controller.onAddClasse,
                 ),
                 T20UI.spaceHeight,
               ],

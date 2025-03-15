@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/utils/default_input_validator.dart';
 
@@ -56,11 +55,6 @@ class _BottomSheetAddBoardLinkTitleFieldState extends State<NameTextField> {
             fillColor: widget.fillColor ?? palette.backgroundLevelOne,
             helperText: 'obrigatório',
             errorText: error,
-            helperStyle: TextStyle(color: palette.textDisable),
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: 6,
-              horizontal: T20UI.spaceSize,
-            ),
           ),
         );
       },

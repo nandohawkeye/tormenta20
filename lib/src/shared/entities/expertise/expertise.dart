@@ -19,6 +19,22 @@ class Expertise extends ExpertiseBase {
     required this.isTrained,
   });
 
+  Expertise cloneWith({
+    required String uuid,
+    required String parentUuid,
+  }) {
+    return Expertise(
+      id: id,
+      name: name,
+      atribute: atribute,
+      bonus: bonus,
+      valueFinal: valueFinal,
+      uuid: uuid,
+      parentUuid: parentUuid,
+      isTrained: isTrained,
+    );
+  }
+
   @override
   bool operator ==(other) =>
       other is Expertise &&

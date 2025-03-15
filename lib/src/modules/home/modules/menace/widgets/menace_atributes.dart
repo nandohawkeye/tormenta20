@@ -13,27 +13,27 @@ class MenaceAtributes extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         MenaceAtributeItem(
-          value: menace.strength,
+          value: menace.strength ?? 0,
           label: 'FOR',
         ),
         MenaceAtributeItem(
-          value: menace.dexterity,
+          value: menace.dexterity ?? 0,
           label: 'DES',
         ),
         MenaceAtributeItem(
-          value: menace.constitution,
+          value: menace.constitution ?? 0,
           label: 'CON',
         ),
         MenaceAtributeItem(
-          value: menace.intelligence,
+          value: menace.intelligence ?? 0,
           label: 'INT',
         ),
         MenaceAtributeItem(
-          value: menace.wisdom,
+          value: menace.wisdom ?? 0,
           label: 'SAB',
         ),
         MenaceAtributeItem(
-          value: menace.charisma,
+          value: menace.charisma ?? 0,
           label: 'CAR',
         ),
       ],

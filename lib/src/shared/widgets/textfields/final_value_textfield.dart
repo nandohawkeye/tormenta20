@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/utils/default_input_validator.dart';
 
 class FinalValueTextfield extends StatefulWidget {
@@ -62,11 +60,6 @@ class _FinalValueTextfieldState extends State<FinalValueTextfield> {
             fillColor: widget.fillColor,
             helperText: widget.isObrigatory ? 'obrigatório' : null,
             errorText: error,
-            helperStyle: TextStyle(color: palette.textDisable),
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: 6,
-              horizontal: T20UI.spaceSize,
-            ),
           ),
         );
       },

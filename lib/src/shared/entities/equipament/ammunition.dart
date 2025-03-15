@@ -19,6 +19,24 @@ class Ammunition extends Equipment implements Spaceable {
   });
 
   @override
+  Ammunition cloneWith({
+    required String uuid,
+    required String parentUuid,
+  }) {
+    return Ammunition(
+      uuid: uuid,
+      parentUuid: parentUuid,
+      name: name,
+      storedIn: storedIn,
+      improvements: improvements,
+      specialMaterial: specialMaterial,
+      quantity: quantity,
+      price: price,
+      desc: desc,
+    );
+  }
+
+  @override
   double get spaceOcuped => (quantity / 20).floorToDouble();
 
   @override

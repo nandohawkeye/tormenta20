@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:tormenta20/src/core/database/app_database.dart';
+import 'package:tormenta20/src/modules/home/modules/grimorie/grimorie_storage_service.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire_adapters.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_character.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_character_adapters.dart';
+import 'package:tormenta20/src/shared/failures/failure.dart';
 
 class GrimorieStore extends ChangeNotifier {
   GrimorieStore(this._grimoire) {
@@ -17,10 +17,7 @@ class GrimorieStore extends ChangeNotifier {
   StreamSubscription? _sub;
 
   void _setSub(String grimoireUuid) async {
-    await GetIt.I<AppDatabase>()
-        .grimoireDAO
-        .watchAllGrimoire(grimoireUuid)
-        .then((resp) {
+    await _storageService.watchAllGrimoire(grimoireUuid).then((resp) {
       if (resp.grimoires != null) {
         _sub ??= resp.grimoires!.listen((data) {
           if (data.isNotEmpty) {
@@ -32,10 +29,16 @@ class GrimorieStore extends ChangeNotifier {
     });
   }
 
+  final _storageService = GrimorieStorageService();
+
+  Future<Failure?> deleteGrimoire() {
+    return _storageService.deleteGrimoire(_grimoire);
+  }
+
   Grimoire _grimoire;
   Grimoire get grimoire => _grimoire;
   void updateGrimorie(Grimoire value) async {
-    await GetIt.I<AppDatabase>().grimoireDAO.insertGrimoire(value);
+    await _storageService.insertGrimoire(value);
   }
 
   void addMagics(List<Magic> values) async {
@@ -49,20 +52,14 @@ class GrimorieStore extends ChangeNotifier {
           _grimoire, [...oldMagics, ...newMagics]);
 
       await Future.forEach(
-          newMagics,
-          (magic) async => await GetIt.I<AppDatabase>()
-              .magicCharacterDAO
-              .insertMagic(magic));
+          newMagics, (magic) async => await _storageService.insertMagic(magic));
 
-      await GetIt.I<AppDatabase>().grimoireDAO.insertGrimoire(upGriporio);
+      await _storageService.insertGrimoire(upGriporio);
     } catch (_) {}
   }
 
   void removeMagic(MagicCharacter magic) async {
-    await GetIt.I<AppDatabase>()
-        .magicCharacterDAO
-        .deleteMagic(magic)
-        .then((failure) async {
+    await _storageService.deleteMagic(magic).then((failure) async {
       if (failure != null) {
         List<MagicCharacter> allMagics = [];
         allMagics.addAll(_grimoire.magicsCharacters);
@@ -70,13 +67,13 @@ class GrimorieStore extends ChangeNotifier {
         final upGriporio =
             GrimoireAdapters.copyWithNewMagics(_grimoire, allMagics);
 
-        await GetIt.I<AppDatabase>().grimoireDAO.insertGrimoire(upGriporio);
+        await _storageService.insertGrimoire(upGriporio);
       }
     });
   }
 
   void setupMagic(MagicCharacter magic) async {
-    await GetIt.I<AppDatabase>().magicCharacterDAO.insertMagic(magic);
+    await _storageService.insertMagic(magic);
   }
 
   @override

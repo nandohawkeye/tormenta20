@@ -9,19 +9,21 @@ import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
 import 'package:tormenta20/src/shared/entities/board/board_note_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session_adapters.dart';
+import 'package:tormenta20/src/shared/entities/menace_adapters.dart';
+import 'package:tormenta20/src/shared/entities/menace_link_board_adapters.dart';
 
 abstract class BoardAdapters {
   static BoardTableCompanion toCompanion(Board entity) {
     return BoardTableCompanion(
       uuid: Value<String>(entity.uuid),
       name: Value<String>(entity.name),
-      level: Value<int>(entity.level),
+      level: Value<int>(entity.level ?? 1),
       modeIndex: Value<int>(entity.mode.index),
       adventureName: Value<String>(entity.adventureName),
       bannerPath: Value<String?>(entity.bannerPath),
       desc: Value<String?>(entity.desc),
-      createdAt: Value<DateTime>(entity.createdAt),
-      updatedAt: Value<DateTime>(entity.updatedAt),
+      createdAt: Value<int>(entity.createdAt.millisecondsSinceEpoch),
+      updatedAt: Value<int>(entity.updatedAt.millisecondsSinceEpoch),
       whatsGroupLink: Value<String?>(entity.whatsGroupLink),
       telegramGroupLink: Value<String?>(entity.telegramGroupLink),
       discordServerLink: Value<String?>(entity.discordServerLink),
@@ -35,8 +37,8 @@ abstract class BoardAdapters {
       uuid: data.uuid,
       adventureName: data.adventureName,
       name: data.name,
-      createdAt: data.createdAt,
-      updatedAt: data.updatedAt,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(data.createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data.updatedAt),
       level: data.level,
       mode: BoardModeType.values[data.modeIndex],
       isFavorited: data.isFavorited,
@@ -61,7 +63,7 @@ abstract class BoardAdapters {
   static Board fromDriftDto(BoardDriftDto dto) {
     final links = dto.linksData.map(BoardLinkAdapters.fromDriftData).toList();
     final players =
-        dto.playersData.map(BoardPlayerAdapters.fromDriftDto).toList();
+        dto.playersData.map(BoardPlayerAdapters.fromDriftData).toList();
     final materials =
         dto.materialsData.map(BoardMaterialsAdapters.fromDriftData).toList();
     final notes = dto.notesData.map(BoardNoteAdapters.fromDriftData).toList();
@@ -69,12 +71,15 @@ abstract class BoardAdapters {
         dto.sessionsData.map(BoardSessionAdapters.fromDriftData).toList();
     final combats =
         dto.combatsData.map(BoardCombatAdapters.fromDriftData).toList();
+    final linkMenaces =
+        dto.linkMenaceData.map(MenaceLinkBoardAdapters.fromDriftData).toList();
+    final menaces = dto.menaceData.map(MenaceAdapters.fromDriftData).toList();
     return Board(
       uuid: dto.boardData.uuid,
       adventureName: dto.boardData.adventureName,
       name: dto.boardData.name,
-      createdAt: dto.boardData.createdAt,
-      updatedAt: dto.boardData.updatedAt,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(dto.boardData.createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(dto.boardData.updatedAt),
       level: dto.boardData.level,
       mode: BoardModeType.values[dto.boardData.modeIndex],
       isFavorited: dto.boardData.isFavorited,
@@ -89,8 +94,8 @@ abstract class BoardAdapters {
       materials: materials,
       notes: notes,
       combats: combats,
-      menaces: [],
-      menacesLinkToBoard: [],
+      menaces: menaces,
+      menacesLinkToBoard: linkMenaces,
       characters: [],
       sessions: sessions,
     );

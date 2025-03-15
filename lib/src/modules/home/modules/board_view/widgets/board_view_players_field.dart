@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/add_edit_player_character.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_player_card.dart';
@@ -13,9 +11,16 @@ import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 
 class BoardViewPlayersField extends StatelessWidget {
-  const BoardViewPlayersField(this.board, {super.key});
+  const BoardViewPlayersField(
+    this.board, {
+    super.key,
+    required this.saveBoardPlayer,
+    required this.deleteBoardPlayer,
+  });
 
   final Board board;
+  final Future<void> Function(BoardPlayer player) saveBoardPlayer;
+  final Future<void> Function(BoardPlayer player) deleteBoardPlayer;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +35,7 @@ class BoardViewPlayersField extends StatelessWidget {
         ),
       ).then((result) {
         if (result != null) {
-          GetIt.I<AppDatabase>().boardDAO.saveBoardPlayer(result);
+          saveBoardPlayer(result);
         }
       });
     }
@@ -46,13 +51,13 @@ class BoardViewPlayersField extends StatelessWidget {
           }
 
           if (result == PlayerOptionsType.delete) {
-            GetIt.I<AppDatabase>().boardDAO.deleteBoardPlayer(player);
+            deleteBoardPlayer(player);
           }
 
           if (result == PlayerOptionsType.alive) {
-            GetIt.I<AppDatabase>().boardDAO.saveBoardPlayer(
-                  player.copyWithChangeAlive(isAlive: !player.isAlive),
-                );
+            saveBoardPlayer(
+              player.copyWithChangeAlive(isAlive: !player.isAlive),
+            );
           }
         },
       );

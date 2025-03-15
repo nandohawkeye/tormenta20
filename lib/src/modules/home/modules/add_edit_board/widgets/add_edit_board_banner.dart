@@ -132,13 +132,14 @@ class _AddEditBoardBannerState extends State<AddEditBoardBanner> {
                   Padding(
                     padding: const EdgeInsets.only(
                       top: T20UI.smallSpaceSize,
-                      left: T20UI.spaceSize + 8,
+                      left: T20UI.spaceSize + T20UI.spaceSize,
                     ),
                     child: Text(
                       'Use uma imagem 16:9',
                       style: TextStyle(
                         fontSize: 12,
                         color: palette.textDisable,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),

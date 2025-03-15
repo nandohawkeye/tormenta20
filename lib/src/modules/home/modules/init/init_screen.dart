@@ -10,8 +10,10 @@ import 'package:tormenta20/src/modules/home/modules/init/widgets/init_add_option
 import 'package:tormenta20/src/modules/home/modules/init/widgets/init_board_field.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/init_character_field.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/init_menace_field.dart';
+import 'package:tormenta20/src/modules/home/modules/menace/menace_screen.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
+import 'package:tormenta20/src/shared/entities/menace.dart';
 import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 
 class InitScreen extends StatelessWidget {
@@ -38,12 +40,23 @@ class InitScreen extends StatelessWidget {
     }
 
     void callMenace() async {
-      Navigator.push(
+      Navigator.push<Menace?>(
         context,
         MaterialPageRoute(
           builder: (_) => const AddEditMenaceScreen(),
         ),
-      );
+      ).then((result) {
+        if (result != null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => MenaceScreen(
+                menace: result,
+              ),
+            ),
+          );
+        }
+      });
     }
 
     void callCharacter() async {}

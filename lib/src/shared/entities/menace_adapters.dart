@@ -49,6 +49,8 @@ abstract class MenaceAdapters {
     equipments.addAll(dto.shields.map(ShieldAdapters.fromDriftData));
     equipments.addAll(dto.weapons.map(WeaponAdapters.fromDriftData));
     return Menace(
+      createdAt: DateTime.fromMillisecondsSinceEpoch(dto.data.createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(dto.data.updatedAt),
       uuid: dto.data.uuid,
       type: MenaceType.values[dto.data.typeIndex],
       name: dto.data.name,
@@ -95,6 +97,8 @@ abstract class MenaceAdapters {
         ? null
         : TreasureType.values[data.treasureTypeIndex!];
     return Menace(
+      createdAt: DateTime.fromMillisecondsSinceEpoch(data.createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data.updatedAt),
       uuid: data.uuid,
       type: MenaceType.values[data.typeIndex],
       name: data.name,
@@ -136,35 +140,37 @@ abstract class MenaceAdapters {
 
   static MenaceTableCompanion toDriftCompanion(Menace entity) {
     return MenaceTableCompanion(
+      createdAt: Value(entity.createdAt.millisecondsSinceEpoch),
+      updatedAt: Value(entity.updatedAt.millisecondsSinceEpoch),
       uuid: Value(entity.uuid),
       name: Value(entity.name),
       desc: Value(entity.desc),
       typeIndex: Value(entity.type.index),
       casterInfos: Value(entity.casterInfos),
-      charisma: Value(entity.charisma),
+      charisma: Value(entity.charisma ?? 0),
       combateRoleIndex: Value(entity.combatRole.index),
-      constitution: Value(entity.constitution),
+      constitution: Value(entity.constitution ?? 0),
       creatureSizeIndex: Value(entity.creatureSize.index),
       defense: Value(entity.defense),
-      dexterity: Value(entity.dexterity),
+      dexterity: Value(entity.dexterity ?? 0),
       displacement: Value(entity.displacement),
       divinityId: Value(entity.divinityId),
       extraInfos: Value(entity.extraInfos),
-      fortResistence: Value(entity.fortResistence),
+      fortResistence: Value(entity.fortResistence ?? 0),
       imageAsset: Value(entity.imageAsset),
       imagePath: Value(entity.imagePath),
       initiative: Value(entity.initiative),
-      intelligence: Value(entity.intelligence),
+      intelligence: Value(entity.intelligence ?? 0),
       life: Value(entity.life),
       mana: Value(entity.mana),
       nd: Value(entity.nd),
-      perception: Value(entity.perception),
-      refResistence: Value(entity.refResistence),
+      perception: Value(entity.perception ?? 0),
+      refResistence: Value(entity.refResistence ?? 0),
       senses: Value(entity.senses),
-      strength: Value(entity.strength),
+      strength: Value(entity.strength ?? 0),
       treasureTypeIndex: Value(entity.treasures?.index),
-      vonResistence: Value(entity.vonResistence),
-      wisdom: Value(entity.wisdom),
+      vonResistence: Value(entity.vonResistence ?? 0),
+      wisdom: Value(entity.wisdom ?? 0),
     );
   }
 }

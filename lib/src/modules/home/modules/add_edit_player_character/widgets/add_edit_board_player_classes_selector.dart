@@ -5,11 +5,9 @@ import 'package:tormenta20/src/shared/widgets/selector_fields/selector_multi_fie
 import 'package:tormenta20/src/shared/widgets/selector_fields/selector_multi_store.dart';
 
 class AddEditBoardPlayerClassesSelector extends StatelessWidget {
-  const AddEditBoardPlayerClassesSelector(this.store,
-      {super.key, required this.onTap});
+  const AddEditBoardPlayerClassesSelector(this.store, {super.key});
 
   final SelectorMultiStore<ClasseType> store;
-  final Function(ClasseType?) onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +15,6 @@ class AddEditBoardPlayerClassesSelector extends StatelessWidget {
       label: 'Classes',
       handleTitle: CharacterUtils.handleClasseTypeTitle,
       itens: ClasseType.values,
-      onTapItem: onTap,
       store: store,
       isObrigatory: true,
     );
