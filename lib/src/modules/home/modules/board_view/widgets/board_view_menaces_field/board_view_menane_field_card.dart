@@ -35,8 +35,8 @@ class BoardViewMenaneFieldCard extends StatelessWidget {
           child: Row(
             children: [
               SizedBox(
-                height: imageSize + 2,
-                width: imageSize + 2,
+                height: imageSize + 6,
+                width: imageSize + 6,
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
@@ -67,8 +67,8 @@ class BoardViewMenaneFieldCard extends StatelessWidget {
                         ),
                       ),
                     Assets.images.bordaTokenAmeaca.image(
-                      height: imageSize + 2,
-                      width: imageSize + 2,
+                      height: imageSize + 6,
+                      width: imageSize + 6,
                       fit: BoxFit.cover,
                     ),
                   ],

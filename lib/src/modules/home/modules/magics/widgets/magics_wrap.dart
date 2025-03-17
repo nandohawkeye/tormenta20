@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/magics_store.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_card/magic_card.dart';
 
@@ -14,13 +14,19 @@ class MagicsWrap extends StatelessWidget {
     return AnimatedBuilder(
       animation: store,
       builder: (_, __) => store.magics.isEmpty
-          ? Padding(
-              padding: const EdgeInsets.only(top: 100),
-              child: Center(
-                  child: Text(
-                'Nenhuma magia disponível',
-                style: TextStyle(fontSize: 16, color: palette.primary),
-              )),
+          ? const Padding(
+              padding: EdgeInsets.only(top: 100),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(FontAwesomeIcons.ghost),
+                  T20UI.smallSpaceWidth,
+                  Text(
+                    'Nenhuma magia disponível',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ],
+              ),
             )
           : Padding(
               padding: T20UI.horizontallScreenPadding,

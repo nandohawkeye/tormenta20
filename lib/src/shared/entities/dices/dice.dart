@@ -1,11 +1,11 @@
 import 'package:tormenta20/src/shared/entities/entity_base.dart';
 
-class RoolDice extends EntityBase {
+class Dice extends EntityBase {
   final String uuid;
-  final String quantity;
-  final String dice;
+  final int quantity;
+  final int dice;
 
-  RoolDice({
+  Dice({
     required this.uuid,
     required this.quantity,
     required this.dice,
@@ -16,7 +16,7 @@ class RoolDice extends EntityBase {
 
   @override
   bool operator ==(other) =>
-      other is RoolDice &&
+      other is Dice &&
       other.uuid == uuid &&
       other.quantity == quantity &&
       other.dice == dice;

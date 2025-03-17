@@ -1,3 +1,4 @@
+import 'package:tormenta20/src/shared/entities/atributes.dart';
 import 'package:tormenta20/src/shared/extensions/string_ext.dart';
 
 abstract class AtributeUtils {
@@ -16,6 +17,22 @@ abstract class AtributeUtils {
       return 'Carisma';
     } else {
       return value.capitalize().trim();
+    }
+  }
+
+  static String resumedTitle(Atribute atribute) {
+    if (atribute == Atribute.strength) {
+      return 'FOR: ';
+    } else if (atribute == Atribute.dexterity) {
+      return 'DES: ';
+    } else if (atribute == Atribute.constitution) {
+      return 'CON: ';
+    } else if (atribute == Atribute.intelligence) {
+      return 'INT: ';
+    } else if (atribute == Atribute.wisdom) {
+      return 'SAB: ';
+    } else {
+      return 'CAR: ';
     }
   }
 }

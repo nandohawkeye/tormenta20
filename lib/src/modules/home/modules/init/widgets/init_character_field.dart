@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_character/add_edit_character.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/character_screen_button.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 
@@ -23,7 +24,14 @@ class InitCharacterField extends StatelessWidget {
             left: T20UI.screenContentSpaceSize,
           ),
           child: CharacterScreenButton(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const AddEditCharacter(),
+                ),
+              );
+            },
           ),
         ),
       ],

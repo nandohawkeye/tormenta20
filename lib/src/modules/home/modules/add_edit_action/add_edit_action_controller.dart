@@ -5,7 +5,7 @@ import 'package:tormenta20/src/shared/entities/action/action_type.dart';
 import 'package:tormenta20/src/shared/entities/action/distance_attack.dart';
 import 'package:tormenta20/src/shared/entities/action/hand_to_hand.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
-import 'package:tormenta20/src/shared/entities/rool_dice.dart';
+import 'package:tormenta20/src/shared/entities/dices/dice.dart';
 import 'package:uuid/uuid.dart';
 
 class AddEditActionController {
@@ -60,7 +60,7 @@ class AddEditActionController {
   String? _dices;
   String? get dices => _dices;
   void _setDice(String? value) => _dices = value;
-  void onChangeDice(List<RoolDice> dices) {
+  void onChangeDice(List<Dice> dices) {
     int index = 0;
     if (dices.isEmpty) {
       _setDice(null);
@@ -69,7 +69,7 @@ class AddEditActionController {
 
     String formatted = '';
 
-    for (RoolDice dice in dices) {
+    for (Dice dice in dices) {
       if (index > 0) {
         formatted += ',${dice.toString()}';
       } else {
@@ -85,7 +85,7 @@ class AddEditActionController {
   String? _extraDices;
   String? get extraDices => _extraDices;
   void _setExtraDice(String? value) => _extraDices = value;
-  void onChangeExtraDice(List<RoolDice> dices) {
+  void onChangeExtraDice(List<Dice> dices) {
     int index = 0;
 
     if (dices.isEmpty) {
@@ -95,7 +95,7 @@ class AddEditActionController {
 
     String formatted = '';
 
-    for (RoolDice dice in dices) {
+    for (Dice dice in dices) {
       if (index > 0) {
         formatted += ',${dice.toString()}';
       } else {

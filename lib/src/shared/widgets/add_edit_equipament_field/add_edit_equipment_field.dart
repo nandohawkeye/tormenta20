@@ -24,7 +24,7 @@ class AddEditEquipamentField extends StatelessWidget {
         MaterialPageRoute(
           builder: (_) => AddEditEquipmentsScreen(
             equipament: equipament,
-            menaceUuid: menaceUuid,
+            parentUuid: menaceUuid,
           ),
         ),
       ).then(store.put);

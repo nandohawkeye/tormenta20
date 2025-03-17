@@ -26,11 +26,11 @@ class AddEditEquipmentsScreen extends StatefulWidget {
   const AddEditEquipmentsScreen({
     super.key,
     this.equipament,
-    required this.menaceUuid,
+    required this.parentUuid,
   });
 
   final Equipment? equipament;
-  final String menaceUuid;
+  final String parentUuid;
 
   @override
   State<AddEditEquipmentsScreen> createState() => _AddEditActionScreenState();
@@ -48,7 +48,7 @@ class _AddEditActionScreenState extends State<AddEditEquipmentsScreen> {
     _scrollController = ScrollController();
     _controller = AddEditEquipmentsController(
       widget.equipament,
-      widget.menaceUuid,
+      widget.parentUuid,
     );
     Future.delayed(const Duration(seconds: 1)).then((_) => _hasInited = true);
   }

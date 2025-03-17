@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/shared/entities/rool_dice.dart';
+import 'package:tormenta20/src/shared/entities/dices/dice.dart';
 
 class AddEditDicesFieldCard extends StatelessWidget {
   const AddEditDicesFieldCard({
@@ -11,8 +11,8 @@ class AddEditDicesFieldCard extends StatelessWidget {
     required this.onRemove,
   });
 
-  final RoolDice dice;
-  final Function(RoolDice) onRemove;
+  final Dice dice;
+  final Function(Dice) onRemove;
 
   @override
   Widget build(BuildContext context) {

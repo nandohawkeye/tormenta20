@@ -20,7 +20,7 @@ import 'package:tormenta20/src/shared/entities/equipament/general_item.dart';
 import 'package:tormenta20/src/shared/entities/equipament/saddlebag.dart';
 import 'package:tormenta20/src/shared/entities/equipament/shield.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon.dart';
-import 'package:tormenta20/src/shared/entities/rool_dice.dart';
+import 'package:tormenta20/src/shared/entities/dices/dice.dart';
 import 'package:uuid/uuid.dart';
 
 class AddEditEquipmentsController {
@@ -202,7 +202,7 @@ class AddEditEquipmentsController {
   String? _dices;
   String? get dices => _dices;
   void _setDiceMacro(String? value) => _dices = value;
-  void onChangeDice(List<RoolDice> dices) {
+  void onChangeDice(List<Dice> dices) {
     int index = 0;
     if (dices.isEmpty) {
       _setDiceMacro(null);
@@ -211,7 +211,7 @@ class AddEditEquipmentsController {
 
     String formatted = '';
 
-    for (RoolDice dice in dices) {
+    for (Dice dice in dices) {
       if (index > 0) {
         formatted += ',${dice.toString()}';
       } else {

@@ -20,7 +20,7 @@ import 'package:uuid/uuid.dart';
 class AddEditMenaceController {
   AddEditMenaceController(Menace? menace) {
     stage = ValueNotifier<int>(1);
-    percent = ValueNotifier<double>(0.0);
+    percent = ValueNotifier<double>(0.2);
     if (menace != null) {
       _createdAt = menace.createdAt;
       _uuid = menace.uuid;
@@ -323,7 +323,7 @@ class AddEditMenaceController {
       createdAt: _createdAt ?? updatedAt,
       updatedAt: updatedAt,
       uuid: _uuid,
-      name: _name!,
+      name: _name!.trim(),
       nd: _nd!,
       initiative: _initiative!,
       perception: _perception!,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/modules/add_magics/widgets/add_magic_screen_bottom_widgets.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/modules/add_magics/widgets/add_magics_card.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/modules/add_magics/add_magics_store.dart';
@@ -52,11 +52,17 @@ class _AddMagicsScreenState extends State<AddMagicsScreen> {
             child: AnimatedBuilder(
               animation: _store,
               builder: (_, __) => _store.magics.isEmpty
-                  ? Center(
-                      child: Text(
-                      'Nenhuma magia disponível',
-                      style: TextStyle(fontSize: 16, color: palette.primary),
-                    ))
+                  ? const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(FontAwesomeIcons.ghost),
+                        T20UI.smallSpaceWidth,
+                        Text(
+                          'Nenhuma magia disponível',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    )
                   : ListView.separated(
                       padding: T20UI.allPadding,
                       shrinkWrap: true,

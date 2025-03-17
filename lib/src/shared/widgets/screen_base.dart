@@ -39,6 +39,8 @@ class ScreenBase extends StatelessWidget {
           const Divider(),
           Expanded(
             child: SingleChildScrollView(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
               controller: scrollController,
               child: body,
             ),

@@ -4,8 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
-import 'package:tormenta20/src/shared/entities/rool_dice.dart';
-import 'package:tormenta20/src/shared/entities/rool_dice_adapters.dart';
+import 'package:tormenta20/src/shared/entities/dices/dice.dart';
+import 'package:tormenta20/src/shared/entities/dices/dice_adapters.dart';
 import 'package:tormenta20/src/shared/widgets/add_edit_dices_field/add_edit_dices_field_card.dart';
 import 'package:tormenta20/src/shared/widgets/warning_widget.dart';
 
@@ -25,7 +25,7 @@ class AddEditDicesField extends StatefulWidget {
   final bool hasError;
   final String? helpText;
   final String? initialValue;
-  final Function(List<RoolDice>) onChangeValues;
+  final Function(List<Dice>) onChangeValues;
 
   @override
   State<AddEditDicesField> createState() => _AddEditDicesFieldState();
@@ -34,15 +34,15 @@ class AddEditDicesField extends StatefulWidget {
 class _AddEditDicesFieldState extends State<AddEditDicesField> {
   late final TextEditingController _quantEditController;
   late final TextEditingController _dicesEditController;
-  late final ValueNotifier<List<RoolDice>> _roolDices;
-  void _addDice(RoolDice value) {
-    List<RoolDice> oldValues = _roolDices.value;
+  late final ValueNotifier<List<Dice>> _roolDices;
+  void _addDice(Dice value) {
+    List<Dice> oldValues = _roolDices.value;
     _roolDices.value = [value, ...oldValues];
     widget.onChangeValues(_roolDices.value);
   }
 
-  void _removeDice(RoolDice value) {
-    List<RoolDice> oldValues = _roolDices.value;
+  void _removeDice(Dice value) {
+    List<Dice> oldValues = _roolDices.value;
     oldValues.remove(value);
     _roolDices.value = [...oldValues];
     widget.onChangeValues(_roolDices.value);
@@ -53,7 +53,7 @@ class _AddEditDicesFieldState extends State<AddEditDicesField> {
     super.initState();
     _quantEditController = TextEditingController(text: '1');
     _dicesEditController = TextEditingController();
-    _roolDices = ValueNotifier<List<RoolDice>>([]);
+    _roolDices = ValueNotifier<List<Dice>>([]);
     _addInitialValue(widget.initialValue);
   }
 
@@ -70,7 +70,7 @@ class _AddEditDicesFieldState extends State<AddEditDicesField> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final values = value.split(',');
-      final dices = values.map(RoolDiceAdapters.fromMacro);
+      final dices = values.map(DiceAdapters.fromMacro);
       _roolDices.value = [...dices];
     });
   }
@@ -176,7 +176,7 @@ class _AddEditDicesFieldState extends State<AddEditDicesField> {
                               if (quantity.isEmpty || diceValue.isEmpty) return;
 
                               final dice =
-                                  RoolDiceAdapters.create(quantity, diceValue);
+                                  DiceAdapters.create(quantity, diceValue);
                               _addDice(dice);
                             },
                           )

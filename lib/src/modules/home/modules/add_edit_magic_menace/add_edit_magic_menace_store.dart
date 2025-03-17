@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_menace.dart';
-import 'package:tormenta20/src/shared/entities/rool_dice.dart';
+import 'package:tormenta20/src/shared/entities/dices/dice.dart';
 import 'package:uuid/uuid.dart';
 
 class AddEditMagicMenaceStore {
@@ -27,7 +27,7 @@ class AddEditMagicMenaceStore {
 
   String? _dices;
   void _setDice(String? value) => _dices = value;
-  void onChangeDice(List<RoolDice> dices) {
+  void onChangeDice(List<Dice> dices) {
     int index = 0;
     if (dices.isEmpty) {
       _setDice(null);
@@ -36,7 +36,7 @@ class AddEditMagicMenaceStore {
 
     String formatted = '';
 
-    for (RoolDice dice in dices) {
+    for (Dice dice in dices) {
       if (index > 0) {
         formatted += ',${dice.toString()}';
       } else {
@@ -51,7 +51,7 @@ class AddEditMagicMenaceStore {
 
   String? _extraDices;
   void _setExtraDice(String? value) => _extraDices = value;
-  void onChangeExtraDice(List<RoolDice> dices) {
+  void onChangeExtraDice(List<Dice> dices) {
     int index = 0;
 
     if (dices.isEmpty) {
@@ -61,7 +61,7 @@ class AddEditMagicMenaceStore {
 
     String formatted = '';
 
-    for (RoolDice dice in dices) {
+    for (Dice dice in dices) {
       if (index > 0) {
         formatted += ',${dice.toString()}';
       } else {

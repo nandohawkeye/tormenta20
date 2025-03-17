@@ -21,6 +21,7 @@ class ScrollAnimatedIntCount extends StatefulWidget {
 
 class _ScrollAnimatedIntCountState extends State<ScrollAnimatedIntCount> {
   List<FixedExtentScrollController> _controllers = [];
+  bool _isNegative = false;
 
   @override
   void initState() {
@@ -29,10 +30,11 @@ class _ScrollAnimatedIntCountState extends State<ScrollAnimatedIntCount> {
   }
 
   void _initializeControllers() {
+    _isNegative = widget.count.isNegative;
     _controllers = List.generate(
-      widget.count.toString().length,
+      widget.count.abs().toString().length,
       (index) => FixedExtentScrollController(
-          initialItem: int.parse(widget.count.toString()[index])),
+          initialItem: int.parse(widget.count.abs().toString()[index])),
     );
   }
 
@@ -53,7 +55,8 @@ class _ScrollAnimatedIntCountState extends State<ScrollAnimatedIntCount> {
   }
 
   void _updateControllers() {
-    String countStr = widget.count.toString();
+    _isNegative = widget.count.isNegative;
+    String countStr = widget.count.abs().toString();
 
     if (_controllers.length < countStr.length) {
       _initializeControllers();
@@ -71,35 +74,48 @@ class _ScrollAnimatedIntCountState extends State<ScrollAnimatedIntCount> {
 
   @override
   Widget build(BuildContext context) {
-    String countStr = widget.count.toString();
+    String countStr = widget.count.abs().toString();
 
     return Center(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: List.generate(countStr.length, (index) {
-          return SizedBox(
-            width: widget.width,
-            height: widget.height,
-            child: ListWheelScrollView.useDelegate(
-              controller: _controllers[index],
-              physics: const NeverScrollableScrollPhysics(),
-              itemExtent: 60,
-              perspective: 0.002,
-              childDelegate: ListWheelChildLoopingListDelegate(
-                children: List.generate(
-                  10,
-                  (digit) => Center(
-                    child: Text(
-                      digit.toString(),
-                      key: ValueKey<int>(digit),
-                      style: widget.textStyle,
+        children: [
+          if (_isNegative)
+            SizedBox(
+              width: widget.width,
+              height: widget.height,
+              child: Center(
+                child: Text(
+                  '-',
+                  style: widget.textStyle,
+                ),
+              ),
+            ),
+          ...List.generate(countStr.length, (index) {
+            return SizedBox(
+              width: widget.width,
+              height: widget.height,
+              child: ListWheelScrollView.useDelegate(
+                controller: _controllers[index],
+                physics: const NeverScrollableScrollPhysics(),
+                itemExtent: 60,
+                perspective: 0.002,
+                childDelegate: ListWheelChildLoopingListDelegate(
+                  children: List.generate(
+                    10,
+                    (digit) => Center(
+                      child: Text(
+                        digit.toString(),
+                        key: ValueKey<int>(digit),
+                        style: widget.textStyle,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          );
-        }),
+            );
+          })
+        ],
       ),
     );
   }

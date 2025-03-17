@@ -119,7 +119,7 @@ class _AddEditMenaceScreenState extends State<AddEditMenaceScreen> {
                   if (stage == 1) {
                     if (_formKeyStageOne.currentState!.validate()) {
                       _controller.setStage(2);
-                      _controller.setPercent(.3);
+                      _controller.setPercent(.4);
                     }
                   } else if (stage == 2) {
                     if (_formKeyStageTwo.currentState!.validate()) {
@@ -155,10 +155,12 @@ class _AddEditMenaceScreenState extends State<AddEditMenaceScreen> {
                 },
                 onBack: () async {
                   final stage = _controller.stage.value;
+                  final percent = _controller.percent.value;
                   if (stage == 1) {
                     await _confirmCancelMenace();
                   } else {
                     _controller.setStage(stage - 1);
+                    _controller.setPercent(percent - .2);
                   }
                 },
               ),

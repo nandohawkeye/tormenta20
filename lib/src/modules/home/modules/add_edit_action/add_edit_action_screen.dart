@@ -19,12 +19,12 @@ class AddEditActionScreen extends StatefulWidget {
   const AddEditActionScreen({
     super.key,
     this.initialAction,
-    required this.menaceUuid,
+    required this.parentUuid,
     required this.equipments,
   });
 
   final ActionEnt? initialAction;
-  final String menaceUuid;
+  final String parentUuid;
   final List<Equipment> equipments;
 
   @override
@@ -42,7 +42,7 @@ class _AddEditActionScreenState extends State<AddEditActionScreen> {
     _scrollController = ScrollController();
     _controller = AddEditActionController(
       widget.initialAction,
-      widget.menaceUuid,
+      widget.parentUuid,
     );
   }
 

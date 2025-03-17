@@ -87,10 +87,10 @@ class AddEditBoardPlayerController {
     final character = BoardPlayer(
       imagePath: _filePath,
       imageAsset: _assetPath,
-      playerName: _player!,
+      playerName: _player!.trim(),
       uuid: _characterUuid,
       boardUuid: _boardUuid,
-      characterName: _characterName!,
+      characterName: _characterName!.trim(),
       brood: broodStore.data!,
       createdAt: _createdAt ?? updatedAt,
       updatedAt: updatedAt,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/add_edit_board_screen.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_character/add_edit_character.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/add_edit_menace_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/board_view_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/init_add_options_bottomsheet/init_add_options_bottomsheet.dart';
@@ -59,7 +60,14 @@ class InitScreen extends StatelessWidget {
       });
     }
 
-    void callCharacter() async {}
+    void callCharacter() async {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => const AddEditCharacter(),
+        ),
+      );
+    }
 
     return Scaffold(
       floatingActionButton: SimpleButton(

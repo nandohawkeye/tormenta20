@@ -37,7 +37,7 @@ class BoardCardPlayersRestCount extends StatelessWidget {
                   shape: BoxShape.circle,
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 1, bottom: 2),
+                  padding: const EdgeInsets.only(bottom: 1, right: 2),
                   child: Center(
                       child: Text(
                     '+${allLength - sublistLength}',

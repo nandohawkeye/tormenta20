@@ -47,7 +47,7 @@ class MainButton extends StatelessWidget {
                   children: [
                     if (icon != null)
                       Padding(
-                        padding: const EdgeInsets.only(right: 6),
+                        padding: const EdgeInsets.only(right: 8),
                         child: Icon(
                           icon,
                           size: 16,

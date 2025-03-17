@@ -29,7 +29,7 @@ class AddEditActionField extends StatelessWidget {
           builder: (_) => AddEditActionScreen(
             initialAction: action,
             equipments: equipments,
-            menaceUuid: menaceUuid,
+            parentUuid: menaceUuid,
           ),
         ),
       ).then(store.put);
