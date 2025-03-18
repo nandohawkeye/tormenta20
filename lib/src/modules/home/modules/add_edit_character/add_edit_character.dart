@@ -125,24 +125,30 @@ class _AddEditCharacterState extends State<AddEditCharacter> {
                     Expanded(
                       child: AtributeDiceField(
                         atribute: Atribute.strength,
-                        value: strengthDice?.atributeValue ?? 0,
+                        value: (strengthDice?.atributeValue ?? 0).abs(),
                         setAtribute: _controller.atributeDicesStore.setAtribute,
+                        isNegative:
+                            (strengthDice?.atributeValue ?? 0).isNegative,
                       ),
                     ),
                     T20UI.spaceWidth,
                     Expanded(
                       child: AtributeDiceField(
                         atribute: Atribute.dexterity,
-                        value: dexterityDice?.atributeValue ?? 0,
+                        value: (dexterityDice?.atributeValue ?? 0).abs(),
                         setAtribute: _controller.atributeDicesStore.setAtribute,
+                        isNegative:
+                            (dexterityDice?.atributeValue ?? 0).isNegative,
                       ),
                     ),
                     T20UI.spaceWidth,
                     Expanded(
                       child: AtributeDiceField(
                         atribute: Atribute.constitution,
-                        value: constitutionDice?.atributeValue ?? 0,
+                        value: (constitutionDice?.atributeValue ?? 0).abs(),
                         setAtribute: _controller.atributeDicesStore.setAtribute,
+                        isNegative:
+                            (constitutionDice?.atributeValue ?? 0).isNegative,
                       ),
                     ),
                   ],
@@ -176,15 +182,18 @@ class _AddEditCharacterState extends State<AddEditCharacter> {
                     Expanded(
                       child: AtributeDiceField(
                         atribute: Atribute.intelligence,
-                        value: intelligenceDice?.atributeValue ?? 0,
+                        value: (intelligenceDice?.atributeValue ?? 0).abs(),
                         setAtribute: _controller.atributeDicesStore.setAtribute,
+                        isNegative:
+                            (intelligenceDice?.atributeValue ?? 0).isNegative,
                       ),
                     ),
                     T20UI.spaceWidth,
                     Expanded(
                       child: AtributeDiceField(
                         atribute: Atribute.wisdom,
-                        value: wisdomDice?.atributeValue ?? 0,
+                        value: (wisdomDice?.atributeValue ?? 0).abs(),
+                        isNegative: (wisdomDice?.atributeValue ?? 0).isNegative,
                         setAtribute: _controller.atributeDicesStore.setAtribute,
                       ),
                     ),
@@ -192,8 +201,10 @@ class _AddEditCharacterState extends State<AddEditCharacter> {
                     Expanded(
                       child: AtributeDiceField(
                         atribute: Atribute.charisma,
-                        value: charismaDice?.atributeValue ?? 0,
+                        value: (charismaDice?.atributeValue ?? 0).abs(),
                         setAtribute: _controller.atributeDicesStore.setAtribute,
+                        isNegative:
+                            (charismaDice?.atributeValue ?? 0).isNegative,
                       ),
                     ),
                   ],

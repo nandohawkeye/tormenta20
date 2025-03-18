@@ -8,12 +8,14 @@ class ScrollAnimatedIntCount extends StatefulWidget {
     required this.width,
     required this.height,
     this.textStyle,
+    this.isNegative = false,
   });
 
   final int count;
   final double width;
   final double height;
   final TextStyle? textStyle;
+  final bool isNegative;
 
   @override
   State<ScrollAnimatedIntCount> createState() => _ScrollAnimatedIntCountState();
@@ -21,7 +23,6 @@ class ScrollAnimatedIntCount extends StatefulWidget {
 
 class _ScrollAnimatedIntCountState extends State<ScrollAnimatedIntCount> {
   List<FixedExtentScrollController> _controllers = [];
-  bool _isNegative = false;
 
   @override
   void initState() {
@@ -30,11 +31,10 @@ class _ScrollAnimatedIntCountState extends State<ScrollAnimatedIntCount> {
   }
 
   void _initializeControllers() {
-    _isNegative = widget.count.isNegative;
     _controllers = List.generate(
-      widget.count.abs().toString().length,
+      widget.count.toString().length,
       (index) => FixedExtentScrollController(
-          initialItem: int.parse(widget.count.abs().toString()[index])),
+          initialItem: int.parse(widget.count.toString()[index])),
     );
   }
 
@@ -49,13 +49,13 @@ class _ScrollAnimatedIntCountState extends State<ScrollAnimatedIntCount> {
   @override
   void didUpdateWidget(covariant ScrollAnimatedIntCount oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.count != widget.count) {
+    if (oldWidget.count != widget.count ||
+        oldWidget.isNegative != widget.isNegative) {
       _updateControllers();
     }
   }
 
   void _updateControllers() {
-    _isNegative = widget.count.isNegative;
     String countStr = widget.count.abs().toString();
 
     if (_controllers.length < countStr.length) {
@@ -74,13 +74,13 @@ class _ScrollAnimatedIntCountState extends State<ScrollAnimatedIntCount> {
 
   @override
   Widget build(BuildContext context) {
-    String countStr = widget.count.abs().toString();
+    String countStr = widget.count.toString();
 
     return Center(
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          if (_isNegative)
+          if (widget.isNegative)
             SizedBox(
               width: widget.width,
               height: widget.height,
@@ -91,30 +91,33 @@ class _ScrollAnimatedIntCountState extends State<ScrollAnimatedIntCount> {
                 ),
               ),
             ),
-          ...List.generate(countStr.length, (index) {
-            return SizedBox(
-              width: widget.width,
-              height: widget.height,
-              child: ListWheelScrollView.useDelegate(
-                controller: _controllers[index],
-                physics: const NeverScrollableScrollPhysics(),
-                itemExtent: 60,
-                perspective: 0.002,
-                childDelegate: ListWheelChildLoopingListDelegate(
-                  children: List.generate(
-                    10,
-                    (digit) => Center(
-                      child: Text(
-                        digit.toString(),
-                        key: ValueKey<int>(digit),
-                        style: widget.textStyle,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(countStr.length, (index) {
+              return SizedBox(
+                width: widget.width,
+                height: widget.height,
+                child: ListWheelScrollView.useDelegate(
+                  controller: _controllers[index],
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemExtent: 60,
+                  perspective: 0.002,
+                  childDelegate: ListWheelChildLoopingListDelegate(
+                    children: List.generate(
+                      10,
+                      (digit) => Center(
+                        child: Text(
+                          digit.toString(),
+                          key: ValueKey<int>(digit),
+                          style: widget.textStyle,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            );
-          })
+              );
+            }),
+          ),
         ],
       ),
     );

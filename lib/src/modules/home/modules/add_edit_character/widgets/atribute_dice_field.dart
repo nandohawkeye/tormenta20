@@ -11,11 +11,13 @@ class AtributeDiceField extends StatelessWidget {
     required this.atribute,
     required this.value,
     required this.setAtribute,
+    required this.isNegative,
   });
 
   final Atribute atribute;
   final Function(Atribute) setAtribute;
   final int value;
+  final bool isNegative;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +44,7 @@ class AtributeDiceField extends StatelessWidget {
                     count: value,
                     height: 40,
                     width: 15,
+                    isNegative: isNegative,
                     textStyle: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
