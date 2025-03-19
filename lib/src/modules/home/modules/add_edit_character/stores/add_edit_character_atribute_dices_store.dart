@@ -8,6 +8,25 @@ import 'package:tormenta20/src/shared/entities/dices/atribute_roll_dice_ext.dart
 import 'package:uuid/uuid.dart';
 
 class AddEditCharacterAtributeDicesStore extends ChangeNotifier {
+  bool _hasError = false;
+  bool get hasError => _hasError;
+
+  bool validade() {
+    if (_dices.isEmpty) {
+      _hasError = true;
+      notifyListeners();
+      return false;
+    } else if (_dices.any((d) => d.atribute == null)) {
+      _hasError = true;
+      notifyListeners();
+      return false;
+    } else {
+      _hasError = false;
+      notifyListeners();
+      return true;
+    }
+  }
+
   List<AtributeRollDice> _dices = [];
   List<AtributeRollDice> get dices => _dices;
   void createDicesAndRoll() {
@@ -32,6 +51,8 @@ class AddEditCharacterAtributeDicesStore extends ChangeNotifier {
     if (_selected == null) {
       return;
     }
+
+    _hasError = false;
 
     List<AtributeRollDice> oldDices = [];
     oldDices.addAll(_dices);

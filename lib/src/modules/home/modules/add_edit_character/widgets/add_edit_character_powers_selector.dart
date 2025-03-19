@@ -11,13 +11,11 @@ class AddEditCharacterPowersSelector extends StatelessWidget {
     required this.store,
     required this.onAddDeleteList,
     required this.characterUuid,
-    required this.getPowers,
   });
 
   final AddMultiStore<Power> store;
   final Function(Power) onAddDeleteList;
   final String characterUuid;
-  final List<Power> Function() getPowers;
 
   @override
   Widget build(BuildContext context) {

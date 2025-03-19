@@ -1,34 +1,23 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_character/add_edit_character_controller.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_character/stores/add_edit_character_actions_store.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_character/stores/add_edit_character_alignment_store.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_character/stores/add_edit_character_brood_store.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_character/stores/add_edit_character_classe_store.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_character/stores/add_edit_character_equipment_store.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_character/stores/add_edit_character_origins_store.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_character/stores/add_edit_character_powers_store.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_character/stores/add_edit_character_size_store.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_character/stores/add_edit_character_trained_expertises_store.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_character/widgets/add_character_atributes_fields.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_character/widgets/add_edit_character_actions_selector.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_character/widgets/add_edit_character_add_warning.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_character/widgets/add_edit_character_alignment_selector.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_character/widgets/add_edit_character_brood_selector.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_character/widgets/add_edit_character_dice_selector/add_edit_character_classe_selector.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_character/widgets/add_edit_character_dice_selector.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_character/widgets/add_edit_character_edit_warning.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_character/widgets/add_edit_character_equipment_selector.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_character/widgets/add_edit_character_grimorie_selector.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_character/widgets/add_edit_character_origins_selector.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_character/widgets/add_edit_character_powers_selector.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_character/widgets/add_edit_character_size_selector.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_character/widgets/add_edit_character_trained_expertises.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_character/widgets/atribute_dice_field.dart';
-import 'package:tormenta20/src/shared/entities/atributes.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_character/widgets/edit_character_atributes_fields.dart';
 import 'package:tormenta20/src/shared/entities/character.dart';
 import 'package:tormenta20/src/shared/widgets/divinity_selector/divinity_selector.dart';
-import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/screen_base.dart';
 import 'package:tormenta20/src/shared/widgets/textfields/defense_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/textfields/displacements_textfield.dart';
@@ -55,12 +44,13 @@ class AddEditCharacter extends StatefulWidget {
 }
 
 class _AddEditCharacterState extends State<AddEditCharacter> {
+  final _formKey = GlobalKey<FormState>();
   late final AddEditCharacterController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = AddEditCharacterController();
+    _controller = AddEditCharacterController(widget.initial);
   }
 
   @override
@@ -73,306 +63,183 @@ class _AddEditCharacterState extends State<AddEditCharacter> {
   Widget build(BuildContext context) {
     return ScreenBase(
       label: 'Criar personagem',
-      onSave: () {},
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          T20UI.spaceHeight,
-          TokenSelector(
-            allTokens: [
-              ...Assets.tokensLendas.values.map((t) => t.path),
-              ...Assets.tokens.values.map((t) => t.path)
-            ],
-            isMenace: false,
-            changeAsset: (_) {},
-            changePath: (_) {},
-            initalImageAsset: null,
-            initialImagePath: null,
-            size: 80,
-          ),
-          T20UI.spaceHeight,
-          Padding(
-            padding: T20UI.horizontallScreenPadding,
-            child: NameTextField(
-              initialName: null,
-              onchange: (_) {},
-            ),
-          ),
-          T20UI.spaceHeight,
-          AnimatedBuilder(
-            animation: _controller.atributeDicesStore,
-            builder: (_, __) {
-              final strengthDice =
-                  _controller.atributeDicesStore.dices.firstWhereOrNull(
-                (at) => at.atribute == Atribute.strength,
-              );
-
-              final dexterityDice =
-                  _controller.atributeDicesStore.dices.firstWhereOrNull(
-                (at) => at.atribute == Atribute.dexterity,
-              );
-
-              final constitutionDice =
-                  _controller.atributeDicesStore.dices.firstWhereOrNull(
-                (at) => at.atribute == Atribute.constitution,
-              );
-
-              return Padding(
-                padding: T20UI.horizontallScreenPadding,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: AtributeDiceField(
-                        atribute: Atribute.strength,
-                        value: (strengthDice?.atributeValue ?? 0).abs(),
-                        setAtribute: _controller.atributeDicesStore.setAtribute,
-                        isNegative:
-                            (strengthDice?.atributeValue ?? 0).isNegative,
-                      ),
-                    ),
-                    T20UI.spaceWidth,
-                    Expanded(
-                      child: AtributeDiceField(
-                        atribute: Atribute.dexterity,
-                        value: (dexterityDice?.atributeValue ?? 0).abs(),
-                        setAtribute: _controller.atributeDicesStore.setAtribute,
-                        isNegative:
-                            (dexterityDice?.atributeValue ?? 0).isNegative,
-                      ),
-                    ),
-                    T20UI.spaceWidth,
-                    Expanded(
-                      child: AtributeDiceField(
-                        atribute: Atribute.constitution,
-                        value: (constitutionDice?.atributeValue ?? 0).abs(),
-                        setAtribute: _controller.atributeDicesStore.setAtribute,
-                        isNegative:
-                            (constitutionDice?.atributeValue ?? 0).isNegative,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-          T20UI.spaceHeight,
-          AnimatedBuilder(
-            animation: _controller.atributeDicesStore,
-            builder: (_, __) {
-              final intelligenceDice =
-                  _controller.atributeDicesStore.dices.firstWhereOrNull(
-                (at) => at.atribute == Atribute.intelligence,
-              );
-
-              final wisdomDice =
-                  _controller.atributeDicesStore.dices.firstWhereOrNull(
-                (at) => at.atribute == Atribute.wisdom,
-              );
-
-              final charismaDice =
-                  _controller.atributeDicesStore.dices.firstWhereOrNull(
-                (at) => at.atribute == Atribute.charisma,
-              );
-
-              return Padding(
-                padding: T20UI.horizontallScreenPadding,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: AtributeDiceField(
-                        atribute: Atribute.intelligence,
-                        value: (intelligenceDice?.atributeValue ?? 0).abs(),
-                        setAtribute: _controller.atributeDicesStore.setAtribute,
-                        isNegative:
-                            (intelligenceDice?.atributeValue ?? 0).isNegative,
-                      ),
-                    ),
-                    T20UI.spaceWidth,
-                    Expanded(
-                      child: AtributeDiceField(
-                        atribute: Atribute.wisdom,
-                        value: (wisdomDice?.atributeValue ?? 0).abs(),
-                        isNegative: (wisdomDice?.atributeValue ?? 0).isNegative,
-                        setAtribute: _controller.atributeDicesStore.setAtribute,
-                      ),
-                    ),
-                    T20UI.spaceWidth,
-                    Expanded(
-                      child: AtributeDiceField(
-                        atribute: Atribute.charisma,
-                        value: (charismaDice?.atributeValue ?? 0).abs(),
-                        setAtribute: _controller.atributeDicesStore.setAtribute,
-                        isNegative:
-                            (charismaDice?.atributeValue ?? 0).isNegative,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-          AddEditCharacterDiceSelector(_controller.atributeDicesStore),
-          T20UI.spaceHeight,
-          Padding(
-            padding: T20UI.horizontallScreenPadding,
-            child: MainButton(
-              label: 'Rolar dados',
-              icon: FontAwesomeIcons.dice,
-              onTap: _controller.createDices,
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-                    horizontal: T20UI.spaceSize + T20UI.spaceSize)
-                .copyWith(top: 8),
-            child: Text(
-              'Obrigatório, aperte em "🎲 Rolar dados", selecione o dado e depois o atributo.',
-              maxLines: 10,
-              style: TextStyle(fontSize: 12),
-            ),
-          ),
-          T20UI.spaceHeight,
-          AddEditCharacterBroodSelector(AddEditCharacterBroodStore(null)),
-          T20UI.spaceHeight,
-          AddEditCharacterClasseSelector(AddEditCharacterClasseStore(null)),
-          T20UI.spaceHeight,
-          AddEditCharacterSizeSelector(AddEditCharacterSizeStore(null)),
-          T20UI.spaceHeight,
-          Padding(
-            padding: T20UI.horizontallScreenPadding,
-            child: Row(
-              children: [
-                Expanded(
-                  child: LifeTextField(
-                    onchange: (_) {},
-                    initialLife: null,
-                  ),
-                ),
-                T20UI.spaceWidth,
-                Expanded(
-                  child: ManaTextField(
-                    onchange: (_) {},
-                    initialMana: null,
-                  ),
-                ),
+      onSave: () {
+        if (_formKey.currentState?.validate() ?? false) {
+          final character = _controller.onSave();
+          print('charcter: $character');
+        }
+      },
+      body: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            T20UI.spaceHeight,
+            if (_controller.isEdit) const AddEditCharacterEditWarning(),
+            if (!_controller.isEdit) const AddEditCharacterAddWarning(),
+            T20UI.spaceHeight,
+            TokenSelector(
+              allTokens: [
+                ...Assets.tokensLendas.values.map((t) => t.path),
+                ...Assets.tokens.values.map((t) => t.path)
               ],
+              isMenace: false,
+              changeAsset: _controller.changeAsset,
+              changePath: _controller.changePath,
+              initalImageAsset: widget.initial?.imageAsset,
+              initialImagePath: widget.initial?.imagePath,
+              size: 80,
             ),
-          ),
-          T20UI.spaceHeight,
-          Padding(
-            padding: T20UI.horizontallScreenPadding,
-            child: Row(
-              children: [
-                Expanded(
-                  child: PerceptionTextfield(
-                    onchange: (_) {},
-                    initialPerception: null,
-                  ),
-                ),
-                T20UI.spaceWidth,
-                Expanded(
-                  child: DefenseTextField(
-                    onchange: (_) {},
-                    initialDefense: null,
-                  ),
-                ),
-              ],
+            T20UI.spaceHeight,
+            Padding(
+              padding: T20UI.horizontallScreenPadding,
+              child: NameTextField(
+                initialName: widget.initial?.name,
+                onchange: _controller.onChangeName,
+              ),
             ),
-          ),
-          T20UI.spaceHeight,
-          Padding(
-            padding: T20UI.horizontallScreenPadding,
-            child: Row(
-              children: [
-                Expanded(
-                  child: ResisFortTextfield(
-                    onchange: (_) {},
-                    initialValue: null,
+            T20UI.spaceHeight,
+            if (_controller.isEdit) EditCharacterAtributesFields(_controller),
+            if (!_controller.isEdit) AddCharacterAtributesFields(_controller),
+            T20UI.spaceHeight,
+            AddEditCharacterBroodSelector(_controller.broodStore),
+            T20UI.spaceHeight,
+            AddEditCharacterClasseSelector(_controller.classeStore),
+            T20UI.spaceHeight,
+            AddEditCharacterSizeSelector(_controller.sizeStore),
+            T20UI.spaceHeight,
+            Padding(
+              padding: T20UI.horizontallScreenPadding,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: LifeTextField(
+                      onchange: _controller.onChangeLife,
+                      initialLife: widget.initial?.life,
+                    ),
                   ),
-                ),
-                T20UI.spaceWidth,
-                Expanded(
-                  child: ResisRefTextfield(
-                    onchange: (_) {},
-                    initialValue: null,
+                  T20UI.spaceWidth,
+                  Expanded(
+                    child: ManaTextField(
+                      onchange: _controller.onChangeMana,
+                      initialMana: widget.initial?.mana,
+                    ),
                   ),
-                ),
-                T20UI.spaceWidth,
-                Expanded(
-                  child: ResisVonTextfield(
-                    onchange: (_) {},
-                    initialValue: null,
+                ],
+              ),
+            ),
+            T20UI.spaceHeight,
+            Padding(
+              padding: T20UI.horizontallScreenPadding,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: PerceptionTextfield(
+                      onchange: _controller.onChangePerception,
+                      initialPerception: widget.initial?.perception,
+                    ),
                   ),
-                ),
-              ],
+                  T20UI.spaceWidth,
+                  Expanded(
+                    child: DefenseTextField(
+                      onchange: _controller.onChangeDefense,
+                      initialDefense: widget.initial?.defense,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          T20UI.spaceHeight,
-          Padding(
-            padding: T20UI.horizontallScreenPadding,
-            child: SensesTextfield(
-              onchange: (_) {},
-              initialValue: null,
+            T20UI.spaceHeight,
+            Padding(
+              padding: T20UI.horizontallScreenPadding,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: ResisFortTextfield(
+                      onchange: _controller.onChangeResisFort,
+                      initialValue: widget.initial?.fortResistence,
+                    ),
+                  ),
+                  T20UI.spaceWidth,
+                  Expanded(
+                    child: ResisRefTextfield(
+                      onchange: _controller.onChangeResisRef,
+                      initialValue: widget.initial?.refResistence,
+                    ),
+                  ),
+                  T20UI.spaceWidth,
+                  Expanded(
+                    child: ResisVonTextfield(
+                      onchange: _controller.onChangeResisVon,
+                      initialValue: widget.initial?.vonResistence,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          T20UI.spaceHeight,
-          Padding(
-            padding: T20UI.horizontallScreenPadding,
-            child: DisplacementsTextfield(
-              onchange: (_) {},
-              initialValue: null,
+            T20UI.spaceHeight,
+            Padding(
+              padding: T20UI.horizontallScreenPadding,
+              child: SensesTextfield(
+                onchange: _controller.changeSenses,
+                initialValue: widget.initial?.senses,
+              ),
             ),
-          ),
-          T20UI.spaceHeight,
-          AddEditCharacterEquipmentSelector(
-            store: AddEditCharacterEquipmentStore([]),
-            onAddDeleteList: (_) {},
-            characterUuid: '',
-          ),
-          T20UI.spaceHeight,
-          AddEditCharacterActionsSelector(
-            store: AddEditCharacterActionsStore([]),
-            getEquipaments: () => [],
-            characterUuid: '',
-            onAddDeleteList: (_) {},
-          ),
-          T20UI.spaceHeight,
-          DivinitySelector(
-            onSelectDivinity: (_) {},
-            initialDivinityId: null,
-          ),
-          T20UI.spaceHeight,
-          AddEditCharacterTrainedExpertises(
-            store: AddEditCharacterTrainedExpertisesStore([]),
-            getTrainedExpertises: () => [],
-            characterUuid: '',
-            onAddDeleteList: (_) {},
-          ),
-          T20UI.spaceHeight,
-          AddEditCharacterPowersSelector(
-            store: AddEditCharacterPowersStore([]),
-            getPowers: () => [],
-            characterUuid: '',
-            onAddDeleteList: (_) {},
-          ),
-          T20UI.spaceHeight,
-          AddEditCharacterOriginsSelector(
-            store: AddEditCharacterOriginsStore([]),
-            getOrigins: () => [],
-            characterUuid: '',
-            onAddDeleteList: (_) {},
-          ),
-          T20UI.spaceHeight,
-          AddEditCharacterGrimorieSelector(
-            onchange: (_) {},
-            initialSelected: null,
-          ),
-          T20UI.spaceHeight,
-          AddEditCharacterAlignmentSelector(
-              AddEditCharacterAlignmentStore(null)),
-          T20UI.spaceHeight,
-        ],
+            T20UI.spaceHeight,
+            Padding(
+              padding: T20UI.horizontallScreenPadding,
+              child: DisplacementsTextfield(
+                onchange: _controller.changeDisplacment,
+                initialValue: widget.initial?.displacement,
+              ),
+            ),
+            T20UI.spaceHeight,
+            AddEditCharacterEquipmentSelector(
+              store: _controller.equipmentStore,
+              onAddDeleteList: _controller.setEquipmentToDelete,
+              characterUuid: _controller.characterUuid,
+            ),
+            T20UI.spaceHeight,
+            AddEditCharacterActionsSelector(
+              store: _controller.actionsStore,
+              getEquipaments: _controller.getEquipments,
+              characterUuid: _controller.characterUuid,
+              onAddDeleteList: _controller.setActionToDelete,
+            ),
+            T20UI.spaceHeight,
+            DivinitySelector(
+              onSelectDivinity: _controller.onChangeDivinityId,
+              initialDivinityId: widget.initial?.divinityId,
+            ),
+            T20UI.spaceHeight,
+            AddEditCharacterTrainedExpertises(
+              store: _controller.trainedExpertisesStore,
+              characterUuid: _controller.characterUuid,
+              onAddDeleteList: _controller.setExpertiseToDelete,
+            ),
+            T20UI.spaceHeight,
+            AddEditCharacterPowersSelector(
+              store: _controller.powersStore,
+              characterUuid: _controller.characterUuid,
+              onAddDeleteList: _controller.setPowerToDelete,
+            ),
+            T20UI.spaceHeight,
+            AddEditCharacterOriginsSelector(
+              store: _controller.originsStore,
+              characterUuid: _controller.characterUuid,
+              onAddDeleteList: _controller.setOriginToDelete,
+            ),
+            T20UI.spaceHeight,
+            AddEditCharacterGrimorieSelector(
+              onchange: _controller.changeGrimoire,
+              initialSelected: widget.initial?.grimorie,
+            ),
+            T20UI.spaceHeight,
+            AddEditCharacterAlignmentSelector(_controller.alignmentStore),
+            T20UI.spaceHeight,
+          ],
+        ),
       ),
     );
   }

@@ -5,6 +5,7 @@ import 'package:drift/native.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+import 'package:tormenta20/src/core/database/daos/character_dao.dart';
 import 'package:tormenta20/src/core/database/daos/config_dao.dart';
 import 'package:tormenta20/src/core/database/daos/grimoire_dao.dart';
 import 'package:tormenta20/src/core/database/daos/magic_character_dao.dart';
@@ -20,6 +21,9 @@ import 'package:tormenta20/src/core/database/tables/board_character_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_combat_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_note_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_player_table.dart';
+import 'package:tormenta20/src/core/database/tables/character_board_table.dart';
+import 'package:tormenta20/src/core/database/tables/character_table.dart';
+import 'package:tormenta20/src/core/database/tables/classe_character_table.dart';
 import 'package:tormenta20/src/core/database/tables/config_table.dart';
 import 'package:tormenta20/src/core/database/tables/equipment_table.dart';
 import 'package:tormenta20/src/core/database/tables/expertise_table.dart';
@@ -30,6 +34,8 @@ import 'package:tormenta20/src/core/database/tables/magic_character_table.dart';
 import 'package:tormenta20/src/core/database/tables/magic_menace_table.dart';
 import 'package:tormenta20/src/core/database/tables/menace_link_board_table.dart';
 import 'package:tormenta20/src/core/database/tables/menace_table.dart';
+import 'package:tormenta20/src/core/database/tables/origin_table.dart';
+import 'package:tormenta20/src/core/database/tables/power_table.dart';
 import 'package:tormenta20/src/core/database/tables/saddlebag_table.dart';
 import 'package:tormenta20/src/core/database/tables/shield_table.dart';
 import 'package:tormenta20/src/core/database/tables/tibars_table.dart';
@@ -78,6 +84,11 @@ part 'app_database.g.dart';
     ExpertiseTable,
     MenaceLinkBoardTable,
     ConfigTable,
+    CharacterTable,
+    ClasseCharacterTable,
+    OriginTable,
+    PowerTable,
+    CharacterBoardTable,
   ],
   daos: [
     GrimoireDAO,
@@ -85,13 +96,14 @@ part 'app_database.g.dart';
     MagicCharacterDAO,
     MenaceDAO,
     ConfigDAO,
+    CharacterDAO,
   ],
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 12;
+  int get schemaVersion => 14;
 
   @override
   MigrationStrategy get migration {
@@ -180,6 +192,20 @@ class AppDatabase extends _$AppDatabase {
                   boardPlayerTable, boardPlayerTable.classeIndexes);
               await m.addColumn(
                   boardCharacterTable, boardCharacterTable.classeIndexes);
+            }
+
+            if (from < 13) {
+              await m.createTable(characterTable);
+              await m.createTable(classeCharacterTable);
+              await m.createTable(originTable);
+              await m.createTable(powerTable);
+              await m.createTable(characterBoardTable);
+              await m.createTable(boardTable);
+            }
+
+            if (from < 14) {
+              await m.addColumn(characterTable, characterTable.aligmentIndex);
+              await m.alterTable(TableMigration(characterTable));
             }
           },
         );

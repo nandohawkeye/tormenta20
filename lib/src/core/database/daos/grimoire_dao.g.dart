@@ -7,4 +7,5 @@ mixin _$GrimoireDAOMixin on DatabaseAccessor<AppDatabase> {
   $GrimoireTableTable get grimoireTable => attachedDatabase.grimoireTable;
   $MagicCharacterTableTable get magicCharacterTable =>
       attachedDatabase.magicCharacterTable;
+  $CharacterTableTable get characterTable => attachedDatabase.characterTable;
 }

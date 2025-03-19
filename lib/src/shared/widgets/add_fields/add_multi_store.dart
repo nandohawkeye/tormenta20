@@ -31,6 +31,16 @@ abstract class AddMultiStore<T extends EntityBase> extends ChangeNotifier
     notifyListeners();
   }
 
+  void putAll(List<T>? values) {
+    if (values == null) return;
+
+    _data.clear();
+    _data.addAll(values);
+
+    hasError = false;
+    notifyListeners();
+  }
+
   void clearAll() {
     _data.clear();
     notifyListeners();

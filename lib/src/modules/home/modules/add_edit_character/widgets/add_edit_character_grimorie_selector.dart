@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/modules/home/modules/select_grimorie/select_grimorie_screen.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
@@ -43,19 +44,18 @@ class _AddEditBoardPlayerBroodSelectorState
   }
 
   void _onAdd(Grimoire? grimorie) async {
-    // await Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (_) => SelectEquipmentsScreen(
-    //       equipaments: widget.equipaments,
-    //       initialSelected: equipament,
-    //     ),
-    //   ),
-    // ).then((result) {
-    //   if (result != null) {
-    //     _onChange(result);
-    //   }
-    // });
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => SelectGrimorieScreen(
+          grimorie: grimorie,
+        ),
+      ),
+    ).then((result) {
+      if (result != null) {
+        _onChange(result);
+      }
+    });
   }
 
   @override

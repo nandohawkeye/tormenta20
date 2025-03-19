@@ -17,6 +17,18 @@ abstract class GrimoireAdapters {
     );
   }
 
+  static Grimoire fromDriftData(GrimoireTableData data) {
+    return Grimoire(
+      uuid: data.uuid,
+      name: data.name,
+      desc: data.desc,
+      iconAsset: data.iconAsset,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(data.createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data.updatedAt),
+      magicsCharacters: [],
+    );
+  }
+
   static Grimoire fromDriftDto(GrimoireDriftDto dto) {
     return Grimoire(
       uuid: dto.grimoireData.uuid,

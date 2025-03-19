@@ -4,6 +4,7 @@ import 'package:tormenta20/src/shared/utils/character_utils.dart';
 
 class ClasseTypeCharacter extends EntityBase {
   final String uuid;
+  final String characterUuid;
   final ClasseType type;
   final int level;
 
@@ -11,6 +12,7 @@ class ClasseTypeCharacter extends EntityBase {
     required this.uuid,
     required this.type,
     required this.level,
+    required this.characterUuid,
   });
 
   @override
@@ -24,9 +26,11 @@ class ClasseTypeCharacter extends EntityBase {
   bool operator ==(other) =>
       other is ClasseTypeCharacter &&
       other.uuid == uuid &&
+      other.characterUuid == characterUuid &&
       other.type == type &&
       other.level == level;
 
   @override
-  int get hashCode => uuid.hashCode ^ type.hashCode ^ level.hashCode;
+  int get hashCode =>
+      uuid.hashCode ^ type.hashCode ^ characterUuid.hashCode ^ level.hashCode;
 }

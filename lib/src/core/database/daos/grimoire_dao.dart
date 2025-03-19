@@ -1,5 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
+import 'package:tormenta20/src/core/database/tables/character_table.dart';
 import 'package:tormenta20/src/core/database/tables/grimoire_table.dart';
 import 'package:tormenta20/src/core/database/tables/magic_character_table.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
@@ -9,7 +10,11 @@ import 'package:tormenta20/src/shared/failures/failure.dart';
 
 part 'grimoire_dao.g.dart';
 
-@DriftAccessor(tables: [GrimoireTable, MagicCharacterTable])
+@DriftAccessor(tables: [
+  GrimoireTable,
+  MagicCharacterTable,
+  CharacterTable,
+])
 class GrimoireDAO extends DatabaseAccessor<AppDatabase>
     with _$GrimoireDAOMixin {
   GrimoireDAO(super.db);

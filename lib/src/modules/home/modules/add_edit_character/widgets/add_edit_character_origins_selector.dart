@@ -11,13 +11,11 @@ class AddEditCharacterOriginsSelector extends StatelessWidget {
     required this.store,
     required this.onAddDeleteList,
     required this.characterUuid,
-    required this.getOrigins,
   });
 
   final AddMultiStore<Origin> store;
   final Function(Origin) onAddDeleteList;
   final String characterUuid;
-  final List<Origin> Function() getOrigins;
 
   @override
   Widget build(BuildContext context) {

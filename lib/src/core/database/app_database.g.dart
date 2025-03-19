@@ -14718,6 +14718,3609 @@ class ConfigTableCompanion extends UpdateCompanion<ConfigTableData> {
   }
 }
 
+class $CharacterTableTable extends CharacterTable
+    with TableInfo<$CharacterTableTable, CharacterTableData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $CharacterTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _uuidMeta = const VerificationMeta('uuid');
+  @override
+  late final GeneratedColumn<String> uuid = GeneratedColumn<String>(
+      'uuid', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _imagePathMeta =
+      const VerificationMeta('imagePath');
+  @override
+  late final GeneratedColumn<String> imagePath = GeneratedColumn<String>(
+      'image_path', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _imageAssetMeta =
+      const VerificationMeta('imageAsset');
+  @override
+  late final GeneratedColumn<String> imageAsset = GeneratedColumn<String>(
+      'image_asset', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _displacementMeta =
+      const VerificationMeta('displacement');
+  @override
+  late final GeneratedColumn<String> displacement = GeneratedColumn<String>(
+      'displacement', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _sensesMeta = const VerificationMeta('senses');
+  @override
+  late final GeneratedColumn<String> senses = GeneratedColumn<String>(
+      'senses', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _divinityIdMeta =
+      const VerificationMeta('divinityId');
+  @override
+  late final GeneratedColumn<int> divinityId = GeneratedColumn<int>(
+      'divinity_id', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _perceptionMeta =
+      const VerificationMeta('perception');
+  @override
+  late final GeneratedColumn<int> perception = GeneratedColumn<int>(
+      'perception', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _defenseMeta =
+      const VerificationMeta('defense');
+  @override
+  late final GeneratedColumn<int> defense = GeneratedColumn<int>(
+      'defense', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _lifeMeta = const VerificationMeta('life');
+  @override
+  late final GeneratedColumn<int> life = GeneratedColumn<int>(
+      'life', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _manaMeta = const VerificationMeta('mana');
+  @override
+  late final GeneratedColumn<int> mana = GeneratedColumn<int>(
+      'mana', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _fortResistenceMeta =
+      const VerificationMeta('fortResistence');
+  @override
+  late final GeneratedColumn<int> fortResistence = GeneratedColumn<int>(
+      'fort_resistence', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _refResistenceMeta =
+      const VerificationMeta('refResistence');
+  @override
+  late final GeneratedColumn<int> refResistence = GeneratedColumn<int>(
+      'ref_resistence', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _vonResistenceMeta =
+      const VerificationMeta('vonResistence');
+  @override
+  late final GeneratedColumn<int> vonResistence = GeneratedColumn<int>(
+      'von_resistence', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _strengthMeta =
+      const VerificationMeta('strength');
+  @override
+  late final GeneratedColumn<int> strength = GeneratedColumn<int>(
+      'strength', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _dexterityMeta =
+      const VerificationMeta('dexterity');
+  @override
+  late final GeneratedColumn<int> dexterity = GeneratedColumn<int>(
+      'dexterity', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _constitutionMeta =
+      const VerificationMeta('constitution');
+  @override
+  late final GeneratedColumn<int> constitution = GeneratedColumn<int>(
+      'constitution', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _intelligenceMeta =
+      const VerificationMeta('intelligence');
+  @override
+  late final GeneratedColumn<int> intelligence = GeneratedColumn<int>(
+      'intelligence', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _wisdomMeta = const VerificationMeta('wisdom');
+  @override
+  late final GeneratedColumn<int> wisdom = GeneratedColumn<int>(
+      'wisdom', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _charismaMeta =
+      const VerificationMeta('charisma');
+  @override
+  late final GeneratedColumn<int> charisma = GeneratedColumn<int>(
+      'charisma', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _creatureSizeIndexMeta =
+      const VerificationMeta('creatureSizeIndex');
+  @override
+  late final GeneratedColumn<int> creatureSizeIndex = GeneratedColumn<int>(
+      'creature_size_index', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _broodIndexMeta =
+      const VerificationMeta('broodIndex');
+  @override
+  late final GeneratedColumn<int> broodIndex = GeneratedColumn<int>(
+      'brood_index', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _grimoireUuidMeta =
+      const VerificationMeta('grimoireUuid');
+  @override
+  late final GeneratedColumn<String> grimoireUuid = GeneratedColumn<String>(
+      'grimoire_uuid', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<int> createdAt = GeneratedColumn<int>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _updatedAtMeta =
+      const VerificationMeta('updatedAt');
+  @override
+  late final GeneratedColumn<int> updatedAt = GeneratedColumn<int>(
+      'updated_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _trainedExpertisesIndexesMeta =
+      const VerificationMeta('trainedExpertisesIndexes');
+  @override
+  late final GeneratedColumn<String> trainedExpertisesIndexes =
+      GeneratedColumn<String>('trained_expertises_indexes', aliasedName, true,
+          type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _aligmentIndexMeta =
+      const VerificationMeta('aligmentIndex');
+  @override
+  late final GeneratedColumn<int> aligmentIndex = GeneratedColumn<int>(
+      'aligment_index', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [
+        uuid,
+        name,
+        imagePath,
+        imageAsset,
+        displacement,
+        senses,
+        divinityId,
+        perception,
+        defense,
+        life,
+        mana,
+        fortResistence,
+        refResistence,
+        vonResistence,
+        strength,
+        dexterity,
+        constitution,
+        intelligence,
+        wisdom,
+        charisma,
+        creatureSizeIndex,
+        broodIndex,
+        grimoireUuid,
+        createdAt,
+        updatedAt,
+        trainedExpertisesIndexes,
+        aligmentIndex
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'character_table';
+  @override
+  VerificationContext validateIntegrity(Insertable<CharacterTableData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('uuid')) {
+      context.handle(
+          _uuidMeta, uuid.isAcceptableOrUnknown(data['uuid']!, _uuidMeta));
+    } else if (isInserting) {
+      context.missing(_uuidMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('image_path')) {
+      context.handle(_imagePathMeta,
+          imagePath.isAcceptableOrUnknown(data['image_path']!, _imagePathMeta));
+    }
+    if (data.containsKey('image_asset')) {
+      context.handle(
+          _imageAssetMeta,
+          imageAsset.isAcceptableOrUnknown(
+              data['image_asset']!, _imageAssetMeta));
+    }
+    if (data.containsKey('displacement')) {
+      context.handle(
+          _displacementMeta,
+          displacement.isAcceptableOrUnknown(
+              data['displacement']!, _displacementMeta));
+    }
+    if (data.containsKey('senses')) {
+      context.handle(_sensesMeta,
+          senses.isAcceptableOrUnknown(data['senses']!, _sensesMeta));
+    }
+    if (data.containsKey('divinity_id')) {
+      context.handle(
+          _divinityIdMeta,
+          divinityId.isAcceptableOrUnknown(
+              data['divinity_id']!, _divinityIdMeta));
+    }
+    if (data.containsKey('perception')) {
+      context.handle(
+          _perceptionMeta,
+          perception.isAcceptableOrUnknown(
+              data['perception']!, _perceptionMeta));
+    } else if (isInserting) {
+      context.missing(_perceptionMeta);
+    }
+    if (data.containsKey('defense')) {
+      context.handle(_defenseMeta,
+          defense.isAcceptableOrUnknown(data['defense']!, _defenseMeta));
+    } else if (isInserting) {
+      context.missing(_defenseMeta);
+    }
+    if (data.containsKey('life')) {
+      context.handle(
+          _lifeMeta, life.isAcceptableOrUnknown(data['life']!, _lifeMeta));
+    } else if (isInserting) {
+      context.missing(_lifeMeta);
+    }
+    if (data.containsKey('mana')) {
+      context.handle(
+          _manaMeta, mana.isAcceptableOrUnknown(data['mana']!, _manaMeta));
+    } else if (isInserting) {
+      context.missing(_manaMeta);
+    }
+    if (data.containsKey('fort_resistence')) {
+      context.handle(
+          _fortResistenceMeta,
+          fortResistence.isAcceptableOrUnknown(
+              data['fort_resistence']!, _fortResistenceMeta));
+    } else if (isInserting) {
+      context.missing(_fortResistenceMeta);
+    }
+    if (data.containsKey('ref_resistence')) {
+      context.handle(
+          _refResistenceMeta,
+          refResistence.isAcceptableOrUnknown(
+              data['ref_resistence']!, _refResistenceMeta));
+    } else if (isInserting) {
+      context.missing(_refResistenceMeta);
+    }
+    if (data.containsKey('von_resistence')) {
+      context.handle(
+          _vonResistenceMeta,
+          vonResistence.isAcceptableOrUnknown(
+              data['von_resistence']!, _vonResistenceMeta));
+    } else if (isInserting) {
+      context.missing(_vonResistenceMeta);
+    }
+    if (data.containsKey('strength')) {
+      context.handle(_strengthMeta,
+          strength.isAcceptableOrUnknown(data['strength']!, _strengthMeta));
+    } else if (isInserting) {
+      context.missing(_strengthMeta);
+    }
+    if (data.containsKey('dexterity')) {
+      context.handle(_dexterityMeta,
+          dexterity.isAcceptableOrUnknown(data['dexterity']!, _dexterityMeta));
+    } else if (isInserting) {
+      context.missing(_dexterityMeta);
+    }
+    if (data.containsKey('constitution')) {
+      context.handle(
+          _constitutionMeta,
+          constitution.isAcceptableOrUnknown(
+              data['constitution']!, _constitutionMeta));
+    } else if (isInserting) {
+      context.missing(_constitutionMeta);
+    }
+    if (data.containsKey('intelligence')) {
+      context.handle(
+          _intelligenceMeta,
+          intelligence.isAcceptableOrUnknown(
+              data['intelligence']!, _intelligenceMeta));
+    } else if (isInserting) {
+      context.missing(_intelligenceMeta);
+    }
+    if (data.containsKey('wisdom')) {
+      context.handle(_wisdomMeta,
+          wisdom.isAcceptableOrUnknown(data['wisdom']!, _wisdomMeta));
+    } else if (isInserting) {
+      context.missing(_wisdomMeta);
+    }
+    if (data.containsKey('charisma')) {
+      context.handle(_charismaMeta,
+          charisma.isAcceptableOrUnknown(data['charisma']!, _charismaMeta));
+    } else if (isInserting) {
+      context.missing(_charismaMeta);
+    }
+    if (data.containsKey('creature_size_index')) {
+      context.handle(
+          _creatureSizeIndexMeta,
+          creatureSizeIndex.isAcceptableOrUnknown(
+              data['creature_size_index']!, _creatureSizeIndexMeta));
+    } else if (isInserting) {
+      context.missing(_creatureSizeIndexMeta);
+    }
+    if (data.containsKey('brood_index')) {
+      context.handle(
+          _broodIndexMeta,
+          broodIndex.isAcceptableOrUnknown(
+              data['brood_index']!, _broodIndexMeta));
+    } else if (isInserting) {
+      context.missing(_broodIndexMeta);
+    }
+    if (data.containsKey('grimoire_uuid')) {
+      context.handle(
+          _grimoireUuidMeta,
+          grimoireUuid.isAcceptableOrUnknown(
+              data['grimoire_uuid']!, _grimoireUuidMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(_updatedAtMeta,
+          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
+    } else if (isInserting) {
+      context.missing(_updatedAtMeta);
+    }
+    if (data.containsKey('trained_expertises_indexes')) {
+      context.handle(
+          _trainedExpertisesIndexesMeta,
+          trainedExpertisesIndexes.isAcceptableOrUnknown(
+              data['trained_expertises_indexes']!,
+              _trainedExpertisesIndexesMeta));
+    }
+    if (data.containsKey('aligment_index')) {
+      context.handle(
+          _aligmentIndexMeta,
+          aligmentIndex.isAcceptableOrUnknown(
+              data['aligment_index']!, _aligmentIndexMeta));
+    } else if (isInserting) {
+      context.missing(_aligmentIndexMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {uuid};
+  @override
+  CharacterTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return CharacterTableData(
+      uuid: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}uuid'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      imagePath: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}image_path']),
+      imageAsset: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}image_asset']),
+      displacement: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}displacement']),
+      senses: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}senses']),
+      divinityId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}divinity_id']),
+      perception: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}perception'])!,
+      defense: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}defense'])!,
+      life: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}life'])!,
+      mana: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}mana'])!,
+      fortResistence: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}fort_resistence'])!,
+      refResistence: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}ref_resistence'])!,
+      vonResistence: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}von_resistence'])!,
+      strength: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}strength'])!,
+      dexterity: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}dexterity'])!,
+      constitution: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}constitution'])!,
+      intelligence: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}intelligence'])!,
+      wisdom: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}wisdom'])!,
+      charisma: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}charisma'])!,
+      creatureSizeIndex: attachedDatabase.typeMapping.read(
+          DriftSqlType.int, data['${effectivePrefix}creature_size_index'])!,
+      broodIndex: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}brood_index'])!,
+      grimoireUuid: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}grimoire_uuid']),
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}created_at'])!,
+      updatedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}updated_at'])!,
+      trainedExpertisesIndexes: attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}trained_expertises_indexes']),
+      aligmentIndex: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}aligment_index'])!,
+    );
+  }
+
+  @override
+  $CharacterTableTable createAlias(String alias) {
+    return $CharacterTableTable(attachedDatabase, alias);
+  }
+}
+
+class CharacterTableData extends DataClass
+    implements Insertable<CharacterTableData> {
+  final String uuid;
+  final String name;
+  final String? imagePath;
+  final String? imageAsset;
+  final String? displacement;
+  final String? senses;
+  final int? divinityId;
+  final int perception;
+  final int defense;
+  final int life;
+  final int mana;
+  final int fortResistence;
+  final int refResistence;
+  final int vonResistence;
+  final int strength;
+  final int dexterity;
+  final int constitution;
+  final int intelligence;
+  final int wisdom;
+  final int charisma;
+  final int creatureSizeIndex;
+  final int broodIndex;
+  final String? grimoireUuid;
+  final int createdAt;
+  final int updatedAt;
+  final String? trainedExpertisesIndexes;
+  final int aligmentIndex;
+  const CharacterTableData(
+      {required this.uuid,
+      required this.name,
+      this.imagePath,
+      this.imageAsset,
+      this.displacement,
+      this.senses,
+      this.divinityId,
+      required this.perception,
+      required this.defense,
+      required this.life,
+      required this.mana,
+      required this.fortResistence,
+      required this.refResistence,
+      required this.vonResistence,
+      required this.strength,
+      required this.dexterity,
+      required this.constitution,
+      required this.intelligence,
+      required this.wisdom,
+      required this.charisma,
+      required this.creatureSizeIndex,
+      required this.broodIndex,
+      this.grimoireUuid,
+      required this.createdAt,
+      required this.updatedAt,
+      this.trainedExpertisesIndexes,
+      required this.aligmentIndex});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['uuid'] = Variable<String>(uuid);
+    map['name'] = Variable<String>(name);
+    if (!nullToAbsent || imagePath != null) {
+      map['image_path'] = Variable<String>(imagePath);
+    }
+    if (!nullToAbsent || imageAsset != null) {
+      map['image_asset'] = Variable<String>(imageAsset);
+    }
+    if (!nullToAbsent || displacement != null) {
+      map['displacement'] = Variable<String>(displacement);
+    }
+    if (!nullToAbsent || senses != null) {
+      map['senses'] = Variable<String>(senses);
+    }
+    if (!nullToAbsent || divinityId != null) {
+      map['divinity_id'] = Variable<int>(divinityId);
+    }
+    map['perception'] = Variable<int>(perception);
+    map['defense'] = Variable<int>(defense);
+    map['life'] = Variable<int>(life);
+    map['mana'] = Variable<int>(mana);
+    map['fort_resistence'] = Variable<int>(fortResistence);
+    map['ref_resistence'] = Variable<int>(refResistence);
+    map['von_resistence'] = Variable<int>(vonResistence);
+    map['strength'] = Variable<int>(strength);
+    map['dexterity'] = Variable<int>(dexterity);
+    map['constitution'] = Variable<int>(constitution);
+    map['intelligence'] = Variable<int>(intelligence);
+    map['wisdom'] = Variable<int>(wisdom);
+    map['charisma'] = Variable<int>(charisma);
+    map['creature_size_index'] = Variable<int>(creatureSizeIndex);
+    map['brood_index'] = Variable<int>(broodIndex);
+    if (!nullToAbsent || grimoireUuid != null) {
+      map['grimoire_uuid'] = Variable<String>(grimoireUuid);
+    }
+    map['created_at'] = Variable<int>(createdAt);
+    map['updated_at'] = Variable<int>(updatedAt);
+    if (!nullToAbsent || trainedExpertisesIndexes != null) {
+      map['trained_expertises_indexes'] =
+          Variable<String>(trainedExpertisesIndexes);
+    }
+    map['aligment_index'] = Variable<int>(aligmentIndex);
+    return map;
+  }
+
+  CharacterTableCompanion toCompanion(bool nullToAbsent) {
+    return CharacterTableCompanion(
+      uuid: Value(uuid),
+      name: Value(name),
+      imagePath: imagePath == null && nullToAbsent
+          ? const Value.absent()
+          : Value(imagePath),
+      imageAsset: imageAsset == null && nullToAbsent
+          ? const Value.absent()
+          : Value(imageAsset),
+      displacement: displacement == null && nullToAbsent
+          ? const Value.absent()
+          : Value(displacement),
+      senses:
+          senses == null && nullToAbsent ? const Value.absent() : Value(senses),
+      divinityId: divinityId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(divinityId),
+      perception: Value(perception),
+      defense: Value(defense),
+      life: Value(life),
+      mana: Value(mana),
+      fortResistence: Value(fortResistence),
+      refResistence: Value(refResistence),
+      vonResistence: Value(vonResistence),
+      strength: Value(strength),
+      dexterity: Value(dexterity),
+      constitution: Value(constitution),
+      intelligence: Value(intelligence),
+      wisdom: Value(wisdom),
+      charisma: Value(charisma),
+      creatureSizeIndex: Value(creatureSizeIndex),
+      broodIndex: Value(broodIndex),
+      grimoireUuid: grimoireUuid == null && nullToAbsent
+          ? const Value.absent()
+          : Value(grimoireUuid),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+      trainedExpertisesIndexes: trainedExpertisesIndexes == null && nullToAbsent
+          ? const Value.absent()
+          : Value(trainedExpertisesIndexes),
+      aligmentIndex: Value(aligmentIndex),
+    );
+  }
+
+  factory CharacterTableData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return CharacterTableData(
+      uuid: serializer.fromJson<String>(json['uuid']),
+      name: serializer.fromJson<String>(json['name']),
+      imagePath: serializer.fromJson<String?>(json['imagePath']),
+      imageAsset: serializer.fromJson<String?>(json['imageAsset']),
+      displacement: serializer.fromJson<String?>(json['displacement']),
+      senses: serializer.fromJson<String?>(json['senses']),
+      divinityId: serializer.fromJson<int?>(json['divinityId']),
+      perception: serializer.fromJson<int>(json['perception']),
+      defense: serializer.fromJson<int>(json['defense']),
+      life: serializer.fromJson<int>(json['life']),
+      mana: serializer.fromJson<int>(json['mana']),
+      fortResistence: serializer.fromJson<int>(json['fortResistence']),
+      refResistence: serializer.fromJson<int>(json['refResistence']),
+      vonResistence: serializer.fromJson<int>(json['vonResistence']),
+      strength: serializer.fromJson<int>(json['strength']),
+      dexterity: serializer.fromJson<int>(json['dexterity']),
+      constitution: serializer.fromJson<int>(json['constitution']),
+      intelligence: serializer.fromJson<int>(json['intelligence']),
+      wisdom: serializer.fromJson<int>(json['wisdom']),
+      charisma: serializer.fromJson<int>(json['charisma']),
+      creatureSizeIndex: serializer.fromJson<int>(json['creatureSizeIndex']),
+      broodIndex: serializer.fromJson<int>(json['broodIndex']),
+      grimoireUuid: serializer.fromJson<String?>(json['grimoireUuid']),
+      createdAt: serializer.fromJson<int>(json['createdAt']),
+      updatedAt: serializer.fromJson<int>(json['updatedAt']),
+      trainedExpertisesIndexes:
+          serializer.fromJson<String?>(json['trainedExpertisesIndexes']),
+      aligmentIndex: serializer.fromJson<int>(json['aligmentIndex']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'uuid': serializer.toJson<String>(uuid),
+      'name': serializer.toJson<String>(name),
+      'imagePath': serializer.toJson<String?>(imagePath),
+      'imageAsset': serializer.toJson<String?>(imageAsset),
+      'displacement': serializer.toJson<String?>(displacement),
+      'senses': serializer.toJson<String?>(senses),
+      'divinityId': serializer.toJson<int?>(divinityId),
+      'perception': serializer.toJson<int>(perception),
+      'defense': serializer.toJson<int>(defense),
+      'life': serializer.toJson<int>(life),
+      'mana': serializer.toJson<int>(mana),
+      'fortResistence': serializer.toJson<int>(fortResistence),
+      'refResistence': serializer.toJson<int>(refResistence),
+      'vonResistence': serializer.toJson<int>(vonResistence),
+      'strength': serializer.toJson<int>(strength),
+      'dexterity': serializer.toJson<int>(dexterity),
+      'constitution': serializer.toJson<int>(constitution),
+      'intelligence': serializer.toJson<int>(intelligence),
+      'wisdom': serializer.toJson<int>(wisdom),
+      'charisma': serializer.toJson<int>(charisma),
+      'creatureSizeIndex': serializer.toJson<int>(creatureSizeIndex),
+      'broodIndex': serializer.toJson<int>(broodIndex),
+      'grimoireUuid': serializer.toJson<String?>(grimoireUuid),
+      'createdAt': serializer.toJson<int>(createdAt),
+      'updatedAt': serializer.toJson<int>(updatedAt),
+      'trainedExpertisesIndexes':
+          serializer.toJson<String?>(trainedExpertisesIndexes),
+      'aligmentIndex': serializer.toJson<int>(aligmentIndex),
+    };
+  }
+
+  CharacterTableData copyWith(
+          {String? uuid,
+          String? name,
+          Value<String?> imagePath = const Value.absent(),
+          Value<String?> imageAsset = const Value.absent(),
+          Value<String?> displacement = const Value.absent(),
+          Value<String?> senses = const Value.absent(),
+          Value<int?> divinityId = const Value.absent(),
+          int? perception,
+          int? defense,
+          int? life,
+          int? mana,
+          int? fortResistence,
+          int? refResistence,
+          int? vonResistence,
+          int? strength,
+          int? dexterity,
+          int? constitution,
+          int? intelligence,
+          int? wisdom,
+          int? charisma,
+          int? creatureSizeIndex,
+          int? broodIndex,
+          Value<String?> grimoireUuid = const Value.absent(),
+          int? createdAt,
+          int? updatedAt,
+          Value<String?> trainedExpertisesIndexes = const Value.absent(),
+          int? aligmentIndex}) =>
+      CharacterTableData(
+        uuid: uuid ?? this.uuid,
+        name: name ?? this.name,
+        imagePath: imagePath.present ? imagePath.value : this.imagePath,
+        imageAsset: imageAsset.present ? imageAsset.value : this.imageAsset,
+        displacement:
+            displacement.present ? displacement.value : this.displacement,
+        senses: senses.present ? senses.value : this.senses,
+        divinityId: divinityId.present ? divinityId.value : this.divinityId,
+        perception: perception ?? this.perception,
+        defense: defense ?? this.defense,
+        life: life ?? this.life,
+        mana: mana ?? this.mana,
+        fortResistence: fortResistence ?? this.fortResistence,
+        refResistence: refResistence ?? this.refResistence,
+        vonResistence: vonResistence ?? this.vonResistence,
+        strength: strength ?? this.strength,
+        dexterity: dexterity ?? this.dexterity,
+        constitution: constitution ?? this.constitution,
+        intelligence: intelligence ?? this.intelligence,
+        wisdom: wisdom ?? this.wisdom,
+        charisma: charisma ?? this.charisma,
+        creatureSizeIndex: creatureSizeIndex ?? this.creatureSizeIndex,
+        broodIndex: broodIndex ?? this.broodIndex,
+        grimoireUuid:
+            grimoireUuid.present ? grimoireUuid.value : this.grimoireUuid,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+        trainedExpertisesIndexes: trainedExpertisesIndexes.present
+            ? trainedExpertisesIndexes.value
+            : this.trainedExpertisesIndexes,
+        aligmentIndex: aligmentIndex ?? this.aligmentIndex,
+      );
+  CharacterTableData copyWithCompanion(CharacterTableCompanion data) {
+    return CharacterTableData(
+      uuid: data.uuid.present ? data.uuid.value : this.uuid,
+      name: data.name.present ? data.name.value : this.name,
+      imagePath: data.imagePath.present ? data.imagePath.value : this.imagePath,
+      imageAsset:
+          data.imageAsset.present ? data.imageAsset.value : this.imageAsset,
+      displacement: data.displacement.present
+          ? data.displacement.value
+          : this.displacement,
+      senses: data.senses.present ? data.senses.value : this.senses,
+      divinityId:
+          data.divinityId.present ? data.divinityId.value : this.divinityId,
+      perception:
+          data.perception.present ? data.perception.value : this.perception,
+      defense: data.defense.present ? data.defense.value : this.defense,
+      life: data.life.present ? data.life.value : this.life,
+      mana: data.mana.present ? data.mana.value : this.mana,
+      fortResistence: data.fortResistence.present
+          ? data.fortResistence.value
+          : this.fortResistence,
+      refResistence: data.refResistence.present
+          ? data.refResistence.value
+          : this.refResistence,
+      vonResistence: data.vonResistence.present
+          ? data.vonResistence.value
+          : this.vonResistence,
+      strength: data.strength.present ? data.strength.value : this.strength,
+      dexterity: data.dexterity.present ? data.dexterity.value : this.dexterity,
+      constitution: data.constitution.present
+          ? data.constitution.value
+          : this.constitution,
+      intelligence: data.intelligence.present
+          ? data.intelligence.value
+          : this.intelligence,
+      wisdom: data.wisdom.present ? data.wisdom.value : this.wisdom,
+      charisma: data.charisma.present ? data.charisma.value : this.charisma,
+      creatureSizeIndex: data.creatureSizeIndex.present
+          ? data.creatureSizeIndex.value
+          : this.creatureSizeIndex,
+      broodIndex:
+          data.broodIndex.present ? data.broodIndex.value : this.broodIndex,
+      grimoireUuid: data.grimoireUuid.present
+          ? data.grimoireUuid.value
+          : this.grimoireUuid,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      trainedExpertisesIndexes: data.trainedExpertisesIndexes.present
+          ? data.trainedExpertisesIndexes.value
+          : this.trainedExpertisesIndexes,
+      aligmentIndex: data.aligmentIndex.present
+          ? data.aligmentIndex.value
+          : this.aligmentIndex,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CharacterTableData(')
+          ..write('uuid: $uuid, ')
+          ..write('name: $name, ')
+          ..write('imagePath: $imagePath, ')
+          ..write('imageAsset: $imageAsset, ')
+          ..write('displacement: $displacement, ')
+          ..write('senses: $senses, ')
+          ..write('divinityId: $divinityId, ')
+          ..write('perception: $perception, ')
+          ..write('defense: $defense, ')
+          ..write('life: $life, ')
+          ..write('mana: $mana, ')
+          ..write('fortResistence: $fortResistence, ')
+          ..write('refResistence: $refResistence, ')
+          ..write('vonResistence: $vonResistence, ')
+          ..write('strength: $strength, ')
+          ..write('dexterity: $dexterity, ')
+          ..write('constitution: $constitution, ')
+          ..write('intelligence: $intelligence, ')
+          ..write('wisdom: $wisdom, ')
+          ..write('charisma: $charisma, ')
+          ..write('creatureSizeIndex: $creatureSizeIndex, ')
+          ..write('broodIndex: $broodIndex, ')
+          ..write('grimoireUuid: $grimoireUuid, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('trainedExpertisesIndexes: $trainedExpertisesIndexes, ')
+          ..write('aligmentIndex: $aligmentIndex')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hashAll([
+        uuid,
+        name,
+        imagePath,
+        imageAsset,
+        displacement,
+        senses,
+        divinityId,
+        perception,
+        defense,
+        life,
+        mana,
+        fortResistence,
+        refResistence,
+        vonResistence,
+        strength,
+        dexterity,
+        constitution,
+        intelligence,
+        wisdom,
+        charisma,
+        creatureSizeIndex,
+        broodIndex,
+        grimoireUuid,
+        createdAt,
+        updatedAt,
+        trainedExpertisesIndexes,
+        aligmentIndex
+      ]);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is CharacterTableData &&
+          other.uuid == this.uuid &&
+          other.name == this.name &&
+          other.imagePath == this.imagePath &&
+          other.imageAsset == this.imageAsset &&
+          other.displacement == this.displacement &&
+          other.senses == this.senses &&
+          other.divinityId == this.divinityId &&
+          other.perception == this.perception &&
+          other.defense == this.defense &&
+          other.life == this.life &&
+          other.mana == this.mana &&
+          other.fortResistence == this.fortResistence &&
+          other.refResistence == this.refResistence &&
+          other.vonResistence == this.vonResistence &&
+          other.strength == this.strength &&
+          other.dexterity == this.dexterity &&
+          other.constitution == this.constitution &&
+          other.intelligence == this.intelligence &&
+          other.wisdom == this.wisdom &&
+          other.charisma == this.charisma &&
+          other.creatureSizeIndex == this.creatureSizeIndex &&
+          other.broodIndex == this.broodIndex &&
+          other.grimoireUuid == this.grimoireUuid &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt &&
+          other.trainedExpertisesIndexes == this.trainedExpertisesIndexes &&
+          other.aligmentIndex == this.aligmentIndex);
+}
+
+class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
+  final Value<String> uuid;
+  final Value<String> name;
+  final Value<String?> imagePath;
+  final Value<String?> imageAsset;
+  final Value<String?> displacement;
+  final Value<String?> senses;
+  final Value<int?> divinityId;
+  final Value<int> perception;
+  final Value<int> defense;
+  final Value<int> life;
+  final Value<int> mana;
+  final Value<int> fortResistence;
+  final Value<int> refResistence;
+  final Value<int> vonResistence;
+  final Value<int> strength;
+  final Value<int> dexterity;
+  final Value<int> constitution;
+  final Value<int> intelligence;
+  final Value<int> wisdom;
+  final Value<int> charisma;
+  final Value<int> creatureSizeIndex;
+  final Value<int> broodIndex;
+  final Value<String?> grimoireUuid;
+  final Value<int> createdAt;
+  final Value<int> updatedAt;
+  final Value<String?> trainedExpertisesIndexes;
+  final Value<int> aligmentIndex;
+  final Value<int> rowid;
+  const CharacterTableCompanion({
+    this.uuid = const Value.absent(),
+    this.name = const Value.absent(),
+    this.imagePath = const Value.absent(),
+    this.imageAsset = const Value.absent(),
+    this.displacement = const Value.absent(),
+    this.senses = const Value.absent(),
+    this.divinityId = const Value.absent(),
+    this.perception = const Value.absent(),
+    this.defense = const Value.absent(),
+    this.life = const Value.absent(),
+    this.mana = const Value.absent(),
+    this.fortResistence = const Value.absent(),
+    this.refResistence = const Value.absent(),
+    this.vonResistence = const Value.absent(),
+    this.strength = const Value.absent(),
+    this.dexterity = const Value.absent(),
+    this.constitution = const Value.absent(),
+    this.intelligence = const Value.absent(),
+    this.wisdom = const Value.absent(),
+    this.charisma = const Value.absent(),
+    this.creatureSizeIndex = const Value.absent(),
+    this.broodIndex = const Value.absent(),
+    this.grimoireUuid = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.trainedExpertisesIndexes = const Value.absent(),
+    this.aligmentIndex = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  CharacterTableCompanion.insert({
+    required String uuid,
+    required String name,
+    this.imagePath = const Value.absent(),
+    this.imageAsset = const Value.absent(),
+    this.displacement = const Value.absent(),
+    this.senses = const Value.absent(),
+    this.divinityId = const Value.absent(),
+    required int perception,
+    required int defense,
+    required int life,
+    required int mana,
+    required int fortResistence,
+    required int refResistence,
+    required int vonResistence,
+    required int strength,
+    required int dexterity,
+    required int constitution,
+    required int intelligence,
+    required int wisdom,
+    required int charisma,
+    required int creatureSizeIndex,
+    required int broodIndex,
+    this.grimoireUuid = const Value.absent(),
+    required int createdAt,
+    required int updatedAt,
+    this.trainedExpertisesIndexes = const Value.absent(),
+    required int aligmentIndex,
+    this.rowid = const Value.absent(),
+  })  : uuid = Value(uuid),
+        name = Value(name),
+        perception = Value(perception),
+        defense = Value(defense),
+        life = Value(life),
+        mana = Value(mana),
+        fortResistence = Value(fortResistence),
+        refResistence = Value(refResistence),
+        vonResistence = Value(vonResistence),
+        strength = Value(strength),
+        dexterity = Value(dexterity),
+        constitution = Value(constitution),
+        intelligence = Value(intelligence),
+        wisdom = Value(wisdom),
+        charisma = Value(charisma),
+        creatureSizeIndex = Value(creatureSizeIndex),
+        broodIndex = Value(broodIndex),
+        createdAt = Value(createdAt),
+        updatedAt = Value(updatedAt),
+        aligmentIndex = Value(aligmentIndex);
+  static Insertable<CharacterTableData> custom({
+    Expression<String>? uuid,
+    Expression<String>? name,
+    Expression<String>? imagePath,
+    Expression<String>? imageAsset,
+    Expression<String>? displacement,
+    Expression<String>? senses,
+    Expression<int>? divinityId,
+    Expression<int>? perception,
+    Expression<int>? defense,
+    Expression<int>? life,
+    Expression<int>? mana,
+    Expression<int>? fortResistence,
+    Expression<int>? refResistence,
+    Expression<int>? vonResistence,
+    Expression<int>? strength,
+    Expression<int>? dexterity,
+    Expression<int>? constitution,
+    Expression<int>? intelligence,
+    Expression<int>? wisdom,
+    Expression<int>? charisma,
+    Expression<int>? creatureSizeIndex,
+    Expression<int>? broodIndex,
+    Expression<String>? grimoireUuid,
+    Expression<int>? createdAt,
+    Expression<int>? updatedAt,
+    Expression<String>? trainedExpertisesIndexes,
+    Expression<int>? aligmentIndex,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (uuid != null) 'uuid': uuid,
+      if (name != null) 'name': name,
+      if (imagePath != null) 'image_path': imagePath,
+      if (imageAsset != null) 'image_asset': imageAsset,
+      if (displacement != null) 'displacement': displacement,
+      if (senses != null) 'senses': senses,
+      if (divinityId != null) 'divinity_id': divinityId,
+      if (perception != null) 'perception': perception,
+      if (defense != null) 'defense': defense,
+      if (life != null) 'life': life,
+      if (mana != null) 'mana': mana,
+      if (fortResistence != null) 'fort_resistence': fortResistence,
+      if (refResistence != null) 'ref_resistence': refResistence,
+      if (vonResistence != null) 'von_resistence': vonResistence,
+      if (strength != null) 'strength': strength,
+      if (dexterity != null) 'dexterity': dexterity,
+      if (constitution != null) 'constitution': constitution,
+      if (intelligence != null) 'intelligence': intelligence,
+      if (wisdom != null) 'wisdom': wisdom,
+      if (charisma != null) 'charisma': charisma,
+      if (creatureSizeIndex != null) 'creature_size_index': creatureSizeIndex,
+      if (broodIndex != null) 'brood_index': broodIndex,
+      if (grimoireUuid != null) 'grimoire_uuid': grimoireUuid,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (trainedExpertisesIndexes != null)
+        'trained_expertises_indexes': trainedExpertisesIndexes,
+      if (aligmentIndex != null) 'aligment_index': aligmentIndex,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  CharacterTableCompanion copyWith(
+      {Value<String>? uuid,
+      Value<String>? name,
+      Value<String?>? imagePath,
+      Value<String?>? imageAsset,
+      Value<String?>? displacement,
+      Value<String?>? senses,
+      Value<int?>? divinityId,
+      Value<int>? perception,
+      Value<int>? defense,
+      Value<int>? life,
+      Value<int>? mana,
+      Value<int>? fortResistence,
+      Value<int>? refResistence,
+      Value<int>? vonResistence,
+      Value<int>? strength,
+      Value<int>? dexterity,
+      Value<int>? constitution,
+      Value<int>? intelligence,
+      Value<int>? wisdom,
+      Value<int>? charisma,
+      Value<int>? creatureSizeIndex,
+      Value<int>? broodIndex,
+      Value<String?>? grimoireUuid,
+      Value<int>? createdAt,
+      Value<int>? updatedAt,
+      Value<String?>? trainedExpertisesIndexes,
+      Value<int>? aligmentIndex,
+      Value<int>? rowid}) {
+    return CharacterTableCompanion(
+      uuid: uuid ?? this.uuid,
+      name: name ?? this.name,
+      imagePath: imagePath ?? this.imagePath,
+      imageAsset: imageAsset ?? this.imageAsset,
+      displacement: displacement ?? this.displacement,
+      senses: senses ?? this.senses,
+      divinityId: divinityId ?? this.divinityId,
+      perception: perception ?? this.perception,
+      defense: defense ?? this.defense,
+      life: life ?? this.life,
+      mana: mana ?? this.mana,
+      fortResistence: fortResistence ?? this.fortResistence,
+      refResistence: refResistence ?? this.refResistence,
+      vonResistence: vonResistence ?? this.vonResistence,
+      strength: strength ?? this.strength,
+      dexterity: dexterity ?? this.dexterity,
+      constitution: constitution ?? this.constitution,
+      intelligence: intelligence ?? this.intelligence,
+      wisdom: wisdom ?? this.wisdom,
+      charisma: charisma ?? this.charisma,
+      creatureSizeIndex: creatureSizeIndex ?? this.creatureSizeIndex,
+      broodIndex: broodIndex ?? this.broodIndex,
+      grimoireUuid: grimoireUuid ?? this.grimoireUuid,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      trainedExpertisesIndexes:
+          trainedExpertisesIndexes ?? this.trainedExpertisesIndexes,
+      aligmentIndex: aligmentIndex ?? this.aligmentIndex,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (uuid.present) {
+      map['uuid'] = Variable<String>(uuid.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (imagePath.present) {
+      map['image_path'] = Variable<String>(imagePath.value);
+    }
+    if (imageAsset.present) {
+      map['image_asset'] = Variable<String>(imageAsset.value);
+    }
+    if (displacement.present) {
+      map['displacement'] = Variable<String>(displacement.value);
+    }
+    if (senses.present) {
+      map['senses'] = Variable<String>(senses.value);
+    }
+    if (divinityId.present) {
+      map['divinity_id'] = Variable<int>(divinityId.value);
+    }
+    if (perception.present) {
+      map['perception'] = Variable<int>(perception.value);
+    }
+    if (defense.present) {
+      map['defense'] = Variable<int>(defense.value);
+    }
+    if (life.present) {
+      map['life'] = Variable<int>(life.value);
+    }
+    if (mana.present) {
+      map['mana'] = Variable<int>(mana.value);
+    }
+    if (fortResistence.present) {
+      map['fort_resistence'] = Variable<int>(fortResistence.value);
+    }
+    if (refResistence.present) {
+      map['ref_resistence'] = Variable<int>(refResistence.value);
+    }
+    if (vonResistence.present) {
+      map['von_resistence'] = Variable<int>(vonResistence.value);
+    }
+    if (strength.present) {
+      map['strength'] = Variable<int>(strength.value);
+    }
+    if (dexterity.present) {
+      map['dexterity'] = Variable<int>(dexterity.value);
+    }
+    if (constitution.present) {
+      map['constitution'] = Variable<int>(constitution.value);
+    }
+    if (intelligence.present) {
+      map['intelligence'] = Variable<int>(intelligence.value);
+    }
+    if (wisdom.present) {
+      map['wisdom'] = Variable<int>(wisdom.value);
+    }
+    if (charisma.present) {
+      map['charisma'] = Variable<int>(charisma.value);
+    }
+    if (creatureSizeIndex.present) {
+      map['creature_size_index'] = Variable<int>(creatureSizeIndex.value);
+    }
+    if (broodIndex.present) {
+      map['brood_index'] = Variable<int>(broodIndex.value);
+    }
+    if (grimoireUuid.present) {
+      map['grimoire_uuid'] = Variable<String>(grimoireUuid.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<int>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<int>(updatedAt.value);
+    }
+    if (trainedExpertisesIndexes.present) {
+      map['trained_expertises_indexes'] =
+          Variable<String>(trainedExpertisesIndexes.value);
+    }
+    if (aligmentIndex.present) {
+      map['aligment_index'] = Variable<int>(aligmentIndex.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CharacterTableCompanion(')
+          ..write('uuid: $uuid, ')
+          ..write('name: $name, ')
+          ..write('imagePath: $imagePath, ')
+          ..write('imageAsset: $imageAsset, ')
+          ..write('displacement: $displacement, ')
+          ..write('senses: $senses, ')
+          ..write('divinityId: $divinityId, ')
+          ..write('perception: $perception, ')
+          ..write('defense: $defense, ')
+          ..write('life: $life, ')
+          ..write('mana: $mana, ')
+          ..write('fortResistence: $fortResistence, ')
+          ..write('refResistence: $refResistence, ')
+          ..write('vonResistence: $vonResistence, ')
+          ..write('strength: $strength, ')
+          ..write('dexterity: $dexterity, ')
+          ..write('constitution: $constitution, ')
+          ..write('intelligence: $intelligence, ')
+          ..write('wisdom: $wisdom, ')
+          ..write('charisma: $charisma, ')
+          ..write('creatureSizeIndex: $creatureSizeIndex, ')
+          ..write('broodIndex: $broodIndex, ')
+          ..write('grimoireUuid: $grimoireUuid, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('trainedExpertisesIndexes: $trainedExpertisesIndexes, ')
+          ..write('aligmentIndex: $aligmentIndex, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $ClasseCharacterTableTable extends ClasseCharacterTable
+    with TableInfo<$ClasseCharacterTableTable, ClasseCharacterTableData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ClasseCharacterTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _uuidMeta = const VerificationMeta('uuid');
+  @override
+  late final GeneratedColumn<String> uuid = GeneratedColumn<String>(
+      'uuid', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _characterUuidMeta =
+      const VerificationMeta('characterUuid');
+  @override
+  late final GeneratedColumn<String> characterUuid = GeneratedColumn<String>(
+      'character_uuid', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _typeIndexMeta =
+      const VerificationMeta('typeIndex');
+  @override
+  late final GeneratedColumn<int> typeIndex = GeneratedColumn<int>(
+      'type_index', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _levelMeta = const VerificationMeta('level');
+  @override
+  late final GeneratedColumn<int> level = GeneratedColumn<int>(
+      'level', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [uuid, characterUuid, typeIndex, level];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'classe_character_table';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<ClasseCharacterTableData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('uuid')) {
+      context.handle(
+          _uuidMeta, uuid.isAcceptableOrUnknown(data['uuid']!, _uuidMeta));
+    } else if (isInserting) {
+      context.missing(_uuidMeta);
+    }
+    if (data.containsKey('character_uuid')) {
+      context.handle(
+          _characterUuidMeta,
+          characterUuid.isAcceptableOrUnknown(
+              data['character_uuid']!, _characterUuidMeta));
+    } else if (isInserting) {
+      context.missing(_characterUuidMeta);
+    }
+    if (data.containsKey('type_index')) {
+      context.handle(_typeIndexMeta,
+          typeIndex.isAcceptableOrUnknown(data['type_index']!, _typeIndexMeta));
+    } else if (isInserting) {
+      context.missing(_typeIndexMeta);
+    }
+    if (data.containsKey('level')) {
+      context.handle(
+          _levelMeta, level.isAcceptableOrUnknown(data['level']!, _levelMeta));
+    } else if (isInserting) {
+      context.missing(_levelMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {uuid};
+  @override
+  ClasseCharacterTableData map(Map<String, dynamic> data,
+      {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ClasseCharacterTableData(
+      uuid: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}uuid'])!,
+      characterUuid: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}character_uuid'])!,
+      typeIndex: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}type_index'])!,
+      level: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}level'])!,
+    );
+  }
+
+  @override
+  $ClasseCharacterTableTable createAlias(String alias) {
+    return $ClasseCharacterTableTable(attachedDatabase, alias);
+  }
+}
+
+class ClasseCharacterTableData extends DataClass
+    implements Insertable<ClasseCharacterTableData> {
+  final String uuid;
+  final String characterUuid;
+  final int typeIndex;
+  final int level;
+  const ClasseCharacterTableData(
+      {required this.uuid,
+      required this.characterUuid,
+      required this.typeIndex,
+      required this.level});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['uuid'] = Variable<String>(uuid);
+    map['character_uuid'] = Variable<String>(characterUuid);
+    map['type_index'] = Variable<int>(typeIndex);
+    map['level'] = Variable<int>(level);
+    return map;
+  }
+
+  ClasseCharacterTableCompanion toCompanion(bool nullToAbsent) {
+    return ClasseCharacterTableCompanion(
+      uuid: Value(uuid),
+      characterUuid: Value(characterUuid),
+      typeIndex: Value(typeIndex),
+      level: Value(level),
+    );
+  }
+
+  factory ClasseCharacterTableData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ClasseCharacterTableData(
+      uuid: serializer.fromJson<String>(json['uuid']),
+      characterUuid: serializer.fromJson<String>(json['characterUuid']),
+      typeIndex: serializer.fromJson<int>(json['typeIndex']),
+      level: serializer.fromJson<int>(json['level']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'uuid': serializer.toJson<String>(uuid),
+      'characterUuid': serializer.toJson<String>(characterUuid),
+      'typeIndex': serializer.toJson<int>(typeIndex),
+      'level': serializer.toJson<int>(level),
+    };
+  }
+
+  ClasseCharacterTableData copyWith(
+          {String? uuid, String? characterUuid, int? typeIndex, int? level}) =>
+      ClasseCharacterTableData(
+        uuid: uuid ?? this.uuid,
+        characterUuid: characterUuid ?? this.characterUuid,
+        typeIndex: typeIndex ?? this.typeIndex,
+        level: level ?? this.level,
+      );
+  ClasseCharacterTableData copyWithCompanion(
+      ClasseCharacterTableCompanion data) {
+    return ClasseCharacterTableData(
+      uuid: data.uuid.present ? data.uuid.value : this.uuid,
+      characterUuid: data.characterUuid.present
+          ? data.characterUuid.value
+          : this.characterUuid,
+      typeIndex: data.typeIndex.present ? data.typeIndex.value : this.typeIndex,
+      level: data.level.present ? data.level.value : this.level,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ClasseCharacterTableData(')
+          ..write('uuid: $uuid, ')
+          ..write('characterUuid: $characterUuid, ')
+          ..write('typeIndex: $typeIndex, ')
+          ..write('level: $level')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(uuid, characterUuid, typeIndex, level);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ClasseCharacterTableData &&
+          other.uuid == this.uuid &&
+          other.characterUuid == this.characterUuid &&
+          other.typeIndex == this.typeIndex &&
+          other.level == this.level);
+}
+
+class ClasseCharacterTableCompanion
+    extends UpdateCompanion<ClasseCharacterTableData> {
+  final Value<String> uuid;
+  final Value<String> characterUuid;
+  final Value<int> typeIndex;
+  final Value<int> level;
+  final Value<int> rowid;
+  const ClasseCharacterTableCompanion({
+    this.uuid = const Value.absent(),
+    this.characterUuid = const Value.absent(),
+    this.typeIndex = const Value.absent(),
+    this.level = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  ClasseCharacterTableCompanion.insert({
+    required String uuid,
+    required String characterUuid,
+    required int typeIndex,
+    required int level,
+    this.rowid = const Value.absent(),
+  })  : uuid = Value(uuid),
+        characterUuid = Value(characterUuid),
+        typeIndex = Value(typeIndex),
+        level = Value(level);
+  static Insertable<ClasseCharacterTableData> custom({
+    Expression<String>? uuid,
+    Expression<String>? characterUuid,
+    Expression<int>? typeIndex,
+    Expression<int>? level,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (uuid != null) 'uuid': uuid,
+      if (characterUuid != null) 'character_uuid': characterUuid,
+      if (typeIndex != null) 'type_index': typeIndex,
+      if (level != null) 'level': level,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  ClasseCharacterTableCompanion copyWith(
+      {Value<String>? uuid,
+      Value<String>? characterUuid,
+      Value<int>? typeIndex,
+      Value<int>? level,
+      Value<int>? rowid}) {
+    return ClasseCharacterTableCompanion(
+      uuid: uuid ?? this.uuid,
+      characterUuid: characterUuid ?? this.characterUuid,
+      typeIndex: typeIndex ?? this.typeIndex,
+      level: level ?? this.level,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (uuid.present) {
+      map['uuid'] = Variable<String>(uuid.value);
+    }
+    if (characterUuid.present) {
+      map['character_uuid'] = Variable<String>(characterUuid.value);
+    }
+    if (typeIndex.present) {
+      map['type_index'] = Variable<int>(typeIndex.value);
+    }
+    if (level.present) {
+      map['level'] = Variable<int>(level.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ClasseCharacterTableCompanion(')
+          ..write('uuid: $uuid, ')
+          ..write('characterUuid: $characterUuid, ')
+          ..write('typeIndex: $typeIndex, ')
+          ..write('level: $level, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $OriginTableTable extends OriginTable
+    with TableInfo<$OriginTableTable, OriginTableData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $OriginTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _uuidMeta = const VerificationMeta('uuid');
+  @override
+  late final GeneratedColumn<String> uuid = GeneratedColumn<String>(
+      'uuid', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _characterUuidMeta =
+      const VerificationMeta('characterUuid');
+  @override
+  late final GeneratedColumn<String> characterUuid = GeneratedColumn<String>(
+      'character_uuid', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _descMeta = const VerificationMeta('desc');
+  @override
+  late final GeneratedColumn<String> desc = GeneratedColumn<String>(
+      'desc', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [uuid, characterUuid, name, desc];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'origin_table';
+  @override
+  VerificationContext validateIntegrity(Insertable<OriginTableData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('uuid')) {
+      context.handle(
+          _uuidMeta, uuid.isAcceptableOrUnknown(data['uuid']!, _uuidMeta));
+    } else if (isInserting) {
+      context.missing(_uuidMeta);
+    }
+    if (data.containsKey('character_uuid')) {
+      context.handle(
+          _characterUuidMeta,
+          characterUuid.isAcceptableOrUnknown(
+              data['character_uuid']!, _characterUuidMeta));
+    } else if (isInserting) {
+      context.missing(_characterUuidMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('desc')) {
+      context.handle(
+          _descMeta, desc.isAcceptableOrUnknown(data['desc']!, _descMeta));
+    } else if (isInserting) {
+      context.missing(_descMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {uuid};
+  @override
+  OriginTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return OriginTableData(
+      uuid: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}uuid'])!,
+      characterUuid: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}character_uuid'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      desc: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}desc'])!,
+    );
+  }
+
+  @override
+  $OriginTableTable createAlias(String alias) {
+    return $OriginTableTable(attachedDatabase, alias);
+  }
+}
+
+class OriginTableData extends DataClass implements Insertable<OriginTableData> {
+  final String uuid;
+  final String characterUuid;
+  final String name;
+  final String desc;
+  const OriginTableData(
+      {required this.uuid,
+      required this.characterUuid,
+      required this.name,
+      required this.desc});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['uuid'] = Variable<String>(uuid);
+    map['character_uuid'] = Variable<String>(characterUuid);
+    map['name'] = Variable<String>(name);
+    map['desc'] = Variable<String>(desc);
+    return map;
+  }
+
+  OriginTableCompanion toCompanion(bool nullToAbsent) {
+    return OriginTableCompanion(
+      uuid: Value(uuid),
+      characterUuid: Value(characterUuid),
+      name: Value(name),
+      desc: Value(desc),
+    );
+  }
+
+  factory OriginTableData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return OriginTableData(
+      uuid: serializer.fromJson<String>(json['uuid']),
+      characterUuid: serializer.fromJson<String>(json['characterUuid']),
+      name: serializer.fromJson<String>(json['name']),
+      desc: serializer.fromJson<String>(json['desc']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'uuid': serializer.toJson<String>(uuid),
+      'characterUuid': serializer.toJson<String>(characterUuid),
+      'name': serializer.toJson<String>(name),
+      'desc': serializer.toJson<String>(desc),
+    };
+  }
+
+  OriginTableData copyWith(
+          {String? uuid, String? characterUuid, String? name, String? desc}) =>
+      OriginTableData(
+        uuid: uuid ?? this.uuid,
+        characterUuid: characterUuid ?? this.characterUuid,
+        name: name ?? this.name,
+        desc: desc ?? this.desc,
+      );
+  OriginTableData copyWithCompanion(OriginTableCompanion data) {
+    return OriginTableData(
+      uuid: data.uuid.present ? data.uuid.value : this.uuid,
+      characterUuid: data.characterUuid.present
+          ? data.characterUuid.value
+          : this.characterUuid,
+      name: data.name.present ? data.name.value : this.name,
+      desc: data.desc.present ? data.desc.value : this.desc,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('OriginTableData(')
+          ..write('uuid: $uuid, ')
+          ..write('characterUuid: $characterUuid, ')
+          ..write('name: $name, ')
+          ..write('desc: $desc')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(uuid, characterUuid, name, desc);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is OriginTableData &&
+          other.uuid == this.uuid &&
+          other.characterUuid == this.characterUuid &&
+          other.name == this.name &&
+          other.desc == this.desc);
+}
+
+class OriginTableCompanion extends UpdateCompanion<OriginTableData> {
+  final Value<String> uuid;
+  final Value<String> characterUuid;
+  final Value<String> name;
+  final Value<String> desc;
+  final Value<int> rowid;
+  const OriginTableCompanion({
+    this.uuid = const Value.absent(),
+    this.characterUuid = const Value.absent(),
+    this.name = const Value.absent(),
+    this.desc = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  OriginTableCompanion.insert({
+    required String uuid,
+    required String characterUuid,
+    required String name,
+    required String desc,
+    this.rowid = const Value.absent(),
+  })  : uuid = Value(uuid),
+        characterUuid = Value(characterUuid),
+        name = Value(name),
+        desc = Value(desc);
+  static Insertable<OriginTableData> custom({
+    Expression<String>? uuid,
+    Expression<String>? characterUuid,
+    Expression<String>? name,
+    Expression<String>? desc,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (uuid != null) 'uuid': uuid,
+      if (characterUuid != null) 'character_uuid': characterUuid,
+      if (name != null) 'name': name,
+      if (desc != null) 'desc': desc,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  OriginTableCompanion copyWith(
+      {Value<String>? uuid,
+      Value<String>? characterUuid,
+      Value<String>? name,
+      Value<String>? desc,
+      Value<int>? rowid}) {
+    return OriginTableCompanion(
+      uuid: uuid ?? this.uuid,
+      characterUuid: characterUuid ?? this.characterUuid,
+      name: name ?? this.name,
+      desc: desc ?? this.desc,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (uuid.present) {
+      map['uuid'] = Variable<String>(uuid.value);
+    }
+    if (characterUuid.present) {
+      map['character_uuid'] = Variable<String>(characterUuid.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (desc.present) {
+      map['desc'] = Variable<String>(desc.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('OriginTableCompanion(')
+          ..write('uuid: $uuid, ')
+          ..write('characterUuid: $characterUuid, ')
+          ..write('name: $name, ')
+          ..write('desc: $desc, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $PowerTableTable extends PowerTable
+    with TableInfo<$PowerTableTable, PowerTableData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $PowerTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _uuidMeta = const VerificationMeta('uuid');
+  @override
+  late final GeneratedColumn<String> uuid = GeneratedColumn<String>(
+      'uuid', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _descMeta = const VerificationMeta('desc');
+  @override
+  late final GeneratedColumn<String> desc = GeneratedColumn<String>(
+      'desc', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _characterUuidMeta =
+      const VerificationMeta('characterUuid');
+  @override
+  late final GeneratedColumn<String> characterUuid = GeneratedColumn<String>(
+      'character_uuid', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _typeIndexMeta =
+      const VerificationMeta('typeIndex');
+  @override
+  late final GeneratedColumn<int> typeIndex = GeneratedColumn<int>(
+      'type_index', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [uuid, name, desc, characterUuid, typeIndex];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'power_table';
+  @override
+  VerificationContext validateIntegrity(Insertable<PowerTableData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('uuid')) {
+      context.handle(
+          _uuidMeta, uuid.isAcceptableOrUnknown(data['uuid']!, _uuidMeta));
+    } else if (isInserting) {
+      context.missing(_uuidMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('desc')) {
+      context.handle(
+          _descMeta, desc.isAcceptableOrUnknown(data['desc']!, _descMeta));
+    } else if (isInserting) {
+      context.missing(_descMeta);
+    }
+    if (data.containsKey('character_uuid')) {
+      context.handle(
+          _characterUuidMeta,
+          characterUuid.isAcceptableOrUnknown(
+              data['character_uuid']!, _characterUuidMeta));
+    } else if (isInserting) {
+      context.missing(_characterUuidMeta);
+    }
+    if (data.containsKey('type_index')) {
+      context.handle(_typeIndexMeta,
+          typeIndex.isAcceptableOrUnknown(data['type_index']!, _typeIndexMeta));
+    } else if (isInserting) {
+      context.missing(_typeIndexMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {uuid};
+  @override
+  PowerTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return PowerTableData(
+      uuid: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}uuid'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      desc: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}desc'])!,
+      characterUuid: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}character_uuid'])!,
+      typeIndex: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}type_index'])!,
+    );
+  }
+
+  @override
+  $PowerTableTable createAlias(String alias) {
+    return $PowerTableTable(attachedDatabase, alias);
+  }
+}
+
+class PowerTableData extends DataClass implements Insertable<PowerTableData> {
+  final String uuid;
+  final String name;
+  final String desc;
+  final String characterUuid;
+  final int typeIndex;
+  const PowerTableData(
+      {required this.uuid,
+      required this.name,
+      required this.desc,
+      required this.characterUuid,
+      required this.typeIndex});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['uuid'] = Variable<String>(uuid);
+    map['name'] = Variable<String>(name);
+    map['desc'] = Variable<String>(desc);
+    map['character_uuid'] = Variable<String>(characterUuid);
+    map['type_index'] = Variable<int>(typeIndex);
+    return map;
+  }
+
+  PowerTableCompanion toCompanion(bool nullToAbsent) {
+    return PowerTableCompanion(
+      uuid: Value(uuid),
+      name: Value(name),
+      desc: Value(desc),
+      characterUuid: Value(characterUuid),
+      typeIndex: Value(typeIndex),
+    );
+  }
+
+  factory PowerTableData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return PowerTableData(
+      uuid: serializer.fromJson<String>(json['uuid']),
+      name: serializer.fromJson<String>(json['name']),
+      desc: serializer.fromJson<String>(json['desc']),
+      characterUuid: serializer.fromJson<String>(json['characterUuid']),
+      typeIndex: serializer.fromJson<int>(json['typeIndex']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'uuid': serializer.toJson<String>(uuid),
+      'name': serializer.toJson<String>(name),
+      'desc': serializer.toJson<String>(desc),
+      'characterUuid': serializer.toJson<String>(characterUuid),
+      'typeIndex': serializer.toJson<int>(typeIndex),
+    };
+  }
+
+  PowerTableData copyWith(
+          {String? uuid,
+          String? name,
+          String? desc,
+          String? characterUuid,
+          int? typeIndex}) =>
+      PowerTableData(
+        uuid: uuid ?? this.uuid,
+        name: name ?? this.name,
+        desc: desc ?? this.desc,
+        characterUuid: characterUuid ?? this.characterUuid,
+        typeIndex: typeIndex ?? this.typeIndex,
+      );
+  PowerTableData copyWithCompanion(PowerTableCompanion data) {
+    return PowerTableData(
+      uuid: data.uuid.present ? data.uuid.value : this.uuid,
+      name: data.name.present ? data.name.value : this.name,
+      desc: data.desc.present ? data.desc.value : this.desc,
+      characterUuid: data.characterUuid.present
+          ? data.characterUuid.value
+          : this.characterUuid,
+      typeIndex: data.typeIndex.present ? data.typeIndex.value : this.typeIndex,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PowerTableData(')
+          ..write('uuid: $uuid, ')
+          ..write('name: $name, ')
+          ..write('desc: $desc, ')
+          ..write('characterUuid: $characterUuid, ')
+          ..write('typeIndex: $typeIndex')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(uuid, name, desc, characterUuid, typeIndex);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is PowerTableData &&
+          other.uuid == this.uuid &&
+          other.name == this.name &&
+          other.desc == this.desc &&
+          other.characterUuid == this.characterUuid &&
+          other.typeIndex == this.typeIndex);
+}
+
+class PowerTableCompanion extends UpdateCompanion<PowerTableData> {
+  final Value<String> uuid;
+  final Value<String> name;
+  final Value<String> desc;
+  final Value<String> characterUuid;
+  final Value<int> typeIndex;
+  final Value<int> rowid;
+  const PowerTableCompanion({
+    this.uuid = const Value.absent(),
+    this.name = const Value.absent(),
+    this.desc = const Value.absent(),
+    this.characterUuid = const Value.absent(),
+    this.typeIndex = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  PowerTableCompanion.insert({
+    required String uuid,
+    required String name,
+    required String desc,
+    required String characterUuid,
+    required int typeIndex,
+    this.rowid = const Value.absent(),
+  })  : uuid = Value(uuid),
+        name = Value(name),
+        desc = Value(desc),
+        characterUuid = Value(characterUuid),
+        typeIndex = Value(typeIndex);
+  static Insertable<PowerTableData> custom({
+    Expression<String>? uuid,
+    Expression<String>? name,
+    Expression<String>? desc,
+    Expression<String>? characterUuid,
+    Expression<int>? typeIndex,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (uuid != null) 'uuid': uuid,
+      if (name != null) 'name': name,
+      if (desc != null) 'desc': desc,
+      if (characterUuid != null) 'character_uuid': characterUuid,
+      if (typeIndex != null) 'type_index': typeIndex,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  PowerTableCompanion copyWith(
+      {Value<String>? uuid,
+      Value<String>? name,
+      Value<String>? desc,
+      Value<String>? characterUuid,
+      Value<int>? typeIndex,
+      Value<int>? rowid}) {
+    return PowerTableCompanion(
+      uuid: uuid ?? this.uuid,
+      name: name ?? this.name,
+      desc: desc ?? this.desc,
+      characterUuid: characterUuid ?? this.characterUuid,
+      typeIndex: typeIndex ?? this.typeIndex,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (uuid.present) {
+      map['uuid'] = Variable<String>(uuid.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (desc.present) {
+      map['desc'] = Variable<String>(desc.value);
+    }
+    if (characterUuid.present) {
+      map['character_uuid'] = Variable<String>(characterUuid.value);
+    }
+    if (typeIndex.present) {
+      map['type_index'] = Variable<int>(typeIndex.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PowerTableCompanion(')
+          ..write('uuid: $uuid, ')
+          ..write('name: $name, ')
+          ..write('desc: $desc, ')
+          ..write('characterUuid: $characterUuid, ')
+          ..write('typeIndex: $typeIndex, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $CharacterBoardTableTable extends CharacterBoardTable
+    with TableInfo<$CharacterBoardTableTable, CharacterBoardTableData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $CharacterBoardTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _uuidMeta = const VerificationMeta('uuid');
+  @override
+  late final GeneratedColumn<String> uuid = GeneratedColumn<String>(
+      'uuid', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _parentuuidMeta =
+      const VerificationMeta('parentuuid');
+  @override
+  late final GeneratedColumn<String> parentuuid = GeneratedColumn<String>(
+      'parentuuid', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _boarduuidMeta =
+      const VerificationMeta('boarduuid');
+  @override
+  late final GeneratedColumn<String> boarduuid = GeneratedColumn<String>(
+      'boarduuid', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _imagePathMeta =
+      const VerificationMeta('imagePath');
+  @override
+  late final GeneratedColumn<String> imagePath = GeneratedColumn<String>(
+      'image_path', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _imageAssetMeta =
+      const VerificationMeta('imageAsset');
+  @override
+  late final GeneratedColumn<String> imageAsset = GeneratedColumn<String>(
+      'image_asset', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _displacementMeta =
+      const VerificationMeta('displacement');
+  @override
+  late final GeneratedColumn<String> displacement = GeneratedColumn<String>(
+      'displacement', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _sensesMeta = const VerificationMeta('senses');
+  @override
+  late final GeneratedColumn<String> senses = GeneratedColumn<String>(
+      'senses', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _divinityIdMeta =
+      const VerificationMeta('divinityId');
+  @override
+  late final GeneratedColumn<int> divinityId = GeneratedColumn<int>(
+      'divinity_id', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _initiativeMeta =
+      const VerificationMeta('initiative');
+  @override
+  late final GeneratedColumn<int> initiative = GeneratedColumn<int>(
+      'initiative', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _perceptionMeta =
+      const VerificationMeta('perception');
+  @override
+  late final GeneratedColumn<int> perception = GeneratedColumn<int>(
+      'perception', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _defenseMeta =
+      const VerificationMeta('defense');
+  @override
+  late final GeneratedColumn<int> defense = GeneratedColumn<int>(
+      'defense', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _lifeMeta = const VerificationMeta('life');
+  @override
+  late final GeneratedColumn<int> life = GeneratedColumn<int>(
+      'life', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _manaMeta = const VerificationMeta('mana');
+  @override
+  late final GeneratedColumn<int> mana = GeneratedColumn<int>(
+      'mana', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _fortResistenceMeta =
+      const VerificationMeta('fortResistence');
+  @override
+  late final GeneratedColumn<int> fortResistence = GeneratedColumn<int>(
+      'fort_resistence', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _refResistenceMeta =
+      const VerificationMeta('refResistence');
+  @override
+  late final GeneratedColumn<int> refResistence = GeneratedColumn<int>(
+      'ref_resistence', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _vonResistenceMeta =
+      const VerificationMeta('vonResistence');
+  @override
+  late final GeneratedColumn<int> vonResistence = GeneratedColumn<int>(
+      'von_resistence', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _strengthMeta =
+      const VerificationMeta('strength');
+  @override
+  late final GeneratedColumn<int> strength = GeneratedColumn<int>(
+      'strength', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _dexterityMeta =
+      const VerificationMeta('dexterity');
+  @override
+  late final GeneratedColumn<int> dexterity = GeneratedColumn<int>(
+      'dexterity', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _constitutionMeta =
+      const VerificationMeta('constitution');
+  @override
+  late final GeneratedColumn<int> constitution = GeneratedColumn<int>(
+      'constitution', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _intelligenceMeta =
+      const VerificationMeta('intelligence');
+  @override
+  late final GeneratedColumn<int> intelligence = GeneratedColumn<int>(
+      'intelligence', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _wisdomMeta = const VerificationMeta('wisdom');
+  @override
+  late final GeneratedColumn<int> wisdom = GeneratedColumn<int>(
+      'wisdom', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _charismaMeta =
+      const VerificationMeta('charisma');
+  @override
+  late final GeneratedColumn<int> charisma = GeneratedColumn<int>(
+      'charisma', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _typeIndexMeta =
+      const VerificationMeta('typeIndex');
+  @override
+  late final GeneratedColumn<int> typeIndex = GeneratedColumn<int>(
+      'type_index', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _creatureSizeIndexMeta =
+      const VerificationMeta('creatureSizeIndex');
+  @override
+  late final GeneratedColumn<int> creatureSizeIndex = GeneratedColumn<int>(
+      'creature_size_index', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _broodIndexMeta =
+      const VerificationMeta('broodIndex');
+  @override
+  late final GeneratedColumn<int> broodIndex = GeneratedColumn<int>(
+      'brood_index', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _combateRoleIndexMeta =
+      const VerificationMeta('combateRoleIndex');
+  @override
+  late final GeneratedColumn<int> combateRoleIndex = GeneratedColumn<int>(
+      'combate_role_index', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _treasureTypeIndexMeta =
+      const VerificationMeta('treasureTypeIndex');
+  @override
+  late final GeneratedColumn<int> treasureTypeIndex = GeneratedColumn<int>(
+      'treasure_type_index', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _grimoireUuidMeta =
+      const VerificationMeta('grimoireUuid');
+  @override
+  late final GeneratedColumn<String> grimoireUuid = GeneratedColumn<String>(
+      'grimoire_uuid', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<int> createdAt = GeneratedColumn<int>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _updatedAtMeta =
+      const VerificationMeta('updatedAt');
+  @override
+  late final GeneratedColumn<int> updatedAt = GeneratedColumn<int>(
+      'updated_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _isAliveMeta =
+      const VerificationMeta('isAlive');
+  @override
+  late final GeneratedColumn<bool> isAlive = GeneratedColumn<bool>(
+      'is_alive', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("is_alive" IN (0, 1))'));
+  static const VerificationMeta _trainedExpertisesIndexesMeta =
+      const VerificationMeta('trainedExpertisesIndexes');
+  @override
+  late final GeneratedColumn<String> trainedExpertisesIndexes =
+      GeneratedColumn<String>('trained_expertises_indexes', aliasedName, true,
+          type: DriftSqlType.string, requiredDuringInsert: false);
+  @override
+  List<GeneratedColumn> get $columns => [
+        uuid,
+        parentuuid,
+        boarduuid,
+        name,
+        imagePath,
+        imageAsset,
+        displacement,
+        senses,
+        divinityId,
+        initiative,
+        perception,
+        defense,
+        life,
+        mana,
+        fortResistence,
+        refResistence,
+        vonResistence,
+        strength,
+        dexterity,
+        constitution,
+        intelligence,
+        wisdom,
+        charisma,
+        typeIndex,
+        creatureSizeIndex,
+        broodIndex,
+        combateRoleIndex,
+        treasureTypeIndex,
+        grimoireUuid,
+        createdAt,
+        updatedAt,
+        isAlive,
+        trainedExpertisesIndexes
+      ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'character_board_table';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<CharacterBoardTableData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('uuid')) {
+      context.handle(
+          _uuidMeta, uuid.isAcceptableOrUnknown(data['uuid']!, _uuidMeta));
+    } else if (isInserting) {
+      context.missing(_uuidMeta);
+    }
+    if (data.containsKey('parentuuid')) {
+      context.handle(
+          _parentuuidMeta,
+          parentuuid.isAcceptableOrUnknown(
+              data['parentuuid']!, _parentuuidMeta));
+    } else if (isInserting) {
+      context.missing(_parentuuidMeta);
+    }
+    if (data.containsKey('boarduuid')) {
+      context.handle(_boarduuidMeta,
+          boarduuid.isAcceptableOrUnknown(data['boarduuid']!, _boarduuidMeta));
+    } else if (isInserting) {
+      context.missing(_boarduuidMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('image_path')) {
+      context.handle(_imagePathMeta,
+          imagePath.isAcceptableOrUnknown(data['image_path']!, _imagePathMeta));
+    }
+    if (data.containsKey('image_asset')) {
+      context.handle(
+          _imageAssetMeta,
+          imageAsset.isAcceptableOrUnknown(
+              data['image_asset']!, _imageAssetMeta));
+    }
+    if (data.containsKey('displacement')) {
+      context.handle(
+          _displacementMeta,
+          displacement.isAcceptableOrUnknown(
+              data['displacement']!, _displacementMeta));
+    }
+    if (data.containsKey('senses')) {
+      context.handle(_sensesMeta,
+          senses.isAcceptableOrUnknown(data['senses']!, _sensesMeta));
+    }
+    if (data.containsKey('divinity_id')) {
+      context.handle(
+          _divinityIdMeta,
+          divinityId.isAcceptableOrUnknown(
+              data['divinity_id']!, _divinityIdMeta));
+    }
+    if (data.containsKey('initiative')) {
+      context.handle(
+          _initiativeMeta,
+          initiative.isAcceptableOrUnknown(
+              data['initiative']!, _initiativeMeta));
+    } else if (isInserting) {
+      context.missing(_initiativeMeta);
+    }
+    if (data.containsKey('perception')) {
+      context.handle(
+          _perceptionMeta,
+          perception.isAcceptableOrUnknown(
+              data['perception']!, _perceptionMeta));
+    } else if (isInserting) {
+      context.missing(_perceptionMeta);
+    }
+    if (data.containsKey('defense')) {
+      context.handle(_defenseMeta,
+          defense.isAcceptableOrUnknown(data['defense']!, _defenseMeta));
+    } else if (isInserting) {
+      context.missing(_defenseMeta);
+    }
+    if (data.containsKey('life')) {
+      context.handle(
+          _lifeMeta, life.isAcceptableOrUnknown(data['life']!, _lifeMeta));
+    } else if (isInserting) {
+      context.missing(_lifeMeta);
+    }
+    if (data.containsKey('mana')) {
+      context.handle(
+          _manaMeta, mana.isAcceptableOrUnknown(data['mana']!, _manaMeta));
+    } else if (isInserting) {
+      context.missing(_manaMeta);
+    }
+    if (data.containsKey('fort_resistence')) {
+      context.handle(
+          _fortResistenceMeta,
+          fortResistence.isAcceptableOrUnknown(
+              data['fort_resistence']!, _fortResistenceMeta));
+    } else if (isInserting) {
+      context.missing(_fortResistenceMeta);
+    }
+    if (data.containsKey('ref_resistence')) {
+      context.handle(
+          _refResistenceMeta,
+          refResistence.isAcceptableOrUnknown(
+              data['ref_resistence']!, _refResistenceMeta));
+    } else if (isInserting) {
+      context.missing(_refResistenceMeta);
+    }
+    if (data.containsKey('von_resistence')) {
+      context.handle(
+          _vonResistenceMeta,
+          vonResistence.isAcceptableOrUnknown(
+              data['von_resistence']!, _vonResistenceMeta));
+    } else if (isInserting) {
+      context.missing(_vonResistenceMeta);
+    }
+    if (data.containsKey('strength')) {
+      context.handle(_strengthMeta,
+          strength.isAcceptableOrUnknown(data['strength']!, _strengthMeta));
+    } else if (isInserting) {
+      context.missing(_strengthMeta);
+    }
+    if (data.containsKey('dexterity')) {
+      context.handle(_dexterityMeta,
+          dexterity.isAcceptableOrUnknown(data['dexterity']!, _dexterityMeta));
+    } else if (isInserting) {
+      context.missing(_dexterityMeta);
+    }
+    if (data.containsKey('constitution')) {
+      context.handle(
+          _constitutionMeta,
+          constitution.isAcceptableOrUnknown(
+              data['constitution']!, _constitutionMeta));
+    } else if (isInserting) {
+      context.missing(_constitutionMeta);
+    }
+    if (data.containsKey('intelligence')) {
+      context.handle(
+          _intelligenceMeta,
+          intelligence.isAcceptableOrUnknown(
+              data['intelligence']!, _intelligenceMeta));
+    } else if (isInserting) {
+      context.missing(_intelligenceMeta);
+    }
+    if (data.containsKey('wisdom')) {
+      context.handle(_wisdomMeta,
+          wisdom.isAcceptableOrUnknown(data['wisdom']!, _wisdomMeta));
+    } else if (isInserting) {
+      context.missing(_wisdomMeta);
+    }
+    if (data.containsKey('charisma')) {
+      context.handle(_charismaMeta,
+          charisma.isAcceptableOrUnknown(data['charisma']!, _charismaMeta));
+    } else if (isInserting) {
+      context.missing(_charismaMeta);
+    }
+    if (data.containsKey('type_index')) {
+      context.handle(_typeIndexMeta,
+          typeIndex.isAcceptableOrUnknown(data['type_index']!, _typeIndexMeta));
+    } else if (isInserting) {
+      context.missing(_typeIndexMeta);
+    }
+    if (data.containsKey('creature_size_index')) {
+      context.handle(
+          _creatureSizeIndexMeta,
+          creatureSizeIndex.isAcceptableOrUnknown(
+              data['creature_size_index']!, _creatureSizeIndexMeta));
+    } else if (isInserting) {
+      context.missing(_creatureSizeIndexMeta);
+    }
+    if (data.containsKey('brood_index')) {
+      context.handle(
+          _broodIndexMeta,
+          broodIndex.isAcceptableOrUnknown(
+              data['brood_index']!, _broodIndexMeta));
+    } else if (isInserting) {
+      context.missing(_broodIndexMeta);
+    }
+    if (data.containsKey('combate_role_index')) {
+      context.handle(
+          _combateRoleIndexMeta,
+          combateRoleIndex.isAcceptableOrUnknown(
+              data['combate_role_index']!, _combateRoleIndexMeta));
+    } else if (isInserting) {
+      context.missing(_combateRoleIndexMeta);
+    }
+    if (data.containsKey('treasure_type_index')) {
+      context.handle(
+          _treasureTypeIndexMeta,
+          treasureTypeIndex.isAcceptableOrUnknown(
+              data['treasure_type_index']!, _treasureTypeIndexMeta));
+    }
+    if (data.containsKey('grimoire_uuid')) {
+      context.handle(
+          _grimoireUuidMeta,
+          grimoireUuid.isAcceptableOrUnknown(
+              data['grimoire_uuid']!, _grimoireUuidMeta));
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(_updatedAtMeta,
+          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
+    } else if (isInserting) {
+      context.missing(_updatedAtMeta);
+    }
+    if (data.containsKey('is_alive')) {
+      context.handle(_isAliveMeta,
+          isAlive.isAcceptableOrUnknown(data['is_alive']!, _isAliveMeta));
+    } else if (isInserting) {
+      context.missing(_isAliveMeta);
+    }
+    if (data.containsKey('trained_expertises_indexes')) {
+      context.handle(
+          _trainedExpertisesIndexesMeta,
+          trainedExpertisesIndexes.isAcceptableOrUnknown(
+              data['trained_expertises_indexes']!,
+              _trainedExpertisesIndexesMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {uuid};
+  @override
+  CharacterBoardTableData map(Map<String, dynamic> data,
+      {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return CharacterBoardTableData(
+      uuid: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}uuid'])!,
+      parentuuid: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}parentuuid'])!,
+      boarduuid: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}boarduuid'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      imagePath: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}image_path']),
+      imageAsset: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}image_asset']),
+      displacement: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}displacement']),
+      senses: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}senses']),
+      divinityId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}divinity_id']),
+      initiative: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}initiative'])!,
+      perception: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}perception'])!,
+      defense: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}defense'])!,
+      life: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}life'])!,
+      mana: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}mana'])!,
+      fortResistence: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}fort_resistence'])!,
+      refResistence: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}ref_resistence'])!,
+      vonResistence: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}von_resistence'])!,
+      strength: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}strength'])!,
+      dexterity: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}dexterity'])!,
+      constitution: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}constitution'])!,
+      intelligence: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}intelligence'])!,
+      wisdom: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}wisdom'])!,
+      charisma: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}charisma'])!,
+      typeIndex: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}type_index'])!,
+      creatureSizeIndex: attachedDatabase.typeMapping.read(
+          DriftSqlType.int, data['${effectivePrefix}creature_size_index'])!,
+      broodIndex: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}brood_index'])!,
+      combateRoleIndex: attachedDatabase.typeMapping.read(
+          DriftSqlType.int, data['${effectivePrefix}combate_role_index'])!,
+      treasureTypeIndex: attachedDatabase.typeMapping.read(
+          DriftSqlType.int, data['${effectivePrefix}treasure_type_index']),
+      grimoireUuid: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}grimoire_uuid']),
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}created_at'])!,
+      updatedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}updated_at'])!,
+      isAlive: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_alive'])!,
+      trainedExpertisesIndexes: attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}trained_expertises_indexes']),
+    );
+  }
+
+  @override
+  $CharacterBoardTableTable createAlias(String alias) {
+    return $CharacterBoardTableTable(attachedDatabase, alias);
+  }
+}
+
+class CharacterBoardTableData extends DataClass
+    implements Insertable<CharacterBoardTableData> {
+  final String uuid;
+  final String parentuuid;
+  final String boarduuid;
+  final String name;
+  final String? imagePath;
+  final String? imageAsset;
+  final String? displacement;
+  final String? senses;
+  final int? divinityId;
+  final int initiative;
+  final int perception;
+  final int defense;
+  final int life;
+  final int mana;
+  final int fortResistence;
+  final int refResistence;
+  final int vonResistence;
+  final int strength;
+  final int dexterity;
+  final int constitution;
+  final int intelligence;
+  final int wisdom;
+  final int charisma;
+  final int typeIndex;
+  final int creatureSizeIndex;
+  final int broodIndex;
+  final int combateRoleIndex;
+  final int? treasureTypeIndex;
+  final String? grimoireUuid;
+  final int createdAt;
+  final int updatedAt;
+  final bool isAlive;
+  final String? trainedExpertisesIndexes;
+  const CharacterBoardTableData(
+      {required this.uuid,
+      required this.parentuuid,
+      required this.boarduuid,
+      required this.name,
+      this.imagePath,
+      this.imageAsset,
+      this.displacement,
+      this.senses,
+      this.divinityId,
+      required this.initiative,
+      required this.perception,
+      required this.defense,
+      required this.life,
+      required this.mana,
+      required this.fortResistence,
+      required this.refResistence,
+      required this.vonResistence,
+      required this.strength,
+      required this.dexterity,
+      required this.constitution,
+      required this.intelligence,
+      required this.wisdom,
+      required this.charisma,
+      required this.typeIndex,
+      required this.creatureSizeIndex,
+      required this.broodIndex,
+      required this.combateRoleIndex,
+      this.treasureTypeIndex,
+      this.grimoireUuid,
+      required this.createdAt,
+      required this.updatedAt,
+      required this.isAlive,
+      this.trainedExpertisesIndexes});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['uuid'] = Variable<String>(uuid);
+    map['parentuuid'] = Variable<String>(parentuuid);
+    map['boarduuid'] = Variable<String>(boarduuid);
+    map['name'] = Variable<String>(name);
+    if (!nullToAbsent || imagePath != null) {
+      map['image_path'] = Variable<String>(imagePath);
+    }
+    if (!nullToAbsent || imageAsset != null) {
+      map['image_asset'] = Variable<String>(imageAsset);
+    }
+    if (!nullToAbsent || displacement != null) {
+      map['displacement'] = Variable<String>(displacement);
+    }
+    if (!nullToAbsent || senses != null) {
+      map['senses'] = Variable<String>(senses);
+    }
+    if (!nullToAbsent || divinityId != null) {
+      map['divinity_id'] = Variable<int>(divinityId);
+    }
+    map['initiative'] = Variable<int>(initiative);
+    map['perception'] = Variable<int>(perception);
+    map['defense'] = Variable<int>(defense);
+    map['life'] = Variable<int>(life);
+    map['mana'] = Variable<int>(mana);
+    map['fort_resistence'] = Variable<int>(fortResistence);
+    map['ref_resistence'] = Variable<int>(refResistence);
+    map['von_resistence'] = Variable<int>(vonResistence);
+    map['strength'] = Variable<int>(strength);
+    map['dexterity'] = Variable<int>(dexterity);
+    map['constitution'] = Variable<int>(constitution);
+    map['intelligence'] = Variable<int>(intelligence);
+    map['wisdom'] = Variable<int>(wisdom);
+    map['charisma'] = Variable<int>(charisma);
+    map['type_index'] = Variable<int>(typeIndex);
+    map['creature_size_index'] = Variable<int>(creatureSizeIndex);
+    map['brood_index'] = Variable<int>(broodIndex);
+    map['combate_role_index'] = Variable<int>(combateRoleIndex);
+    if (!nullToAbsent || treasureTypeIndex != null) {
+      map['treasure_type_index'] = Variable<int>(treasureTypeIndex);
+    }
+    if (!nullToAbsent || grimoireUuid != null) {
+      map['grimoire_uuid'] = Variable<String>(grimoireUuid);
+    }
+    map['created_at'] = Variable<int>(createdAt);
+    map['updated_at'] = Variable<int>(updatedAt);
+    map['is_alive'] = Variable<bool>(isAlive);
+    if (!nullToAbsent || trainedExpertisesIndexes != null) {
+      map['trained_expertises_indexes'] =
+          Variable<String>(trainedExpertisesIndexes);
+    }
+    return map;
+  }
+
+  CharacterBoardTableCompanion toCompanion(bool nullToAbsent) {
+    return CharacterBoardTableCompanion(
+      uuid: Value(uuid),
+      parentuuid: Value(parentuuid),
+      boarduuid: Value(boarduuid),
+      name: Value(name),
+      imagePath: imagePath == null && nullToAbsent
+          ? const Value.absent()
+          : Value(imagePath),
+      imageAsset: imageAsset == null && nullToAbsent
+          ? const Value.absent()
+          : Value(imageAsset),
+      displacement: displacement == null && nullToAbsent
+          ? const Value.absent()
+          : Value(displacement),
+      senses:
+          senses == null && nullToAbsent ? const Value.absent() : Value(senses),
+      divinityId: divinityId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(divinityId),
+      initiative: Value(initiative),
+      perception: Value(perception),
+      defense: Value(defense),
+      life: Value(life),
+      mana: Value(mana),
+      fortResistence: Value(fortResistence),
+      refResistence: Value(refResistence),
+      vonResistence: Value(vonResistence),
+      strength: Value(strength),
+      dexterity: Value(dexterity),
+      constitution: Value(constitution),
+      intelligence: Value(intelligence),
+      wisdom: Value(wisdom),
+      charisma: Value(charisma),
+      typeIndex: Value(typeIndex),
+      creatureSizeIndex: Value(creatureSizeIndex),
+      broodIndex: Value(broodIndex),
+      combateRoleIndex: Value(combateRoleIndex),
+      treasureTypeIndex: treasureTypeIndex == null && nullToAbsent
+          ? const Value.absent()
+          : Value(treasureTypeIndex),
+      grimoireUuid: grimoireUuid == null && nullToAbsent
+          ? const Value.absent()
+          : Value(grimoireUuid),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+      isAlive: Value(isAlive),
+      trainedExpertisesIndexes: trainedExpertisesIndexes == null && nullToAbsent
+          ? const Value.absent()
+          : Value(trainedExpertisesIndexes),
+    );
+  }
+
+  factory CharacterBoardTableData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return CharacterBoardTableData(
+      uuid: serializer.fromJson<String>(json['uuid']),
+      parentuuid: serializer.fromJson<String>(json['parentuuid']),
+      boarduuid: serializer.fromJson<String>(json['boarduuid']),
+      name: serializer.fromJson<String>(json['name']),
+      imagePath: serializer.fromJson<String?>(json['imagePath']),
+      imageAsset: serializer.fromJson<String?>(json['imageAsset']),
+      displacement: serializer.fromJson<String?>(json['displacement']),
+      senses: serializer.fromJson<String?>(json['senses']),
+      divinityId: serializer.fromJson<int?>(json['divinityId']),
+      initiative: serializer.fromJson<int>(json['initiative']),
+      perception: serializer.fromJson<int>(json['perception']),
+      defense: serializer.fromJson<int>(json['defense']),
+      life: serializer.fromJson<int>(json['life']),
+      mana: serializer.fromJson<int>(json['mana']),
+      fortResistence: serializer.fromJson<int>(json['fortResistence']),
+      refResistence: serializer.fromJson<int>(json['refResistence']),
+      vonResistence: serializer.fromJson<int>(json['vonResistence']),
+      strength: serializer.fromJson<int>(json['strength']),
+      dexterity: serializer.fromJson<int>(json['dexterity']),
+      constitution: serializer.fromJson<int>(json['constitution']),
+      intelligence: serializer.fromJson<int>(json['intelligence']),
+      wisdom: serializer.fromJson<int>(json['wisdom']),
+      charisma: serializer.fromJson<int>(json['charisma']),
+      typeIndex: serializer.fromJson<int>(json['typeIndex']),
+      creatureSizeIndex: serializer.fromJson<int>(json['creatureSizeIndex']),
+      broodIndex: serializer.fromJson<int>(json['broodIndex']),
+      combateRoleIndex: serializer.fromJson<int>(json['combateRoleIndex']),
+      treasureTypeIndex: serializer.fromJson<int?>(json['treasureTypeIndex']),
+      grimoireUuid: serializer.fromJson<String?>(json['grimoireUuid']),
+      createdAt: serializer.fromJson<int>(json['createdAt']),
+      updatedAt: serializer.fromJson<int>(json['updatedAt']),
+      isAlive: serializer.fromJson<bool>(json['isAlive']),
+      trainedExpertisesIndexes:
+          serializer.fromJson<String?>(json['trainedExpertisesIndexes']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'uuid': serializer.toJson<String>(uuid),
+      'parentuuid': serializer.toJson<String>(parentuuid),
+      'boarduuid': serializer.toJson<String>(boarduuid),
+      'name': serializer.toJson<String>(name),
+      'imagePath': serializer.toJson<String?>(imagePath),
+      'imageAsset': serializer.toJson<String?>(imageAsset),
+      'displacement': serializer.toJson<String?>(displacement),
+      'senses': serializer.toJson<String?>(senses),
+      'divinityId': serializer.toJson<int?>(divinityId),
+      'initiative': serializer.toJson<int>(initiative),
+      'perception': serializer.toJson<int>(perception),
+      'defense': serializer.toJson<int>(defense),
+      'life': serializer.toJson<int>(life),
+      'mana': serializer.toJson<int>(mana),
+      'fortResistence': serializer.toJson<int>(fortResistence),
+      'refResistence': serializer.toJson<int>(refResistence),
+      'vonResistence': serializer.toJson<int>(vonResistence),
+      'strength': serializer.toJson<int>(strength),
+      'dexterity': serializer.toJson<int>(dexterity),
+      'constitution': serializer.toJson<int>(constitution),
+      'intelligence': serializer.toJson<int>(intelligence),
+      'wisdom': serializer.toJson<int>(wisdom),
+      'charisma': serializer.toJson<int>(charisma),
+      'typeIndex': serializer.toJson<int>(typeIndex),
+      'creatureSizeIndex': serializer.toJson<int>(creatureSizeIndex),
+      'broodIndex': serializer.toJson<int>(broodIndex),
+      'combateRoleIndex': serializer.toJson<int>(combateRoleIndex),
+      'treasureTypeIndex': serializer.toJson<int?>(treasureTypeIndex),
+      'grimoireUuid': serializer.toJson<String?>(grimoireUuid),
+      'createdAt': serializer.toJson<int>(createdAt),
+      'updatedAt': serializer.toJson<int>(updatedAt),
+      'isAlive': serializer.toJson<bool>(isAlive),
+      'trainedExpertisesIndexes':
+          serializer.toJson<String?>(trainedExpertisesIndexes),
+    };
+  }
+
+  CharacterBoardTableData copyWith(
+          {String? uuid,
+          String? parentuuid,
+          String? boarduuid,
+          String? name,
+          Value<String?> imagePath = const Value.absent(),
+          Value<String?> imageAsset = const Value.absent(),
+          Value<String?> displacement = const Value.absent(),
+          Value<String?> senses = const Value.absent(),
+          Value<int?> divinityId = const Value.absent(),
+          int? initiative,
+          int? perception,
+          int? defense,
+          int? life,
+          int? mana,
+          int? fortResistence,
+          int? refResistence,
+          int? vonResistence,
+          int? strength,
+          int? dexterity,
+          int? constitution,
+          int? intelligence,
+          int? wisdom,
+          int? charisma,
+          int? typeIndex,
+          int? creatureSizeIndex,
+          int? broodIndex,
+          int? combateRoleIndex,
+          Value<int?> treasureTypeIndex = const Value.absent(),
+          Value<String?> grimoireUuid = const Value.absent(),
+          int? createdAt,
+          int? updatedAt,
+          bool? isAlive,
+          Value<String?> trainedExpertisesIndexes = const Value.absent()}) =>
+      CharacterBoardTableData(
+        uuid: uuid ?? this.uuid,
+        parentuuid: parentuuid ?? this.parentuuid,
+        boarduuid: boarduuid ?? this.boarduuid,
+        name: name ?? this.name,
+        imagePath: imagePath.present ? imagePath.value : this.imagePath,
+        imageAsset: imageAsset.present ? imageAsset.value : this.imageAsset,
+        displacement:
+            displacement.present ? displacement.value : this.displacement,
+        senses: senses.present ? senses.value : this.senses,
+        divinityId: divinityId.present ? divinityId.value : this.divinityId,
+        initiative: initiative ?? this.initiative,
+        perception: perception ?? this.perception,
+        defense: defense ?? this.defense,
+        life: life ?? this.life,
+        mana: mana ?? this.mana,
+        fortResistence: fortResistence ?? this.fortResistence,
+        refResistence: refResistence ?? this.refResistence,
+        vonResistence: vonResistence ?? this.vonResistence,
+        strength: strength ?? this.strength,
+        dexterity: dexterity ?? this.dexterity,
+        constitution: constitution ?? this.constitution,
+        intelligence: intelligence ?? this.intelligence,
+        wisdom: wisdom ?? this.wisdom,
+        charisma: charisma ?? this.charisma,
+        typeIndex: typeIndex ?? this.typeIndex,
+        creatureSizeIndex: creatureSizeIndex ?? this.creatureSizeIndex,
+        broodIndex: broodIndex ?? this.broodIndex,
+        combateRoleIndex: combateRoleIndex ?? this.combateRoleIndex,
+        treasureTypeIndex: treasureTypeIndex.present
+            ? treasureTypeIndex.value
+            : this.treasureTypeIndex,
+        grimoireUuid:
+            grimoireUuid.present ? grimoireUuid.value : this.grimoireUuid,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+        isAlive: isAlive ?? this.isAlive,
+        trainedExpertisesIndexes: trainedExpertisesIndexes.present
+            ? trainedExpertisesIndexes.value
+            : this.trainedExpertisesIndexes,
+      );
+  CharacterBoardTableData copyWithCompanion(CharacterBoardTableCompanion data) {
+    return CharacterBoardTableData(
+      uuid: data.uuid.present ? data.uuid.value : this.uuid,
+      parentuuid:
+          data.parentuuid.present ? data.parentuuid.value : this.parentuuid,
+      boarduuid: data.boarduuid.present ? data.boarduuid.value : this.boarduuid,
+      name: data.name.present ? data.name.value : this.name,
+      imagePath: data.imagePath.present ? data.imagePath.value : this.imagePath,
+      imageAsset:
+          data.imageAsset.present ? data.imageAsset.value : this.imageAsset,
+      displacement: data.displacement.present
+          ? data.displacement.value
+          : this.displacement,
+      senses: data.senses.present ? data.senses.value : this.senses,
+      divinityId:
+          data.divinityId.present ? data.divinityId.value : this.divinityId,
+      initiative:
+          data.initiative.present ? data.initiative.value : this.initiative,
+      perception:
+          data.perception.present ? data.perception.value : this.perception,
+      defense: data.defense.present ? data.defense.value : this.defense,
+      life: data.life.present ? data.life.value : this.life,
+      mana: data.mana.present ? data.mana.value : this.mana,
+      fortResistence: data.fortResistence.present
+          ? data.fortResistence.value
+          : this.fortResistence,
+      refResistence: data.refResistence.present
+          ? data.refResistence.value
+          : this.refResistence,
+      vonResistence: data.vonResistence.present
+          ? data.vonResistence.value
+          : this.vonResistence,
+      strength: data.strength.present ? data.strength.value : this.strength,
+      dexterity: data.dexterity.present ? data.dexterity.value : this.dexterity,
+      constitution: data.constitution.present
+          ? data.constitution.value
+          : this.constitution,
+      intelligence: data.intelligence.present
+          ? data.intelligence.value
+          : this.intelligence,
+      wisdom: data.wisdom.present ? data.wisdom.value : this.wisdom,
+      charisma: data.charisma.present ? data.charisma.value : this.charisma,
+      typeIndex: data.typeIndex.present ? data.typeIndex.value : this.typeIndex,
+      creatureSizeIndex: data.creatureSizeIndex.present
+          ? data.creatureSizeIndex.value
+          : this.creatureSizeIndex,
+      broodIndex:
+          data.broodIndex.present ? data.broodIndex.value : this.broodIndex,
+      combateRoleIndex: data.combateRoleIndex.present
+          ? data.combateRoleIndex.value
+          : this.combateRoleIndex,
+      treasureTypeIndex: data.treasureTypeIndex.present
+          ? data.treasureTypeIndex.value
+          : this.treasureTypeIndex,
+      grimoireUuid: data.grimoireUuid.present
+          ? data.grimoireUuid.value
+          : this.grimoireUuid,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      isAlive: data.isAlive.present ? data.isAlive.value : this.isAlive,
+      trainedExpertisesIndexes: data.trainedExpertisesIndexes.present
+          ? data.trainedExpertisesIndexes.value
+          : this.trainedExpertisesIndexes,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CharacterBoardTableData(')
+          ..write('uuid: $uuid, ')
+          ..write('parentuuid: $parentuuid, ')
+          ..write('boarduuid: $boarduuid, ')
+          ..write('name: $name, ')
+          ..write('imagePath: $imagePath, ')
+          ..write('imageAsset: $imageAsset, ')
+          ..write('displacement: $displacement, ')
+          ..write('senses: $senses, ')
+          ..write('divinityId: $divinityId, ')
+          ..write('initiative: $initiative, ')
+          ..write('perception: $perception, ')
+          ..write('defense: $defense, ')
+          ..write('life: $life, ')
+          ..write('mana: $mana, ')
+          ..write('fortResistence: $fortResistence, ')
+          ..write('refResistence: $refResistence, ')
+          ..write('vonResistence: $vonResistence, ')
+          ..write('strength: $strength, ')
+          ..write('dexterity: $dexterity, ')
+          ..write('constitution: $constitution, ')
+          ..write('intelligence: $intelligence, ')
+          ..write('wisdom: $wisdom, ')
+          ..write('charisma: $charisma, ')
+          ..write('typeIndex: $typeIndex, ')
+          ..write('creatureSizeIndex: $creatureSizeIndex, ')
+          ..write('broodIndex: $broodIndex, ')
+          ..write('combateRoleIndex: $combateRoleIndex, ')
+          ..write('treasureTypeIndex: $treasureTypeIndex, ')
+          ..write('grimoireUuid: $grimoireUuid, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('isAlive: $isAlive, ')
+          ..write('trainedExpertisesIndexes: $trainedExpertisesIndexes')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hashAll([
+        uuid,
+        parentuuid,
+        boarduuid,
+        name,
+        imagePath,
+        imageAsset,
+        displacement,
+        senses,
+        divinityId,
+        initiative,
+        perception,
+        defense,
+        life,
+        mana,
+        fortResistence,
+        refResistence,
+        vonResistence,
+        strength,
+        dexterity,
+        constitution,
+        intelligence,
+        wisdom,
+        charisma,
+        typeIndex,
+        creatureSizeIndex,
+        broodIndex,
+        combateRoleIndex,
+        treasureTypeIndex,
+        grimoireUuid,
+        createdAt,
+        updatedAt,
+        isAlive,
+        trainedExpertisesIndexes
+      ]);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is CharacterBoardTableData &&
+          other.uuid == this.uuid &&
+          other.parentuuid == this.parentuuid &&
+          other.boarduuid == this.boarduuid &&
+          other.name == this.name &&
+          other.imagePath == this.imagePath &&
+          other.imageAsset == this.imageAsset &&
+          other.displacement == this.displacement &&
+          other.senses == this.senses &&
+          other.divinityId == this.divinityId &&
+          other.initiative == this.initiative &&
+          other.perception == this.perception &&
+          other.defense == this.defense &&
+          other.life == this.life &&
+          other.mana == this.mana &&
+          other.fortResistence == this.fortResistence &&
+          other.refResistence == this.refResistence &&
+          other.vonResistence == this.vonResistence &&
+          other.strength == this.strength &&
+          other.dexterity == this.dexterity &&
+          other.constitution == this.constitution &&
+          other.intelligence == this.intelligence &&
+          other.wisdom == this.wisdom &&
+          other.charisma == this.charisma &&
+          other.typeIndex == this.typeIndex &&
+          other.creatureSizeIndex == this.creatureSizeIndex &&
+          other.broodIndex == this.broodIndex &&
+          other.combateRoleIndex == this.combateRoleIndex &&
+          other.treasureTypeIndex == this.treasureTypeIndex &&
+          other.grimoireUuid == this.grimoireUuid &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt &&
+          other.isAlive == this.isAlive &&
+          other.trainedExpertisesIndexes == this.trainedExpertisesIndexes);
+}
+
+class CharacterBoardTableCompanion
+    extends UpdateCompanion<CharacterBoardTableData> {
+  final Value<String> uuid;
+  final Value<String> parentuuid;
+  final Value<String> boarduuid;
+  final Value<String> name;
+  final Value<String?> imagePath;
+  final Value<String?> imageAsset;
+  final Value<String?> displacement;
+  final Value<String?> senses;
+  final Value<int?> divinityId;
+  final Value<int> initiative;
+  final Value<int> perception;
+  final Value<int> defense;
+  final Value<int> life;
+  final Value<int> mana;
+  final Value<int> fortResistence;
+  final Value<int> refResistence;
+  final Value<int> vonResistence;
+  final Value<int> strength;
+  final Value<int> dexterity;
+  final Value<int> constitution;
+  final Value<int> intelligence;
+  final Value<int> wisdom;
+  final Value<int> charisma;
+  final Value<int> typeIndex;
+  final Value<int> creatureSizeIndex;
+  final Value<int> broodIndex;
+  final Value<int> combateRoleIndex;
+  final Value<int?> treasureTypeIndex;
+  final Value<String?> grimoireUuid;
+  final Value<int> createdAt;
+  final Value<int> updatedAt;
+  final Value<bool> isAlive;
+  final Value<String?> trainedExpertisesIndexes;
+  final Value<int> rowid;
+  const CharacterBoardTableCompanion({
+    this.uuid = const Value.absent(),
+    this.parentuuid = const Value.absent(),
+    this.boarduuid = const Value.absent(),
+    this.name = const Value.absent(),
+    this.imagePath = const Value.absent(),
+    this.imageAsset = const Value.absent(),
+    this.displacement = const Value.absent(),
+    this.senses = const Value.absent(),
+    this.divinityId = const Value.absent(),
+    this.initiative = const Value.absent(),
+    this.perception = const Value.absent(),
+    this.defense = const Value.absent(),
+    this.life = const Value.absent(),
+    this.mana = const Value.absent(),
+    this.fortResistence = const Value.absent(),
+    this.refResistence = const Value.absent(),
+    this.vonResistence = const Value.absent(),
+    this.strength = const Value.absent(),
+    this.dexterity = const Value.absent(),
+    this.constitution = const Value.absent(),
+    this.intelligence = const Value.absent(),
+    this.wisdom = const Value.absent(),
+    this.charisma = const Value.absent(),
+    this.typeIndex = const Value.absent(),
+    this.creatureSizeIndex = const Value.absent(),
+    this.broodIndex = const Value.absent(),
+    this.combateRoleIndex = const Value.absent(),
+    this.treasureTypeIndex = const Value.absent(),
+    this.grimoireUuid = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.isAlive = const Value.absent(),
+    this.trainedExpertisesIndexes = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  CharacterBoardTableCompanion.insert({
+    required String uuid,
+    required String parentuuid,
+    required String boarduuid,
+    required String name,
+    this.imagePath = const Value.absent(),
+    this.imageAsset = const Value.absent(),
+    this.displacement = const Value.absent(),
+    this.senses = const Value.absent(),
+    this.divinityId = const Value.absent(),
+    required int initiative,
+    required int perception,
+    required int defense,
+    required int life,
+    required int mana,
+    required int fortResistence,
+    required int refResistence,
+    required int vonResistence,
+    required int strength,
+    required int dexterity,
+    required int constitution,
+    required int intelligence,
+    required int wisdom,
+    required int charisma,
+    required int typeIndex,
+    required int creatureSizeIndex,
+    required int broodIndex,
+    required int combateRoleIndex,
+    this.treasureTypeIndex = const Value.absent(),
+    this.grimoireUuid = const Value.absent(),
+    required int createdAt,
+    required int updatedAt,
+    required bool isAlive,
+    this.trainedExpertisesIndexes = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : uuid = Value(uuid),
+        parentuuid = Value(parentuuid),
+        boarduuid = Value(boarduuid),
+        name = Value(name),
+        initiative = Value(initiative),
+        perception = Value(perception),
+        defense = Value(defense),
+        life = Value(life),
+        mana = Value(mana),
+        fortResistence = Value(fortResistence),
+        refResistence = Value(refResistence),
+        vonResistence = Value(vonResistence),
+        strength = Value(strength),
+        dexterity = Value(dexterity),
+        constitution = Value(constitution),
+        intelligence = Value(intelligence),
+        wisdom = Value(wisdom),
+        charisma = Value(charisma),
+        typeIndex = Value(typeIndex),
+        creatureSizeIndex = Value(creatureSizeIndex),
+        broodIndex = Value(broodIndex),
+        combateRoleIndex = Value(combateRoleIndex),
+        createdAt = Value(createdAt),
+        updatedAt = Value(updatedAt),
+        isAlive = Value(isAlive);
+  static Insertable<CharacterBoardTableData> custom({
+    Expression<String>? uuid,
+    Expression<String>? parentuuid,
+    Expression<String>? boarduuid,
+    Expression<String>? name,
+    Expression<String>? imagePath,
+    Expression<String>? imageAsset,
+    Expression<String>? displacement,
+    Expression<String>? senses,
+    Expression<int>? divinityId,
+    Expression<int>? initiative,
+    Expression<int>? perception,
+    Expression<int>? defense,
+    Expression<int>? life,
+    Expression<int>? mana,
+    Expression<int>? fortResistence,
+    Expression<int>? refResistence,
+    Expression<int>? vonResistence,
+    Expression<int>? strength,
+    Expression<int>? dexterity,
+    Expression<int>? constitution,
+    Expression<int>? intelligence,
+    Expression<int>? wisdom,
+    Expression<int>? charisma,
+    Expression<int>? typeIndex,
+    Expression<int>? creatureSizeIndex,
+    Expression<int>? broodIndex,
+    Expression<int>? combateRoleIndex,
+    Expression<int>? treasureTypeIndex,
+    Expression<String>? grimoireUuid,
+    Expression<int>? createdAt,
+    Expression<int>? updatedAt,
+    Expression<bool>? isAlive,
+    Expression<String>? trainedExpertisesIndexes,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (uuid != null) 'uuid': uuid,
+      if (parentuuid != null) 'parentuuid': parentuuid,
+      if (boarduuid != null) 'boarduuid': boarduuid,
+      if (name != null) 'name': name,
+      if (imagePath != null) 'image_path': imagePath,
+      if (imageAsset != null) 'image_asset': imageAsset,
+      if (displacement != null) 'displacement': displacement,
+      if (senses != null) 'senses': senses,
+      if (divinityId != null) 'divinity_id': divinityId,
+      if (initiative != null) 'initiative': initiative,
+      if (perception != null) 'perception': perception,
+      if (defense != null) 'defense': defense,
+      if (life != null) 'life': life,
+      if (mana != null) 'mana': mana,
+      if (fortResistence != null) 'fort_resistence': fortResistence,
+      if (refResistence != null) 'ref_resistence': refResistence,
+      if (vonResistence != null) 'von_resistence': vonResistence,
+      if (strength != null) 'strength': strength,
+      if (dexterity != null) 'dexterity': dexterity,
+      if (constitution != null) 'constitution': constitution,
+      if (intelligence != null) 'intelligence': intelligence,
+      if (wisdom != null) 'wisdom': wisdom,
+      if (charisma != null) 'charisma': charisma,
+      if (typeIndex != null) 'type_index': typeIndex,
+      if (creatureSizeIndex != null) 'creature_size_index': creatureSizeIndex,
+      if (broodIndex != null) 'brood_index': broodIndex,
+      if (combateRoleIndex != null) 'combate_role_index': combateRoleIndex,
+      if (treasureTypeIndex != null) 'treasure_type_index': treasureTypeIndex,
+      if (grimoireUuid != null) 'grimoire_uuid': grimoireUuid,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (isAlive != null) 'is_alive': isAlive,
+      if (trainedExpertisesIndexes != null)
+        'trained_expertises_indexes': trainedExpertisesIndexes,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  CharacterBoardTableCompanion copyWith(
+      {Value<String>? uuid,
+      Value<String>? parentuuid,
+      Value<String>? boarduuid,
+      Value<String>? name,
+      Value<String?>? imagePath,
+      Value<String?>? imageAsset,
+      Value<String?>? displacement,
+      Value<String?>? senses,
+      Value<int?>? divinityId,
+      Value<int>? initiative,
+      Value<int>? perception,
+      Value<int>? defense,
+      Value<int>? life,
+      Value<int>? mana,
+      Value<int>? fortResistence,
+      Value<int>? refResistence,
+      Value<int>? vonResistence,
+      Value<int>? strength,
+      Value<int>? dexterity,
+      Value<int>? constitution,
+      Value<int>? intelligence,
+      Value<int>? wisdom,
+      Value<int>? charisma,
+      Value<int>? typeIndex,
+      Value<int>? creatureSizeIndex,
+      Value<int>? broodIndex,
+      Value<int>? combateRoleIndex,
+      Value<int?>? treasureTypeIndex,
+      Value<String?>? grimoireUuid,
+      Value<int>? createdAt,
+      Value<int>? updatedAt,
+      Value<bool>? isAlive,
+      Value<String?>? trainedExpertisesIndexes,
+      Value<int>? rowid}) {
+    return CharacterBoardTableCompanion(
+      uuid: uuid ?? this.uuid,
+      parentuuid: parentuuid ?? this.parentuuid,
+      boarduuid: boarduuid ?? this.boarduuid,
+      name: name ?? this.name,
+      imagePath: imagePath ?? this.imagePath,
+      imageAsset: imageAsset ?? this.imageAsset,
+      displacement: displacement ?? this.displacement,
+      senses: senses ?? this.senses,
+      divinityId: divinityId ?? this.divinityId,
+      initiative: initiative ?? this.initiative,
+      perception: perception ?? this.perception,
+      defense: defense ?? this.defense,
+      life: life ?? this.life,
+      mana: mana ?? this.mana,
+      fortResistence: fortResistence ?? this.fortResistence,
+      refResistence: refResistence ?? this.refResistence,
+      vonResistence: vonResistence ?? this.vonResistence,
+      strength: strength ?? this.strength,
+      dexterity: dexterity ?? this.dexterity,
+      constitution: constitution ?? this.constitution,
+      intelligence: intelligence ?? this.intelligence,
+      wisdom: wisdom ?? this.wisdom,
+      charisma: charisma ?? this.charisma,
+      typeIndex: typeIndex ?? this.typeIndex,
+      creatureSizeIndex: creatureSizeIndex ?? this.creatureSizeIndex,
+      broodIndex: broodIndex ?? this.broodIndex,
+      combateRoleIndex: combateRoleIndex ?? this.combateRoleIndex,
+      treasureTypeIndex: treasureTypeIndex ?? this.treasureTypeIndex,
+      grimoireUuid: grimoireUuid ?? this.grimoireUuid,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      isAlive: isAlive ?? this.isAlive,
+      trainedExpertisesIndexes:
+          trainedExpertisesIndexes ?? this.trainedExpertisesIndexes,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (uuid.present) {
+      map['uuid'] = Variable<String>(uuid.value);
+    }
+    if (parentuuid.present) {
+      map['parentuuid'] = Variable<String>(parentuuid.value);
+    }
+    if (boarduuid.present) {
+      map['boarduuid'] = Variable<String>(boarduuid.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (imagePath.present) {
+      map['image_path'] = Variable<String>(imagePath.value);
+    }
+    if (imageAsset.present) {
+      map['image_asset'] = Variable<String>(imageAsset.value);
+    }
+    if (displacement.present) {
+      map['displacement'] = Variable<String>(displacement.value);
+    }
+    if (senses.present) {
+      map['senses'] = Variable<String>(senses.value);
+    }
+    if (divinityId.present) {
+      map['divinity_id'] = Variable<int>(divinityId.value);
+    }
+    if (initiative.present) {
+      map['initiative'] = Variable<int>(initiative.value);
+    }
+    if (perception.present) {
+      map['perception'] = Variable<int>(perception.value);
+    }
+    if (defense.present) {
+      map['defense'] = Variable<int>(defense.value);
+    }
+    if (life.present) {
+      map['life'] = Variable<int>(life.value);
+    }
+    if (mana.present) {
+      map['mana'] = Variable<int>(mana.value);
+    }
+    if (fortResistence.present) {
+      map['fort_resistence'] = Variable<int>(fortResistence.value);
+    }
+    if (refResistence.present) {
+      map['ref_resistence'] = Variable<int>(refResistence.value);
+    }
+    if (vonResistence.present) {
+      map['von_resistence'] = Variable<int>(vonResistence.value);
+    }
+    if (strength.present) {
+      map['strength'] = Variable<int>(strength.value);
+    }
+    if (dexterity.present) {
+      map['dexterity'] = Variable<int>(dexterity.value);
+    }
+    if (constitution.present) {
+      map['constitution'] = Variable<int>(constitution.value);
+    }
+    if (intelligence.present) {
+      map['intelligence'] = Variable<int>(intelligence.value);
+    }
+    if (wisdom.present) {
+      map['wisdom'] = Variable<int>(wisdom.value);
+    }
+    if (charisma.present) {
+      map['charisma'] = Variable<int>(charisma.value);
+    }
+    if (typeIndex.present) {
+      map['type_index'] = Variable<int>(typeIndex.value);
+    }
+    if (creatureSizeIndex.present) {
+      map['creature_size_index'] = Variable<int>(creatureSizeIndex.value);
+    }
+    if (broodIndex.present) {
+      map['brood_index'] = Variable<int>(broodIndex.value);
+    }
+    if (combateRoleIndex.present) {
+      map['combate_role_index'] = Variable<int>(combateRoleIndex.value);
+    }
+    if (treasureTypeIndex.present) {
+      map['treasure_type_index'] = Variable<int>(treasureTypeIndex.value);
+    }
+    if (grimoireUuid.present) {
+      map['grimoire_uuid'] = Variable<String>(grimoireUuid.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<int>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<int>(updatedAt.value);
+    }
+    if (isAlive.present) {
+      map['is_alive'] = Variable<bool>(isAlive.value);
+    }
+    if (trainedExpertisesIndexes.present) {
+      map['trained_expertises_indexes'] =
+          Variable<String>(trainedExpertisesIndexes.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CharacterBoardTableCompanion(')
+          ..write('uuid: $uuid, ')
+          ..write('parentuuid: $parentuuid, ')
+          ..write('boarduuid: $boarduuid, ')
+          ..write('name: $name, ')
+          ..write('imagePath: $imagePath, ')
+          ..write('imageAsset: $imageAsset, ')
+          ..write('displacement: $displacement, ')
+          ..write('senses: $senses, ')
+          ..write('divinityId: $divinityId, ')
+          ..write('initiative: $initiative, ')
+          ..write('perception: $perception, ')
+          ..write('defense: $defense, ')
+          ..write('life: $life, ')
+          ..write('mana: $mana, ')
+          ..write('fortResistence: $fortResistence, ')
+          ..write('refResistence: $refResistence, ')
+          ..write('vonResistence: $vonResistence, ')
+          ..write('strength: $strength, ')
+          ..write('dexterity: $dexterity, ')
+          ..write('constitution: $constitution, ')
+          ..write('intelligence: $intelligence, ')
+          ..write('wisdom: $wisdom, ')
+          ..write('charisma: $charisma, ')
+          ..write('typeIndex: $typeIndex, ')
+          ..write('creatureSizeIndex: $creatureSizeIndex, ')
+          ..write('broodIndex: $broodIndex, ')
+          ..write('combateRoleIndex: $combateRoleIndex, ')
+          ..write('treasureTypeIndex: $treasureTypeIndex, ')
+          ..write('grimoireUuid: $grimoireUuid, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('isAlive: $isAlive, ')
+          ..write('trainedExpertisesIndexes: $trainedExpertisesIndexes, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -14764,12 +18367,20 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $MenaceLinkBoardTableTable menaceLinkBoardTable =
       $MenaceLinkBoardTableTable(this);
   late final $ConfigTableTable configTable = $ConfigTableTable(this);
+  late final $CharacterTableTable characterTable = $CharacterTableTable(this);
+  late final $ClasseCharacterTableTable classeCharacterTable =
+      $ClasseCharacterTableTable(this);
+  late final $OriginTableTable originTable = $OriginTableTable(this);
+  late final $PowerTableTable powerTable = $PowerTableTable(this);
+  late final $CharacterBoardTableTable characterBoardTable =
+      $CharacterBoardTableTable(this);
   late final GrimoireDAO grimoireDAO = GrimoireDAO(this as AppDatabase);
   late final BoardDAO boardDAO = BoardDAO(this as AppDatabase);
   late final MagicCharacterDAO magicCharacterDAO =
       MagicCharacterDAO(this as AppDatabase);
   late final MenaceDAO menaceDAO = MenaceDAO(this as AppDatabase);
   late final ConfigDAO configDAO = ConfigDAO(this as AppDatabase);
+  late final CharacterDAO characterDAO = CharacterDAO(this as AppDatabase);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -14803,7 +18414,12 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         actionDistanceAttackTable,
         expertiseTable,
         menaceLinkBoardTable,
-        configTable
+        configTable,
+        characterTable,
+        classeCharacterTable,
+        originTable,
+        powerTable,
+        characterBoardTable
       ];
 }
 
@@ -20640,6 +24256,1419 @@ class $$ConfigTableTableOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
+typedef $$CharacterTableTableCreateCompanionBuilder = CharacterTableCompanion
+    Function({
+  required String uuid,
+  required String name,
+  Value<String?> imagePath,
+  Value<String?> imageAsset,
+  Value<String?> displacement,
+  Value<String?> senses,
+  Value<int?> divinityId,
+  required int perception,
+  required int defense,
+  required int life,
+  required int mana,
+  required int fortResistence,
+  required int refResistence,
+  required int vonResistence,
+  required int strength,
+  required int dexterity,
+  required int constitution,
+  required int intelligence,
+  required int wisdom,
+  required int charisma,
+  required int creatureSizeIndex,
+  required int broodIndex,
+  Value<String?> grimoireUuid,
+  required int createdAt,
+  required int updatedAt,
+  Value<String?> trainedExpertisesIndexes,
+  required int aligmentIndex,
+  Value<int> rowid,
+});
+typedef $$CharacterTableTableUpdateCompanionBuilder = CharacterTableCompanion
+    Function({
+  Value<String> uuid,
+  Value<String> name,
+  Value<String?> imagePath,
+  Value<String?> imageAsset,
+  Value<String?> displacement,
+  Value<String?> senses,
+  Value<int?> divinityId,
+  Value<int> perception,
+  Value<int> defense,
+  Value<int> life,
+  Value<int> mana,
+  Value<int> fortResistence,
+  Value<int> refResistence,
+  Value<int> vonResistence,
+  Value<int> strength,
+  Value<int> dexterity,
+  Value<int> constitution,
+  Value<int> intelligence,
+  Value<int> wisdom,
+  Value<int> charisma,
+  Value<int> creatureSizeIndex,
+  Value<int> broodIndex,
+  Value<String?> grimoireUuid,
+  Value<int> createdAt,
+  Value<int> updatedAt,
+  Value<String?> trainedExpertisesIndexes,
+  Value<int> aligmentIndex,
+  Value<int> rowid,
+});
+
+class $$CharacterTableTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $CharacterTableTable,
+    CharacterTableData,
+    $$CharacterTableTableFilterComposer,
+    $$CharacterTableTableOrderingComposer,
+    $$CharacterTableTableCreateCompanionBuilder,
+    $$CharacterTableTableUpdateCompanionBuilder> {
+  $$CharacterTableTableTableManager(
+      _$AppDatabase db, $CharacterTableTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$CharacterTableTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$CharacterTableTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<String> uuid = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<String?> imagePath = const Value.absent(),
+            Value<String?> imageAsset = const Value.absent(),
+            Value<String?> displacement = const Value.absent(),
+            Value<String?> senses = const Value.absent(),
+            Value<int?> divinityId = const Value.absent(),
+            Value<int> perception = const Value.absent(),
+            Value<int> defense = const Value.absent(),
+            Value<int> life = const Value.absent(),
+            Value<int> mana = const Value.absent(),
+            Value<int> fortResistence = const Value.absent(),
+            Value<int> refResistence = const Value.absent(),
+            Value<int> vonResistence = const Value.absent(),
+            Value<int> strength = const Value.absent(),
+            Value<int> dexterity = const Value.absent(),
+            Value<int> constitution = const Value.absent(),
+            Value<int> intelligence = const Value.absent(),
+            Value<int> wisdom = const Value.absent(),
+            Value<int> charisma = const Value.absent(),
+            Value<int> creatureSizeIndex = const Value.absent(),
+            Value<int> broodIndex = const Value.absent(),
+            Value<String?> grimoireUuid = const Value.absent(),
+            Value<int> createdAt = const Value.absent(),
+            Value<int> updatedAt = const Value.absent(),
+            Value<String?> trainedExpertisesIndexes = const Value.absent(),
+            Value<int> aligmentIndex = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              CharacterTableCompanion(
+            uuid: uuid,
+            name: name,
+            imagePath: imagePath,
+            imageAsset: imageAsset,
+            displacement: displacement,
+            senses: senses,
+            divinityId: divinityId,
+            perception: perception,
+            defense: defense,
+            life: life,
+            mana: mana,
+            fortResistence: fortResistence,
+            refResistence: refResistence,
+            vonResistence: vonResistence,
+            strength: strength,
+            dexterity: dexterity,
+            constitution: constitution,
+            intelligence: intelligence,
+            wisdom: wisdom,
+            charisma: charisma,
+            creatureSizeIndex: creatureSizeIndex,
+            broodIndex: broodIndex,
+            grimoireUuid: grimoireUuid,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            trainedExpertisesIndexes: trainedExpertisesIndexes,
+            aligmentIndex: aligmentIndex,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String uuid,
+            required String name,
+            Value<String?> imagePath = const Value.absent(),
+            Value<String?> imageAsset = const Value.absent(),
+            Value<String?> displacement = const Value.absent(),
+            Value<String?> senses = const Value.absent(),
+            Value<int?> divinityId = const Value.absent(),
+            required int perception,
+            required int defense,
+            required int life,
+            required int mana,
+            required int fortResistence,
+            required int refResistence,
+            required int vonResistence,
+            required int strength,
+            required int dexterity,
+            required int constitution,
+            required int intelligence,
+            required int wisdom,
+            required int charisma,
+            required int creatureSizeIndex,
+            required int broodIndex,
+            Value<String?> grimoireUuid = const Value.absent(),
+            required int createdAt,
+            required int updatedAt,
+            Value<String?> trainedExpertisesIndexes = const Value.absent(),
+            required int aligmentIndex,
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              CharacterTableCompanion.insert(
+            uuid: uuid,
+            name: name,
+            imagePath: imagePath,
+            imageAsset: imageAsset,
+            displacement: displacement,
+            senses: senses,
+            divinityId: divinityId,
+            perception: perception,
+            defense: defense,
+            life: life,
+            mana: mana,
+            fortResistence: fortResistence,
+            refResistence: refResistence,
+            vonResistence: vonResistence,
+            strength: strength,
+            dexterity: dexterity,
+            constitution: constitution,
+            intelligence: intelligence,
+            wisdom: wisdom,
+            charisma: charisma,
+            creatureSizeIndex: creatureSizeIndex,
+            broodIndex: broodIndex,
+            grimoireUuid: grimoireUuid,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            trainedExpertisesIndexes: trainedExpertisesIndexes,
+            aligmentIndex: aligmentIndex,
+            rowid: rowid,
+          ),
+        ));
+}
+
+class $$CharacterTableTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $CharacterTableTable> {
+  $$CharacterTableTableFilterComposer(super.$state);
+  ColumnFilters<String> get uuid => $state.composableBuilder(
+      column: $state.table.uuid,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get imagePath => $state.composableBuilder(
+      column: $state.table.imagePath,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get imageAsset => $state.composableBuilder(
+      column: $state.table.imageAsset,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get displacement => $state.composableBuilder(
+      column: $state.table.displacement,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get senses => $state.composableBuilder(
+      column: $state.table.senses,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get divinityId => $state.composableBuilder(
+      column: $state.table.divinityId,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get perception => $state.composableBuilder(
+      column: $state.table.perception,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get defense => $state.composableBuilder(
+      column: $state.table.defense,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get life => $state.composableBuilder(
+      column: $state.table.life,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get mana => $state.composableBuilder(
+      column: $state.table.mana,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get fortResistence => $state.composableBuilder(
+      column: $state.table.fortResistence,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get refResistence => $state.composableBuilder(
+      column: $state.table.refResistence,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get vonResistence => $state.composableBuilder(
+      column: $state.table.vonResistence,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get strength => $state.composableBuilder(
+      column: $state.table.strength,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get dexterity => $state.composableBuilder(
+      column: $state.table.dexterity,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get constitution => $state.composableBuilder(
+      column: $state.table.constitution,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get intelligence => $state.composableBuilder(
+      column: $state.table.intelligence,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get wisdom => $state.composableBuilder(
+      column: $state.table.wisdom,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get charisma => $state.composableBuilder(
+      column: $state.table.charisma,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get creatureSizeIndex => $state.composableBuilder(
+      column: $state.table.creatureSizeIndex,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get broodIndex => $state.composableBuilder(
+      column: $state.table.broodIndex,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get grimoireUuid => $state.composableBuilder(
+      column: $state.table.grimoireUuid,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get createdAt => $state.composableBuilder(
+      column: $state.table.createdAt,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get updatedAt => $state.composableBuilder(
+      column: $state.table.updatedAt,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get trainedExpertisesIndexes =>
+      $state.composableBuilder(
+          column: $state.table.trainedExpertisesIndexes,
+          builder: (column, joinBuilders) =>
+              ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get aligmentIndex => $state.composableBuilder(
+      column: $state.table.aligmentIndex,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $$CharacterTableTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $CharacterTableTable> {
+  $$CharacterTableTableOrderingComposer(super.$state);
+  ColumnOrderings<String> get uuid => $state.composableBuilder(
+      column: $state.table.uuid,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get imagePath => $state.composableBuilder(
+      column: $state.table.imagePath,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get imageAsset => $state.composableBuilder(
+      column: $state.table.imageAsset,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get displacement => $state.composableBuilder(
+      column: $state.table.displacement,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get senses => $state.composableBuilder(
+      column: $state.table.senses,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get divinityId => $state.composableBuilder(
+      column: $state.table.divinityId,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get perception => $state.composableBuilder(
+      column: $state.table.perception,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get defense => $state.composableBuilder(
+      column: $state.table.defense,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get life => $state.composableBuilder(
+      column: $state.table.life,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get mana => $state.composableBuilder(
+      column: $state.table.mana,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get fortResistence => $state.composableBuilder(
+      column: $state.table.fortResistence,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get refResistence => $state.composableBuilder(
+      column: $state.table.refResistence,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get vonResistence => $state.composableBuilder(
+      column: $state.table.vonResistence,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get strength => $state.composableBuilder(
+      column: $state.table.strength,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get dexterity => $state.composableBuilder(
+      column: $state.table.dexterity,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get constitution => $state.composableBuilder(
+      column: $state.table.constitution,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get intelligence => $state.composableBuilder(
+      column: $state.table.intelligence,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get wisdom => $state.composableBuilder(
+      column: $state.table.wisdom,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get charisma => $state.composableBuilder(
+      column: $state.table.charisma,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get creatureSizeIndex => $state.composableBuilder(
+      column: $state.table.creatureSizeIndex,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get broodIndex => $state.composableBuilder(
+      column: $state.table.broodIndex,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get grimoireUuid => $state.composableBuilder(
+      column: $state.table.grimoireUuid,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get createdAt => $state.composableBuilder(
+      column: $state.table.createdAt,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get updatedAt => $state.composableBuilder(
+      column: $state.table.updatedAt,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get trainedExpertisesIndexes =>
+      $state.composableBuilder(
+          column: $state.table.trainedExpertisesIndexes,
+          builder: (column, joinBuilders) =>
+              ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get aligmentIndex => $state.composableBuilder(
+      column: $state.table.aligmentIndex,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
+typedef $$ClasseCharacterTableTableCreateCompanionBuilder
+    = ClasseCharacterTableCompanion Function({
+  required String uuid,
+  required String characterUuid,
+  required int typeIndex,
+  required int level,
+  Value<int> rowid,
+});
+typedef $$ClasseCharacterTableTableUpdateCompanionBuilder
+    = ClasseCharacterTableCompanion Function({
+  Value<String> uuid,
+  Value<String> characterUuid,
+  Value<int> typeIndex,
+  Value<int> level,
+  Value<int> rowid,
+});
+
+class $$ClasseCharacterTableTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $ClasseCharacterTableTable,
+    ClasseCharacterTableData,
+    $$ClasseCharacterTableTableFilterComposer,
+    $$ClasseCharacterTableTableOrderingComposer,
+    $$ClasseCharacterTableTableCreateCompanionBuilder,
+    $$ClasseCharacterTableTableUpdateCompanionBuilder> {
+  $$ClasseCharacterTableTableTableManager(
+      _$AppDatabase db, $ClasseCharacterTableTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer: $$ClasseCharacterTableTableFilterComposer(
+              ComposerState(db, table)),
+          orderingComposer: $$ClasseCharacterTableTableOrderingComposer(
+              ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<String> uuid = const Value.absent(),
+            Value<String> characterUuid = const Value.absent(),
+            Value<int> typeIndex = const Value.absent(),
+            Value<int> level = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              ClasseCharacterTableCompanion(
+            uuid: uuid,
+            characterUuid: characterUuid,
+            typeIndex: typeIndex,
+            level: level,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String uuid,
+            required String characterUuid,
+            required int typeIndex,
+            required int level,
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              ClasseCharacterTableCompanion.insert(
+            uuid: uuid,
+            characterUuid: characterUuid,
+            typeIndex: typeIndex,
+            level: level,
+            rowid: rowid,
+          ),
+        ));
+}
+
+class $$ClasseCharacterTableTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $ClasseCharacterTableTable> {
+  $$ClasseCharacterTableTableFilterComposer(super.$state);
+  ColumnFilters<String> get uuid => $state.composableBuilder(
+      column: $state.table.uuid,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get characterUuid => $state.composableBuilder(
+      column: $state.table.characterUuid,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get typeIndex => $state.composableBuilder(
+      column: $state.table.typeIndex,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get level => $state.composableBuilder(
+      column: $state.table.level,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $$ClasseCharacterTableTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $ClasseCharacterTableTable> {
+  $$ClasseCharacterTableTableOrderingComposer(super.$state);
+  ColumnOrderings<String> get uuid => $state.composableBuilder(
+      column: $state.table.uuid,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get characterUuid => $state.composableBuilder(
+      column: $state.table.characterUuid,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get typeIndex => $state.composableBuilder(
+      column: $state.table.typeIndex,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get level => $state.composableBuilder(
+      column: $state.table.level,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
+typedef $$OriginTableTableCreateCompanionBuilder = OriginTableCompanion
+    Function({
+  required String uuid,
+  required String characterUuid,
+  required String name,
+  required String desc,
+  Value<int> rowid,
+});
+typedef $$OriginTableTableUpdateCompanionBuilder = OriginTableCompanion
+    Function({
+  Value<String> uuid,
+  Value<String> characterUuid,
+  Value<String> name,
+  Value<String> desc,
+  Value<int> rowid,
+});
+
+class $$OriginTableTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $OriginTableTable,
+    OriginTableData,
+    $$OriginTableTableFilterComposer,
+    $$OriginTableTableOrderingComposer,
+    $$OriginTableTableCreateCompanionBuilder,
+    $$OriginTableTableUpdateCompanionBuilder> {
+  $$OriginTableTableTableManager(_$AppDatabase db, $OriginTableTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$OriginTableTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$OriginTableTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<String> uuid = const Value.absent(),
+            Value<String> characterUuid = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<String> desc = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              OriginTableCompanion(
+            uuid: uuid,
+            characterUuid: characterUuid,
+            name: name,
+            desc: desc,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String uuid,
+            required String characterUuid,
+            required String name,
+            required String desc,
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              OriginTableCompanion.insert(
+            uuid: uuid,
+            characterUuid: characterUuid,
+            name: name,
+            desc: desc,
+            rowid: rowid,
+          ),
+        ));
+}
+
+class $$OriginTableTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $OriginTableTable> {
+  $$OriginTableTableFilterComposer(super.$state);
+  ColumnFilters<String> get uuid => $state.composableBuilder(
+      column: $state.table.uuid,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get characterUuid => $state.composableBuilder(
+      column: $state.table.characterUuid,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get desc => $state.composableBuilder(
+      column: $state.table.desc,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $$OriginTableTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $OriginTableTable> {
+  $$OriginTableTableOrderingComposer(super.$state);
+  ColumnOrderings<String> get uuid => $state.composableBuilder(
+      column: $state.table.uuid,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get characterUuid => $state.composableBuilder(
+      column: $state.table.characterUuid,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get desc => $state.composableBuilder(
+      column: $state.table.desc,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
+typedef $$PowerTableTableCreateCompanionBuilder = PowerTableCompanion Function({
+  required String uuid,
+  required String name,
+  required String desc,
+  required String characterUuid,
+  required int typeIndex,
+  Value<int> rowid,
+});
+typedef $$PowerTableTableUpdateCompanionBuilder = PowerTableCompanion Function({
+  Value<String> uuid,
+  Value<String> name,
+  Value<String> desc,
+  Value<String> characterUuid,
+  Value<int> typeIndex,
+  Value<int> rowid,
+});
+
+class $$PowerTableTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $PowerTableTable,
+    PowerTableData,
+    $$PowerTableTableFilterComposer,
+    $$PowerTableTableOrderingComposer,
+    $$PowerTableTableCreateCompanionBuilder,
+    $$PowerTableTableUpdateCompanionBuilder> {
+  $$PowerTableTableTableManager(_$AppDatabase db, $PowerTableTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$PowerTableTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$PowerTableTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<String> uuid = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<String> desc = const Value.absent(),
+            Value<String> characterUuid = const Value.absent(),
+            Value<int> typeIndex = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              PowerTableCompanion(
+            uuid: uuid,
+            name: name,
+            desc: desc,
+            characterUuid: characterUuid,
+            typeIndex: typeIndex,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String uuid,
+            required String name,
+            required String desc,
+            required String characterUuid,
+            required int typeIndex,
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              PowerTableCompanion.insert(
+            uuid: uuid,
+            name: name,
+            desc: desc,
+            characterUuid: characterUuid,
+            typeIndex: typeIndex,
+            rowid: rowid,
+          ),
+        ));
+}
+
+class $$PowerTableTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $PowerTableTable> {
+  $$PowerTableTableFilterComposer(super.$state);
+  ColumnFilters<String> get uuid => $state.composableBuilder(
+      column: $state.table.uuid,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get desc => $state.composableBuilder(
+      column: $state.table.desc,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get characterUuid => $state.composableBuilder(
+      column: $state.table.characterUuid,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get typeIndex => $state.composableBuilder(
+      column: $state.table.typeIndex,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $$PowerTableTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $PowerTableTable> {
+  $$PowerTableTableOrderingComposer(super.$state);
+  ColumnOrderings<String> get uuid => $state.composableBuilder(
+      column: $state.table.uuid,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get desc => $state.composableBuilder(
+      column: $state.table.desc,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get characterUuid => $state.composableBuilder(
+      column: $state.table.characterUuid,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get typeIndex => $state.composableBuilder(
+      column: $state.table.typeIndex,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
+typedef $$CharacterBoardTableTableCreateCompanionBuilder
+    = CharacterBoardTableCompanion Function({
+  required String uuid,
+  required String parentuuid,
+  required String boarduuid,
+  required String name,
+  Value<String?> imagePath,
+  Value<String?> imageAsset,
+  Value<String?> displacement,
+  Value<String?> senses,
+  Value<int?> divinityId,
+  required int initiative,
+  required int perception,
+  required int defense,
+  required int life,
+  required int mana,
+  required int fortResistence,
+  required int refResistence,
+  required int vonResistence,
+  required int strength,
+  required int dexterity,
+  required int constitution,
+  required int intelligence,
+  required int wisdom,
+  required int charisma,
+  required int typeIndex,
+  required int creatureSizeIndex,
+  required int broodIndex,
+  required int combateRoleIndex,
+  Value<int?> treasureTypeIndex,
+  Value<String?> grimoireUuid,
+  required int createdAt,
+  required int updatedAt,
+  required bool isAlive,
+  Value<String?> trainedExpertisesIndexes,
+  Value<int> rowid,
+});
+typedef $$CharacterBoardTableTableUpdateCompanionBuilder
+    = CharacterBoardTableCompanion Function({
+  Value<String> uuid,
+  Value<String> parentuuid,
+  Value<String> boarduuid,
+  Value<String> name,
+  Value<String?> imagePath,
+  Value<String?> imageAsset,
+  Value<String?> displacement,
+  Value<String?> senses,
+  Value<int?> divinityId,
+  Value<int> initiative,
+  Value<int> perception,
+  Value<int> defense,
+  Value<int> life,
+  Value<int> mana,
+  Value<int> fortResistence,
+  Value<int> refResistence,
+  Value<int> vonResistence,
+  Value<int> strength,
+  Value<int> dexterity,
+  Value<int> constitution,
+  Value<int> intelligence,
+  Value<int> wisdom,
+  Value<int> charisma,
+  Value<int> typeIndex,
+  Value<int> creatureSizeIndex,
+  Value<int> broodIndex,
+  Value<int> combateRoleIndex,
+  Value<int?> treasureTypeIndex,
+  Value<String?> grimoireUuid,
+  Value<int> createdAt,
+  Value<int> updatedAt,
+  Value<bool> isAlive,
+  Value<String?> trainedExpertisesIndexes,
+  Value<int> rowid,
+});
+
+class $$CharacterBoardTableTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $CharacterBoardTableTable,
+    CharacterBoardTableData,
+    $$CharacterBoardTableTableFilterComposer,
+    $$CharacterBoardTableTableOrderingComposer,
+    $$CharacterBoardTableTableCreateCompanionBuilder,
+    $$CharacterBoardTableTableUpdateCompanionBuilder> {
+  $$CharacterBoardTableTableTableManager(
+      _$AppDatabase db, $CharacterBoardTableTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer: $$CharacterBoardTableTableFilterComposer(
+              ComposerState(db, table)),
+          orderingComposer: $$CharacterBoardTableTableOrderingComposer(
+              ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<String> uuid = const Value.absent(),
+            Value<String> parentuuid = const Value.absent(),
+            Value<String> boarduuid = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<String?> imagePath = const Value.absent(),
+            Value<String?> imageAsset = const Value.absent(),
+            Value<String?> displacement = const Value.absent(),
+            Value<String?> senses = const Value.absent(),
+            Value<int?> divinityId = const Value.absent(),
+            Value<int> initiative = const Value.absent(),
+            Value<int> perception = const Value.absent(),
+            Value<int> defense = const Value.absent(),
+            Value<int> life = const Value.absent(),
+            Value<int> mana = const Value.absent(),
+            Value<int> fortResistence = const Value.absent(),
+            Value<int> refResistence = const Value.absent(),
+            Value<int> vonResistence = const Value.absent(),
+            Value<int> strength = const Value.absent(),
+            Value<int> dexterity = const Value.absent(),
+            Value<int> constitution = const Value.absent(),
+            Value<int> intelligence = const Value.absent(),
+            Value<int> wisdom = const Value.absent(),
+            Value<int> charisma = const Value.absent(),
+            Value<int> typeIndex = const Value.absent(),
+            Value<int> creatureSizeIndex = const Value.absent(),
+            Value<int> broodIndex = const Value.absent(),
+            Value<int> combateRoleIndex = const Value.absent(),
+            Value<int?> treasureTypeIndex = const Value.absent(),
+            Value<String?> grimoireUuid = const Value.absent(),
+            Value<int> createdAt = const Value.absent(),
+            Value<int> updatedAt = const Value.absent(),
+            Value<bool> isAlive = const Value.absent(),
+            Value<String?> trainedExpertisesIndexes = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              CharacterBoardTableCompanion(
+            uuid: uuid,
+            parentuuid: parentuuid,
+            boarduuid: boarduuid,
+            name: name,
+            imagePath: imagePath,
+            imageAsset: imageAsset,
+            displacement: displacement,
+            senses: senses,
+            divinityId: divinityId,
+            initiative: initiative,
+            perception: perception,
+            defense: defense,
+            life: life,
+            mana: mana,
+            fortResistence: fortResistence,
+            refResistence: refResistence,
+            vonResistence: vonResistence,
+            strength: strength,
+            dexterity: dexterity,
+            constitution: constitution,
+            intelligence: intelligence,
+            wisdom: wisdom,
+            charisma: charisma,
+            typeIndex: typeIndex,
+            creatureSizeIndex: creatureSizeIndex,
+            broodIndex: broodIndex,
+            combateRoleIndex: combateRoleIndex,
+            treasureTypeIndex: treasureTypeIndex,
+            grimoireUuid: grimoireUuid,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            isAlive: isAlive,
+            trainedExpertisesIndexes: trainedExpertisesIndexes,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String uuid,
+            required String parentuuid,
+            required String boarduuid,
+            required String name,
+            Value<String?> imagePath = const Value.absent(),
+            Value<String?> imageAsset = const Value.absent(),
+            Value<String?> displacement = const Value.absent(),
+            Value<String?> senses = const Value.absent(),
+            Value<int?> divinityId = const Value.absent(),
+            required int initiative,
+            required int perception,
+            required int defense,
+            required int life,
+            required int mana,
+            required int fortResistence,
+            required int refResistence,
+            required int vonResistence,
+            required int strength,
+            required int dexterity,
+            required int constitution,
+            required int intelligence,
+            required int wisdom,
+            required int charisma,
+            required int typeIndex,
+            required int creatureSizeIndex,
+            required int broodIndex,
+            required int combateRoleIndex,
+            Value<int?> treasureTypeIndex = const Value.absent(),
+            Value<String?> grimoireUuid = const Value.absent(),
+            required int createdAt,
+            required int updatedAt,
+            required bool isAlive,
+            Value<String?> trainedExpertisesIndexes = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              CharacterBoardTableCompanion.insert(
+            uuid: uuid,
+            parentuuid: parentuuid,
+            boarduuid: boarduuid,
+            name: name,
+            imagePath: imagePath,
+            imageAsset: imageAsset,
+            displacement: displacement,
+            senses: senses,
+            divinityId: divinityId,
+            initiative: initiative,
+            perception: perception,
+            defense: defense,
+            life: life,
+            mana: mana,
+            fortResistence: fortResistence,
+            refResistence: refResistence,
+            vonResistence: vonResistence,
+            strength: strength,
+            dexterity: dexterity,
+            constitution: constitution,
+            intelligence: intelligence,
+            wisdom: wisdom,
+            charisma: charisma,
+            typeIndex: typeIndex,
+            creatureSizeIndex: creatureSizeIndex,
+            broodIndex: broodIndex,
+            combateRoleIndex: combateRoleIndex,
+            treasureTypeIndex: treasureTypeIndex,
+            grimoireUuid: grimoireUuid,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            isAlive: isAlive,
+            trainedExpertisesIndexes: trainedExpertisesIndexes,
+            rowid: rowid,
+          ),
+        ));
+}
+
+class $$CharacterBoardTableTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $CharacterBoardTableTable> {
+  $$CharacterBoardTableTableFilterComposer(super.$state);
+  ColumnFilters<String> get uuid => $state.composableBuilder(
+      column: $state.table.uuid,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get parentuuid => $state.composableBuilder(
+      column: $state.table.parentuuid,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get boarduuid => $state.composableBuilder(
+      column: $state.table.boarduuid,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get imagePath => $state.composableBuilder(
+      column: $state.table.imagePath,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get imageAsset => $state.composableBuilder(
+      column: $state.table.imageAsset,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get displacement => $state.composableBuilder(
+      column: $state.table.displacement,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get senses => $state.composableBuilder(
+      column: $state.table.senses,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get divinityId => $state.composableBuilder(
+      column: $state.table.divinityId,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get initiative => $state.composableBuilder(
+      column: $state.table.initiative,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get perception => $state.composableBuilder(
+      column: $state.table.perception,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get defense => $state.composableBuilder(
+      column: $state.table.defense,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get life => $state.composableBuilder(
+      column: $state.table.life,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get mana => $state.composableBuilder(
+      column: $state.table.mana,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get fortResistence => $state.composableBuilder(
+      column: $state.table.fortResistence,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get refResistence => $state.composableBuilder(
+      column: $state.table.refResistence,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get vonResistence => $state.composableBuilder(
+      column: $state.table.vonResistence,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get strength => $state.composableBuilder(
+      column: $state.table.strength,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get dexterity => $state.composableBuilder(
+      column: $state.table.dexterity,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get constitution => $state.composableBuilder(
+      column: $state.table.constitution,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get intelligence => $state.composableBuilder(
+      column: $state.table.intelligence,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get wisdom => $state.composableBuilder(
+      column: $state.table.wisdom,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get charisma => $state.composableBuilder(
+      column: $state.table.charisma,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get typeIndex => $state.composableBuilder(
+      column: $state.table.typeIndex,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get creatureSizeIndex => $state.composableBuilder(
+      column: $state.table.creatureSizeIndex,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get broodIndex => $state.composableBuilder(
+      column: $state.table.broodIndex,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get combateRoleIndex => $state.composableBuilder(
+      column: $state.table.combateRoleIndex,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get treasureTypeIndex => $state.composableBuilder(
+      column: $state.table.treasureTypeIndex,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get grimoireUuid => $state.composableBuilder(
+      column: $state.table.grimoireUuid,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get createdAt => $state.composableBuilder(
+      column: $state.table.createdAt,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get updatedAt => $state.composableBuilder(
+      column: $state.table.updatedAt,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get isAlive => $state.composableBuilder(
+      column: $state.table.isAlive,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get trainedExpertisesIndexes =>
+      $state.composableBuilder(
+          column: $state.table.trainedExpertisesIndexes,
+          builder: (column, joinBuilders) =>
+              ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $$CharacterBoardTableTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $CharacterBoardTableTable> {
+  $$CharacterBoardTableTableOrderingComposer(super.$state);
+  ColumnOrderings<String> get uuid => $state.composableBuilder(
+      column: $state.table.uuid,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get parentuuid => $state.composableBuilder(
+      column: $state.table.parentuuid,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get boarduuid => $state.composableBuilder(
+      column: $state.table.boarduuid,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get imagePath => $state.composableBuilder(
+      column: $state.table.imagePath,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get imageAsset => $state.composableBuilder(
+      column: $state.table.imageAsset,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get displacement => $state.composableBuilder(
+      column: $state.table.displacement,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get senses => $state.composableBuilder(
+      column: $state.table.senses,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get divinityId => $state.composableBuilder(
+      column: $state.table.divinityId,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get initiative => $state.composableBuilder(
+      column: $state.table.initiative,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get perception => $state.composableBuilder(
+      column: $state.table.perception,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get defense => $state.composableBuilder(
+      column: $state.table.defense,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get life => $state.composableBuilder(
+      column: $state.table.life,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get mana => $state.composableBuilder(
+      column: $state.table.mana,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get fortResistence => $state.composableBuilder(
+      column: $state.table.fortResistence,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get refResistence => $state.composableBuilder(
+      column: $state.table.refResistence,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get vonResistence => $state.composableBuilder(
+      column: $state.table.vonResistence,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get strength => $state.composableBuilder(
+      column: $state.table.strength,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get dexterity => $state.composableBuilder(
+      column: $state.table.dexterity,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get constitution => $state.composableBuilder(
+      column: $state.table.constitution,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get intelligence => $state.composableBuilder(
+      column: $state.table.intelligence,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get wisdom => $state.composableBuilder(
+      column: $state.table.wisdom,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get charisma => $state.composableBuilder(
+      column: $state.table.charisma,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get typeIndex => $state.composableBuilder(
+      column: $state.table.typeIndex,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get creatureSizeIndex => $state.composableBuilder(
+      column: $state.table.creatureSizeIndex,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get broodIndex => $state.composableBuilder(
+      column: $state.table.broodIndex,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get combateRoleIndex => $state.composableBuilder(
+      column: $state.table.combateRoleIndex,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get treasureTypeIndex => $state.composableBuilder(
+      column: $state.table.treasureTypeIndex,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get grimoireUuid => $state.composableBuilder(
+      column: $state.table.grimoireUuid,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get createdAt => $state.composableBuilder(
+      column: $state.table.createdAt,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get updatedAt => $state.composableBuilder(
+      column: $state.table.updatedAt,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get isAlive => $state.composableBuilder(
+      column: $state.table.isAlive,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get trainedExpertisesIndexes =>
+      $state.composableBuilder(
+          column: $state.table.trainedExpertisesIndexes,
+          builder: (column, joinBuilders) =>
+              ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
 class $AppDatabaseManager {
   final _$AppDatabase _db;
   $AppDatabaseManager(this._db);
@@ -20703,4 +25732,14 @@ class $AppDatabaseManager {
       $$MenaceLinkBoardTableTableTableManager(_db, _db.menaceLinkBoardTable);
   $$ConfigTableTableTableManager get configTable =>
       $$ConfigTableTableTableManager(_db, _db.configTable);
+  $$CharacterTableTableTableManager get characterTable =>
+      $$CharacterTableTableTableManager(_db, _db.characterTable);
+  $$ClasseCharacterTableTableTableManager get classeCharacterTable =>
+      $$ClasseCharacterTableTableTableManager(_db, _db.classeCharacterTable);
+  $$OriginTableTableTableManager get originTable =>
+      $$OriginTableTableTableManager(_db, _db.originTable);
+  $$PowerTableTableTableManager get powerTable =>
+      $$PowerTableTableTableManager(_db, _db.powerTable);
+  $$CharacterBoardTableTableTableManager get characterBoardTable =>
+      $$CharacterBoardTableTableTableManager(_db, _db.characterBoardTable);
 }
