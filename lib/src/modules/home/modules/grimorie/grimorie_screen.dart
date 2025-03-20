@@ -8,6 +8,7 @@ import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/grimorie_store.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/modules/add_magics/add_magics_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/widgets/delete_grimorie_bottom_sheet/delete_grimorie_bottomsheet.dart';
+import 'package:tormenta20/src/modules/home/modules/grimorie/widgets/grimoire_characters_list/grimorie_characters_list.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/widgets/grimorie_magic_list.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/widgets/grimorie_options_bottomsheet/grimorie_options_bottomsheet.dart';
@@ -122,6 +123,7 @@ class _GrimorieScreenState extends State<GrimorieScreen> {
                   ),
           ),
           T20UI.spaceHeight,
+          GrimorieCharactersList(_store),
           const Padding(
             padding: T20UI.horizontalPadding,
             child: Labels('Magias'),

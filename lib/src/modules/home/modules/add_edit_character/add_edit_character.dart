@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
@@ -25,9 +27,6 @@ import 'package:tormenta20/src/shared/widgets/textfields/life_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/textfields/mana_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/textfields/name_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/textfields/perception_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/textfields/resis_fort_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/textfields/resis_ref_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/textfields/resis_von_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/textfields/senses_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/token_selector/token_selector.dart';
 
@@ -63,10 +62,12 @@ class _AddEditCharacterState extends State<AddEditCharacter> {
   Widget build(BuildContext context) {
     return ScreenBase(
       label: 'Criar personagem',
-      onSave: () {
+      onSave: () async {
         if (_formKey.currentState?.validate() ?? false) {
-          final character = _controller.onSave();
-          print('charcter: $character');
+          final character = await _controller.onSave();
+          if (character != null) {
+            Navigator.pop(context, character);
+          }
         }
       },
       body: Form(
@@ -153,34 +154,6 @@ class _AddEditCharacterState extends State<AddEditCharacter> {
             T20UI.spaceHeight,
             Padding(
               padding: T20UI.horizontallScreenPadding,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: ResisFortTextfield(
-                      onchange: _controller.onChangeResisFort,
-                      initialValue: widget.initial?.fortResistence,
-                    ),
-                  ),
-                  T20UI.spaceWidth,
-                  Expanded(
-                    child: ResisRefTextfield(
-                      onchange: _controller.onChangeResisRef,
-                      initialValue: widget.initial?.refResistence,
-                    ),
-                  ),
-                  T20UI.spaceWidth,
-                  Expanded(
-                    child: ResisVonTextfield(
-                      onchange: _controller.onChangeResisVon,
-                      initialValue: widget.initial?.vonResistence,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            T20UI.spaceHeight,
-            Padding(
-              padding: T20UI.horizontallScreenPadding,
               child: SensesTextfield(
                 onchange: _controller.changeSenses,
                 initialValue: widget.initial?.senses,
@@ -216,7 +189,7 @@ class _AddEditCharacterState extends State<AddEditCharacter> {
             AddEditCharacterTrainedExpertises(
               store: _controller.trainedExpertisesStore,
               characterUuid: _controller.characterUuid,
-              onAddDeleteList: _controller.setExpertiseToDelete,
+              onAddDeleteList: (_) {},
             ),
             T20UI.spaceHeight,
             AddEditCharacterPowersSelector(

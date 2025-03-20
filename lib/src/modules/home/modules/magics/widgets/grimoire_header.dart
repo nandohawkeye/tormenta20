@@ -6,7 +6,7 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/grimorie_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/grimories_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie_screen.dart';
-import 'package:tormenta20/src/modules/home/modules/magics/widgets/grimoire_card.dart';
+import 'package:tormenta20/src/modules/home/modules/magics/widgets/grimoire_card/grimoire_card.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/shared/widgets/screen_image_button.dart';
 
@@ -39,6 +39,8 @@ class GrimoireHeader extends StatelessWidget {
       });
     }
 
+    final listHeight = 110 * MediaQuery.of(context).textScaler.scale(1);
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +67,7 @@ class GrimoireHeader extends StatelessWidget {
                   ),
                 )
               : SizedBox(
-                  height: 100 * MediaQuery.of(context).textScaler.scale(1),
+                  height: listHeight,
                   child: ListView.separated(
                     shrinkWrap: true,
                     padding: const EdgeInsets.symmetric(
@@ -74,8 +76,10 @@ class GrimoireHeader extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemCount: store.grimories.length,
                     separatorBuilder: T20UI.separatorBuilderHorizontal,
-                    itemBuilder: (_, index) =>
-                        GrimoireCard(grimoire: store.grimories[index]),
+                    itemBuilder: (_, index) => GrimoireCard(
+                      grimoire: store.grimories[index],
+                      height: listHeight,
+                    ),
                   ),
                 ),
         ),

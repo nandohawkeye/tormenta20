@@ -15,9 +15,6 @@ class CharacterBoardTable extends Table {
   IntColumn get defense => integer()();
   IntColumn get life => integer()();
   IntColumn get mana => integer()();
-  IntColumn get fortResistence => integer()();
-  IntColumn get refResistence => integer()();
-  IntColumn get vonResistence => integer()();
   IntColumn get strength => integer()();
   IntColumn get dexterity => integer()();
   IntColumn get constitution => integer()();
@@ -33,7 +30,7 @@ class CharacterBoardTable extends Table {
   IntColumn get createdAt => integer()();
   IntColumn get updatedAt => integer()();
   BoolColumn get isAlive => boolean()();
-  TextColumn get trainedExpertisesIndexes => text().nullable()();
+  IntColumn get aligmentIndex => integer()();
 
   @override
   Set<Column>? get primaryKey => {uuid};

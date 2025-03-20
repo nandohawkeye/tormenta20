@@ -540,6 +540,35 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
     }
   }
 
+  Future<({Failure? failure, Stream<List<Board>>? boards})>
+      watchOnlyBoards() async {
+    try {
+      return (
+        failure: null,
+        boards: (select(boardTable)
+              ..addColumns([
+                boardTable.name,
+                boardTable.adventureName,
+                boardTable.bannerPath,
+                boardTable.createdAt,
+                boardTable.updatedAt,
+              ]))
+            .watch()
+            .map((rows) {
+          List<Board> boards = [];
+
+          for (var row in rows) {
+            boards.add(BoardAdapters.fromDriftData(row));
+          }
+
+          return boards;
+        })
+      );
+    } catch (e) {
+      return (failure: Failure(e.toString()), boards: null);
+    }
+  }
+
   Future<({Failure? failure, Stream<Board?>? boards})> watchSingleBoard(
       String uuid) async {
     try {

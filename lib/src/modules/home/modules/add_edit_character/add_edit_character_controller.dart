@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_final_fields
 
+import 'package:tormenta20/src/modules/home/modules/add_edit_character/add_edit_character_storage_service.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_character/stores/add_edit_character_actions_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_character/stores/add_edit_character_alignment_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_character/stores/add_edit_character_atribute_dices_store.dart';
@@ -17,7 +18,6 @@ import 'package:tormenta20/src/shared/entities/character.dart';
 import 'package:tormenta20/src/shared/entities/classe_type_character.dart';
 import 'package:tormenta20/src/shared/entities/creature_size_category.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
-import 'package:tormenta20/src/shared/entities/expertise/expertise_base.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
 import 'package:tormenta20/src/shared/entities/origin.dart';
 import 'package:tormenta20/src/shared/entities/power.dart';
@@ -43,7 +43,18 @@ class AddEditCharacterController {
       _uuid = initial.uuid;
       _createdAt = initial.createdAt;
       _grimoire = initial.grimorie;
-      _classeUuid = initial.classe.uuid;
+      _classeUuid = initial.classe?.uuid;
+      _name = initial.name;
+      _senses = initial.senses;
+      _displacement = initial.displacement;
+      _defense = initial.defense;
+      _perception = initial.perception;
+      _imageAsset = initial.imageAsset;
+      _imagePath = initial.imagePath;
+      _divinityId = initial.divinityId;
+      _life = initial.life;
+      _mana = initial.mana;
+
       strengthStore = ChangeAtributeStore(initial.strength ?? 0);
       dexterityStore = ChangeAtributeStore(initial.dexterity ?? 0);
       constituionStore = ChangeAtributeStore(initial.constitution ?? 0);
@@ -53,7 +64,7 @@ class AddEditCharacterController {
 
       alignmentStore = AddEditCharacterAlignmentStore(initial.alignmentType);
       broodStore = AddEditCharacterBroodStore(initial.brood);
-      classeStore = AddEditCharacterClasseStore(initial.classe.type);
+      classeStore = AddEditCharacterClasseStore(initial.classe?.type);
       sizeStore = AddEditCharacterSizeStore(initial.creatureSize);
       equipmentStore = AddEditCharacterEquipmentStore(initial.equipments);
       actionsStore = AddEditCharacterActionsStore(initial.actions);
@@ -63,6 +74,9 @@ class AddEditCharacterController {
           AddEditCharacterTrainedExpertisesStore(initial.trainedExpertises);
     }
   }
+
+  final AddEditCharacterStorageService _storageService =
+      AddEditCharacterStorageService();
 
   late final AddEditCharacterAtributeDicesStore atributeDicesStore;
   late final AddEditCharacterBroodStore broodStore;
@@ -87,10 +101,6 @@ class AddEditCharacterController {
 
   List<ActionEnt> _actionsToDelete = [];
   void setActionToDelete(ActionEnt value) => _actionsToDelete.add(value);
-
-  List<ExpertiseBase> _expertiseToDelete = [];
-  void setExpertiseToDelete(ExpertiseBase value) =>
-      _expertiseToDelete.add(value);
 
   List<Power> _powerToDelete = [];
   void setPowerToDelete(Power value) => _powerToDelete.add(value);
@@ -166,39 +176,15 @@ class AddEditCharacterController {
     _defense = int.parse(value);
   }
 
-  int? _resisFort;
-  int? get resisFort => _resisFort;
-  void onChangeResisFort(String? value) {
-    if (value == null) return;
-
-    _resisFort = int.parse(value);
-  }
-
-  int? _resisRef;
-  int? get resisRef => _resisRef;
-  void onChangeResisRef(String? value) {
-    if (value == null) return;
-
-    _resisRef = int.parse(value);
-  }
-
-  int? _resisVon;
-  int? get resisVon => _resisVon;
-  void onChangeResisVon(String? value) {
-    if (value == null) return;
-
-    _resisVon = int.parse(value);
-  }
-
   String? _senses;
   String? get senses => _senses;
   void changeSenses(String? value) => _senses = value;
 
-  String? _displacment;
-  String? get displacment => _displacment;
-  void changeDisplacment(String? value) => _displacment = value;
+  String? _displacement;
+  String? get displacement => _displacement;
+  void changeDisplacment(String? value) => _displacement = value;
 
-  Character? onSave() {
+  Future<Character?> onSave() async {
     if (!atributeDicesStore.validade()) return null;
 
     if (!classeStore.validate()) return null;
@@ -220,17 +206,14 @@ class AddEditCharacterController {
         imageAsset: _imageAsset,
         imagePath: _imagePath,
         divinityId: _divinityId,
-        displacement: _displacment,
+        displacement: _displacement,
         senses: _senses,
         uuid: _uuid,
-        name: _name!,
+        name: _name!.trim(),
         defense: _defense!,
         life: _life!,
         mana: _mana!,
         perception: _perception,
-        fortResistence: _resisFort,
-        refResistence: _resisRef,
-        vonResistence: _resisVon,
         strength: atributeDicesStore.dices
             .firstWhere((d) => d.atribute == Atribute.strength)
             .atributeValue,
@@ -261,23 +244,21 @@ class AddEditCharacterController {
         trainedExpertises: trainedExpertisesStore.data,
         powers: powersStore.data,
         classe: classe,
+        characterBoards: [],
       );
     } else {
       character = Character(
         imageAsset: _imageAsset,
         imagePath: _imagePath,
         divinityId: _divinityId,
-        displacement: _displacment,
+        displacement: _displacement,
         senses: _senses,
         uuid: _uuid,
-        name: _name!,
+        name: _name!.trim(),
         defense: _defense!,
         life: _life!,
         mana: _mana!,
         perception: _perception,
-        fortResistence: _resisFort,
-        refResistence: _resisRef,
-        vonResistence: _resisVon,
         strength: strengthStore.value,
         dexterity: dexterityStore.value,
         constitution: constituionStore.value,
@@ -296,7 +277,20 @@ class AddEditCharacterController {
         trainedExpertises: trainedExpertisesStore.data,
         powers: powersStore.data,
         classe: classe,
+        characterBoards: [],
       );
+    }
+
+    final failure = await _storageService.saveCharacter(
+      entity: character,
+      powerToDelete: _powerToDelete,
+      originToDelete: _originToDelete,
+      actionsToDelete: _actionsToDelete,
+      equipmentsToDelete: _equipmentsToDelete,
+    );
+
+    if (failure != null) {
+      return null;
     }
 
     return character;

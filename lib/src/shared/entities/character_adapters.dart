@@ -7,6 +7,7 @@ import 'package:tormenta20/src/shared/entities/action/hand_to_hand_adapters.dart
 import 'package:tormenta20/src/shared/entities/brood.dart';
 import 'package:tormenta20/src/shared/entities/character.dart';
 import 'package:tormenta20/src/shared/entities/character_alignment_type.dart';
+import 'package:tormenta20/src/shared/entities/character_board_adapters.dart';
 import 'package:tormenta20/src/shared/entities/character_dto.dart';
 import 'package:tormenta20/src/shared/entities/classe_character_type_adapters.dart';
 import 'package:tormenta20/src/shared/entities/creature_size_category.dart';
@@ -28,11 +29,11 @@ import 'package:tormenta20/src/shared/entities/power_adapaters.dart';
 import 'package:tormenta20/src/shared/entities/trained_expertise_adapters.dart';
 
 abstract class CharacterAdapters {
-  static Character fromDriftData(CharacterDto dto) {
+  static Character fromDriftDto(CharacterDto dto) {
     List<Origin> origins = [];
     origins.addAll(dto.origins.map(OriginAdapters.fromDriftData));
     List<Power> powers = [];
-    powers.addAll(dto.powers.map(PowerAdapaters.fromDriftData));
+    powers.addAll(dto.powers.map(PowerAdapters.fromDriftData));
     List<ActionEnt> actions = [];
     actions.addAll(dto.actions.map(ActionAdapters.fromDriftData));
     actions
@@ -66,16 +67,16 @@ abstract class CharacterAdapters {
       dexterity: dto.data.dexterity,
       displacement: dto.data.displacement,
       divinityId: dto.data.divinityId,
-      fortResistence: dto.data.fortResistence,
       imageAsset: dto.data.imageAsset,
       imagePath: dto.data.imagePath,
       intelligence: dto.data.intelligence,
       perception: dto.data.perception,
-      refResistence: dto.data.refResistence,
       senses: dto.data.senses,
       strength: dto.data.strength,
-      vonResistence: dto.data.vonResistence,
       wisdom: dto.data.wisdom,
+      characterBoards: dto.characterBoardsData
+          .map(CharacterBoardAdapters.fromDriftData)
+          .toList(),
       trainedExpertises: TrainedExpertiseAdapters.fromString(
           dto.data.trainedExpertisesIndexes),
       grimorie: dto.grimoireData == null
@@ -86,6 +87,42 @@ abstract class CharacterAdapters {
       origins: origins,
       equipments: equipments,
       actions: actions,
+    );
+  }
+
+  static Character fromDriftData(CharacterTableData data) {
+    return Character(
+      uuid: data.uuid,
+      alignmentType: CharacterAlignmentType.values[data.aligmentIndex],
+      brood: Brood.values[data.broodIndex],
+      createdAt: DateTime.fromMillisecondsSinceEpoch(data.createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data.updatedAt),
+      creatureSize: CreatureSizeCategory.values[data.creatureSizeIndex],
+      defense: data.defense,
+      life: data.life,
+      mana: data.mana,
+      name: data.name,
+      charisma: data.charisma,
+      constitution: data.constitution,
+      dexterity: data.dexterity,
+      displacement: data.displacement,
+      divinityId: data.divinityId,
+      imageAsset: data.imageAsset,
+      imagePath: data.imagePath,
+      intelligence: data.intelligence,
+      perception: data.perception,
+      senses: data.senses,
+      strength: data.strength,
+      wisdom: data.wisdom,
+      characterBoards: [],
+      trainedExpertises:
+          TrainedExpertiseAdapters.fromString(data.trainedExpertisesIndexes),
+      grimorie: null,
+      classe: null,
+      powers: [],
+      origins: [],
+      equipments: [],
+      actions: [],
     );
   }
 
@@ -102,7 +139,6 @@ abstract class CharacterAdapters {
       dexterity: Value(entity.dexterity ?? 0),
       displacement: Value(entity.displacement),
       divinityId: Value(entity.divinityId),
-      fortResistence: Value(entity.fortResistence ?? 0),
       grimoireUuid: Value(entity.grimorie?.uuid),
       imageAsset: Value(entity.imageAsset),
       imagePath: Value(entity.imagePath),
@@ -111,13 +147,11 @@ abstract class CharacterAdapters {
       mana: Value(entity.mana),
       name: Value(entity.name),
       perception: Value(entity.perception ?? 0),
-      refResistence: Value(entity.refResistence ?? 0),
       senses: Value(entity.senses),
       strength: Value(entity.strength ?? 0),
       trainedExpertisesIndexes: Value(
           TrainedExpertiseAdapters.toStringValue(entity.trainedExpertises)),
       updatedAt: Value(entity.updatedAt.millisecondsSinceEpoch),
-      vonResistence: Value(entity.vonResistence ?? 0),
       wisdom: Value(entity.wisdom ?? 0),
     );
   }

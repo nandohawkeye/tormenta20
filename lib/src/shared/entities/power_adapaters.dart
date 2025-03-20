@@ -3,7 +3,7 @@ import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/shared/entities/power.dart';
 import 'package:tormenta20/src/shared/entities/power_type.dart';
 
-abstract class PowerAdapaters {
+abstract class PowerAdapters {
   static Power fromDriftData(PowerTableData data) {
     return Power(
       uuid: data.uuid,

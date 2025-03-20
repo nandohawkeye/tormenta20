@@ -689,13 +689,6 @@ class MenaceDAO extends DatabaseAccessor<AppDatabase> with _$MenaceDAOMixin {
             );
           }
 
-          if (saddlebags.isNotEmpty) {
-            batch.insertAllOnConflictUpdate(
-              saddlebagTable,
-              saddlebags.map(SaddlebagAdapters.toDriftCompanion),
-            );
-          }
-
           if (shields.isNotEmpty) {
             batch.insertAllOnConflictUpdate(
               shieldTable,

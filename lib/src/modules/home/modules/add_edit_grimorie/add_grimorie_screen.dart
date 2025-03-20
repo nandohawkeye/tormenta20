@@ -72,6 +72,7 @@ class _AddGrimorieScreenState extends State<AddGrimorieScreen> {
             updatedAt: now,
             magicsCharacters: _magics,
             iconAsset: _iconAsset.value,
+            characters: [],
           );
 
           Navigator.pop(context, grimoire);

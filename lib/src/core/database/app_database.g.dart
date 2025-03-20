@@ -14785,24 +14785,6 @@ class $CharacterTableTable extends CharacterTable
   late final GeneratedColumn<int> mana = GeneratedColumn<int>(
       'mana', aliasedName, false,
       type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _fortResistenceMeta =
-      const VerificationMeta('fortResistence');
-  @override
-  late final GeneratedColumn<int> fortResistence = GeneratedColumn<int>(
-      'fort_resistence', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _refResistenceMeta =
-      const VerificationMeta('refResistence');
-  @override
-  late final GeneratedColumn<int> refResistence = GeneratedColumn<int>(
-      'ref_resistence', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _vonResistenceMeta =
-      const VerificationMeta('vonResistence');
-  @override
-  late final GeneratedColumn<int> vonResistence = GeneratedColumn<int>(
-      'von_resistence', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _strengthMeta =
       const VerificationMeta('strength');
   @override
@@ -14893,9 +14875,6 @@ class $CharacterTableTable extends CharacterTable
         defense,
         life,
         mana,
-        fortResistence,
-        refResistence,
-        vonResistence,
         strength,
         dexterity,
         constitution,
@@ -14983,30 +14962,6 @@ class $CharacterTableTable extends CharacterTable
           _manaMeta, mana.isAcceptableOrUnknown(data['mana']!, _manaMeta));
     } else if (isInserting) {
       context.missing(_manaMeta);
-    }
-    if (data.containsKey('fort_resistence')) {
-      context.handle(
-          _fortResistenceMeta,
-          fortResistence.isAcceptableOrUnknown(
-              data['fort_resistence']!, _fortResistenceMeta));
-    } else if (isInserting) {
-      context.missing(_fortResistenceMeta);
-    }
-    if (data.containsKey('ref_resistence')) {
-      context.handle(
-          _refResistenceMeta,
-          refResistence.isAcceptableOrUnknown(
-              data['ref_resistence']!, _refResistenceMeta));
-    } else if (isInserting) {
-      context.missing(_refResistenceMeta);
-    }
-    if (data.containsKey('von_resistence')) {
-      context.handle(
-          _vonResistenceMeta,
-          vonResistence.isAcceptableOrUnknown(
-              data['von_resistence']!, _vonResistenceMeta));
-    } else if (isInserting) {
-      context.missing(_vonResistenceMeta);
     }
     if (data.containsKey('strength')) {
       context.handle(_strengthMeta,
@@ -15128,12 +15083,6 @@ class $CharacterTableTable extends CharacterTable
           .read(DriftSqlType.int, data['${effectivePrefix}life'])!,
       mana: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}mana'])!,
-      fortResistence: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}fort_resistence'])!,
-      refResistence: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}ref_resistence'])!,
-      vonResistence: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}von_resistence'])!,
       strength: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}strength'])!,
       dexterity: attachedDatabase.typeMapping
@@ -15183,9 +15132,6 @@ class CharacterTableData extends DataClass
   final int defense;
   final int life;
   final int mana;
-  final int fortResistence;
-  final int refResistence;
-  final int vonResistence;
   final int strength;
   final int dexterity;
   final int constitution;
@@ -15211,9 +15157,6 @@ class CharacterTableData extends DataClass
       required this.defense,
       required this.life,
       required this.mana,
-      required this.fortResistence,
-      required this.refResistence,
-      required this.vonResistence,
       required this.strength,
       required this.dexterity,
       required this.constitution,
@@ -15251,9 +15194,6 @@ class CharacterTableData extends DataClass
     map['defense'] = Variable<int>(defense);
     map['life'] = Variable<int>(life);
     map['mana'] = Variable<int>(mana);
-    map['fort_resistence'] = Variable<int>(fortResistence);
-    map['ref_resistence'] = Variable<int>(refResistence);
-    map['von_resistence'] = Variable<int>(vonResistence);
     map['strength'] = Variable<int>(strength);
     map['dexterity'] = Variable<int>(dexterity);
     map['constitution'] = Variable<int>(constitution);
@@ -15297,9 +15237,6 @@ class CharacterTableData extends DataClass
       defense: Value(defense),
       life: Value(life),
       mana: Value(mana),
-      fortResistence: Value(fortResistence),
-      refResistence: Value(refResistence),
-      vonResistence: Value(vonResistence),
       strength: Value(strength),
       dexterity: Value(dexterity),
       constitution: Value(constitution),
@@ -15335,9 +15272,6 @@ class CharacterTableData extends DataClass
       defense: serializer.fromJson<int>(json['defense']),
       life: serializer.fromJson<int>(json['life']),
       mana: serializer.fromJson<int>(json['mana']),
-      fortResistence: serializer.fromJson<int>(json['fortResistence']),
-      refResistence: serializer.fromJson<int>(json['refResistence']),
-      vonResistence: serializer.fromJson<int>(json['vonResistence']),
       strength: serializer.fromJson<int>(json['strength']),
       dexterity: serializer.fromJson<int>(json['dexterity']),
       constitution: serializer.fromJson<int>(json['constitution']),
@@ -15369,9 +15303,6 @@ class CharacterTableData extends DataClass
       'defense': serializer.toJson<int>(defense),
       'life': serializer.toJson<int>(life),
       'mana': serializer.toJson<int>(mana),
-      'fortResistence': serializer.toJson<int>(fortResistence),
-      'refResistence': serializer.toJson<int>(refResistence),
-      'vonResistence': serializer.toJson<int>(vonResistence),
       'strength': serializer.toJson<int>(strength),
       'dexterity': serializer.toJson<int>(dexterity),
       'constitution': serializer.toJson<int>(constitution),
@@ -15401,9 +15332,6 @@ class CharacterTableData extends DataClass
           int? defense,
           int? life,
           int? mana,
-          int? fortResistence,
-          int? refResistence,
-          int? vonResistence,
           int? strength,
           int? dexterity,
           int? constitution,
@@ -15430,9 +15358,6 @@ class CharacterTableData extends DataClass
         defense: defense ?? this.defense,
         life: life ?? this.life,
         mana: mana ?? this.mana,
-        fortResistence: fortResistence ?? this.fortResistence,
-        refResistence: refResistence ?? this.refResistence,
-        vonResistence: vonResistence ?? this.vonResistence,
         strength: strength ?? this.strength,
         dexterity: dexterity ?? this.dexterity,
         constitution: constitution ?? this.constitution,
@@ -15468,15 +15393,6 @@ class CharacterTableData extends DataClass
       defense: data.defense.present ? data.defense.value : this.defense,
       life: data.life.present ? data.life.value : this.life,
       mana: data.mana.present ? data.mana.value : this.mana,
-      fortResistence: data.fortResistence.present
-          ? data.fortResistence.value
-          : this.fortResistence,
-      refResistence: data.refResistence.present
-          ? data.refResistence.value
-          : this.refResistence,
-      vonResistence: data.vonResistence.present
-          ? data.vonResistence.value
-          : this.vonResistence,
       strength: data.strength.present ? data.strength.value : this.strength,
       dexterity: data.dexterity.present ? data.dexterity.value : this.dexterity,
       constitution: data.constitution.present
@@ -15520,9 +15436,6 @@ class CharacterTableData extends DataClass
           ..write('defense: $defense, ')
           ..write('life: $life, ')
           ..write('mana: $mana, ')
-          ..write('fortResistence: $fortResistence, ')
-          ..write('refResistence: $refResistence, ')
-          ..write('vonResistence: $vonResistence, ')
           ..write('strength: $strength, ')
           ..write('dexterity: $dexterity, ')
           ..write('constitution: $constitution, ')
@@ -15553,9 +15466,6 @@ class CharacterTableData extends DataClass
         defense,
         life,
         mana,
-        fortResistence,
-        refResistence,
-        vonResistence,
         strength,
         dexterity,
         constitution,
@@ -15585,9 +15495,6 @@ class CharacterTableData extends DataClass
           other.defense == this.defense &&
           other.life == this.life &&
           other.mana == this.mana &&
-          other.fortResistence == this.fortResistence &&
-          other.refResistence == this.refResistence &&
-          other.vonResistence == this.vonResistence &&
           other.strength == this.strength &&
           other.dexterity == this.dexterity &&
           other.constitution == this.constitution &&
@@ -15615,9 +15522,6 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
   final Value<int> defense;
   final Value<int> life;
   final Value<int> mana;
-  final Value<int> fortResistence;
-  final Value<int> refResistence;
-  final Value<int> vonResistence;
   final Value<int> strength;
   final Value<int> dexterity;
   final Value<int> constitution;
@@ -15644,9 +15548,6 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
     this.defense = const Value.absent(),
     this.life = const Value.absent(),
     this.mana = const Value.absent(),
-    this.fortResistence = const Value.absent(),
-    this.refResistence = const Value.absent(),
-    this.vonResistence = const Value.absent(),
     this.strength = const Value.absent(),
     this.dexterity = const Value.absent(),
     this.constitution = const Value.absent(),
@@ -15674,9 +15575,6 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
     required int defense,
     required int life,
     required int mana,
-    required int fortResistence,
-    required int refResistence,
-    required int vonResistence,
     required int strength,
     required int dexterity,
     required int constitution,
@@ -15697,9 +15595,6 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
         defense = Value(defense),
         life = Value(life),
         mana = Value(mana),
-        fortResistence = Value(fortResistence),
-        refResistence = Value(refResistence),
-        vonResistence = Value(vonResistence),
         strength = Value(strength),
         dexterity = Value(dexterity),
         constitution = Value(constitution),
@@ -15723,9 +15618,6 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
     Expression<int>? defense,
     Expression<int>? life,
     Expression<int>? mana,
-    Expression<int>? fortResistence,
-    Expression<int>? refResistence,
-    Expression<int>? vonResistence,
     Expression<int>? strength,
     Expression<int>? dexterity,
     Expression<int>? constitution,
@@ -15753,9 +15645,6 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
       if (defense != null) 'defense': defense,
       if (life != null) 'life': life,
       if (mana != null) 'mana': mana,
-      if (fortResistence != null) 'fort_resistence': fortResistence,
-      if (refResistence != null) 'ref_resistence': refResistence,
-      if (vonResistence != null) 'von_resistence': vonResistence,
       if (strength != null) 'strength': strength,
       if (dexterity != null) 'dexterity': dexterity,
       if (constitution != null) 'constitution': constitution,
@@ -15786,9 +15675,6 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
       Value<int>? defense,
       Value<int>? life,
       Value<int>? mana,
-      Value<int>? fortResistence,
-      Value<int>? refResistence,
-      Value<int>? vonResistence,
       Value<int>? strength,
       Value<int>? dexterity,
       Value<int>? constitution,
@@ -15815,9 +15701,6 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
       defense: defense ?? this.defense,
       life: life ?? this.life,
       mana: mana ?? this.mana,
-      fortResistence: fortResistence ?? this.fortResistence,
-      refResistence: refResistence ?? this.refResistence,
-      vonResistence: vonResistence ?? this.vonResistence,
       strength: strength ?? this.strength,
       dexterity: dexterity ?? this.dexterity,
       constitution: constitution ?? this.constitution,
@@ -15871,15 +15754,6 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
     }
     if (mana.present) {
       map['mana'] = Variable<int>(mana.value);
-    }
-    if (fortResistence.present) {
-      map['fort_resistence'] = Variable<int>(fortResistence.value);
-    }
-    if (refResistence.present) {
-      map['ref_resistence'] = Variable<int>(refResistence.value);
-    }
-    if (vonResistence.present) {
-      map['von_resistence'] = Variable<int>(vonResistence.value);
     }
     if (strength.present) {
       map['strength'] = Variable<int>(strength.value);
@@ -15941,9 +15815,6 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
           ..write('defense: $defense, ')
           ..write('life: $life, ')
           ..write('mana: $mana, ')
-          ..write('fortResistence: $fortResistence, ')
-          ..write('refResistence: $refResistence, ')
-          ..write('vonResistence: $vonResistence, ')
           ..write('strength: $strength, ')
           ..write('dexterity: $dexterity, ')
           ..write('constitution: $constitution, ')
@@ -16908,24 +16779,6 @@ class $CharacterBoardTableTable extends CharacterBoardTable
   late final GeneratedColumn<int> mana = GeneratedColumn<int>(
       'mana', aliasedName, false,
       type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _fortResistenceMeta =
-      const VerificationMeta('fortResistence');
-  @override
-  late final GeneratedColumn<int> fortResistence = GeneratedColumn<int>(
-      'fort_resistence', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _refResistenceMeta =
-      const VerificationMeta('refResistence');
-  @override
-  late final GeneratedColumn<int> refResistence = GeneratedColumn<int>(
-      'ref_resistence', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _vonResistenceMeta =
-      const VerificationMeta('vonResistence');
-  @override
-  late final GeneratedColumn<int> vonResistence = GeneratedColumn<int>(
-      'von_resistence', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _strengthMeta =
       const VerificationMeta('strength');
   @override
@@ -17018,12 +16871,12 @@ class $CharacterBoardTableTable extends CharacterBoardTable
       requiredDuringInsert: true,
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('CHECK ("is_alive" IN (0, 1))'));
-  static const VerificationMeta _trainedExpertisesIndexesMeta =
-      const VerificationMeta('trainedExpertisesIndexes');
+  static const VerificationMeta _aligmentIndexMeta =
+      const VerificationMeta('aligmentIndex');
   @override
-  late final GeneratedColumn<String> trainedExpertisesIndexes =
-      GeneratedColumn<String>('trained_expertises_indexes', aliasedName, true,
-          type: DriftSqlType.string, requiredDuringInsert: false);
+  late final GeneratedColumn<int> aligmentIndex = GeneratedColumn<int>(
+      'aligment_index', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [
         uuid,
@@ -17040,9 +16893,6 @@ class $CharacterBoardTableTable extends CharacterBoardTable
         defense,
         life,
         mana,
-        fortResistence,
-        refResistence,
-        vonResistence,
         strength,
         dexterity,
         constitution,
@@ -17058,7 +16908,7 @@ class $CharacterBoardTableTable extends CharacterBoardTable
         createdAt,
         updatedAt,
         isAlive,
-        trainedExpertisesIndexes
+        aligmentIndex
       ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -17156,30 +17006,6 @@ class $CharacterBoardTableTable extends CharacterBoardTable
           _manaMeta, mana.isAcceptableOrUnknown(data['mana']!, _manaMeta));
     } else if (isInserting) {
       context.missing(_manaMeta);
-    }
-    if (data.containsKey('fort_resistence')) {
-      context.handle(
-          _fortResistenceMeta,
-          fortResistence.isAcceptableOrUnknown(
-              data['fort_resistence']!, _fortResistenceMeta));
-    } else if (isInserting) {
-      context.missing(_fortResistenceMeta);
-    }
-    if (data.containsKey('ref_resistence')) {
-      context.handle(
-          _refResistenceMeta,
-          refResistence.isAcceptableOrUnknown(
-              data['ref_resistence']!, _refResistenceMeta));
-    } else if (isInserting) {
-      context.missing(_refResistenceMeta);
-    }
-    if (data.containsKey('von_resistence')) {
-      context.handle(
-          _vonResistenceMeta,
-          vonResistence.isAcceptableOrUnknown(
-              data['von_resistence']!, _vonResistenceMeta));
-    } else if (isInserting) {
-      context.missing(_vonResistenceMeta);
     }
     if (data.containsKey('strength')) {
       context.handle(_strengthMeta,
@@ -17281,12 +17107,13 @@ class $CharacterBoardTableTable extends CharacterBoardTable
     } else if (isInserting) {
       context.missing(_isAliveMeta);
     }
-    if (data.containsKey('trained_expertises_indexes')) {
+    if (data.containsKey('aligment_index')) {
       context.handle(
-          _trainedExpertisesIndexesMeta,
-          trainedExpertisesIndexes.isAcceptableOrUnknown(
-              data['trained_expertises_indexes']!,
-              _trainedExpertisesIndexesMeta));
+          _aligmentIndexMeta,
+          aligmentIndex.isAcceptableOrUnknown(
+              data['aligment_index']!, _aligmentIndexMeta));
+    } else if (isInserting) {
+      context.missing(_aligmentIndexMeta);
     }
     return context;
   }
@@ -17326,12 +17153,6 @@ class $CharacterBoardTableTable extends CharacterBoardTable
           .read(DriftSqlType.int, data['${effectivePrefix}life'])!,
       mana: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}mana'])!,
-      fortResistence: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}fort_resistence'])!,
-      refResistence: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}ref_resistence'])!,
-      vonResistence: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}von_resistence'])!,
       strength: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}strength'])!,
       dexterity: attachedDatabase.typeMapping
@@ -17362,9 +17183,8 @@ class $CharacterBoardTableTable extends CharacterBoardTable
           .read(DriftSqlType.int, data['${effectivePrefix}updated_at'])!,
       isAlive: attachedDatabase.typeMapping
           .read(DriftSqlType.bool, data['${effectivePrefix}is_alive'])!,
-      trainedExpertisesIndexes: attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}trained_expertises_indexes']),
+      aligmentIndex: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}aligment_index'])!,
     );
   }
 
@@ -17390,9 +17210,6 @@ class CharacterBoardTableData extends DataClass
   final int defense;
   final int life;
   final int mana;
-  final int fortResistence;
-  final int refResistence;
-  final int vonResistence;
   final int strength;
   final int dexterity;
   final int constitution;
@@ -17408,7 +17225,7 @@ class CharacterBoardTableData extends DataClass
   final int createdAt;
   final int updatedAt;
   final bool isAlive;
-  final String? trainedExpertisesIndexes;
+  final int aligmentIndex;
   const CharacterBoardTableData(
       {required this.uuid,
       required this.parentuuid,
@@ -17424,9 +17241,6 @@ class CharacterBoardTableData extends DataClass
       required this.defense,
       required this.life,
       required this.mana,
-      required this.fortResistence,
-      required this.refResistence,
-      required this.vonResistence,
       required this.strength,
       required this.dexterity,
       required this.constitution,
@@ -17442,7 +17256,7 @@ class CharacterBoardTableData extends DataClass
       required this.createdAt,
       required this.updatedAt,
       required this.isAlive,
-      this.trainedExpertisesIndexes});
+      required this.aligmentIndex});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -17470,9 +17284,6 @@ class CharacterBoardTableData extends DataClass
     map['defense'] = Variable<int>(defense);
     map['life'] = Variable<int>(life);
     map['mana'] = Variable<int>(mana);
-    map['fort_resistence'] = Variable<int>(fortResistence);
-    map['ref_resistence'] = Variable<int>(refResistence);
-    map['von_resistence'] = Variable<int>(vonResistence);
     map['strength'] = Variable<int>(strength);
     map['dexterity'] = Variable<int>(dexterity);
     map['constitution'] = Variable<int>(constitution);
@@ -17492,10 +17303,7 @@ class CharacterBoardTableData extends DataClass
     map['created_at'] = Variable<int>(createdAt);
     map['updated_at'] = Variable<int>(updatedAt);
     map['is_alive'] = Variable<bool>(isAlive);
-    if (!nullToAbsent || trainedExpertisesIndexes != null) {
-      map['trained_expertises_indexes'] =
-          Variable<String>(trainedExpertisesIndexes);
-    }
+    map['aligment_index'] = Variable<int>(aligmentIndex);
     return map;
   }
 
@@ -17524,9 +17332,6 @@ class CharacterBoardTableData extends DataClass
       defense: Value(defense),
       life: Value(life),
       mana: Value(mana),
-      fortResistence: Value(fortResistence),
-      refResistence: Value(refResistence),
-      vonResistence: Value(vonResistence),
       strength: Value(strength),
       dexterity: Value(dexterity),
       constitution: Value(constitution),
@@ -17546,9 +17351,7 @@ class CharacterBoardTableData extends DataClass
       createdAt: Value(createdAt),
       updatedAt: Value(updatedAt),
       isAlive: Value(isAlive),
-      trainedExpertisesIndexes: trainedExpertisesIndexes == null && nullToAbsent
-          ? const Value.absent()
-          : Value(trainedExpertisesIndexes),
+      aligmentIndex: Value(aligmentIndex),
     );
   }
 
@@ -17570,9 +17373,6 @@ class CharacterBoardTableData extends DataClass
       defense: serializer.fromJson<int>(json['defense']),
       life: serializer.fromJson<int>(json['life']),
       mana: serializer.fromJson<int>(json['mana']),
-      fortResistence: serializer.fromJson<int>(json['fortResistence']),
-      refResistence: serializer.fromJson<int>(json['refResistence']),
-      vonResistence: serializer.fromJson<int>(json['vonResistence']),
       strength: serializer.fromJson<int>(json['strength']),
       dexterity: serializer.fromJson<int>(json['dexterity']),
       constitution: serializer.fromJson<int>(json['constitution']),
@@ -17588,8 +17388,7 @@ class CharacterBoardTableData extends DataClass
       createdAt: serializer.fromJson<int>(json['createdAt']),
       updatedAt: serializer.fromJson<int>(json['updatedAt']),
       isAlive: serializer.fromJson<bool>(json['isAlive']),
-      trainedExpertisesIndexes:
-          serializer.fromJson<String?>(json['trainedExpertisesIndexes']),
+      aligmentIndex: serializer.fromJson<int>(json['aligmentIndex']),
     );
   }
   @override
@@ -17610,9 +17409,6 @@ class CharacterBoardTableData extends DataClass
       'defense': serializer.toJson<int>(defense),
       'life': serializer.toJson<int>(life),
       'mana': serializer.toJson<int>(mana),
-      'fortResistence': serializer.toJson<int>(fortResistence),
-      'refResistence': serializer.toJson<int>(refResistence),
-      'vonResistence': serializer.toJson<int>(vonResistence),
       'strength': serializer.toJson<int>(strength),
       'dexterity': serializer.toJson<int>(dexterity),
       'constitution': serializer.toJson<int>(constitution),
@@ -17628,8 +17424,7 @@ class CharacterBoardTableData extends DataClass
       'createdAt': serializer.toJson<int>(createdAt),
       'updatedAt': serializer.toJson<int>(updatedAt),
       'isAlive': serializer.toJson<bool>(isAlive),
-      'trainedExpertisesIndexes':
-          serializer.toJson<String?>(trainedExpertisesIndexes),
+      'aligmentIndex': serializer.toJson<int>(aligmentIndex),
     };
   }
 
@@ -17648,9 +17443,6 @@ class CharacterBoardTableData extends DataClass
           int? defense,
           int? life,
           int? mana,
-          int? fortResistence,
-          int? refResistence,
-          int? vonResistence,
           int? strength,
           int? dexterity,
           int? constitution,
@@ -17666,7 +17458,7 @@ class CharacterBoardTableData extends DataClass
           int? createdAt,
           int? updatedAt,
           bool? isAlive,
-          Value<String?> trainedExpertisesIndexes = const Value.absent()}) =>
+          int? aligmentIndex}) =>
       CharacterBoardTableData(
         uuid: uuid ?? this.uuid,
         parentuuid: parentuuid ?? this.parentuuid,
@@ -17683,9 +17475,6 @@ class CharacterBoardTableData extends DataClass
         defense: defense ?? this.defense,
         life: life ?? this.life,
         mana: mana ?? this.mana,
-        fortResistence: fortResistence ?? this.fortResistence,
-        refResistence: refResistence ?? this.refResistence,
-        vonResistence: vonResistence ?? this.vonResistence,
         strength: strength ?? this.strength,
         dexterity: dexterity ?? this.dexterity,
         constitution: constitution ?? this.constitution,
@@ -17704,9 +17493,7 @@ class CharacterBoardTableData extends DataClass
         createdAt: createdAt ?? this.createdAt,
         updatedAt: updatedAt ?? this.updatedAt,
         isAlive: isAlive ?? this.isAlive,
-        trainedExpertisesIndexes: trainedExpertisesIndexes.present
-            ? trainedExpertisesIndexes.value
-            : this.trainedExpertisesIndexes,
+        aligmentIndex: aligmentIndex ?? this.aligmentIndex,
       );
   CharacterBoardTableData copyWithCompanion(CharacterBoardTableCompanion data) {
     return CharacterBoardTableData(
@@ -17731,15 +17518,6 @@ class CharacterBoardTableData extends DataClass
       defense: data.defense.present ? data.defense.value : this.defense,
       life: data.life.present ? data.life.value : this.life,
       mana: data.mana.present ? data.mana.value : this.mana,
-      fortResistence: data.fortResistence.present
-          ? data.fortResistence.value
-          : this.fortResistence,
-      refResistence: data.refResistence.present
-          ? data.refResistence.value
-          : this.refResistence,
-      vonResistence: data.vonResistence.present
-          ? data.vonResistence.value
-          : this.vonResistence,
       strength: data.strength.present ? data.strength.value : this.strength,
       dexterity: data.dexterity.present ? data.dexterity.value : this.dexterity,
       constitution: data.constitution.present
@@ -17768,9 +17546,9 @@ class CharacterBoardTableData extends DataClass
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
       updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
       isAlive: data.isAlive.present ? data.isAlive.value : this.isAlive,
-      trainedExpertisesIndexes: data.trainedExpertisesIndexes.present
-          ? data.trainedExpertisesIndexes.value
-          : this.trainedExpertisesIndexes,
+      aligmentIndex: data.aligmentIndex.present
+          ? data.aligmentIndex.value
+          : this.aligmentIndex,
     );
   }
 
@@ -17791,9 +17569,6 @@ class CharacterBoardTableData extends DataClass
           ..write('defense: $defense, ')
           ..write('life: $life, ')
           ..write('mana: $mana, ')
-          ..write('fortResistence: $fortResistence, ')
-          ..write('refResistence: $refResistence, ')
-          ..write('vonResistence: $vonResistence, ')
           ..write('strength: $strength, ')
           ..write('dexterity: $dexterity, ')
           ..write('constitution: $constitution, ')
@@ -17809,7 +17584,7 @@ class CharacterBoardTableData extends DataClass
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
           ..write('isAlive: $isAlive, ')
-          ..write('trainedExpertisesIndexes: $trainedExpertisesIndexes')
+          ..write('aligmentIndex: $aligmentIndex')
           ..write(')'))
         .toString();
   }
@@ -17830,9 +17605,6 @@ class CharacterBoardTableData extends DataClass
         defense,
         life,
         mana,
-        fortResistence,
-        refResistence,
-        vonResistence,
         strength,
         dexterity,
         constitution,
@@ -17848,7 +17620,7 @@ class CharacterBoardTableData extends DataClass
         createdAt,
         updatedAt,
         isAlive,
-        trainedExpertisesIndexes
+        aligmentIndex
       ]);
   @override
   bool operator ==(Object other) =>
@@ -17868,9 +17640,6 @@ class CharacterBoardTableData extends DataClass
           other.defense == this.defense &&
           other.life == this.life &&
           other.mana == this.mana &&
-          other.fortResistence == this.fortResistence &&
-          other.refResistence == this.refResistence &&
-          other.vonResistence == this.vonResistence &&
           other.strength == this.strength &&
           other.dexterity == this.dexterity &&
           other.constitution == this.constitution &&
@@ -17886,7 +17655,7 @@ class CharacterBoardTableData extends DataClass
           other.createdAt == this.createdAt &&
           other.updatedAt == this.updatedAt &&
           other.isAlive == this.isAlive &&
-          other.trainedExpertisesIndexes == this.trainedExpertisesIndexes);
+          other.aligmentIndex == this.aligmentIndex);
 }
 
 class CharacterBoardTableCompanion
@@ -17905,9 +17674,6 @@ class CharacterBoardTableCompanion
   final Value<int> defense;
   final Value<int> life;
   final Value<int> mana;
-  final Value<int> fortResistence;
-  final Value<int> refResistence;
-  final Value<int> vonResistence;
   final Value<int> strength;
   final Value<int> dexterity;
   final Value<int> constitution;
@@ -17923,7 +17689,7 @@ class CharacterBoardTableCompanion
   final Value<int> createdAt;
   final Value<int> updatedAt;
   final Value<bool> isAlive;
-  final Value<String?> trainedExpertisesIndexes;
+  final Value<int> aligmentIndex;
   final Value<int> rowid;
   const CharacterBoardTableCompanion({
     this.uuid = const Value.absent(),
@@ -17940,9 +17706,6 @@ class CharacterBoardTableCompanion
     this.defense = const Value.absent(),
     this.life = const Value.absent(),
     this.mana = const Value.absent(),
-    this.fortResistence = const Value.absent(),
-    this.refResistence = const Value.absent(),
-    this.vonResistence = const Value.absent(),
     this.strength = const Value.absent(),
     this.dexterity = const Value.absent(),
     this.constitution = const Value.absent(),
@@ -17958,7 +17721,7 @@ class CharacterBoardTableCompanion
     this.createdAt = const Value.absent(),
     this.updatedAt = const Value.absent(),
     this.isAlive = const Value.absent(),
-    this.trainedExpertisesIndexes = const Value.absent(),
+    this.aligmentIndex = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   CharacterBoardTableCompanion.insert({
@@ -17976,9 +17739,6 @@ class CharacterBoardTableCompanion
     required int defense,
     required int life,
     required int mana,
-    required int fortResistence,
-    required int refResistence,
-    required int vonResistence,
     required int strength,
     required int dexterity,
     required int constitution,
@@ -17994,7 +17754,7 @@ class CharacterBoardTableCompanion
     required int createdAt,
     required int updatedAt,
     required bool isAlive,
-    this.trainedExpertisesIndexes = const Value.absent(),
+    required int aligmentIndex,
     this.rowid = const Value.absent(),
   })  : uuid = Value(uuid),
         parentuuid = Value(parentuuid),
@@ -18005,9 +17765,6 @@ class CharacterBoardTableCompanion
         defense = Value(defense),
         life = Value(life),
         mana = Value(mana),
-        fortResistence = Value(fortResistence),
-        refResistence = Value(refResistence),
-        vonResistence = Value(vonResistence),
         strength = Value(strength),
         dexterity = Value(dexterity),
         constitution = Value(constitution),
@@ -18020,7 +17777,8 @@ class CharacterBoardTableCompanion
         combateRoleIndex = Value(combateRoleIndex),
         createdAt = Value(createdAt),
         updatedAt = Value(updatedAt),
-        isAlive = Value(isAlive);
+        isAlive = Value(isAlive),
+        aligmentIndex = Value(aligmentIndex);
   static Insertable<CharacterBoardTableData> custom({
     Expression<String>? uuid,
     Expression<String>? parentuuid,
@@ -18036,9 +17794,6 @@ class CharacterBoardTableCompanion
     Expression<int>? defense,
     Expression<int>? life,
     Expression<int>? mana,
-    Expression<int>? fortResistence,
-    Expression<int>? refResistence,
-    Expression<int>? vonResistence,
     Expression<int>? strength,
     Expression<int>? dexterity,
     Expression<int>? constitution,
@@ -18054,7 +17809,7 @@ class CharacterBoardTableCompanion
     Expression<int>? createdAt,
     Expression<int>? updatedAt,
     Expression<bool>? isAlive,
-    Expression<String>? trainedExpertisesIndexes,
+    Expression<int>? aligmentIndex,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -18072,9 +17827,6 @@ class CharacterBoardTableCompanion
       if (defense != null) 'defense': defense,
       if (life != null) 'life': life,
       if (mana != null) 'mana': mana,
-      if (fortResistence != null) 'fort_resistence': fortResistence,
-      if (refResistence != null) 'ref_resistence': refResistence,
-      if (vonResistence != null) 'von_resistence': vonResistence,
       if (strength != null) 'strength': strength,
       if (dexterity != null) 'dexterity': dexterity,
       if (constitution != null) 'constitution': constitution,
@@ -18090,8 +17842,7 @@ class CharacterBoardTableCompanion
       if (createdAt != null) 'created_at': createdAt,
       if (updatedAt != null) 'updated_at': updatedAt,
       if (isAlive != null) 'is_alive': isAlive,
-      if (trainedExpertisesIndexes != null)
-        'trained_expertises_indexes': trainedExpertisesIndexes,
+      if (aligmentIndex != null) 'aligment_index': aligmentIndex,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -18111,9 +17862,6 @@ class CharacterBoardTableCompanion
       Value<int>? defense,
       Value<int>? life,
       Value<int>? mana,
-      Value<int>? fortResistence,
-      Value<int>? refResistence,
-      Value<int>? vonResistence,
       Value<int>? strength,
       Value<int>? dexterity,
       Value<int>? constitution,
@@ -18129,7 +17877,7 @@ class CharacterBoardTableCompanion
       Value<int>? createdAt,
       Value<int>? updatedAt,
       Value<bool>? isAlive,
-      Value<String?>? trainedExpertisesIndexes,
+      Value<int>? aligmentIndex,
       Value<int>? rowid}) {
     return CharacterBoardTableCompanion(
       uuid: uuid ?? this.uuid,
@@ -18146,9 +17894,6 @@ class CharacterBoardTableCompanion
       defense: defense ?? this.defense,
       life: life ?? this.life,
       mana: mana ?? this.mana,
-      fortResistence: fortResistence ?? this.fortResistence,
-      refResistence: refResistence ?? this.refResistence,
-      vonResistence: vonResistence ?? this.vonResistence,
       strength: strength ?? this.strength,
       dexterity: dexterity ?? this.dexterity,
       constitution: constitution ?? this.constitution,
@@ -18164,8 +17909,7 @@ class CharacterBoardTableCompanion
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       isAlive: isAlive ?? this.isAlive,
-      trainedExpertisesIndexes:
-          trainedExpertisesIndexes ?? this.trainedExpertisesIndexes,
+      aligmentIndex: aligmentIndex ?? this.aligmentIndex,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -18215,15 +17959,6 @@ class CharacterBoardTableCompanion
     if (mana.present) {
       map['mana'] = Variable<int>(mana.value);
     }
-    if (fortResistence.present) {
-      map['fort_resistence'] = Variable<int>(fortResistence.value);
-    }
-    if (refResistence.present) {
-      map['ref_resistence'] = Variable<int>(refResistence.value);
-    }
-    if (vonResistence.present) {
-      map['von_resistence'] = Variable<int>(vonResistence.value);
-    }
     if (strength.present) {
       map['strength'] = Variable<int>(strength.value);
     }
@@ -18269,9 +18004,8 @@ class CharacterBoardTableCompanion
     if (isAlive.present) {
       map['is_alive'] = Variable<bool>(isAlive.value);
     }
-    if (trainedExpertisesIndexes.present) {
-      map['trained_expertises_indexes'] =
-          Variable<String>(trainedExpertisesIndexes.value);
+    if (aligmentIndex.present) {
+      map['aligment_index'] = Variable<int>(aligmentIndex.value);
     }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
@@ -18296,9 +18030,6 @@ class CharacterBoardTableCompanion
           ..write('defense: $defense, ')
           ..write('life: $life, ')
           ..write('mana: $mana, ')
-          ..write('fortResistence: $fortResistence, ')
-          ..write('refResistence: $refResistence, ')
-          ..write('vonResistence: $vonResistence, ')
           ..write('strength: $strength, ')
           ..write('dexterity: $dexterity, ')
           ..write('constitution: $constitution, ')
@@ -18314,7 +18045,7 @@ class CharacterBoardTableCompanion
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
           ..write('isAlive: $isAlive, ')
-          ..write('trainedExpertisesIndexes: $trainedExpertisesIndexes, ')
+          ..write('aligmentIndex: $aligmentIndex, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -24269,9 +24000,6 @@ typedef $$CharacterTableTableCreateCompanionBuilder = CharacterTableCompanion
   required int defense,
   required int life,
   required int mana,
-  required int fortResistence,
-  required int refResistence,
-  required int vonResistence,
   required int strength,
   required int dexterity,
   required int constitution,
@@ -24300,9 +24028,6 @@ typedef $$CharacterTableTableUpdateCompanionBuilder = CharacterTableCompanion
   Value<int> defense,
   Value<int> life,
   Value<int> mana,
-  Value<int> fortResistence,
-  Value<int> refResistence,
-  Value<int> vonResistence,
   Value<int> strength,
   Value<int> dexterity,
   Value<int> constitution,
@@ -24348,9 +24073,6 @@ class $$CharacterTableTableTableManager extends RootTableManager<
             Value<int> defense = const Value.absent(),
             Value<int> life = const Value.absent(),
             Value<int> mana = const Value.absent(),
-            Value<int> fortResistence = const Value.absent(),
-            Value<int> refResistence = const Value.absent(),
-            Value<int> vonResistence = const Value.absent(),
             Value<int> strength = const Value.absent(),
             Value<int> dexterity = const Value.absent(),
             Value<int> constitution = const Value.absent(),
@@ -24378,9 +24100,6 @@ class $$CharacterTableTableTableManager extends RootTableManager<
             defense: defense,
             life: life,
             mana: mana,
-            fortResistence: fortResistence,
-            refResistence: refResistence,
-            vonResistence: vonResistence,
             strength: strength,
             dexterity: dexterity,
             constitution: constitution,
@@ -24408,9 +24127,6 @@ class $$CharacterTableTableTableManager extends RootTableManager<
             required int defense,
             required int life,
             required int mana,
-            required int fortResistence,
-            required int refResistence,
-            required int vonResistence,
             required int strength,
             required int dexterity,
             required int constitution,
@@ -24438,9 +24154,6 @@ class $$CharacterTableTableTableManager extends RootTableManager<
             defense: defense,
             life: life,
             mana: mana,
-            fortResistence: fortResistence,
-            refResistence: refResistence,
-            vonResistence: vonResistence,
             strength: strength,
             dexterity: dexterity,
             constitution: constitution,
@@ -24514,21 +24227,6 @@ class $$CharacterTableTableFilterComposer
 
   ColumnFilters<int> get mana => $state.composableBuilder(
       column: $state.table.mana,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get fortResistence => $state.composableBuilder(
-      column: $state.table.fortResistence,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get refResistence => $state.composableBuilder(
-      column: $state.table.refResistence,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get vonResistence => $state.composableBuilder(
-      column: $state.table.vonResistence,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -24654,21 +24352,6 @@ class $$CharacterTableTableOrderingComposer
 
   ColumnOrderings<int> get mana => $state.composableBuilder(
       column: $state.table.mana,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get fortResistence => $state.composableBuilder(
-      column: $state.table.fortResistence,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get refResistence => $state.composableBuilder(
-      column: $state.table.refResistence,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get vonResistence => $state.composableBuilder(
-      column: $state.table.vonResistence,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
@@ -25106,9 +24789,6 @@ typedef $$CharacterBoardTableTableCreateCompanionBuilder
   required int defense,
   required int life,
   required int mana,
-  required int fortResistence,
-  required int refResistence,
-  required int vonResistence,
   required int strength,
   required int dexterity,
   required int constitution,
@@ -25124,7 +24804,7 @@ typedef $$CharacterBoardTableTableCreateCompanionBuilder
   required int createdAt,
   required int updatedAt,
   required bool isAlive,
-  Value<String?> trainedExpertisesIndexes,
+  required int aligmentIndex,
   Value<int> rowid,
 });
 typedef $$CharacterBoardTableTableUpdateCompanionBuilder
@@ -25143,9 +24823,6 @@ typedef $$CharacterBoardTableTableUpdateCompanionBuilder
   Value<int> defense,
   Value<int> life,
   Value<int> mana,
-  Value<int> fortResistence,
-  Value<int> refResistence,
-  Value<int> vonResistence,
   Value<int> strength,
   Value<int> dexterity,
   Value<int> constitution,
@@ -25161,7 +24838,7 @@ typedef $$CharacterBoardTableTableUpdateCompanionBuilder
   Value<int> createdAt,
   Value<int> updatedAt,
   Value<bool> isAlive,
-  Value<String?> trainedExpertisesIndexes,
+  Value<int> aligmentIndex,
   Value<int> rowid,
 });
 
@@ -25197,9 +24874,6 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             Value<int> defense = const Value.absent(),
             Value<int> life = const Value.absent(),
             Value<int> mana = const Value.absent(),
-            Value<int> fortResistence = const Value.absent(),
-            Value<int> refResistence = const Value.absent(),
-            Value<int> vonResistence = const Value.absent(),
             Value<int> strength = const Value.absent(),
             Value<int> dexterity = const Value.absent(),
             Value<int> constitution = const Value.absent(),
@@ -25215,7 +24889,7 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             Value<int> createdAt = const Value.absent(),
             Value<int> updatedAt = const Value.absent(),
             Value<bool> isAlive = const Value.absent(),
-            Value<String?> trainedExpertisesIndexes = const Value.absent(),
+            Value<int> aligmentIndex = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               CharacterBoardTableCompanion(
@@ -25233,9 +24907,6 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             defense: defense,
             life: life,
             mana: mana,
-            fortResistence: fortResistence,
-            refResistence: refResistence,
-            vonResistence: vonResistence,
             strength: strength,
             dexterity: dexterity,
             constitution: constitution,
@@ -25251,7 +24922,7 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             createdAt: createdAt,
             updatedAt: updatedAt,
             isAlive: isAlive,
-            trainedExpertisesIndexes: trainedExpertisesIndexes,
+            aligmentIndex: aligmentIndex,
             rowid: rowid,
           ),
           createCompanionCallback: ({
@@ -25269,9 +24940,6 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             required int defense,
             required int life,
             required int mana,
-            required int fortResistence,
-            required int refResistence,
-            required int vonResistence,
             required int strength,
             required int dexterity,
             required int constitution,
@@ -25287,7 +24955,7 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             required int createdAt,
             required int updatedAt,
             required bool isAlive,
-            Value<String?> trainedExpertisesIndexes = const Value.absent(),
+            required int aligmentIndex,
             Value<int> rowid = const Value.absent(),
           }) =>
               CharacterBoardTableCompanion.insert(
@@ -25305,9 +24973,6 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             defense: defense,
             life: life,
             mana: mana,
-            fortResistence: fortResistence,
-            refResistence: refResistence,
-            vonResistence: vonResistence,
             strength: strength,
             dexterity: dexterity,
             constitution: constitution,
@@ -25323,7 +24988,7 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             createdAt: createdAt,
             updatedAt: updatedAt,
             isAlive: isAlive,
-            trainedExpertisesIndexes: trainedExpertisesIndexes,
+            aligmentIndex: aligmentIndex,
             rowid: rowid,
           ),
         ));
@@ -25402,21 +25067,6 @@ class $$CharacterBoardTableTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<int> get fortResistence => $state.composableBuilder(
-      column: $state.table.fortResistence,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get refResistence => $state.composableBuilder(
-      column: $state.table.refResistence,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get vonResistence => $state.composableBuilder(
-      column: $state.table.vonResistence,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
   ColumnFilters<int> get strength => $state.composableBuilder(
       column: $state.table.strength,
       builder: (column, joinBuilders) =>
@@ -25492,11 +25142,10 @@ class $$CharacterBoardTableTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<String> get trainedExpertisesIndexes =>
-      $state.composableBuilder(
-          column: $state.table.trainedExpertisesIndexes,
-          builder: (column, joinBuilders) =>
-              ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<int> get aligmentIndex => $state.composableBuilder(
+      column: $state.table.aligmentIndex,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
 }
 
 class $$CharacterBoardTableTableOrderingComposer
@@ -25569,21 +25218,6 @@ class $$CharacterBoardTableTableOrderingComposer
 
   ColumnOrderings<int> get mana => $state.composableBuilder(
       column: $state.table.mana,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get fortResistence => $state.composableBuilder(
-      column: $state.table.fortResistence,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get refResistence => $state.composableBuilder(
-      column: $state.table.refResistence,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get vonResistence => $state.composableBuilder(
-      column: $state.table.vonResistence,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
@@ -25662,11 +25296,10 @@ class $$CharacterBoardTableTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<String> get trainedExpertisesIndexes =>
-      $state.composableBuilder(
-          column: $state.table.trainedExpertisesIndexes,
-          builder: (column, joinBuilders) =>
-              ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<int> get aligmentIndex => $state.composableBuilder(
+      column: $state.table.aligmentIndex,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
 class $AppDatabaseManager {

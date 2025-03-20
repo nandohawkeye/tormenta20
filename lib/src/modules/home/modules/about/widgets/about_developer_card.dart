@@ -4,6 +4,7 @@ import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_developer_card_links.dart';
+import 'package:tormenta20/src/modules/home/modules/about/widgets/about_suggest_card.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/coffee_bottomsheet/coffee_bottomsheet.dart';
 import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
@@ -83,6 +84,10 @@ class AboutDeveloperCard extends StatelessWidget {
             ),
             const DividerLevelTwo(verticalPadding: 0),
             const AboutDeveloperCardLinks(),
+            const DividerLevelTwo(verticalPadding: 0),
+            T20UI.spaceHeight,
+            const AboutSuggestCard(),
+            T20UI.spaceHeight,
           ],
         ),
       ),

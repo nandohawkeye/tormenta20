@@ -4,11 +4,13 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:tormenta20/src/modules/home/modules/init/init_storage_service.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
+import 'package:tormenta20/src/shared/entities/character.dart';
 import 'package:tormenta20/src/shared/entities/menace.dart';
 
 class InitStore extends ChangeNotifier {
   StreamSubscription? _subBoards;
   StreamSubscription? _subMenaces;
+  StreamSubscription? _subCharacters;
   final _storageService = InitStorageService();
 
   Future<InitStore> init() async {
@@ -21,6 +23,12 @@ class InitStore extends ChangeNotifier {
     _storageService.watchMenaces().then((resp) {
       if (resp.menaces != null) {
         _subMenaces ??= resp.menaces?.listen(_setMenaces);
+      }
+    });
+
+    _storageService.watchCharacters().then((resp) {
+      if (resp.characters != null) {
+        _subCharacters ??= resp.characters?.listen(_setCharacters);
       }
     });
 
@@ -43,12 +51,22 @@ class InitStore extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<Character> _characters = [];
+  List<Character> get characters => _characters;
+  void _setCharacters(List<Character> values) {
+    _characters.clear();
+    _characters.addAll(values);
+    notifyListeners();
+  }
+
   @override
   void dispose() {
     _subBoards?.cancel();
     _subBoards = null;
     _subMenaces?.cancel();
     _subMenaces = null;
+    _subCharacters?.cancel();
+    _subCharacters = null;
     super.dispose();
   }
 }

@@ -104,6 +104,12 @@ class GrimoireDAO extends DatabaseAccessor<AppDatabase>
                   magicCharacterTable.grimoireUUid,
                 ),
               ),
+              leftOuterJoin(
+                characterTable,
+                grimoireTable.uuid.equalsExp(
+                  characterTable.grimoireUuid,
+                ),
+              ),
             ])
             .watch()
             .map((rows) {
@@ -113,6 +119,7 @@ class GrimoireDAO extends DatabaseAccessor<AppDatabase>
                 final grimoireData = row.readTable(grimoireTable);
                 final magicCharactersData =
                     row.readTableOrNull(magicCharacterTable);
+                final charactersData = row.readTableOrNull(characterTable);
 
                 if (!(grimoiresDTO.containsKey(grimoireData.uuid))) {
                   grimoiresDTO.addAll({
@@ -121,10 +128,21 @@ class GrimoireDAO extends DatabaseAccessor<AppDatabase>
                   });
                 }
 
-                if (magicCharactersData != null) {
+                if (magicCharactersData != null &&
+                    !(grimoiresDTO[grimoireData.uuid]!.magicsData.any(
+                        (magic) => magic.uuid == magicCharactersData.uuid))) {
                   grimoiresDTO[grimoireData.uuid]!
                       .magicsData
                       .add(magicCharactersData);
+                }
+
+                if (charactersData != null &&
+                    !(grimoiresDTO[grimoireData.uuid]!.charactersData.any(
+                        (character) =>
+                            character.uuid == charactersData.uuid))) {
+                  grimoiresDTO[grimoireData.uuid]!
+                      .charactersData
+                      .add(charactersData);
                 }
               }
 
@@ -152,6 +170,12 @@ class GrimoireDAO extends DatabaseAccessor<AppDatabase>
                   magicCharacterTable.grimoireUUid,
                 ),
               ),
+              leftOuterJoin(
+                characterTable,
+                grimoireTable.uuid.equalsExp(
+                  characterTable.grimoireUuid,
+                ),
+              ),
             ])
             .watch()
             .map((rows) {
@@ -161,6 +185,7 @@ class GrimoireDAO extends DatabaseAccessor<AppDatabase>
                 final grimoireData = row.readTable(grimoireTable);
                 final magicCharactersData =
                     row.readTableOrNull(magicCharacterTable);
+                final charactersData = row.readTableOrNull(characterTable);
 
                 if (!(grimoiresDTO.containsKey(grimoireData.uuid))) {
                   grimoiresDTO.addAll({
@@ -169,10 +194,21 @@ class GrimoireDAO extends DatabaseAccessor<AppDatabase>
                   });
                 }
 
-                if (magicCharactersData != null) {
+                if (magicCharactersData != null &&
+                    !(grimoiresDTO[grimoireData.uuid]!.magicsData.any(
+                        (magic) => magic.uuid == magicCharactersData.uuid))) {
                   grimoiresDTO[grimoireData.uuid]!
                       .magicsData
                       .add(magicCharactersData);
+                }
+
+                if (charactersData != null &&
+                    !(grimoiresDTO[grimoireData.uuid]!.charactersData.any(
+                        (character) =>
+                            character.uuid == charactersData.uuid))) {
+                  grimoiresDTO[grimoireData.uuid]!
+                      .charactersData
+                      .add(charactersData);
                 }
               }
 

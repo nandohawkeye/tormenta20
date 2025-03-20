@@ -1,3 +1,4 @@
+import 'package:tormenta20/src/shared/entities/character.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_character.dart';
 import 'package:tormenta20/src/shared/failures/failure.dart';
@@ -13,6 +14,11 @@ class GrimorieStorageService extends DriftStorageService {
     return super.dataBase.grimoireDAO.watchAllGrimoire(grimoireUuid);
   }
 
+  Future<({Failure? failure, Stream<List<Character>>? characters})>
+      watchCharacters() {
+    return super.dataBase.characterDAO.watchCharacters();
+  }
+
   Future<Failure?> insertGrimoire(Grimoire entity) {
     return super.dataBase.grimoireDAO.insertGrimoire(entity);
   }
@@ -23,5 +29,9 @@ class GrimorieStorageService extends DriftStorageService {
 
   Future<Failure?> deleteMagic(MagicCharacter entity) {
     return super.dataBase.magicCharacterDAO.deleteMagic(entity);
+  }
+
+  Future<Failure?> updateOnlyCharacter({required Character entity}) {
+    return super.dataBase.characterDAO.updateOnlyCharacter(entity: entity);
   }
 }

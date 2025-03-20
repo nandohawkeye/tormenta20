@@ -1,3 +1,4 @@
+import 'package:tormenta20/src/shared/entities/character.dart';
 import 'package:tormenta20/src/shared/entities/entity_base.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_character.dart';
 
@@ -9,6 +10,7 @@ class Grimoire extends EntityBase {
   final DateTime updatedAt;
   final String iconAsset;
   final List<MagicCharacter> magicsCharacters;
+  final List<Character> characters;
 
   Grimoire({
     required this.uuid,
@@ -18,6 +20,7 @@ class Grimoire extends EntityBase {
     required this.updatedAt,
     required this.magicsCharacters,
     required this.iconAsset,
+    required this.characters,
   });
 
   @override
@@ -29,6 +32,7 @@ class Grimoire extends EntityBase {
       other.updatedAt == updatedAt &&
       other.uuid == uuid &&
       other.iconAsset == iconAsset &&
+      other.characters == characters &&
       other.magicsCharacters == magicsCharacters;
 
   @override
@@ -38,6 +42,7 @@ class Grimoire extends EntityBase {
       createdAt.hashCode ^
       updatedAt.hashCode ^
       uuid.hashCode ^
+      characters.hashCode ^
       magicsCharacters.hashCode ^
       iconAsset.hashCode;
 

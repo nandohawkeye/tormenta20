@@ -103,7 +103,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 14;
+  int get schemaVersion => 16;
 
   @override
   MigrationStrategy get migration {
@@ -206,6 +206,17 @@ class AppDatabase extends _$AppDatabase {
             if (from < 14) {
               await m.addColumn(characterTable, characterTable.aligmentIndex);
               await m.alterTable(TableMigration(characterTable));
+            }
+
+            if (from < 15) {
+              await m.alterTable(TableMigration(characterBoardTable));
+              await m.alterTable(TableMigration(characterTable));
+            }
+
+            if (from < 16) {
+              await m.addColumn(
+                  characterBoardTable, characterBoardTable.aligmentIndex);
+              await m.alterTable(TableMigration(characterBoardTable));
             }
           },
         );

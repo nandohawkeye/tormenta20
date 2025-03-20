@@ -1,5 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
+import 'package:tormenta20/src/shared/entities/character_adapters.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire_drift_dto.dart';
 import 'package:tormenta20/src/shared/entities/magic/magic_character.dart';
@@ -26,6 +27,7 @@ abstract class GrimoireAdapters {
       createdAt: DateTime.fromMillisecondsSinceEpoch(data.createdAt),
       updatedAt: DateTime.fromMillisecondsSinceEpoch(data.updatedAt),
       magicsCharacters: [],
+      characters: [],
     );
   }
 
@@ -41,6 +43,8 @@ abstract class GrimoireAdapters {
           DateTime.fromMillisecondsSinceEpoch(dto.grimoireData.updatedAt),
       magicsCharacters:
           dto.magicsData.map(MagicCharacterAdapters.fromDriftData).toList(),
+      characters:
+          dto.charactersData.map(CharacterAdapters.fromDriftData).toList(),
     );
   }
 
@@ -54,6 +58,7 @@ abstract class GrimoireAdapters {
       updatedAt: DateTime.now(),
       magicsCharacters: magicsCharacters,
       iconAsset: other.iconAsset,
+      characters: [],
     );
   }
 }

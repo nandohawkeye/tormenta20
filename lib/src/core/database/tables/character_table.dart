@@ -12,9 +12,6 @@ class CharacterTable extends Table {
   IntColumn get defense => integer()();
   IntColumn get life => integer()();
   IntColumn get mana => integer()();
-  IntColumn get fortResistence => integer()();
-  IntColumn get refResistence => integer()();
-  IntColumn get vonResistence => integer()();
   IntColumn get strength => integer()();
   IntColumn get dexterity => integer()();
   IntColumn get constitution => integer()();

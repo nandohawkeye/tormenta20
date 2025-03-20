@@ -85,21 +85,17 @@ class _MenaceScreenState extends State<MenaceScreen> {
       animation: _store,
       builder: (_, __) {
         final menace = _store.menace;
+        final tabIndex = _store.tabIndex;
+        final boards = _store.boards;
         return ScreenBase(
           label: '${menace.name} - ND ${menace.nd}',
           onSaveLabel: 'Opções',
           extraTopWidgets: [
             const Divider(),
             T20UI.spaceHeight,
-            AnimatedBuilder(
-              animation: _store,
-              builder: (_, __) {
-                final selected = _store.tabIndex;
-                return MenaceTabs(
-                  selected: selected,
-                  changeTabIndex: _store.changeTabIndex,
-                );
-              },
+            MenaceTabs(
+              selected: tabIndex,
+              changeTabIndex: _store.changeTabIndex,
             ),
             T20UI.spaceHeight,
           ],
@@ -130,31 +126,16 @@ class _MenaceScreenState extends State<MenaceScreen> {
                 value: menace.extraInfos,
                 textColor: palette.textSecundary,
               ),
-              MenaceBoardsField(_store),
-              AnimatedBuilder(
-                animation: _store,
-                builder: (_, __) {
-                  final index = _store.tabIndex;
-
-                  if (index == 0) {
-                    return MenaceActions(menace.actions);
-                  }
-
-                  if (index == 1) {
-                    return MenaceSkills(menace.generalSkills);
-                  }
-
-                  if (index == 2) {
-                    return MenaceMagics(menace.magics);
-                  }
-
-                  if (index == 3) {
-                    return MenaceEquipments(menace.equipments);
-                  }
-
-                  return MenaceExpertises(menace.expertises);
-                },
+              MenaceBoardsField(
+                _store,
+                menace: menace,
+                boards: boards,
               ),
+              if (tabIndex == 0) MenaceActions(menace.actions),
+              if (tabIndex == 1) MenaceSkills(menace.generalSkills),
+              if (tabIndex == 2) MenaceMagics(menace.magics),
+              if (tabIndex == 3) MenaceEquipments(menace.equipments),
+              if (tabIndex == 4) MenaceExpertises(menace.expertises),
               T20UI.spaceHeight,
             ],
           ),
@@ -162,21 +143,23 @@ class _MenaceScreenState extends State<MenaceScreen> {
             await BottomsheetUtils.show<MenaceOption?>(
               context: context,
               child: const MenaceOptionsBottomsheet(),
-            ).then((result) async {
-              if (result == MenaceOption.edit) {
-                callEdit(menace);
-              }
+            ).then(
+              (result) async {
+                if (result == MenaceOption.edit) {
+                  callEdit(menace);
+                }
 
-              if (result == MenaceOption.delete) {
-                callRemove();
-              }
+                if (result == MenaceOption.delete) {
+                  callRemove();
+                }
 
-              if (result == MenaceOption.clone) {
-                callClone(menace);
-              }
+                if (result == MenaceOption.clone) {
+                  callClone(menace);
+                }
 
-              if (result == MenaceOption.export) {}
-            });
+                if (result == MenaceOption.export) {}
+              },
+            );
           },
         );
       },

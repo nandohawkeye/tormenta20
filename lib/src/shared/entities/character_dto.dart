@@ -20,5 +20,7 @@ class CharacterDto {
   List<ShieldTableData> shields = [];
   List<WeaponTableData> weapons = [];
 
-  CharacterDto({required this.data});
+  List<CharacterBoardTableData> characterBoardsData = [];
+
+  CharacterDto(this.data);
 }
