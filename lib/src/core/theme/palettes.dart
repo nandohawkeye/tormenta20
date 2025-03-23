@@ -18,6 +18,7 @@ class PaletteBase {
     required this.cardBackground,
     required this.success,
     required this.primary,
+    required this.onPrimary,
     required this.secondary,
     required this.error,
     required this.textPrimary,
@@ -49,6 +50,7 @@ class PaletteBase {
   final Color success;
   final Color error;
   final Color primary;
+  final Color onPrimary;
   final Color accent;
   final Color onAccent;
   final Color secundaryCTA;
@@ -95,7 +97,8 @@ abstract class Palettes {
         secundaryCTA: Colors.transparent,
         onSecundaryCTA: const Color(0xFF000000),
         popMenu: const Color(0xFF262626),
-        primary: const Color(0xFFCC152A),
+        primary: const Color(0xFF7A0D19),
+        onPrimary: const Color(0xFFFFFFFF),
         secondary: const Color(0xFF262626),
         success: const Color(0xFF65C466),
         disable: const Color(0xFF5E6064),

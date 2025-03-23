@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/shared/extensions/string_ext.dart';
 
 abstract class CharacterAlignmentTypeUtils {
@@ -20,6 +22,16 @@ abstract class CharacterAlignmentTypeUtils {
       return 'Caótico e Maligno';
     } else {
       return value.capitalize().trim();
+    }
+  }
+
+  static IconData handleIcon(String value) {
+    if (value.contains('Maligno')) {
+      return FontAwesomeIcons.solidFaceAngry;
+    } else if (value.contains('Bondoso')) {
+      return FontAwesomeIcons.solidFaceLaughBeam;
+    } else {
+      return FontAwesomeIcons.solidFaceSmileWink;
     }
   }
 }

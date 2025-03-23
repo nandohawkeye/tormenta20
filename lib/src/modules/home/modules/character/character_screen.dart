@@ -3,10 +3,20 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/character/character_store.dart';
+import 'package:tormenta20/src/modules/home/modules/character/widgets/character_actions.dart';
+import 'package:tormenta20/src/modules/home/modules/character/widgets/character_atributes.dart';
+import 'package:tormenta20/src/modules/home/modules/character/widgets/character_boards/character_board_field.dart';
+import 'package:tormenta20/src/modules/home/modules/character/widgets/character_equipments.dart';
 import 'package:tormenta20/src/modules/home/modules/character/widgets/character_grimoire_button.dart';
 import 'package:tormenta20/src/modules/home/modules/character/widgets/character_header_image.dart';
 import 'package:tormenta20/src/modules/home/modules/character/widgets/character_header_infos.dart';
+import 'package:tormenta20/src/modules/home/modules/character/widgets/character_options_bottomsheet/character_options_bottomsheet.dart';
+import 'package:tormenta20/src/modules/home/modules/character/widgets/character_origins.dart';
+import 'package:tormenta20/src/modules/home/modules/character/widgets/character_powers.dart';
+import 'package:tormenta20/src/modules/home/modules/character/widgets/character_tabs/character_tabs.dart';
+import 'package:tormenta20/src/modules/home/modules/character/widgets/character_trained_expertises.dart';
 import 'package:tormenta20/src/shared/entities/character.dart';
+import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/screen_base.dart';
 
 class CharacterScreen extends StatefulWidget {
@@ -45,6 +55,8 @@ class _CharacterScreenState extends State<CharacterScreen> {
       builder: (_, __) {
         final character = _store.character;
         final grimoire = character.grimorie;
+        final tabIndexSelected = _store.tabIndex;
+        final boards = _store.boards;
         return ScreenBase(
           label: character.name,
           onSaveLabel: 'Opções',
@@ -54,21 +66,15 @@ class _CharacterScreenState extends State<CharacterScreen> {
                   T20UI.spaceWidth,
                 ]
               : [],
-          // extraTopWidgets: [
-          //   const Divider(),
-          //   T20UI.spaceHeight,
-          //   AnimatedBuilder(
-          //     animation: _store,
-          //     builder: (_, __) {
-          //       final selected = _store.tabIndex;
-          //       return MenaceTabs(
-          //         selected: selected,
-          //         changeTabIndex: _store.changeTabIndex,
-          //       );
-          //     },
-          //   ),
-          //   T20UI.spaceHeight,
-          // ],
+          extraTopWidgets: [
+            const Divider(),
+            T20UI.spaceHeight,
+            CharacterTabs(
+              selected: tabIndexSelected,
+              changeTabIndex: _store.changeTabIndex,
+            ),
+            T20UI.spaceHeight,
+          ],
           body: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,64 +91,46 @@ class _CharacterScreenState extends State<CharacterScreen> {
               T20UI.spaceHeight,
               const Divider(),
               T20UI.spaceHeight,
-              // Padding(
-              //   padding: T20UI.horizontallScreenPadding,
-              //   child: MenaceAtributes(menace),
-              // ),
+              Padding(
+                padding: T20UI.horizontallScreenPadding,
+                child: CharacterAtributes(character),
+              ),
               T20UI.spaceHeight,
               const Divider(),
-              // MenaceValidText(value: menace.desc),
-              // MenaceValidText(
-              //   value: menace.extraInfos,
-              //   textColor: palette.textSecundary,
-              // ),
-              // MenaceBoardsField(_store),
-              // AnimatedBuilder(
-              //   animation: _store,
-              //   builder: (_, __) {
-              //     final index = _store.tabIndex;
-
-              //     if (index == 0) {
-              //       return MenaceActions(menace.actions);
-              //     }
-
-              //     if (index == 1) {
-              //       return MenaceSkills(menace.generalSkills);
-              //     }
-
-              //     if (index == 2) {
-              //       return MenaceMagics(menace.magics);
-              //     }
-
-              //     if (index == 3) {
-              //       return MenaceEquipments(menace.equipments);
-              //     }
-
-              //     return MenaceExpertises(menace.expertises);
-              //   },
-              // ),
+              CharacterBoardField(
+                _store,
+                character: character,
+                boards: boards,
+              ),
+              if (tabIndexSelected == 0) CharacterActions(character.actions),
+              if (tabIndexSelected == 1)
+                CharacterEquipments(character.equipments),
+              if (tabIndexSelected == 2) CharacterPowers(character.powers),
+              if (tabIndexSelected == 3) CharacterOrigins(character.origins),
+              if (tabIndexSelected == 4)
+                CharacterTrainedExpertises(character.trainedExpertises),
               T20UI.spaceHeight,
             ],
           ),
           onSave: () async {
-            // await BottomsheetUtils.show<MenaceOption?>(
-            //   context: context,
-            //   child: const MenaceOptionsBottomsheet(),
-            // ).then((result) async {
-            //   if (result == MenaceOption.edit) {
-            //     callEdit(menace);
-            //   }
+            await BottomsheetUtils.show<CharacterOption?>(
+              context: context,
+              child: const CharacterOptionsBottomsheet(),
+            ).then((result) async {
+              // if (result == MenaceOption.edit) {
+              //   callEdit(menace);
+              // }
 
-            //   if (result == MenaceOption.delete) {
-            //     callRemove();
-            //   }
+              // if (result == MenaceOption.delete) {
+              //   callRemove();
+              // }
 
-            //   if (result == MenaceOption.clone) {
-            //     callClone(menace);
-            //   }
+              // if (result == MenaceOption.clone) {
+              //   callClone(menace);
+              // }
 
-            //   if (result == MenaceOption.export) {}
-            // });
+              // if (result == MenaceOption.export) {}
+            });
           },
         );
       },

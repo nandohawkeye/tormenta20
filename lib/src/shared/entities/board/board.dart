@@ -1,4 +1,3 @@
-import 'package:tormenta20/src/shared/entities/board/board_charcter.dart';
 import 'package:tormenta20/src/shared/entities/board/board_combat.dart';
 import 'package:tormenta20/src/shared/entities/board/board_note.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player.dart';
@@ -6,6 +5,7 @@ import 'package:tormenta20/src/shared/entities/board/board_session.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link.dart';
 import 'package:tormenta20/src/shared/entities/board/board_material.dart';
 import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
+import 'package:tormenta20/src/shared/entities/character_board.dart';
 import 'package:tormenta20/src/shared/entities/menace.dart';
 import 'package:tormenta20/src/shared/entities/menace_link_board.dart';
 
@@ -23,7 +23,7 @@ class Board {
   final List<BoardSession> sessions;
   final List<BoardCombat> combats;
   final List<BoardPlayer> players;
-  final List<BoardCharacter> characters;
+  final List<CharacterBoard> characters;
   final BoardModeType mode;
   final bool isFavorited;
   final List<BoardNote> notes;

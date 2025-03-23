@@ -7,8 +7,8 @@ import 'package:tormenta20/src/shared/widgets/bottom_sheet_base.dart';
 import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
-class MenaceOptionsBottomsheet extends StatelessWidget {
-  const MenaceOptionsBottomsheet({super.key});
+class CharacterOptionsBottomsheet extends StatelessWidget {
+  const CharacterOptionsBottomsheet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +34,24 @@ class MenaceOptionsBottomsheet extends StatelessWidget {
                   icon: FontAwesomeIcons.solidTrashCan,
                   title: 'Deletar',
                   subtitle:
-                      'Essa ação não tem volta e impactará as mesas que usam essa ameaça. Cuidado!',
+                      'Essa ação não tem volta, você não poderá adiciona-lo em novas mesas.',
                   onTap: () => Navigator.pop(
                     context,
-                    MenaceOption.delete,
+                    CharacterOption.delete,
+                  ),
+                ),
+              ),
+              T20UI.spaceHeight,
+              Padding(
+                padding: T20UI.horizontalPadding,
+                child: BottomSheetInitBoardItem(
+                  icon: FontAwesomeIcons.shareNodes,
+                  title: 'Compartilhar',
+                  subtitle:
+                      'Compartilhe o personagem para o mestre adicionar a mesa, facilite a vida dele :)',
+                  onTap: () => Navigator.pop(
+                    context,
+                    CharacterOption.export,
                   ),
                 ),
               ),
@@ -47,24 +61,11 @@ class MenaceOptionsBottomsheet extends StatelessWidget {
                 child: BottomSheetInitBoardItem(
                   icon: FontAwesomeIcons.fileArrowDown,
                   title: 'Salvar',
-                  subtitle: 'Exporte e salve essa ameaça em um local seguro',
-                  onTap: () => Navigator.pop(
-                    context,
-                    MenaceOption.export,
-                  ),
-                ),
-              ),
-              T20UI.spaceHeight,
-              Padding(
-                padding: T20UI.horizontalPadding,
-                child: BottomSheetInitBoardItem(
-                  icon: FontAwesomeIcons.peopleArrows,
-                  title: 'Clonar',
                   subtitle:
-                      'Copie essa ameaça para usar com outras caracteristicas ou em outra mesa',
+                      'Exporte e salve esse personagem em um local seguro',
                   onTap: () => Navigator.pop(
                     context,
-                    MenaceOption.clone,
+                    CharacterOption.save,
                   ),
                 ),
               ),
@@ -75,10 +76,10 @@ class MenaceOptionsBottomsheet extends StatelessWidget {
                   icon: FontAwesomeIcons.solidPenToSquare,
                   title: 'Editar',
                   subtitle:
-                      'Edite essa ameaça e seus detalhes para enfrentar seus jogadores',
+                      'Edite esse personagem e seus detalhes para enfrentar ameaças',
                   onTap: () => Navigator.pop(
                     context,
-                    MenaceOption.edit,
+                    CharacterOption.edit,
                   ),
                 ),
               ),
@@ -110,4 +111,4 @@ class MenaceOptionsBottomsheet extends StatelessWidget {
   }
 }
 
-enum MenaceOption { edit, clone, export, delete }
+enum CharacterOption { edit, save, export, delete }

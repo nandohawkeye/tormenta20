@@ -70,7 +70,7 @@ class CharacterHeaderInfos extends StatelessWidget {
             ),
             T20UI.spaceWidth,
             Icon(
-              FontAwesomeIcons.solidEye,
+              FontAwesomeIcons.personRays,
               size: 14,
               color: palette.textSecundary,
             ),
@@ -81,43 +81,6 @@ class CharacterHeaderInfos extends StatelessWidget {
               style: TextStyle(
                   color: palette.textSecundary, fontWeight: FontWeight.w500),
             ),
-          ],
-        ),
-        const SizedBox(height: 4),
-        Row(
-          children: [
-            // Icon(
-            //   FontAwesomeIcons.solidGem,
-            //   size: 14,
-            //   color: palette.textSecundary,
-            // ),
-            // const SizedBox(width: 4),
-            // Text(
-            //   TreasureTypeUtils.handleMenaceTitle(
-            //       character.treasures?.name ?? 'none'),
-            //   maxLines: 2,
-            //   style: TextStyle(
-            //       color: palette.textSecundary, fontWeight: FontWeight.w500),
-            // ),
-            // T20UI.spaceWidth,
-            if (character.displacement?.isNotEmpty ?? false)
-              Row(
-                children: [
-                  Icon(
-                    FontAwesomeIcons.personWalking,
-                    size: 14,
-                    color: palette.textSecundary,
-                  ),
-                  const SizedBox(width: 2),
-                  Text(
-                    character.displacement ?? '',
-                    maxLines: 2,
-                    style: TextStyle(
-                        color: palette.textSecundary,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ],
-              )
           ],
         ),
         if (character.senses?.isNotEmpty ?? false)
@@ -146,7 +109,8 @@ class CharacterHeaderInfos extends StatelessWidget {
           child: Row(
             children: [
               Icon(
-                FontAwesomeIcons.solidFaceLaughBeam,
+                CharacterAlignmentTypeUtils.handleIcon(
+                    character.alignmentType.name),
                 size: 14,
                 color: palette.textSecundary,
               ),
@@ -160,6 +124,29 @@ class CharacterHeaderInfos extends StatelessWidget {
               ),
             ],
           ),
+        ),
+        const SizedBox(height: 4),
+        Row(
+          children: [
+            if (character.displacement?.isNotEmpty ?? false)
+              Row(
+                children: [
+                  Icon(
+                    FontAwesomeIcons.personWalking,
+                    size: 14,
+                    color: palette.textSecundary,
+                  ),
+                  const SizedBox(width: 2),
+                  Text(
+                    character.displacement ?? '',
+                    maxLines: 2,
+                    style: TextStyle(
+                        color: palette.textSecundary,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
+              )
+          ],
         ),
       ],
     );
