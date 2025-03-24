@@ -46,6 +46,7 @@ class _SelectGrimorieScreenState extends State<SelectGrimorieScreen> {
         }
       },
       extraRightWidgets: [
+        T20UI.spaceWidth,
         SimpleButton(
           icon: FontAwesomeIcons.plus,
           iconColor: palette.icon,
@@ -65,7 +66,6 @@ class _SelectGrimorieScreenState extends State<SelectGrimorieScreen> {
             );
           },
         ),
-        T20UI.spaceWidth,
       ],
       body: AnimatedBuilder(
         animation: _store,

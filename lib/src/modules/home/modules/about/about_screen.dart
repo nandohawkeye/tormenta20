@@ -46,9 +46,9 @@ class _AboutScreenState extends State<AboutScreen> {
             child: PageView(
               onPageChanged: _store.changeCurrentPage,
               controller: _pageController,
-              children: [
-                const AboutScreenInfos(),
-                AboutSettings(_store),
+              children: const [
+                AboutScreenInfos(),
+                AboutSettings(),
               ],
             ),
           )

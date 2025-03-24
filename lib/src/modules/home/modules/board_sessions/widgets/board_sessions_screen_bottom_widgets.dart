@@ -70,7 +70,6 @@ class BoardSessionsScreenBottomWidgets extends StatelessWidget {
                           : createCloseSessionBottomsheet,
                     ),
                   ),
-                  T20UI.spaceWidth,
                   const SimpleCloseButton()
                 ],
               ),

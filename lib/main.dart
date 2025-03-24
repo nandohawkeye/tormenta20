@@ -8,6 +8,7 @@ import 'package:tormenta20/src/modules/home/modules/about/about_store.dart';
 import 'package:tormenta20/src/modules/home/modules/init/init_store.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/grimories_store.dart';
 import 'package:tormenta20/src/modules/splash/splash_screen.dart';
+import 'package:tormenta20/src/shared/config/config_store.dart';
 
 void main() {
   applyWorkaroundToOpenSqlite3OnOldAndroidVersions();
@@ -51,9 +52,11 @@ class _AppState extends State<App> with WidgetsBindingObserver {
     GetIt.I<AboutStore>().dispose();
     GetIt.I<InitStore>().dispose();
     GetIt.I<GrimoriesStore>().dispose();
+    GetIt.I<ConfigStore>().dispose();
     await GetIt.I.unregister<GrimoriesStore>();
     await GetIt.I.unregister<AboutStore>();
     await GetIt.I.unregister<InitStore>();
+    await GetIt.I.unregister<ConfigStore>();
   }
 
   @override

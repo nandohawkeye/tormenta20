@@ -34,7 +34,7 @@ class AddEditBoardShortcutCard extends StatelessWidget {
             borderRadius: T20UI.borderRadius,
             onTap: onTap,
             child: Padding(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.only(left: 12, top: 6, bottom: 6),
               child: Row(
                 children: [
                   type == BoardShortcutsType.whats
@@ -42,7 +42,7 @@ class AddEditBoardShortcutCard extends StatelessWidget {
                           padding: const EdgeInsets.only(right: 12, left: 6),
                           child: WhatsappSvgIcon(
                             size: 30,
-                            color: palette.selected,
+                            color: palette.icon,
                           ),
                         )
                       : Padding(
@@ -50,8 +50,8 @@ class AddEditBoardShortcutCard extends StatelessWidget {
                               const EdgeInsets.only(right: T20UI.spaceSize),
                           child: Icon(
                             BoardShortcutsUtils.handleIcon(type, url),
-                            size: 32,
-                            color: palette.selected,
+                            size: 30,
+                            color: palette.icon,
                           ),
                         ),
                   Expanded(
@@ -61,17 +61,15 @@ class AddEditBoardShortcutCard extends StatelessWidget {
                       children: [
                         Text(
                           BoardShortcutsUtils.handleLabel(type),
-                          style: TextStyle(
-                            fontFamily: FontFamily.tormenta,
-                            color: palette.accent,
-                          ),
+                          style: const TextStyle(
+                              fontFamily: FontFamily.tormenta, fontSize: 18),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           url,
                           style: TextStyle(
                             color: palette.textDisable,
-                            fontSize: 12,
+                            fontSize: 14,
                           ),
                         ),
                       ],
@@ -79,9 +77,10 @@ class AddEditBoardShortcutCard extends StatelessWidget {
                   ),
                   SimpleButton(
                     icon: FontAwesomeIcons.solidPenToSquare,
-                    backgroundColor: palette.selected,
-                    iconColor: palette.onSelected,
+                    backgroundColor: palette.backgroundLevelOne,
+                    iconColor: palette.selected,
                     onTap: onTap,
+                    iconSize: 18,
                   )
                 ],
               ),

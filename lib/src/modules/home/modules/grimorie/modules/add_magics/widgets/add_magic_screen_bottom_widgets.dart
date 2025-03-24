@@ -111,7 +111,6 @@ class AddMagicScreenBottomWidgets extends StatelessWidget {
                             Navigator.pop(context, store.selectedMagics),
                       ),
                     ),
-                    T20UI.spaceWidth,
                     SimpleCloseButton(backgroundColor: palette.cardBackground)
                   ],
                 )

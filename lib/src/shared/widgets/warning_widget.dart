@@ -26,7 +26,7 @@ class WarningWidget extends StatelessWidget {
           hasError ? 'É obrigatório!' : helpText ?? 'obrigatório',
           style: TextStyle(
             fontSize: 12,
-            color: hasError ? palette.accent : palette.textDisable,
+            color: hasError ? palette.accent : palette.textSecundary,
             fontWeight: hasError ? FontWeight.bold : FontWeight.w500,
           ),
         ),

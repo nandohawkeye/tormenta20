@@ -68,120 +68,105 @@ class _AddEditSelectedExpertiseBottomsheetState
     return PopScope(
       canPop: widget.expertiseUuid == null,
       child: BottomSheetBase(
-        child: Padding(
-          padding: T20UI.allPaddingWithPaddingBottom(context),
-          child: SizedBox(
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                  color: palette.backgroundLevelOne,
-                  borderRadius: T20UI.borderRadius),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                T20UI.spaceHeight,
+                Padding(
+                  padding: T20UI.horizontalPadding,
+                  child: Text(
+                    'Pericía',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: FontFamily.tormenta,
+                    ),
+                  ),
+                ),
+                T20UI.spaceHeight,
+              ],
+            ),
+            const DividerLevelTwo(verticalPadding: 0),
+            T20UI.spaceHeight,
+            Form(
+              key: _formKey,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      T20UI.spaceHeight,
-                      Padding(
-                        padding: T20UI.horizontalPadding,
-                        child: Text(
-                          'Pericía',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontFamily: FontFamily.tormenta,
-                          ),
-                        ),
-                      ),
-                      T20UI.spaceHeight,
-                    ],
-                  ),
-                  const DividerLevelTwo(verticalPadding: 0),
-                  T20UI.spaceHeight,
-                  Form(
-                    key: _formKey,
+                  Padding(
+                    padding: T20UI.horizontallScreenPadding,
                     child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: T20UI.horizontallScreenPadding,
-                          child: Column(
-                            children: [
-                              NameTextField(
-                                initialName: widget.expertiseBase?.name,
-                                fillColor: palette.backgroundLevelTwo,
-                                onchange: _setName,
-                              ),
-                              T20UI.spaceHeight,
-                              FinalValueTextfield(
-                                onchange: _setValue,
-                                isObrigatory: true,
-                                fillColor: palette.backgroundLevelTwo,
-                                initialValue: widget.valueFinal,
-                              ),
-                              T20UI.spaceHeight,
-                            ],
-                          ),
+                        NameTextField(
+                          initialName: widget.expertiseBase?.name,
+                          fillColor: palette.backgroundLevelTwo,
+                          onchange: _setName,
                         ),
-                        AddEditMenaceCreateExpertiseBottomsheetAtributeSelector(
-                          _atributeStore,
-                          cardColor: palette.backgroundLevelThree,
-                          bodyColor: palette.backgroundLevelTwo,
+                        T20UI.spaceHeight,
+                        FinalValueTextfield(
+                          onchange: _setValue,
+                          isObrigatory: true,
+                          fillColor: palette.backgroundLevelTwo,
+                          initialValue: widget.valueFinal,
                         ),
                         T20UI.spaceHeight,
                       ],
                     ),
                   ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const DividerLevelTwo(verticalPadding: 0),
-                      Padding(
-                        padding: T20UI.allPadding,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: MainButton(
-                                label: 'Salvar',
-                                onTap: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    final isValidate =
-                                        _atributeStore.validate();
-
-                                    if (!isValidate) return;
-
-                                    final expertise = Expertise(
-                                      id: widget.expertiseBase?.id ?? 0,
-                                      uuid: widget.expertiseUuid ??
-                                          const Uuid().v4(),
-                                      name: _name!,
-                                      atribute: _atributeStore.data!,
-                                      parentUuid: widget.parentUuid,
-                                      valueFinal: _value,
-                                      isTrained: false,
-                                    );
-
-                                    Navigator.pop(context, expertise);
-                                  }
-                                },
-                              ),
-                            ),
-                            T20UI.spaceWidth,
-                            SimpleCloseButton(
-                              backgroundColor: palette.backgroundLevelTwo,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  )
+                  AddEditMenaceCreateExpertiseBottomsheetAtributeSelector(
+                    _atributeStore,
+                    cardColor: palette.backgroundLevelThree,
+                    bodyColor: palette.backgroundLevelTwo,
+                  ),
+                  T20UI.spaceHeight,
                 ],
               ),
             ),
-          ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const DividerLevelTwo(verticalPadding: 0),
+                Padding(
+                  padding: T20UI.allPadding,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: MainButton(
+                          label: 'Salvar',
+                          onTap: () {
+                            if (_formKey.currentState!.validate()) {
+                              final isValidate = _atributeStore.validate();
+
+                              if (!isValidate) return;
+
+                              final expertise = Expertise(
+                                id: widget.expertiseBase?.id ?? 0,
+                                uuid: widget.expertiseUuid ?? const Uuid().v4(),
+                                name: _name!,
+                                atribute: _atributeStore.data!,
+                                parentUuid: widget.parentUuid,
+                                valueFinal: _value,
+                                isTrained: false,
+                              );
+
+                              Navigator.pop(context, expertise);
+                            }
+                          },
+                        ),
+                      ),
+                      const SimpleCloseButton()
+                    ],
+                  ),
+                ),
+              ],
+            )
+          ],
         ),
       ),
     );

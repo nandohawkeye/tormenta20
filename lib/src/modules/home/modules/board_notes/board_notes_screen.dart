@@ -157,7 +157,6 @@ class _BoardNotesScreenState extends State<BoardNotesScreen> {
                         );
                       },
                     ),
-                    T20UI.spaceWidth,
                     const SimpleCloseButton()
                   ],
                 ),

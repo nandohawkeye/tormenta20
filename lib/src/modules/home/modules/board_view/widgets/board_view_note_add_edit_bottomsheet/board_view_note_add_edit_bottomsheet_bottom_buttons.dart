@@ -47,7 +47,7 @@ class BoardViewNoteAddEditBottomsheetBottomButtons extends StatelessWidget {
                     child: DecoratedBox(
                       decoration: BoxDecoration(
                         borderRadius: T20UI.borderRadius,
-                        color: palette.backgroundLevelTwo,
+                        color: palette.backgroundLevelOne,
                       ),
                       child: Material(
                         color: Colors.transparent,
@@ -68,10 +68,7 @@ class BoardViewNoteAddEditBottomsheetBottomButtons extends StatelessWidget {
                   )
                 ],
               ),
-              T20UI.spaceWidth,
-              SimpleCloseButton(
-                backgroundColor: palette.backgroundLevelTwo,
-              )
+              const SimpleCloseButton()
             ],
           ),
         )

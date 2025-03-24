@@ -51,7 +51,7 @@ class _BottomSheetAddBoardLinkTitleFieldState
           validator: DefaultInputValidator.valid,
           decoration: InputDecoration(
             labelText: 'Título',
-            fillColor: palette.backgroundLevelTwo,
+            fillColor: palette.backgroundLevelOne,
             helperText: 'obrigatório',
             errorText: error,
           ),

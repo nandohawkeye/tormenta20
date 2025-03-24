@@ -27,7 +27,7 @@ class AddFieldBody extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(
               top: T20UI.smallSpaceSize,
-              left: T20UI.screenContentSpaceSize,
+              left: T20UI.screenContentSpaceSize - 6,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

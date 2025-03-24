@@ -33,7 +33,7 @@ class CharacterStore extends ChangeNotifier {
       }
     });
 
-    await _storageService.watchOnlyBoards().then((resp) {
+    await _storageService.watchOnlyBoardsToCharacters().then((resp) {
       if (resp.boards != null) {
         _subBoard ??= resp.boards!.listen((result) {
           changeBoards(result);
@@ -41,6 +41,8 @@ class CharacterStore extends ChangeNotifier {
       }
     });
   }
+
+  void deleteCharacter() => _storageService.deleteCharacter(_character);
 
   int _tabIndex = 0;
   int get tabIndex => _tabIndex;

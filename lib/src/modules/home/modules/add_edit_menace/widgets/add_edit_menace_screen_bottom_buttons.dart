@@ -44,8 +44,10 @@ class AddEditMenaceScreenBottomButtons extends StatelessWidget {
                       );
                     }),
               ),
-              T20UI.spaceWidth,
-              SimpleCloseButton(onTap: onBack)
+              SimpleCloseButton(
+                onTap: onBack,
+                isObrigatory: true,
+              )
             ],
           ),
         )

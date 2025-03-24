@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_note_add_edit_bottomsheet/board_view_note_add_edit_bottomsheet_bottom_buttons.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_note_add_edit_bottomsheet/board_view_note_add_edit_bottomsheet_header.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_note_add_edit_bottomsheet/board_view_note_add_edit_bottomsheet_note_field.dart';
@@ -45,72 +44,62 @@ class _BoardViewNoteAddEditBottomsheetState
   @override
   Widget build(BuildContext context) {
     return BottomSheetBase(
-      child: Padding(
-        padding: T20UI.allPaddingWithPaddingBottom(context),
-        child: SizedBox(
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-                color: palette.backgroundLevelOne,
-                borderRadius: T20UI.borderRadius),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const BoardViewNoteAddEditBottomsheetHeader(),
+          const DividerLevelTwo(verticalPadding: 0),
+          T20UI.spaceHeight,
+          Form(
+            key: _formKey,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const BoardViewNoteAddEditBottomsheetHeader(),
-                const DividerLevelTwo(verticalPadding: 0),
-                T20UI.spaceHeight,
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
+                Padding(
+                  padding: T20UI.horizontalPadding,
+                  child: Row(
                     children: [
-                      Padding(
-                        padding: T20UI.horizontalPadding,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: BoardViewNoteAddEditBottomsheetNoteField(
-                                onchange: _setNoteText,
-                                initialNote: widget.note?.note,
-                              ),
-                            ),
-                          ],
+                      Expanded(
+                        child: BoardViewNoteAddEditBottomsheetNoteField(
+                          onchange: _setNoteText,
+                          initialNote: widget.note?.note,
                         ),
                       ),
-                      T20UI.spaceHeight,
                     ],
                   ),
                 ),
-                ValueListenableBuilder(
-                  valueListenable: _isFavorited,
-                  builder: (_, isFavorited, __) {
-                    return BoardViewNoteAddEditBottomsheetBottomButtons(
-                      isFavorited: isFavorited,
-                      changeFavorited: _changeFavorited,
-                      onSave: () {
-                        if (_formKey.currentState!.validate()) {
-                          final updateAt = DateTime.now();
-
-                          final newNote = BoardNote(
-                              boardUuid: widget.boardUuid,
-                              uuid: widget.note?.uuid ?? const Uuid().v4(),
-                              note: _noteText!,
-                              isFavorited: _isFavorited.value,
-                              updatedAt: updateAt,
-                              createdAt: widget.note?.createdAt ?? updateAt);
-
-                          Navigator.pop(context, newNote);
-                        }
-                      },
-                    );
-                  },
-                )
+                T20UI.spaceHeight,
               ],
             ),
           ),
-        ),
+          ValueListenableBuilder(
+            valueListenable: _isFavorited,
+            builder: (_, isFavorited, __) {
+              return BoardViewNoteAddEditBottomsheetBottomButtons(
+                isFavorited: isFavorited,
+                changeFavorited: _changeFavorited,
+                onSave: () {
+                  if (_formKey.currentState!.validate()) {
+                    final updateAt = DateTime.now();
+
+                    final newNote = BoardNote(
+                        boardUuid: widget.boardUuid,
+                        uuid: widget.note?.uuid ?? const Uuid().v4(),
+                        note: _noteText!,
+                        isFavorited: _isFavorited.value,
+                        updatedAt: updateAt,
+                        createdAt: widget.note?.createdAt ?? updateAt);
+
+                    Navigator.pop(context, newNote);
+                  }
+                },
+              );
+            },
+          )
+        ],
       ),
     );
   }

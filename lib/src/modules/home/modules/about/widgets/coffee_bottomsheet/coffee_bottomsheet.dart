@@ -16,82 +16,70 @@ class CoffeeBottomsheet extends StatelessWidget {
     const String data =
         '00020126580014br.gov.bcb.pix0136c4c16641-24af-44cf-9b1c-b827e1ab49f05204000053039865802BR5916Luiz F D M Neves6009Arapiraca62290525RF2CX7ovB5cGdKdO9EK9jMhr763042233';
     return BottomSheetBase(
-      child: Padding(
-        padding: EdgeInsets.only(
-          left: T20UI.spaceSize,
-          right: T20UI.spaceSize,
-          bottom: MediaQuery.of(context).padding.bottom + T20UI.spaceSize,
-        ),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-              color: palette.backgroundLevelOne,
-              borderRadius: T20UI.borderRadius),
-          child: Column(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          T20UI.spaceHeight,
+          Text(
+            'Muito obrigado pelo cafezinho, TMJ!',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              fontFamily: FontFamily.tormenta,
+              color: palette.accent,
+            ),
+          ),
+          T20UI.spaceHeight,
+          Card(
+            color: Colors.white,
+            child: InkWell(
+              borderRadius: T20UI.borderRadius,
+              onTap: () async {
+                await Clipboard.setData(
+                  const ClipboardData(text: data),
+                );
+              },
+              child: Padding(
+                padding: T20UI.allPadding,
+                child: QrImageView(data: data, size: 160),
+              ),
+            ),
+          ),
+          T20UI.spaceHeight,
+          const SizedBox(
+            width: 200,
+            child: Text(
+              'Você pode escanear e também clicar pra copiar o pix copia e cola',
+              maxLines: 3,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          T20UI.spaceHeight,
+          Column(
             mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              T20UI.spaceHeight,
-              Text(
-                'Muito obrigado pelo cafezinho, TMJ!',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  fontFamily: FontFamily.tormenta,
-                  color: palette.accent,
-                ),
-              ),
-              T20UI.spaceHeight,
-              Card(
-                color: Colors.white,
-                child: InkWell(
-                  borderRadius: T20UI.borderRadius,
-                  onTap: () async {
-                    await Clipboard.setData(
-                      const ClipboardData(text: data),
-                    );
-                  },
-                  child: Padding(
-                    padding: T20UI.allPadding,
-                    child: QrImageView(data: data, size: 160),
-                  ),
-                ),
-              ),
-              T20UI.spaceHeight,
-              const SizedBox(
-                width: 200,
-                child: Text(
-                  'Você pode escanear e também clicar pra copiar o pix copia e cola',
-                  maxLines: 3,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              T20UI.spaceHeight,
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const DividerLevelTwo(verticalPadding: 0),
-                  Padding(
-                    padding: T20UI.allPadding,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: MainButton(
-                            label: 'Voltar',
-                            onTap: () => Navigator.pop(context),
-                          ),
-                        ),
-                      ],
+              const DividerLevelTwo(verticalPadding: 0),
+              Padding(
+                padding: T20UI.allPadding,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: MainButton(
+                        label: 'Voltar',
+                        onTap: () => Navigator.pop(context),
+                      ),
                     ),
-                  )
-                ],
+                  ],
+                ),
               )
             ],
-          ),
-        ),
+          )
+        ],
       ),
     );
   }

@@ -103,7 +103,8 @@ class GrimorieMagicCard extends StatelessWidget {
                   children: [
                     Text(
                       magic.name,
-                      style: const TextStyle(fontWeight: FontWeight.w500),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w500, fontSize: 16),
                     ),
                     const SizedBox(height: 4),
                     Text(

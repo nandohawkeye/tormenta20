@@ -185,7 +185,9 @@ class AddEditCharacterController {
   void changeDisplacment(String? value) => _displacement = value;
 
   Future<Character?> onSave() async {
-    if (!atributeDicesStore.validade()) return null;
+    if (!isEdit) {
+      if (!atributeDicesStore.validade()) return null;
+    }
 
     if (!classeStore.validate()) return null;
 

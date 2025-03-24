@@ -77,10 +77,7 @@ class ShowBoardMaterialsBottomsheetBottomWidgets extends StatelessWidget {
                   );
                 },
               ),
-              T20UI.spaceWidth,
-              SimpleCloseButton(
-                backgroundColor: palette.backgroundLevelTwo,
-              )
+              const SimpleCloseButton()
             ],
           ),
         )

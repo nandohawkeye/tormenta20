@@ -52,7 +52,7 @@ class _BottomSheetAddBoardLinkTitleFieldState
           decoration: InputDecoration(
             labelText: 'URL',
             errorText: error,
-            fillColor: palette.backgroundLevelTwo,
+            fillColor: palette.backgroundLevelOne,
             helperText: 'obrigatório',
           ),
         );

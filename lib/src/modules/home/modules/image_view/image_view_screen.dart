@@ -61,7 +61,6 @@ class ImageViewScreen extends StatelessWidget {
                       },
                     ),
                   ),
-                  T20UI.spaceWidth,
                   const SimpleCloseButton()
                 ],
               ),

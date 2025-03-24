@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/filter_magics/magic_filter_store.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
@@ -30,8 +29,7 @@ class MagicFilterBottomsheetBottomWidgets extends StatelessWidget {
                   },
                 ),
               ),
-              T20UI.spaceWidth,
-              SimpleCloseButton(backgroundColor: palette.backgroundLevelOne)
+              const SimpleCloseButton()
             ],
           ),
         ),

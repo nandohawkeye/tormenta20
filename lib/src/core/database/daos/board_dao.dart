@@ -541,11 +541,12 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
   }
 
   Future<({Failure? failure, Stream<List<Board>>? boards})>
-      watchOnlyBoards() async {
+      watchOnlyBoardsToCharacters() async {
     try {
       return (
         failure: null,
         boards: (select(boardTable)
+              ..where((tbl) => tbl.modeIndex.equals(1))
               ..addColumns([
                 boardTable.name,
                 boardTable.adventureName,

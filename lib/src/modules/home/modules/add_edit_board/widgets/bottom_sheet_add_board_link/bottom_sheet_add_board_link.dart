@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/bottom_sheet_add_board_link/bottom_sheet_add_board_link_header.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/bottom_sheet_add_board_link/bottom_sheet_add_board_link_main_buttons.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/bottom_sheet_add_board_link/bottom_sheet_add_board_link_title_field.dart';
@@ -43,69 +42,59 @@ class _BottomSheetAddBoardLinkState extends State<BottomSheetAddBoardLink> {
   @override
   Widget build(BuildContext context) {
     return BottomSheetBase(
-      child: Padding(
-        padding: T20UI.allPaddingWithPaddingBottom(context),
-        child: SizedBox(
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-                color: palette.backgroundLevelOne,
-                borderRadius: T20UI.borderRadius),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const BottomSheetAddBoardLinkHeader(),
+          const DividerLevelTwo(verticalPadding: 0),
+          T20UI.spaceHeight,
+          Form(
+            key: _formKey,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const BottomSheetAddBoardLinkHeader(),
-                const DividerLevelTwo(verticalPadding: 0),
-                T20UI.spaceHeight,
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
+                Padding(
+                  padding: T20UI.horizontalPadding,
+                  child: Row(
                     children: [
-                      Padding(
-                        padding: T20UI.horizontalPadding,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: BottomSheetAddBoardLinkTitleField(
-                                onchange: _setTitle,
-                                initialTitle: widget.link?.title,
-                              ),
-                            ),
-                            T20UI.spaceWidth,
-                            Expanded(
-                              child: BottomSheetAddBoardLinkURLField(
-                                onchange: _setURL,
-                                initialTitle: widget.link?.link,
-                              ),
-                            ),
-                          ],
+                      Expanded(
+                        child: BottomSheetAddBoardLinkTitleField(
+                          onchange: _setTitle,
+                          initialTitle: widget.link?.title,
                         ),
                       ),
-                      T20UI.spaceHeight,
+                      T20UI.spaceWidth,
+                      Expanded(
+                        child: BottomSheetAddBoardLinkURLField(
+                          onchange: _setURL,
+                          initialTitle: widget.link?.link,
+                        ),
+                      ),
                     ],
                   ),
                 ),
-                BottomSheetAddBoardLinkMainButtons(
-                  onSave: () {
-                    if (_formKey.currentState!.validate()) {
-                      final newLink = BoardLink(
-                        boardUuid: widget.boardUuid,
-                        uuid: widget.link?.uuid ?? const Uuid().v4(),
-                        title: _title!,
-                        link: _url!,
-                      );
-
-                      Navigator.pop(context, newLink);
-                    }
-                  },
-                )
+                T20UI.spaceHeight,
               ],
             ),
           ),
-        ),
+          BottomSheetAddBoardLinkMainButtons(
+            onSave: () {
+              if (_formKey.currentState!.validate()) {
+                final newLink = BoardLink(
+                  boardUuid: widget.boardUuid,
+                  uuid: widget.link?.uuid ?? const Uuid().v4(),
+                  title: _title!,
+                  link: _url!,
+                );
+
+                Navigator.pop(context, newLink);
+              }
+            },
+          )
+        ],
       ),
     );
   }

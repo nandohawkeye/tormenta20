@@ -114,7 +114,6 @@ class _PdfViewScreenState extends State<PdfViewScreen> {
                           await Share.shareXFiles([XFile(widget.path)]),
                     ),
                   ),
-                  T20UI.spaceWidth,
                   const SimpleCloseButton()
                 ],
               ),

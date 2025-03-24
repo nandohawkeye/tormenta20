@@ -14527,8 +14527,19 @@ class $ConfigTableTable extends ConfigTable
       defaultConstraints: GeneratedColumn.constraintIsAlways(
           'CHECK ("show_apresetation" IN (0, 1))'),
       defaultValue: const Constant(false));
+  static const VerificationMeta _enableBottomBackButtonMeta =
+      const VerificationMeta('enableBottomBackButton');
   @override
-  List<GeneratedColumn> get $columns => [id, modeIndex, showApresetation];
+  late final GeneratedColumn<bool> enableBottomBackButton =
+      GeneratedColumn<bool>('enable_bottom_back_button', aliasedName, false,
+          type: DriftSqlType.bool,
+          requiredDuringInsert: false,
+          defaultConstraints: GeneratedColumn.constraintIsAlways(
+              'CHECK ("enable_bottom_back_button" IN (0, 1))'),
+          defaultValue: const Constant(true));
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, modeIndex, showApresetation, enableBottomBackButton];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -14552,6 +14563,12 @@ class $ConfigTableTable extends ConfigTable
           showApresetation.isAcceptableOrUnknown(
               data['show_apresetation']!, _showApresetationMeta));
     }
+    if (data.containsKey('enable_bottom_back_button')) {
+      context.handle(
+          _enableBottomBackButtonMeta,
+          enableBottomBackButton.isAcceptableOrUnknown(
+              data['enable_bottom_back_button']!, _enableBottomBackButtonMeta));
+    }
     return context;
   }
 
@@ -14567,6 +14584,9 @@ class $ConfigTableTable extends ConfigTable
           .read(DriftSqlType.int, data['${effectivePrefix}mode_index'])!,
       showApresetation: attachedDatabase.typeMapping.read(
           DriftSqlType.bool, data['${effectivePrefix}show_apresetation'])!,
+      enableBottomBackButton: attachedDatabase.typeMapping.read(
+          DriftSqlType.bool,
+          data['${effectivePrefix}enable_bottom_back_button'])!,
     );
   }
 
@@ -14580,16 +14600,19 @@ class ConfigTableData extends DataClass implements Insertable<ConfigTableData> {
   final int id;
   final int modeIndex;
   final bool showApresetation;
+  final bool enableBottomBackButton;
   const ConfigTableData(
       {required this.id,
       required this.modeIndex,
-      required this.showApresetation});
+      required this.showApresetation,
+      required this.enableBottomBackButton});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
     map['mode_index'] = Variable<int>(modeIndex);
     map['show_apresetation'] = Variable<bool>(showApresetation);
+    map['enable_bottom_back_button'] = Variable<bool>(enableBottomBackButton);
     return map;
   }
 
@@ -14598,6 +14621,7 @@ class ConfigTableData extends DataClass implements Insertable<ConfigTableData> {
       id: Value(id),
       modeIndex: Value(modeIndex),
       showApresetation: Value(showApresetation),
+      enableBottomBackButton: Value(enableBottomBackButton),
     );
   }
 
@@ -14608,6 +14632,8 @@ class ConfigTableData extends DataClass implements Insertable<ConfigTableData> {
       id: serializer.fromJson<int>(json['id']),
       modeIndex: serializer.fromJson<int>(json['modeIndex']),
       showApresetation: serializer.fromJson<bool>(json['showApresetation']),
+      enableBottomBackButton:
+          serializer.fromJson<bool>(json['enableBottomBackButton']),
     );
   }
   @override
@@ -14617,14 +14643,21 @@ class ConfigTableData extends DataClass implements Insertable<ConfigTableData> {
       'id': serializer.toJson<int>(id),
       'modeIndex': serializer.toJson<int>(modeIndex),
       'showApresetation': serializer.toJson<bool>(showApresetation),
+      'enableBottomBackButton': serializer.toJson<bool>(enableBottomBackButton),
     };
   }
 
-  ConfigTableData copyWith({int? id, int? modeIndex, bool? showApresetation}) =>
+  ConfigTableData copyWith(
+          {int? id,
+          int? modeIndex,
+          bool? showApresetation,
+          bool? enableBottomBackButton}) =>
       ConfigTableData(
         id: id ?? this.id,
         modeIndex: modeIndex ?? this.modeIndex,
         showApresetation: showApresetation ?? this.showApresetation,
+        enableBottomBackButton:
+            enableBottomBackButton ?? this.enableBottomBackButton,
       );
   ConfigTableData copyWithCompanion(ConfigTableCompanion data) {
     return ConfigTableData(
@@ -14633,6 +14666,9 @@ class ConfigTableData extends DataClass implements Insertable<ConfigTableData> {
       showApresetation: data.showApresetation.present
           ? data.showApresetation.value
           : this.showApresetation,
+      enableBottomBackButton: data.enableBottomBackButton.present
+          ? data.enableBottomBackButton.value
+          : this.enableBottomBackButton,
     );
   }
 
@@ -14641,54 +14677,68 @@ class ConfigTableData extends DataClass implements Insertable<ConfigTableData> {
     return (StringBuffer('ConfigTableData(')
           ..write('id: $id, ')
           ..write('modeIndex: $modeIndex, ')
-          ..write('showApresetation: $showApresetation')
+          ..write('showApresetation: $showApresetation, ')
+          ..write('enableBottomBackButton: $enableBottomBackButton')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, modeIndex, showApresetation);
+  int get hashCode =>
+      Object.hash(id, modeIndex, showApresetation, enableBottomBackButton);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is ConfigTableData &&
           other.id == this.id &&
           other.modeIndex == this.modeIndex &&
-          other.showApresetation == this.showApresetation);
+          other.showApresetation == this.showApresetation &&
+          other.enableBottomBackButton == this.enableBottomBackButton);
 }
 
 class ConfigTableCompanion extends UpdateCompanion<ConfigTableData> {
   final Value<int> id;
   final Value<int> modeIndex;
   final Value<bool> showApresetation;
+  final Value<bool> enableBottomBackButton;
   const ConfigTableCompanion({
     this.id = const Value.absent(),
     this.modeIndex = const Value.absent(),
     this.showApresetation = const Value.absent(),
+    this.enableBottomBackButton = const Value.absent(),
   });
   ConfigTableCompanion.insert({
     this.id = const Value.absent(),
     this.modeIndex = const Value.absent(),
     this.showApresetation = const Value.absent(),
+    this.enableBottomBackButton = const Value.absent(),
   });
   static Insertable<ConfigTableData> custom({
     Expression<int>? id,
     Expression<int>? modeIndex,
     Expression<bool>? showApresetation,
+    Expression<bool>? enableBottomBackButton,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (modeIndex != null) 'mode_index': modeIndex,
       if (showApresetation != null) 'show_apresetation': showApresetation,
+      if (enableBottomBackButton != null)
+        'enable_bottom_back_button': enableBottomBackButton,
     });
   }
 
   ConfigTableCompanion copyWith(
-      {Value<int>? id, Value<int>? modeIndex, Value<bool>? showApresetation}) {
+      {Value<int>? id,
+      Value<int>? modeIndex,
+      Value<bool>? showApresetation,
+      Value<bool>? enableBottomBackButton}) {
     return ConfigTableCompanion(
       id: id ?? this.id,
       modeIndex: modeIndex ?? this.modeIndex,
       showApresetation: showApresetation ?? this.showApresetation,
+      enableBottomBackButton:
+          enableBottomBackButton ?? this.enableBottomBackButton,
     );
   }
 
@@ -14704,6 +14754,10 @@ class ConfigTableCompanion extends UpdateCompanion<ConfigTableData> {
     if (showApresetation.present) {
       map['show_apresetation'] = Variable<bool>(showApresetation.value);
     }
+    if (enableBottomBackButton.present) {
+      map['enable_bottom_back_button'] =
+          Variable<bool>(enableBottomBackButton.value);
+    }
     return map;
   }
 
@@ -14712,7 +14766,8 @@ class ConfigTableCompanion extends UpdateCompanion<ConfigTableData> {
     return (StringBuffer('ConfigTableCompanion(')
           ..write('id: $id, ')
           ..write('modeIndex: $modeIndex, ')
-          ..write('showApresetation: $showApresetation')
+          ..write('showApresetation: $showApresetation, ')
+          ..write('enableBottomBackButton: $enableBottomBackButton')
           ..write(')'))
         .toString();
   }
@@ -23902,12 +23957,14 @@ typedef $$ConfigTableTableCreateCompanionBuilder = ConfigTableCompanion
   Value<int> id,
   Value<int> modeIndex,
   Value<bool> showApresetation,
+  Value<bool> enableBottomBackButton,
 });
 typedef $$ConfigTableTableUpdateCompanionBuilder = ConfigTableCompanion
     Function({
   Value<int> id,
   Value<int> modeIndex,
   Value<bool> showApresetation,
+  Value<bool> enableBottomBackButton,
 });
 
 class $$ConfigTableTableTableManager extends RootTableManager<
@@ -23930,21 +23987,25 @@ class $$ConfigTableTableTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             Value<int> modeIndex = const Value.absent(),
             Value<bool> showApresetation = const Value.absent(),
+            Value<bool> enableBottomBackButton = const Value.absent(),
           }) =>
               ConfigTableCompanion(
             id: id,
             modeIndex: modeIndex,
             showApresetation: showApresetation,
+            enableBottomBackButton: enableBottomBackButton,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
             Value<int> modeIndex = const Value.absent(),
             Value<bool> showApresetation = const Value.absent(),
+            Value<bool> enableBottomBackButton = const Value.absent(),
           }) =>
               ConfigTableCompanion.insert(
             id: id,
             modeIndex: modeIndex,
             showApresetation: showApresetation,
+            enableBottomBackButton: enableBottomBackButton,
           ),
         ));
 }
@@ -23966,6 +24027,11 @@ class $$ConfigTableTableFilterComposer
       column: $state.table.showApresetation,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get enableBottomBackButton => $state.composableBuilder(
+      column: $state.table.enableBottomBackButton,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
 }
 
 class $$ConfigTableTableOrderingComposer
@@ -23983,6 +24049,11 @@ class $$ConfigTableTableOrderingComposer
 
   ColumnOrderings<bool> get showApresetation => $state.composableBuilder(
       column: $state.table.showApresetation,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get enableBottomBackButton => $state.composableBuilder(
+      column: $state.table.enableBottomBackButton,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }

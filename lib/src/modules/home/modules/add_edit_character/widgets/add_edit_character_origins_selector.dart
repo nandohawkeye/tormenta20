@@ -24,7 +24,7 @@ class AddEditCharacterOriginsSelector extends StatelessWidget {
         context: context,
         child: AddEditOriginBottomsheet(
           initialOrigin: origin,
-          parentUuid: '',
+          parentUuid: characterUuid,
         ),
       ).then(store.put);
     }

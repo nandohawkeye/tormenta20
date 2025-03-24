@@ -1,85 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/modules/home/modules/init/widgets/bottom_sheet_init_board/bottom_sheet_init_board_item.dart';
 import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
-import 'package:tormenta20/src/shared/widgets/bottom_sheet_base.dart';
-import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
-import 'package:tormenta20/src/shared/widgets/main_button.dart';
+import 'package:tormenta20/src/shared/widgets/options_bottomsheet_base/options_bottomsheet.dart';
+import 'package:tormenta20/src/shared/widgets/options_bottomsheet_base/options_bottomsheet_entity.dart';
 
 class BottomSheetInitBoard extends StatelessWidget {
   const BottomSheetInitBoard({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BottomSheetBase(
-      child: Padding(
-        padding: EdgeInsets.only(
-          left: T20UI.spaceSize,
-          right: T20UI.spaceSize,
-          bottom: MediaQuery.of(context).padding.bottom + T20UI.spaceSize,
+    return OptionsBottomsheet<BoardModeType>(
+      itens: [
+        OptionsBottomsheetEntity(
+          icon: FontAwesomeIcons.plus,
+          label: 'Criar',
+          mensage:
+              'Sou um mestre e quero criar uma mesa para me divertir com a galera!',
+          type: BoardModeType.master,
         ),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-              color: palette.backgroundLevelOne,
-              borderRadius: T20UI.borderRadius),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              T20UI.spaceHeight,
-              Padding(
-                padding: T20UI.horizontalPadding,
-                child: BottomSheetInitBoardItem(
-                  icon: FontAwesomeIcons.plus,
-                  title: 'Criar',
-                  subtitle:
-                      'Sou um mestre e quero criar uma mesa para me divertir com a galera',
-                  onTap: () => Navigator.pop(
-                    context,
-                    BoardModeType.master,
-                  ),
-                ),
-              ),
-              T20UI.spaceHeight,
-              Padding(
-                padding: T20UI.horizontalPadding,
-                child: BottomSheetInitBoardItem(
-                  icon: FontAwesomeIcons.solidFileCode,
-                  title: 'Vincular usando arquivo',
-                  subtitle:
-                      'Sou um jogador e quero me vincula a uma mesa usando um arquivo enviado',
-                  onTap: () => Navigator.pop(
-                    context,
-                    BoardModeType.player,
-                  ),
-                ),
-              ),
-              T20UI.spaceHeight,
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const DividerLevelTwo(verticalPadding: 0),
-                  Padding(
-                    padding: T20UI.allPadding,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: MainButton(
-                            label: 'Voltar',
-                            onTap: () => Navigator.pop(context),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
+        OptionsBottomsheetEntity(
+          icon: FontAwesomeIcons.solidFileCode,
+          label: 'Vincular usando arquivo',
+          mensage:
+              'Sou um jogador e quero me vincula a uma mesa usando um arquivo enviado',
+          type: BoardModeType.player,
         ),
-      ),
+      ],
     );
   }
 }

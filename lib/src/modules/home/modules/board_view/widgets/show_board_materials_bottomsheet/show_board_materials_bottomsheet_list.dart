@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_material_card.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/show_board_materials_bottomsheet/show_board_materials_bottomsheet_store.dart';
 import 'package:tormenta20/src/shared/widgets/screen_image_button.dart';
@@ -24,6 +25,7 @@ class ShowBoardMaterialsBottomsheetList extends StatelessWidget {
           return ScreenImageButton(
             imageAsset: Assets.images.pdf.path,
             borderRadius: BorderRadius.zero,
+            background: palette.background,
             title: 'Materiais',
             subtitle:
                 'Adicione arquivos de PDF e imagens para consultar rapidamente',

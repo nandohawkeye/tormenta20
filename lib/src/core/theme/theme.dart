@@ -131,7 +131,7 @@ final ThemeData theme = ThemeData(
     errorStyle: TextStyle(
         color: palette.accent, fontSize: 12, fontWeight: FontWeight.bold),
     helperStyle: TextStyle(
-      color: palette.textDisable,
+      color: palette.textSecundary,
       fontSize: 12,
       fontWeight: FontWeight.w500,
     ),

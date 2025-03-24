@@ -26,14 +26,20 @@ class AddEditCharacterWarning extends StatelessWidget {
           child: Row(
             children: [
               T20UI.smallSpaceWidth,
-              const Icon(FontAwesomeIcons.circleInfo),
+              Icon(
+                FontAwesomeIcons.circleInfo,
+                color: palette.textSecundary,
+              ),
               T20UI.spaceWidth,
               Flexible(
                   child: Text(
                 mensage,
                 maxLines: 10,
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: palette.textSecundary,
+                ),
               ))
             ],
           ),

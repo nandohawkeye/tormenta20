@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_character/add_edit_character.dart';
 import 'package:tormenta20/src/modules/home/modules/character/character_store.dart';
 import 'package:tormenta20/src/modules/home/modules/character/widgets/character_actions.dart';
 import 'package:tormenta20/src/modules/home/modules/character/widgets/character_atributes.dart';
@@ -15,6 +16,7 @@ import 'package:tormenta20/src/modules/home/modules/character/widgets/character_
 import 'package:tormenta20/src/modules/home/modules/character/widgets/character_powers.dart';
 import 'package:tormenta20/src/modules/home/modules/character/widgets/character_tabs/character_tabs.dart';
 import 'package:tormenta20/src/modules/home/modules/character/widgets/character_trained_expertises.dart';
+import 'package:tormenta20/src/modules/home/modules/character/widgets/delete_character_bottomsheet/delete_character_bottomsheet.dart';
 import 'package:tormenta20/src/shared/entities/character.dart';
 import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/screen_base.dart';
@@ -48,6 +50,26 @@ class _CharacterScreenState extends State<CharacterScreen> {
     super.dispose();
   }
 
+  void _callEdit(Character character) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => AddEditCharacter(initial: character),
+      ),
+    );
+  }
+
+  void _callRemove() async {
+    await BottomsheetUtils.show<bool?>(
+      context: context,
+      child: const DeleteCharacterBottomsheet(),
+    ).then((result) async {
+      if (result != null && result) {
+        _store.deleteCharacter();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -62,8 +84,8 @@ class _CharacterScreenState extends State<CharacterScreen> {
           onSaveLabel: 'Opções',
           extraRightWidgets: grimoire != null
               ? [
-                  CharacterGrimoireButton(grimoire),
                   T20UI.spaceWidth,
+                  CharacterGrimoireButton(grimoire),
                 ]
               : [],
           extraTopWidgets: [
@@ -117,19 +139,19 @@ class _CharacterScreenState extends State<CharacterScreen> {
               context: context,
               child: const CharacterOptionsBottomsheet(),
             ).then((result) async {
-              // if (result == MenaceOption.edit) {
-              //   callEdit(menace);
-              // }
+              if (result == CharacterOption.edit) {
+                _callEdit(character);
+              }
 
-              // if (result == MenaceOption.delete) {
-              //   callRemove();
-              // }
+              if (result == CharacterOption.delete) {
+                _callRemove();
+              }
 
-              // if (result == MenaceOption.clone) {
-              //   callClone(menace);
-              // }
+              if (result == CharacterOption.save) {
+                // callClone(menace);
+              }
 
-              // if (result == MenaceOption.export) {}
+              if (result == CharacterOption.export) {}
             });
           },
         );

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/widgets/default_brackdrop_filter.dart';
 
 class BottomSheetBase extends StatelessWidget {
@@ -13,7 +15,19 @@ class BottomSheetBase extends StatelessWidget {
         const DefaultBrackdropFilter(),
         Align(
           alignment: Alignment.bottomCenter,
-          child: child,
+          child: Padding(
+            padding: EdgeInsets.only(
+              left: T20UI.spaceSize,
+              right: T20UI.spaceSize,
+              bottom: MediaQuery.of(context).padding.bottom + T20UI.spaceSize,
+            ),
+            child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: palette.background,
+                  borderRadius: T20UI.borderRadius,
+                ),
+                child: child),
+          ),
         ),
       ],
     );

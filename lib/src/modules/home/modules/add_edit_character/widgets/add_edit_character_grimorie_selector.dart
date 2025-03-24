@@ -84,7 +84,7 @@ class _AddEditBoardPlayerBroodSelectorState
                       const Padding(
                         padding: EdgeInsets.only(
                           top: T20UI.smallSpaceSize,
-                          left: T20UI.screenContentSpaceSize,
+                          left: T20UI.screenContentSpaceSize - 6,
                           bottom: T20UI.smallSpaceSize,
                         ),
                         child: Text('Grimório'),

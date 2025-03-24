@@ -19,7 +19,7 @@ class DefaultBrackdropFilter extends StatelessWidget {
           child: GestureDetector(
             onTap: () => Navigator.pop(context),
             child: Container(
-              color: palette.accent.withValues(alpha: .1),
+              color: palette.accent.withValues(alpha: .15),
               height: context.height,
               width: context.width,
             ),

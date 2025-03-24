@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_general_skills_bottom_sheet/add_edit_general_skills_desc_textfield.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_general_skills_bottom_sheet/add_edit_general_skills_main_buttons.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_general_skills_bottom_sheet/add_edit_general_skills_title_textfield.dart';
@@ -44,82 +43,72 @@ class _AddEditGeneralSkillsBottomSheetState
   @override
   Widget build(BuildContext context) {
     return BottomSheetBase(
-      child: Padding(
-        padding: T20UI.allPaddingWithPaddingBottom(context),
-        child: SizedBox(
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-                color: palette.backgroundLevelOne,
-                borderRadius: T20UI.borderRadius),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              T20UI.spaceHeight,
+              Padding(
+                padding: T20UI.horizontalPadding,
+                child: Text(
+                  'Habilidade geral',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontFamily: FontFamily.tormenta,
+                  ),
+                ),
+              ),
+              T20UI.spaceHeight,
+            ],
+          ),
+          const DividerLevelTwo(verticalPadding: 0),
+          T20UI.spaceHeight,
+          Form(
+            key: _formKey,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    T20UI.spaceHeight,
-                    Padding(
-                      padding: T20UI.horizontalPadding,
-                      child: Text(
-                        'Habilidade geral',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: FontFamily.tormenta,
-                        ),
-                      ),
-                    ),
-                    T20UI.spaceHeight,
-                  ],
-                ),
-                const DividerLevelTwo(verticalPadding: 0),
-                T20UI.spaceHeight,
-                Form(
-                  key: _formKey,
+                Padding(
+                  padding: T20UI.horizontalPadding,
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: T20UI.horizontalPadding,
-                        child: Column(
-                          children: [
-                            AddEditGeneralSkillsTitleTextfield(
-                              onchange: _setTitle,
-                              initialTitle: widget.skill?.name,
-                            ),
-                            T20UI.spaceHeight,
-                            AddEditGeneralSkillsDescTextfield(
-                              onchange: _setDesc,
-                              initialDesc: widget.skill?.desc,
-                            ),
-                          ],
-                        ),
+                      AddEditGeneralSkillsTitleTextfield(
+                        onchange: _setTitle,
+                        initialTitle: widget.skill?.name,
                       ),
                       T20UI.spaceHeight,
+                      AddEditGeneralSkillsDescTextfield(
+                        onchange: _setDesc,
+                        initialDesc: widget.skill?.desc,
+                      ),
                     ],
                   ),
                 ),
-                AddEditGeneralSkillsMainButtons(
-                  onSave: () {
-                    if (_formKey.currentState!.validate()) {
-                      final newSkill = GeneralSkill(
-                        parentUuid: widget.menaceUuid,
-                        uuid: widget.skill?.uuid ?? const Uuid().v4(),
-                        name: _title!,
-                        desc: _desc!,
-                      );
-
-                      Navigator.pop(context, newSkill);
-                    }
-                  },
-                )
+                T20UI.spaceHeight,
               ],
             ),
           ),
-        ),
+          AddEditGeneralSkillsMainButtons(
+            onSave: () {
+              if (_formKey.currentState!.validate()) {
+                final newSkill = GeneralSkill(
+                  parentUuid: widget.menaceUuid,
+                  uuid: widget.skill?.uuid ?? const Uuid().v4(),
+                  name: _title!,
+                  desc: _desc!,
+                );
+
+                Navigator.pop(context, newSkill);
+              }
+            },
+          )
+        ],
       ),
     );
   }

@@ -53,7 +53,7 @@ class _BottomSheetAddBoardLinkTitleFieldState
           validator: DefaultInputValidator.valid,
           decoration: InputDecoration(
             hintText: 'Digite algo',
-            fillColor: palette.backgroundLevelTwo,
+            fillColor: palette.backgroundLevelOne,
             helperText: 'obrigatório',
             errorText: error,
           ),

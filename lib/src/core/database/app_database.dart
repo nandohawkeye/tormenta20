@@ -103,7 +103,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 16;
+  int get schemaVersion => 17;
 
   @override
   MigrationStrategy get migration {
@@ -218,6 +218,11 @@ class AppDatabase extends _$AppDatabase {
                   characterBoardTable, characterBoardTable.aligmentIndex);
               await m.alterTable(TableMigration(characterBoardTable));
             }
+
+            if (from < 17) {
+              await m.addColumn(
+                  configTable, configTable.enableBottomBackButton);
+            }
           },
         );
 
@@ -233,6 +238,11 @@ class AppDatabase extends _$AppDatabase {
       },
       beforeOpen: (details) async {
         await customStatement('PRAGMA foreign_keys = ON');
+        await customStatement('''
+        INSERT INTO config_table (id, mode_index, show_apresetation, enable_bottom_back_button)
+        SELECT 1, 0, false, true
+        WHERE NOT EXISTS (SELECT 1 FROM config_table WHERE id = 1);
+        ''');
       },
     );
   }

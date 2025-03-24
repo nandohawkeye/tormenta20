@@ -11,6 +11,7 @@ import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_vie
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_sessions.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_text_fields.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
+import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
 
 class BoardViewScreen extends StatefulWidget {
   const BoardViewScreen({super.key, required this.initial});
@@ -55,19 +56,22 @@ class _BoardViewScreenState extends State<BoardViewScreen> {
                     BoardViewBanner(board),
                     BoardViewTextFields(board),
                     const Divider(),
-                    BoardViewSessions(
-                      board,
-                      createCombat: _store.createCloseCombat,
-                    ),
-                    BoardViewPlayersField(
-                      board,
-                      saveBoardPlayer: _store.saveBoardPlayer,
-                      deleteBoardPlayer: _store.deleteBoardPlayer,
-                    ),
-                    BoardViewMenacesField(
-                      menaces,
-                      boardUuid: board.uuid,
-                    ),
+                    if (board.mode == BoardModeType.master)
+                      BoardViewSessions(
+                        board,
+                        createCombat: _store.createCloseCombat,
+                      ),
+                    if (board.mode == BoardModeType.master)
+                      BoardViewPlayersField(
+                        board,
+                        saveBoardPlayer: _store.saveBoardPlayer,
+                        deleteBoardPlayer: _store.deleteBoardPlayer,
+                      ),
+                    if (board.mode == BoardModeType.master)
+                      BoardViewMenacesField(
+                        menaces,
+                        boardUuid: board.uuid,
+                      ),
                     const SizedBox(height: 240)
                   ],
                 ),

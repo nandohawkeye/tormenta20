@@ -156,7 +156,7 @@ class AddCharacterAtributesFields extends StatelessWidget {
                   maxLines: 10,
                   style: TextStyle(
                     fontSize: 12,
-                    color: hasError ? palette.accent : palette.textPrimary,
+                    color: hasError ? palette.accent : palette.textSecundary,
                     fontWeight: FontWeight.w500,
                   ),
                 ),

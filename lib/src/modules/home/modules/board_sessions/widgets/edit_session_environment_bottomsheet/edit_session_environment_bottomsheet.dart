@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/board_sessions/widgets/edit_session_environment_bottomsheet/edit_session_environment_selector.dart';
 import 'package:tormenta20/src/modules/home/modules/board_sessions/widgets/edit_session_environment_bottomsheet/edit_session_environment_store.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session.dart';
@@ -42,81 +41,64 @@ class _AddEditSelectedExpertiseBottomsheetState
   @override
   Widget build(BuildContext context) {
     return BottomSheetBase(
-      child: Padding(
-        padding: T20UI.allPaddingWithPaddingBottom(context),
-        child: SizedBox(
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-                color: palette.backgroundLevelOne,
-                borderRadius: T20UI.borderRadius),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    T20UI.spaceHeight,
-                    Padding(
-                      padding: T20UI.horizontalPadding,
-                      child: Text(
-                        'Selecione o terreno',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: FontFamily.tormenta,
-                        ),
-                      ),
-                    ),
-                    T20UI.spaceHeight,
-                  ],
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              T20UI.spaceHeight,
+              Padding(
+                padding: T20UI.horizontalPadding,
+                child: Text(
+                  'Selecione o terreno',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontFamily: FontFamily.tormenta,
+                  ),
                 ),
-                const DividerLevelTwo(verticalPadding: 0),
-                T20UI.spaceHeight,
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    EditSessionEnvironmentSelector(
-                      _store,
-                      cardColor: palette.backgroundLevelThree,
-                      bodyColor: palette.backgroundLevelTwo,
-                    ),
-                    T20UI.spaceHeight,
-                  ],
-                ),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const DividerLevelTwo(verticalPadding: 0),
-                    Padding(
-                      padding: T20UI.allPadding,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: MainButton(
-                              label: 'Confirmar',
-                              onTap: () {
-                                final result = _store.data;
-
-                                Navigator.pop(context, result);
-                              },
-                            ),
-                          ),
-                          T20UI.spaceWidth,
-                          SimpleCloseButton(
-                            backgroundColor: palette.backgroundLevelTwo,
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
+              ),
+              T20UI.spaceHeight,
+            ],
           ),
-        ),
+          const DividerLevelTwo(verticalPadding: 0),
+          T20UI.spaceHeight,
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              EditSessionEnvironmentSelector(_store),
+              T20UI.spaceHeight,
+            ],
+          ),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const DividerLevelTwo(verticalPadding: 0),
+              Padding(
+                padding: T20UI.allPadding,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: MainButton(
+                        label: 'Confirmar',
+                        onTap: () {
+                          final result = _store.data;
+
+                          Navigator.pop(context, result);
+                        },
+                      ),
+                    ),
+                    const SimpleCloseButton()
+                  ],
+                ),
+              ),
+            ],
+          )
+        ],
       ),
     );
   }

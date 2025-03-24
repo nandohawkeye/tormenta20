@@ -144,6 +144,7 @@ class _GrimorieScreenState extends State<GrimorieScreen> {
             label: "Adicionar magias",
             onSave: addMagic,
             extraRightWidgets: [
+              T20UI.spaceWidth,
               SimpleButton(
                 icon: FontAwesomeIcons.bars,
                 iconColor: palette.icon,
@@ -183,7 +184,6 @@ class _GrimorieScreenState extends State<GrimorieScreen> {
                   });
                 },
               ),
-              T20UI.spaceWidth,
             ],
           ),
         ],

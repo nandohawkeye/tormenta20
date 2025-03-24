@@ -90,7 +90,6 @@ class _BoardCombatScreenState extends State<BoardCombatScreen> {
                             },
                           ),
                         ),
-                        T20UI.spaceWidth,
                         const SimpleCloseButton()
                       ],
                     ),

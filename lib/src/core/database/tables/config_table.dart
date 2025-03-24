@@ -5,6 +5,8 @@ class ConfigTable extends Table {
   IntColumn get modeIndex => integer().withDefault(const Constant(0))();
   BoolColumn get showApresetation =>
       boolean().withDefault(const Constant(false))();
+  BoolColumn get enableBottomBackButton =>
+      boolean().withDefault(const Constant(true))();
 
   @override
   Set<Column>? get primaryKey => {id};

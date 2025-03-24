@@ -13,6 +13,7 @@ import 'package:tormenta20/src/modules/home/modules/board_view/widgets/valid_cre
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/entities/board/board_combat_ext.dart';
+import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session_ext.dart';
 import 'package:tormenta20/src/shared/failures/failure.dart';
 import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
@@ -48,6 +49,15 @@ class BoardViewBottomWidgets extends StatelessWidget {
       });
     }
 
+    //TODO improve about boardModeType player later
+    final buttonLabel = board.mode == BoardModeType.master
+        ? (hasCombatInOpen
+            ? 'Ver combate'
+            : hasSessionOpen
+                ? 'Encerrar sessão'
+                : 'Iníciar sessão')
+        : 'Ficha';
+
     return Align(
       alignment: Alignment.bottomCenter,
       child: ColoredBox(
@@ -60,19 +70,16 @@ class BoardViewBottomWidgets extends StatelessWidget {
             BoardViewShortcuts(board),
             T20UI.spaceHeight,
             ScreenSaveMainButtons(
-              label: hasCombatInOpen
-                  ? 'Ver combate'
-                  : hasSessionOpen
-                      ? 'Encerrar sessão'
-                      : 'Iníciar sessão',
+              label: buttonLabel,
               extraRightWidgets: [
+                T20UI.spaceWidth,
                 SimpleButton(
                   icon: FontAwesomeIcons.bars,
                   iconColor: palette.icon,
                   onTap: () async {
                     BottomsheetUtils.show<BordViewOptionType?>(
                       context: context,
-                      child: const BoardViewOptionsBottomsheet(),
+                      child: BoardViewOptionsBottomsheet(board),
                     ).then((result) async {
                       if (result == BordViewOptionType.edit) {
                         Navigator.push(
@@ -108,7 +115,6 @@ class BoardViewBottomWidgets extends StatelessWidget {
                     });
                   },
                 ),
-                T20UI.spaceWidth,
               ],
               onSave:
                   hasCombatInOpen ? showCombat : createCloseSessionBottomsheet,

@@ -138,7 +138,7 @@ class _AddEditBoardBannerState extends State<AddEditBoardBanner> {
                       'Use uma imagem 16:9',
                       style: TextStyle(
                         fontSize: 12,
-                        color: palette.textDisable,
+                        color: palette.textSecundary,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

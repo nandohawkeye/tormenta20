@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
 
@@ -25,10 +24,7 @@ class AddEditBoardMainButtons extends StatelessWidget {
                   onTap: onSave,
                 ),
               ),
-              T20UI.spaceWidth,
-              SimpleCloseButton(
-                backgroundColor: palette.cardBackground,
-              )
+              const SimpleCloseButton()
             ],
           ),
         ),

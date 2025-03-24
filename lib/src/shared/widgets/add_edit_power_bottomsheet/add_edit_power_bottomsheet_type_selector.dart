@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/entities/power_type.dart';
 import 'package:tormenta20/src/shared/utils/power_type_utils.dart';
 import 'package:tormenta20/src/shared/widgets/add_edit_power_bottomsheet/add_edit_power_bottomsheet_type_store.dart';
@@ -18,8 +17,6 @@ class AddEditPowerBottomsheetTypeSelector extends StatelessWidget {
       itens: PowerType.values,
       store: store,
       isObrigatory: true,
-      bodyColor: palette.backgroundLevelTwo,
-      cardColor: palette.backgroundLevelThree,
     );
   }
 }

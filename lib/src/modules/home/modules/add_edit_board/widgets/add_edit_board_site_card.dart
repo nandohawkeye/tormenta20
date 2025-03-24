@@ -30,13 +30,14 @@ class AddEditBoardSiteCard extends StatelessWidget {
             borderRadius: T20UI.borderRadius,
             onTap: () => onSelect(link),
             child: Padding(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.only(
+                  left: T20UI.smallSpaceSize + 4, top: 6, bottom: 6),
               child: Row(
                 children: [
                   Icon(
                     FontAwesomeIcons.link,
-                    size: 32,
-                    color: palette.selected,
+                    size: 30,
+                    color: palette.icon,
                   ),
                   T20UI.spaceWidth,
                   Expanded(
@@ -46,17 +47,15 @@ class AddEditBoardSiteCard extends StatelessWidget {
                       children: [
                         Text(
                           link.title,
-                          style: TextStyle(
-                            fontFamily: FontFamily.tormenta,
-                            color: palette.accent,
-                          ),
+                          style: const TextStyle(
+                              fontFamily: FontFamily.tormenta, fontSize: 18),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           link.link,
                           style: TextStyle(
                             color: palette.textDisable,
-                            fontSize: 12,
+                            fontSize: 14,
                           ),
                         ),
                       ],
@@ -64,9 +63,10 @@ class AddEditBoardSiteCard extends StatelessWidget {
                   ),
                   SimpleButton(
                     icon: FontAwesomeIcons.solidTrashCan,
-                    backgroundColor: palette.selected,
-                    iconColor: palette.onSelected,
+                    backgroundColor: palette.backgroundLevelOne,
+                    iconColor: palette.selected,
                     onTap: () => onRemove(link),
+                    iconSize: 18,
                   )
                 ],
               ),

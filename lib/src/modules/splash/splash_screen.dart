@@ -6,6 +6,7 @@ import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/modules/home/home_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/init/init_store.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/grimories_store.dart';
+import 'package:tormenta20/src/shared/config/config_store.dart';
 import 'package:tormenta20/src/shared/widgets/app_logo.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -27,10 +28,11 @@ class _SplashScreenState extends State<SplashScreen> {
     getIt.registerSingleton<AppDatabase>(AppDatabase());
     getIt.registerSingleton<FilePicker>(FilePicker.platform);
 
-    getIt.registerSingletonAsync<GrimoriesStore>(
-        () async => GrimoriesStore().init());
+    getIt.registerSingletonAsync<ConfigStore>(ConfigStore().init);
 
-    getIt.registerSingletonAsync<InitStore>(() async => InitStore().init());
+    getIt.registerSingletonAsync<GrimoriesStore>(GrimoriesStore().init);
+
+    getIt.registerSingletonAsync<InitStore>(InitStore().init);
 
     await getIt.allReady();
 

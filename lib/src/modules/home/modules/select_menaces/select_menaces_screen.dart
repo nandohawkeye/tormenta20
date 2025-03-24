@@ -69,7 +69,7 @@ class _SelectMenacesScreenState extends State<SelectMenacesScreen> {
               ? []
               : [
                   Padding(
-                    padding: const EdgeInsets.only(right: T20UI.spaceSize),
+                    padding: const EdgeInsets.only(left: T20UI.spaceSize),
                     child: SimpleButton(
                       icon: FontAwesomeIcons.plus,
                       iconColor: palette.icon,

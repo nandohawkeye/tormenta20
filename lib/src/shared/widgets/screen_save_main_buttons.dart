@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
 
@@ -40,12 +39,8 @@ class ScreenSaveMainButtons extends StatelessWidget {
                   onTap: onSave,
                 ),
               ),
-              T20UI.spaceWidth,
               ...?extraRightWidgets,
-              SimpleCloseButton(
-                onTap: onBack,
-                backgroundColor: palette.backgroundLevelOne,
-              )
+              SimpleCloseButton(onTap: onBack)
             ],
           ),
         ),

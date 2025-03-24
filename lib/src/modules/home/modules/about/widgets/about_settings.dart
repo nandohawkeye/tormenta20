@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/modules/home/modules/about/about_store.dart';
+import 'package:tormenta20/src/modules/home/modules/about/widgets/about_back_button_switch.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_settings_backup_card.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_settings_selector_mode/about_settings_selector_mode.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 
 class AboutSettings extends StatelessWidget {
-  const AboutSettings(this.store, {super.key});
-
-  final AboutStore store;
+  const AboutSettings({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,13 +57,23 @@ class AboutSettings extends StatelessWidget {
           child: Labels('Modo'),
         ),
         T20UI.spaceHeight,
-        Padding(
+        const Padding(
           padding: T20UI.horizontallScreenPadding,
-          child: AboutSettingsSelectorMode(store),
+          child: AboutSettingsSelectorMode(),
         ),
-        SizedBox(
-          height: MediaQuery.of(context).padding.bottom + T20UI.spaceSize,
-        )
+        T20UI.spaceHeight,
+        const Divider(),
+        T20UI.spaceHeight,
+        const Padding(
+          padding: T20UI.horizontalPadding,
+          child: Labels('Botão de voltar'),
+        ),
+        T20UI.spaceHeight,
+        const Padding(
+          padding: T20UI.horizontallScreenPadding,
+          child: AboutBackButtonSwitch(),
+        ),
+        T20UI.safeAreaBottom(context)
       ],
     );
   }

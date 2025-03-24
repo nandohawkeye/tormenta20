@@ -9,7 +9,12 @@ class CharacterStorageService extends DriftStorageService {
     return super.dataBase.characterDAO.watchCharacter(uuid);
   }
 
-  Future<({Stream<List<Board>>? boards, Failure? failure})> watchOnlyBoards() {
-    return super.dataBase.boardDAO.watchOnlyBoards();
+  Future<void> deleteCharacter(Character entity) {
+    return super.dataBase.characterDAO.deleteCharacter(entity: entity);
+  }
+
+  Future<({Stream<List<Board>>? boards, Failure? failure})>
+      watchOnlyBoardsToCharacters() {
+    return super.dataBase.boardDAO.watchOnlyBoardsToCharacters();
   }
 }

@@ -52,7 +52,7 @@ class _BottomSheetBoardShortcutFieldState
 
     _animation = ColorTween(
       begin: palette.textPrimary,
-      end: palette.accent.withValues(alpha: .8),
+      end: palette.selected,
     ).animate(_controller);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -87,7 +87,7 @@ class _BottomSheetBoardShortcutFieldState
                   textCapitalization: TextCapitalization.none,
                   decoration: InputDecoration(
                     labelText: BoardShortcutsUtils.handleLabel(widget.type),
-                    fillColor: palette.backgroundLevelTwo,
+                    fillColor: palette.backgroundLevelOne,
                     suffixIcon: AnimatedBuilder(
                       animation: Listenable.merge([_url, _animation]),
                       builder: (_, __) {

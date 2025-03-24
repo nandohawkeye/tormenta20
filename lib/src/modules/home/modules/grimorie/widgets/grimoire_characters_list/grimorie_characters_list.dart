@@ -22,6 +22,7 @@ class GrimorieCharactersList extends StatelessWidget {
 
         return Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               height: T20UI.inputHeight,

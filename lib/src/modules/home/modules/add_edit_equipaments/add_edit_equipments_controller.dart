@@ -238,6 +238,8 @@ class AddEditEquipmentsController {
   int? _penalty;
   int? get penalty => _penalty;
   void changePenalty(String? value) {
+    if (value == '-') return;
+
     if (value?.isEmpty ?? true) {
       _penalty = null;
     } else {
