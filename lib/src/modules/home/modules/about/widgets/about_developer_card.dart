@@ -7,7 +7,6 @@ import 'package:tormenta20/src/modules/home/modules/about/widgets/about_develope
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_suggest_card.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/coffee_bottomsheet/coffee_bottomsheet.dart';
 import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
-import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 
 class AboutDeveloperCard extends StatelessWidget {
   const AboutDeveloperCard({super.key});
@@ -82,12 +81,10 @@ class AboutDeveloperCard extends StatelessWidget {
                 ),
               ),
             ),
-            const DividerLevelTwo(verticalPadding: 0),
             const AboutDeveloperCardLinks(),
-            const DividerLevelTwo(verticalPadding: 0),
-            T20UI.spaceHeight,
+            T20UI.smallSpaceHeight,
             const AboutSuggestCard(),
-            T20UI.spaceHeight,
+            T20UI.smallSpaceHeight,
           ],
         ),
       ),

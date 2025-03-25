@@ -12,7 +12,7 @@ class AboutPublisherCardLinks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: T20UI.allPadding,
+      padding: T20UI.allSmallPadding,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -21,11 +21,13 @@ class AboutPublisherCardLinks extends StatelessWidget {
             onTap: () async =>
                 await UrlUtils.lauch('https://www.twitch.tv/jamboeditora'),
           ),
+          T20UI.smallSpaceWidth,
           AboutSimpleLinkButton(
             icon: const Icon(FontAwesomeIcons.discord),
             onTap: () async =>
                 await UrlUtils.lauch('https://discord.gg/9DcyWYXR'),
           ),
+          T20UI.smallSpaceWidth,
           AboutSimpleLinkButton(
             icon: FittedBox(
               fit: BoxFit.scaleDown,
@@ -38,11 +40,13 @@ class AboutPublisherCardLinks extends StatelessWidget {
             onTap: () async =>
                 await UrlUtils.lauch('https://www.instagram.com/jamboeditora/'),
           ),
+          T20UI.smallSpaceWidth,
           AboutSimpleLinkButton(
             icon: const Icon(FontAwesomeIcons.facebookF),
             onTap: () async =>
                 await UrlUtils.lauch('https://www.facebook.com/jamboeditora'),
           ),
+          T20UI.smallSpaceWidth,
           AboutSimpleLinkButton(
             icon: const Icon(FontAwesomeIcons.youtube),
             onTap: () async => await UrlUtils.lauch(

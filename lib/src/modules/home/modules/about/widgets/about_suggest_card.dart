@@ -10,7 +10,7 @@ class AboutSuggestCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: T20UI.spaceSize),
+      padding: const EdgeInsets.symmetric(horizontal: T20UI.smallSpaceSize),
       child: Card(
         color: palette.selected,
         child: InkWell(
@@ -29,7 +29,7 @@ class AboutSuggestCard extends StatelessWidget {
                 T20UI.smallSpaceWidth,
                 Flexible(
                   child: Text(
-                    'Para sugestões, criticas e idéias, por favor aperte aqui!',
+                    'Para sugestões, criticas e idéias, por favor aperte aqui e compartilhar comigo!',
                     maxLines: 10,
                     style: TextStyle(
                       fontWeight: FontWeight.w500,

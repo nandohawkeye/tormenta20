@@ -14,7 +14,7 @@ class AboutDeveloperCardLinks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: T20UI.allPadding,
+      padding: T20UI.allSmallPadding,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -23,11 +23,13 @@ class AboutDeveloperCardLinks extends StatelessWidget {
             onTap: () async => await UrlUtils.lauch(
                 'https://play.google.com/store/apps/dev?id=7093741402026746463'),
           ),
+          T20UI.smallSpaceWidth,
           AboutSimpleLinkButton(
             icon: const Icon(FontAwesomeIcons.linkedinIn),
             onTap: () async => await UrlUtils.lauch(
                 'https://www.linkedin.com/in/luizfernando-de-m-neves'),
           ),
+          T20UI.smallSpaceWidth,
           AboutSimpleLinkButton(
             icon: FittedBox(
               fit: BoxFit.scaleDown,
@@ -40,11 +42,13 @@ class AboutDeveloperCardLinks extends StatelessWidget {
             onTap: () async => await UrlUtils.lauch(
                 'https://www.instagram.com/nando_magalhaes_'),
           ),
+          T20UI.smallSpaceWidth,
           AboutSimpleLinkButton(
             icon: const Icon(FontAwesomeIcons.github),
             onTap: () async =>
                 await UrlUtils.lauch('https://github.com/nandohawkeye'),
           ),
+          T20UI.smallSpaceWidth,
           AboutSimpleLinkButton(
             icon: const Padding(
               padding: EdgeInsets.only(left: 4),

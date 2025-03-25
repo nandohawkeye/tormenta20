@@ -5,7 +5,6 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_publisher_card_links.dart';
 import 'package:tormenta20/src/shared/utils/url_utils.dart';
-import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 
 class AboutPublisherCard extends StatelessWidget {
   const AboutPublisherCard({super.key});
@@ -76,7 +75,6 @@ class AboutPublisherCard extends StatelessWidget {
                 ),
               ),
             ),
-            const DividerLevelTwo(verticalPadding: 0),
             const AboutPublisherCardLinks(),
           ],
         ),
