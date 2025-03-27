@@ -12,10 +12,13 @@ import 'package:tormenta20/src/modules/home/modules/board_view/widgets/confirm_d
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/valid_create_close_session_bottomsheet/valid_create_close_session_bottomsheet.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
+import 'package:tormenta20/src/shared/entities/board/board_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_combat_ext.dart';
 import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session_ext.dart';
+import 'package:tormenta20/src/shared/extensions/string_ext.dart';
 import 'package:tormenta20/src/shared/failures/failure.dart';
+import 'package:tormenta20/src/shared/utils/backup_utils.dart';
 import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/screen_save_main_buttons.dart';
 
@@ -111,6 +114,19 @@ class BoardViewBottomWidgets extends StatelessWidget {
                           ...board.materials.map((m) => XFile(m.path)),
                           if (board.bannerPath != null) XFile(board.bannerPath!)
                         ]);
+                      }
+
+                      if (result == BordViewOptionType.json) {
+                        final data = BoardAdapters.toExportPlayer(board);
+
+                        if (data == null) return;
+
+                        final file = await BackupUtils.createTempJson(data,
+                            'mesa_${board.adventureName.toLowerCase().replaceAllDiacritics().trim()}_${board.name.toLowerCase().replaceAllDiacritics().trim()}_convite');
+
+                        if (file == null) return;
+
+                        Share.shareXFiles([XFile(file.path)]);
                       }
                     });
                   },

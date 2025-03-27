@@ -2,12 +2,13 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/modules/home/home_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/init/init_store.dart';
+import 'package:tormenta20/src/modules/home/modules/intro/intro_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/grimories_store.dart';
 import 'package:tormenta20/src/shared/config/config_store.dart';
-import 'package:tormenta20/src/shared/widgets/app_logo.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -20,39 +21,53 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _init();
+
+    _initDependencies();
   }
 
-  void _init() async {
-    GetIt getIt = GetIt.instance;
-    getIt.registerSingleton<AppDatabase>(AppDatabase());
-    getIt.registerSingleton<FilePicker>(FilePicker.platform);
+  void _initDependencies() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      GetIt getIt = GetIt.instance;
+      getIt.registerSingleton<AppDatabase>(AppDatabase());
 
-    getIt.registerSingletonAsync<ConfigStore>(ConfigStore().init);
+      getIt.registerSingletonAsync<ConfigStore>(ConfigStore().init);
 
-    getIt.registerSingletonAsync<GrimoriesStore>(GrimoriesStore().init);
+      await getIt.allReady();
 
-    getIt.registerSingletonAsync<InitStore>(InitStore().init);
+      final showApresetation = getIt<ConfigStore>().config?.showApresetation;
 
-    await getIt.allReady();
+      if (showApresetation == null) return;
 
-    await Future.delayed(const Duration(milliseconds: 500)).then(
-      (_) => Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (_) => const HomeScreen(),
-        ),
-      ),
-    );
+      if (showApresetation) {
+        getIt.registerSingleton<FilePicker>(FilePicker.platform);
+
+        getIt.registerSingletonAsync<PackageInfo>(PackageInfo.fromPlatform);
+
+        getIt.registerSingletonAsync<GrimoriesStore>(GrimoriesStore().init);
+
+        getIt.registerSingletonAsync<InitStore>(InitStore().init);
+
+        await getIt.allReady();
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => const HomeScreen(),
+          ),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => const IntroScreen(),
+          ),
+        );
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(toolbarHeight: 0, elevation: 0),
-      body: const Center(
-        child: AppLogo(width: 250),
-      ),
-    );
+    return const Material();
   }
 }

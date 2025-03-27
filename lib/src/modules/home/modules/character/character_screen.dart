@@ -147,10 +147,6 @@ class _CharacterScreenState extends State<CharacterScreen> {
                 _callRemove();
               }
 
-              if (result == CharacterOption.save) {
-                // callClone(menace);
-              }
-
               if (result == CharacterOption.export) {}
             });
           },

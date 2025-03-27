@@ -20,4 +20,13 @@ abstract class BoardLinkAdapters {
       title: data.title,
     );
   }
+
+  static Map<String, dynamic> toJson(BoardLink entity) {
+    return {
+      'uuid': entity.uuid,
+      'board_uuid': entity.boardUuid,
+      'title': entity.title,
+      'link': entity.link,
+    };
+  }
 }

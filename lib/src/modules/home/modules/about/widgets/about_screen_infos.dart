@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_developer_card.dart';
@@ -41,7 +43,7 @@ class AboutScreenInfos extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                'v1.0.0 - ${DateTime.now().year}',
+                'v${GetIt.I<PackageInfo>().version} - ${DateTime.now().year}',
                 style: TextStyle(
                   color: palette.textDisable,
                 ),

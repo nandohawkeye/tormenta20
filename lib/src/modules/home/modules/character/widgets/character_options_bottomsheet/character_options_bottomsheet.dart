@@ -25,12 +25,6 @@ class CharacterOptionsBottomsheet extends StatelessWidget {
           type: CharacterOption.export,
         ),
         OptionsBottomsheetEntity(
-          icon: FontAwesomeIcons.fileArrowDown,
-          label: 'Salvar',
-          mensage: 'Exporte e salve esse personagem em um local seguro',
-          type: CharacterOption.save,
-        ),
-        OptionsBottomsheetEntity(
           icon: FontAwesomeIcons.solidPenToSquare,
           label: 'Editar',
           mensage:
@@ -42,4 +36,4 @@ class CharacterOptionsBottomsheet extends StatelessWidget {
   }
 }
 
-enum CharacterOption { edit, save, export, delete }
+enum CharacterOption { edit, export, delete }

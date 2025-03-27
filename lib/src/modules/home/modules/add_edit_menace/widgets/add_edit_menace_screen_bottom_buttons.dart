@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/shared/widgets/animated_percent_circular_progress.dart';
@@ -46,7 +48,7 @@ class AddEditMenaceScreenBottomButtons extends StatelessWidget {
               ),
               SimpleCloseButton(
                 onTap: onBack,
-                isObrigatory: true,
+                isObrigatory: Platform.isIOS,
               )
             ],
           ),

@@ -7,7 +7,6 @@ import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link.dart';
 import 'package:tormenta20/src/shared/utils/url_utils.dart';
-import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 
 class BoardViewLinksCard extends StatelessWidget {
   const BoardViewLinksCard(
@@ -33,8 +32,10 @@ class BoardViewLinksCard extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              T20UI.smallSpaceHeight,
               Padding(
-                padding: T20UI.allPadding,
+                padding: const EdgeInsets.symmetric(
+                    horizontal: T20UI.smallSpaceSize + 4),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -64,9 +65,8 @@ class BoardViewLinksCard extends StatelessWidget {
                   ],
                 ),
               ),
-              const DividerLevelTwo(verticalPadding: 0),
               Padding(
-                padding: T20UI.allPadding,
+                padding: T20UI.allSmallPadding,
                 child: Row(
                   children: [
                     Expanded(
@@ -107,7 +107,7 @@ class BoardViewLinksCard extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),

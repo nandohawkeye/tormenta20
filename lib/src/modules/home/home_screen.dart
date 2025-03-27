@@ -10,7 +10,9 @@ import 'package:tormenta20/src/modules/home/modules/about/about_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/init/init_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/magics_screen.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
+import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/app_logo.dart';
+import 'package:tormenta20/src/shared/widgets/import_file_bottomsheet/import_file_bottomsheet.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, this.initialIndex = 0});
@@ -83,7 +85,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           icon: FontAwesomeIcons.solidFileCode,
                           backgroundColor: palette.background,
                           iconSize: 20,
-                          onTap: () async {},
+                          onTap: () async {
+                            BottomsheetUtils.show(
+                              context: context,
+                              child: const ImportFileBottomsheet(),
+                            );
+                          },
                         );
                       },
                     )

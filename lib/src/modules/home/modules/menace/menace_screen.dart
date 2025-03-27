@@ -156,8 +156,6 @@ class _MenaceScreenState extends State<MenaceScreen> {
                 if (result == MenaceOption.clone) {
                   callClone(menace);
                 }
-
-                if (result == MenaceOption.export) {}
               },
             );
           },

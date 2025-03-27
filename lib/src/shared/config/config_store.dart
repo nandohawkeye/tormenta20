@@ -7,7 +7,7 @@ class ConfigStore extends ChangeNotifier {
   final _storageService = ConfigStarageService();
 
   Future<ConfigStore> init() async {
-    _storageService.getConfig().then((resp) {
+    await _storageService.getConfig().then((resp) {
       _putConfig(resp.config);
     });
 
@@ -31,10 +31,10 @@ class ConfigStore extends ChangeNotifier {
     if (failure == null) _putConfig(upConfig);
   }
 
-  void markShowApresentation(PlayMode mode) async {
-    final upConfig = _config?.copyWithMarkedSee();
+  void markShowApresentation() async {
+    if (_config == null) return;
 
-    if (upConfig == null) return;
+    final upConfig = _config!.copyWithMarkedSee();
 
     final failure = await _storageService.updateConfig(upConfig);
 

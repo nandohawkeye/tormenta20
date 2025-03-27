@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
@@ -10,8 +12,9 @@ import 'package:tormenta20/src/modules/home/modules/magics/grimories_store.dart'
 import 'package:tormenta20/src/modules/splash/splash_screen.dart';
 import 'package:tormenta20/src/shared/config/config_store.dart';
 
-void main() {
+void main() async {
   applyWorkaroundToOpenSqlite3OnOldAndroidVersions();
+
   runApp(const App());
 }
 

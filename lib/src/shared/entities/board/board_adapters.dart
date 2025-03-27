@@ -1,4 +1,5 @@
 import 'package:drift/drift.dart';
+import 'package:flutter/foundation.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/entities/board/board_combat_adapters.dart';
@@ -9,8 +10,10 @@ import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
 import 'package:tormenta20/src/shared/entities/board/board_note_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session_adapters.dart';
+import 'package:tormenta20/src/shared/entities/export_import_type.dart';
 import 'package:tormenta20/src/shared/entities/menace_adapters.dart';
 import 'package:tormenta20/src/shared/entities/menace_link_board_adapters.dart';
+import 'package:tormenta20/src/shared/utils/export_import_utils.dart';
 
 abstract class BoardAdapters {
   static BoardTableCompanion toCompanion(Board entity) {
@@ -99,5 +102,58 @@ abstract class BoardAdapters {
       characters: [],
       sessions: sessions,
     );
+  }
+
+  static Map<String, dynamic>? toExportPlayer(Board entity) {
+    try {
+      var base = ExportImportUtils.toExportBase(ExportImportType.binding);
+
+      if (base == null) return null;
+
+      Map<String, dynamic> boardData = {
+        'uuid': entity.uuid,
+        'name': entity.name,
+        'adventure_name': entity.adventureName,
+        'level': entity.level ?? 1,
+        'mode_index': BoardModeType.player.index,
+      };
+
+      if (entity.desc?.isNotEmpty ?? false) {
+        boardData.addAll({'desc': entity.desc});
+      }
+
+      if (entity.whatsGroupLink?.isNotEmpty ?? false) {
+        boardData.addAll({'whats': entity.whatsGroupLink});
+      }
+
+      if (entity.telegramGroupLink?.isNotEmpty ?? false) {
+        boardData.addAll({'telegram': entity.telegramGroupLink});
+      }
+
+      if (entity.discordServerLink?.isNotEmpty ?? false) {
+        boardData.addAll({'discord': entity.discordServerLink});
+      }
+
+      if (entity.driveFilesLink?.isNotEmpty ?? false) {
+        boardData.addAll({'drive': entity.driveFilesLink});
+      }
+
+      if (entity.links.isNotEmpty) {
+        boardData.addAll(
+            {'links': entity.links.map(BoardLinkAdapters.toJson).toList()});
+      }
+
+      base.addAll({'board': boardData});
+
+      print('base: $base');
+
+      return base;
+    } catch (e) {
+      if (kDebugMode) {
+        print('error: $e');
+      }
+
+      return null;
+    }
   }
 }

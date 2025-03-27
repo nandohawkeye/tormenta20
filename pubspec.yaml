@@ -56,7 +56,10 @@ dependencies:
   qr_flutter: 4.1.0
   collection: 1.19.1
   receive_sharing_intent: 1.8.1
-  fl_chart: 0.69.0
+  package_info_plus: 8.1.1
+  animated_text_kit: 4.2.3
+  flutter_native_splash: 2.4.4
+  crypto: 3.0.6
 
   
   path: ^1.8.3
@@ -90,6 +93,25 @@ flutter_icons:
 
 # The following section is specific to Flutter packages.
 
+flutter_native_splash:
+  color: "#000000"
+  # image: assets/images/logo.png
+  android_12:
+    # The image parameter sets the splash screen icon image.  If this parameter is not specified,
+    # the app's launcher icon will be used instead.
+    # Please note that the splash screen will be clipped to a circle on the center of the screen.
+    # App icon with an icon background: This should be 960×960 pixels, and fit within a circle
+    # 640 pixels in diameter.
+    # App icon without an icon background: This should be 1152×1152 pixels, and fit within a circle
+    # 768 pixels in diameter.
+    #image: assets/android12splash.png
+
+    # Splash screen background color.
+    color: "#000000"
+
+  android_gravity: center
+
+
     
 flutter:
   uses-material-design: true
@@ -119,9 +141,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: medieval
+    - family: merriweathersans
       fonts:
-        - asset: assets/fonts/medieval.ttf
+        - asset: assets/fonts/merriweathersans.ttf
     - family: tormenta
       fonts:
         - asset: assets/fonts/Tormenta20.ttf
@@ -129,3 +151,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+  

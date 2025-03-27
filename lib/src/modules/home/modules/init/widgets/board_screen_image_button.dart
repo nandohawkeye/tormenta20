@@ -19,7 +19,7 @@ class BoardScreenImageButton extends StatelessWidget {
       imageAsset: Assets.images.knight.path,
       title: 'Mesas',
       subtitle:
-          'Crie ou se vincule a mesa de um mestre, e comece a se divertir com seus amigos!',
+          'Crie ou se vincule a uma mesa para se divertir com seus amigos!',
       onTap: () async {
         await BottomsheetUtils.show<BoardModeType?>(
           context: context,

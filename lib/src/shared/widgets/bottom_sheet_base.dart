@@ -14,19 +14,22 @@ class BottomSheetBase extends StatelessWidget {
       children: [
         const DefaultBrackdropFilter(),
         Align(
-          alignment: Alignment.bottomCenter,
-          child: Padding(
-            padding: EdgeInsets.only(
-              left: T20UI.spaceSize,
-              right: T20UI.spaceSize,
-              bottom: MediaQuery.of(context).padding.bottom + T20UI.spaceSize,
+          alignment: Alignment.bottomRight,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 600),
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: T20UI.spaceSize,
+                right: T20UI.spaceSize,
+                bottom: MediaQuery.of(context).padding.bottom + T20UI.spaceSize,
+              ),
+              child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: palette.background,
+                    borderRadius: T20UI.borderRadius,
+                  ),
+                  child: child),
             ),
-            child: DecoratedBox(
-                decoration: BoxDecoration(
-                  color: palette.background,
-                  borderRadius: T20UI.borderRadius,
-                ),
-                child: child),
           ),
         ),
       ],

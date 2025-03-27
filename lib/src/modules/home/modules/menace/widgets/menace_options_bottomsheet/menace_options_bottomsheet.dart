@@ -18,12 +18,6 @@ class MenaceOptionsBottomsheet extends StatelessWidget {
           type: MenaceOption.delete,
         ),
         OptionsBottomsheetEntity(
-          icon: FontAwesomeIcons.fileArrowDown,
-          label: 'Salvar',
-          mensage: 'Exporte e salve essa ameaça em um local seguro',
-          type: MenaceOption.export,
-        ),
-        OptionsBottomsheetEntity(
           icon: FontAwesomeIcons.peopleArrows,
           label: 'Clonar',
           mensage:
@@ -42,4 +36,4 @@ class MenaceOptionsBottomsheet extends StatelessWidget {
   }
 }
 
-enum MenaceOption { edit, clone, export, delete }
+enum MenaceOption { edit, clone, delete }
