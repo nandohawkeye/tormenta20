@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +42,10 @@ class _HomeScreenState extends State<HomeScreen> {
     _intentSub = ReceiveSharingIntent.instance.getMediaStream().listen(
         (List<SharedMediaFile> value) {
       if (kDebugMode) print('compartinhado app aberto: $value');
+
+      if (value.isNotEmpty) {
+        _opemBottomSheetImport(File(value.first.path));
+      }
     }, onError: (err) {
       if (kDebugMode) print("Erro ao receber arquivo: $err");
     });
@@ -49,6 +54,10 @@ class _HomeScreenState extends State<HomeScreen> {
         .getInitialMedia()
         .then((List<SharedMediaFile> value) {
       if (kDebugMode) print('compartinhado app ao abrir: $value');
+
+      if (value.isNotEmpty) {
+        _opemBottomSheetImport(File(value.first.path));
+      }
     });
   }
 
@@ -57,6 +66,15 @@ class _HomeScreenState extends State<HomeScreen> {
     _store.dispose();
     _intentSub.cancel();
     super.dispose();
+  }
+
+  void _opemBottomSheetImport([File? file]) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      BottomsheetUtils.show(
+        context: context,
+        child: ImportFileBottomsheet(initialFile: file),
+      );
+    });
   }
 
   @override
@@ -85,12 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           icon: FontAwesomeIcons.solidFileCode,
                           backgroundColor: palette.background,
                           iconSize: 20,
-                          onTap: () async {
-                            BottomsheetUtils.show(
-                              context: context,
-                              child: const ImportFileBottomsheet(),
-                            );
-                          },
+                          onTap: _opemBottomSheetImport,
                         );
                       },
                     )
