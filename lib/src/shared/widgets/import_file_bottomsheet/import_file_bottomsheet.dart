@@ -125,6 +125,7 @@ class _ImportFileBottomsheetState extends State<ImportFileBottomsheet> {
                                               : isValid == false
                                                   ? 'Não foi possível validar'
                                                   : title),
+                                          const SizedBox(height: 4),
                                           Text(
                                             '${file.path.split('/').last}',
                                             style: TextStyle(
@@ -149,7 +150,7 @@ class _ImportFileBottomsheetState extends State<ImportFileBottomsheet> {
                                   T20UI.spaceWidth,
                                   Flexible(
                                     child: Text(
-                                      'Selecione o arquivo que deseja importar.\nObs: ao selecionar um arquivo já exitente, as informações serão sobreecritas!',
+                                      'Selecione um arquivo .t20 que deseja importar.\n\nObs: ao selecionar um arquivo já exitente, as informações serão sobreecritas!',
                                       maxLines: 20,
                                     ),
                                   )

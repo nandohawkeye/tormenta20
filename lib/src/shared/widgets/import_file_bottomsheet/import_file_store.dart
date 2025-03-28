@@ -22,8 +22,9 @@ class ImportFileStore extends ChangeNotifier {
   void getFile() async {
     FilePickerResult? result = await GetIt.I<FilePicker>().pickFiles(
       allowMultiple: false,
-      type: FileType.custom,
-      allowedExtensions: ['.t20'],
+      type: FileType.any,
+      // type: FileType.custom,
+      // allowedExtensions: ['.t20'],
     );
 
     if (result?.paths.first != null) {
