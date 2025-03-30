@@ -1,10 +1,11 @@
 import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
+import 'package:tormenta20/src/shared/entities/board/board_adapters.dart';
 import 'package:tormenta20/src/shared/utils/backup_utils.dart';
 import 'package:tormenta20/src/shared/utils/crypto_utils.dart';
+import 'package:tormenta20/src/shared/widgets/import_file_bottomsheet/import_file_storage_service.dart';
 
 class ImportFileStore extends ChangeNotifier {
   ImportFileStore(File? initial) {
@@ -14,8 +15,12 @@ class ImportFileStore extends ChangeNotifier {
     }
   }
 
+  final _storageService = ImportFileStorageService();
+
   String _title = '';
   String get title => _title;
+
+  Map<String, dynamic>? _data;
 
   File? _file;
   File? get file => _file;
@@ -23,8 +28,6 @@ class ImportFileStore extends ChangeNotifier {
     FilePickerResult? result = await GetIt.I<FilePicker>().pickFiles(
       allowMultiple: false,
       type: FileType.any,
-      // type: FileType.custom,
-      // allowedExtensions: ['.t20'],
     );
 
     if (result?.paths.first != null) {
@@ -66,6 +69,7 @@ class ImportFileStore extends ChangeNotifier {
 
     if (json.containsKey('board')) {
       _title = 'Mesa';
+      _data = json['board'];
     }
 
     if (json.containsKey('board') && json['type'] == 1) {
@@ -74,9 +78,29 @@ class ImportFileStore extends ChangeNotifier {
 
     _isValid = true;
     notifyListeners();
-
-    print('json: $json');
   }
 
-  void import() {}
+  Future<bool> import() async {
+    final data = _data;
+    if (data == null) return false;
+
+    try {
+      if (_title.toLowerCase().contains('mesa')) {
+        final board = BoardAdapters.fronJson(data);
+        await _storageService.saveBoard(
+          board: board,
+          materialsToDelete: [],
+          linksToDelete: [],
+        );
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('error import file: $e');
+      }
+
+      return false;
+    }
+
+    return true;
+  }
 }

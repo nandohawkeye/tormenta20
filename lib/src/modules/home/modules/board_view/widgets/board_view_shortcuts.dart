@@ -14,38 +14,35 @@ class BoardViewShortcuts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: T20UI.horizontalPadding,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          if (board.telegramGroupLink != null)
-            BoardViewShortcutButton(
-              type: BoardShortcutsType.telegran,
-              url: board.telegramGroupLink,
-            ),
-          if (board.discordServerLink != null)
-            BoardViewShortcutButton(
-              type: BoardShortcutsType.discord,
-              url: board.discordServerLink,
-            ),
-          if (board.driveFilesLink != null)
-            BoardViewShortcutButton(
-              type: BoardShortcutsType.drive,
-              url: board.driveFilesLink,
-            ),
-          if (board.whatsGroupLink != null)
-            BoardViewShortcutButton(
-              type: BoardShortcutsType.whats,
-              url: board.whatsGroupLink,
-            ),
-          BordViewMaterialsButton(board: board),
-          const SizedBox(width: T20UI.smallSpaceSize),
-          BoardViewNotesButton(board: board),
-          const SizedBox(width: T20UI.smallSpaceSize),
-          BoardViewLinksButton(board: board),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        T20UI.spaceWidth,
+        if (board.telegramGroupLink != null)
+          BoardViewShortcutButton(
+            type: BoardShortcutsType.telegran,
+            url: board.telegramGroupLink,
+          ),
+        if (board.discordServerLink != null)
+          BoardViewShortcutButton(
+            type: BoardShortcutsType.discord,
+            url: board.discordServerLink,
+          ),
+        if (board.driveFilesLink != null)
+          BoardViewShortcutButton(
+            type: BoardShortcutsType.drive,
+            url: board.driveFilesLink,
+          ),
+        if (board.whatsGroupLink != null)
+          BoardViewShortcutButton(
+            type: BoardShortcutsType.whats,
+            url: board.whatsGroupLink,
+          ),
+        BordViewMaterialsButton(board: board),
+        BoardViewNotesButton(board: board),
+        BoardViewLinksButton(board: board),
+        const SizedBox(width: 4)
+      ],
     );
   }
 }

@@ -5,6 +5,8 @@ import 'package:tormenta20/src/modules/home/modules/about/widgets/about_back_but
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_settings_backup_card.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_settings_selector_mode/about_settings_selector_mode.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
+import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
+import 'package:tormenta20/src/shared/widgets/import_file_bottomsheet/import_file_bottomsheet.dart';
 
 class AboutSettings extends StatelessWidget {
   const AboutSettings({super.key});
@@ -46,7 +48,12 @@ class AboutSettings extends StatelessWidget {
             icon: FontAwesomeIcons.fileExport,
             title: 'Importar arquivo de backup',
             subtitle: 'Recupere seus arquivos salvos e comece a jogar!',
-            onTap: () {},
+            onTap: () {
+              BottomsheetUtils.show(
+                context: context,
+                child: const ImportFileBottomsheet(),
+              );
+            },
           ),
         ),
         T20UI.spaceHeight,

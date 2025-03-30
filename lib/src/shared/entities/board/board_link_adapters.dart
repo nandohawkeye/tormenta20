@@ -24,9 +24,17 @@ abstract class BoardLinkAdapters {
   static Map<String, dynamic> toJson(BoardLink entity) {
     return {
       'uuid': entity.uuid,
-      'board_uuid': entity.boardUuid,
       'title': entity.title,
       'link': entity.link,
     };
+  }
+
+  static BoardLink fromJson(Map<String, dynamic> data, String boardUuid) {
+    return BoardLink(
+      uuid: data['uuid'],
+      link: data['link'],
+      boardUuid: boardUuid,
+      title: data['title'],
+    );
   }
 }

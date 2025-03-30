@@ -8,6 +8,7 @@ import 'package:tormenta20/src/modules/home/modules/init/widgets/bottom_sheet_in
 import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
 import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
+import 'package:tormenta20/src/shared/widgets/import_file_bottomsheet/import_file_bottomsheet.dart';
 import 'package:tormenta20/src/shared/widgets/screen_image_button.dart';
 
 class BoardScreenImageButton extends StatelessWidget {
@@ -43,6 +44,11 @@ class BoardScreenImageButton extends StatelessWidget {
                     );
                   }
                 },
+              );
+            } else {
+              BottomsheetUtils.show(
+                context: context,
+                child: const ImportFileBottomsheet(),
               );
             }
           }

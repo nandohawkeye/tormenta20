@@ -4,6 +4,7 @@ import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/entities/board/board_combat_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_dto.dart';
+import 'package:tormenta20/src/shared/entities/board/board_link.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_materials_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
@@ -14,6 +15,7 @@ import 'package:tormenta20/src/shared/entities/export_import_type.dart';
 import 'package:tormenta20/src/shared/entities/menace_adapters.dart';
 import 'package:tormenta20/src/shared/entities/menace_link_board_adapters.dart';
 import 'package:tormenta20/src/shared/utils/export_import_utils.dart';
+import 'package:uuid/uuid.dart';
 
 abstract class BoardAdapters {
   static BoardTableCompanion toCompanion(Board entity) {
@@ -104,6 +106,44 @@ abstract class BoardAdapters {
     );
   }
 
+  static Board fronJson(Map<String, dynamic> data) {
+    String uuid = data['uuid'] ?? const Uuid().v4();
+    final now = DateTime.now();
+    List<BoardLink> links = [];
+    if (data.containsKey('links') && (data['links'] as List).isNotEmpty) {
+      links.addAll((data['links'] as List)
+          .map((link) => BoardLinkAdapters.fromJson(link, uuid)));
+    }
+
+    final board = Board(
+      uuid: uuid,
+      adventureName: data['adventure_name'],
+      name: data['name'],
+      createdAt: now,
+      updatedAt: now,
+      level: data['level'],
+      mode: BoardModeType.values[data['level'] ?? 0],
+      isFavorited: data['is_favorited'],
+      bannerPath: null,
+      desc: data['desc'],
+      whatsGroupLink: data['whats'],
+      telegramGroupLink: data['telegram'],
+      discordServerLink: data['discord'],
+      driveFilesLink: data['drive'],
+      links: links,
+      players: [],
+      materials: [],
+      notes: [],
+      combats: [],
+      menaces: [],
+      menacesLinkToBoard: [],
+      characters: [],
+      sessions: [],
+    );
+
+    return board;
+  }
+
   static Map<String, dynamic>? toExportPlayer(Board entity) {
     try {
       var base = ExportImportUtils.toExportBase(ExportImportType.binding);
@@ -111,11 +151,11 @@ abstract class BoardAdapters {
       if (base == null) return null;
 
       Map<String, dynamic> boardData = {
-        'uuid': entity.uuid,
         'name': entity.name,
         'adventure_name': entity.adventureName,
         'level': entity.level ?? 1,
         'mode_index': BoardModeType.player.index,
+        'is_favorited': false,
       };
 
       if (entity.desc?.isNotEmpty ?? false) {

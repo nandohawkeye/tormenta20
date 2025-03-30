@@ -22,21 +22,24 @@ class BoardViewLinksButton extends StatelessWidget {
     }
 
     return Expanded(
-      child: SizedBox(
-        height: T20UI.inputHeight,
-        child: Card(
-          color: Colors.transparent,
-          shape: RoundedRectangleBorder(
-            borderRadius: T20UI.borderRadius,
-            side: BorderSide(
-              color: palette.backgroundLevelOne,
-              width: 2,
+      child: Padding(
+        padding: const EdgeInsets.only(right: T20UI.smallSpaceSize),
+        child: SizedBox(
+          height: T20UI.inputHeight,
+          child: Card(
+            color: Colors.transparent,
+            shape: RoundedRectangleBorder(
+              borderRadius: T20UI.borderRadius,
+              side: BorderSide(
+                color: palette.backgroundLevelOne,
+                width: 2,
+              ),
             ),
-          ),
-          child: InkWell(
-            borderRadius: T20UI.borderRadius,
-            onTap: openLinks,
-            child: const Icon(FontAwesomeIcons.link),
+            child: InkWell(
+              borderRadius: T20UI.borderRadius,
+              onTap: openLinks,
+              child: const Icon(FontAwesomeIcons.link),
+            ),
           ),
         ),
       ),
