@@ -123,7 +123,7 @@ class _MagicSelectedState extends State<MagicSelected> {
                         MagicSelectedItem(
                           preffix: 'Alvo/Área/Efeito: ',
                           icon: FontAwesomeIcons.locationCrosshairs,
-                          text: widget.magic.targetAreaEfect,
+                          text: widget.magic.targetAreaEffect,
                         ),
                         MagicSelectedDesc(widget.magic.desc),
                         T20UI.safeAreaBottom(context, additionalHeight: 50),

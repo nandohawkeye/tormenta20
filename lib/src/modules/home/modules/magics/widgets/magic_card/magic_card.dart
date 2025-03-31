@@ -20,7 +20,7 @@ class MagicCard extends StatelessWidget {
         .replaceAllDiacritics()
         .contains((searchFilter.toLowerCase().replaceAllDiacritics()));
     final bool hasInTarget =
-        searchFilter.isEmpty ? false : compareText(magic.targetAreaEfect);
+        searchFilter.isEmpty ? false : compareText(magic.targetAreaEffect);
     final bool hasInDesc =
         searchFilter.isEmpty ? false : compareText(magic.desc);
     final bool hasInPublication =

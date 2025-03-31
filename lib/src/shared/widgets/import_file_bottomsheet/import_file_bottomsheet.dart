@@ -82,9 +82,7 @@ class _ImportFileBottomsheetState extends State<ImportFileBottomsheet> {
                         return const ImportFileBottomsheetFileEmptyCard();
                       },
                     ),
-                    ImportFileBottomsheetWarning(
-                      _store,
-                    )
+                    ImportFileBottomsheetWarning(_store)
                   ],
                 ),
               ),

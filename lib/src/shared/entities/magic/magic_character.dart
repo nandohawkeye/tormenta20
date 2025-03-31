@@ -2,7 +2,7 @@ import 'package:tormenta20/src/shared/entities/magic/magic.dart';
 
 class MagicCharacter extends Magic {
   final String uuid;
-  final String grimoireUUid;
+  final String grimoireUuid;
   final int? pm;
   final int? cd;
   final String? damageDices;
@@ -10,7 +10,7 @@ class MagicCharacter extends Magic {
   final int? mediumDamageValue;
   MagicCharacter({
     required this.uuid,
-    required this.grimoireUUid,
+    required this.grimoireUuid,
     required super.id,
     required super.name,
     required super.desc,
@@ -21,7 +21,7 @@ class MagicCharacter extends Magic {
     required super.duration,
     required super.range,
     required super.resistence,
-    required super.targetAreaEfect,
+    required super.targetAreaEffect,
     required super.publication,
     this.pm,
     this.cd,
@@ -39,7 +39,7 @@ class MagicCharacter extends Magic {
   }) {
     return MagicCharacter(
       uuid: uuid,
-      grimoireUUid: grimoireUUid,
+      grimoireUuid: grimoireUuid,
       id: id,
       name: name,
       desc: desc,
@@ -50,7 +50,7 @@ class MagicCharacter extends Magic {
       duration: duration,
       range: range,
       resistence: resistence,
-      targetAreaEfect: targetAreaEfect,
+      targetAreaEffect: targetAreaEffect,
       publication: publication,
       pm: pm ?? this.pm,
       cd: cd ?? this.cd,
@@ -72,10 +72,10 @@ class MagicCharacter extends Magic {
       other.duration == duration &&
       other.range == range &&
       other.resistence == resistence &&
-      other.targetAreaEfect == targetAreaEfect &&
+      other.targetAreaEffect == targetAreaEffect &&
       other.uuid == uuid &&
       other.id == id &&
-      other.grimoireUUid == grimoireUUid &&
+      other.grimoireUuid == grimoireUuid &&
       other.pm == pm &&
       other.cd == cd &&
       other.damageDices == damageDices &&
@@ -94,10 +94,10 @@ class MagicCharacter extends Magic {
       duration.hashCode ^
       range.hashCode ^
       resistence.hashCode ^
-      targetAreaEfect.hashCode ^
+      targetAreaEffect.hashCode ^
       id.hashCode ^
       uuid.hashCode ^
-      grimoireUUid.hashCode ^
+      grimoireUuid.hashCode ^
       publication.hashCode ^
       pm.hashCode ^
       cd.hashCode ^

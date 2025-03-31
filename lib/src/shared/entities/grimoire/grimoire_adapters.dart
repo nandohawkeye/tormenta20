@@ -48,6 +48,41 @@ abstract class GrimoireAdapters {
     );
   }
 
+  static Grimoire fromJson(Map<String, dynamic> data) {
+    final now = DateTime.now();
+    return Grimoire(
+      uuid: data['uuid'],
+      name: data['name'],
+      desc: data['desc'],
+      iconAsset: data['icon_asset'],
+      createdAt: now,
+      updatedAt: now,
+      magicsCharacters: [],
+      characters: [],
+    );
+  }
+
+  static Map<String, dynamic> toJson(Grimoire entity) {
+    List<Map<String, dynamic>> magicsData = [];
+    if (entity.magicsCharacters.isNotEmpty) {
+      magicsData
+          .addAll(entity.magicsCharacters.map(MagicCharacterAdapters.toJson));
+    }
+
+    Map<String, dynamic> data = {
+      'uuid': entity.uuid,
+      'name': entity.name,
+      'desc': entity.desc,
+      'icon_asset': entity.iconAsset,
+    };
+
+    if (magicsData.isNotEmpty) {
+      data.addAll({'magics': magicsData});
+    }
+
+    return data;
+  }
+
   static Grimoire copyWithNewMagics(
       Grimoire other, List<MagicCharacter> magicsCharacters) {
     return Grimoire(

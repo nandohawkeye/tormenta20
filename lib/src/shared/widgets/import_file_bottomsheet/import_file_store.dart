@@ -41,6 +41,9 @@ class ImportFileStore extends ChangeNotifier {
   bool? _isValid;
   bool? get isValid => _isValid;
 
+  bool _hasErrorImport = false;
+  bool get hasErrorImport => _hasErrorImport;
+
   void _validate(File file) async {
     final json = await BackupUtils.import(file);
 
@@ -84,6 +87,9 @@ class ImportFileStore extends ChangeNotifier {
     final data = _data;
     if (data == null) return false;
 
+    _hasErrorImport = false;
+    notifyListeners();
+
     try {
       if (_title.toLowerCase().contains('mesa')) {
         final board = BoardAdapters.fronJson(data);
@@ -98,6 +104,8 @@ class ImportFileStore extends ChangeNotifier {
         print('error import file: $e');
       }
 
+      _hasErrorImport = false;
+      notifyListeners();
       return false;
     }
 

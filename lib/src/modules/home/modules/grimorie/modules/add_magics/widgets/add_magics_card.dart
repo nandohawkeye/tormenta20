@@ -34,7 +34,7 @@ class AddMagicsCard extends StatelessWidget {
     final isDisable =
         multiSelect ? disabledMagics.any((m) => m.id == magic.id) : false;
     final bool hasInTarget =
-        searchFilter.isEmpty ? false : compareText(magic.targetAreaEfect);
+        searchFilter.isEmpty ? false : compareText(magic.targetAreaEffect);
     final bool hasInDesc =
         searchFilter.isEmpty ? false : compareText(magic.desc);
     final bool hasInPublication =

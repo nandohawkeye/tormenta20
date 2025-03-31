@@ -16,7 +16,7 @@ class Magic extends EntityBase {
   final MagicDuration duration;
   final MagicRange range;
   final String resistence;
-  final String targetAreaEfect;
+  final String targetAreaEffect;
   final int id;
   final String publication;
 
@@ -31,7 +31,7 @@ class Magic extends EntityBase {
     required this.duration,
     required this.range,
     required this.resistence,
-    required this.targetAreaEfect,
+    required this.targetAreaEffect,
     required this.publication,
   });
 
@@ -47,7 +47,7 @@ class Magic extends EntityBase {
       other.duration == duration &&
       other.range == range &&
       other.resistence == resistence &&
-      other.targetAreaEfect == targetAreaEfect &&
+      other.targetAreaEffect == targetAreaEffect &&
       other.id == id &&
       other.publication == publication;
 
@@ -62,7 +62,7 @@ class Magic extends EntityBase {
       duration.hashCode ^
       range.hashCode ^
       resistence.hashCode ^
-      targetAreaEfect.hashCode ^
+      targetAreaEffect.hashCode ^
       id.hashCode ^
       publication.hashCode;
 

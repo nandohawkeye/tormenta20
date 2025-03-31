@@ -18,6 +18,7 @@ abstract class ExportImportUtils {
         'sha_256': indentifier,
         'app_version': appversion,
         'type': type.index,
+        'created_at': DateTime.now().toUtc().toIso8601String(),
       };
     } catch (e) {
       if (kDebugMode) {

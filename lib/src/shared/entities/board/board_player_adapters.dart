@@ -48,4 +48,27 @@ abstract class BoardPlayerAdapters {
       initiative: data.initiative,
     );
   }
+
+  static BoardPlayer fromJson(Map<String, dynamic> data, String boardUuid) {
+    final classes = ClasseCharacterAdapters.fromString(data['classe_indexes']);
+    final now = DateTime.now();
+
+    return BoardPlayer(
+      playerName: data['player_name'],
+      uuid: data['uuid'],
+      boardUuid: boardUuid,
+      characterName: data['character_name'],
+      brood: Brood.values[data['brood_index']],
+      createdAt: now,
+      updatedAt: now,
+      classes: classes,
+      imageAsset: data['image_asset'],
+      imagePath: null,
+      life: data['life'],
+      mana: data['mana'],
+      defense: data['defense'],
+      isAlive: true,
+      initiative: data['initiative'],
+    );
+  }
 }

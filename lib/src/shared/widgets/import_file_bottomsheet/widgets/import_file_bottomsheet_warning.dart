@@ -13,14 +13,17 @@ class ImportFileBottomsheetWarning extends StatelessWidget {
       animation: store,
       builder: (_, __) {
         final isValid = store.isValid;
+        final hasErrorImport = store.hasErrorImport;
         return Padding(
           padding: const EdgeInsets.only(top: 8, left: 16),
           child: Text(
-            isValid == null
-                ? 'obrigatório'
-                : isValid == true
-                    ? 'tudo certo!'
-                    : 'arquivo inválido!',
+            hasErrorImport
+                ? 'Não foi possível importar'
+                : isValid == null
+                    ? 'obrigatório'
+                    : isValid == true
+                        ? 'tudo certo!'
+                        : 'arquivo inválido!',
             style: TextStyle(fontSize: 12, color: palette.textSecundary),
           ),
         );

@@ -28,7 +28,7 @@ class MagicsStore extends ChangeNotifier {
         (m) =>
             (_compareText(m.name) ||
                 _compareText(m.desc) ||
-                _compareText(m.targetAreaEfect) ||
+                _compareText(m.targetAreaEffect) ||
                 _compareText(m.publication)) &&
             (_typesSelecteds.isNotEmpty
                 ? _typesSelecteds.contains(m.type)
