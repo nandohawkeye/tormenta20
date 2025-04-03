@@ -36,4 +36,26 @@ abstract class BoardSessionAdapters {
       combats: dto.combats.map(BoardCombatAdapters.fromDriftData).toList(),
     );
   }
+
+  static Map<String, dynamic> toJson(BoardSession entity) {
+    return {
+      'uuid': entity.uuid,
+      'board_uuid': entity.boardUuid,
+      'started_at': entity.startedAt.toIso8601String(),
+      'end_at': entity.endAt?.toIso8601String(),
+      'environment_index': entity.environment?.index,
+    };
+  }
+
+  static BoardSession fromJson(Map<String, dynamic> data) {
+    final now = DateTime.now();
+    return BoardSession(
+      uuid: data['uuid'],
+      boardUuid: data['board_uuid'],
+      startedAt: DateTime.tryParse(data['started_at']) ?? now,
+      endAt: DateTime.tryParse(data['end_at']),
+      environment: SessionEnvironment.values[data['environment_index'] ?? 0],
+      combats: [],
+    );
+  }
 }

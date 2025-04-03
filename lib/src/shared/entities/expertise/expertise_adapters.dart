@@ -35,6 +35,32 @@ abstract class ExpertiseAdapters {
     );
   }
 
+  static Expertise fromJson(Map<String, dynamic> data) {
+    return Expertise(
+      id: data['id'],
+      name: data['name'],
+      atribute: Atribute.values[data['atribute_index']],
+      parentUuid: data['parent_uuid'],
+      uuid: data['uuid'],
+      isTrained: data['is_trained'],
+      bonus: data['bonus'],
+      valueFinal: data['value_final'],
+    );
+  }
+
+  static Map<String, dynamic> toJson(Expertise entity) {
+    return {
+      'id': entity.id,
+      'name': entity.name,
+      'atribute_index': entity.atribute.index,
+      'parent_uuid': entity.parentUuid,
+      'uuid': entity.uuid,
+      'is_trained': entity.isTrained,
+      'bonus': entity.bonus,
+      'value_final': entity.valueFinal,
+    };
+  }
+
   static ExpertiseTableCompanion toDriftCompanion(Expertise entity) {
     return ExpertiseTableCompanion(
       uuid: Value(entity.uuid),

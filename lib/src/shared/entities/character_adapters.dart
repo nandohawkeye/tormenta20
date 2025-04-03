@@ -126,6 +126,43 @@ abstract class CharacterAdapters {
     );
   }
 
+  static Character fromJson(Map<String, dynamic> data) {
+    final now = DateTime.now();
+    return Character(
+      uuid: data['uuid'],
+      alignmentType: CharacterAlignmentType.values[data['aligment_index']],
+      brood: Brood.values[data['brood_index']],
+      createdAt: DateTime.tryParse(data['created_at']) ?? now,
+      updatedAt: DateTime.tryParse(data['updated_at']) ?? now,
+      creatureSize: CreatureSizeCategory.values[data['creature_size_index']],
+      defense: data['defense'],
+      life: data['life'],
+      mana: data['mana'],
+      name: data['name'],
+      charisma: data['charisma'],
+      constitution: data['constitution'],
+      dexterity: data['dexterity'],
+      displacement: data['displacement'],
+      divinityId: data['divinity_id'],
+      imageAsset: data['image_asset'],
+      imagePath: null,
+      intelligence: data['intelligence'],
+      perception: data['perception'],
+      senses: data['senses'],
+      strength: data['strength'],
+      wisdom: data['wisdom'],
+      characterBoards: [],
+      trainedExpertises: TrainedExpertiseAdapters.fromString(
+          data['trained_expertises_indexes']),
+      grimorie: null,
+      classe: null,
+      powers: [],
+      origins: [],
+      equipments: [],
+      actions: [],
+    );
+  }
+
   static CharacterTableCompanion toDriftCompanion(Character entity) {
     return CharacterTableCompanion(
       uuid: Value(entity.uuid),

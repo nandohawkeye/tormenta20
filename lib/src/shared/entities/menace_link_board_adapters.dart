@@ -19,4 +19,20 @@ abstract class MenaceLinkBoardAdapters {
       boardUuid: Value(entity.boardUuid),
     );
   }
+
+  static Map<String, dynamic> toJson(MenaceLinkBoard entity) {
+    return {
+      'uuid': entity.uuid,
+      'menace_uuid': entity.menaceUuid,
+      'board_uuid': entity.boardUuid,
+    };
+  }
+
+  static MenaceLinkBoard fromJson(Map<String, dynamic> data) {
+    return MenaceLinkBoard(
+      uuid: data['uuid'],
+      menaceUuid: data['menace_uuid'],
+      boardUuid: data['board_uuid'],
+    );
+  }
 }

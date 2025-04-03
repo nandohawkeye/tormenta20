@@ -2,17 +2,22 @@ import 'package:drift/drift.dart';
 import 'package:flutter/foundation.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
+import 'package:tormenta20/src/shared/entities/board/board_combat.dart';
 import 'package:tormenta20/src/shared/entities/board/board_combat_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_dto.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link.dart';
 import 'package:tormenta20/src/shared/entities/board/board_link_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_materials_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
+import 'package:tormenta20/src/shared/entities/board/board_note.dart';
 import 'package:tormenta20/src/shared/entities/board/board_note_adapters.dart';
+import 'package:tormenta20/src/shared/entities/board/board_player.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player_adapters.dart';
+import 'package:tormenta20/src/shared/entities/board/board_session.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session_adapters.dart';
 import 'package:tormenta20/src/shared/entities/export_import_type.dart';
 import 'package:tormenta20/src/shared/entities/menace_adapters.dart';
+import 'package:tormenta20/src/shared/entities/menace_link_board.dart';
 import 'package:tormenta20/src/shared/entities/menace_link_board_adapters.dart';
 import 'package:tormenta20/src/shared/utils/export_import_utils.dart';
 import 'package:uuid/uuid.dart';
@@ -110,17 +115,47 @@ abstract class BoardAdapters {
     String uuid = data['uuid'] ?? const Uuid().v4();
     final now = DateTime.now();
     List<BoardLink> links = [];
+    List<BoardPlayer> players = [];
+    List<BoardNote> notes = [];
+    List<BoardCombat> combats = [];
+    List<BoardSession> sessions = [];
+    List<MenaceLinkBoard> menacesLinkToBoard = [];
     if (data.containsKey('links') && (data['links'] as List).isNotEmpty) {
       links.addAll((data['links'] as List)
           .map((link) => BoardLinkAdapters.fromJson(link, uuid)));
+    }
+
+    if (data.containsKey('players')) {
+      players.addAll((data['players'] as List)
+          .map((player) => BoardPlayerAdapters.fromJson(player)));
+    }
+
+    if (data.containsKey('notes')) {
+      notes.addAll((data['notes'] as List)
+          .map((note) => BoardNoteAdapters.fromJson(note)));
+    }
+
+    if (data.containsKey('combats')) {
+      combats.addAll((data['combats'] as List)
+          .map((combat) => BoardCombatAdapters.fromJson(combat)));
+    }
+
+    if (data.containsKey('sessions')) {
+      sessions.addAll((data['sessions'] as List)
+          .map((session) => BoardSessionAdapters.fromJson(session)));
+    }
+
+    if (data.containsKey('menace_links')) {
+      menacesLinkToBoard.addAll((data['menace_links'] as List)
+          .map((menaceLink) => MenaceLinkBoardAdapters.fromJson(menaceLink)));
     }
 
     final board = Board(
       uuid: uuid,
       adventureName: data['adventure_name'],
       name: data['name'],
-      createdAt: now,
-      updatedAt: now,
+      createdAt: DateTime.tryParse(data['created_at']) ?? now,
+      updatedAt: DateTime.tryParse(data['updated_at']) ?? now,
       level: data['level'],
       mode: BoardModeType.values[data['level'] ?? 0],
       isFavorited: data['is_favorited'],
@@ -131,14 +166,14 @@ abstract class BoardAdapters {
       discordServerLink: data['discord'],
       driveFilesLink: data['drive'],
       links: links,
-      players: [],
-      materials: [],
-      notes: [],
-      combats: [],
-      menaces: [],
-      menacesLinkToBoard: [],
+      players: players,
+      notes: notes,
+      combats: combats,
+      sessions: sessions,
+      menacesLinkToBoard: menacesLinkToBoard,
       characters: [],
-      sessions: [],
+      menaces: [],
+      materials: [],
     );
 
     return board;

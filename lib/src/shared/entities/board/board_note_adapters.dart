@@ -24,4 +24,27 @@ abstract class BoardNoteAdapters {
       updatedAt: Value<int>(entity.updatedAt.millisecondsSinceEpoch),
     );
   }
+
+  static Map<String, dynamic> toJson(BoardNote entity) {
+    return {
+      'uuid': entity.uuid,
+      'note': entity.note,
+      'created_at': entity.createdAt.toIso8601String(),
+      'updated_at': entity.updatedAt.toIso8601String(),
+      'board_uuid': entity.boardUuid,
+      'is_favorited': entity.isFavorited,
+    };
+  }
+
+  static BoardNote fromJson(Map<String, dynamic> data) {
+    final now = DateTime.now();
+    return BoardNote(
+      uuid: data['uuid'],
+      note: data['note'],
+      createdAt: DateTime.tryParse(data['created_at']) ?? now,
+      updatedAt: DateTime.tryParse(data['updated_at']) ?? now,
+      boardUuid: data['board_uuid'],
+      isFavorited: data['is_favorited'],
+    );
+  }
 }

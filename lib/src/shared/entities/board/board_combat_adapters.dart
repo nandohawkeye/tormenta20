@@ -24,4 +24,27 @@ abstract class BoardCombatAdapters {
       endAt: data.endAt,
     );
   }
+
+  static Map<String, dynamic> toJson(BoardCombat entity) {
+    return {
+      'uuid': entity.uuid,
+      'board_uuid': entity.boardUuid,
+      'session_uuid': entity.sessionUuid,
+      'turn': entity.turn,
+      'started_at': entity.startedAt.toIso8601String(),
+      'end_at': entity.endAt?.toIso8601String(),
+    };
+  }
+
+  static BoardCombat fromJson(Map<String, dynamic> data) {
+    final now = DateTime.now();
+    return BoardCombat(
+      uuid: data['uuid'],
+      sessionUuid: data['session_uuid'],
+      boardUuid: data['board_uuid'],
+      startedAt: DateTime.tryParse(data['started_at']) ?? now,
+      turn: data['turn'],
+      endAt: DateTime.tryParse(data['end_at']),
+    );
+  }
 }

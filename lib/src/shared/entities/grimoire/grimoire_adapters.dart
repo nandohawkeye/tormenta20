@@ -49,7 +49,15 @@ abstract class GrimoireAdapters {
   }
 
   static Grimoire fromJson(Map<String, dynamic> data) {
+    List<MagicCharacter> magicsCharacters = [];
+
+    if (data.containsKey('magics')) {
+      magicsCharacters.addAll((data['magics'] as List)
+          .map((magic) => MagicCharacterAdapters.fromJson(magic)));
+    }
+
     final now = DateTime.now();
+
     return Grimoire(
       uuid: data['uuid'],
       name: data['name'],
@@ -57,7 +65,7 @@ abstract class GrimoireAdapters {
       iconAsset: data['icon_asset'],
       createdAt: now,
       updatedAt: now,
-      magicsCharacters: [],
+      magicsCharacters: magicsCharacters,
       characters: [],
     );
   }

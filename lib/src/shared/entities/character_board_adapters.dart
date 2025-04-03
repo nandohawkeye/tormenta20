@@ -73,4 +73,71 @@ abstract class CharacterBoardAdapters {
       wisdom: Value(entity.wisdom ?? 0),
     );
   }
+
+  static CharacterBoard fromJson(Map<String, dynamic> data) {
+    final now = DateTime.now();
+    return CharacterBoard(
+      uuid: data['uuid'],
+      parentuuid: data['parent_uuid'],
+      boardUuid: data['board_uuid'],
+      isAlive: data['is_alive'],
+      alignmentType: CharacterAlignmentType.values[data['aligment_index']],
+      brood: Brood.values[data['brood_index']],
+      createdAt: DateTime.tryParse(data['created_at']) ?? now,
+      updatedAt: DateTime.tryParse(data['updated_at']) ?? now,
+      creatureSize: CreatureSizeCategory.values[data['creature_size_index']],
+      defense: data['defense'],
+      life: data['life'],
+      mana: data['mana'],
+      name: data['name'],
+      charisma: data['charisma'],
+      constitution: data['constitution'],
+      dexterity: data['dexterity'],
+      displacement: data['displacement'],
+      divinityId: data['divinity_id'],
+      imageAsset: data['image_asset'],
+      imagePath: null,
+      intelligence: data['intelligence'],
+      perception: data['perception'],
+      senses: data['senses'],
+      strength: data['strength'],
+      wisdom: data['wisdom'],
+      expertises: [],
+      grimorie: null,
+      classes: [],
+      powers: [],
+      origins: [],
+      equipments: [],
+      actions: [],
+    );
+  }
+
+  static Map<String, dynamic> toJson(CharacterBoard entity) {
+    return {
+      'uuid': entity.uuid,
+      'parent_uuid': entity.parentuuid,
+      'board_uuid': entity.boardUuid,
+      'is_alive': entity.isAlive,
+      'aligment_index': entity.alignmentType.index,
+      'brood_index': entity.brood.index,
+      'created_at': entity.createdAt.toIso8601String(),
+      'updated_at': entity.updatedAt.toIso8601String(),
+      'creature_size_index': entity.creatureSize.index,
+      'defense': entity.defense,
+      'life': entity.life,
+      'mana': entity.mana,
+      'name': entity.name,
+      'charisma': entity.charisma,
+      'constitution': entity.constitution,
+      'dexterity': entity.dexterity,
+      'displacement': entity.displacement,
+      'divinity_id': entity.divinityId,
+      'image_asset': entity.imageAsset,
+      'intelligence': entity.intelligence,
+      'perception': entity.perception,
+      'senses': entity.senses,
+      'strength': entity.strength,
+      'wisdom': entity.wisdom,
+    };
+  }
 }

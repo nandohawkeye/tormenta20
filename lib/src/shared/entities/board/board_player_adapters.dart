@@ -49,14 +49,14 @@ abstract class BoardPlayerAdapters {
     );
   }
 
-  static BoardPlayer fromJson(Map<String, dynamic> data, String boardUuid) {
+  static BoardPlayer fromJson(Map<String, dynamic> data) {
     final classes = ClasseCharacterAdapters.fromString(data['classe_indexes']);
     final now = DateTime.now();
 
     return BoardPlayer(
       playerName: data['player_name'],
       uuid: data['uuid'],
-      boardUuid: boardUuid,
+      boardUuid: data['board_uuid'],
       characterName: data['character_name'],
       brood: Brood.values[data['brood_index']],
       createdAt: now,
