@@ -19,4 +19,20 @@ abstract class SaddlebagAdapters {
       price: Value(entity.price),
     );
   }
+
+  static Saddlebag fromJson(Map<String, dynamic> data) {
+    return Saddlebag(
+      uuid: data['uuid'],
+      parentUuid: data['parent_uuid'],
+      price: (data['price'] as double?),
+    );
+  }
+
+  static Map<String, dynamic> toJson(Saddlebag entity) {
+    return {
+      'uuid': entity.uuid,
+      'parent_uuid': entity.parentUuid,
+      'price': entity.price,
+    };
+  }
 }

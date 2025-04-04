@@ -39,4 +39,41 @@ abstract class GeneralItemAdapters {
       storedIn: Value(entity.storedIn),
     );
   }
+
+  static GeneralItem fromJson(Map<String, dynamic> data) {
+    SpecialMaterialTypes? specialMaterial;
+
+    if (data['special_material_index'] != null) {
+      specialMaterial =
+          SpecialMaterialTypes.values[data['special_material_index']];
+    }
+
+    return GeneralItem(
+      uuid: data['uuid'],
+      parentUuid: data['parent_uuid'],
+      name: data['name'],
+      price: data['price'],
+      desc: data['desc'],
+      spaceOcuped: data['ocuped_space'],
+      type: GeneralItemType.values[data['type_index']],
+      improvements: ImprovementTypeAdapter.fromString(data['improvements']),
+      specialMaterial: specialMaterial,
+      storedIn: data['stored_in'],
+    );
+  }
+
+  static Map<String, dynamic> toJson(GeneralItem entity) {
+    return {
+      'uuid': entity.uuid,
+      'parent_uuid': entity.parentUuid,
+      'name': entity.name,
+      'price': entity.price,
+      'desc': entity.desc,
+      'ocuped_space': entity.spaceOcuped,
+      'type_index': entity.type.index,
+      'improvements': ImprovementTypeAdapter.toStringValue(entity.improvements),
+      'special_material_index': entity.specialMaterial?.index,
+      'stored_in': entity.storedIn,
+    };
+  }
 }

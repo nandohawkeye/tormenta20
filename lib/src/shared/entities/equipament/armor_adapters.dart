@@ -43,4 +43,45 @@ abstract class ArmorAdapters {
       storedIn: Value(entity.storedIn),
     );
   }
+
+  static Armor fromJson(Map<String, dynamic> data) {
+    SpecialMaterialTypes? specialMaterial;
+
+    if (data['special_material_index'] != null) {
+      specialMaterial =
+          SpecialMaterialTypes.values[data['special_material_index']];
+    }
+
+    return Armor(
+      uuid: data['uuid'],
+      defenseBonus: data['defense_bonus'],
+      penalty: data['penalty'],
+      spaceOcuped: data['ocuped_space'],
+      type: ArmorType.values[data['type_index']],
+      parentUuid: data['parent_uuid'],
+      price: (data['price'] as double?),
+      name: data['name'],
+      desc: data['desc'],
+      improvements: ImprovementTypeAdapter.fromString(data['improvements']),
+      specialMaterial: specialMaterial,
+      storedIn: data['stored_in'],
+    );
+  }
+
+  static Map<String, dynamic> toJson(Armor entity) {
+    return {
+      'uuid': entity.uuid,
+      'parent_uuid': entity.parentUuid,
+      'price': entity.price,
+      'name': entity.name,
+      'desc': entity.desc,
+      'defense_bonus': entity.defenseBonus,
+      'ocuped_space': entity.spaceOcuped,
+      'penalty': entity.penalty,
+      'type_index': entity.type.index,
+      'improvements': ImprovementTypeAdapter.toStringValue(entity.improvements),
+      'special_material_index': entity.specialMaterial?.index,
+      'stored_in': entity.storedIn,
+    };
+  }
 }

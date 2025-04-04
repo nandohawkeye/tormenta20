@@ -20,4 +20,22 @@ abstract class OriginAdapters {
       characterUuid: Value(entity.characterUuid),
     );
   }
+
+  static Origin fromJson(Map<String, dynamic> data) {
+    return Origin(
+      uuid: data['uuid'],
+      name: data['name'],
+      desc: data['desc'],
+      characterUuid: data['character_uuid'],
+    );
+  }
+
+  static Map<String, dynamic> toJson(Origin entity) {
+    return {
+      'uuid': entity.uuid,
+      'name': entity.name,
+      'desc': entity.desc,
+      'character_uuid': entity.characterUuid,
+    };
+  }
 }

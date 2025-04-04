@@ -37,4 +37,38 @@ abstract class HandToHandAdapters {
       typeIndex: Value(entity.type.index),
     );
   }
+
+  static HandToHand fromJson(Map<String, dynamic> data) {
+    return HandToHand(
+      uuid: data['uuid'],
+      parentUuid: data['parent_uuid'],
+      name: data['name'],
+      desc: data['desc'],
+      pm: data['pm'],
+      cd: data['cd'],
+      damageDices: data['damage_dices'],
+      extraDamageDices: data['extra_damage_dices'],
+      mediumDamageValue: data['medium_damage_value'],
+      critical: data['critical'],
+      criticalMultiplier: data['critical_multiplier'],
+      equipamentUuid: data['equipament_uuid'],
+    );
+  }
+
+  static Map<String, dynamic> toJson(HandToHand entity) {
+    return {
+      'uuid': entity.uuid,
+      'parent_uuid': entity.parentUuid,
+      'name': entity.name,
+      'desc': entity.desc,
+      'pm': entity.pm,
+      'cd': entity.cd,
+      'damage_dices': entity.damageDices,
+      'extra_damage_dices': entity.extraDamageDices,
+      'medium_damage_value': entity.mediumDamageValue,
+      'critical': entity.critical,
+      'critical_multiplier': entity.criticalMultiplier,
+      'equipament_uuid': entity.equipamentUuid,
+    };
+  }
 }

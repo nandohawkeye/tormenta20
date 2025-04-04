@@ -22,4 +22,22 @@ abstract class ClasseCharacterTypeAdapters {
       characterUuid: Value(entity.characterUuid),
     );
   }
+
+  static ClasseTypeCharacter fromJson(Map<String, dynamic> data) {
+    return ClasseTypeCharacter(
+      uuid: data['uuid'],
+      level: data['level'],
+      type: ClasseType.values[data['type_index']],
+      characterUuid: data['character_uuid'],
+    );
+  }
+
+  static Map<String, dynamic> toJson(ClasseTypeCharacter entity) {
+    return {
+      'uuid': entity.uuid,
+      'level': entity.level,
+      'type_index': entity.type.index,
+      'character_uuid': entity.characterUuid,
+    };
+  }
 }

@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
-import 'package:tormenta20/src/shared/entities/equipament/adventurer_backpack.dart';
+import 'package:tormenta20/src/shared/entities/equipament/adventurere_backpack.dart';
 
 abstract class AdventureBackpackAdapters {
   static AdventureBackpack fromDriftData(AdventureBackpackTableData data) {
@@ -20,5 +20,21 @@ abstract class AdventureBackpackAdapters {
       suffix: Value(entity.suffix),
       price: Value(entity.price),
     );
+  }
+
+  static AdventureBackpack fromJson(Map<String, dynamic> data) {
+    return AdventureBackpack(
+      uuid: data['uuid'],
+      parentUuid: data['parent_uuid'],
+      price: (data['price'] as double?),
+    );
+  }
+
+  static Map<String, dynamic> toJson(AdventureBackpack entity) {
+    return {
+      'uuid': entity.uuid,
+      'parent_uuid': entity.parentUuid,
+      'price': entity.price,
+    };
   }
 }

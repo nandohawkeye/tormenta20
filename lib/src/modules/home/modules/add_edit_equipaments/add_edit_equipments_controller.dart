@@ -11,7 +11,7 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_equipaments/stores/
 import 'package:tormenta20/src/modules/home/modules/add_edit_equipaments/stores/add_edit_equipment_weapon_type_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_equipaments/stores/add_edit_equipment_wieldable_type_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_equipaments/stores/add_edit_weapon_skill_type_store.dart';
-import 'package:tormenta20/src/shared/entities/equipament/adventurer_backpack.dart';
+import 'package:tormenta20/src/shared/entities/equipament/adventurere_backpack.dart';
 import 'package:tormenta20/src/shared/entities/equipament/ammunition.dart';
 import 'package:tormenta20/src/shared/entities/equipament/armor.dart';
 import 'package:tormenta20/src/shared/entities/equipament/backpack.dart';

@@ -2,7 +2,9 @@ import 'package:drift/drift.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/shared/entities/action/action.dart';
 import 'package:tormenta20/src/shared/entities/action/action_adapters.dart';
-import 'package:tormenta20/src/shared/entities/action/distance_adapters.dart';
+import 'package:tormenta20/src/shared/entities/action/distance_attack.dart';
+import 'package:tormenta20/src/shared/entities/action/distance_attack_adapters.dart';
+import 'package:tormenta20/src/shared/entities/action/hand_to_hand.dart';
 import 'package:tormenta20/src/shared/entities/action/hand_to_hand_adapters.dart';
 import 'package:tormenta20/src/shared/entities/brood.dart';
 import 'package:tormenta20/src/shared/entities/character.dart';
@@ -10,6 +12,7 @@ import 'package:tormenta20/src/shared/entities/character_alignment_type.dart';
 import 'package:tormenta20/src/shared/entities/character_board_adapters.dart';
 import 'package:tormenta20/src/shared/entities/character_dto.dart';
 import 'package:tormenta20/src/shared/entities/classe_character_type_adapters.dart';
+import 'package:tormenta20/src/shared/entities/classe_type_character.dart';
 import 'package:tormenta20/src/shared/entities/creature_size_category.dart';
 import 'package:tormenta20/src/shared/entities/equipament/adventure_backpack_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/ammunition_adapters.dart';
@@ -127,6 +130,105 @@ abstract class CharacterAdapters {
   }
 
   static Character fromJson(Map<String, dynamic> data) {
+    ClasseTypeCharacter? classe;
+    List<Power> powers = [];
+    List<Origin> origins = [];
+    List<ActionEnt> actions = [];
+    List<Equipment> equipments = [];
+
+    if (data['classe'] != null) {
+      classe = ClasseCharacterTypeAdapters.fromJson(data['classe']);
+    }
+
+    if (data['powers'] != null && (data['powers'] as List).isNotEmpty) {
+      powers.addAll((data['powers'] as List)
+          .map((e) => PowerAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['origins'] != null && (data['origins'] as List).isNotEmpty) {
+      origins.addAll((data['origins'] as List)
+          .map((e) => OriginAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['actions'] != null && (data['actions'] as List).isNotEmpty) {
+      actions.addAll((data['actions'] as List)
+          .map((e) => ActionAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['distance_attacks'] != null &&
+        (data['distance_attacks'] as List).isNotEmpty) {
+      actions.addAll((data['distance_attacks'] as List)
+          .map((e) => DistanceAttackAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['hand_to_hands'] != null &&
+        (data['hand_to_hands'] as List).isNotEmpty) {
+      actions.addAll((data['hand_to_hands'] as List)
+          .map((e) => HandToHandAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['adventure_backpack'] != null &&
+        (data['adventure_backpack'] as List).isNotEmpty) {
+      equipments.addAll((data['adventure_backpack'] as List)
+          .map((e) => AdventureBackpackAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['ammunitions'] != null &&
+        (data['ammunitions'] as List).isNotEmpty) {
+      equipments.addAll((data['ammunitions'] as List)
+          .map((e) => AmmunitionAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['armors'] != null && (data['armors'] as List).isNotEmpty) {
+      equipments.addAll((data['armors'] as List)
+          .map((e) => ArmorAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['backpacks'] != null && (data['backpacks'] as List).isNotEmpty) {
+      equipments.addAll((data['backpacks'] as List)
+          .map((e) => BackpackAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['equipments'] != null && (data['equipments'] as List).isNotEmpty) {
+      equipments.addAll((data['equipments'] as List)
+          .map((e) => EquipmentAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['general_items'] != null &&
+        (data['general_items'] as List).isNotEmpty) {
+      equipments.addAll((data['general_items'] as List)
+          .map((e) => GeneralItemAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['saddlebags'] != null && (data['saddlebags'] as List).isNotEmpty) {
+      equipments.addAll((data['saddlebags'] as List)
+          .map((e) => SaddlebagAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['shields'] != null && (data['shields'] as List).isNotEmpty) {
+      equipments.addAll((data['shields'] as List)
+          .map((e) => ShieldAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['weapons'] != null && (data['weapons'] as List).isNotEmpty) {
+      equipments.addAll((data['weapons'] as List)
+          .map((e) => WeaponAdapters.fromJson(e))
+          .toList());
+    }
+
     final now = DateTime.now();
     return Character(
       uuid: data['uuid'],
@@ -155,12 +257,93 @@ abstract class CharacterAdapters {
       trainedExpertises: TrainedExpertiseAdapters.fromString(
           data['trained_expertises_indexes']),
       grimorie: null,
-      classe: null,
-      powers: [],
-      origins: [],
-      equipments: [],
-      actions: [],
+      classe: classe,
+      powers: powers,
+      origins: origins,
+      equipments: equipments,
+      actions: actions,
     );
+  }
+
+  static Map<String, dynamic> toJson(Character entity) {
+    final data = {
+      'uuid': entity.uuid,
+      'aligment_index': entity.alignmentType.index,
+      'brood_index': entity.brood.index,
+      'created_at': entity.createdAt.toIso8601String(),
+      'updated_at': entity.updatedAt.toIso8601String(),
+      'creature_size_index': entity.creatureSize.index,
+      'defense': entity.defense,
+      'life': entity.life,
+      'mana': entity.mana,
+      'name': entity.name,
+      'charisma': entity.charisma,
+      'constitution': entity.constitution,
+      'dexterity': entity.dexterity,
+      'displacement': entity.displacement,
+      'divinity_id': entity.divinityId,
+      'image_asset': entity.imageAsset,
+      'image_path': null,
+      'intelligence': entity.intelligence,
+      'perception': entity.perception,
+      'senses': entity.senses,
+      'strength': entity.strength,
+      'wisdom': entity.wisdom,
+    };
+
+    if (entity.classe != null) {
+      data.addAll(
+          {'classe': ClasseCharacterTypeAdapters.toJson(entity.classe!)});
+    }
+
+    if (entity.powers.isNotEmpty) {
+      data.addAll({
+        'powers': entity.powers.map((e) => PowerAdapters.toJson(e)).toList()
+      });
+    }
+
+    if (entity.origins.isNotEmpty) {
+      data.addAll({
+        'origins': entity.origins.map((e) => OriginAdapters.toJson(e)).toList()
+      });
+    }
+
+    if (entity.actions.isNotEmpty) {
+      List<dynamic> actionsData = [];
+      List<dynamic> distanceAttacksData = [];
+      List<dynamic> handToHandsData = [];
+
+      for (var action in entity.actions) {
+        if (action is DistanceAttack) {
+          distanceAttacksData.add(DistanceAttackAdapters.toJson(action));
+        } else if (action is HandToHand) {
+          handToHandsData.add(HandToHandAdapters.toJson(action));
+        } else {
+          actionsData.add(ActionAdapters.toJson(action));
+        }
+      }
+
+      if (actionsData.isNotEmpty) {
+        data.addAll({'actions': actionsData});
+      }
+
+      if (distanceAttacksData.isNotEmpty) {
+        data.addAll({'distance_attacks': distanceAttacksData});
+      }
+
+      if (handToHandsData.isNotEmpty) {
+        data.addAll({'hand_to_hands': handToHandsData});
+      }
+    }
+
+    //TODO implement this
+    // if(entity.equipments.isNotEmpty) {
+    //   data.addAll({
+    //     'equipments': entity.equipments.map((e) => EquipmentAdapters.toJson(e)).toList()
+    //   });
+    // }
+
+    return data;
   }
 
   static CharacterTableCompanion toDriftCompanion(Character entity) {

@@ -66,4 +66,60 @@ abstract class WeaponAdapters {
       wieldableIndex: Value(entity.wieldableType.index),
     );
   }
+
+  static Weapon fromJson(Map<String, dynamic> data) {
+    SpecialMaterialTypes? specialMaterial;
+
+    if (data['special_material_index'] != null) {
+      specialMaterial =
+          SpecialMaterialTypes.values[data['special_material_index']];
+    }
+
+    return Weapon(
+      uuid: data['uuid'],
+      parentUuid: data['parent_uuid'],
+      price: (data['price'] as double?),
+      name: data['name'],
+      desc: data['desc'],
+      critical: data['critical'],
+      criticalMultiplier: data['critical_multiplier'],
+      dices: data['dices'],
+      spaceOcuped: data['space_ocuped'],
+      isNatural: data['is_natural'],
+      isUnarmed: data['is_unarmed'],
+      type: WeaponType.values[data['type_index']],
+      purpose: WeaponPurpose.values[data['purpose_index']],
+      proficiency: WeaponProficiency.values[data['proficiency_index']],
+      range: EquipmentWeaponRangeType.values[data['range_index']],
+      skills: WeaponSkillsAdapter.fromString(data['skill_indexes']),
+      steps: data['steps'],
+      improvements: ImprovementTypeAdapter.fromString(data['improvements']),
+      wieldableType: WieldableType.values[data['wieldable_type_index']],
+      specialMaterial: specialMaterial,
+    );
+  }
+
+  static Map<String, dynamic> toJson(Weapon entity) {
+    return {
+      'uuid': entity.uuid,
+      'parent_uuid': entity.parentUuid,
+      'price': entity.price,
+      'name': entity.name,
+      'desc': entity.desc,
+      'critical': entity.critical,
+      'critical_multiplier': entity.criticalMultiplier,
+      'dices': entity.dices,
+      'space_ocuped': entity.spaceOcuped,
+      'is_natural': entity.isNatural,
+      'is_unarmed': entity.isUnarmed,
+      'type_index': entity.type.index,
+      'purpose_index': entity.purpose.index,
+      'proficiency_index': entity.proficiency.index,
+      'range_index': entity.range.index,
+      'skill_indexes': WeaponSkillsAdapter.toStringValue(entity.skills),
+      'steps': entity.steps,
+      'improvements': ImprovementTypeAdapter.toStringValue(entity.improvements),
+      'wieldable_type_index': entity.wieldableType.index,
+    };
+  }
 }

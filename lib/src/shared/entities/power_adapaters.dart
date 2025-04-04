@@ -23,4 +23,24 @@ abstract class PowerAdapters {
       characterUuid: Value(entity.characterUuid),
     );
   }
+
+  static Power fromJson(Map<String, dynamic> data) {
+    return Power(
+      uuid: data['uuid'],
+      name: data['name'],
+      desc: data['desc'],
+      type: PowerType.values[data['type_index']],
+      characterUuid: data['character_uuid'],
+    );
+  }
+
+  static Map<String, dynamic> toJson(Power entity) {
+    return {
+      'uuid': entity.uuid,
+      'name': entity.name,
+      'desc': entity.desc,
+      'type_index': entity.type.index,
+      'character_uuid': entity.characterUuid,
+    };
+  }
 }

@@ -30,4 +30,33 @@ abstract class EquipmentAdapters {
       storedIn: Value(entity.storedIn),
     );
   }
+
+  static Equipment fromJson(Map<String, dynamic> data) {
+    SpecialMaterialTypes? specialMaterial;
+
+    if (data['special_material_index'] != null) {
+      specialMaterial =
+          SpecialMaterialTypes.values[data['special_material_index']];
+    }
+
+    return Equipment(
+      uuid: data['uuid'],
+      parentUuid: data['parent_uuid'],
+      name: data['name'],
+      improvements: ImprovementTypeAdapter.fromString(data['improvements']),
+      specialMaterial: specialMaterial,
+      storedIn: data['stored_in'],
+    );
+  }
+
+  static Map<String, dynamic> toJson(Equipment entity) {
+    return {
+      'uuid': entity.uuid,
+      'parent_uuid': entity.parentUuid,
+      'name': entity.name,
+      'improvements': ImprovementTypeAdapter.toStringValue(entity.improvements),
+      'special_material_index': entity.specialMaterial?.index,
+      'stored_in': entity.storedIn,
+    };
+  }
 }

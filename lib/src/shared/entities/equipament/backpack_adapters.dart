@@ -20,4 +20,20 @@ abstract class BackpackAdapters {
       price: Value(entity.price),
     );
   }
+
+  static Backpack fromJson(Map<String, dynamic> data) {
+    return Backpack(
+      uuid: data['uuid'],
+      parentUuid: data['parent_uuid'],
+      price: (data['price'] as double?),
+    );
+  }
+
+  static Map<String, dynamic> toJson(Backpack entity) {
+    return {
+      'uuid': entity.uuid,
+      'parent_uuid': entity.parentUuid,
+      'price': entity.price,
+    };
+  }
 }

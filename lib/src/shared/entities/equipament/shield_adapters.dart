@@ -43,4 +43,45 @@ abstract class ShieldAdapters {
       storedIn: Value(entity.storedIn),
     );
   }
+
+  static Shield fromJson(Map<String, dynamic> data) {
+    SpecialMaterialTypes? specialMaterial;
+
+    if (data['special_material_index'] != null) {
+      specialMaterial =
+          SpecialMaterialTypes.values[data['special_material_index']];
+    }
+
+    return Shield(
+      uuid: data['uuid'],
+      parentUuid: data['parent_uuid'],
+      price: (data['price'] as double?),
+      name: data['name'],
+      desc: data['desc'],
+      defenseBonus: data['defense_bonus'],
+      spaceOcuped: data['space_ocuped'],
+      penalty: data['penalty'],
+      type: ShieldType.values[data['type_index']],
+      improvements: ImprovementTypeAdapter.fromString(data['improvements']),
+      specialMaterial: specialMaterial,
+      storedIn: data['stored_in'],
+    );
+  }
+
+  static Map<String, dynamic> toJson(Shield entity) {
+    return {
+      'uuid': entity.uuid,
+      'parent_uuid': entity.parentUuid,
+      'name': entity.name,
+      'price': entity.price,
+      'desc': entity.desc,
+      'defense_bonus': entity.defenseBonus,
+      'space_ocuped': entity.spaceOcuped,
+      'penalty': entity.penalty,
+      'type_index': entity.type.index,
+      'improvements': ImprovementTypeAdapter.toStringValue(entity.improvements),
+      'special_material_index': entity.specialMaterial?.index,
+      'stored_in': entity.storedIn,
+    };
+  }
 }

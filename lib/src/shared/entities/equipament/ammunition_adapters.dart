@@ -36,4 +36,39 @@ abstract class AmmunitionAdapters {
       storedIn: Value(entity.storedIn),
     );
   }
+
+  static Ammunition fromJson(Map<String, dynamic> data) {
+    SpecialMaterialTypes? specialMaterial;
+
+    if (data['special_material_index'] != null) {
+      specialMaterial =
+          SpecialMaterialTypes.values[data['special_material_index']];
+    }
+
+    return Ammunition(
+      uuid: data['uuid'],
+      parentUuid: data['parent_uuid'],
+      price: (data['price'] as double?),
+      name: data['name'],
+      quantity: data['quantity'],
+      desc: data['desc'],
+      improvements: ImprovementTypeAdapter.fromString(data['improvements']),
+      specialMaterial: specialMaterial,
+      storedIn: data['stored_in'],
+    );
+  }
+
+  static Map<String, dynamic> toJson(Ammunition entity) {
+    return {
+      'uuid': entity.uuid,
+      'parent_uuid': entity.parentUuid,
+      'price': entity.price,
+      'name': entity.name,
+      'quantity': entity.quantity,
+      'desc': entity.desc,
+      'improvements': ImprovementTypeAdapter.toStringValue(entity.improvements),
+      'special_material_index': entity.specialMaterial?.index,
+      'stored_in': entity.storedIn,
+    };
+  }
 }

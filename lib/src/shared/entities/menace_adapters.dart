@@ -2,7 +2,7 @@ import 'package:drift/drift.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/shared/entities/action/action.dart';
 import 'package:tormenta20/src/shared/entities/action/action_adapters.dart';
-import 'package:tormenta20/src/shared/entities/action/distance_adapters.dart';
+import 'package:tormenta20/src/shared/entities/action/distance_attack_adapters.dart';
 import 'package:tormenta20/src/shared/entities/action/hand_to_hand_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_adapters.dart';
 import 'package:tormenta20/src/shared/entities/combat_role.dart';
