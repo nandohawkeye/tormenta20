@@ -12,6 +12,24 @@ abstract class GeneralSkillAdapters {
     );
   }
 
+  static GeneralSkill fromJson(Map<String, dynamic> json) {
+    return GeneralSkill(
+      uuid: json['uuid'] as String,
+      name: json['name'] as String,
+      desc: json['desc'] as String,
+      parentUuid: json['parent_uuid'] as String,
+    );
+  }
+
+  static Map<String, dynamic> toJson(GeneralSkill entity) {
+    return {
+      'uuid': entity.uuid,
+      'name': entity.name,
+      'desc': entity.desc,
+      'parent_uuid': entity.parentUuid,
+    };
+  }
+
   static GeneralSkillTableCompanion toDriftCompanion(GeneralSkill entity) {
     return GeneralSkillTableCompanion(
       uuid: Value(entity.uuid),

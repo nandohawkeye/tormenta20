@@ -138,6 +138,195 @@ abstract class MenaceAdapters {
     );
   }
 
+  static Menace fromJson(Map<String, dynamic> data) {
+    final now = DateTime.now();
+    List<ActionEnt> actions = [];
+    List<Equipment> equipments = [];
+
+    if (data['actions'] != null && (data['actions'] as List).isNotEmpty) {
+      actions.addAll((data['actions'] as List)
+          .map((e) => ActionAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['distance_attacks'] != null &&
+        (data['distance_attacks'] as List).isNotEmpty) {
+      actions.addAll((data['distance_attacks'] as List)
+          .map((e) => DistanceAttackAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['hand_to_hands'] != null &&
+        (data['hand_to_hands'] as List).isNotEmpty) {
+      actions.addAll((data['hand_to_hands'] as List)
+          .map((e) => HandToHandAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['adventure_backpack'] != null &&
+        (data['adventure_backpack'] as List).isNotEmpty) {
+      equipments.addAll((data['adventure_backpack'] as List)
+          .map((e) => AdventureBackpackAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['ammunitions'] != null &&
+        (data['ammunitions'] as List).isNotEmpty) {
+      equipments.addAll((data['ammunitions'] as List)
+          .map((e) => AmmunitionAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['armors'] != null && (data['armors'] as List).isNotEmpty) {
+      equipments.addAll((data['armors'] as List)
+          .map((e) => ArmorAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['backpacks'] != null && (data['backpacks'] as List).isNotEmpty) {
+      equipments.addAll((data['backpacks'] as List)
+          .map((e) => BackpackAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['equipments'] != null && (data['equipments'] as List).isNotEmpty) {
+      equipments.addAll((data['equipments'] as List)
+          .map((e) => EquipmentAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['general_items'] != null &&
+        (data['general_items'] as List).isNotEmpty) {
+      equipments.addAll((data['general_items'] as List)
+          .map((e) => GeneralItemAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['saddlebags'] != null && (data['saddlebags'] as List).isNotEmpty) {
+      equipments.addAll((data['saddlebags'] as List)
+          .map((e) => SaddlebagAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['shields'] != null && (data['shields'] as List).isNotEmpty) {
+      equipments.addAll((data['shields'] as List)
+          .map((e) => ShieldAdapters.fromJson(e))
+          .toList());
+    }
+
+    if (data['weapons'] != null && (data['weapons'] as List).isNotEmpty) {
+      equipments.addAll((data['weapons'] as List)
+          .map((e) => WeaponAdapters.fromJson(e))
+          .toList());
+    }
+    return Menace(
+      createdAt: DateTime.tryParse(data['created_at']) ?? now,
+      updatedAt: DateTime.tryParse(data['updated_at']) ?? now,
+      uuid: data['uuid'],
+      type: MenaceType.values[data['type_index']],
+      name: data['name'],
+      charisma: data['charisma'],
+      desc: data['desc'],
+      combatRole: CombatRole.values[data['combate_role_index']],
+      constitution: data['constitution'],
+      creatureSize: CreatureSizeCategory.values[data['creature_size_index']],
+      defense: data['defense'],
+      dexterity: data['dexterity'],
+      fortResistence: data['fort_resistence'],
+      initiative: data['initiative'],
+      intelligence: data['intelligence'],
+      life: data['life'],
+      mana: data['mana'],
+      nd: data['nd'],
+      wisdom: data['wisdom'],
+      strength: data['strength'],
+      perception: data['perception'],
+      imageAsset: data['imageAsset'],
+      refResistence: data['ref_resistence'],
+      imagePath: null,
+      extraInfos: data['extra_infos'] ?? '',
+      casterInfos: data['caster_infos'] ?? '',
+      divinityId: data['divinity_id'] ?? '',
+      senses: data['senses'] ?? '',
+      magics: (data['magics'] as List)
+          .map((e) => MagicMenaceAdapters.fromJson(e))
+          .toList(),
+      boardsLinkeds: [],
+      boards: [],
+      actions: actions,
+      displacement: data['displacement'],
+      expertises: (data['expertises'] as List)
+          .map((e) => ExpertiseAdapters.fromJson(e))
+          .toList(),
+      generalSkills: (data['general_Skills'] as List)
+          .map((e) => GeneralSkillAdapters.fromJson(e))
+          .toList(),
+      equipments: equipments,
+      vonResistence: data['von_resistence'],
+      treasures: TreasureType.values[data['treasures_index']],
+    );
+  }
+
+  static Map<String, dynamic> toJson(Menace entity) {
+    final data = {
+      'uuid': entity.uuid,
+      'name': entity.name,
+      'desc': entity.desc,
+      'type_index': entity.type.index,
+      'charisma': entity.charisma,
+      'combate_role_index': entity.combatRole.index,
+      'constitution': entity.constitution,
+      'creature_size_index': entity.creatureSize.index,
+      'defense': entity.defense,
+      'dexterity': entity.dexterity,
+      'fort_resistence': entity.fortResistence,
+      'initiative': entity.initiative,
+      'intelligence': entity.intelligence,
+      'life': entity.life,
+      'mana': entity.mana,
+      'nd': entity.nd,
+      'wisdom': entity.wisdom,
+      'strength': entity.strength,
+      'perception': entity.perception,
+      'imageAsset': entity.imageAsset,
+      'ref_resistence': entity.refResistence,
+      'image_path': null,
+      'extra_infos': entity.extraInfos ?? '',
+      'caster_infos': entity.casterInfos ?? '',
+      'divinity_id': entity.divinityId ?? '',
+      'senses': entity.senses ?? '',
+      'created_at': entity.createdAt.toIso8601String(),
+      'displacement': entity.displacement,
+      'treasures_index': entity.treasures?.index ?? 0,
+    };
+
+    if (entity.magics.isNotEmpty) {
+      data['magics'] = entity.magics.map(MagicMenaceAdapters.toJson).toList();
+    }
+
+    if (entity.expertises.isNotEmpty) {
+      data['expertises'] =
+          entity.expertises.map(ExpertiseAdapters.toJson).toList();
+    }
+
+    if (entity.generalSkills.isNotEmpty) {
+      data['general_skills'] =
+          entity.generalSkills.map(GeneralSkillAdapters.toJson).toList();
+    }
+
+    //TODO immplementar os itens abaixo
+    // if (entity.actions.isNotEmpty) {
+    //   data['actions'] = entity.actions.map(ActionAdapters.toJson).toList();
+    // }
+
+    // if (entity.equipments.isNotEmpty) {
+    //   data['equipments'] =
+    //       entity.equipments.map(EquipmentAdapters.toJson).toList();
+    // }
+
+    return data;
+  }
+
   static MenaceTableCompanion toDriftCompanion(Menace entity) {
     return MenaceTableCompanion(
       createdAt: Value(entity.createdAt.millisecondsSinceEpoch),

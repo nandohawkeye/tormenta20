@@ -15,14 +15,22 @@ import 'package:tormenta20/src/shared/entities/classe_character_type_adapters.da
 import 'package:tormenta20/src/shared/entities/classe_type_character.dart';
 import 'package:tormenta20/src/shared/entities/creature_size_category.dart';
 import 'package:tormenta20/src/shared/entities/equipament/adventure_backpack_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/adventurere_backpack.dart';
+import 'package:tormenta20/src/shared/entities/equipament/ammunition.dart';
 import 'package:tormenta20/src/shared/entities/equipament/ammunition_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/armor.dart';
 import 'package:tormenta20/src/shared/entities/equipament/armor_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/backpack.dart';
 import 'package:tormenta20/src/shared/entities/equipament/backpack_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/general_item.dart';
 import 'package:tormenta20/src/shared/entities/equipament/general_item_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/saddlebag.dart';
 import 'package:tormenta20/src/shared/entities/equipament/saddlebag_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/shield.dart';
 import 'package:tormenta20/src/shared/entities/equipament/shield_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/weapon.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon_adapters.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire_adapters.dart';
 import 'package:tormenta20/src/shared/entities/origin.dart';
@@ -336,12 +344,96 @@ abstract class CharacterAdapters {
       }
     }
 
-    //TODO implement this
-    // if(entity.equipments.isNotEmpty) {
-    //   data.addAll({
-    //     'equipments': entity.equipments.map((e) => EquipmentAdapters.toJson(e)).toList()
-    //   });
-    // }
+    if (entity.equipments.isNotEmpty) {
+      List<AdventureBackpack> adventureBackpacks = [];
+      List<Ammunition> ammunitions = [];
+      List<Armor> armors = [];
+      List<Backpack> backpacks = [];
+      List<GeneralItem> generalItems = [];
+      List<Saddlebag> saddlebags = [];
+      List<Shield> shields = [];
+      List<Weapon> weapons = [];
+      List<Equipment> equipments = [];
+
+      for (var equipament in entity.equipments) {
+        if (equipament is AdventureBackpack) {
+          adventureBackpacks.add(equipament);
+        } else if (equipament is Ammunition) {
+          ammunitions.add(equipament);
+        } else if (equipament is Armor) {
+          armors.add(equipament);
+        } else if (equipament is Backpack) {
+          backpacks.add(equipament);
+        } else if (equipament is GeneralItem) {
+          generalItems.add(equipament);
+        } else if (equipament is Saddlebag) {
+          saddlebags.add(equipament);
+        } else if (equipament is Shield) {
+          shields.add(equipament);
+        } else if (equipament is Weapon) {
+          weapons.add(equipament);
+        } else {
+          equipments.add(equipament);
+        }
+      }
+
+      if (adventureBackpacks.isNotEmpty) {
+        data.addAll({
+          'adventure_backpack': adventureBackpacks
+              .map((e) => AdventureBackpackAdapters.toJson(e))
+              .toList()
+        });
+      }
+
+      if (equipments.isNotEmpty) {
+        data.addAll({
+          'equipments':
+              equipments.map((e) => EquipmentAdapters.toJson(e)).toList()
+        });
+      }
+
+      if (backpacks.isNotEmpty) {
+        data.addAll({
+          'backpacks': backpacks.map((e) => BackpackAdapters.toJson(e)).toList()
+        });
+      }
+
+      if (saddlebags.isNotEmpty) {
+        data.addAll({
+          'saddlebags':
+              saddlebags.map((e) => SaddlebagAdapters.toJson(e)).toList()
+        });
+      }
+
+      if (ammunitions.isNotEmpty) {
+        data.addAll({
+          'ammunitions':
+              ammunitions.map((e) => AmmunitionAdapters.toJson(e)).toList()
+        });
+      }
+
+      if (armors.isNotEmpty) {
+        data.addAll(
+            {'armors': armors.map((e) => ArmorAdapters.toJson(e)).toList()});
+      }
+
+      if (generalItems.isNotEmpty) {
+        data.addAll({
+          'general_items':
+              generalItems.map((e) => GeneralItemAdapters.toJson(e)).toList()
+        });
+      }
+
+      if (shields.isNotEmpty) {
+        data.addAll(
+            {'shields': shields.map((e) => ShieldAdapters.toJson(e)).toList()});
+      }
+
+      if (weapons.isNotEmpty) {
+        data.addAll(
+            {'weapons': weapons.map((e) => WeaponAdapters.toJson(e)).toList()});
+      }
+    }
 
     return data;
   }
