@@ -17,7 +17,6 @@ import 'package:tormenta20/src/core/database/tables/adventure_backpack_table.dar
 import 'package:tormenta20/src/core/database/tables/ammunition_table.dart';
 import 'package:tormenta20/src/core/database/tables/armor_table.dart';
 import 'package:tormenta20/src/core/database/tables/backpack_table.dart';
-import 'package:tormenta20/src/core/database/tables/board_character_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_combat_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_note_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_player_table.dart';
@@ -62,7 +61,6 @@ part 'app_database.g.dart';
     BoardSessionTable,
     BoardLinkTable,
     BoardPlayerTable,
-    BoardCharacterTable,
     BoardNoteTable,
     BoardCombatTable,
     MenaceTable,
@@ -103,7 +101,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 17;
+  int get schemaVersion => 19;
 
   @override
   MigrationStrategy get migration {
@@ -181,7 +179,6 @@ class AppDatabase extends _$AppDatabase {
               await m.addColumn(menaceTable, menaceTable.createdAt);
               await m.addColumn(menaceTable, menaceTable.updatedAt);
               await m.alterTable(TableMigration(boardNoteTable));
-              await m.alterTable(TableMigration(boardCharacterTable));
               await m.alterTable(TableMigration(boardPlayerTable));
               await m.alterTable(TableMigration(boardTable));
               await m.createTable(configTable);
@@ -190,8 +187,6 @@ class AppDatabase extends _$AppDatabase {
             if (from < 12) {
               await m.addColumn(
                   boardPlayerTable, boardPlayerTable.classeIndexes);
-              await m.addColumn(
-                  boardCharacterTable, boardCharacterTable.classeIndexes);
             }
 
             if (from < 13) {
@@ -222,6 +217,26 @@ class AppDatabase extends _$AppDatabase {
             if (from < 17) {
               await m.addColumn(
                   configTable, configTable.enableBottomBackButton);
+            }
+
+            if (from < 18) {
+              await m.addColumn(shieldTable, shieldTable.inUse);
+              await m.addColumn(armorTable, armorTable.inUse);
+            }
+
+            if (from < 19) {
+              await m.addColumn(
+                  characterBoardTable, characterBoardTable.currentLife);
+              await m.addColumn(
+                  characterBoardTable, characterBoardTable.currentMana);
+              await m.addColumn(
+                  characterBoardTable, characterBoardTable.inLeftHand);
+              await m.addColumn(
+                  characterBoardTable, characterBoardTable.inRightHand);
+              await m.addColumn(
+                  characterBoardTable, characterBoardTable.inTwoHands);
+              await m.addColumn(
+                  characterBoardTable, characterBoardTable.inWearableSlots);
             }
           },
         );

@@ -3,9 +3,11 @@ import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/shared/widgets/screen_slide_images_button.dart';
 
 class CharacterScreenButton extends StatelessWidget {
-  const CharacterScreenButton({super.key, this.subtitle, required this.onTap});
+  const CharacterScreenButton(
+      {super.key, this.subtitle, required this.onTap, this.title});
 
   final String? subtitle;
+  final String? title;
   final Function() onTap;
 
   @override
@@ -14,7 +16,7 @@ class CharacterScreenButton extends StatelessWidget {
         Assets.images.caracters.values.map((a) => a.path).toList();
     return ScreenSlideImagesButton(
       imageAssets: characters,
-      title: 'Personagens',
+      title: title ?? 'Personagens',
       subtitle: subtitle ??
           'Crie um personagem, vincule-o a uma mesa e comece a jogar!',
       onTap: onTap,

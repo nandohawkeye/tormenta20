@@ -19,7 +19,9 @@ class CharacterBoard extends EntityBase {
   final Brood brood;
   final int defense;
   final int life;
+  final int currentLife;
   final int mana;
+  final int currentMana;
   final CreatureSizeCategory creatureSize;
   final String? imagePath;
   final String? imageAsset;
@@ -43,6 +45,10 @@ class CharacterBoard extends EntityBase {
   final List<Expertise> expertises;
   final List<Power> powers;
   final CharacterAlignmentType alignmentType;
+  final String? inLeftHand;
+  final String? inRightHand;
+  final String? inTwoHands;
+  final String? inWearableSlots;
 
   CharacterBoard({
     required this.uuid,
@@ -77,6 +83,12 @@ class CharacterBoard extends EntityBase {
     required this.expertises,
     required this.powers,
     required this.alignmentType,
+    required this.currentLife,
+    required this.currentMana,
+    this.inLeftHand,
+    this.inRightHand,
+    this.inTwoHands,
+    this.inWearableSlots,
   });
 
   @override
@@ -92,6 +104,8 @@ class CharacterBoard extends EntityBase {
       other.defense == defense &&
       other.life == life &&
       other.mana == mana &&
+      other.currentLife == currentLife &&
+      other.currentMana == currentMana &&
       other.creatureSize == creatureSize &&
       other.displacement == displacement &&
       other.perception == perception &&
@@ -130,6 +144,8 @@ class CharacterBoard extends EntityBase {
       defense.hashCode ^
       life.hashCode ^
       mana.hashCode ^
+      currentLife.hashCode ^
+      currentMana.hashCode ^
       creatureSize.hashCode ^
       displacement.hashCode ^
       perception.hashCode ^

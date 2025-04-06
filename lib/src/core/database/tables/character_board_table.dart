@@ -31,6 +31,12 @@ class CharacterBoardTable extends Table {
   IntColumn get updatedAt => integer()();
   BoolColumn get isAlive => boolean()();
   IntColumn get aligmentIndex => integer()();
+  IntColumn get currentLife => integer()();
+  IntColumn get currentMana => integer()();
+  TextColumn get inLeftHand => text().nullable()();
+  TextColumn get inRightHand => text().nullable()();
+  TextColumn get inTwoHands => text().nullable()();
+  TextColumn get inWearableSlots => text().nullable()();
 
   @override
   Set<Column>? get primaryKey => {uuid};

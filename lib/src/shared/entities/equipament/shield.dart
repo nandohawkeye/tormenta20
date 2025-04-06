@@ -1,9 +1,11 @@
+import 'package:tormenta20/src/shared/entities/equipament/defensible.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/entities/equipament/shield_type.dart';
 import 'package:tormenta20/src/shared/entities/equipament/spaceable.dart';
 
-class Shield extends Equipment implements Spaceable {
+class Shield extends Equipment implements Spaceable, Defensible {
   final double _space;
+  final bool _inUse;
   final ShieldType type;
   final double? price;
   final int defenseBonus;
@@ -15,6 +17,7 @@ class Shield extends Equipment implements Spaceable {
     required super.parentUuid,
     required super.name,
     required double spaceOcuped,
+    required bool defenseInUse,
     required this.type,
     this.price,
     required this.defenseBonus,
@@ -23,7 +26,8 @@ class Shield extends Equipment implements Spaceable {
     super.storedIn,
     required super.improvements,
     super.specialMaterial,
-  }) : _space = spaceOcuped;
+  })  : _space = spaceOcuped,
+        _inUse = defenseInUse;
 
   @override
   Shield cloneWith({
@@ -35,6 +39,7 @@ class Shield extends Equipment implements Spaceable {
       parentUuid: parentUuid,
       name: name,
       spaceOcuped: _space,
+      defenseInUse: _inUse,
       type: type,
       price: price,
       defenseBonus: defenseBonus,
@@ -61,6 +66,7 @@ class Shield extends Equipment implements Spaceable {
       other.defenseBonus == defenseBonus &&
       other.penalty == penalty &&
       other.desc == desc &&
+      other.inUse == inUse &&
       other.storedIn == storedIn &&
       other.improvements == improvements &&
       other.specialMaterial == specialMaterial;
@@ -78,5 +84,9 @@ class Shield extends Equipment implements Spaceable {
       desc.hashCode ^
       storedIn.hashCode ^
       improvements.hashCode ^
+      inUse.hashCode ^
       specialMaterial.hashCode;
+
+  @override
+  bool get inUse => _inUse;
 }

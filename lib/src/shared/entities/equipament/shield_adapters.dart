@@ -23,6 +23,7 @@ abstract class ShieldAdapters {
       improvements: ImprovementTypeAdapter.fromString(data.improvements),
       specialMaterial: specialMaterial,
       storedIn: data.storedIn,
+      defenseInUse: data.inUse,
     );
   }
 
@@ -41,6 +42,7 @@ abstract class ShieldAdapters {
           Value(ImprovementTypeAdapter.toStringValue(entity.improvements)),
       specialMaterialIndex: Value(entity.specialMaterial?.index),
       storedIn: Value(entity.storedIn),
+      inUse: Value(entity.inUse),
     );
   }
 
@@ -65,6 +67,7 @@ abstract class ShieldAdapters {
       improvements: ImprovementTypeAdapter.fromString(data['improvements']),
       specialMaterial: specialMaterial,
       storedIn: data['stored_in'],
+      defenseInUse: data['in_use'],
     );
   }
 
@@ -82,6 +85,7 @@ abstract class ShieldAdapters {
       'improvements': ImprovementTypeAdapter.toStringValue(entity.improvements),
       'special_material_index': entity.specialMaterial?.index,
       'stored_in': entity.storedIn,
+      'in_use': entity.inUse,
     };
   }
 }

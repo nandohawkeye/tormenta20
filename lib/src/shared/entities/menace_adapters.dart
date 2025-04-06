@@ -230,8 +230,8 @@ abstract class MenaceAdapters {
           .toList());
     }
     return Menace(
-      createdAt: DateTime.tryParse(data['created_at']) ?? now,
-      updatedAt: DateTime.tryParse(data['updated_at']) ?? now,
+      createdAt: DateTime.tryParse(data['created_at'] ?? '') ?? now,
+      updatedAt: DateTime.tryParse(data['updated_at'] ?? '') ?? now,
       uuid: data['uuid'],
       type: MenaceType.values[data['type_index']],
       name: data['name'],

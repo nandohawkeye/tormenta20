@@ -16,6 +16,7 @@ import 'package:tormenta20/src/shared/entities/board/board_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_combat_ext.dart';
 import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session_ext.dart';
+import 'package:tormenta20/src/shared/entities/character_board.dart';
 import 'package:tormenta20/src/shared/extensions/string_ext.dart';
 import 'package:tormenta20/src/shared/failures/failure.dart';
 import 'package:tormenta20/src/shared/utils/backup_utils.dart';
@@ -29,11 +30,15 @@ class BoardViewBottomWidgets extends StatelessWidget {
     required this.createCloseSession,
     required this.showCombat,
     required this.deleteBoard,
+    this.character,
+    required this.showCharacterRecord,
   });
 
   final Board board;
   final Function() createCloseSession;
   final Function() showCombat;
+  final CharacterBoard? character;
+  final Function() showCharacterRecord;
   final Future<Failure?> Function(Board board) deleteBoard;
 
   @override
@@ -52,7 +57,9 @@ class BoardViewBottomWidgets extends StatelessWidget {
       });
     }
 
-    //TODO improve about boardModeType player later
+    final isEnabled =
+        board.mode == BoardModeType.master ? true : (character != null);
+
     final buttonLabel = board.mode == BoardModeType.master
         ? (hasCombatInOpen
             ? 'Ver combate'
@@ -74,6 +81,7 @@ class BoardViewBottomWidgets extends StatelessWidget {
             T20UI.spaceHeight,
             ScreenSaveMainButtons(
               label: buttonLabel,
+              isEnable: isEnabled,
               extraRightWidgets: [
                 T20UI.spaceWidth,
                 SimpleButton(
@@ -122,7 +130,7 @@ class BoardViewBottomWidgets extends StatelessWidget {
                         if (data == null) return;
 
                         final file = await BackupUtils.createTempJson(data,
-                            'mesa_${board.adventureName.toLowerCase().replaceAllDiacritics().trim()}_${board.name.toLowerCase().replaceAllDiacritics().trim()}_convite');
+                            'mesa_${board.adventureName.toLowerCase().replaceAllDiacritics().trim().replaceAll(' ', '')}_${board.name.toLowerCase().replaceAllDiacritics().trim().replaceAll(' ', '')}_convite');
 
                         if (file == null) return;
 
@@ -132,8 +140,11 @@ class BoardViewBottomWidgets extends StatelessWidget {
                   },
                 ),
               ],
-              onSave:
-                  hasCombatInOpen ? showCombat : createCloseSessionBottomsheet,
+              onSave: board.mode == BoardModeType.master
+                  ? (hasCombatInOpen
+                      ? showCombat
+                      : createCloseSessionBottomsheet)
+                  : showCharacterRecord,
             ),
           ],
         ),

@@ -417,6 +417,7 @@ class AddEditEquipmentsController {
         price: _price,
         defenseBonus: _defenseBonus!,
         penalty: _penalty!,
+        defenseInUse: false,
       );
 
       return armor;
@@ -434,6 +435,7 @@ class AddEditEquipmentsController {
         price: _price,
         defenseBonus: _defenseBonus!,
         penalty: _penalty!,
+        defenseInUse: false,
       );
 
       return shield;

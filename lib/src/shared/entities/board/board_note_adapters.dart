@@ -41,8 +41,8 @@ abstract class BoardNoteAdapters {
     return BoardNote(
       uuid: data['uuid'],
       note: data['note'],
-      createdAt: DateTime.tryParse(data['created_at']) ?? now,
-      updatedAt: DateTime.tryParse(data['updated_at']) ?? now,
+      createdAt: DateTime.tryParse(data['created_at'] ?? '') ?? now,
+      updatedAt: DateTime.tryParse(data['updated_at'] ?? '') ?? now,
       boardUuid: data['board_uuid'],
       isFavorited: data['is_favorited'],
     );

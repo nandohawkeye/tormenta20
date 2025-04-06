@@ -1,11 +1,13 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/board_combat/board_combat_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/board_view_store.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_banner.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_bottom_widgets.dart';
+import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_character_field.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_menaces_field/board_view_menaces_field.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_players_field.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_sessions.dart';
@@ -44,6 +46,7 @@ class _BoardViewScreenState extends State<BoardViewScreen> {
       builder: (_, __) {
         final board = _store.board;
         final menaces = board.menaces;
+        final character = board.characters.firstWhereOrNull((e) => e.isAlive);
 
         return Material(
           color: palette.background,
@@ -56,6 +59,12 @@ class _BoardViewScreenState extends State<BoardViewScreen> {
                     BoardViewBanner(board),
                     BoardViewTextFields(board),
                     const Divider(),
+                    if (board.mode == BoardModeType.player)
+                      BoardViewCharacterField(
+                        board,
+                        saveBoardCharacter: _store.saveBaordCharacter,
+                        deleteBoardCharacter: _store.deleteBoardCharacter,
+                      ),
                     if (board.mode == BoardModeType.master)
                       BoardViewSessions(
                         board,
@@ -80,6 +89,8 @@ class _BoardViewScreenState extends State<BoardViewScreen> {
                 board,
                 deleteBoard: _store.deleteBoard,
                 createCloseSession: _store.createCloseSession,
+                character: character,
+                showCharacterRecord: () {},
                 showCombat: () {
                   final currentCombat = _store.getCurrentCombat();
                   if (currentCombat != null) {

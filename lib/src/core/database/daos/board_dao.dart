@@ -1,7 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:flutter/foundation.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
-import 'package:tormenta20/src/core/database/tables/board_character_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_combat_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_session_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_link_table.dart';
@@ -29,6 +28,7 @@ import 'package:tormenta20/src/shared/entities/board/board_player_adapters.dart'
 import 'package:tormenta20/src/shared/entities/board/board_session.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session_dto.dart';
+import 'package:tormenta20/src/shared/entities/character_board.dart';
 import 'package:tormenta20/src/shared/failures/failure.dart';
 
 part 'board_dao.g.dart';
@@ -36,7 +36,6 @@ part 'board_dao.g.dart';
 @DriftAccessor(tables: [
   BoardTable,
   BoardMaterialTable,
-  BoardCharacterTable,
   BoardPlayerTable,
   BoardSessionTable,
   BoardLinkTable,
@@ -194,6 +193,31 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
         batch.insertAllOnConflictUpdate(
             boardPlayerTable, [BoardPlayerAdapters.toCompanion(player)]);
       });
+
+      return null;
+    } catch (e) {
+      return Failure(e.toString());
+    }
+  }
+
+  Future<Failure?> saveBoardCharacter(CharacterBoard character) async {
+    try {
+      // await batch((batch) {
+      //   batch.insertAllOnConflictUpdate(
+      //       characterBoardTable, [CharacterBoardAdapters.toCompanion(character)]);
+      // });
+
+      return null;
+    } catch (e) {
+      return Failure(e.toString());
+    }
+  }
+
+  Future<Failure?> deleteBoardCharacter(CharacterBoard character) async {
+    try {
+      await (delete(characterBoardTable)
+            ..where((tbl) => tbl.uuid.equals(character.uuid)))
+          .go();
 
       return null;
     } catch (e) {
@@ -493,6 +517,7 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
       return (
         failure: null,
         boards: (select(boardTable)
+              ..where((tbl) => tbl.modeIndex.equals(0))
               ..addColumns([
                 boardTable.name,
                 boardTable.adventureName,

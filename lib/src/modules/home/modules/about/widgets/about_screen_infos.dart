@@ -39,13 +39,17 @@ class AboutScreenInfos extends StatelessWidget {
           ),
           const AboutOtherRightsReservedsCard(),
           T20UI.spaceHeight,
+          T20UI.spaceHeight,
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'v${GetIt.I<PackageInfo>().version} - ${DateTime.now().year}',
-                style: TextStyle(
-                  color: palette.textDisable,
+              Flexible(
+                child: Text(
+                  'Desenvolvido por Nando HawkEye - v${GetIt.I<PackageInfo>().version} - ${DateTime.now().year}',
+                  maxLines: 2,
+                  style: TextStyle(
+                    color: palette.textDisable,
+                  ),
                 ),
               ),
               T20UI.spaceWidth,

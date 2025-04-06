@@ -13,6 +13,7 @@ class ArmorTable extends Table {
   IntColumn get typeIndex => integer()();
   IntColumn get defenseBonus => integer()();
   IntColumn get penalty => integer()();
+  BoolColumn get inUse => boolean().withDefault(const Constant(false))();
 
   @override
   Set<Column>? get primaryKey => {uuid};

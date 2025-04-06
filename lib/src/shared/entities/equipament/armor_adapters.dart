@@ -23,6 +23,7 @@ abstract class ArmorAdapters {
       improvements: ImprovementTypeAdapter.fromString(data.improvements),
       specialMaterial: specialMaterial,
       storedIn: data.storedIn,
+      defenseInUse: data.inUse,
     );
   }
 
@@ -41,6 +42,7 @@ abstract class ArmorAdapters {
           Value(ImprovementTypeAdapter.toStringValue(entity.improvements)),
       specialMaterialIndex: Value(entity.specialMaterial?.index),
       storedIn: Value(entity.storedIn),
+      inUse: Value(entity.inUse),
     );
   }
 
@@ -53,19 +55,19 @@ abstract class ArmorAdapters {
     }
 
     return Armor(
-      uuid: data['uuid'],
-      defenseBonus: data['defense_bonus'],
-      penalty: data['penalty'],
-      spaceOcuped: data['ocuped_space'],
-      type: ArmorType.values[data['type_index']],
-      parentUuid: data['parent_uuid'],
-      price: (data['price'] as double?),
-      name: data['name'],
-      desc: data['desc'],
-      improvements: ImprovementTypeAdapter.fromString(data['improvements']),
-      specialMaterial: specialMaterial,
-      storedIn: data['stored_in'],
-    );
+        uuid: data['uuid'],
+        defenseBonus: data['defense_bonus'],
+        penalty: data['penalty'],
+        spaceOcuped: data['ocuped_space'],
+        type: ArmorType.values[data['type_index']],
+        parentUuid: data['parent_uuid'],
+        price: (data['price'] as double?),
+        name: data['name'],
+        desc: data['desc'],
+        improvements: ImprovementTypeAdapter.fromString(data['improvements']),
+        specialMaterial: specialMaterial,
+        storedIn: data['stored_in'],
+        defenseInUse: data['in_use']);
   }
 
   static Map<String, dynamic> toJson(Armor entity) {
@@ -82,6 +84,7 @@ abstract class ArmorAdapters {
       'improvements': ImprovementTypeAdapter.toStringValue(entity.improvements),
       'special_material_index': entity.specialMaterial?.index,
       'stored_in': entity.storedIn,
+      'in_use': entity.inUse,
     };
   }
 }

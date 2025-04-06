@@ -3563,535 +3563,6 @@ class BoardPlayerTableCompanion extends UpdateCompanion<BoardPlayerTableData> {
   }
 }
 
-class $BoardCharacterTableTable extends BoardCharacterTable
-    with TableInfo<$BoardCharacterTableTable, BoardCharacterTableData> {
-  @override
-  final GeneratedDatabase attachedDatabase;
-  final String? _alias;
-  $BoardCharacterTableTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _uuidMeta = const VerificationMeta('uuid');
-  @override
-  late final GeneratedColumn<String> uuid = GeneratedColumn<String>(
-      'uuid', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _boardUuidMeta =
-      const VerificationMeta('boardUuid');
-  @override
-  late final GeneratedColumn<String> boardUuid = GeneratedColumn<String>(
-      'board_uuid', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _characterNameMeta =
-      const VerificationMeta('characterName');
-  @override
-  late final GeneratedColumn<String> characterName = GeneratedColumn<String>(
-      'character_name', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _playerNameMeta =
-      const VerificationMeta('playerName');
-  @override
-  late final GeneratedColumn<String> playerName = GeneratedColumn<String>(
-      'player_name', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _imagePathMeta =
-      const VerificationMeta('imagePath');
-  @override
-  late final GeneratedColumn<String> imagePath = GeneratedColumn<String>(
-      'image_path', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _imageAssetMeta =
-      const VerificationMeta('imageAsset');
-  @override
-  late final GeneratedColumn<String> imageAsset = GeneratedColumn<String>(
-      'image_asset', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _broodIndexMeta =
-      const VerificationMeta('broodIndex');
-  @override
-  late final GeneratedColumn<int> broodIndex = GeneratedColumn<int>(
-      'brood_index', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _createdAtMeta =
-      const VerificationMeta('createdAt');
-  @override
-  late final GeneratedColumn<int> createdAt = GeneratedColumn<int>(
-      'created_at', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _updatedAtMeta =
-      const VerificationMeta('updatedAt');
-  @override
-  late final GeneratedColumn<int> updatedAt = GeneratedColumn<int>(
-      'updated_at', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _classeIndexesMeta =
-      const VerificationMeta('classeIndexes');
-  @override
-  late final GeneratedColumn<String> classeIndexes = GeneratedColumn<String>(
-      'classe_indexes', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  @override
-  List<GeneratedColumn> get $columns => [
-        uuid,
-        boardUuid,
-        characterName,
-        playerName,
-        imagePath,
-        imageAsset,
-        broodIndex,
-        createdAt,
-        updatedAt,
-        classeIndexes
-      ];
-  @override
-  String get aliasedName => _alias ?? actualTableName;
-  @override
-  String get actualTableName => $name;
-  static const String $name = 'board_character_table';
-  @override
-  VerificationContext validateIntegrity(
-      Insertable<BoardCharacterTableData> instance,
-      {bool isInserting = false}) {
-    final context = VerificationContext();
-    final data = instance.toColumns(true);
-    if (data.containsKey('uuid')) {
-      context.handle(
-          _uuidMeta, uuid.isAcceptableOrUnknown(data['uuid']!, _uuidMeta));
-    } else if (isInserting) {
-      context.missing(_uuidMeta);
-    }
-    if (data.containsKey('board_uuid')) {
-      context.handle(_boardUuidMeta,
-          boardUuid.isAcceptableOrUnknown(data['board_uuid']!, _boardUuidMeta));
-    } else if (isInserting) {
-      context.missing(_boardUuidMeta);
-    }
-    if (data.containsKey('character_name')) {
-      context.handle(
-          _characterNameMeta,
-          characterName.isAcceptableOrUnknown(
-              data['character_name']!, _characterNameMeta));
-    } else if (isInserting) {
-      context.missing(_characterNameMeta);
-    }
-    if (data.containsKey('player_name')) {
-      context.handle(
-          _playerNameMeta,
-          playerName.isAcceptableOrUnknown(
-              data['player_name']!, _playerNameMeta));
-    } else if (isInserting) {
-      context.missing(_playerNameMeta);
-    }
-    if (data.containsKey('image_path')) {
-      context.handle(_imagePathMeta,
-          imagePath.isAcceptableOrUnknown(data['image_path']!, _imagePathMeta));
-    }
-    if (data.containsKey('image_asset')) {
-      context.handle(
-          _imageAssetMeta,
-          imageAsset.isAcceptableOrUnknown(
-              data['image_asset']!, _imageAssetMeta));
-    }
-    if (data.containsKey('brood_index')) {
-      context.handle(
-          _broodIndexMeta,
-          broodIndex.isAcceptableOrUnknown(
-              data['brood_index']!, _broodIndexMeta));
-    } else if (isInserting) {
-      context.missing(_broodIndexMeta);
-    }
-    if (data.containsKey('created_at')) {
-      context.handle(_createdAtMeta,
-          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
-    } else if (isInserting) {
-      context.missing(_createdAtMeta);
-    }
-    if (data.containsKey('updated_at')) {
-      context.handle(_updatedAtMeta,
-          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
-    } else if (isInserting) {
-      context.missing(_updatedAtMeta);
-    }
-    if (data.containsKey('classe_indexes')) {
-      context.handle(
-          _classeIndexesMeta,
-          classeIndexes.isAcceptableOrUnknown(
-              data['classe_indexes']!, _classeIndexesMeta));
-    } else if (isInserting) {
-      context.missing(_classeIndexesMeta);
-    }
-    return context;
-  }
-
-  @override
-  Set<GeneratedColumn> get $primaryKey => {uuid};
-  @override
-  BoardCharacterTableData map(Map<String, dynamic> data,
-      {String? tablePrefix}) {
-    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return BoardCharacterTableData(
-      uuid: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}uuid'])!,
-      boardUuid: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}board_uuid'])!,
-      characterName: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}character_name'])!,
-      playerName: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}player_name'])!,
-      imagePath: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}image_path']),
-      imageAsset: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}image_asset']),
-      broodIndex: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}brood_index'])!,
-      createdAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}created_at'])!,
-      updatedAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}updated_at'])!,
-      classeIndexes: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}classe_indexes'])!,
-    );
-  }
-
-  @override
-  $BoardCharacterTableTable createAlias(String alias) {
-    return $BoardCharacterTableTable(attachedDatabase, alias);
-  }
-}
-
-class BoardCharacterTableData extends DataClass
-    implements Insertable<BoardCharacterTableData> {
-  final String uuid;
-  final String boardUuid;
-  final String characterName;
-  final String playerName;
-  final String? imagePath;
-  final String? imageAsset;
-  final int broodIndex;
-  final int createdAt;
-  final int updatedAt;
-  final String classeIndexes;
-  const BoardCharacterTableData(
-      {required this.uuid,
-      required this.boardUuid,
-      required this.characterName,
-      required this.playerName,
-      this.imagePath,
-      this.imageAsset,
-      required this.broodIndex,
-      required this.createdAt,
-      required this.updatedAt,
-      required this.classeIndexes});
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['uuid'] = Variable<String>(uuid);
-    map['board_uuid'] = Variable<String>(boardUuid);
-    map['character_name'] = Variable<String>(characterName);
-    map['player_name'] = Variable<String>(playerName);
-    if (!nullToAbsent || imagePath != null) {
-      map['image_path'] = Variable<String>(imagePath);
-    }
-    if (!nullToAbsent || imageAsset != null) {
-      map['image_asset'] = Variable<String>(imageAsset);
-    }
-    map['brood_index'] = Variable<int>(broodIndex);
-    map['created_at'] = Variable<int>(createdAt);
-    map['updated_at'] = Variable<int>(updatedAt);
-    map['classe_indexes'] = Variable<String>(classeIndexes);
-    return map;
-  }
-
-  BoardCharacterTableCompanion toCompanion(bool nullToAbsent) {
-    return BoardCharacterTableCompanion(
-      uuid: Value(uuid),
-      boardUuid: Value(boardUuid),
-      characterName: Value(characterName),
-      playerName: Value(playerName),
-      imagePath: imagePath == null && nullToAbsent
-          ? const Value.absent()
-          : Value(imagePath),
-      imageAsset: imageAsset == null && nullToAbsent
-          ? const Value.absent()
-          : Value(imageAsset),
-      broodIndex: Value(broodIndex),
-      createdAt: Value(createdAt),
-      updatedAt: Value(updatedAt),
-      classeIndexes: Value(classeIndexes),
-    );
-  }
-
-  factory BoardCharacterTableData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return BoardCharacterTableData(
-      uuid: serializer.fromJson<String>(json['uuid']),
-      boardUuid: serializer.fromJson<String>(json['boardUuid']),
-      characterName: serializer.fromJson<String>(json['characterName']),
-      playerName: serializer.fromJson<String>(json['playerName']),
-      imagePath: serializer.fromJson<String?>(json['imagePath']),
-      imageAsset: serializer.fromJson<String?>(json['imageAsset']),
-      broodIndex: serializer.fromJson<int>(json['broodIndex']),
-      createdAt: serializer.fromJson<int>(json['createdAt']),
-      updatedAt: serializer.fromJson<int>(json['updatedAt']),
-      classeIndexes: serializer.fromJson<String>(json['classeIndexes']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'uuid': serializer.toJson<String>(uuid),
-      'boardUuid': serializer.toJson<String>(boardUuid),
-      'characterName': serializer.toJson<String>(characterName),
-      'playerName': serializer.toJson<String>(playerName),
-      'imagePath': serializer.toJson<String?>(imagePath),
-      'imageAsset': serializer.toJson<String?>(imageAsset),
-      'broodIndex': serializer.toJson<int>(broodIndex),
-      'createdAt': serializer.toJson<int>(createdAt),
-      'updatedAt': serializer.toJson<int>(updatedAt),
-      'classeIndexes': serializer.toJson<String>(classeIndexes),
-    };
-  }
-
-  BoardCharacterTableData copyWith(
-          {String? uuid,
-          String? boardUuid,
-          String? characterName,
-          String? playerName,
-          Value<String?> imagePath = const Value.absent(),
-          Value<String?> imageAsset = const Value.absent(),
-          int? broodIndex,
-          int? createdAt,
-          int? updatedAt,
-          String? classeIndexes}) =>
-      BoardCharacterTableData(
-        uuid: uuid ?? this.uuid,
-        boardUuid: boardUuid ?? this.boardUuid,
-        characterName: characterName ?? this.characterName,
-        playerName: playerName ?? this.playerName,
-        imagePath: imagePath.present ? imagePath.value : this.imagePath,
-        imageAsset: imageAsset.present ? imageAsset.value : this.imageAsset,
-        broodIndex: broodIndex ?? this.broodIndex,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
-        classeIndexes: classeIndexes ?? this.classeIndexes,
-      );
-  BoardCharacterTableData copyWithCompanion(BoardCharacterTableCompanion data) {
-    return BoardCharacterTableData(
-      uuid: data.uuid.present ? data.uuid.value : this.uuid,
-      boardUuid: data.boardUuid.present ? data.boardUuid.value : this.boardUuid,
-      characterName: data.characterName.present
-          ? data.characterName.value
-          : this.characterName,
-      playerName:
-          data.playerName.present ? data.playerName.value : this.playerName,
-      imagePath: data.imagePath.present ? data.imagePath.value : this.imagePath,
-      imageAsset:
-          data.imageAsset.present ? data.imageAsset.value : this.imageAsset,
-      broodIndex:
-          data.broodIndex.present ? data.broodIndex.value : this.broodIndex,
-      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
-      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
-      classeIndexes: data.classeIndexes.present
-          ? data.classeIndexes.value
-          : this.classeIndexes,
-    );
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('BoardCharacterTableData(')
-          ..write('uuid: $uuid, ')
-          ..write('boardUuid: $boardUuid, ')
-          ..write('characterName: $characterName, ')
-          ..write('playerName: $playerName, ')
-          ..write('imagePath: $imagePath, ')
-          ..write('imageAsset: $imageAsset, ')
-          ..write('broodIndex: $broodIndex, ')
-          ..write('createdAt: $createdAt, ')
-          ..write('updatedAt: $updatedAt, ')
-          ..write('classeIndexes: $classeIndexes')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(uuid, boardUuid, characterName, playerName,
-      imagePath, imageAsset, broodIndex, createdAt, updatedAt, classeIndexes);
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is BoardCharacterTableData &&
-          other.uuid == this.uuid &&
-          other.boardUuid == this.boardUuid &&
-          other.characterName == this.characterName &&
-          other.playerName == this.playerName &&
-          other.imagePath == this.imagePath &&
-          other.imageAsset == this.imageAsset &&
-          other.broodIndex == this.broodIndex &&
-          other.createdAt == this.createdAt &&
-          other.updatedAt == this.updatedAt &&
-          other.classeIndexes == this.classeIndexes);
-}
-
-class BoardCharacterTableCompanion
-    extends UpdateCompanion<BoardCharacterTableData> {
-  final Value<String> uuid;
-  final Value<String> boardUuid;
-  final Value<String> characterName;
-  final Value<String> playerName;
-  final Value<String?> imagePath;
-  final Value<String?> imageAsset;
-  final Value<int> broodIndex;
-  final Value<int> createdAt;
-  final Value<int> updatedAt;
-  final Value<String> classeIndexes;
-  final Value<int> rowid;
-  const BoardCharacterTableCompanion({
-    this.uuid = const Value.absent(),
-    this.boardUuid = const Value.absent(),
-    this.characterName = const Value.absent(),
-    this.playerName = const Value.absent(),
-    this.imagePath = const Value.absent(),
-    this.imageAsset = const Value.absent(),
-    this.broodIndex = const Value.absent(),
-    this.createdAt = const Value.absent(),
-    this.updatedAt = const Value.absent(),
-    this.classeIndexes = const Value.absent(),
-    this.rowid = const Value.absent(),
-  });
-  BoardCharacterTableCompanion.insert({
-    required String uuid,
-    required String boardUuid,
-    required String characterName,
-    required String playerName,
-    this.imagePath = const Value.absent(),
-    this.imageAsset = const Value.absent(),
-    required int broodIndex,
-    required int createdAt,
-    required int updatedAt,
-    required String classeIndexes,
-    this.rowid = const Value.absent(),
-  })  : uuid = Value(uuid),
-        boardUuid = Value(boardUuid),
-        characterName = Value(characterName),
-        playerName = Value(playerName),
-        broodIndex = Value(broodIndex),
-        createdAt = Value(createdAt),
-        updatedAt = Value(updatedAt),
-        classeIndexes = Value(classeIndexes);
-  static Insertable<BoardCharacterTableData> custom({
-    Expression<String>? uuid,
-    Expression<String>? boardUuid,
-    Expression<String>? characterName,
-    Expression<String>? playerName,
-    Expression<String>? imagePath,
-    Expression<String>? imageAsset,
-    Expression<int>? broodIndex,
-    Expression<int>? createdAt,
-    Expression<int>? updatedAt,
-    Expression<String>? classeIndexes,
-    Expression<int>? rowid,
-  }) {
-    return RawValuesInsertable({
-      if (uuid != null) 'uuid': uuid,
-      if (boardUuid != null) 'board_uuid': boardUuid,
-      if (characterName != null) 'character_name': characterName,
-      if (playerName != null) 'player_name': playerName,
-      if (imagePath != null) 'image_path': imagePath,
-      if (imageAsset != null) 'image_asset': imageAsset,
-      if (broodIndex != null) 'brood_index': broodIndex,
-      if (createdAt != null) 'created_at': createdAt,
-      if (updatedAt != null) 'updated_at': updatedAt,
-      if (classeIndexes != null) 'classe_indexes': classeIndexes,
-      if (rowid != null) 'rowid': rowid,
-    });
-  }
-
-  BoardCharacterTableCompanion copyWith(
-      {Value<String>? uuid,
-      Value<String>? boardUuid,
-      Value<String>? characterName,
-      Value<String>? playerName,
-      Value<String?>? imagePath,
-      Value<String?>? imageAsset,
-      Value<int>? broodIndex,
-      Value<int>? createdAt,
-      Value<int>? updatedAt,
-      Value<String>? classeIndexes,
-      Value<int>? rowid}) {
-    return BoardCharacterTableCompanion(
-      uuid: uuid ?? this.uuid,
-      boardUuid: boardUuid ?? this.boardUuid,
-      characterName: characterName ?? this.characterName,
-      playerName: playerName ?? this.playerName,
-      imagePath: imagePath ?? this.imagePath,
-      imageAsset: imageAsset ?? this.imageAsset,
-      broodIndex: broodIndex ?? this.broodIndex,
-      createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
-      classeIndexes: classeIndexes ?? this.classeIndexes,
-      rowid: rowid ?? this.rowid,
-    );
-  }
-
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    if (uuid.present) {
-      map['uuid'] = Variable<String>(uuid.value);
-    }
-    if (boardUuid.present) {
-      map['board_uuid'] = Variable<String>(boardUuid.value);
-    }
-    if (characterName.present) {
-      map['character_name'] = Variable<String>(characterName.value);
-    }
-    if (playerName.present) {
-      map['player_name'] = Variable<String>(playerName.value);
-    }
-    if (imagePath.present) {
-      map['image_path'] = Variable<String>(imagePath.value);
-    }
-    if (imageAsset.present) {
-      map['image_asset'] = Variable<String>(imageAsset.value);
-    }
-    if (broodIndex.present) {
-      map['brood_index'] = Variable<int>(broodIndex.value);
-    }
-    if (createdAt.present) {
-      map['created_at'] = Variable<int>(createdAt.value);
-    }
-    if (updatedAt.present) {
-      map['updated_at'] = Variable<int>(updatedAt.value);
-    }
-    if (classeIndexes.present) {
-      map['classe_indexes'] = Variable<String>(classeIndexes.value);
-    }
-    if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
-    }
-    return map;
-  }
-
-  @override
-  String toString() {
-    return (StringBuffer('BoardCharacterTableCompanion(')
-          ..write('uuid: $uuid, ')
-          ..write('boardUuid: $boardUuid, ')
-          ..write('characterName: $characterName, ')
-          ..write('playerName: $playerName, ')
-          ..write('imagePath: $imagePath, ')
-          ..write('imageAsset: $imageAsset, ')
-          ..write('broodIndex: $broodIndex, ')
-          ..write('createdAt: $createdAt, ')
-          ..write('updatedAt: $updatedAt, ')
-          ..write('classeIndexes: $classeIndexes, ')
-          ..write('rowid: $rowid')
-          ..write(')'))
-        .toString();
-  }
-}
-
 class $BoardNoteTableTable extends BoardNoteTable
     with TableInfo<$BoardNoteTableTable, BoardNoteTableData> {
   @override
@@ -7427,6 +6898,15 @@ class $ArmorTableTable extends ArmorTable
   late final GeneratedColumn<int> penalty = GeneratedColumn<int>(
       'penalty', aliasedName, false,
       type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _inUseMeta = const VerificationMeta('inUse');
+  @override
+  late final GeneratedColumn<bool> inUse = GeneratedColumn<bool>(
+      'in_use', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("in_use" IN (0, 1))'),
+      defaultValue: const Constant(false));
   @override
   List<GeneratedColumn> get $columns => [
         uuid,
@@ -7440,7 +6920,8 @@ class $ArmorTableTable extends ArmorTable
         ocupedSpace,
         typeIndex,
         defenseBonus,
-        penalty
+        penalty,
+        inUse
       ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -7524,6 +7005,10 @@ class $ArmorTableTable extends ArmorTable
     } else if (isInserting) {
       context.missing(_penaltyMeta);
     }
+    if (data.containsKey('in_use')) {
+      context.handle(
+          _inUseMeta, inUse.isAcceptableOrUnknown(data['in_use']!, _inUseMeta));
+    }
     return context;
   }
 
@@ -7557,6 +7042,8 @@ class $ArmorTableTable extends ArmorTable
           .read(DriftSqlType.int, data['${effectivePrefix}defense_bonus'])!,
       penalty: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}penalty'])!,
+      inUse: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}in_use'])!,
     );
   }
 
@@ -7579,6 +7066,7 @@ class ArmorTableData extends DataClass implements Insertable<ArmorTableData> {
   final int typeIndex;
   final int defenseBonus;
   final int penalty;
+  final bool inUse;
   const ArmorTableData(
       {required this.uuid,
       required this.name,
@@ -7591,7 +7079,8 @@ class ArmorTableData extends DataClass implements Insertable<ArmorTableData> {
       required this.ocupedSpace,
       required this.typeIndex,
       required this.defenseBonus,
-      required this.penalty});
+      required this.penalty,
+      required this.inUse});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -7617,6 +7106,7 @@ class ArmorTableData extends DataClass implements Insertable<ArmorTableData> {
     map['type_index'] = Variable<int>(typeIndex);
     map['defense_bonus'] = Variable<int>(defenseBonus);
     map['penalty'] = Variable<int>(penalty);
+    map['in_use'] = Variable<bool>(inUse);
     return map;
   }
 
@@ -7641,6 +7131,7 @@ class ArmorTableData extends DataClass implements Insertable<ArmorTableData> {
       typeIndex: Value(typeIndex),
       defenseBonus: Value(defenseBonus),
       penalty: Value(penalty),
+      inUse: Value(inUse),
     );
   }
 
@@ -7661,6 +7152,7 @@ class ArmorTableData extends DataClass implements Insertable<ArmorTableData> {
       typeIndex: serializer.fromJson<int>(json['typeIndex']),
       defenseBonus: serializer.fromJson<int>(json['defenseBonus']),
       penalty: serializer.fromJson<int>(json['penalty']),
+      inUse: serializer.fromJson<bool>(json['inUse']),
     );
   }
   @override
@@ -7679,6 +7171,7 @@ class ArmorTableData extends DataClass implements Insertable<ArmorTableData> {
       'typeIndex': serializer.toJson<int>(typeIndex),
       'defenseBonus': serializer.toJson<int>(defenseBonus),
       'penalty': serializer.toJson<int>(penalty),
+      'inUse': serializer.toJson<bool>(inUse),
     };
   }
 
@@ -7694,7 +7187,8 @@ class ArmorTableData extends DataClass implements Insertable<ArmorTableData> {
           double? ocupedSpace,
           int? typeIndex,
           int? defenseBonus,
-          int? penalty}) =>
+          int? penalty,
+          bool? inUse}) =>
       ArmorTableData(
         uuid: uuid ?? this.uuid,
         name: name ?? this.name,
@@ -7711,6 +7205,7 @@ class ArmorTableData extends DataClass implements Insertable<ArmorTableData> {
         typeIndex: typeIndex ?? this.typeIndex,
         defenseBonus: defenseBonus ?? this.defenseBonus,
         penalty: penalty ?? this.penalty,
+        inUse: inUse ?? this.inUse,
       );
   ArmorTableData copyWithCompanion(ArmorTableCompanion data) {
     return ArmorTableData(
@@ -7734,6 +7229,7 @@ class ArmorTableData extends DataClass implements Insertable<ArmorTableData> {
           ? data.defenseBonus.value
           : this.defenseBonus,
       penalty: data.penalty.present ? data.penalty.value : this.penalty,
+      inUse: data.inUse.present ? data.inUse.value : this.inUse,
     );
   }
 
@@ -7751,7 +7247,8 @@ class ArmorTableData extends DataClass implements Insertable<ArmorTableData> {
           ..write('ocupedSpace: $ocupedSpace, ')
           ..write('typeIndex: $typeIndex, ')
           ..write('defenseBonus: $defenseBonus, ')
-          ..write('penalty: $penalty')
+          ..write('penalty: $penalty, ')
+          ..write('inUse: $inUse')
           ..write(')'))
         .toString();
   }
@@ -7769,7 +7266,8 @@ class ArmorTableData extends DataClass implements Insertable<ArmorTableData> {
       ocupedSpace,
       typeIndex,
       defenseBonus,
-      penalty);
+      penalty,
+      inUse);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -7785,7 +7283,8 @@ class ArmorTableData extends DataClass implements Insertable<ArmorTableData> {
           other.ocupedSpace == this.ocupedSpace &&
           other.typeIndex == this.typeIndex &&
           other.defenseBonus == this.defenseBonus &&
-          other.penalty == this.penalty);
+          other.penalty == this.penalty &&
+          other.inUse == this.inUse);
 }
 
 class ArmorTableCompanion extends UpdateCompanion<ArmorTableData> {
@@ -7801,6 +7300,7 @@ class ArmorTableCompanion extends UpdateCompanion<ArmorTableData> {
   final Value<int> typeIndex;
   final Value<int> defenseBonus;
   final Value<int> penalty;
+  final Value<bool> inUse;
   final Value<int> rowid;
   const ArmorTableCompanion({
     this.uuid = const Value.absent(),
@@ -7815,6 +7315,7 @@ class ArmorTableCompanion extends UpdateCompanion<ArmorTableData> {
     this.typeIndex = const Value.absent(),
     this.defenseBonus = const Value.absent(),
     this.penalty = const Value.absent(),
+    this.inUse = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   ArmorTableCompanion.insert({
@@ -7830,6 +7331,7 @@ class ArmorTableCompanion extends UpdateCompanion<ArmorTableData> {
     required int typeIndex,
     required int defenseBonus,
     required int penalty,
+    this.inUse = const Value.absent(),
     this.rowid = const Value.absent(),
   })  : uuid = Value(uuid),
         name = Value(name),
@@ -7851,6 +7353,7 @@ class ArmorTableCompanion extends UpdateCompanion<ArmorTableData> {
     Expression<int>? typeIndex,
     Expression<int>? defenseBonus,
     Expression<int>? penalty,
+    Expression<bool>? inUse,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -7867,6 +7370,7 @@ class ArmorTableCompanion extends UpdateCompanion<ArmorTableData> {
       if (typeIndex != null) 'type_index': typeIndex,
       if (defenseBonus != null) 'defense_bonus': defenseBonus,
       if (penalty != null) 'penalty': penalty,
+      if (inUse != null) 'in_use': inUse,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -7884,6 +7388,7 @@ class ArmorTableCompanion extends UpdateCompanion<ArmorTableData> {
       Value<int>? typeIndex,
       Value<int>? defenseBonus,
       Value<int>? penalty,
+      Value<bool>? inUse,
       Value<int>? rowid}) {
     return ArmorTableCompanion(
       uuid: uuid ?? this.uuid,
@@ -7898,6 +7403,7 @@ class ArmorTableCompanion extends UpdateCompanion<ArmorTableData> {
       typeIndex: typeIndex ?? this.typeIndex,
       defenseBonus: defenseBonus ?? this.defenseBonus,
       penalty: penalty ?? this.penalty,
+      inUse: inUse ?? this.inUse,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -7941,6 +7447,9 @@ class ArmorTableCompanion extends UpdateCompanion<ArmorTableData> {
     if (penalty.present) {
       map['penalty'] = Variable<int>(penalty.value);
     }
+    if (inUse.present) {
+      map['in_use'] = Variable<bool>(inUse.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -7962,6 +7471,7 @@ class ArmorTableCompanion extends UpdateCompanion<ArmorTableData> {
           ..write('typeIndex: $typeIndex, ')
           ..write('defenseBonus: $defenseBonus, ')
           ..write('penalty: $penalty, ')
+          ..write('inUse: $inUse, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -9953,6 +9463,15 @@ class $ShieldTableTable extends ShieldTable
   late final GeneratedColumn<int> penalty = GeneratedColumn<int>(
       'penalty', aliasedName, false,
       type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _inUseMeta = const VerificationMeta('inUse');
+  @override
+  late final GeneratedColumn<bool> inUse = GeneratedColumn<bool>(
+      'in_use', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("in_use" IN (0, 1))'),
+      defaultValue: const Constant(false));
   @override
   List<GeneratedColumn> get $columns => [
         uuid,
@@ -9966,7 +9485,8 @@ class $ShieldTableTable extends ShieldTable
         ocupedSpace,
         typeIndex,
         defenseBonus,
-        penalty
+        penalty,
+        inUse
       ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -10050,6 +9570,10 @@ class $ShieldTableTable extends ShieldTable
     } else if (isInserting) {
       context.missing(_penaltyMeta);
     }
+    if (data.containsKey('in_use')) {
+      context.handle(
+          _inUseMeta, inUse.isAcceptableOrUnknown(data['in_use']!, _inUseMeta));
+    }
     return context;
   }
 
@@ -10083,6 +9607,8 @@ class $ShieldTableTable extends ShieldTable
           .read(DriftSqlType.int, data['${effectivePrefix}defense_bonus'])!,
       penalty: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}penalty'])!,
+      inUse: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}in_use'])!,
     );
   }
 
@@ -10105,6 +9631,7 @@ class ShieldTableData extends DataClass implements Insertable<ShieldTableData> {
   final int typeIndex;
   final int defenseBonus;
   final int penalty;
+  final bool inUse;
   const ShieldTableData(
       {required this.uuid,
       required this.name,
@@ -10117,7 +9644,8 @@ class ShieldTableData extends DataClass implements Insertable<ShieldTableData> {
       required this.ocupedSpace,
       required this.typeIndex,
       required this.defenseBonus,
-      required this.penalty});
+      required this.penalty,
+      required this.inUse});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -10143,6 +9671,7 @@ class ShieldTableData extends DataClass implements Insertable<ShieldTableData> {
     map['type_index'] = Variable<int>(typeIndex);
     map['defense_bonus'] = Variable<int>(defenseBonus);
     map['penalty'] = Variable<int>(penalty);
+    map['in_use'] = Variable<bool>(inUse);
     return map;
   }
 
@@ -10167,6 +9696,7 @@ class ShieldTableData extends DataClass implements Insertable<ShieldTableData> {
       typeIndex: Value(typeIndex),
       defenseBonus: Value(defenseBonus),
       penalty: Value(penalty),
+      inUse: Value(inUse),
     );
   }
 
@@ -10187,6 +9717,7 @@ class ShieldTableData extends DataClass implements Insertable<ShieldTableData> {
       typeIndex: serializer.fromJson<int>(json['typeIndex']),
       defenseBonus: serializer.fromJson<int>(json['defenseBonus']),
       penalty: serializer.fromJson<int>(json['penalty']),
+      inUse: serializer.fromJson<bool>(json['inUse']),
     );
   }
   @override
@@ -10205,6 +9736,7 @@ class ShieldTableData extends DataClass implements Insertable<ShieldTableData> {
       'typeIndex': serializer.toJson<int>(typeIndex),
       'defenseBonus': serializer.toJson<int>(defenseBonus),
       'penalty': serializer.toJson<int>(penalty),
+      'inUse': serializer.toJson<bool>(inUse),
     };
   }
 
@@ -10220,7 +9752,8 @@ class ShieldTableData extends DataClass implements Insertable<ShieldTableData> {
           double? ocupedSpace,
           int? typeIndex,
           int? defenseBonus,
-          int? penalty}) =>
+          int? penalty,
+          bool? inUse}) =>
       ShieldTableData(
         uuid: uuid ?? this.uuid,
         name: name ?? this.name,
@@ -10237,6 +9770,7 @@ class ShieldTableData extends DataClass implements Insertable<ShieldTableData> {
         typeIndex: typeIndex ?? this.typeIndex,
         defenseBonus: defenseBonus ?? this.defenseBonus,
         penalty: penalty ?? this.penalty,
+        inUse: inUse ?? this.inUse,
       );
   ShieldTableData copyWithCompanion(ShieldTableCompanion data) {
     return ShieldTableData(
@@ -10260,6 +9794,7 @@ class ShieldTableData extends DataClass implements Insertable<ShieldTableData> {
           ? data.defenseBonus.value
           : this.defenseBonus,
       penalty: data.penalty.present ? data.penalty.value : this.penalty,
+      inUse: data.inUse.present ? data.inUse.value : this.inUse,
     );
   }
 
@@ -10277,7 +9812,8 @@ class ShieldTableData extends DataClass implements Insertable<ShieldTableData> {
           ..write('ocupedSpace: $ocupedSpace, ')
           ..write('typeIndex: $typeIndex, ')
           ..write('defenseBonus: $defenseBonus, ')
-          ..write('penalty: $penalty')
+          ..write('penalty: $penalty, ')
+          ..write('inUse: $inUse')
           ..write(')'))
         .toString();
   }
@@ -10295,7 +9831,8 @@ class ShieldTableData extends DataClass implements Insertable<ShieldTableData> {
       ocupedSpace,
       typeIndex,
       defenseBonus,
-      penalty);
+      penalty,
+      inUse);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -10311,7 +9848,8 @@ class ShieldTableData extends DataClass implements Insertable<ShieldTableData> {
           other.ocupedSpace == this.ocupedSpace &&
           other.typeIndex == this.typeIndex &&
           other.defenseBonus == this.defenseBonus &&
-          other.penalty == this.penalty);
+          other.penalty == this.penalty &&
+          other.inUse == this.inUse);
 }
 
 class ShieldTableCompanion extends UpdateCompanion<ShieldTableData> {
@@ -10327,6 +9865,7 @@ class ShieldTableCompanion extends UpdateCompanion<ShieldTableData> {
   final Value<int> typeIndex;
   final Value<int> defenseBonus;
   final Value<int> penalty;
+  final Value<bool> inUse;
   final Value<int> rowid;
   const ShieldTableCompanion({
     this.uuid = const Value.absent(),
@@ -10341,6 +9880,7 @@ class ShieldTableCompanion extends UpdateCompanion<ShieldTableData> {
     this.typeIndex = const Value.absent(),
     this.defenseBonus = const Value.absent(),
     this.penalty = const Value.absent(),
+    this.inUse = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   ShieldTableCompanion.insert({
@@ -10356,6 +9896,7 @@ class ShieldTableCompanion extends UpdateCompanion<ShieldTableData> {
     required int typeIndex,
     required int defenseBonus,
     required int penalty,
+    this.inUse = const Value.absent(),
     this.rowid = const Value.absent(),
   })  : uuid = Value(uuid),
         name = Value(name),
@@ -10377,6 +9918,7 @@ class ShieldTableCompanion extends UpdateCompanion<ShieldTableData> {
     Expression<int>? typeIndex,
     Expression<int>? defenseBonus,
     Expression<int>? penalty,
+    Expression<bool>? inUse,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -10393,6 +9935,7 @@ class ShieldTableCompanion extends UpdateCompanion<ShieldTableData> {
       if (typeIndex != null) 'type_index': typeIndex,
       if (defenseBonus != null) 'defense_bonus': defenseBonus,
       if (penalty != null) 'penalty': penalty,
+      if (inUse != null) 'in_use': inUse,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -10410,6 +9953,7 @@ class ShieldTableCompanion extends UpdateCompanion<ShieldTableData> {
       Value<int>? typeIndex,
       Value<int>? defenseBonus,
       Value<int>? penalty,
+      Value<bool>? inUse,
       Value<int>? rowid}) {
     return ShieldTableCompanion(
       uuid: uuid ?? this.uuid,
@@ -10424,6 +9968,7 @@ class ShieldTableCompanion extends UpdateCompanion<ShieldTableData> {
       typeIndex: typeIndex ?? this.typeIndex,
       defenseBonus: defenseBonus ?? this.defenseBonus,
       penalty: penalty ?? this.penalty,
+      inUse: inUse ?? this.inUse,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -10467,6 +10012,9 @@ class ShieldTableCompanion extends UpdateCompanion<ShieldTableData> {
     if (penalty.present) {
       map['penalty'] = Variable<int>(penalty.value);
     }
+    if (inUse.present) {
+      map['in_use'] = Variable<bool>(inUse.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -10488,6 +10036,7 @@ class ShieldTableCompanion extends UpdateCompanion<ShieldTableData> {
           ..write('typeIndex: $typeIndex, ')
           ..write('defenseBonus: $defenseBonus, ')
           ..write('penalty: $penalty, ')
+          ..write('inUse: $inUse, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -16932,6 +16481,42 @@ class $CharacterBoardTableTable extends CharacterBoardTable
   late final GeneratedColumn<int> aligmentIndex = GeneratedColumn<int>(
       'aligment_index', aliasedName, false,
       type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _currentLifeMeta =
+      const VerificationMeta('currentLife');
+  @override
+  late final GeneratedColumn<int> currentLife = GeneratedColumn<int>(
+      'current_life', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _currentManaMeta =
+      const VerificationMeta('currentMana');
+  @override
+  late final GeneratedColumn<int> currentMana = GeneratedColumn<int>(
+      'current_mana', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _inLeftHandMeta =
+      const VerificationMeta('inLeftHand');
+  @override
+  late final GeneratedColumn<String> inLeftHand = GeneratedColumn<String>(
+      'in_left_hand', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _inRightHandMeta =
+      const VerificationMeta('inRightHand');
+  @override
+  late final GeneratedColumn<String> inRightHand = GeneratedColumn<String>(
+      'in_right_hand', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _inTwoHandsMeta =
+      const VerificationMeta('inTwoHands');
+  @override
+  late final GeneratedColumn<String> inTwoHands = GeneratedColumn<String>(
+      'in_two_hands', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _inWearableSlotsMeta =
+      const VerificationMeta('inWearableSlots');
+  @override
+  late final GeneratedColumn<String> inWearableSlots = GeneratedColumn<String>(
+      'in_wearable_slots', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns => [
         uuid,
@@ -16963,7 +16548,13 @@ class $CharacterBoardTableTable extends CharacterBoardTable
         createdAt,
         updatedAt,
         isAlive,
-        aligmentIndex
+        aligmentIndex,
+        currentLife,
+        currentMana,
+        inLeftHand,
+        inRightHand,
+        inTwoHands,
+        inWearableSlots
       ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -17170,6 +16761,46 @@ class $CharacterBoardTableTable extends CharacterBoardTable
     } else if (isInserting) {
       context.missing(_aligmentIndexMeta);
     }
+    if (data.containsKey('current_life')) {
+      context.handle(
+          _currentLifeMeta,
+          currentLife.isAcceptableOrUnknown(
+              data['current_life']!, _currentLifeMeta));
+    } else if (isInserting) {
+      context.missing(_currentLifeMeta);
+    }
+    if (data.containsKey('current_mana')) {
+      context.handle(
+          _currentManaMeta,
+          currentMana.isAcceptableOrUnknown(
+              data['current_mana']!, _currentManaMeta));
+    } else if (isInserting) {
+      context.missing(_currentManaMeta);
+    }
+    if (data.containsKey('in_left_hand')) {
+      context.handle(
+          _inLeftHandMeta,
+          inLeftHand.isAcceptableOrUnknown(
+              data['in_left_hand']!, _inLeftHandMeta));
+    }
+    if (data.containsKey('in_right_hand')) {
+      context.handle(
+          _inRightHandMeta,
+          inRightHand.isAcceptableOrUnknown(
+              data['in_right_hand']!, _inRightHandMeta));
+    }
+    if (data.containsKey('in_two_hands')) {
+      context.handle(
+          _inTwoHandsMeta,
+          inTwoHands.isAcceptableOrUnknown(
+              data['in_two_hands']!, _inTwoHandsMeta));
+    }
+    if (data.containsKey('in_wearable_slots')) {
+      context.handle(
+          _inWearableSlotsMeta,
+          inWearableSlots.isAcceptableOrUnknown(
+              data['in_wearable_slots']!, _inWearableSlotsMeta));
+    }
     return context;
   }
 
@@ -17240,6 +16871,18 @@ class $CharacterBoardTableTable extends CharacterBoardTable
           .read(DriftSqlType.bool, data['${effectivePrefix}is_alive'])!,
       aligmentIndex: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}aligment_index'])!,
+      currentLife: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}current_life'])!,
+      currentMana: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}current_mana'])!,
+      inLeftHand: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}in_left_hand']),
+      inRightHand: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}in_right_hand']),
+      inTwoHands: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}in_two_hands']),
+      inWearableSlots: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}in_wearable_slots']),
     );
   }
 
@@ -17281,6 +16924,12 @@ class CharacterBoardTableData extends DataClass
   final int updatedAt;
   final bool isAlive;
   final int aligmentIndex;
+  final int currentLife;
+  final int currentMana;
+  final String? inLeftHand;
+  final String? inRightHand;
+  final String? inTwoHands;
+  final String? inWearableSlots;
   const CharacterBoardTableData(
       {required this.uuid,
       required this.parentuuid,
@@ -17311,7 +16960,13 @@ class CharacterBoardTableData extends DataClass
       required this.createdAt,
       required this.updatedAt,
       required this.isAlive,
-      required this.aligmentIndex});
+      required this.aligmentIndex,
+      required this.currentLife,
+      required this.currentMana,
+      this.inLeftHand,
+      this.inRightHand,
+      this.inTwoHands,
+      this.inWearableSlots});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -17359,6 +17014,20 @@ class CharacterBoardTableData extends DataClass
     map['updated_at'] = Variable<int>(updatedAt);
     map['is_alive'] = Variable<bool>(isAlive);
     map['aligment_index'] = Variable<int>(aligmentIndex);
+    map['current_life'] = Variable<int>(currentLife);
+    map['current_mana'] = Variable<int>(currentMana);
+    if (!nullToAbsent || inLeftHand != null) {
+      map['in_left_hand'] = Variable<String>(inLeftHand);
+    }
+    if (!nullToAbsent || inRightHand != null) {
+      map['in_right_hand'] = Variable<String>(inRightHand);
+    }
+    if (!nullToAbsent || inTwoHands != null) {
+      map['in_two_hands'] = Variable<String>(inTwoHands);
+    }
+    if (!nullToAbsent || inWearableSlots != null) {
+      map['in_wearable_slots'] = Variable<String>(inWearableSlots);
+    }
     return map;
   }
 
@@ -17407,6 +17076,20 @@ class CharacterBoardTableData extends DataClass
       updatedAt: Value(updatedAt),
       isAlive: Value(isAlive),
       aligmentIndex: Value(aligmentIndex),
+      currentLife: Value(currentLife),
+      currentMana: Value(currentMana),
+      inLeftHand: inLeftHand == null && nullToAbsent
+          ? const Value.absent()
+          : Value(inLeftHand),
+      inRightHand: inRightHand == null && nullToAbsent
+          ? const Value.absent()
+          : Value(inRightHand),
+      inTwoHands: inTwoHands == null && nullToAbsent
+          ? const Value.absent()
+          : Value(inTwoHands),
+      inWearableSlots: inWearableSlots == null && nullToAbsent
+          ? const Value.absent()
+          : Value(inWearableSlots),
     );
   }
 
@@ -17444,6 +17127,12 @@ class CharacterBoardTableData extends DataClass
       updatedAt: serializer.fromJson<int>(json['updatedAt']),
       isAlive: serializer.fromJson<bool>(json['isAlive']),
       aligmentIndex: serializer.fromJson<int>(json['aligmentIndex']),
+      currentLife: serializer.fromJson<int>(json['currentLife']),
+      currentMana: serializer.fromJson<int>(json['currentMana']),
+      inLeftHand: serializer.fromJson<String?>(json['inLeftHand']),
+      inRightHand: serializer.fromJson<String?>(json['inRightHand']),
+      inTwoHands: serializer.fromJson<String?>(json['inTwoHands']),
+      inWearableSlots: serializer.fromJson<String?>(json['inWearableSlots']),
     );
   }
   @override
@@ -17480,6 +17169,12 @@ class CharacterBoardTableData extends DataClass
       'updatedAt': serializer.toJson<int>(updatedAt),
       'isAlive': serializer.toJson<bool>(isAlive),
       'aligmentIndex': serializer.toJson<int>(aligmentIndex),
+      'currentLife': serializer.toJson<int>(currentLife),
+      'currentMana': serializer.toJson<int>(currentMana),
+      'inLeftHand': serializer.toJson<String?>(inLeftHand),
+      'inRightHand': serializer.toJson<String?>(inRightHand),
+      'inTwoHands': serializer.toJson<String?>(inTwoHands),
+      'inWearableSlots': serializer.toJson<String?>(inWearableSlots),
     };
   }
 
@@ -17513,7 +17208,13 @@ class CharacterBoardTableData extends DataClass
           int? createdAt,
           int? updatedAt,
           bool? isAlive,
-          int? aligmentIndex}) =>
+          int? aligmentIndex,
+          int? currentLife,
+          int? currentMana,
+          Value<String?> inLeftHand = const Value.absent(),
+          Value<String?> inRightHand = const Value.absent(),
+          Value<String?> inTwoHands = const Value.absent(),
+          Value<String?> inWearableSlots = const Value.absent()}) =>
       CharacterBoardTableData(
         uuid: uuid ?? this.uuid,
         parentuuid: parentuuid ?? this.parentuuid,
@@ -17549,6 +17250,14 @@ class CharacterBoardTableData extends DataClass
         updatedAt: updatedAt ?? this.updatedAt,
         isAlive: isAlive ?? this.isAlive,
         aligmentIndex: aligmentIndex ?? this.aligmentIndex,
+        currentLife: currentLife ?? this.currentLife,
+        currentMana: currentMana ?? this.currentMana,
+        inLeftHand: inLeftHand.present ? inLeftHand.value : this.inLeftHand,
+        inRightHand: inRightHand.present ? inRightHand.value : this.inRightHand,
+        inTwoHands: inTwoHands.present ? inTwoHands.value : this.inTwoHands,
+        inWearableSlots: inWearableSlots.present
+            ? inWearableSlots.value
+            : this.inWearableSlots,
       );
   CharacterBoardTableData copyWithCompanion(CharacterBoardTableCompanion data) {
     return CharacterBoardTableData(
@@ -17604,6 +17313,19 @@ class CharacterBoardTableData extends DataClass
       aligmentIndex: data.aligmentIndex.present
           ? data.aligmentIndex.value
           : this.aligmentIndex,
+      currentLife:
+          data.currentLife.present ? data.currentLife.value : this.currentLife,
+      currentMana:
+          data.currentMana.present ? data.currentMana.value : this.currentMana,
+      inLeftHand:
+          data.inLeftHand.present ? data.inLeftHand.value : this.inLeftHand,
+      inRightHand:
+          data.inRightHand.present ? data.inRightHand.value : this.inRightHand,
+      inTwoHands:
+          data.inTwoHands.present ? data.inTwoHands.value : this.inTwoHands,
+      inWearableSlots: data.inWearableSlots.present
+          ? data.inWearableSlots.value
+          : this.inWearableSlots,
     );
   }
 
@@ -17639,7 +17361,13 @@ class CharacterBoardTableData extends DataClass
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
           ..write('isAlive: $isAlive, ')
-          ..write('aligmentIndex: $aligmentIndex')
+          ..write('aligmentIndex: $aligmentIndex, ')
+          ..write('currentLife: $currentLife, ')
+          ..write('currentMana: $currentMana, ')
+          ..write('inLeftHand: $inLeftHand, ')
+          ..write('inRightHand: $inRightHand, ')
+          ..write('inTwoHands: $inTwoHands, ')
+          ..write('inWearableSlots: $inWearableSlots')
           ..write(')'))
         .toString();
   }
@@ -17675,7 +17403,13 @@ class CharacterBoardTableData extends DataClass
         createdAt,
         updatedAt,
         isAlive,
-        aligmentIndex
+        aligmentIndex,
+        currentLife,
+        currentMana,
+        inLeftHand,
+        inRightHand,
+        inTwoHands,
+        inWearableSlots
       ]);
   @override
   bool operator ==(Object other) =>
@@ -17710,7 +17444,13 @@ class CharacterBoardTableData extends DataClass
           other.createdAt == this.createdAt &&
           other.updatedAt == this.updatedAt &&
           other.isAlive == this.isAlive &&
-          other.aligmentIndex == this.aligmentIndex);
+          other.aligmentIndex == this.aligmentIndex &&
+          other.currentLife == this.currentLife &&
+          other.currentMana == this.currentMana &&
+          other.inLeftHand == this.inLeftHand &&
+          other.inRightHand == this.inRightHand &&
+          other.inTwoHands == this.inTwoHands &&
+          other.inWearableSlots == this.inWearableSlots);
 }
 
 class CharacterBoardTableCompanion
@@ -17745,6 +17485,12 @@ class CharacterBoardTableCompanion
   final Value<int> updatedAt;
   final Value<bool> isAlive;
   final Value<int> aligmentIndex;
+  final Value<int> currentLife;
+  final Value<int> currentMana;
+  final Value<String?> inLeftHand;
+  final Value<String?> inRightHand;
+  final Value<String?> inTwoHands;
+  final Value<String?> inWearableSlots;
   final Value<int> rowid;
   const CharacterBoardTableCompanion({
     this.uuid = const Value.absent(),
@@ -17777,6 +17523,12 @@ class CharacterBoardTableCompanion
     this.updatedAt = const Value.absent(),
     this.isAlive = const Value.absent(),
     this.aligmentIndex = const Value.absent(),
+    this.currentLife = const Value.absent(),
+    this.currentMana = const Value.absent(),
+    this.inLeftHand = const Value.absent(),
+    this.inRightHand = const Value.absent(),
+    this.inTwoHands = const Value.absent(),
+    this.inWearableSlots = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   CharacterBoardTableCompanion.insert({
@@ -17810,6 +17562,12 @@ class CharacterBoardTableCompanion
     required int updatedAt,
     required bool isAlive,
     required int aligmentIndex,
+    required int currentLife,
+    required int currentMana,
+    this.inLeftHand = const Value.absent(),
+    this.inRightHand = const Value.absent(),
+    this.inTwoHands = const Value.absent(),
+    this.inWearableSlots = const Value.absent(),
     this.rowid = const Value.absent(),
   })  : uuid = Value(uuid),
         parentuuid = Value(parentuuid),
@@ -17833,7 +17591,9 @@ class CharacterBoardTableCompanion
         createdAt = Value(createdAt),
         updatedAt = Value(updatedAt),
         isAlive = Value(isAlive),
-        aligmentIndex = Value(aligmentIndex);
+        aligmentIndex = Value(aligmentIndex),
+        currentLife = Value(currentLife),
+        currentMana = Value(currentMana);
   static Insertable<CharacterBoardTableData> custom({
     Expression<String>? uuid,
     Expression<String>? parentuuid,
@@ -17865,6 +17625,12 @@ class CharacterBoardTableCompanion
     Expression<int>? updatedAt,
     Expression<bool>? isAlive,
     Expression<int>? aligmentIndex,
+    Expression<int>? currentLife,
+    Expression<int>? currentMana,
+    Expression<String>? inLeftHand,
+    Expression<String>? inRightHand,
+    Expression<String>? inTwoHands,
+    Expression<String>? inWearableSlots,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -17898,6 +17664,12 @@ class CharacterBoardTableCompanion
       if (updatedAt != null) 'updated_at': updatedAt,
       if (isAlive != null) 'is_alive': isAlive,
       if (aligmentIndex != null) 'aligment_index': aligmentIndex,
+      if (currentLife != null) 'current_life': currentLife,
+      if (currentMana != null) 'current_mana': currentMana,
+      if (inLeftHand != null) 'in_left_hand': inLeftHand,
+      if (inRightHand != null) 'in_right_hand': inRightHand,
+      if (inTwoHands != null) 'in_two_hands': inTwoHands,
+      if (inWearableSlots != null) 'in_wearable_slots': inWearableSlots,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -17933,6 +17705,12 @@ class CharacterBoardTableCompanion
       Value<int>? updatedAt,
       Value<bool>? isAlive,
       Value<int>? aligmentIndex,
+      Value<int>? currentLife,
+      Value<int>? currentMana,
+      Value<String?>? inLeftHand,
+      Value<String?>? inRightHand,
+      Value<String?>? inTwoHands,
+      Value<String?>? inWearableSlots,
       Value<int>? rowid}) {
     return CharacterBoardTableCompanion(
       uuid: uuid ?? this.uuid,
@@ -17965,6 +17743,12 @@ class CharacterBoardTableCompanion
       updatedAt: updatedAt ?? this.updatedAt,
       isAlive: isAlive ?? this.isAlive,
       aligmentIndex: aligmentIndex ?? this.aligmentIndex,
+      currentLife: currentLife ?? this.currentLife,
+      currentMana: currentMana ?? this.currentMana,
+      inLeftHand: inLeftHand ?? this.inLeftHand,
+      inRightHand: inRightHand ?? this.inRightHand,
+      inTwoHands: inTwoHands ?? this.inTwoHands,
+      inWearableSlots: inWearableSlots ?? this.inWearableSlots,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -18062,6 +17846,24 @@ class CharacterBoardTableCompanion
     if (aligmentIndex.present) {
       map['aligment_index'] = Variable<int>(aligmentIndex.value);
     }
+    if (currentLife.present) {
+      map['current_life'] = Variable<int>(currentLife.value);
+    }
+    if (currentMana.present) {
+      map['current_mana'] = Variable<int>(currentMana.value);
+    }
+    if (inLeftHand.present) {
+      map['in_left_hand'] = Variable<String>(inLeftHand.value);
+    }
+    if (inRightHand.present) {
+      map['in_right_hand'] = Variable<String>(inRightHand.value);
+    }
+    if (inTwoHands.present) {
+      map['in_two_hands'] = Variable<String>(inTwoHands.value);
+    }
+    if (inWearableSlots.present) {
+      map['in_wearable_slots'] = Variable<String>(inWearableSlots.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -18101,6 +17903,12 @@ class CharacterBoardTableCompanion
           ..write('updatedAt: $updatedAt, ')
           ..write('isAlive: $isAlive, ')
           ..write('aligmentIndex: $aligmentIndex, ')
+          ..write('currentLife: $currentLife, ')
+          ..write('currentMana: $currentMana, ')
+          ..write('inLeftHand: $inLeftHand, ')
+          ..write('inRightHand: $inRightHand, ')
+          ..write('inTwoHands: $inTwoHands, ')
+          ..write('inWearableSlots: $inWearableSlots, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -18121,8 +17929,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $BoardLinkTableTable boardLinkTable = $BoardLinkTableTable(this);
   late final $BoardPlayerTableTable boardPlayerTable =
       $BoardPlayerTableTable(this);
-  late final $BoardCharacterTableTable boardCharacterTable =
-      $BoardCharacterTableTable(this);
   late final $BoardNoteTableTable boardNoteTable = $BoardNoteTableTable(this);
   late final $BoardCombatTableTable boardCombatTable =
       $BoardCombatTableTable(this);
@@ -18179,7 +17985,6 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         boardSessionTable,
         boardLinkTable,
         boardPlayerTable,
-        boardCharacterTable,
         boardNoteTable,
         boardCombatTable,
         menaceTable,
@@ -19620,215 +19425,6 @@ class $$BoardPlayerTableTableOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
-typedef $$BoardCharacterTableTableCreateCompanionBuilder
-    = BoardCharacterTableCompanion Function({
-  required String uuid,
-  required String boardUuid,
-  required String characterName,
-  required String playerName,
-  Value<String?> imagePath,
-  Value<String?> imageAsset,
-  required int broodIndex,
-  required int createdAt,
-  required int updatedAt,
-  required String classeIndexes,
-  Value<int> rowid,
-});
-typedef $$BoardCharacterTableTableUpdateCompanionBuilder
-    = BoardCharacterTableCompanion Function({
-  Value<String> uuid,
-  Value<String> boardUuid,
-  Value<String> characterName,
-  Value<String> playerName,
-  Value<String?> imagePath,
-  Value<String?> imageAsset,
-  Value<int> broodIndex,
-  Value<int> createdAt,
-  Value<int> updatedAt,
-  Value<String> classeIndexes,
-  Value<int> rowid,
-});
-
-class $$BoardCharacterTableTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $BoardCharacterTableTable,
-    BoardCharacterTableData,
-    $$BoardCharacterTableTableFilterComposer,
-    $$BoardCharacterTableTableOrderingComposer,
-    $$BoardCharacterTableTableCreateCompanionBuilder,
-    $$BoardCharacterTableTableUpdateCompanionBuilder> {
-  $$BoardCharacterTableTableTableManager(
-      _$AppDatabase db, $BoardCharacterTableTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer: $$BoardCharacterTableTableFilterComposer(
-              ComposerState(db, table)),
-          orderingComposer: $$BoardCharacterTableTableOrderingComposer(
-              ComposerState(db, table)),
-          updateCompanionCallback: ({
-            Value<String> uuid = const Value.absent(),
-            Value<String> boardUuid = const Value.absent(),
-            Value<String> characterName = const Value.absent(),
-            Value<String> playerName = const Value.absent(),
-            Value<String?> imagePath = const Value.absent(),
-            Value<String?> imageAsset = const Value.absent(),
-            Value<int> broodIndex = const Value.absent(),
-            Value<int> createdAt = const Value.absent(),
-            Value<int> updatedAt = const Value.absent(),
-            Value<String> classeIndexes = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              BoardCharacterTableCompanion(
-            uuid: uuid,
-            boardUuid: boardUuid,
-            characterName: characterName,
-            playerName: playerName,
-            imagePath: imagePath,
-            imageAsset: imageAsset,
-            broodIndex: broodIndex,
-            createdAt: createdAt,
-            updatedAt: updatedAt,
-            classeIndexes: classeIndexes,
-            rowid: rowid,
-          ),
-          createCompanionCallback: ({
-            required String uuid,
-            required String boardUuid,
-            required String characterName,
-            required String playerName,
-            Value<String?> imagePath = const Value.absent(),
-            Value<String?> imageAsset = const Value.absent(),
-            required int broodIndex,
-            required int createdAt,
-            required int updatedAt,
-            required String classeIndexes,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              BoardCharacterTableCompanion.insert(
-            uuid: uuid,
-            boardUuid: boardUuid,
-            characterName: characterName,
-            playerName: playerName,
-            imagePath: imagePath,
-            imageAsset: imageAsset,
-            broodIndex: broodIndex,
-            createdAt: createdAt,
-            updatedAt: updatedAt,
-            classeIndexes: classeIndexes,
-            rowid: rowid,
-          ),
-        ));
-}
-
-class $$BoardCharacterTableTableFilterComposer
-    extends FilterComposer<_$AppDatabase, $BoardCharacterTableTable> {
-  $$BoardCharacterTableTableFilterComposer(super.$state);
-  ColumnFilters<String> get uuid => $state.composableBuilder(
-      column: $state.table.uuid,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get boardUuid => $state.composableBuilder(
-      column: $state.table.boardUuid,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get characterName => $state.composableBuilder(
-      column: $state.table.characterName,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get playerName => $state.composableBuilder(
-      column: $state.table.playerName,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get imagePath => $state.composableBuilder(
-      column: $state.table.imagePath,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get imageAsset => $state.composableBuilder(
-      column: $state.table.imageAsset,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get broodIndex => $state.composableBuilder(
-      column: $state.table.broodIndex,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get createdAt => $state.composableBuilder(
-      column: $state.table.createdAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get updatedAt => $state.composableBuilder(
-      column: $state.table.updatedAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get classeIndexes => $state.composableBuilder(
-      column: $state.table.classeIndexes,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-}
-
-class $$BoardCharacterTableTableOrderingComposer
-    extends OrderingComposer<_$AppDatabase, $BoardCharacterTableTable> {
-  $$BoardCharacterTableTableOrderingComposer(super.$state);
-  ColumnOrderings<String> get uuid => $state.composableBuilder(
-      column: $state.table.uuid,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get boardUuid => $state.composableBuilder(
-      column: $state.table.boardUuid,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get characterName => $state.composableBuilder(
-      column: $state.table.characterName,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get playerName => $state.composableBuilder(
-      column: $state.table.playerName,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get imagePath => $state.composableBuilder(
-      column: $state.table.imagePath,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get imageAsset => $state.composableBuilder(
-      column: $state.table.imageAsset,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get broodIndex => $state.composableBuilder(
-      column: $state.table.broodIndex,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get createdAt => $state.composableBuilder(
-      column: $state.table.createdAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get updatedAt => $state.composableBuilder(
-      column: $state.table.updatedAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get classeIndexes => $state.composableBuilder(
-      column: $state.table.classeIndexes,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-}
-
 typedef $$BoardNoteTableTableCreateCompanionBuilder = BoardNoteTableCompanion
     Function({
   required String uuid,
@@ -21143,6 +20739,7 @@ typedef $$ArmorTableTableCreateCompanionBuilder = ArmorTableCompanion Function({
   required int typeIndex,
   required int defenseBonus,
   required int penalty,
+  Value<bool> inUse,
   Value<int> rowid,
 });
 typedef $$ArmorTableTableUpdateCompanionBuilder = ArmorTableCompanion Function({
@@ -21158,6 +20755,7 @@ typedef $$ArmorTableTableUpdateCompanionBuilder = ArmorTableCompanion Function({
   Value<int> typeIndex,
   Value<int> defenseBonus,
   Value<int> penalty,
+  Value<bool> inUse,
   Value<int> rowid,
 });
 
@@ -21190,6 +20788,7 @@ class $$ArmorTableTableTableManager extends RootTableManager<
             Value<int> typeIndex = const Value.absent(),
             Value<int> defenseBonus = const Value.absent(),
             Value<int> penalty = const Value.absent(),
+            Value<bool> inUse = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               ArmorTableCompanion(
@@ -21205,6 +20804,7 @@ class $$ArmorTableTableTableManager extends RootTableManager<
             typeIndex: typeIndex,
             defenseBonus: defenseBonus,
             penalty: penalty,
+            inUse: inUse,
             rowid: rowid,
           ),
           createCompanionCallback: ({
@@ -21220,6 +20820,7 @@ class $$ArmorTableTableTableManager extends RootTableManager<
             required int typeIndex,
             required int defenseBonus,
             required int penalty,
+            Value<bool> inUse = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               ArmorTableCompanion.insert(
@@ -21235,6 +20836,7 @@ class $$ArmorTableTableTableManager extends RootTableManager<
             typeIndex: typeIndex,
             defenseBonus: defenseBonus,
             penalty: penalty,
+            inUse: inUse,
             rowid: rowid,
           ),
         ));
@@ -21302,6 +20904,11 @@ class $$ArmorTableTableFilterComposer
       column: $state.table.penalty,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get inUse => $state.composableBuilder(
+      column: $state.table.inUse,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
 }
 
 class $$ArmorTableTableOrderingComposer
@@ -21364,6 +20971,11 @@ class $$ArmorTableTableOrderingComposer
 
   ColumnOrderings<int> get penalty => $state.composableBuilder(
       column: $state.table.penalty,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get inUse => $state.composableBuilder(
+      column: $state.table.inUse,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
@@ -22154,6 +21766,7 @@ typedef $$ShieldTableTableCreateCompanionBuilder = ShieldTableCompanion
   required int typeIndex,
   required int defenseBonus,
   required int penalty,
+  Value<bool> inUse,
   Value<int> rowid,
 });
 typedef $$ShieldTableTableUpdateCompanionBuilder = ShieldTableCompanion
@@ -22170,6 +21783,7 @@ typedef $$ShieldTableTableUpdateCompanionBuilder = ShieldTableCompanion
   Value<int> typeIndex,
   Value<int> defenseBonus,
   Value<int> penalty,
+  Value<bool> inUse,
   Value<int> rowid,
 });
 
@@ -22202,6 +21816,7 @@ class $$ShieldTableTableTableManager extends RootTableManager<
             Value<int> typeIndex = const Value.absent(),
             Value<int> defenseBonus = const Value.absent(),
             Value<int> penalty = const Value.absent(),
+            Value<bool> inUse = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               ShieldTableCompanion(
@@ -22217,6 +21832,7 @@ class $$ShieldTableTableTableManager extends RootTableManager<
             typeIndex: typeIndex,
             defenseBonus: defenseBonus,
             penalty: penalty,
+            inUse: inUse,
             rowid: rowid,
           ),
           createCompanionCallback: ({
@@ -22232,6 +21848,7 @@ class $$ShieldTableTableTableManager extends RootTableManager<
             required int typeIndex,
             required int defenseBonus,
             required int penalty,
+            Value<bool> inUse = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               ShieldTableCompanion.insert(
@@ -22247,6 +21864,7 @@ class $$ShieldTableTableTableManager extends RootTableManager<
             typeIndex: typeIndex,
             defenseBonus: defenseBonus,
             penalty: penalty,
+            inUse: inUse,
             rowid: rowid,
           ),
         ));
@@ -22314,6 +21932,11 @@ class $$ShieldTableTableFilterComposer
       column: $state.table.penalty,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get inUse => $state.composableBuilder(
+      column: $state.table.inUse,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
 }
 
 class $$ShieldTableTableOrderingComposer
@@ -22376,6 +21999,11 @@ class $$ShieldTableTableOrderingComposer
 
   ColumnOrderings<int> get penalty => $state.composableBuilder(
       column: $state.table.penalty,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get inUse => $state.composableBuilder(
+      column: $state.table.inUse,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
@@ -24876,6 +24504,12 @@ typedef $$CharacterBoardTableTableCreateCompanionBuilder
   required int updatedAt,
   required bool isAlive,
   required int aligmentIndex,
+  required int currentLife,
+  required int currentMana,
+  Value<String?> inLeftHand,
+  Value<String?> inRightHand,
+  Value<String?> inTwoHands,
+  Value<String?> inWearableSlots,
   Value<int> rowid,
 });
 typedef $$CharacterBoardTableTableUpdateCompanionBuilder
@@ -24910,6 +24544,12 @@ typedef $$CharacterBoardTableTableUpdateCompanionBuilder
   Value<int> updatedAt,
   Value<bool> isAlive,
   Value<int> aligmentIndex,
+  Value<int> currentLife,
+  Value<int> currentMana,
+  Value<String?> inLeftHand,
+  Value<String?> inRightHand,
+  Value<String?> inTwoHands,
+  Value<String?> inWearableSlots,
   Value<int> rowid,
 });
 
@@ -24961,6 +24601,12 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             Value<int> updatedAt = const Value.absent(),
             Value<bool> isAlive = const Value.absent(),
             Value<int> aligmentIndex = const Value.absent(),
+            Value<int> currentLife = const Value.absent(),
+            Value<int> currentMana = const Value.absent(),
+            Value<String?> inLeftHand = const Value.absent(),
+            Value<String?> inRightHand = const Value.absent(),
+            Value<String?> inTwoHands = const Value.absent(),
+            Value<String?> inWearableSlots = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               CharacterBoardTableCompanion(
@@ -24994,6 +24640,12 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             updatedAt: updatedAt,
             isAlive: isAlive,
             aligmentIndex: aligmentIndex,
+            currentLife: currentLife,
+            currentMana: currentMana,
+            inLeftHand: inLeftHand,
+            inRightHand: inRightHand,
+            inTwoHands: inTwoHands,
+            inWearableSlots: inWearableSlots,
             rowid: rowid,
           ),
           createCompanionCallback: ({
@@ -25027,6 +24679,12 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             required int updatedAt,
             required bool isAlive,
             required int aligmentIndex,
+            required int currentLife,
+            required int currentMana,
+            Value<String?> inLeftHand = const Value.absent(),
+            Value<String?> inRightHand = const Value.absent(),
+            Value<String?> inTwoHands = const Value.absent(),
+            Value<String?> inWearableSlots = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               CharacterBoardTableCompanion.insert(
@@ -25060,6 +24718,12 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             updatedAt: updatedAt,
             isAlive: isAlive,
             aligmentIndex: aligmentIndex,
+            currentLife: currentLife,
+            currentMana: currentMana,
+            inLeftHand: inLeftHand,
+            inRightHand: inRightHand,
+            inTwoHands: inTwoHands,
+            inWearableSlots: inWearableSlots,
             rowid: rowid,
           ),
         ));
@@ -25217,6 +24881,36 @@ class $$CharacterBoardTableTableFilterComposer
       column: $state.table.aligmentIndex,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get currentLife => $state.composableBuilder(
+      column: $state.table.currentLife,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get currentMana => $state.composableBuilder(
+      column: $state.table.currentMana,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get inLeftHand => $state.composableBuilder(
+      column: $state.table.inLeftHand,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get inRightHand => $state.composableBuilder(
+      column: $state.table.inRightHand,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get inTwoHands => $state.composableBuilder(
+      column: $state.table.inTwoHands,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get inWearableSlots => $state.composableBuilder(
+      column: $state.table.inWearableSlots,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
 }
 
 class $$CharacterBoardTableTableOrderingComposer
@@ -25371,6 +25065,36 @@ class $$CharacterBoardTableTableOrderingComposer
       column: $state.table.aligmentIndex,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get currentLife => $state.composableBuilder(
+      column: $state.table.currentLife,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get currentMana => $state.composableBuilder(
+      column: $state.table.currentMana,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get inLeftHand => $state.composableBuilder(
+      column: $state.table.inLeftHand,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get inRightHand => $state.composableBuilder(
+      column: $state.table.inRightHand,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get inTwoHands => $state.composableBuilder(
+      column: $state.table.inTwoHands,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get inWearableSlots => $state.composableBuilder(
+      column: $state.table.inWearableSlots,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
 class $AppDatabaseManager {
@@ -25390,8 +25114,6 @@ class $AppDatabaseManager {
       $$BoardLinkTableTableTableManager(_db, _db.boardLinkTable);
   $$BoardPlayerTableTableTableManager get boardPlayerTable =>
       $$BoardPlayerTableTableTableManager(_db, _db.boardPlayerTable);
-  $$BoardCharacterTableTableTableManager get boardCharacterTable =>
-      $$BoardCharacterTableTableTableManager(_db, _db.boardCharacterTable);
   $$BoardNoteTableTableTableManager get boardNoteTable =>
       $$BoardNoteTableTableTableManager(_db, _db.boardNoteTable);
   $$BoardCombatTableTableTableManager get boardCombatTable =>

@@ -5,6 +5,7 @@ import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
+import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
 import 'package:tormenta20/src/shared/extensions/context_ext.dart';
 
 class BoardViewBanner extends StatelessWidget {
@@ -61,25 +62,26 @@ class BoardViewBanner extends StatelessWidget {
                   ),
                 ),
               ),
-              Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Padding(
-                    padding: T20UI.horizontalPadding,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                          color:
-                              palette.backgroundLevelTwo.withValues(alpha: .4),
-                          borderRadius: T20UI.borderRadius),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 6, horizontal: 12),
-                        child: Text(
-                          '${board.level}˚ Nivel',
-                          style: const TextStyle(fontWeight: FontWeight.w500),
+              if (board.mode == BoardModeType.master)
+                Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Padding(
+                      padding: T20UI.horizontalPadding,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                            color: palette.backgroundLevelTwo
+                                .withValues(alpha: .4),
+                            borderRadius: T20UI.borderRadius),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 6, horizontal: 12),
+                          child: Text(
+                            '${board.level}˚ Nivel',
+                            style: const TextStyle(fontWeight: FontWeight.w500),
+                          ),
                         ),
                       ),
-                    ),
-                  ))
+                    ))
             ],
           ),
         ),

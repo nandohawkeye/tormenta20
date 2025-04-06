@@ -13,9 +13,6 @@ class FontFamily {
   /// Font family: merriweathersans
   static const String merriweathersans = 'merriweathersans';
 
-  /// Font family: poppins
-  static const String poppins = 'poppins';
-
   /// Font family: tormenta
   static const String tormenta = 'tormenta';
 }

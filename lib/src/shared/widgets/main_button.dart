@@ -9,7 +9,7 @@ class MainButton extends StatelessWidget {
     required this.label,
     required this.onTap,
     this.backgroundColor,
-    this.textColor,
+    this.foreground,
     this.icon,
     this.isEnable = true,
     this.fontFamily = FontFamily.tormenta,
@@ -18,7 +18,7 @@ class MainButton extends StatelessWidget {
   final String label;
   final Function() onTap;
   final Color? backgroundColor;
-  final Color? textColor;
+  final Color? foreground;
   final IconData? icon;
   final String? fontFamily;
   final bool isEnable;
@@ -30,9 +30,10 @@ class MainButton extends StatelessWidget {
       width: double.infinity,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          borderRadius: T20UI.borderRadius,
-          color: backgroundColor ?? palette.selected,
-        ),
+            borderRadius: T20UI.borderRadius,
+            color: (backgroundColor ?? palette.selected).withValues(
+              alpha: isEnable ? 1 : 0.3,
+            )),
         child: Material(
           color: Colors.transparent,
           child: InkWell(
@@ -50,6 +51,7 @@ class MainButton extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 8),
                         child: Icon(
                           icon,
+                          color: isEnable ? foreground : palette.textDisable,
                           size: 16,
                         ),
                       ),
@@ -57,7 +59,7 @@ class MainButton extends StatelessWidget {
                       label,
                       style: TextStyle(
                         fontSize: 16,
-                        color: textColor,
+                        color: isEnable ? foreground : palette.textDisable,
                         fontWeight: FontWeight.w500,
                         fontFamily: fontFamily,
                       ),
