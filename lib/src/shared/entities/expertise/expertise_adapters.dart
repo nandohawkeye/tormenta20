@@ -22,6 +22,21 @@ abstract class ExpertiseAdapters {
     );
   }
 
+  static Expertise createfromBaseCharacter(
+    ExpertiseBase base,
+    String characterUuid,
+    bool isTrained,
+  ) {
+    return Expertise(
+      id: base.id,
+      name: base.name,
+      isTrained: false,
+      atribute: base.atribute,
+      parentUuid: characterUuid,
+      uuid: const Uuid().v4(),
+    );
+  }
+
   static Expertise fromDriftData(ExpertiseTableData data) {
     return Expertise(
       id: data.id,

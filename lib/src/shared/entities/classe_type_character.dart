@@ -15,6 +15,20 @@ class ClasseTypeCharacter extends EntityBase {
     required this.characterUuid,
   });
 
+  ClasseTypeCharacter copyWith({
+    String? uuid,
+    String? characterUuid,
+    ClasseType? type,
+    int? level,
+  }) {
+    return ClasseTypeCharacter(
+      uuid: uuid ?? this.uuid,
+      characterUuid: characterUuid ?? this.characterUuid,
+      type: type ?? this.type,
+      level: level ?? this.level,
+    );
+  }
+
   @override
   String get exibitionLabel =>
       '${CharacterUtils.handleClasseTypeTitle(type.name)} $level˚';

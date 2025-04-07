@@ -1,9 +1,19 @@
 import 'package:drift/drift.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
+import 'package:tormenta20/src/shared/entities/action/action.dart';
 import 'package:tormenta20/src/shared/entities/brood.dart';
+import 'package:tormenta20/src/shared/entities/character.dart';
 import 'package:tormenta20/src/shared/entities/character_alignment_type.dart';
 import 'package:tormenta20/src/shared/entities/character_board.dart';
 import 'package:tormenta20/src/shared/entities/creature_size_category.dart';
+import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
+import 'package:tormenta20/src/shared/entities/expertise/expertise.dart';
+import 'package:tormenta20/src/shared/entities/expertise/expertise_adapters.dart';
+import 'package:tormenta20/src/shared/entities/expertise/expertise_base.dart';
+import 'package:tormenta20/src/shared/entities/origin.dart';
+import 'package:tormenta20/src/shared/entities/power.dart';
+import 'package:tormenta20/src/shared/services/expertises_base_service.dart';
+import 'package:uuid/uuid.dart';
 
 abstract class CharacterBoardAdapters {
   static CharacterBoard fromDriftData(CharacterBoardTableData data) {
@@ -46,6 +56,104 @@ abstract class CharacterBoardAdapters {
       origins: [],
       equipments: [],
       actions: [],
+    );
+  }
+
+  static CharacterBoard createFromCharacter(
+      Character entity, String boardUuid) {
+    final now = DateTime.now();
+    final characterUuid = const Uuid().v4();
+    List<Power> powers = [];
+    List<Origin> origins = [];
+    List<ActionEnt> actions = [];
+    List<Equipment> equipments = [];
+    List<Expertise> expertises = [];
+    List<ExpertiseBase> baseExpertises =
+        ExpertisesBaseService().getExpertises();
+    final classe = entity.classe
+        ?.copyWith(uuid: const Uuid().v4(), characterUuid: characterUuid);
+
+    for (var power in entity.powers) {
+      powers.add(power.copyWith(
+          uuid: const Uuid().v4(), characterUuid: characterUuid));
+    }
+
+    for (var origin in entity.origins) {
+      origins.add(origin.copyWith(
+          uuid: const Uuid().v4(), characterUuid: characterUuid));
+    }
+
+    for (var action in entity.actions) {
+      actions.add(
+          action.cloneWith(uuid: const Uuid().v4(), parentUuid: characterUuid));
+    }
+
+    for (var equipment in entity.equipments) {
+      equipments.add(equipment.cloneWith(
+          uuid: const Uuid().v4(), parentUuid: characterUuid));
+    }
+
+    for (var expertise in entity.trainedExpertises) {
+      expertises.add(
+        ExpertiseAdapters.createfromBaseCharacter(
+          expertise,
+          characterUuid,
+          true,
+        ),
+      );
+    }
+
+    for (var base in baseExpertises) {
+      if (!(entity.trainedExpertises.any((e) => e.id == base.id))) {
+        expertises.add(
+          ExpertiseAdapters.createfromBaseCharacter(
+            base,
+            characterUuid,
+            false,
+          ),
+        );
+      }
+    }
+
+    return CharacterBoard(
+      uuid: characterUuid,
+      parentuuid: entity.uuid,
+      boardUuid: boardUuid,
+      isAlive: true,
+      alignmentType: entity.alignmentType,
+      brood: entity.brood,
+      createdAt: now,
+      updatedAt: now,
+      creatureSize: entity.creatureSize,
+      defense: entity.defense,
+      life: entity.life,
+      mana: entity.mana,
+      name: entity.name,
+      charisma: entity.charisma,
+      constitution: entity.constitution,
+      dexterity: entity.dexterity,
+      displacement: entity.displacement,
+      divinityId: entity.divinityId,
+      imageAsset: entity.imageAsset,
+      imagePath: entity.imagePath,
+      intelligence: entity.intelligence,
+      perception: entity.perception,
+      senses: entity.senses,
+      strength: entity.strength,
+      wisdom: entity.wisdom,
+      currentLife: entity.life,
+      currentMana: entity.mana,
+      inLeftHand: null,
+      inRightHand: null,
+      inTwoHands: null,
+      inWearableSlots: null,
+      expertises: expertises,
+      grimorie: entity.grimorie,
+      classes: classe == null ? [] : [classe],
+      powers: powers,
+      origins: origins,
+      equipments: equipments,
+      actions: actions,
     );
   }
 

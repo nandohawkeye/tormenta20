@@ -13,6 +13,20 @@ class Origin extends EntityBase {
     required this.characterUuid,
   });
 
+  Origin copyWith({
+    String? uuid,
+    String? name,
+    String? desc,
+    String? characterUuid,
+  }) {
+    return Origin(
+      uuid: uuid ?? this.uuid,
+      name: name ?? this.name,
+      desc: desc ?? this.desc,
+      characterUuid: characterUuid ?? this.characterUuid,
+    );
+  }
+
   @override
   String get exibitionLabel => name;
 

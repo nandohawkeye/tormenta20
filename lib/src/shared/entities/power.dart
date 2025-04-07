@@ -16,6 +16,22 @@ class Power extends EntityBase {
     required this.characterUuid,
   });
 
+  Power copyWith({
+    String? uuid,
+    String? name,
+    String? desc,
+    PowerType? type,
+    String? characterUuid,
+  }) {
+    return Power(
+      uuid: uuid ?? this.uuid,
+      name: name ?? this.name,
+      desc: desc ?? this.desc,
+      type: type ?? this.type,
+      characterUuid: characterUuid ?? this.characterUuid,
+    );
+  }
+
   @override
   String get exibitionLabel => name;
 
