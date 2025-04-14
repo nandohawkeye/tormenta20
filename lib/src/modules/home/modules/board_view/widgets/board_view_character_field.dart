@@ -77,6 +77,8 @@ class BoardViewCharacterField extends StatelessWidget {
 
     final character = board.characters.firstWhereOrNull((c) => c.isAlive);
 
+    print('character: $character');
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,

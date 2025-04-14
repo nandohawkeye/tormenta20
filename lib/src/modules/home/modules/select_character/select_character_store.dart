@@ -4,6 +4,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/modules/home/modules/select_character/select_character_storage_service.dart';
 import 'package:tormenta20/src/shared/entities/character.dart';
+import 'package:tormenta20/src/shared/entities/character_board_adapters.dart';
+import 'package:tormenta20/src/shared/failures/failure.dart';
 
 class SelectCharacterStore extends ChangeNotifier {
   SelectCharacterStore(this._boardUuid) {
@@ -19,18 +21,12 @@ class SelectCharacterStore extends ChangeNotifier {
   StreamSubscription? _subCharacters;
   final _storageService = SelectCharacterStorageService();
 
-  // Future<Failure?> addLinkMenaceBoard() {
-  //   List<MenaceLinkBoard> entities = [];
-  //   for (var menace in _selectedMenaces) {
-  //     entities.add(MenaceLinkBoard(
-  //       uuid: const Uuid().v4(),
-  //       boardUuid: _boardUuid,
-  //       menaceUuid: menace.uuid,
-  //     ));
-  //   }
+  Future<Failure?> saveCharacterBoard(Character character) async {
+    final characterBoard =
+        CharacterBoardAdapters.createFromCharacter(character, _boardUuid);
 
-  //   return _storageService.addLinkMenaceBoard(entities: entities);
-  // }
+    return await _storageService.saveCharacterBoard(characterBoard);
+  }
 
   List<Character> _characters = [];
   List<Character> get characters => _characters;

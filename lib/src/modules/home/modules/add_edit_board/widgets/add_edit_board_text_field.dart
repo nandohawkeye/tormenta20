@@ -11,10 +11,12 @@ class AddEditBoardTextFields extends StatelessWidget {
     super.key,
     required this.formKey,
     required this.controller,
+    required this.isPlayerMode,
   });
 
   final GlobalKey<FormState> formKey;
   final AddEditBoardController controller;
+  final bool isPlayerMode;
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +42,14 @@ class AddEditBoardTextFields extends StatelessWidget {
                         initialValue: controller.name,
                       ),
                     ),
-                    T20UI.spaceWidth,
-                    Expanded(
-                      child: AddEditBoardLevelField(
-                        controller.changeLevel,
-                        initialValue: controller.level.toString(),
-                      ),
-                    )
+                    if (!isPlayerMode) T20UI.spaceWidth,
+                    if (!isPlayerMode)
+                      Expanded(
+                        child: AddEditBoardLevelField(
+                          controller.changeLevel,
+                          initialValue: controller.level.toString(),
+                        ),
+                      )
                   ],
                 ),
               ),

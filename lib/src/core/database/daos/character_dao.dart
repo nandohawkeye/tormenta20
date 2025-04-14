@@ -13,6 +13,7 @@ import 'package:tormenta20/src/core/database/tables/character_board_table.dart';
 import 'package:tormenta20/src/core/database/tables/character_table.dart';
 import 'package:tormenta20/src/core/database/tables/classe_character_table.dart';
 import 'package:tormenta20/src/core/database/tables/equipment_table.dart';
+import 'package:tormenta20/src/core/database/tables/expertise_table.dart';
 import 'package:tormenta20/src/core/database/tables/general_item_table.dart';
 import 'package:tormenta20/src/core/database/tables/general_skill_table.dart';
 import 'package:tormenta20/src/core/database/tables/grimoire_table.dart';
@@ -30,6 +31,8 @@ import 'package:tormenta20/src/shared/entities/action/hand_to_hand.dart';
 import 'package:tormenta20/src/shared/entities/action/hand_to_hand_adapters.dart';
 import 'package:tormenta20/src/shared/entities/character.dart';
 import 'package:tormenta20/src/shared/entities/character_adapters.dart';
+import 'package:tormenta20/src/shared/entities/character_board.dart';
+import 'package:tormenta20/src/shared/entities/character_board_adapters.dart';
 import 'package:tormenta20/src/shared/entities/character_dto.dart';
 import 'package:tormenta20/src/shared/entities/classe_character_type_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/adventure_backpack_adapters.dart';
@@ -50,6 +53,7 @@ import 'package:tormenta20/src/shared/entities/equipament/shield.dart';
 import 'package:tormenta20/src/shared/entities/equipament/shield_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon_adapters.dart';
+import 'package:tormenta20/src/shared/entities/expertise/expertise_adapters.dart';
 import 'package:tormenta20/src/shared/entities/origin.dart';
 import 'package:tormenta20/src/shared/entities/origin_adapters.dart';
 import 'package:tormenta20/src/shared/entities/power.dart';
@@ -78,6 +82,7 @@ part 'character_dao.g.dart';
   ShieldTable,
   WeaponTable,
   ActionTable,
+  ExpertiseTable,
   ActionHandToHandTable,
   ActionDistanceAttackTable,
 ])
@@ -798,6 +803,183 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
         print('failure in save character: $e $st');
       }
 
+      return Failure(e.toString());
+    }
+  }
+
+  Future<Failure?> saveBoardCharacter(CharacterBoard character) async {
+    List<HandToHand> handToHand = [];
+    List<DistanceAttack> distanceAttacks = [];
+    List<ActionEnt> actions = [];
+
+    if (character.actions.isNotEmpty) {
+      for (var item in character.actions) {
+        if (item is HandToHand) {
+          handToHand.add(item);
+        } else if (item is DistanceAttack) {
+          distanceAttacks.add(item);
+        } else {
+          actions.add(item);
+        }
+      }
+    }
+
+    List<AdventureBackpack> adventuresBackPack = [];
+    List<Ammunition> ammunitions = [];
+    List<Armor> armors = [];
+    List<Backpack> backpacks = [];
+    List<GeneralItem> generalItems = [];
+    List<Saddlebag> saddlebags = [];
+    List<Shield> shields = [];
+    List<Weapon> weapons = [];
+    List<Equipment> equipments = [];
+
+    if (character.equipments.isNotEmpty) {
+      for (var item in character.equipments) {
+        if (item is AdventureBackpack) {
+          adventuresBackPack.add(item);
+        } else if (item is Ammunition) {
+          ammunitions.add(item);
+        } else if (item is Armor) {
+          armors.add(item);
+        } else if (item is Backpack) {
+          backpacks.add(item);
+        } else if (item is GeneralItem) {
+          generalItems.add(item);
+        } else if (item is Saddlebag) {
+          saddlebags.add(item);
+        } else if (item is Shield) {
+          shields.add(item);
+        } else if (item is Weapon) {
+          weapons.add(item);
+        } else {
+          equipments.add(item);
+        }
+      }
+    }
+
+    try {
+      await batch((batch) {
+        batch.insertAllOnConflictUpdate(characterBoardTable,
+            [CharacterBoardAdapters.toDriftCompanion(character)]);
+
+        if (character.expertises.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            expertiseTable,
+            character.expertises
+                .map((entity) => ExpertiseAdapters.toDriftCompanion(entity)),
+          );
+        }
+
+        if (character.classes.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            classeCharacterTable,
+            character.classes.map((entity) =>
+                ClasseCharacterTypeAdapters.toDriftCompanion(entity)),
+          );
+        }
+
+        if (character.powers.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            powerTable,
+            character.powers.map(PowerAdapters.toDriftCompanion),
+          );
+        }
+
+        if (character.origins.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            originTable,
+            character.origins.map(OriginAdapters.toDriftCompanion),
+          );
+        }
+
+        if (handToHand.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            actionHandToHandTable,
+            handToHand.map(HandToHandAdapters.toDriftCompanion),
+          );
+        }
+
+        if (distanceAttacks.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            actionDistanceAttackTable,
+            distanceAttacks.map(DistanceAttackAdapters.toDriftCompanion),
+          );
+        }
+
+        if (actions.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            actionTable,
+            actions.map(ActionAdapters.toDriftCompanion),
+          );
+        }
+
+        if (adventuresBackPack.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            adventureBackpackTable,
+            adventuresBackPack.map(AdventureBackpackAdapters.toDriftCompanion),
+          );
+        }
+
+        if (ammunitions.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            ammunitionTable,
+            ammunitions.map(AmmunitionAdapters.toDriftCompanion),
+          );
+        }
+
+        if (armors.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            armorTable,
+            armors.map(ArmorAdapters.toDriftCompanion),
+          );
+        }
+
+        if (backpacks.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            backpackTable,
+            backpacks.map(BackpackAdapters.toDriftCompanion),
+          );
+        }
+
+        if (generalItems.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            generalItemTable,
+            generalItems.map(GeneralItemAdapters.toDriftCompanion),
+          );
+        }
+
+        if (saddlebags.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            saddlebagTable,
+            saddlebags.map(SaddlebagAdapters.toDriftCompanion),
+          );
+        }
+
+        if (shields.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            shieldTable,
+            shields.map(ShieldAdapters.toDriftCompanion),
+          );
+        }
+
+        if (weapons.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            weaponTable,
+            weapons.map(WeaponAdapters.toDriftCompanion),
+          );
+        }
+
+        if (equipments.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            equipmentTable,
+            equipments.map(EquipmentAdapters.toDriftCompanion),
+          );
+        }
+      });
+
+      return null;
+    } catch (e) {
       return Failure(e.toString());
     }
   }

@@ -16355,12 +16355,6 @@ class $CharacterBoardTableTable extends CharacterBoardTable
   late final GeneratedColumn<int> divinityId = GeneratedColumn<int>(
       'divinity_id', aliasedName, true,
       type: DriftSqlType.int, requiredDuringInsert: false);
-  static const VerificationMeta _initiativeMeta =
-      const VerificationMeta('initiative');
-  @override
-  late final GeneratedColumn<int> initiative = GeneratedColumn<int>(
-      'initiative', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _perceptionMeta =
       const VerificationMeta('perception');
   @override
@@ -16418,12 +16412,6 @@ class $CharacterBoardTableTable extends CharacterBoardTable
   late final GeneratedColumn<int> charisma = GeneratedColumn<int>(
       'charisma', aliasedName, false,
       type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _typeIndexMeta =
-      const VerificationMeta('typeIndex');
-  @override
-  late final GeneratedColumn<int> typeIndex = GeneratedColumn<int>(
-      'type_index', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _creatureSizeIndexMeta =
       const VerificationMeta('creatureSizeIndex');
   @override
@@ -16436,18 +16424,6 @@ class $CharacterBoardTableTable extends CharacterBoardTable
   late final GeneratedColumn<int> broodIndex = GeneratedColumn<int>(
       'brood_index', aliasedName, false,
       type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _combateRoleIndexMeta =
-      const VerificationMeta('combateRoleIndex');
-  @override
-  late final GeneratedColumn<int> combateRoleIndex = GeneratedColumn<int>(
-      'combate_role_index', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _treasureTypeIndexMeta =
-      const VerificationMeta('treasureTypeIndex');
-  @override
-  late final GeneratedColumn<int> treasureTypeIndex = GeneratedColumn<int>(
-      'treasure_type_index', aliasedName, true,
-      type: DriftSqlType.int, requiredDuringInsert: false);
   static const VerificationMeta _grimoireUuidMeta =
       const VerificationMeta('grimoireUuid');
   @override
@@ -16528,7 +16504,6 @@ class $CharacterBoardTableTable extends CharacterBoardTable
         displacement,
         senses,
         divinityId,
-        initiative,
         perception,
         defense,
         life,
@@ -16539,11 +16514,8 @@ class $CharacterBoardTableTable extends CharacterBoardTable
         intelligence,
         wisdom,
         charisma,
-        typeIndex,
         creatureSizeIndex,
         broodIndex,
-        combateRoleIndex,
-        treasureTypeIndex,
         grimoireUuid,
         createdAt,
         updatedAt,
@@ -16619,14 +16591,6 @@ class $CharacterBoardTableTable extends CharacterBoardTable
           divinityId.isAcceptableOrUnknown(
               data['divinity_id']!, _divinityIdMeta));
     }
-    if (data.containsKey('initiative')) {
-      context.handle(
-          _initiativeMeta,
-          initiative.isAcceptableOrUnknown(
-              data['initiative']!, _initiativeMeta));
-    } else if (isInserting) {
-      context.missing(_initiativeMeta);
-    }
     if (data.containsKey('perception')) {
       context.handle(
           _perceptionMeta,
@@ -16693,12 +16657,6 @@ class $CharacterBoardTableTable extends CharacterBoardTable
     } else if (isInserting) {
       context.missing(_charismaMeta);
     }
-    if (data.containsKey('type_index')) {
-      context.handle(_typeIndexMeta,
-          typeIndex.isAcceptableOrUnknown(data['type_index']!, _typeIndexMeta));
-    } else if (isInserting) {
-      context.missing(_typeIndexMeta);
-    }
     if (data.containsKey('creature_size_index')) {
       context.handle(
           _creatureSizeIndexMeta,
@@ -16714,20 +16672,6 @@ class $CharacterBoardTableTable extends CharacterBoardTable
               data['brood_index']!, _broodIndexMeta));
     } else if (isInserting) {
       context.missing(_broodIndexMeta);
-    }
-    if (data.containsKey('combate_role_index')) {
-      context.handle(
-          _combateRoleIndexMeta,
-          combateRoleIndex.isAcceptableOrUnknown(
-              data['combate_role_index']!, _combateRoleIndexMeta));
-    } else if (isInserting) {
-      context.missing(_combateRoleIndexMeta);
-    }
-    if (data.containsKey('treasure_type_index')) {
-      context.handle(
-          _treasureTypeIndexMeta,
-          treasureTypeIndex.isAcceptableOrUnknown(
-              data['treasure_type_index']!, _treasureTypeIndexMeta));
     }
     if (data.containsKey('grimoire_uuid')) {
       context.handle(
@@ -16829,8 +16773,6 @@ class $CharacterBoardTableTable extends CharacterBoardTable
           .read(DriftSqlType.string, data['${effectivePrefix}senses']),
       divinityId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}divinity_id']),
-      initiative: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}initiative'])!,
       perception: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}perception'])!,
       defense: attachedDatabase.typeMapping
@@ -16851,16 +16793,10 @@ class $CharacterBoardTableTable extends CharacterBoardTable
           .read(DriftSqlType.int, data['${effectivePrefix}wisdom'])!,
       charisma: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}charisma'])!,
-      typeIndex: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}type_index'])!,
       creatureSizeIndex: attachedDatabase.typeMapping.read(
           DriftSqlType.int, data['${effectivePrefix}creature_size_index'])!,
       broodIndex: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}brood_index'])!,
-      combateRoleIndex: attachedDatabase.typeMapping.read(
-          DriftSqlType.int, data['${effectivePrefix}combate_role_index'])!,
-      treasureTypeIndex: attachedDatabase.typeMapping.read(
-          DriftSqlType.int, data['${effectivePrefix}treasure_type_index']),
       grimoireUuid: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}grimoire_uuid']),
       createdAt: attachedDatabase.typeMapping
@@ -16903,7 +16839,6 @@ class CharacterBoardTableData extends DataClass
   final String? displacement;
   final String? senses;
   final int? divinityId;
-  final int initiative;
   final int perception;
   final int defense;
   final int life;
@@ -16914,11 +16849,8 @@ class CharacterBoardTableData extends DataClass
   final int intelligence;
   final int wisdom;
   final int charisma;
-  final int typeIndex;
   final int creatureSizeIndex;
   final int broodIndex;
-  final int combateRoleIndex;
-  final int? treasureTypeIndex;
   final String? grimoireUuid;
   final int createdAt;
   final int updatedAt;
@@ -16940,7 +16872,6 @@ class CharacterBoardTableData extends DataClass
       this.displacement,
       this.senses,
       this.divinityId,
-      required this.initiative,
       required this.perception,
       required this.defense,
       required this.life,
@@ -16951,11 +16882,8 @@ class CharacterBoardTableData extends DataClass
       required this.intelligence,
       required this.wisdom,
       required this.charisma,
-      required this.typeIndex,
       required this.creatureSizeIndex,
       required this.broodIndex,
-      required this.combateRoleIndex,
-      this.treasureTypeIndex,
       this.grimoireUuid,
       required this.createdAt,
       required this.updatedAt,
@@ -16989,7 +16917,6 @@ class CharacterBoardTableData extends DataClass
     if (!nullToAbsent || divinityId != null) {
       map['divinity_id'] = Variable<int>(divinityId);
     }
-    map['initiative'] = Variable<int>(initiative);
     map['perception'] = Variable<int>(perception);
     map['defense'] = Variable<int>(defense);
     map['life'] = Variable<int>(life);
@@ -17000,13 +16927,8 @@ class CharacterBoardTableData extends DataClass
     map['intelligence'] = Variable<int>(intelligence);
     map['wisdom'] = Variable<int>(wisdom);
     map['charisma'] = Variable<int>(charisma);
-    map['type_index'] = Variable<int>(typeIndex);
     map['creature_size_index'] = Variable<int>(creatureSizeIndex);
     map['brood_index'] = Variable<int>(broodIndex);
-    map['combate_role_index'] = Variable<int>(combateRoleIndex);
-    if (!nullToAbsent || treasureTypeIndex != null) {
-      map['treasure_type_index'] = Variable<int>(treasureTypeIndex);
-    }
     if (!nullToAbsent || grimoireUuid != null) {
       map['grimoire_uuid'] = Variable<String>(grimoireUuid);
     }
@@ -17051,7 +16973,6 @@ class CharacterBoardTableData extends DataClass
       divinityId: divinityId == null && nullToAbsent
           ? const Value.absent()
           : Value(divinityId),
-      initiative: Value(initiative),
       perception: Value(perception),
       defense: Value(defense),
       life: Value(life),
@@ -17062,13 +16983,8 @@ class CharacterBoardTableData extends DataClass
       intelligence: Value(intelligence),
       wisdom: Value(wisdom),
       charisma: Value(charisma),
-      typeIndex: Value(typeIndex),
       creatureSizeIndex: Value(creatureSizeIndex),
       broodIndex: Value(broodIndex),
-      combateRoleIndex: Value(combateRoleIndex),
-      treasureTypeIndex: treasureTypeIndex == null && nullToAbsent
-          ? const Value.absent()
-          : Value(treasureTypeIndex),
       grimoireUuid: grimoireUuid == null && nullToAbsent
           ? const Value.absent()
           : Value(grimoireUuid),
@@ -17106,7 +17022,6 @@ class CharacterBoardTableData extends DataClass
       displacement: serializer.fromJson<String?>(json['displacement']),
       senses: serializer.fromJson<String?>(json['senses']),
       divinityId: serializer.fromJson<int?>(json['divinityId']),
-      initiative: serializer.fromJson<int>(json['initiative']),
       perception: serializer.fromJson<int>(json['perception']),
       defense: serializer.fromJson<int>(json['defense']),
       life: serializer.fromJson<int>(json['life']),
@@ -17117,11 +17032,8 @@ class CharacterBoardTableData extends DataClass
       intelligence: serializer.fromJson<int>(json['intelligence']),
       wisdom: serializer.fromJson<int>(json['wisdom']),
       charisma: serializer.fromJson<int>(json['charisma']),
-      typeIndex: serializer.fromJson<int>(json['typeIndex']),
       creatureSizeIndex: serializer.fromJson<int>(json['creatureSizeIndex']),
       broodIndex: serializer.fromJson<int>(json['broodIndex']),
-      combateRoleIndex: serializer.fromJson<int>(json['combateRoleIndex']),
-      treasureTypeIndex: serializer.fromJson<int?>(json['treasureTypeIndex']),
       grimoireUuid: serializer.fromJson<String?>(json['grimoireUuid']),
       createdAt: serializer.fromJson<int>(json['createdAt']),
       updatedAt: serializer.fromJson<int>(json['updatedAt']),
@@ -17148,7 +17060,6 @@ class CharacterBoardTableData extends DataClass
       'displacement': serializer.toJson<String?>(displacement),
       'senses': serializer.toJson<String?>(senses),
       'divinityId': serializer.toJson<int?>(divinityId),
-      'initiative': serializer.toJson<int>(initiative),
       'perception': serializer.toJson<int>(perception),
       'defense': serializer.toJson<int>(defense),
       'life': serializer.toJson<int>(life),
@@ -17159,11 +17070,8 @@ class CharacterBoardTableData extends DataClass
       'intelligence': serializer.toJson<int>(intelligence),
       'wisdom': serializer.toJson<int>(wisdom),
       'charisma': serializer.toJson<int>(charisma),
-      'typeIndex': serializer.toJson<int>(typeIndex),
       'creatureSizeIndex': serializer.toJson<int>(creatureSizeIndex),
       'broodIndex': serializer.toJson<int>(broodIndex),
-      'combateRoleIndex': serializer.toJson<int>(combateRoleIndex),
-      'treasureTypeIndex': serializer.toJson<int?>(treasureTypeIndex),
       'grimoireUuid': serializer.toJson<String?>(grimoireUuid),
       'createdAt': serializer.toJson<int>(createdAt),
       'updatedAt': serializer.toJson<int>(updatedAt),
@@ -17188,7 +17096,6 @@ class CharacterBoardTableData extends DataClass
           Value<String?> displacement = const Value.absent(),
           Value<String?> senses = const Value.absent(),
           Value<int?> divinityId = const Value.absent(),
-          int? initiative,
           int? perception,
           int? defense,
           int? life,
@@ -17199,11 +17106,8 @@ class CharacterBoardTableData extends DataClass
           int? intelligence,
           int? wisdom,
           int? charisma,
-          int? typeIndex,
           int? creatureSizeIndex,
           int? broodIndex,
-          int? combateRoleIndex,
-          Value<int?> treasureTypeIndex = const Value.absent(),
           Value<String?> grimoireUuid = const Value.absent(),
           int? createdAt,
           int? updatedAt,
@@ -17226,7 +17130,6 @@ class CharacterBoardTableData extends DataClass
             displacement.present ? displacement.value : this.displacement,
         senses: senses.present ? senses.value : this.senses,
         divinityId: divinityId.present ? divinityId.value : this.divinityId,
-        initiative: initiative ?? this.initiative,
         perception: perception ?? this.perception,
         defense: defense ?? this.defense,
         life: life ?? this.life,
@@ -17237,13 +17140,8 @@ class CharacterBoardTableData extends DataClass
         intelligence: intelligence ?? this.intelligence,
         wisdom: wisdom ?? this.wisdom,
         charisma: charisma ?? this.charisma,
-        typeIndex: typeIndex ?? this.typeIndex,
         creatureSizeIndex: creatureSizeIndex ?? this.creatureSizeIndex,
         broodIndex: broodIndex ?? this.broodIndex,
-        combateRoleIndex: combateRoleIndex ?? this.combateRoleIndex,
-        treasureTypeIndex: treasureTypeIndex.present
-            ? treasureTypeIndex.value
-            : this.treasureTypeIndex,
         grimoireUuid:
             grimoireUuid.present ? grimoireUuid.value : this.grimoireUuid,
         createdAt: createdAt ?? this.createdAt,
@@ -17275,8 +17173,6 @@ class CharacterBoardTableData extends DataClass
       senses: data.senses.present ? data.senses.value : this.senses,
       divinityId:
           data.divinityId.present ? data.divinityId.value : this.divinityId,
-      initiative:
-          data.initiative.present ? data.initiative.value : this.initiative,
       perception:
           data.perception.present ? data.perception.value : this.perception,
       defense: data.defense.present ? data.defense.value : this.defense,
@@ -17292,18 +17188,11 @@ class CharacterBoardTableData extends DataClass
           : this.intelligence,
       wisdom: data.wisdom.present ? data.wisdom.value : this.wisdom,
       charisma: data.charisma.present ? data.charisma.value : this.charisma,
-      typeIndex: data.typeIndex.present ? data.typeIndex.value : this.typeIndex,
       creatureSizeIndex: data.creatureSizeIndex.present
           ? data.creatureSizeIndex.value
           : this.creatureSizeIndex,
       broodIndex:
           data.broodIndex.present ? data.broodIndex.value : this.broodIndex,
-      combateRoleIndex: data.combateRoleIndex.present
-          ? data.combateRoleIndex.value
-          : this.combateRoleIndex,
-      treasureTypeIndex: data.treasureTypeIndex.present
-          ? data.treasureTypeIndex.value
-          : this.treasureTypeIndex,
       grimoireUuid: data.grimoireUuid.present
           ? data.grimoireUuid.value
           : this.grimoireUuid,
@@ -17341,7 +17230,6 @@ class CharacterBoardTableData extends DataClass
           ..write('displacement: $displacement, ')
           ..write('senses: $senses, ')
           ..write('divinityId: $divinityId, ')
-          ..write('initiative: $initiative, ')
           ..write('perception: $perception, ')
           ..write('defense: $defense, ')
           ..write('life: $life, ')
@@ -17352,11 +17240,8 @@ class CharacterBoardTableData extends DataClass
           ..write('intelligence: $intelligence, ')
           ..write('wisdom: $wisdom, ')
           ..write('charisma: $charisma, ')
-          ..write('typeIndex: $typeIndex, ')
           ..write('creatureSizeIndex: $creatureSizeIndex, ')
           ..write('broodIndex: $broodIndex, ')
-          ..write('combateRoleIndex: $combateRoleIndex, ')
-          ..write('treasureTypeIndex: $treasureTypeIndex, ')
           ..write('grimoireUuid: $grimoireUuid, ')
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
@@ -17383,7 +17268,6 @@ class CharacterBoardTableData extends DataClass
         displacement,
         senses,
         divinityId,
-        initiative,
         perception,
         defense,
         life,
@@ -17394,11 +17278,8 @@ class CharacterBoardTableData extends DataClass
         intelligence,
         wisdom,
         charisma,
-        typeIndex,
         creatureSizeIndex,
         broodIndex,
-        combateRoleIndex,
-        treasureTypeIndex,
         grimoireUuid,
         createdAt,
         updatedAt,
@@ -17424,7 +17305,6 @@ class CharacterBoardTableData extends DataClass
           other.displacement == this.displacement &&
           other.senses == this.senses &&
           other.divinityId == this.divinityId &&
-          other.initiative == this.initiative &&
           other.perception == this.perception &&
           other.defense == this.defense &&
           other.life == this.life &&
@@ -17435,11 +17315,8 @@ class CharacterBoardTableData extends DataClass
           other.intelligence == this.intelligence &&
           other.wisdom == this.wisdom &&
           other.charisma == this.charisma &&
-          other.typeIndex == this.typeIndex &&
           other.creatureSizeIndex == this.creatureSizeIndex &&
           other.broodIndex == this.broodIndex &&
-          other.combateRoleIndex == this.combateRoleIndex &&
-          other.treasureTypeIndex == this.treasureTypeIndex &&
           other.grimoireUuid == this.grimoireUuid &&
           other.createdAt == this.createdAt &&
           other.updatedAt == this.updatedAt &&
@@ -17464,7 +17341,6 @@ class CharacterBoardTableCompanion
   final Value<String?> displacement;
   final Value<String?> senses;
   final Value<int?> divinityId;
-  final Value<int> initiative;
   final Value<int> perception;
   final Value<int> defense;
   final Value<int> life;
@@ -17475,11 +17351,8 @@ class CharacterBoardTableCompanion
   final Value<int> intelligence;
   final Value<int> wisdom;
   final Value<int> charisma;
-  final Value<int> typeIndex;
   final Value<int> creatureSizeIndex;
   final Value<int> broodIndex;
-  final Value<int> combateRoleIndex;
-  final Value<int?> treasureTypeIndex;
   final Value<String?> grimoireUuid;
   final Value<int> createdAt;
   final Value<int> updatedAt;
@@ -17502,7 +17375,6 @@ class CharacterBoardTableCompanion
     this.displacement = const Value.absent(),
     this.senses = const Value.absent(),
     this.divinityId = const Value.absent(),
-    this.initiative = const Value.absent(),
     this.perception = const Value.absent(),
     this.defense = const Value.absent(),
     this.life = const Value.absent(),
@@ -17513,11 +17385,8 @@ class CharacterBoardTableCompanion
     this.intelligence = const Value.absent(),
     this.wisdom = const Value.absent(),
     this.charisma = const Value.absent(),
-    this.typeIndex = const Value.absent(),
     this.creatureSizeIndex = const Value.absent(),
     this.broodIndex = const Value.absent(),
-    this.combateRoleIndex = const Value.absent(),
-    this.treasureTypeIndex = const Value.absent(),
     this.grimoireUuid = const Value.absent(),
     this.createdAt = const Value.absent(),
     this.updatedAt = const Value.absent(),
@@ -17541,7 +17410,6 @@ class CharacterBoardTableCompanion
     this.displacement = const Value.absent(),
     this.senses = const Value.absent(),
     this.divinityId = const Value.absent(),
-    required int initiative,
     required int perception,
     required int defense,
     required int life,
@@ -17552,11 +17420,8 @@ class CharacterBoardTableCompanion
     required int intelligence,
     required int wisdom,
     required int charisma,
-    required int typeIndex,
     required int creatureSizeIndex,
     required int broodIndex,
-    required int combateRoleIndex,
-    this.treasureTypeIndex = const Value.absent(),
     this.grimoireUuid = const Value.absent(),
     required int createdAt,
     required int updatedAt,
@@ -17573,7 +17438,6 @@ class CharacterBoardTableCompanion
         parentuuid = Value(parentuuid),
         boarduuid = Value(boarduuid),
         name = Value(name),
-        initiative = Value(initiative),
         perception = Value(perception),
         defense = Value(defense),
         life = Value(life),
@@ -17584,10 +17448,8 @@ class CharacterBoardTableCompanion
         intelligence = Value(intelligence),
         wisdom = Value(wisdom),
         charisma = Value(charisma),
-        typeIndex = Value(typeIndex),
         creatureSizeIndex = Value(creatureSizeIndex),
         broodIndex = Value(broodIndex),
-        combateRoleIndex = Value(combateRoleIndex),
         createdAt = Value(createdAt),
         updatedAt = Value(updatedAt),
         isAlive = Value(isAlive),
@@ -17604,7 +17466,6 @@ class CharacterBoardTableCompanion
     Expression<String>? displacement,
     Expression<String>? senses,
     Expression<int>? divinityId,
-    Expression<int>? initiative,
     Expression<int>? perception,
     Expression<int>? defense,
     Expression<int>? life,
@@ -17615,11 +17476,8 @@ class CharacterBoardTableCompanion
     Expression<int>? intelligence,
     Expression<int>? wisdom,
     Expression<int>? charisma,
-    Expression<int>? typeIndex,
     Expression<int>? creatureSizeIndex,
     Expression<int>? broodIndex,
-    Expression<int>? combateRoleIndex,
-    Expression<int>? treasureTypeIndex,
     Expression<String>? grimoireUuid,
     Expression<int>? createdAt,
     Expression<int>? updatedAt,
@@ -17643,7 +17501,6 @@ class CharacterBoardTableCompanion
       if (displacement != null) 'displacement': displacement,
       if (senses != null) 'senses': senses,
       if (divinityId != null) 'divinity_id': divinityId,
-      if (initiative != null) 'initiative': initiative,
       if (perception != null) 'perception': perception,
       if (defense != null) 'defense': defense,
       if (life != null) 'life': life,
@@ -17654,11 +17511,8 @@ class CharacterBoardTableCompanion
       if (intelligence != null) 'intelligence': intelligence,
       if (wisdom != null) 'wisdom': wisdom,
       if (charisma != null) 'charisma': charisma,
-      if (typeIndex != null) 'type_index': typeIndex,
       if (creatureSizeIndex != null) 'creature_size_index': creatureSizeIndex,
       if (broodIndex != null) 'brood_index': broodIndex,
-      if (combateRoleIndex != null) 'combate_role_index': combateRoleIndex,
-      if (treasureTypeIndex != null) 'treasure_type_index': treasureTypeIndex,
       if (grimoireUuid != null) 'grimoire_uuid': grimoireUuid,
       if (createdAt != null) 'created_at': createdAt,
       if (updatedAt != null) 'updated_at': updatedAt,
@@ -17684,7 +17538,6 @@ class CharacterBoardTableCompanion
       Value<String?>? displacement,
       Value<String?>? senses,
       Value<int?>? divinityId,
-      Value<int>? initiative,
       Value<int>? perception,
       Value<int>? defense,
       Value<int>? life,
@@ -17695,11 +17548,8 @@ class CharacterBoardTableCompanion
       Value<int>? intelligence,
       Value<int>? wisdom,
       Value<int>? charisma,
-      Value<int>? typeIndex,
       Value<int>? creatureSizeIndex,
       Value<int>? broodIndex,
-      Value<int>? combateRoleIndex,
-      Value<int?>? treasureTypeIndex,
       Value<String?>? grimoireUuid,
       Value<int>? createdAt,
       Value<int>? updatedAt,
@@ -17722,7 +17572,6 @@ class CharacterBoardTableCompanion
       displacement: displacement ?? this.displacement,
       senses: senses ?? this.senses,
       divinityId: divinityId ?? this.divinityId,
-      initiative: initiative ?? this.initiative,
       perception: perception ?? this.perception,
       defense: defense ?? this.defense,
       life: life ?? this.life,
@@ -17733,11 +17582,8 @@ class CharacterBoardTableCompanion
       intelligence: intelligence ?? this.intelligence,
       wisdom: wisdom ?? this.wisdom,
       charisma: charisma ?? this.charisma,
-      typeIndex: typeIndex ?? this.typeIndex,
       creatureSizeIndex: creatureSizeIndex ?? this.creatureSizeIndex,
       broodIndex: broodIndex ?? this.broodIndex,
-      combateRoleIndex: combateRoleIndex ?? this.combateRoleIndex,
-      treasureTypeIndex: treasureTypeIndex ?? this.treasureTypeIndex,
       grimoireUuid: grimoireUuid ?? this.grimoireUuid,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
@@ -17783,9 +17629,6 @@ class CharacterBoardTableCompanion
     if (divinityId.present) {
       map['divinity_id'] = Variable<int>(divinityId.value);
     }
-    if (initiative.present) {
-      map['initiative'] = Variable<int>(initiative.value);
-    }
     if (perception.present) {
       map['perception'] = Variable<int>(perception.value);
     }
@@ -17816,20 +17659,11 @@ class CharacterBoardTableCompanion
     if (charisma.present) {
       map['charisma'] = Variable<int>(charisma.value);
     }
-    if (typeIndex.present) {
-      map['type_index'] = Variable<int>(typeIndex.value);
-    }
     if (creatureSizeIndex.present) {
       map['creature_size_index'] = Variable<int>(creatureSizeIndex.value);
     }
     if (broodIndex.present) {
       map['brood_index'] = Variable<int>(broodIndex.value);
-    }
-    if (combateRoleIndex.present) {
-      map['combate_role_index'] = Variable<int>(combateRoleIndex.value);
-    }
-    if (treasureTypeIndex.present) {
-      map['treasure_type_index'] = Variable<int>(treasureTypeIndex.value);
     }
     if (grimoireUuid.present) {
       map['grimoire_uuid'] = Variable<String>(grimoireUuid.value);
@@ -17882,7 +17716,6 @@ class CharacterBoardTableCompanion
           ..write('displacement: $displacement, ')
           ..write('senses: $senses, ')
           ..write('divinityId: $divinityId, ')
-          ..write('initiative: $initiative, ')
           ..write('perception: $perception, ')
           ..write('defense: $defense, ')
           ..write('life: $life, ')
@@ -17893,11 +17726,8 @@ class CharacterBoardTableCompanion
           ..write('intelligence: $intelligence, ')
           ..write('wisdom: $wisdom, ')
           ..write('charisma: $charisma, ')
-          ..write('typeIndex: $typeIndex, ')
           ..write('creatureSizeIndex: $creatureSizeIndex, ')
           ..write('broodIndex: $broodIndex, ')
-          ..write('combateRoleIndex: $combateRoleIndex, ')
-          ..write('treasureTypeIndex: $treasureTypeIndex, ')
           ..write('grimoireUuid: $grimoireUuid, ')
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
@@ -24483,7 +24313,6 @@ typedef $$CharacterBoardTableTableCreateCompanionBuilder
   Value<String?> displacement,
   Value<String?> senses,
   Value<int?> divinityId,
-  required int initiative,
   required int perception,
   required int defense,
   required int life,
@@ -24494,11 +24323,8 @@ typedef $$CharacterBoardTableTableCreateCompanionBuilder
   required int intelligence,
   required int wisdom,
   required int charisma,
-  required int typeIndex,
   required int creatureSizeIndex,
   required int broodIndex,
-  required int combateRoleIndex,
-  Value<int?> treasureTypeIndex,
   Value<String?> grimoireUuid,
   required int createdAt,
   required int updatedAt,
@@ -24523,7 +24349,6 @@ typedef $$CharacterBoardTableTableUpdateCompanionBuilder
   Value<String?> displacement,
   Value<String?> senses,
   Value<int?> divinityId,
-  Value<int> initiative,
   Value<int> perception,
   Value<int> defense,
   Value<int> life,
@@ -24534,11 +24359,8 @@ typedef $$CharacterBoardTableTableUpdateCompanionBuilder
   Value<int> intelligence,
   Value<int> wisdom,
   Value<int> charisma,
-  Value<int> typeIndex,
   Value<int> creatureSizeIndex,
   Value<int> broodIndex,
-  Value<int> combateRoleIndex,
-  Value<int?> treasureTypeIndex,
   Value<String?> grimoireUuid,
   Value<int> createdAt,
   Value<int> updatedAt,
@@ -24580,7 +24402,6 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             Value<String?> displacement = const Value.absent(),
             Value<String?> senses = const Value.absent(),
             Value<int?> divinityId = const Value.absent(),
-            Value<int> initiative = const Value.absent(),
             Value<int> perception = const Value.absent(),
             Value<int> defense = const Value.absent(),
             Value<int> life = const Value.absent(),
@@ -24591,11 +24412,8 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             Value<int> intelligence = const Value.absent(),
             Value<int> wisdom = const Value.absent(),
             Value<int> charisma = const Value.absent(),
-            Value<int> typeIndex = const Value.absent(),
             Value<int> creatureSizeIndex = const Value.absent(),
             Value<int> broodIndex = const Value.absent(),
-            Value<int> combateRoleIndex = const Value.absent(),
-            Value<int?> treasureTypeIndex = const Value.absent(),
             Value<String?> grimoireUuid = const Value.absent(),
             Value<int> createdAt = const Value.absent(),
             Value<int> updatedAt = const Value.absent(),
@@ -24619,7 +24437,6 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             displacement: displacement,
             senses: senses,
             divinityId: divinityId,
-            initiative: initiative,
             perception: perception,
             defense: defense,
             life: life,
@@ -24630,11 +24447,8 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             intelligence: intelligence,
             wisdom: wisdom,
             charisma: charisma,
-            typeIndex: typeIndex,
             creatureSizeIndex: creatureSizeIndex,
             broodIndex: broodIndex,
-            combateRoleIndex: combateRoleIndex,
-            treasureTypeIndex: treasureTypeIndex,
             grimoireUuid: grimoireUuid,
             createdAt: createdAt,
             updatedAt: updatedAt,
@@ -24658,7 +24472,6 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             Value<String?> displacement = const Value.absent(),
             Value<String?> senses = const Value.absent(),
             Value<int?> divinityId = const Value.absent(),
-            required int initiative,
             required int perception,
             required int defense,
             required int life,
@@ -24669,11 +24482,8 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             required int intelligence,
             required int wisdom,
             required int charisma,
-            required int typeIndex,
             required int creatureSizeIndex,
             required int broodIndex,
-            required int combateRoleIndex,
-            Value<int?> treasureTypeIndex = const Value.absent(),
             Value<String?> grimoireUuid = const Value.absent(),
             required int createdAt,
             required int updatedAt,
@@ -24697,7 +24507,6 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             displacement: displacement,
             senses: senses,
             divinityId: divinityId,
-            initiative: initiative,
             perception: perception,
             defense: defense,
             life: life,
@@ -24708,11 +24517,8 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             intelligence: intelligence,
             wisdom: wisdom,
             charisma: charisma,
-            typeIndex: typeIndex,
             creatureSizeIndex: creatureSizeIndex,
             broodIndex: broodIndex,
-            combateRoleIndex: combateRoleIndex,
-            treasureTypeIndex: treasureTypeIndex,
             grimoireUuid: grimoireUuid,
             createdAt: createdAt,
             updatedAt: updatedAt,
@@ -24777,11 +24583,6 @@ class $$CharacterBoardTableTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<int> get initiative => $state.composableBuilder(
-      column: $state.table.initiative,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
   ColumnFilters<int> get perception => $state.composableBuilder(
       column: $state.table.perception,
       builder: (column, joinBuilders) =>
@@ -24832,11 +24633,6 @@ class $$CharacterBoardTableTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<int> get typeIndex => $state.composableBuilder(
-      column: $state.table.typeIndex,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
   ColumnFilters<int> get creatureSizeIndex => $state.composableBuilder(
       column: $state.table.creatureSizeIndex,
       builder: (column, joinBuilders) =>
@@ -24844,16 +24640,6 @@ class $$CharacterBoardTableTableFilterComposer
 
   ColumnFilters<int> get broodIndex => $state.composableBuilder(
       column: $state.table.broodIndex,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get combateRoleIndex => $state.composableBuilder(
-      column: $state.table.combateRoleIndex,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get treasureTypeIndex => $state.composableBuilder(
-      column: $state.table.treasureTypeIndex,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -24961,11 +24747,6 @@ class $$CharacterBoardTableTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<int> get initiative => $state.composableBuilder(
-      column: $state.table.initiative,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
   ColumnOrderings<int> get perception => $state.composableBuilder(
       column: $state.table.perception,
       builder: (column, joinBuilders) =>
@@ -25016,11 +24797,6 @@ class $$CharacterBoardTableTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<int> get typeIndex => $state.composableBuilder(
-      column: $state.table.typeIndex,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
   ColumnOrderings<int> get creatureSizeIndex => $state.composableBuilder(
       column: $state.table.creatureSizeIndex,
       builder: (column, joinBuilders) =>
@@ -25028,16 +24804,6 @@ class $$CharacterBoardTableTableOrderingComposer
 
   ColumnOrderings<int> get broodIndex => $state.composableBuilder(
       column: $state.table.broodIndex,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get combateRoleIndex => $state.composableBuilder(
-      column: $state.table.combateRoleIndex,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get treasureTypeIndex => $state.composableBuilder(
-      column: $state.table.treasureTypeIndex,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 

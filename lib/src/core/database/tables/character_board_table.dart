@@ -10,7 +10,6 @@ class CharacterBoardTable extends Table {
   TextColumn get displacement => text().nullable()();
   TextColumn get senses => text().nullable()();
   IntColumn get divinityId => integer().nullable()();
-  IntColumn get initiative => integer()();
   IntColumn get perception => integer()();
   IntColumn get defense => integer()();
   IntColumn get life => integer()();
@@ -21,11 +20,8 @@ class CharacterBoardTable extends Table {
   IntColumn get intelligence => integer()();
   IntColumn get wisdom => integer()();
   IntColumn get charisma => integer()();
-  IntColumn get typeIndex => integer()();
   IntColumn get creatureSizeIndex => integer()();
   IntColumn get broodIndex => integer()();
-  IntColumn get combateRoleIndex => integer()();
-  IntColumn get treasureTypeIndex => integer().nullable()();
   TextColumn get grimoireUuid => text().nullable()();
   IntColumn get createdAt => integer()();
   IntColumn get updatedAt => integer()();

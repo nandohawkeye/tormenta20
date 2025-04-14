@@ -9,6 +9,7 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_e
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_sites.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_text_field.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
+import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
 import 'package:tormenta20/src/shared/widgets/screen_save_main_buttons.dart';
 import 'package:tormenta20/src/shared/widgets/screen_header.dart';
 
@@ -41,6 +42,7 @@ class _AddEditBoardScreenState extends State<AddEditBoardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print('mode: ${widget.initialBoard?.mode}');
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,6 +62,8 @@ class _AddEditBoardScreenState extends State<AddEditBoardScreen> {
                   AddEditBoardTextFields(
                     formKey: _formKey,
                     controller: _controller,
+                    isPlayerMode:
+                        widget.initialBoard?.mode == BoardModeType.player,
                   ),
                   T20UI.spaceHeight,
                   AddEditBoardBanner(_controller),

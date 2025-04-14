@@ -33,7 +33,7 @@ class BoardViewStorageService extends DriftStorageService {
   }
 
   Future<Failure?> saveBoardCharacter(CharacterBoard character) {
-    return super.dataBase.boardDAO.saveBoardCharacter(character);
+    return super.dataBase.characterDAO.saveBoardCharacter(character);
   }
 
   Future<Failure?> deleteBoardCharacter(CharacterBoard character) {

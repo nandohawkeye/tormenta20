@@ -1,4 +1,5 @@
 import 'package:tormenta20/src/shared/entities/character.dart';
+import 'package:tormenta20/src/shared/entities/character_board.dart';
 import 'package:tormenta20/src/shared/failures/failure.dart';
 import 'package:tormenta20/src/shared/services/drift_storage_service.dart';
 
@@ -8,8 +9,7 @@ class SelectCharacterStorageService extends DriftStorageService {
     return super.dataBase.characterDAO.watchCharacters();
   }
 
-  // Future<Failure?> addLinkMenaceBoard(
-  //     {required List<MenaceLinkBoard> entities}) {
-  //   return super.dataBase.menaceDAO.addLinksMenaceBoard(entities: entities);
-  // }
+  Future<Failure?> saveCharacterBoard(CharacterBoard character) {
+    return super.dataBase.characterDAO.saveBoardCharacter(character);
+  }
 }

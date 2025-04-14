@@ -29,6 +29,7 @@ import 'package:tormenta20/src/shared/entities/board/board_session.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session_dto.dart';
 import 'package:tormenta20/src/shared/entities/character_board.dart';
+import 'package:tormenta20/src/shared/entities/character_board_adapters.dart';
 import 'package:tormenta20/src/shared/failures/failure.dart';
 
 part 'board_dao.g.dart';
@@ -187,11 +188,11 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
     }
   }
 
-  Future<Failure?> saveBoardPlayer(BoardPlayer player) async {
+  Future<Failure?> saveCharacterBoard(CharacterBoard character) async {
     try {
       await batch((batch) {
-        batch.insertAllOnConflictUpdate(
-            boardPlayerTable, [BoardPlayerAdapters.toCompanion(player)]);
+        batch.insertAllOnConflictUpdate(characterBoardTable,
+            [CharacterBoardAdapters.toDriftCompanion(character)]);
       });
 
       return null;
@@ -200,12 +201,12 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
     }
   }
 
-  Future<Failure?> saveBoardCharacter(CharacterBoard character) async {
+  Future<Failure?> saveBoardPlayer(BoardPlayer player) async {
     try {
-      // await batch((batch) {
-      //   batch.insertAllOnConflictUpdate(
-      //       characterBoardTable, [CharacterBoardAdapters.toCompanion(character)]);
-      // });
+      await batch((batch) {
+        batch.insertAllOnConflictUpdate(
+            boardPlayerTable, [BoardPlayerAdapters.toCompanion(player)]);
+      });
 
       return null;
     } catch (e) {
@@ -609,6 +610,12 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
                 ),
               ),
               leftOuterJoin(
+                characterBoardTable,
+                boardTable.uuid.equalsExp(
+                  characterBoardTable.boarduuid,
+                ),
+              ),
+              leftOuterJoin(
                 boardLinkTable,
                 boardTable.uuid.equalsExp(
                   boardLinkTable.boardUuid,
@@ -664,6 +671,9 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
                   final noteData = row.readTableOrNull(boardNoteTable);
                   final sessionData = row.readTableOrNull(boardSessionTable);
                   final combatData = row.readTableOrNull(boardCombatTable);
+                  final characterBoardData =
+                      row.readTableOrNull(characterBoardTable);
+                  print('characterBoardData: $characterBoardData');
                   final menaceLinkData =
                       row.readTableOrNull(menaceLinkBoardTable);
                   final menaceData = row.readTableOrNull(menaceTable);
@@ -708,6 +718,14 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
                           .menaceData
                           .any((data) => data.uuid == menaceData.uuid))) {
                     boardsDTO[boardData.uuid]!.menaceData.add(menaceData);
+                  }
+
+                  if (characterBoardData != null &&
+                      !(boardsDTO[boardData.uuid]!.characterData.any(
+                          (data) => data.uuid == characterBoardData.uuid))) {
+                    boardsDTO[boardData.uuid]!
+                        .characterData
+                        .add(characterBoardData);
                   }
 
                   if (playerData != null &&

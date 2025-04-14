@@ -101,7 +101,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 19;
+  int get schemaVersion => 20;
 
   @override
   MigrationStrategy get migration {
@@ -237,6 +237,10 @@ class AppDatabase extends _$AppDatabase {
                   characterBoardTable, characterBoardTable.inTwoHands);
               await m.addColumn(
                   characterBoardTable, characterBoardTable.inWearableSlots);
+            }
+
+            if (from < 20) {
+              await m.alterTable(TableMigration(characterBoardTable));
             }
           },
         );

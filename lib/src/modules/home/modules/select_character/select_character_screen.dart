@@ -55,10 +55,11 @@ class _SelectCharacterScreenState extends State<SelectCharacterScreen> {
             } else {
               if (selected == null) return;
 
-              // final failiure = await _store.addLinkMenaceBoard();
-              // if (failiure == null) {
-              //   Navigator.pop(context);
-              // }
+              final failiure = await _store.saveCharacterBoard(selected);
+              if (failiure == null) {
+                print('deu boa');
+                Navigator.pop(context);
+              }
             }
           },
           onSaveLabel: characters.isEmpty ? 'Criar' : 'Confirmar',
