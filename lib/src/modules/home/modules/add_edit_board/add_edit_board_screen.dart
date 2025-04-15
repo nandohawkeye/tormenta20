@@ -42,7 +42,6 @@ class _AddEditBoardScreenState extends State<AddEditBoardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('mode: ${widget.initialBoard?.mode}');
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

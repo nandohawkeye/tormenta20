@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tormenta20/src/modules/home/modules/menace/widgets/menace_atribute_item.dart';
+import 'package:tormenta20/src/modules/home/modules/menace/widgets/atribute_item.dart';
 import 'package:tormenta20/src/shared/entities/menace.dart';
 
 class MenaceAtributes extends StatelessWidget {
@@ -12,27 +12,27 @@ class MenaceAtributes extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        MenaceAtributeItem(
+        AtributeItem(
           value: menace.strength ?? 0,
           label: 'FOR',
         ),
-        MenaceAtributeItem(
+        AtributeItem(
           value: menace.dexterity ?? 0,
           label: 'DES',
         ),
-        MenaceAtributeItem(
+        AtributeItem(
           value: menace.constitution ?? 0,
           label: 'CON',
         ),
-        MenaceAtributeItem(
+        AtributeItem(
           value: menace.intelligence ?? 0,
           label: 'INT',
         ),
-        MenaceAtributeItem(
+        AtributeItem(
           value: menace.wisdom ?? 0,
           label: 'SAB',
         ),
-        MenaceAtributeItem(
+        AtributeItem(
           value: menace.charisma ?? 0,
           label: 'CAR',
         ),

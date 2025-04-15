@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_character_atributes_field.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_character_card.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/character_screen_button.dart';
 import 'package:tormenta20/src/modules/home/modules/select_character/select_character_screen.dart';
@@ -104,7 +105,8 @@ class BoardViewCharacterField extends StatelessWidget {
                   BoardViewCharacterCard(
                     character: character,
                     onTap: addEditPlayer,
-                  )
+                  ),
+
                 // Column(
                 //   mainAxisSize: MainAxisSize.min,
                 //   children: [
