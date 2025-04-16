@@ -66,7 +66,7 @@ class BoardViewBottomWidgets extends StatelessWidget {
             : hasSessionOpen
                 ? 'Encerrar sessão'
                 : 'Iníciar sessão')
-        : 'Ficha';
+        : 'Ficha completa';
 
     return Align(
       alignment: Alignment.bottomCenter,

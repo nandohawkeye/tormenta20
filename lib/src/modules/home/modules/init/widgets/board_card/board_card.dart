@@ -17,6 +17,9 @@ class BoardCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final players = board.players.where((bp) => bp.isAlive).toList();
     players.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
+    //TODO adicionar characters na query para esse card e mostrar em caso de player
+    // final characters =
+    //     board.characters.where((bc) => bc.isAlive).toList().first;
     return Card(
       child: InkWell(
         borderRadius: T20UI.borderRadius,

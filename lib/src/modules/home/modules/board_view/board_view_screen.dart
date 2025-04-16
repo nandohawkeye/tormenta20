@@ -7,7 +7,7 @@ import 'package:tormenta20/src/modules/home/modules/board_combat/board_combat_sc
 import 'package:tormenta20/src/modules/home/modules/board_view/board_view_store.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_banner.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_bottom_widgets.dart';
-import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_character_field.dart';
+import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_character_card/board_view_character_field.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_menaces_field/board_view_menaces_field.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_players_field.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_sessions.dart';

@@ -7,6 +7,7 @@ import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_character_atributes_field.dart';
+import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_character_card/board_view_character_field_death_character_avatar.dart';
 import 'package:tormenta20/src/shared/entities/character_board.dart';
 import 'package:tormenta20/src/shared/utils/character_alignment_type_utils.dart';
 import 'package:tormenta20/src/shared/utils/character_utils.dart';
@@ -17,9 +18,11 @@ class BoardViewCharacterCard extends StatelessWidget {
     super.key,
     required this.character,
     required this.onTap,
+    required this.otherCharacters,
   });
 
   final CharacterBoard character;
+  final List<CharacterBoard> otherCharacters;
   final Function(CharacterBoard) onTap;
 
   @override
@@ -151,14 +154,6 @@ class BoardViewCharacterCard extends StatelessWidget {
                                     fontWeight: FontWeight.w500,
                                     fontSize: 12),
                               )
-                              // T20UI.spaceWidth,
-                              // const Icon(FontAwesomeIcons.personRunning, size: 12),
-                              // const SizedBox(width: 2),
-                              // Text(
-                              //   character.initiative.toString().padLeft(2, '0'),
-                              //   maxLines: 2,
-                              //   style: const TextStyle(fontSize: 12),
-                              // ),
                             ],
                           )
                         ],
@@ -255,7 +250,20 @@ class BoardViewCharacterCard extends StatelessWidget {
               Padding(
                 padding: T20UI.allPadding,
                 child: BoardViewCharacterAtributesField(character),
-              )
+              ),
+              if (otherCharacters.isNotEmpty)
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.only(
+                    bottom: T20UI.smallSpaceSize,
+                    left: T20UI.spaceSize,
+                  ),
+                  child: Row(
+                    children: otherCharacters
+                        .map(BoardViewCharacterFieldDeathCharacterAvatar.new)
+                        .toList(),
+                  ),
+                )
             ],
           ),
         ),
