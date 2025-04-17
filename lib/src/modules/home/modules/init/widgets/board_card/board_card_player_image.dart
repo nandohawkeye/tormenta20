@@ -59,8 +59,8 @@ class BoardCardPlayerImage extends StatelessWidget {
             if (player.imageAsset != null)
               Image.asset(
                 player.imageAsset!,
-                height: 38,
-                width: 38,
+                height: minusSize,
+                width: minusSize,
                 fit: BoxFit.cover,
               ),
             Assets.images.bordaToken.image(

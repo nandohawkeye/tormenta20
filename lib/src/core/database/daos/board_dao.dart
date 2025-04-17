@@ -368,6 +368,12 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
         ),
       ),
       leftOuterJoin(
+        characterBoardTable,
+        boardTable.uuid.equalsExp(
+          characterBoardTable.boarduuid,
+        ),
+      ),
+      leftOuterJoin(
         boardLinkTable,
         boardTable.uuid.equalsExp(
           boardLinkTable.boardUuid,
@@ -439,6 +445,7 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
             final combatData = row.readTableOrNull(boardCombatTable);
             final menaceLinkData = row.readTableOrNull(menaceLinkBoardTable);
             final menaceData = row.readTableOrNull(menaceTable);
+            final characterBoardData = row.readTableOrNull(characterBoardTable);
 
             if (!(boardsDTO.containsKey(boardData.uuid))) {
               boardsDTO.addAll(
@@ -457,6 +464,13 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
                     .notesData
                     .any((data) => data.uuid == noteData.uuid))) {
               boardsDTO[boardData.uuid]!.notesData.add(noteData);
+            }
+
+            if (characterBoardData != null &&
+                !(boardsDTO[boardData.uuid]!
+                    .characterData
+                    .any((data) => data.uuid == characterBoardData.uuid))) {
+              boardsDTO[boardData.uuid]!.characterData.add(characterBoardData);
             }
 
             if (menaceLinkData != null &&
@@ -673,7 +687,6 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
                   final combatData = row.readTableOrNull(boardCombatTable);
                   final characterBoardData =
                       row.readTableOrNull(characterBoardTable);
-                  print('characterBoardData: $characterBoardData');
                   final menaceLinkData =
                       row.readTableOrNull(menaceLinkBoardTable);
                   final menaceData = row.readTableOrNull(menaceTable);

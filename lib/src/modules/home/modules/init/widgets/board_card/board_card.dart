@@ -4,8 +4,10 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/board_view_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/board_card/board_card_banner.dart';
+import 'package:tormenta20/src/modules/home/modules/init/widgets/board_card/board_card_character_token.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/board_card/board_card_players_tokens.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
+import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
 
 class BoardCard extends StatelessWidget {
   const BoardCard({super.key, required this.board, this.width = 300});
@@ -17,9 +19,8 @@ class BoardCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final players = board.players.where((bp) => bp.isAlive).toList();
     players.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
-    //TODO adicionar characters na query para esse card e mostrar em caso de player
-    // final characters =
-    //     board.characters.where((bc) => bc.isAlive).toList().first;
+    final character =
+        board.characters.where((bc) => bc.isAlive).toList().firstOrNull;
     return Card(
       child: InkWell(
         borderRadius: T20UI.borderRadius,
@@ -72,10 +73,16 @@ class BoardCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: T20UI.smallSpaceSize),
-                    BoardCardPlayersTokens(
-                      players: players,
-                      width: width,
-                    )
+                    if (board.mode == BoardModeType.player)
+                      BoardCardCharacterToken(
+                        character: character,
+                        width: width,
+                      ),
+                    if (board.mode == BoardModeType.master)
+                      BoardCardPlayersTokens(
+                        players: players,
+                        width: width,
+                      )
                   ],
                 ),
               )

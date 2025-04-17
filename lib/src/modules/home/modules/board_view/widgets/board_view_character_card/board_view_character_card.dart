@@ -121,22 +121,30 @@ class BoardViewCharacterCard extends StatelessWidget {
                                   color: palette.textSecundary,
                                 ),
                               ),
-                              T20UI.smallSpaceWidth,
-                              Icon(
-                                FontAwesomeIcons.personRays,
-                                size: 12,
-                                color: palette.textSecundary,
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
-                                character.perception.toString().padLeft(2, '0'),
-                                maxLines: 2,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: palette.textSecundary,
-                                  fontWeight: FontWeight.w500,
+                              if (character.perception != null)
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    T20UI.smallSpaceWidth,
+                                    Icon(
+                                      FontAwesomeIcons.solidEye,
+                                      size: 12,
+                                      color: palette.textSecundary,
+                                    ),
+                                    const SizedBox(width: 4),
+                                    Text(
+                                      character.perception
+                                          .toString()
+                                          .padLeft(2, '0'),
+                                      maxLines: 2,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: palette.textSecundary,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
                               T20UI.smallSpaceWidth,
                               Icon(
                                 CharacterAlignmentTypeUtils.handleIcon(

@@ -19,8 +19,8 @@ targets:
         # options:
         #   store_date_time_values_as_text: true
 
-          sql:
-            dialect: sqlite
-            options:
-              modules:
-                - fts5
+          # sql:
+          #   dialect: sqlite
+          #   options:
+          #     modules:
+          #       - fts5
