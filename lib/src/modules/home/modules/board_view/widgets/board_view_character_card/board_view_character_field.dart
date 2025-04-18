@@ -2,10 +2,12 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_character_card/board_view_character_card.dart';
+import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_character_options_bottomsheet/board_view_character_options_bottomsheet.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/character_screen_button.dart';
 import 'package:tormenta20/src/modules/home/modules/select_character/select_character_screen.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/entities/character_board.dart';
+import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 
 class BoardViewCharacterField extends StatelessWidget {
   const BoardViewCharacterField(
@@ -52,27 +54,27 @@ class BoardViewCharacterField extends StatelessWidget {
       });
     }
 
-    void playerOptions(CharacterBoard character) async {
-      // await BottomsheetUtils.show<PlayerOptionsType?>(
-      //   context: context,
-      //   child: BoardViewPlayerOptions(character),
-      // ).then(
-      //   (result) {
-      //     if (result == PlayerOptionsType.edit) {
-      //       addEditPlayer(character);
-      //     }
+    void characterOptions(CharacterBoard character) async {
+      await BottomsheetUtils.show<CharacterOptionsType?>(
+        context: context,
+        child: BoardViewCharacterOptionsBottomsheet(character),
+      ).then(
+        (result) {
+          if (result == CharacterOptionsType.edit) {
+            addEditPlayer(character);
+          }
 
-      //     if (result == PlayerOptionsType.delete) {
-      //       deleteBoardPlayer(character);
-      //     }
+          // if (result == CharacterOptionsType.delete) {
+          //   deleteBoardPlayer(character);
+          // }
 
-      //     if (result == PlayerOptionsType.alive) {
-      //       saveBoardPlayer(
-      //         character.copyWithChangeAlive(isAlive: !player.isAlive),
-      //       );
-      //     }
-      //   },
-      // );
+          // if (result == CharacterOptionsType.alive) {
+          //   saveBoardPlayer(
+          //     character.copyWithChangeAlive(isAlive: !character.isAlive),
+          //   );
+          // }
+        },
+      );
     }
 
     final character = board.characters.firstWhereOrNull((c) => c.isAlive);
@@ -103,7 +105,7 @@ class BoardViewCharacterField extends StatelessWidget {
                 else
                   BoardViewCharacterCard(
                     character: character,
-                    onTap: addEditPlayer,
+                    onTap: characterOptions,
                     otherCharacters:
                         board.characters.where((e) => !e.isAlive).toList(),
                   ),

@@ -35,6 +35,13 @@ class BoardViewOptionsBottomsheet extends StatelessWidget {
               'Faça a boa para os seus amigos e compartilhe os materiais com eles',
           type: BordViewOptionType.material,
         ),
+        if (board.mode == BoardModeType.player)
+          OptionsBottomsheetEntity(
+            icon: FontAwesomeIcons.solidFileCode,
+            label: 'Compartilhar personagem',
+            mensage: 'Gere e compatilhe o arquivo do personagem para o mestre',
+            type: BordViewOptionType.json,
+          ),
         OptionsBottomsheetEntity(
           icon: FontAwesomeIcons.penToSquare,
           label: 'Editar mesa',
@@ -46,4 +53,4 @@ class BoardViewOptionsBottomsheet extends StatelessWidget {
   }
 }
 
-enum BordViewOptionType { delete, json, material, edit }
+enum BordViewOptionType { delete, json, material, edit, character }
