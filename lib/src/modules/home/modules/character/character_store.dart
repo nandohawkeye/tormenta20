@@ -33,7 +33,7 @@ class CharacterStore extends ChangeNotifier {
       }
     });
 
-    await _storageService.watchOnlyBoardsToCharacters().then((resp) {
+    await _storageService.watchOnlyBoardsToCharacters(uuid).then((resp) {
       if (resp.boards != null) {
         _subBoard ??= resp.boards!.listen((result) {
           changeBoards(result);

@@ -38,6 +38,8 @@ class PaletteBase {
     required this.backgroundLevelThree,
     required this.backgroundLevelFour,
     required this.backgroundLevelOne,
+    required this.life,
+    required this.mana,
   });
   final Color background;
   final Color cardStroke;
@@ -76,6 +78,9 @@ class PaletteBase {
   final Color backgroundLevelTwo;
   final Color backgroundLevelThree;
   final Color backgroundLevelFour;
+
+  final Color life;
+  final Color mana;
 }
 
 abstract class Palettes {
@@ -116,5 +121,7 @@ abstract class Palettes {
         backgroundLevelTwo: const Color(0xFF424242),
         backgroundLevelThree: const Color(0xFF616161),
         backgroundLevelFour: const Color(0xFF757575),
+        life: const Color(0xFF388E3C),
+        mana: const Color(0xFF0288D1),
       );
 }

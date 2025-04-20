@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/character/character_store.dart';
 import 'package:tormenta20/src/modules/home/modules/character/widgets/character_boards/character_board_field_card.dart';
-import 'package:tormenta20/src/modules/home/modules/menace/widgets/remove_menace_in_board_bottomsheet/remove_menace_in_board_bottomsheet.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/entities/character.dart';
-import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 
 class CharacterBoardField extends StatelessWidget {
   const CharacterBoardField(
@@ -21,17 +19,6 @@ class CharacterBoardField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void removeBoard(Board board) async {
-      await BottomsheetUtils.show<bool?>(
-        context: context,
-        child: RemoveMenaceInBoardBottomsheet(board),
-      ).then((result) async {
-        if (result != null) {
-          // store.removeLinkToBoard(board);
-        }
-      });
-    }
-
     if (boards.isEmpty) {
       return const SizedBox.shrink();
     }
@@ -51,10 +38,6 @@ class CharacterBoardField extends StatelessWidget {
             itemCount: boards.length,
             itemBuilder: (_, index) {
               return CharacterBoardFieldCard(
-                // onAdd: store.addLinkToBoard,
-                onAdd: (_) {},
-                onRemove: removeBoard,
-                character: character,
                 board: boards[index],
               );
             },

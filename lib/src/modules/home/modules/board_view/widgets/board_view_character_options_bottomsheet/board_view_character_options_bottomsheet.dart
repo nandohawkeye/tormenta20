@@ -29,16 +29,9 @@ class BoardViewCharacterOptionsBottomsheet extends StatelessWidget {
               : 'Colocaram o clérigo pra trabalhar',
           type: CharacterOptionsType.alive,
         ),
-        if (character.isAlive)
-          OptionsBottomsheetEntity(
-            icon: FontAwesomeIcons.penToSquare,
-            label: 'Editar personagem',
-            mensage: 'Clique para editar as informações do personagem',
-            type: CharacterOptionsType.edit,
-          ),
       ],
     );
   }
 }
 
-enum CharacterOptionsType { delete, alive, edit }
+enum CharacterOptionsType { delete, alive }

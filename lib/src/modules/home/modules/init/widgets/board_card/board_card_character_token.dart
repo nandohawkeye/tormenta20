@@ -98,12 +98,20 @@ class BoardCardCharacterToken extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(character?.name ?? ''),
+            Text('${character?.name}'),
             const SizedBox(height: 2),
             Row(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                const Icon(FontAwesomeIcons.arrowUp, size: 12),
+                const SizedBox(width: 2),
+                Text(
+                  1.toString().padLeft(2, '0'),
+                  maxLines: 2,
+                  style: const TextStyle(fontSize: 12),
+                ),
+                T20UI.spaceWidth,
                 const Icon(FontAwesomeIcons.shieldHalved, size: 12),
                 const SizedBox(width: 4),
                 Text(
@@ -111,7 +119,7 @@ class BoardCardCharacterToken extends StatelessWidget {
                   maxLines: 2,
                   style: const TextStyle(fontSize: 12),
                 ),
-                T20UI.smallSpaceWidth,
+                T20UI.spaceWidth,
                 const Icon(FontAwesomeIcons.solidHeart, size: 12),
                 const SizedBox(width: 4),
                 Text(
@@ -119,7 +127,7 @@ class BoardCardCharacterToken extends StatelessWidget {
                   maxLines: 2,
                   style: const TextStyle(fontSize: 12),
                 ),
-                T20UI.smallSpaceWidth,
+                T20UI.spaceWidth,
                 const Icon(FontAwesomeIcons.handSparkles, size: 12),
                 const SizedBox(width: 4),
                 Text(
@@ -127,7 +135,7 @@ class BoardCardCharacterToken extends StatelessWidget {
                   maxLines: 2,
                   style: const TextStyle(fontSize: 12),
                 ),
-                T20UI.smallSpaceWidth,
+                T20UI.spaceWidth,
                 if (character?.perception != null)
                   Row(
                     mainAxisSize: MainAxisSize.min,

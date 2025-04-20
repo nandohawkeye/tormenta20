@@ -80,6 +80,7 @@ class _BoardViewScreenState extends State<BoardViewScreen> {
                       BoardViewMenacesField(
                         menaces,
                         boardUuid: board.uuid,
+                        removeMenace: _store.removeLinkMenaceToBoard,
                       ),
                     const SizedBox(height: 240)
                   ],

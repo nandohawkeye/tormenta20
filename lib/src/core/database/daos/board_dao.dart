@@ -155,6 +155,14 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
             .go();
       });
 
+      await (delete(characterBoardTable)
+            ..where((tbl) => tbl.boarduuid.equals(board.uuid)))
+          .go();
+
+      await (delete(menaceLinkBoardTable)
+            ..where((tbl) => tbl.boardUuid.equals(board.uuid)))
+          .go();
+
       await Future.forEach(links, (link) async {
         await (delete(boardLinkTable)
               ..where((tbl) => tbl.uuid.equals(link.uuid)))
@@ -207,18 +215,6 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
         batch.insertAllOnConflictUpdate(
             boardPlayerTable, [BoardPlayerAdapters.toCompanion(player)]);
       });
-
-      return null;
-    } catch (e) {
-      return Failure(e.toString());
-    }
-  }
-
-  Future<Failure?> deleteBoardCharacter(CharacterBoard character) async {
-    try {
-      await (delete(characterBoardTable)
-            ..where((tbl) => tbl.uuid.equals(character.uuid)))
-          .go();
 
       return null;
     } catch (e) {
@@ -541,7 +537,7 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
                 boardTable.updatedAt,
               ]))
             .join([
-              leftOuterJoin(
+              innerJoin(
                 menaceLinkBoardTable,
                 boardTable.uuid.equalsExp(
                   menaceLinkBoardTable.boardUuid,
@@ -581,7 +577,7 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
   }
 
   Future<({Failure? failure, Stream<List<Board>>? boards})>
-      watchOnlyBoardsToCharacters() async {
+      watchOnlyBoardsToCharacter(String characterUuid) async {
     try {
       return (
         failure: null,
@@ -593,6 +589,13 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
                 boardTable.bannerPath,
                 boardTable.createdAt,
                 boardTable.updatedAt,
+              ]).join([
+                innerJoin(
+                  characterBoardTable,
+                  characterBoardTable.parentuuid.equals(
+                    characterUuid,
+                  ),
+                ),
               ]))
             .watch()
             .map((rows) {

@@ -11,7 +11,8 @@ class DividerLevelTwo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: verticalPadding),
-      child: Divider(color: palette.divider, height: 0),
+      child: Divider(
+          color: palette.backgroundLevelThree.withValues(alpha: .2), height: 0),
     );
   }
 }

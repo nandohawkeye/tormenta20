@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/menace/menace_store.dart';
 import 'package:tormenta20/src/modules/home/modules/menace/widgets/menace_boards_field/menace_boards_field_card.dart';
-import 'package:tormenta20/src/modules/home/modules/menace/widgets/remove_menace_in_board_bottomsheet/remove_menace_in_board_bottomsheet.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/entities/menace.dart';
-import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 
 class MenaceBoardsField extends StatelessWidget {
   const MenaceBoardsField(this.store,
@@ -17,17 +15,6 @@ class MenaceBoardsField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void removeBoard(Board board) async {
-      await BottomsheetUtils.show<bool?>(
-        context: context,
-        child: RemoveMenaceInBoardBottomsheet(board),
-      ).then((result) async {
-        if (result != null) {
-          store.removeLinkToBoard(board);
-        }
-      });
-    }
-
     if (boards.isEmpty) {
       return const SizedBox.shrink();
     }
@@ -47,9 +34,6 @@ class MenaceBoardsField extends StatelessWidget {
             itemCount: boards.length,
             itemBuilder: (_, index) {
               return MenaceBoardsFieldCard(
-                onAdd: store.addLinkToBoard,
-                onRemove: removeBoard,
-                menace: menace,
                 board: boards[index],
               );
             },

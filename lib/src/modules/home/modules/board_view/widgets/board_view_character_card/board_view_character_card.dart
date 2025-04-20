@@ -11,7 +11,6 @@ import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_vie
 import 'package:tormenta20/src/shared/entities/character_board.dart';
 import 'package:tormenta20/src/shared/utils/character_alignment_type_utils.dart';
 import 'package:tormenta20/src/shared/utils/character_utils.dart';
-import 'package:tormenta20/src/shared/utils/creature_size_utils.dart';
 
 class BoardViewCharacterCard extends StatelessWidget {
   const BoardViewCharacterCard({
@@ -19,11 +18,13 @@ class BoardViewCharacterCard extends StatelessWidget {
     required this.character,
     required this.onTap,
     required this.otherCharacters,
+    required this.onTapDeathCharacter,
   });
 
   final CharacterBoard character;
   final List<CharacterBoard> otherCharacters;
   final Function(CharacterBoard) onTap;
+  final Function(CharacterBoard) onTapDeathCharacter;
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +93,7 @@ class BoardViewCharacterCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '${character.name} ',
+                            character.name,
                             maxLines: 2,
                             style: const TextStyle(
                               fontFamily: FontFamily.tormenta,
@@ -100,16 +101,50 @@ class BoardViewCharacterCard extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 4),
-                          Text(
-                            '${CharacterUtils.handleBroodTitle(character.brood.name)} - ${CreatureSizeUtils.handleTitle(character.creatureSize.name)}',
-                            style: TextStyle(
-                                color: palette.textSecundary, fontSize: 14),
+                          Row(
+                            children: [
+                              Text(
+                                CharacterUtils.handleBroodTitle(
+                                    character.brood.name),
+                                style: TextStyle(
+                                    color: palette.textSecundary, fontSize: 14),
+                              ),
+                              T20UI.smallSpaceWidth,
+                              Icon(
+                                CharacterAlignmentTypeUtils.handleIcon(
+                                    character.alignmentType.name),
+                                size: 12,
+                                color: palette.textSecundary,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                CharacterAlignmentTypeUtils.handleTitle(
+                                    character.alignmentType.name),
+                                maxLines: 2,
+                                style: TextStyle(
+                                    color: palette.textSecundary,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 12),
+                              )
+                            ],
                           ),
                           const SizedBox(height: 4),
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
+                              Icon(FontAwesomeIcons.arrowUp,
+                                  color: palette.textSecundary, size: 12),
+                              const SizedBox(width: 2),
+                              Text(
+                                1.toString().padLeft(2, '0'),
+                                maxLines: 2,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: palette.textSecundary,
+                                ),
+                              ),
+                              T20UI.spaceWidth,
                               Icon(FontAwesomeIcons.shieldHalved,
                                   color: palette.textSecundary, size: 12),
                               const SizedBox(width: 4),
@@ -125,7 +160,7 @@ class BoardViewCharacterCard extends StatelessWidget {
                                 Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    T20UI.smallSpaceWidth,
+                                    T20UI.spaceWidth,
                                     Icon(
                                       FontAwesomeIcons.solidEye,
                                       size: 12,
@@ -145,23 +180,6 @@ class BoardViewCharacterCard extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                              T20UI.smallSpaceWidth,
-                              Icon(
-                                CharacterAlignmentTypeUtils.handleIcon(
-                                    character.alignmentType.name),
-                                size: 12,
-                                color: palette.textSecundary,
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
-                                CharacterAlignmentTypeUtils.handleTitle(
-                                    character.alignmentType.name),
-                                maxLines: 2,
-                                style: TextStyle(
-                                    color: palette.textSecundary,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 12),
-                              )
                             ],
                           )
                         ],
@@ -205,8 +223,8 @@ class BoardViewCharacterCard extends StatelessWidget {
                 child: LinearProgressIndicator(
                   value:
                       (((character.currentLife * 100) / character.life) / 100),
-                  backgroundColor: Colors.green.withValues(alpha: .2),
-                  color: Colors.green,
+                  backgroundColor: palette.life.withValues(alpha: .2),
+                  color: palette.life,
                   minHeight: 4,
                   borderRadius: T20UI.borderRadius,
                   stopIndicatorRadius: T20UI.inputBorderRadius,
@@ -248,8 +266,8 @@ class BoardViewCharacterCard extends StatelessWidget {
                 child: LinearProgressIndicator(
                   value:
                       (((character.currentMana * 100) / character.mana) / 100),
-                  backgroundColor: Colors.blue.withValues(alpha: .2),
-                  color: Colors.blue,
+                  backgroundColor: palette.mana.withValues(alpha: .2),
+                  color: palette.mana,
                   minHeight: 4,
                   borderRadius: T20UI.borderRadius,
                   stopIndicatorRadius: T20UI.inputBorderRadius,
@@ -268,7 +286,10 @@ class BoardViewCharacterCard extends StatelessWidget {
                   ),
                   child: Row(
                     children: otherCharacters
-                        .map(BoardViewCharacterFieldDeathCharacterAvatar.new)
+                        .map((e) => BoardViewCharacterFieldDeathCharacterAvatar(
+                              character: e,
+                              onTap: onTapDeathCharacter,
+                            ))
                         .toList(),
                   ),
                 )

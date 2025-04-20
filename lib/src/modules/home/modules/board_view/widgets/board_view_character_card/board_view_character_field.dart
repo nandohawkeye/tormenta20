@@ -2,12 +2,15 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_character_card/board_view_character_card.dart';
+import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_character_card/board_view_character_death_character_card.dart';
+import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_character_confirm_delete/board_view_character_confirm_delete_bottomsheet.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_character_options_bottomsheet/board_view_character_options_bottomsheet.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/character_screen_button.dart';
 import 'package:tormenta20/src/modules/home/modules/select_character/select_character_screen.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/entities/character_board.dart';
 import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
+import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
 
 class BoardViewCharacterField extends StatelessWidget {
   const BoardViewCharacterField(
@@ -23,22 +26,6 @@ class BoardViewCharacterField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void addEditPlayer(CharacterBoard? character) async {
-      // await Navigator.push<BoardPlayer?>(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (_) => AddEditBoardPlayerCharacter(
-      //       character: character,
-      //       boardUuid: board.uuid,
-      //     ),
-      //   ),
-      // ).then((result) {
-      //   if (result != null) {
-      //     saveBoardPlayer(result);
-      //   }
-      // });
-    }
-
     void addCharacter() async {
       await Navigator.push<CharacterBoard?>(
         context,
@@ -54,32 +41,40 @@ class BoardViewCharacterField extends StatelessWidget {
       });
     }
 
+    void onDelete(CharacterBoard character) async {
+      await BottomsheetUtils.show<bool?>(
+        context: context,
+        child: BoardViewCharacterConfirmDeleteBottomsheet(
+          characterName: character.name,
+        ),
+      ).then((result) {
+        if (result == true) {
+          deleteBoardCharacter(character);
+        }
+      });
+    }
+
     void characterOptions(CharacterBoard character) async {
       await BottomsheetUtils.show<CharacterOptionsType?>(
         context: context,
         child: BoardViewCharacterOptionsBottomsheet(character),
       ).then(
         (result) {
-          if (result == CharacterOptionsType.edit) {
-            addEditPlayer(character);
+          if (result == CharacterOptionsType.delete) {
+            onDelete(character);
           }
 
-          // if (result == CharacterOptionsType.delete) {
-          //   deleteBoardPlayer(character);
-          // }
-
-          // if (result == CharacterOptionsType.alive) {
-          //   saveBoardPlayer(
-          //     character.copyWithChangeAlive(isAlive: !character.isAlive),
-          //   );
-          // }
+          if (result == CharacterOptionsType.alive) {
+            saveBoardCharacter(
+              character.copyWith(isAlive: !character.isAlive),
+            );
+          }
         },
       );
     }
 
     final character = board.characters.firstWhereOrNull((c) => c.isAlive);
-
-    print('character: $character');
+    final deathCharacters = board.characters.where((c) => !c.isAlive).toList();
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -96,44 +91,50 @@ class BoardViewCharacterField extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (character == null)
-                  CharacterScreenButton(
-                    title: 'Personagem',
-                    subtitle:
-                        'Adicione ou crie um personagem para comeãr a jogar',
-                    onTap: addCharacter,
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CharacterScreenButton(
+                        title: 'Personagem',
+                        subtitle:
+                            'Adicione ou crie um personagem para comeãr a jogar',
+                        onTap: addCharacter,
+                      ),
+                      if (deathCharacters.isNotEmpty)
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const DividerLevelTwo(verticalPadding: 0),
+                            SizedBox(
+                              width: double.infinity,
+                              child: ListView.separated(
+                                shrinkWrap: true,
+                                primary: false,
+                                padding: EdgeInsets.zero,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: deathCharacters.length,
+                                separatorBuilder: (_, __) =>
+                                    const DividerLevelTwo(verticalPadding: 0),
+                                itemBuilder: (_, index) {
+                                  return BoardViewCharacterDeathCharacterCard(
+                                    character: deathCharacters[index],
+                                    onTap: characterOptions,
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        )
+                    ],
                   )
                 else
                   BoardViewCharacterCard(
                     character: character,
                     onTap: characterOptions,
+                    onTapDeathCharacter: onDelete,
                     otherCharacters:
                         board.characters.where((e) => !e.isAlive).toList(),
                   ),
-
-                // Column(
-                //   mainAxisSize: MainAxisSize.min,
-                //   children: [
-                //     const DividerLevelTwo(verticalPadding: 0),
-                //     SizedBox(
-                //       width: double.infinity,
-                //       child: ListView.separated(
-                //         shrinkWrap: true,
-                //         primary: false,
-                //         padding: EdgeInsets.zero,
-                //         physics: const NeverScrollableScrollPhysics(),
-                //         itemCount: players.length,
-                //         separatorBuilder: (_, __) =>
-                //             const DividerLevelTwo(verticalPadding: 0),
-                //         itemBuilder: (_, index) {
-                //           return BoardViewPlayerCard(
-                //             player: players[index],
-                //             onTap: playerOptions,
-                //           );
-                //         },
-                //       ),
-                //     ),
-                //   ],
-                // )
               ],
             ),
           ),

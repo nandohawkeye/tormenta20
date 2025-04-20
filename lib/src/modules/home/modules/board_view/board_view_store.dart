@@ -9,6 +9,7 @@ import 'package:tormenta20/src/shared/entities/board/board_player.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session_ext.dart';
 import 'package:tormenta20/src/shared/entities/character_board.dart';
+import 'package:tormenta20/src/shared/entities/menace.dart';
 import 'package:tormenta20/src/shared/failures/failure.dart';
 import 'package:uuid/uuid.dart';
 
@@ -46,6 +47,11 @@ class BoardViewStore extends ChangeNotifier {
 
   Future<void> deleteBoardCharacter(CharacterBoard character) async {
     await _storageService.deleteBoardCharacter(character);
+  }
+
+  void removeLinkMenaceToBoard(Menace menace) async {
+    await _storageService.removeLinkMenaceBoard(
+        menaceUuid: menace.uuid, boardUuid: board.uuid);
   }
 
   StreamSubscription? _sub;

@@ -983,4 +983,84 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
       return Failure(e.toString());
     }
   }
+
+  Future<Failure?> deleteBoardCharacter(CharacterBoard character) async {
+    try {
+      await (delete(characterBoardTable)
+            ..where((tbl) => tbl.uuid.equals(character.uuid)))
+          .go();
+
+      await (delete(originTable)
+            ..where((tbl) => tbl.characterUuid.equals(character.uuid)))
+          .go();
+
+      await (delete(powerTable)
+            ..where((tbl) => tbl.characterUuid.equals(character.uuid)))
+          .go();
+
+      await (delete(classeCharacterTable)
+            ..where((tbl) => tbl.characterUuid.equals(character.uuid)))
+          .go();
+
+      if (character.expertises.isNotEmpty) {
+        await (delete(expertiseTable)
+              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
+            .go();
+      }
+
+      if (character.actions.isNotEmpty) {
+        await (delete(actionHandToHandTable)
+              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
+            .go();
+        await (delete(actionDistanceAttackTable)
+              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
+            .go();
+        await (delete(actionTable)
+              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
+            .go();
+      }
+
+      if (character.equipments.isNotEmpty) {
+        await (delete(adventureBackpackTable)
+              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
+            .go();
+
+        await (delete(ammunitionTable)
+              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
+            .go();
+
+        await (delete(armorTable)
+              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
+            .go();
+
+        await (delete(backpackTable)
+              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
+            .go();
+
+        await (delete(generalItemTable)
+              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
+            .go();
+
+        await (delete(saddlebagTable)
+              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
+            .go();
+
+        await (delete(shieldTable)
+              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
+            .go();
+
+        await (delete(weaponTable)
+              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
+            .go();
+
+        await (delete(equipmentTable)
+              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
+            .go();
+      }
+
+      return null;
+    } catch (e) {
+      return Failure(e.toString());
+    }
+  }
 }
