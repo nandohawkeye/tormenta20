@@ -1,6 +1,7 @@
 import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/entities/equipament/spaceable.dart';
 
+//TODO inserir tibars ao criar characterBoard e seus adaptadores
 class Tibars extends Equipment implements Spaceable {
   final int gold;
   final int silver;

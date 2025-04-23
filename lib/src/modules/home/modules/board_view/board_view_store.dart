@@ -5,6 +5,7 @@ import 'package:tormenta20/src/modules/home/modules/board_view/board_view_storag
 import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/entities/board/board_combat.dart';
 import 'package:tormenta20/src/shared/entities/board/board_combat_ext.dart';
+import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session_ext.dart';
@@ -15,6 +16,7 @@ import 'package:uuid/uuid.dart';
 
 class BoardViewStore extends ChangeNotifier {
   BoardViewStore(this._board) {
+    _boardCharacters.addAll(_board.characters);
     _storageService.watchSingleBoard(_board.uuid).then((resp) {
       if (resp.boards != null) {
         _sub ??= resp.boards?.listen((data) {
@@ -28,6 +30,22 @@ class BoardViewStore extends ChangeNotifier {
         });
       }
     });
+
+    if (_board.mode == BoardModeType.player) {
+      _storageService.watchCharactersBoard(_board.uuid).then(
+        (resp) {
+          if (resp.character != null) {
+            _subCharacters ??= resp.character?.listen((data) {
+              _boardCharacters.clear();
+              _boardCharacters.addAll(data);
+              print('characters: ${_boardCharacters.length}');
+
+              notifyListeners();
+            });
+          }
+        },
+      );
+    }
   }
 
   Future<Failure?> deleteBoard(Board board) =>
@@ -55,10 +73,14 @@ class BoardViewStore extends ChangeNotifier {
   }
 
   StreamSubscription? _sub;
+  StreamSubscription? _subCharacters;
   final _storageService = BoardViewStorageService();
 
   late Board _board;
   Board get board => _board;
+
+  List<CharacterBoard> _boardCharacters = [];
+  List<CharacterBoard> get boardCharacters => _boardCharacters;
 
   bool _boardDeleted = false;
   bool get boardDeleted => _boardDeleted;
@@ -128,6 +150,8 @@ class BoardViewStore extends ChangeNotifier {
   void dispose() {
     _sub?.cancel();
     _sub = null;
+    _subCharacters?.cancel();
+    _subCharacters = null;
     super.dispose();
   }
 }

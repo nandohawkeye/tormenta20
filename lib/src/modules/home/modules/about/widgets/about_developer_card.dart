@@ -70,7 +70,7 @@ class AboutDeveloperCard extends StatelessWidget {
                           ),
                           const SizedBox(height: 4),
                           const Text(
-                            'Contribua com esse projeto me pagando um cafezinho clicando aqui, e conheça  também minhas redes sociais abaixo.',
+                            'Apoie esse projeto contribuindo com um cafezinho clicando nesse texto, e conheça  também minhas redes sociais abaixo.',
                             maxLines: 10,
                             style: TextStyle(fontWeight: FontWeight.w500),
                           ),

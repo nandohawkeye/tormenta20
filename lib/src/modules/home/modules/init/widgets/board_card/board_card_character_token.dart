@@ -7,6 +7,8 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/entities/character_board.dart';
 import 'package:tormenta20/src/shared/extensions/context_ext.dart';
+import 'package:tormenta20/src/shared/utils/character_alignment_type_utils.dart';
+import 'package:tormenta20/src/shared/utils/character_utils.dart';
 
 class BoardCardCharacterToken extends StatelessWidget {
   const BoardCardCharacterToken({
@@ -104,51 +106,25 @@ class BoardCardCharacterToken extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Icon(FontAwesomeIcons.arrowUp, size: 12),
-                const SizedBox(width: 2),
                 Text(
-                  1.toString().padLeft(2, '0'),
-                  maxLines: 2,
-                  style: const TextStyle(fontSize: 12),
+                  CharacterUtils.handleBroodTitle(character!.brood.name),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w500, fontSize: 12),
                 ),
-                T20UI.spaceWidth,
-                const Icon(FontAwesomeIcons.shieldHalved, size: 12),
+                T20UI.smallSpaceWidth,
+                Icon(
+                  CharacterAlignmentTypeUtils.handleIcon(
+                      character!.alignmentType.name),
+                  size: 12,
+                ),
                 const SizedBox(width: 4),
                 Text(
-                  character!.defense.toString().padLeft(2, '0'),
+                  CharacterAlignmentTypeUtils.handleTitle(
+                      character!.alignmentType.name),
                   maxLines: 2,
-                  style: const TextStyle(fontSize: 12),
-                ),
-                T20UI.spaceWidth,
-                const Icon(FontAwesomeIcons.solidHeart, size: 12),
-                const SizedBox(width: 4),
-                Text(
-                  character!.currentLife.toString().padLeft(2, '0'),
-                  maxLines: 2,
-                  style: const TextStyle(fontSize: 12),
-                ),
-                T20UI.spaceWidth,
-                const Icon(FontAwesomeIcons.handSparkles, size: 12),
-                const SizedBox(width: 4),
-                Text(
-                  character!.currentMana.toString().padLeft(2, '0'),
-                  maxLines: 2,
-                  style: const TextStyle(fontSize: 12),
-                ),
-                T20UI.spaceWidth,
-                if (character?.perception != null)
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(FontAwesomeIcons.solidEye, size: 12),
-                      const SizedBox(width: 4),
-                      Text(
-                        character!.perception.toString().padLeft(2, '0'),
-                        maxLines: 2,
-                        style: const TextStyle(fontSize: 12),
-                      ),
-                    ],
-                  )
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w500, fontSize: 12),
+                )
               ],
             ),
             const SizedBox(height: 6),

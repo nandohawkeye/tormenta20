@@ -1,21 +1,112 @@
 import 'package:drift/drift.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/shared/entities/action/action.dart';
+import 'package:tormenta20/src/shared/entities/action/action_adapters.dart';
+import 'package:tormenta20/src/shared/entities/action/distance_attack_adapters.dart';
+import 'package:tormenta20/src/shared/entities/action/hand_to_hand_adapters.dart';
 import 'package:tormenta20/src/shared/entities/brood.dart';
 import 'package:tormenta20/src/shared/entities/character.dart';
 import 'package:tormenta20/src/shared/entities/character_alignment_type.dart';
 import 'package:tormenta20/src/shared/entities/character_board.dart';
+import 'package:tormenta20/src/shared/entities/character_board_dto.dart';
+import 'package:tormenta20/src/shared/entities/classe_character_type_adapters.dart';
+import 'package:tormenta20/src/shared/entities/classe_type_character.dart';
 import 'package:tormenta20/src/shared/entities/creature_size_category.dart';
+import 'package:tormenta20/src/shared/entities/equipament/adventure_backpack_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/ammunition_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/armor_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/backpack_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
+import 'package:tormenta20/src/shared/entities/equipament/equipment_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/general_item_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/saddlebag_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/shield_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/tibars.dart';
+import 'package:tormenta20/src/shared/entities/equipament/weapon_adapters.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise_adapters.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise_base.dart';
+import 'package:tormenta20/src/shared/entities/grimoire/grimoire_adapters.dart';
 import 'package:tormenta20/src/shared/entities/origin.dart';
+import 'package:tormenta20/src/shared/entities/origin_adapters.dart';
 import 'package:tormenta20/src/shared/entities/power.dart';
+import 'package:tormenta20/src/shared/entities/power_adapaters.dart';
 import 'package:tormenta20/src/shared/services/expertises_base_service.dart';
 import 'package:uuid/uuid.dart';
 
 abstract class CharacterBoardAdapters {
+  static CharacterBoard fromDriftDto(CharacterBoardDto dto) {
+    List<Origin> origins = [];
+    origins.addAll(dto.origins.map(OriginAdapters.fromDriftData));
+    List<Power> powers = [];
+    powers.addAll(dto.powers.map(PowerAdapters.fromDriftData));
+    List<ActionEnt> actions = [];
+    actions.addAll(dto.actions.map(ActionAdapters.fromDriftData));
+    actions
+        .addAll(dto.distanceAttacks.map(DistanceAttackAdapters.fromDriftData));
+    actions.addAll(dto.handToHands.map(HandToHandAdapters.fromDriftData));
+
+    List<ClasseTypeCharacter> classes = [];
+    classes.addAll(dto.classes.map(ClasseCharacterTypeAdapters.fromDriftData));
+
+    List<Expertise> expertises = [];
+    expertises.addAll(dto.expertises.map(ExpertiseAdapters.fromDriftData));
+
+    List<Equipment> equipments = [];
+    equipments.addAll(dto.equipments.map(EquipmentAdapters.fromDriftData));
+    equipments.addAll(
+        dto.adventureBackpacks.map(AdventureBackpackAdapters.fromDriftData));
+    equipments.addAll(dto.backpacks.map(BackpackAdapters.fromDriftData));
+    equipments.addAll(dto.ammunitions.map(AmmunitionAdapters.fromDriftData));
+    equipments.addAll(dto.armors.map(ArmorAdapters.fromDriftData));
+    equipments.addAll(dto.generalItens.map(GeneralItemAdapters.fromDriftData));
+    equipments.addAll(dto.saddlebags.map(SaddlebagAdapters.fromDriftData));
+    equipments.addAll(dto.shields.map(ShieldAdapters.fromDriftData));
+    equipments.addAll(dto.weapons.map(WeaponAdapters.fromDriftData));
+    return CharacterBoard(
+      uuid: dto.characterBoardsData.uuid,
+      parentuuid: dto.characterBoardsData.parentuuid,
+      boardUuid: dto.characterBoardsData.boarduuid,
+      isAlive: dto.characterBoardsData.isAlive,
+      currentLife: dto.characterBoardsData.currentLife,
+      currentMana: dto.characterBoardsData.currentMana,
+      alignmentType:
+          CharacterAlignmentType.values[dto.characterBoardsData.aligmentIndex],
+      brood: Brood.values[dto.characterBoardsData.broodIndex],
+      createdAt: DateTime.fromMillisecondsSinceEpoch(
+          dto.characterBoardsData.createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(
+          dto.characterBoardsData.updatedAt),
+      creatureSize: CreatureSizeCategory
+          .values[dto.characterBoardsData.creatureSizeIndex],
+      defense: dto.characterBoardsData.defense,
+      life: dto.characterBoardsData.life,
+      mana: dto.characterBoardsData.mana,
+      name: dto.characterBoardsData.name,
+      charisma: dto.characterBoardsData.charisma,
+      constitution: dto.characterBoardsData.constitution,
+      dexterity: dto.characterBoardsData.dexterity,
+      displacement: dto.characterBoardsData.displacement,
+      divinityId: dto.characterBoardsData.divinityId,
+      imageAsset: dto.characterBoardsData.imageAsset,
+      imagePath: dto.characterBoardsData.imagePath,
+      intelligence: dto.characterBoardsData.intelligence,
+      perception: dto.characterBoardsData.perception,
+      senses: dto.characterBoardsData.senses,
+      strength: dto.characterBoardsData.strength,
+      wisdom: dto.characterBoardsData.wisdom,
+      expertises: expertises,
+      grimorie: dto.grimoireData == null
+          ? null
+          : GrimoireAdapters.fromDriftData(dto.grimoireData!),
+      classes: classes,
+      powers: powers,
+      origins: origins,
+      equipments: equipments,
+      actions: actions,
+    );
+  }
+
   static CharacterBoard fromDriftData(CharacterBoardTableData data) {
     return CharacterBoard(
       uuid: data.uuid,
@@ -92,6 +183,17 @@ abstract class CharacterBoardAdapters {
       equipments.add(equipment.cloneWith(
           uuid: const Uuid().v4(), parentUuid: characterUuid));
     }
+
+    //TODO fix this for 4d6
+    equipments.add(
+      Tibars(
+        gold: 0,
+        silver: 0,
+        bronze: 0,
+        uuid: const Uuid().v4(),
+        parentUuid: characterUuid,
+      ),
+    );
 
     for (var expertise in entity.trainedExpertises) {
       expertises.add(

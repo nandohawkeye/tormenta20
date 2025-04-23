@@ -46,7 +46,8 @@ class _BoardViewScreenState extends State<BoardViewScreen> {
       builder: (_, __) {
         final board = _store.board;
         final menaces = board.menaces;
-        final character = board.characters.firstWhereOrNull((e) => e.isAlive);
+        final characters = _store.boardCharacters;
+        final character = characters.firstWhereOrNull((e) => e.isAlive);
 
         return Material(
           color: palette.background,
@@ -62,6 +63,7 @@ class _BoardViewScreenState extends State<BoardViewScreen> {
                     if (board.mode == BoardModeType.player)
                       BoardViewCharacterField(
                         board,
+                        characters: characters,
                         saveBoardCharacter: _store.saveBaordCharacter,
                         deleteBoardCharacter: _store.deleteBoardCharacter,
                       ),

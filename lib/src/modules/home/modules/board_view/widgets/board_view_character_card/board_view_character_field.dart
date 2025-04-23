@@ -18,9 +18,11 @@ class BoardViewCharacterField extends StatelessWidget {
     super.key,
     required this.saveBoardCharacter,
     required this.deleteBoardCharacter,
+    required this.characters,
   });
 
   final Board board;
+  final List<CharacterBoard> characters;
   final Future<void> Function(CharacterBoard character) saveBoardCharacter;
   final Future<void> Function(CharacterBoard character) deleteBoardCharacter;
 
@@ -73,8 +75,8 @@ class BoardViewCharacterField extends StatelessWidget {
       );
     }
 
-    final character = board.characters.firstWhereOrNull((c) => c.isAlive);
-    final deathCharacters = board.characters.where((c) => !c.isAlive).toList();
+    final characterAlive = characters.firstWhereOrNull((c) => c.isAlive);
+    final deathCharacters = characters.where((c) => !c.isAlive).toList();
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -90,14 +92,14 @@ class BoardViewCharacterField extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                if (character == null)
+                if (characterAlive == null)
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       CharacterScreenButton(
                         title: 'Personagem',
                         subtitle:
-                            'Adicione ou crie um personagem para comeãr a jogar',
+                            'Adicione ou crie um personagem para começar a jogar',
                         onTap: addCharacter,
                       ),
                       if (deathCharacters.isNotEmpty)
@@ -129,11 +131,10 @@ class BoardViewCharacterField extends StatelessWidget {
                   )
                 else
                   BoardViewCharacterCard(
-                    character: character,
+                    character: characterAlive,
                     onTap: characterOptions,
                     onTapDeathCharacter: onDelete,
-                    otherCharacters:
-                        board.characters.where((e) => !e.isAlive).toList(),
+                    otherCharacters: deathCharacters,
                   ),
               ],
             ),

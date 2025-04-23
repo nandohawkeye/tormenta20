@@ -20,6 +20,11 @@ class BoardViewStorageService extends DriftStorageService {
     return super.dataBase.boardDAO.watchSingleBoard(uuid);
   }
 
+  Future<({Stream<List<CharacterBoard>>? character, Failure? failure})>
+      watchCharactersBoard(String boardUuid) {
+    return super.dataBase.characterDAO.watchCharactersBoardFromBoard(boardUuid);
+  }
+
   Future<Failure?> deleteBoard(Board board) {
     return super.dataBase.boardDAO.deleteBoard(board);
   }

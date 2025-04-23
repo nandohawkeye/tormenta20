@@ -137,7 +137,9 @@ class BoardViewCharacterCard extends StatelessWidget {
                                   color: palette.textSecundary, size: 12),
                               const SizedBox(width: 2),
                               Text(
-                                1.toString().padLeft(2, '0'),
+                                character.classes.length
+                                    .toString()
+                                    .padLeft(2, '0'),
                                 maxLines: 2,
                                 style: TextStyle(
                                   fontSize: 12,
