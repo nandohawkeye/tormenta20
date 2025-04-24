@@ -20,6 +20,7 @@ class SelectorOnlyField<T> extends StatelessWidget {
     this.onChange,
     this.bodyColor,
     this.cardColor,
+    this.isEnableChange = true,
   });
 
   final String label;
@@ -32,6 +33,7 @@ class SelectorOnlyField<T> extends StatelessWidget {
   final String Function(String) handleTitle;
   final Color? bodyColor;
   final Color? cardColor;
+  final bool isEnableChange;
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +67,7 @@ class SelectorOnlyField<T> extends StatelessWidget {
                       animation: store,
                       builder: (_, __) {
                         final selected = store.data;
+
                         return ListView.separated(
                           shrinkWrap: true,
                           padding: const EdgeInsets.symmetric(
@@ -92,7 +95,9 @@ class SelectorOnlyField<T> extends StatelessWidget {
                               handleTitle: handleTitle,
                               type: itens[index - (hasRemoveAll ? 1 : 0)],
                               selected: selected,
-                              onTap: onChange ?? store.onChange,
+                              onTap: !isEnableChange
+                                  ? (_) {}
+                                  : onChange ?? store.onChange,
                               backgroundColor: cardColor,
                             );
                           },

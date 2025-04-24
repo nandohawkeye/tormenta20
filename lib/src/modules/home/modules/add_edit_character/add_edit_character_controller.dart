@@ -17,6 +17,7 @@ import 'package:tormenta20/src/shared/entities/brood.dart';
 import 'package:tormenta20/src/shared/entities/character.dart';
 import 'package:tormenta20/src/shared/entities/classe_type_character.dart';
 import 'package:tormenta20/src/shared/entities/creature_size_category.dart';
+import 'package:tormenta20/src/shared/entities/equipament/backpack.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
 import 'package:tormenta20/src/shared/entities/origin.dart';
@@ -32,7 +33,8 @@ class AddEditCharacterController {
       broodStore = AddEditCharacterBroodStore(Brood.humano);
       classeStore = AddEditCharacterClasseStore(null);
       sizeStore = AddEditCharacterSizeStore(CreatureSizeCategory.medium);
-      equipmentStore = AddEditCharacterEquipmentStore([]);
+      equipmentStore = AddEditCharacterEquipmentStore(
+          [Backpack(uuid: const Uuid().v4(), parentUuid: _uuid)]);
       actionsStore = AddEditCharacterActionsStore([]);
       powersStore = AddEditCharacterPowersStore([]);
       originsStore = AddEditCharacterOriginsStore([]);

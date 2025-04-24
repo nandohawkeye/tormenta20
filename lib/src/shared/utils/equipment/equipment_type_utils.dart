@@ -14,7 +14,7 @@ abstract class EquipmentTypeUtils {
       return 'Item geral';
     } else if (value.contains('Saddlebag')) {
       return 'Alforja';
-    } else if (value == ('AdventurerBackpack')) {
+    } else if (value.contains('AdventureBackpack')) {
       return 'Mochila de aventureiro';
     } else if (value.contains('Backpack')) {
       return 'Mochila';

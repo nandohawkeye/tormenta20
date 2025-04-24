@@ -7,6 +7,7 @@ class TibarsTable extends Table {
   IntColumn get gold => integer()();
   IntColumn get silver => integer()();
   IntColumn get bronze => integer()();
+  BoolColumn get hasInitialRoll => boolean()();
 
   @override
   Set<Column>? get primaryKey => {uuid};

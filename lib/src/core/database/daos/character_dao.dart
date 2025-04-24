@@ -22,6 +22,7 @@ import 'package:tormenta20/src/core/database/tables/origin_table.dart';
 import 'package:tormenta20/src/core/database/tables/power_table.dart';
 import 'package:tormenta20/src/core/database/tables/saddlebag_table.dart';
 import 'package:tormenta20/src/core/database/tables/shield_table.dart';
+import 'package:tormenta20/src/core/database/tables/tibars_table.dart';
 import 'package:tormenta20/src/core/database/tables/weapon_table.dart';
 import 'package:tormenta20/src/shared/entities/action/action.dart';
 import 'package:tormenta20/src/shared/entities/action/action_adapters.dart';
@@ -52,6 +53,8 @@ import 'package:tormenta20/src/shared/entities/equipament/saddlebag.dart';
 import 'package:tormenta20/src/shared/entities/equipament/saddlebag_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/shield.dart';
 import 'package:tormenta20/src/shared/entities/equipament/shield_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/tibars.dart';
+import 'package:tormenta20/src/shared/entities/equipament/tibars_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon_adapters.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise_adapters.dart';
@@ -83,6 +86,7 @@ part 'character_dao.g.dart';
   ShieldTable,
   WeaponTable,
   ActionTable,
+  TibarsTable,
   ExpertiseTable,
   ActionHandToHandTable,
   ActionDistanceAttackTable,
@@ -500,6 +504,12 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
                 ),
               ),
               leftOuterJoin(
+                tibarsTable,
+                characterBoardTable.uuid.equalsExp(
+                  tibarsTable.parentUuid,
+                ),
+              ),
+              leftOuterJoin(
                 equipmentTable,
                 characterBoardTable.uuid.equalsExp(
                   equipmentTable.parentUuid,
@@ -581,6 +591,7 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
                 final actionDistance =
                     row.readTableOrNull(actionDistanceAttackTable);
                 final equipmentData = row.readTableOrNull(equipmentTable);
+                final tibarsData = row.readTableOrNull(tibarsTable);
                 final adventureBackpackData =
                     row.readTableOrNull(adventureBackpackTable);
                 final backpackData = row.readTableOrNull(backpackTable);
@@ -596,7 +607,9 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
                 if (!(characterBoardDTO.containsKey(characterBoardData.uuid))) {
                   characterBoardDTO.addAll({
                     characterBoardData.uuid: CharacterBoardDto(
-                        characterBoardsData: characterBoardData)
+                      characterBoardsData: characterBoardData,
+                      tibars: tibarsData,
+                    )
                   });
                 }
 
@@ -1150,6 +1163,7 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
     List<Shield> shields = [];
     List<Weapon> weapons = [];
     List<Equipment> equipments = [];
+    Tibars? tibars;
 
     if (character.equipments.isNotEmpty) {
       for (var item in character.equipments) {
@@ -1169,6 +1183,8 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
           shields.add(item);
         } else if (item is Weapon) {
           weapons.add(item);
+        } else if (item is Tibars) {
+          tibars = item;
         } else {
           equipments.add(item);
         }
@@ -1179,6 +1195,11 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
       await batch((batch) {
         batch.insertAllOnConflictUpdate(characterBoardTable,
             [CharacterBoardAdapters.toDriftCompanion(character)]);
+
+        if (tibars != null) {
+          batch.insertAllOnConflictUpdate(
+              tibarsTable, [TibarsAdapters.toDriftCompanion(tibars)]);
+        }
 
         if (character.expertises.isNotEmpty) {
           batch.insertAllOnConflictUpdate(

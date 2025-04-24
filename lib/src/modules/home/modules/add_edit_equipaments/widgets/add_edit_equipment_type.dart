@@ -36,16 +36,14 @@ class AddEditEquipamentType extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IgnorePointer(
-      ignoring: !isEnableToChange,
-      child: SelectorOnlyField<Type>(
-        label: 'Tipos de equipamento',
-        handleTitle: EquipmentTypeUtils.handleTitle,
-        itens: _types,
-        store: store,
-        onChange: onChange,
-        isObrigatory: true,
-      ),
+    return SelectorOnlyField<Type>(
+      label: 'Tipos de equipamento',
+      handleTitle: EquipmentTypeUtils.handleTitle,
+      itens: _types,
+      store: store,
+      onChange: onChange,
+      isObrigatory: true,
+      isEnableChange: isEnableToChange,
     );
   }
 }

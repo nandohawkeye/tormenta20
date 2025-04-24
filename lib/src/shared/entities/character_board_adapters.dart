@@ -13,8 +13,10 @@ import 'package:tormenta20/src/shared/entities/classe_character_type_adapters.da
 import 'package:tormenta20/src/shared/entities/classe_type_character.dart';
 import 'package:tormenta20/src/shared/entities/creature_size_category.dart';
 import 'package:tormenta20/src/shared/entities/equipament/adventure_backpack_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/adventurere_backpack.dart';
 import 'package:tormenta20/src/shared/entities/equipament/ammunition_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/armor_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/backpack.dart';
 import 'package:tormenta20/src/shared/entities/equipament/backpack_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment_adapters.dart';
@@ -22,6 +24,7 @@ import 'package:tormenta20/src/shared/entities/equipament/general_item_adapters.
 import 'package:tormenta20/src/shared/entities/equipament/saddlebag_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/shield_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/tibars.dart';
+import 'package:tormenta20/src/shared/entities/equipament/tibars_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon_adapters.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise_adapters.dart';
@@ -63,6 +66,11 @@ abstract class CharacterBoardAdapters {
     equipments.addAll(dto.saddlebags.map(SaddlebagAdapters.fromDriftData));
     equipments.addAll(dto.shields.map(ShieldAdapters.fromDriftData));
     equipments.addAll(dto.weapons.map(WeaponAdapters.fromDriftData));
+
+    if (dto.tibars != null) {
+      equipments.add(TibarsAdapters.fromDriftData(dto.tibars!));
+    }
+
     return CharacterBoard(
       uuid: dto.characterBoardsData.uuid,
       parentuuid: dto.characterBoardsData.parentuuid,
@@ -184,12 +192,22 @@ abstract class CharacterBoardAdapters {
           uuid: const Uuid().v4(), parentUuid: characterUuid));
     }
 
-    //TODO fix this for 4d6
+    String? storeInUuid;
+
+    if (equipments.any((e) => e is Backpack)) {
+      storeInUuid = equipments.firstWhere((e) => e is Backpack).uuid;
+    }
+
+    if (equipments.any((e) => e is AdventureBackpack)) {
+      storeInUuid = equipments.firstWhere((e) => e is AdventureBackpack).uuid;
+    }
+
     equipments.add(
       Tibars(
         gold: 0,
         silver: 0,
         bronze: 0,
+        storedIn: storeInUuid,
         uuid: const Uuid().v4(),
         parentUuid: characterUuid,
       ),

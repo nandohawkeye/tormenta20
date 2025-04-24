@@ -11,6 +11,7 @@ abstract class TibarsAdapters {
       silver: data.silver,
       parentUuid: data.parentUuid,
       storedIn: data.storedIn,
+      hasInitialRoll: data.hasInitialRoll,
     );
   }
 
@@ -22,6 +23,7 @@ abstract class TibarsAdapters {
       bronze: Value(entity.bronze),
       gold: Value(entity.gold),
       silver: Value(entity.silver),
+      hasInitialRoll: Value(entity.hasInitialRoll),
     );
   }
 }

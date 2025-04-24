@@ -10081,9 +10081,18 @@ class $TibarsTableTable extends TibarsTable
   late final GeneratedColumn<int> bronze = GeneratedColumn<int>(
       'bronze', aliasedName, false,
       type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _hasInitialRollMeta =
+      const VerificationMeta('hasInitialRoll');
+  @override
+  late final GeneratedColumn<bool> hasInitialRoll = GeneratedColumn<bool>(
+      'has_initial_roll', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: true,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'CHECK ("has_initial_roll" IN (0, 1))'));
   @override
   List<GeneratedColumn> get $columns =>
-      [uuid, parentUuid, storedIn, gold, silver, bronze];
+      [uuid, parentUuid, storedIn, gold, silver, bronze, hasInitialRoll];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -10130,6 +10139,14 @@ class $TibarsTableTable extends TibarsTable
     } else if (isInserting) {
       context.missing(_bronzeMeta);
     }
+    if (data.containsKey('has_initial_roll')) {
+      context.handle(
+          _hasInitialRollMeta,
+          hasInitialRoll.isAcceptableOrUnknown(
+              data['has_initial_roll']!, _hasInitialRollMeta));
+    } else if (isInserting) {
+      context.missing(_hasInitialRollMeta);
+    }
     return context;
   }
 
@@ -10151,6 +10168,8 @@ class $TibarsTableTable extends TibarsTable
           .read(DriftSqlType.int, data['${effectivePrefix}silver'])!,
       bronze: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}bronze'])!,
+      hasInitialRoll: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}has_initial_roll'])!,
     );
   }
 
@@ -10167,13 +10186,15 @@ class TibarsTableData extends DataClass implements Insertable<TibarsTableData> {
   final int gold;
   final int silver;
   final int bronze;
+  final bool hasInitialRoll;
   const TibarsTableData(
       {required this.uuid,
       required this.parentUuid,
       this.storedIn,
       required this.gold,
       required this.silver,
-      required this.bronze});
+      required this.bronze,
+      required this.hasInitialRoll});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -10185,6 +10206,7 @@ class TibarsTableData extends DataClass implements Insertable<TibarsTableData> {
     map['gold'] = Variable<int>(gold);
     map['silver'] = Variable<int>(silver);
     map['bronze'] = Variable<int>(bronze);
+    map['has_initial_roll'] = Variable<bool>(hasInitialRoll);
     return map;
   }
 
@@ -10198,6 +10220,7 @@ class TibarsTableData extends DataClass implements Insertable<TibarsTableData> {
       gold: Value(gold),
       silver: Value(silver),
       bronze: Value(bronze),
+      hasInitialRoll: Value(hasInitialRoll),
     );
   }
 
@@ -10211,6 +10234,7 @@ class TibarsTableData extends DataClass implements Insertable<TibarsTableData> {
       gold: serializer.fromJson<int>(json['gold']),
       silver: serializer.fromJson<int>(json['silver']),
       bronze: serializer.fromJson<int>(json['bronze']),
+      hasInitialRoll: serializer.fromJson<bool>(json['hasInitialRoll']),
     );
   }
   @override
@@ -10223,6 +10247,7 @@ class TibarsTableData extends DataClass implements Insertable<TibarsTableData> {
       'gold': serializer.toJson<int>(gold),
       'silver': serializer.toJson<int>(silver),
       'bronze': serializer.toJson<int>(bronze),
+      'hasInitialRoll': serializer.toJson<bool>(hasInitialRoll),
     };
   }
 
@@ -10232,7 +10257,8 @@ class TibarsTableData extends DataClass implements Insertable<TibarsTableData> {
           Value<String?> storedIn = const Value.absent(),
           int? gold,
           int? silver,
-          int? bronze}) =>
+          int? bronze,
+          bool? hasInitialRoll}) =>
       TibarsTableData(
         uuid: uuid ?? this.uuid,
         parentUuid: parentUuid ?? this.parentUuid,
@@ -10240,6 +10266,7 @@ class TibarsTableData extends DataClass implements Insertable<TibarsTableData> {
         gold: gold ?? this.gold,
         silver: silver ?? this.silver,
         bronze: bronze ?? this.bronze,
+        hasInitialRoll: hasInitialRoll ?? this.hasInitialRoll,
       );
   TibarsTableData copyWithCompanion(TibarsTableCompanion data) {
     return TibarsTableData(
@@ -10250,6 +10277,9 @@ class TibarsTableData extends DataClass implements Insertable<TibarsTableData> {
       gold: data.gold.present ? data.gold.value : this.gold,
       silver: data.silver.present ? data.silver.value : this.silver,
       bronze: data.bronze.present ? data.bronze.value : this.bronze,
+      hasInitialRoll: data.hasInitialRoll.present
+          ? data.hasInitialRoll.value
+          : this.hasInitialRoll,
     );
   }
 
@@ -10261,14 +10291,15 @@ class TibarsTableData extends DataClass implements Insertable<TibarsTableData> {
           ..write('storedIn: $storedIn, ')
           ..write('gold: $gold, ')
           ..write('silver: $silver, ')
-          ..write('bronze: $bronze')
+          ..write('bronze: $bronze, ')
+          ..write('hasInitialRoll: $hasInitialRoll')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode =>
-      Object.hash(uuid, parentUuid, storedIn, gold, silver, bronze);
+  int get hashCode => Object.hash(
+      uuid, parentUuid, storedIn, gold, silver, bronze, hasInitialRoll);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -10278,7 +10309,8 @@ class TibarsTableData extends DataClass implements Insertable<TibarsTableData> {
           other.storedIn == this.storedIn &&
           other.gold == this.gold &&
           other.silver == this.silver &&
-          other.bronze == this.bronze);
+          other.bronze == this.bronze &&
+          other.hasInitialRoll == this.hasInitialRoll);
 }
 
 class TibarsTableCompanion extends UpdateCompanion<TibarsTableData> {
@@ -10288,6 +10320,7 @@ class TibarsTableCompanion extends UpdateCompanion<TibarsTableData> {
   final Value<int> gold;
   final Value<int> silver;
   final Value<int> bronze;
+  final Value<bool> hasInitialRoll;
   final Value<int> rowid;
   const TibarsTableCompanion({
     this.uuid = const Value.absent(),
@@ -10296,6 +10329,7 @@ class TibarsTableCompanion extends UpdateCompanion<TibarsTableData> {
     this.gold = const Value.absent(),
     this.silver = const Value.absent(),
     this.bronze = const Value.absent(),
+    this.hasInitialRoll = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   TibarsTableCompanion.insert({
@@ -10305,12 +10339,14 @@ class TibarsTableCompanion extends UpdateCompanion<TibarsTableData> {
     required int gold,
     required int silver,
     required int bronze,
+    required bool hasInitialRoll,
     this.rowid = const Value.absent(),
   })  : uuid = Value(uuid),
         parentUuid = Value(parentUuid),
         gold = Value(gold),
         silver = Value(silver),
-        bronze = Value(bronze);
+        bronze = Value(bronze),
+        hasInitialRoll = Value(hasInitialRoll);
   static Insertable<TibarsTableData> custom({
     Expression<String>? uuid,
     Expression<String>? parentUuid,
@@ -10318,6 +10354,7 @@ class TibarsTableCompanion extends UpdateCompanion<TibarsTableData> {
     Expression<int>? gold,
     Expression<int>? silver,
     Expression<int>? bronze,
+    Expression<bool>? hasInitialRoll,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -10327,6 +10364,7 @@ class TibarsTableCompanion extends UpdateCompanion<TibarsTableData> {
       if (gold != null) 'gold': gold,
       if (silver != null) 'silver': silver,
       if (bronze != null) 'bronze': bronze,
+      if (hasInitialRoll != null) 'has_initial_roll': hasInitialRoll,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -10338,6 +10376,7 @@ class TibarsTableCompanion extends UpdateCompanion<TibarsTableData> {
       Value<int>? gold,
       Value<int>? silver,
       Value<int>? bronze,
+      Value<bool>? hasInitialRoll,
       Value<int>? rowid}) {
     return TibarsTableCompanion(
       uuid: uuid ?? this.uuid,
@@ -10346,6 +10385,7 @@ class TibarsTableCompanion extends UpdateCompanion<TibarsTableData> {
       gold: gold ?? this.gold,
       silver: silver ?? this.silver,
       bronze: bronze ?? this.bronze,
+      hasInitialRoll: hasInitialRoll ?? this.hasInitialRoll,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -10371,6 +10411,9 @@ class TibarsTableCompanion extends UpdateCompanion<TibarsTableData> {
     if (bronze.present) {
       map['bronze'] = Variable<int>(bronze.value);
     }
+    if (hasInitialRoll.present) {
+      map['has_initial_roll'] = Variable<bool>(hasInitialRoll.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -10386,6 +10429,7 @@ class TibarsTableCompanion extends UpdateCompanion<TibarsTableData> {
           ..write('gold: $gold, ')
           ..write('silver: $silver, ')
           ..write('bronze: $bronze, ')
+          ..write('hasInitialRoll: $hasInitialRoll, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -21846,6 +21890,7 @@ typedef $$TibarsTableTableCreateCompanionBuilder = TibarsTableCompanion
   required int gold,
   required int silver,
   required int bronze,
+  required bool hasInitialRoll,
   Value<int> rowid,
 });
 typedef $$TibarsTableTableUpdateCompanionBuilder = TibarsTableCompanion
@@ -21856,6 +21901,7 @@ typedef $$TibarsTableTableUpdateCompanionBuilder = TibarsTableCompanion
   Value<int> gold,
   Value<int> silver,
   Value<int> bronze,
+  Value<bool> hasInitialRoll,
   Value<int> rowid,
 });
 
@@ -21882,6 +21928,7 @@ class $$TibarsTableTableTableManager extends RootTableManager<
             Value<int> gold = const Value.absent(),
             Value<int> silver = const Value.absent(),
             Value<int> bronze = const Value.absent(),
+            Value<bool> hasInitialRoll = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
               TibarsTableCompanion(
@@ -21891,6 +21938,7 @@ class $$TibarsTableTableTableManager extends RootTableManager<
             gold: gold,
             silver: silver,
             bronze: bronze,
+            hasInitialRoll: hasInitialRoll,
             rowid: rowid,
           ),
           createCompanionCallback: ({
@@ -21900,6 +21948,7 @@ class $$TibarsTableTableTableManager extends RootTableManager<
             required int gold,
             required int silver,
             required int bronze,
+            required bool hasInitialRoll,
             Value<int> rowid = const Value.absent(),
           }) =>
               TibarsTableCompanion.insert(
@@ -21909,6 +21958,7 @@ class $$TibarsTableTableTableManager extends RootTableManager<
             gold: gold,
             silver: silver,
             bronze: bronze,
+            hasInitialRoll: hasInitialRoll,
             rowid: rowid,
           ),
         ));
@@ -21946,6 +21996,11 @@ class $$TibarsTableTableFilterComposer
       column: $state.table.bronze,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get hasInitialRoll => $state.composableBuilder(
+      column: $state.table.hasInitialRoll,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
 }
 
 class $$TibarsTableTableOrderingComposer
@@ -21978,6 +22033,11 @@ class $$TibarsTableTableOrderingComposer
 
   ColumnOrderings<int> get bronze => $state.composableBuilder(
       column: $state.table.bronze,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get hasInitialRoll => $state.composableBuilder(
+      column: $state.table.hasInitialRoll,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }

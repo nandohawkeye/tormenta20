@@ -19,10 +19,12 @@ class CharacterBoardDto {
   List<SaddlebagTableData> saddlebags = [];
   List<ShieldTableData> shields = [];
   List<WeaponTableData> weapons = [];
+  TibarsTableData? tibars;
 
   List<ExpertiseTableData> expertises = [];
 
   CharacterBoardDto({
     required this.characterBoardsData,
+    tibars,
   });
 }
