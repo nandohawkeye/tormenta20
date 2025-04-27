@@ -11,6 +11,7 @@ import 'package:tormenta20/src/modules/home/modules/about/about_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/init/init_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/magics_screen.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
+import 'package:tormenta20/src/modules/home/widgets/tip_home_bottomsheet/tip_home_bottomsheet.dart';
 import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/app_logo.dart';
 import 'package:tormenta20/src/shared/widgets/import_file_bottomsheet/import_file_bottomsheet.dart';
@@ -44,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
       if (kDebugMode) print('compartinhado app aberto: $value');
 
       if (value.isNotEmpty) {
-        _opemBottomSheetImport(File(value.first.path));
+        _openBottomSheetImport(File(value.first.path));
       }
     }, onError: (err) {
       if (kDebugMode) print("Erro ao receber arquivo: $err");
@@ -56,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
       if (kDebugMode) print('compartinhado app ao abrir: $value');
 
       if (value.isNotEmpty) {
-        _opemBottomSheetImport(File(value.first.path));
+        _openBottomSheetImport(File(value.first.path));
       }
     });
   }
@@ -68,13 +69,20 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  void _opemBottomSheetImport([File? file]) {
+  void _openBottomSheetImport([File? file]) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       BottomsheetUtils.show(
         context: context,
         child: ImportFileBottomsheet(initialFile: file),
       );
     });
+  }
+
+  void _openTypeBotomSheet() {
+    BottomsheetUtils.show(
+      context: context,
+      child: const TipHomeBottomsheet(),
+    );
   }
 
   @override
@@ -100,10 +108,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         }
 
                         return SimpleButton(
-                          icon: FontAwesomeIcons.solidFileCode,
+                          icon: FontAwesomeIcons.solidLightbulb,
                           backgroundColor: palette.background,
                           iconSize: 20,
-                          onTap: _opemBottomSheetImport,
+                          onTap: _openTypeBotomSheet,
                         );
                       },
                     )

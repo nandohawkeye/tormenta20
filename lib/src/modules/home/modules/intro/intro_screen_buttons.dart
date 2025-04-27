@@ -14,9 +14,11 @@ import 'package:tormenta20/src/modules/home/modules/magics/grimories_store.dart'
 import 'package:tormenta20/src/shared/config/config_store.dart';
 
 class IntroScreenButtons extends StatefulWidget {
-  const IntroScreenButtons(this.pageController, {super.key});
+  const IntroScreenButtons(this.pageController,
+      {super.key, required this.fromSplash});
 
   final PageController pageController;
+  final bool fromSplash;
 
   @override
   State<IntroScreenButtons> createState() => _IntroScreenButtonsState();
@@ -126,7 +128,11 @@ class _IntroScreenButtonsState extends State<IntroScreenButtons> {
                               duration: const Duration(seconds: 2),
                               curve: Curves.bounceOut);
                         } else {
-                          await _toHome();
+                          if (widget.fromSplash) {
+                            await _toHome();
+                          } else {
+                            Navigator.pop(context);
+                          }
                         }
                       },
                       child: const Icon(FontAwesomeIcons.arrowRight)),
@@ -135,9 +141,11 @@ class _IntroScreenButtonsState extends State<IntroScreenButtons> {
             ),
           ),
           TextButton(
-            onPressed: () async => await _toHome(),
+            onPressed: widget.fromSplash
+                ? () async => await _toHome()
+                : () => Navigator.pop(context),
             child: Text(
-              'Pular',
+              widget.fromSplash ? 'Pular' : 'Fechar',
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 color: palette.textDisable,

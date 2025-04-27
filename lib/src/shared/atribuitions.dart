@@ -22,3 +22,4 @@
 
 //pfd
 // <a href="https://www.flaticon.com/free-icons/pdf" title="pdf icons">Pdf icons created by Dimitry Miroliubov - Flaticon</a>
+// <a href="https://www.flaticon.com/free-icons/poetry" title="poetry icons">Poetry icons created by Freepik - Flaticon</a>
