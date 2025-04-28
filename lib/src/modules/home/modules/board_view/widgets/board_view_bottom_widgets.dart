@@ -17,6 +17,7 @@ import 'package:tormenta20/src/shared/entities/board/board_combat_ext.dart';
 import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session_ext.dart';
 import 'package:tormenta20/src/shared/entities/character_board.dart';
+import 'package:tormenta20/src/shared/entities/character_board_adapters.dart';
 import 'package:tormenta20/src/shared/extensions/string_ext.dart';
 import 'package:tormenta20/src/shared/failures/failure.dart';
 import 'package:tormenta20/src/shared/utils/backup_utils.dart';
@@ -131,6 +132,22 @@ class BoardViewBottomWidgets extends StatelessWidget {
 
                         final file = await BackupUtils.createTempJson(data,
                             'mesa_${board.adventureName.toLowerCase().replaceAllDiacritics().trim().replaceAll(' ', '')}_${board.name.toLowerCase().replaceAllDiacritics().trim().replaceAll(' ', '')}_convite');
+
+                        if (file == null) return;
+
+                        Share.shareXFiles([XFile(file.path)]);
+                      }
+
+                      if (result == BordViewOptionType.character) {
+                        final character =
+                            board.characters.firstWhere((e) => e.isAlive);
+                        final data =
+                            CharacterBoardAdapters.toExportMaster(character);
+
+                        if (data == null) return;
+
+                        final file = await BackupUtils.createTempJson(data,
+                            'personagem_${character.name.toLowerCase().replaceAllDiacritics().trim().replaceAll(' ', '')}');
 
                         if (file == null) return;
 

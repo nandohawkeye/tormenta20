@@ -1,4 +1,5 @@
 import 'package:drift/drift.dart';
+import 'package:flutter/foundation.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/shared/entities/action/action.dart';
 import 'package:tormenta20/src/shared/entities/action/action_adapters.dart';
@@ -18,6 +19,7 @@ import 'package:tormenta20/src/shared/entities/equipament/ammunition_adapters.da
 import 'package:tormenta20/src/shared/entities/equipament/armor_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/backpack.dart';
 import 'package:tormenta20/src/shared/entities/equipament/backpack_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/classe_character_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/general_item_adapters.dart';
@@ -29,12 +31,14 @@ import 'package:tormenta20/src/shared/entities/equipament/weapon_adapters.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise_adapters.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise_base.dart';
+import 'package:tormenta20/src/shared/entities/export_import_type.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire_adapters.dart';
 import 'package:tormenta20/src/shared/entities/origin.dart';
 import 'package:tormenta20/src/shared/entities/origin_adapters.dart';
 import 'package:tormenta20/src/shared/entities/power.dart';
 import 'package:tormenta20/src/shared/entities/power_adapaters.dart';
 import 'package:tormenta20/src/shared/services/expertises_base_service.dart';
+import 'package:tormenta20/src/shared/utils/export_import_utils.dart';
 import 'package:uuid/uuid.dart';
 
 abstract class CharacterBoardAdapters {
@@ -391,5 +395,37 @@ abstract class CharacterBoardAdapters {
       'in_two_hands': entity.inTwoHands,
       'in_wearable_slots': entity.inWearableSlots,
     };
+  }
+
+  static Map<String, dynamic>? toExportMaster(CharacterBoard entity) {
+    try {
+      var base = ExportImportUtils.toExportBase(ExportImportType.binding);
+
+      if (base == null) return null;
+
+      Map<String, dynamic> characterData = {
+        'character_name': entity.name,
+        'brood_index': entity.brood.index,
+        'life': entity.life,
+        'mana': entity.mana,
+        'defense': entity.defense,
+        'classes': ClasseCharacterAdapters.toStringValue(
+            entity.classes.map((cl) => cl.type)),
+      };
+
+      if (entity.imageAsset != null) {
+        characterData.addAll({'image_asset': entity.imageAsset});
+      }
+
+      base.addAll({'character': characterData});
+
+      return base;
+    } catch (e) {
+      if (kDebugMode) {
+        print('error: $e');
+      }
+
+      return null;
+    }
   }
 }

@@ -18,7 +18,7 @@ abstract class ClasseCharacterAdapters {
     }
   }
 
-  static String toStringValue(List<ClasseType> values) {
+  static String toStringValue(Iterable<ClasseType> values) {
     if (values.isEmpty) {
       return '';
     }
