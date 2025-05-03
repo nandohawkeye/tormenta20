@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 
 class ScreenSlideImagesButton extends StatefulWidget {
   const ScreenSlideImagesButton({
@@ -76,6 +77,10 @@ class _ScreenSlideImagesButtonState extends State<ScreenSlideImagesButton> {
                     key: Key(_image),
                     height: widget.imageSize,
                     width: widget.imageSize,
+                    cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                        context, widget.imageSize),
+                    cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                        context, widget.imageSize),
                     _image,
                   ),
                 ),

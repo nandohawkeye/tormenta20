@@ -6,6 +6,7 @@ import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/entities/character_board.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 
 class BoardViewCharacterFieldDeathCharacterAvatar extends StatelessWidget {
   const BoardViewCharacterFieldDeathCharacterAvatar({
@@ -47,6 +48,10 @@ class BoardViewCharacterFieldDeathCharacterAvatar extends StatelessWidget {
                       height: imageSize,
                       width: imageSize,
                       fit: BoxFit.cover,
+                      cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                          context, imageSize),
+                      cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                          context, imageSize),
                       errorBuilder: (_, __, ___) => const SizedBox.shrink(),
                     ),
                   ),
@@ -57,12 +62,20 @@ class BoardViewCharacterFieldDeathCharacterAvatar extends StatelessWidget {
                       height: imageSize,
                       width: imageSize,
                       fit: BoxFit.cover,
+                      cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                          context, imageSize),
+                      cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                          context, imageSize),
                     ),
                   ),
                 Assets.images.bordaToken.image(
                   height: imageSize + 6,
                   width: imageSize + 6,
                   fit: BoxFit.cover,
+                  cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                      context, imageSize + 6),
+                  cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                      context, imageSize + 6),
                 ),
               ],
             ),

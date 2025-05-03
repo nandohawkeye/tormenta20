@@ -3,6 +3,7 @@ import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 import 'package:tormenta20/src/shared/utils/url_utils.dart';
 import 'package:tormenta20/src/shared/widgets/bottom_sheet_base.dart';
 import 'package:tormenta20/src/shared/widgets/divider_level_two.dart';
@@ -75,7 +76,16 @@ class CopyrigthAuthorsBottomsheet extends StatelessWidget {
                               spacing: T20UI.spaceSize,
                               runSpacing: T20UI.spaceSize,
                               children: [
-                                Assets.images.pdf.image(height: 48, width: 48),
+                                Assets.images.pdf.image(
+                                  height: 48,
+                                  width: 48,
+                                  cacheHeight:
+                                      PerformanceUtils.cacheImageSizeCalculated(
+                                          context, 48),
+                                  cacheWidth:
+                                      PerformanceUtils.cacheImageSizeCalculated(
+                                          context, 48),
+                                ),
                               ],
                             )
                           ],
@@ -107,8 +117,16 @@ class CopyrigthAuthorsBottomsheet extends StatelessWidget {
                               spacing: T20UI.spaceSize,
                               runSpacing: T20UI.spaceSize,
                               children: [
-                                Assets.images.manuscript
-                                    .image(height: 48, width: 48),
+                                Assets.images.manuscript.image(
+                                  height: 48,
+                                  width: 48,
+                                  cacheHeight:
+                                      PerformanceUtils.cacheImageSizeCalculated(
+                                          context, 48),
+                                  cacheWidth:
+                                      PerformanceUtils.cacheImageSizeCalculated(
+                                          context, 48),
+                                ),
                               ],
                             )
                           ],
@@ -142,9 +160,27 @@ class CopyrigthAuthorsBottomsheet extends StatelessWidget {
                               runSpacing: T20UI.spaceSize,
                               children: [
                                 ...Assets.images.caracters.values
-                                    .map((e) => e.image(height: 48, width: 48)),
+                                    .map((e) => e.image(
+                                          height: 48,
+                                          width: 48,
+                                          cacheHeight: PerformanceUtils
+                                              .cacheImageSizeCalculated(
+                                                  context, 48),
+                                          cacheWidth: PerformanceUtils
+                                              .cacheImageSizeCalculated(
+                                                  context, 48),
+                                        )),
                                 ...Assets.images.menaces.values
-                                    .map((e) => e.image(height: 48, width: 48)),
+                                    .map((e) => e.image(
+                                          height: 48,
+                                          width: 48,
+                                          cacheHeight: PerformanceUtils
+                                              .cacheImageSizeCalculated(
+                                                  context, 48),
+                                          cacheWidth: PerformanceUtils
+                                              .cacheImageSizeCalculated(
+                                                  context, 48),
+                                        )),
                               ],
                             )
                           ],

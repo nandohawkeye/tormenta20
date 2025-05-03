@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 import 'package:tormenta20/src/shared/widgets/token_selector/token_card_bord.dart';
 import 'package:tormenta20/src/shared/widgets/token_selector/token_card_tag.dart';
 
@@ -41,6 +42,10 @@ class TokenCard extends StatelessWidget {
                     height: size,
                     width: size,
                     fit: BoxFit.cover,
+                    cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                        context, size),
+                    cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                        context, size),
                   ),
                 ),
               ),

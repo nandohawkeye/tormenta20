@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_character_card/board_view_character_card.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_character_card/board_view_character_death_character_card.dart';
+import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_character_card/board_view_character_death_character_card_prototype.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_character_confirm_delete/board_view_character_confirm_delete_bottomsheet.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_character_options_bottomsheet/board_view_character_options_bottomsheet.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/character_screen_button.dart';
@@ -109,14 +110,14 @@ class BoardViewCharacterField extends StatelessWidget {
                             const DividerLevelTwo(verticalPadding: 0),
                             SizedBox(
                               width: double.infinity,
-                              child: ListView.separated(
+                              child: ListView.builder(
                                 shrinkWrap: true,
                                 primary: false,
                                 padding: EdgeInsets.zero,
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemCount: deathCharacters.length,
-                                separatorBuilder: (_, __) =>
-                                    const DividerLevelTwo(verticalPadding: 0),
+                                prototypeItem:
+                                    const BoardViewCharacterDeathCharacterCardPrototype(),
                                 itemBuilder: (_, index) {
                                   return BoardViewCharacterDeathCharacterCard(
                                     character: deathCharacters[index],

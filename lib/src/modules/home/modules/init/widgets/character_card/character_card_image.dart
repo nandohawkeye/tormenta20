@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/entities/character.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 import 'package:tormenta20/src/shared/widgets/token_selector/token_card_bord.dart';
 
 class CharacterCardImage extends StatelessWidget {
@@ -62,6 +63,10 @@ class CharacterCardImage extends StatelessWidget {
                         height: size,
                         width: size,
                         fit: BoxFit.cover,
+                        cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                            context, size),
+                        cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                            context, size),
                         errorBuilder: (_, __, ___) => const SizedBox.shrink(),
                       ),
                     ),
@@ -78,6 +83,10 @@ class CharacterCardImage extends StatelessWidget {
                         height: size,
                         width: size,
                         fit: BoxFit.cover,
+                        cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                            context, size),
+                        cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                            context, size),
                         errorBuilder: (_, __, ___) => const SizedBox.shrink(),
                       ),
                     ),

@@ -7,6 +7,7 @@ import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_materials/add_edit_board_material_card_pdf_thumb.dart';
 import 'package:tormenta20/src/shared/entities/board/board_material.dart';
 import 'package:tormenta20/src/shared/entities/board/board_material_types.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 import 'package:tormenta20/src/shared/widgets/error_image_placeholder.dart';
 
 class AddEditBoardMaterialCard extends StatelessWidget {
@@ -38,6 +39,10 @@ class AddEditBoardMaterialCard extends StatelessWidget {
                       width: size,
                       fit: BoxFit.cover,
                       File(material.path),
+                      cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                          context, size),
+                      cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                          context, size),
                       errorBuilder: (_, __, ___) =>
                           const ErrorImagePlaceholder(),
                     ),

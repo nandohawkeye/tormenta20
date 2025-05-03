@@ -9,6 +9,7 @@ import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/entities/character.dart';
 import 'package:tormenta20/src/shared/utils/character_utils.dart';
 import 'package:tormenta20/src/shared/utils/creature_size_utils.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 import 'package:tormenta20/src/shared/widgets/custom_checked.dart';
 
 class SelectCharacterScreenCard extends StatelessWidget {
@@ -56,6 +57,11 @@ class SelectCharacterScreenCard extends StatelessWidget {
                           height: imageSize,
                           width: imageSize,
                           fit: BoxFit.cover,
+                          cacheHeight:
+                              PerformanceUtils.cacheImageSizeCalculated(
+                                  context, imageSize),
+                          cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                              context, imageSize),
                           errorBuilder: (_, __, ___) => const SizedBox.shrink(),
                         ),
                       ),
@@ -66,12 +72,21 @@ class SelectCharacterScreenCard extends StatelessWidget {
                           height: imageSize,
                           width: imageSize,
                           fit: BoxFit.cover,
+                          cacheHeight:
+                              PerformanceUtils.cacheImageSizeCalculated(
+                                  context, imageSize),
+                          cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                              context, imageSize),
                         ),
                       ),
                     Assets.images.bordaToken.image(
                       height: imageSize + 2,
                       width: imageSize + 2,
                       fit: BoxFit.cover,
+                      cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                          context, imageSize + 2),
+                      cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                          context, imageSize + 2),
                     ),
                   ],
                 ),

@@ -5,6 +5,7 @@ import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/extensions/context_ext.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 
 class BoardCardBanner extends StatelessWidget {
   const BoardCardBanner({
@@ -34,11 +35,19 @@ class BoardCardBanner extends StatelessWidget {
                       height: height,
                       width: width,
                       fit: BoxFit.cover,
+                      cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                          context, height),
+                      cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                          context, width),
                       errorBuilder: (_, __, ___) => Image.asset(
                         Assets.images.banner.path,
                         height: height,
                         width: width,
                         fit: BoxFit.cover,
+                        cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                            context, height),
+                        cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                            context, width),
                       ),
                     )
                   : Image.asset(
@@ -46,6 +55,10 @@ class BoardCardBanner extends StatelessWidget {
                       height: height,
                       width: width,
                       fit: BoxFit.cover,
+                      cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                          context, height),
+                      cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                          context, width),
                     ),
               SizedBox(
                 height: height,

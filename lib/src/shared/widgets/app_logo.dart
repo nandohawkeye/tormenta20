@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/gen/assets.gen.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 
 class AppLogo extends StatelessWidget {
   const AppLogo({super.key, this.width, this.height});
@@ -22,6 +23,10 @@ class AppLogo extends StatelessWidget {
           child: Assets.images.logo.image(
             width: width,
             height: height,
+            cacheHeight:
+                PerformanceUtils.cacheImageSizeCalculated(context, height),
+            cacheWidth:
+                PerformanceUtils.cacheImageSizeCalculated(context, width),
           ),
         ),
       ),

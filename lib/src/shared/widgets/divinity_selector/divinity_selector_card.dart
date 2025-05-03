@@ -3,6 +3,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/entities/divinity.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 
 class DivinitySelectorCard extends StatelessWidget {
   const DivinitySelectorCard({
@@ -33,6 +34,10 @@ class DivinitySelectorCard extends StatelessWidget {
                 divinity.assetPath,
                 height: T20UI.inputHeight,
                 width: T20UI.inputHeight,
+                cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                    context, T20UI.inputHeight),
+                cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                    context, T20UI.inputHeight),
               ),
               if (isSelected)
                 AnimationConfiguration.synchronized(

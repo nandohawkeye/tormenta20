@@ -4,6 +4,7 @@ import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_publisher_card_links.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 import 'package:tormenta20/src/shared/utils/url_utils.dart';
 
 class AboutPublisherCard extends StatelessWidget {
@@ -38,11 +39,23 @@ class AboutPublisherCard extends StatelessWidget {
                             child: Assets.images.jambo.image(
                               height: 75,
                               width: 75,
+                              cacheHeight:
+                                  PerformanceUtils.cacheImageSizeCalculated(
+                                      context, 75),
+                              cacheWidth:
+                                  PerformanceUtils.cacheImageSizeCalculated(
+                                      context, 75),
                             ),
                           ),
                           Assets.images.bordaToken.image(
                             height: 80,
                             width: 80,
+                            cacheHeight:
+                                PerformanceUtils.cacheImageSizeCalculated(
+                                    context, 80),
+                            cacheWidth:
+                                PerformanceUtils.cacheImageSizeCalculated(
+                                    context, 80),
                           ),
                         ],
                       ),

@@ -3,6 +3,7 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/add_edit_board_controller.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_site_card.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_site_card_prototype.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/add_edit_board_sites_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/widgets/bottom_sheet_add_board_link/bottom_sheet_add_board_link.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
@@ -79,18 +80,18 @@ class _AddEditBoardLinksState extends State<AddEditBoardLinks> {
           builder: (_, links, __) {
             final list = links ?? [];
 
-            return ListView.separated(
+            return ListView.builder(
               shrinkWrap: true,
               padding: EdgeInsets.zero,
               physics: const NeverScrollableScrollPhysics(),
               primary: false,
+              itemCount: list.length,
+              prototypeItem: const AddEditBoardSiteCardPrototype(),
               itemBuilder: (_, index) => AddEditBoardSiteCard(
                 link: list[index],
                 onRemove: _store.remove,
                 onSelect: addEditSite,
               ),
-              separatorBuilder: T20UI.separatorBuilderVertical,
-              itemCount: list.length,
             );
           },
         )

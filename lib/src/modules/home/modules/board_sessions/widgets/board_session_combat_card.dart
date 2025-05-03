@@ -15,65 +15,72 @@ class BoardSessionCombatCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isTheSameDay = combat.startedAt.isTheSameDay(combat.endAt);
-    return Card(
-      shape: RoundedRectangleBorder(
-          borderRadius: T20UI.borderRadius,
-          side: BorderSide(color: palette.backgroundLevelTwo)),
-      color: palette.backgroundLevelOne,
-      child: Padding(
-        padding: T20UI.allPadding,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (combat.endAt != null)
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Card(
+          shape: RoundedRectangleBorder(
+              borderRadius: T20UI.borderRadius,
+              side: BorderSide(color: palette.backgroundLevelTwo)),
+          color: palette.backgroundLevelOne,
+          child: Padding(
+            padding: T20UI.allPadding,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (combat.endAt != null)
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Duração: ${combat.duration.toFormattedStringWithHours()}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontFamily: FontFamily.tormenta,
-                          fontSize: 16,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Duração: ${combat.duration.toFormattedStringWithHours()}',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontFamily: FontFamily.tormenta,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Text(
+                            '${combat.turn}º turno',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontFamily: FontFamily.tormenta,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
                       ),
-                      Text(
-                        '${combat.turn}º turno',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontFamily: FontFamily.tormenta,
-                          fontSize: 16,
-                        ),
-                      ),
+                      T20UI.spaceHeight,
                     ],
                   ),
-                  T20UI.spaceHeight,
-                ],
-              ),
-            Row(
-              children: [
-                Text(
-                  combat.startedAt.formatted,
-                  style: TextStyle(fontSize: 12, color: palette.textSecundary),
+                Row(
+                  children: [
+                    Text(
+                      combat.startedAt.formatted,
+                      style:
+                          TextStyle(fontSize: 12, color: palette.textSecundary),
+                    ),
+                    if (combat.endAt != null)
+                      Text(
+                        isTheSameDay
+                            ? ' até ${combat.endAt?.formattedHourAndMinute}'
+                            : ' até ${combat.endAt?.formatted}',
+                        style: TextStyle(
+                            fontSize: 12, color: palette.textSecundary),
+                      )
+                  ],
                 ),
-                if (combat.endAt != null)
-                  Text(
-                    isTheSameDay
-                        ? ' até ${combat.endAt?.formattedHourAndMinute}'
-                        : ' até ${combat.endAt?.formatted}',
-                    style:
-                        TextStyle(fontSize: 12, color: palette.textSecundary),
-                  )
               ],
             ),
-          ],
+          ),
         ),
-      ),
+        T20UI.smallSpaceHeight,
+      ],
     );
   }
 }

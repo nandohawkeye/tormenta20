@@ -7,6 +7,7 @@ import 'package:tormenta20/src/modules/home/modules/about/widgets/about_develope
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_suggest_card.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/coffee_bottomsheet/coffee_bottomsheet.dart';
 import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 
 class AboutDeveloperCard extends StatelessWidget {
   const AboutDeveloperCard({super.key});
@@ -44,11 +45,23 @@ class AboutDeveloperCard extends StatelessWidget {
                             child: Assets.images.developer.image(
                               height: 75,
                               width: 75,
+                              cacheHeight:
+                                  PerformanceUtils.cacheImageSizeCalculated(
+                                      context, 75),
+                              cacheWidth:
+                                  PerformanceUtils.cacheImageSizeCalculated(
+                                      context, 75),
                             ),
                           ),
                           Assets.images.bordaToken.image(
                             height: 80,
                             width: 80,
+                            cacheHeight:
+                                PerformanceUtils.cacheImageSizeCalculated(
+                                    context, 80),
+                            cacheWidth:
+                                PerformanceUtils.cacheImageSizeCalculated(
+                                    context, 80),
                           ),
                         ],
                       ),

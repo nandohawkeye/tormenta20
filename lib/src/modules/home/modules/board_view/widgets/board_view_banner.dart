@@ -7,6 +7,7 @@ import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
 import 'package:tormenta20/src/shared/extensions/context_ext.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 
 class BoardViewBanner extends StatelessWidget {
   const BoardViewBanner(this.board, {super.key});
@@ -37,6 +38,10 @@ class BoardViewBanner extends StatelessWidget {
                         height: height,
                         width: width,
                         fit: BoxFit.cover,
+                        cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                            context, height),
+                        cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                            context, width),
                       ),
                     )
                   : Image.asset(
@@ -44,6 +49,10 @@ class BoardViewBanner extends StatelessWidget {
                       height: height,
                       width: width,
                       fit: BoxFit.cover,
+                      cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                          context, height),
+                      cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                          context, width),
                     ),
               SizedBox(
                 height: height,

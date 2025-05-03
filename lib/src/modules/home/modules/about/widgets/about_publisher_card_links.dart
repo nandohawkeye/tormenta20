@@ -4,6 +4,7 @@ import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_simple_link_button.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 import 'package:tormenta20/src/shared/utils/url_utils.dart';
 
 class AboutPublisherCardLinks extends StatelessWidget {
@@ -35,6 +36,10 @@ class AboutPublisherCardLinks extends StatelessWidget {
                 height: 20,
                 width: 20,
                 color: palette.icon,
+                cacheHeight:
+                    PerformanceUtils.cacheImageSizeCalculated(context, 20),
+                cacheWidth:
+                    PerformanceUtils.cacheImageSizeCalculated(context, 20),
               ),
             ),
             onTap: () async =>

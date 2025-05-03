@@ -21,75 +21,80 @@ class BoardCard extends StatelessWidget {
     players.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
     final character =
         board.characters.where((bc) => bc.isAlive).toList().firstOrNull;
-    return Card(
-      child: InkWell(
-        borderRadius: T20UI.borderRadius,
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => BoardViewScreen(initial: board),
-            ),
-          );
-        },
-        child: SizedBox(
-          width: width,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(T20UI.inputBorderRadius),
-                  topRight: Radius.circular(T20UI.inputBorderRadius),
+    return Row(
+      children: [
+        Card(
+          child: InkWell(
+            borderRadius: T20UI.borderRadius,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => BoardViewScreen(initial: board),
                 ),
-                child: BoardCardBanner(
-                  width: width,
-                  board: board,
-                ),
+              );
+            },
+            child: SizedBox(
+              width: width,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(T20UI.inputBorderRadius),
+                      topRight: Radius.circular(T20UI.inputBorderRadius),
+                    ),
+                    child: BoardCardBanner(
+                      width: width,
+                      board: board,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          board.adventureName,
+                          style: TextStyle(
+                            fontFamily: FontFamily.tormenta,
+                            fontSize: 18,
+                            color: palette.accent,
+                          ),
+                        ),
+                        Text(
+                          board.name,
+                          style: TextStyle(
+                            fontFamily: FontFamily.tormenta,
+                            fontSize: 14,
+                            color: palette.textDisable,
+                          ),
+                        ),
+                        const SizedBox(height: T20UI.smallSpaceSize),
+                        if (board.mode == BoardModeType.player)
+                          BoardCardCharacterToken(
+                            character: character,
+                            width: width,
+                          ),
+                        if (board.mode == BoardModeType.master)
+                          BoardCardPlayersTokens(
+                            players: players,
+                            width: width,
+                          )
+                      ],
+                    ),
+                  )
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8,
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      board.adventureName,
-                      style: TextStyle(
-                        fontFamily: FontFamily.tormenta,
-                        fontSize: 18,
-                        color: palette.accent,
-                      ),
-                    ),
-                    Text(
-                      board.name,
-                      style: TextStyle(
-                        fontFamily: FontFamily.tormenta,
-                        fontSize: 14,
-                        color: palette.textDisable,
-                      ),
-                    ),
-                    const SizedBox(height: T20UI.smallSpaceSize),
-                    if (board.mode == BoardModeType.player)
-                      BoardCardCharacterToken(
-                        character: character,
-                        width: width,
-                      ),
-                    if (board.mode == BoardModeType.master)
-                      BoardCardPlayersTokens(
-                        players: players,
-                        width: width,
-                      )
-                  ],
-                ),
-              )
-            ],
+            ),
           ),
         ),
-      ),
+        T20UI.smallSpaceWidth,
+      ],
     );
   }
 }

@@ -5,6 +5,7 @@ import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 
 class IntroPageFour extends StatefulWidget {
   const IntroPageFour({super.key});
@@ -78,11 +79,21 @@ class _IntroPageFourState extends State<IntroPageFour> {
                                   child: Assets.images.developer.image(
                                     height: 75,
                                     width: 75,
+                                    cacheHeight: PerformanceUtils
+                                        .cacheImageSizeCalculated(context, 75),
+                                    cacheWidth: PerformanceUtils
+                                        .cacheImageSizeCalculated(context, 75),
                                   ),
                                 ),
                                 Assets.images.bordaToken.image(
                                   height: 80,
                                   width: 80,
+                                  cacheHeight:
+                                      PerformanceUtils.cacheImageSizeCalculated(
+                                          context, 80),
+                                  cacheWidth:
+                                      PerformanceUtils.cacheImageSizeCalculated(
+                                          context, 80),
                                 ),
                               ],
                             ),
@@ -217,11 +228,21 @@ class _IntroPageFourState extends State<IntroPageFour> {
                                   child: Assets.images.jambo.image(
                                     height: 75,
                                     width: 75,
+                                    cacheHeight: PerformanceUtils
+                                        .cacheImageSizeCalculated(context, 75),
+                                    cacheWidth: PerformanceUtils
+                                        .cacheImageSizeCalculated(context, 75),
                                   ),
                                 ),
                                 Assets.images.bordaToken.image(
                                   height: 80,
                                   width: 80,
+                                  cacheHeight:
+                                      PerformanceUtils.cacheImageSizeCalculated(
+                                          context, 80),
+                                  cacheWidth:
+                                      PerformanceUtils.cacheImageSizeCalculated(
+                                          context, 80),
                                 ),
                               ],
                             ),

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/utils/pdf_utils.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 import 'package:tormenta20/src/shared/widgets/custom_loader.dart';
 import 'package:tormenta20/src/shared/widgets/error_image_placeholder.dart';
 
@@ -77,6 +78,10 @@ class _BoardMaterialCardPdfThumbState extends State<BoardMaterialCardPdfThumb> {
                 height: widget.size,
                 width: widget.size,
                 fit: BoxFit.cover,
+                cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                    context, widget.size),
+                cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                    context, widget.size),
                 thumb,
                 errorBuilder: (_, __, ___) => const ErrorImagePlaceholder(),
               ),

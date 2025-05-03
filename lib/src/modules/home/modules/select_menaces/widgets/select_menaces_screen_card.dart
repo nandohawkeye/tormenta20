@@ -10,6 +10,7 @@ import 'package:tormenta20/src/shared/entities/menace.dart';
 import 'package:tormenta20/src/shared/utils/combat_role_utils.dart';
 import 'package:tormenta20/src/shared/utils/creature_size_utils.dart';
 import 'package:tormenta20/src/shared/utils/menace_utils.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 import 'package:tormenta20/src/shared/utils/treasure_type_utils.dart';
 import 'package:tormenta20/src/shared/widgets/custom_checked.dart';
 
@@ -64,6 +65,12 @@ class SelectMenacesScreenCard extends StatelessWidget {
                             height: imageSize,
                             width: imageSize,
                             fit: BoxFit.cover,
+                            cacheHeight:
+                                PerformanceUtils.cacheImageSizeCalculated(
+                                    context, imageSize),
+                            cacheWidth:
+                                PerformanceUtils.cacheImageSizeCalculated(
+                                    context, imageSize),
                             errorBuilder: (_, __, ___) =>
                                 const SizedBox.shrink(),
                           ),
@@ -75,12 +82,22 @@ class SelectMenacesScreenCard extends StatelessWidget {
                             height: imageSize,
                             width: imageSize,
                             fit: BoxFit.cover,
+                            cacheHeight:
+                                PerformanceUtils.cacheImageSizeCalculated(
+                                    context, imageSize),
+                            cacheWidth:
+                                PerformanceUtils.cacheImageSizeCalculated(
+                                    context, imageSize),
                           ),
                         ),
                       Assets.images.bordaTokenAmeaca.image(
                         height: imageSize + 2,
                         width: imageSize + 2,
                         fit: BoxFit.cover,
+                        cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                            context, imageSize + 2),
+                        cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                            context, imageSize + 2),
                       ),
                     ],
                   ),

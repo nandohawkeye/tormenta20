@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 
 class TokenCardBord extends StatelessWidget {
   const TokenCardBord({
@@ -24,6 +25,8 @@ class TokenCardBord extends StatelessWidget {
       height: size + 5,
       width: size + 5,
       fit: BoxFit.cover,
+      cacheHeight: PerformanceUtils.cacheImageSizeCalculated(context, size + 5),
+      cacheWidth: PerformanceUtils.cacheImageSizeCalculated(context, size + 5),
     );
 
     if (withAnimate) {

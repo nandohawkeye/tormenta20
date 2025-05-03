@@ -116,8 +116,8 @@ class _BoardNotesScreenState extends State<BoardNotesScreen> {
                     bottom: T20UI.spaceSize,
                     top: T20UI.spaceSize,
                   ),
-                  separatorBuilder: T20UI.separatorBuilderVertical,
                   itemCount: notes.length,
+                  separatorBuilder: T20UI.separatorBuilderVertical,
                   itemBuilder: (_, index) => BoardNoteCard(
                     note: notes[index],
                     onRemove: _deleteNote,

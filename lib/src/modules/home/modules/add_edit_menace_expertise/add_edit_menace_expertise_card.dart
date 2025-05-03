@@ -15,24 +15,30 @@ class AddEditMenaceExpertiseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: T20UI.inputHeight,
-      width: double.infinity,
-      child: Card(
-        child: InkWell(
-          borderRadius: T20UI.borderRadius,
-          onTap: () => onTap(expertise),
-          child: Padding(
-            padding: T20UI.horizontalPadding,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(expertise.name.capitalize()),
-              ],
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(
+          height: T20UI.inputHeight,
+          width: double.infinity,
+          child: Card(
+            child: InkWell(
+              borderRadius: T20UI.borderRadius,
+              onTap: () => onTap(expertise),
+              child: Padding(
+                padding: T20UI.horizontalPadding,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(expertise.name.capitalize()),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
-      ),
+        T20UI.smallSpaceHeight
+      ],
     );
   }
 }

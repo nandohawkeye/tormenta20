@@ -10,6 +10,7 @@ import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/board_sessions/widgets/board_session_card_combat_open.dart';
 import 'package:tormenta20/src/modules/home/modules/board_sessions/widgets/board_session_card_session_open.dart';
 import 'package:tormenta20/src/modules/home/modules/board_sessions/widgets/board_session_combat_card.dart';
+import 'package:tormenta20/src/modules/home/modules/board_sessions/widgets/board_session_combat_card_prototype.dart';
 import 'package:tormenta20/src/shared/entities/board/board_combat_ext.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session_ext.dart';
@@ -89,13 +90,13 @@ class BoardSessionsCard extends StatelessWidget {
                     ],
                   ),
                   T20UI.spaceHeight,
-                  ListView.separated(
+                  ListView.builder(
                     padding: T20UI.horizontallScreenPadding,
                     shrinkWrap: true,
                     primary: false,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: session.combats.length,
-                    separatorBuilder: T20UI.separatorBuilderVertical,
+                    prototypeItem: const BoardSessionCombatCardPrototype(),
                     itemBuilder: (_, index) {
                       return BoardSessionCombatCard(
                           combat: session.combats[index]);

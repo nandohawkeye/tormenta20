@@ -36,6 +36,8 @@ class ShowBoardMaterialsBottomsheetList extends StatelessWidget {
         final mode = store.mode;
         final toDelete = store.materialToDelete;
 
+        //TODO ver no android
+
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [

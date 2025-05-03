@@ -60,13 +60,15 @@ class _AddEditBoardMaterialsState extends State<AddEditBoardMaterials> {
               );
             }
 
+            //TODO ver no android
+
             return SizedBox(
               height: 120,
-              child: ListView.separated(
-                itemCount: list.length + 1,
+              child: ListView.builder(
                 padding: T20UI.horizontalPadding,
                 scrollDirection: Axis.horizontal,
-                separatorBuilder: (_, __) => T20UI.spaceWidth,
+                itemCount: list.length,
+                itemExtent: 120,
                 itemBuilder: (_, index) {
                   if (index == 0) {
                     return SizedBox(

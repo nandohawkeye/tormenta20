@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 
 class BoardCardPlayersRestCount extends StatelessWidget {
   const BoardCardPlayersRestCount({
@@ -51,6 +52,10 @@ class BoardCardPlayersRestCount extends StatelessWidget {
             Assets.images.bordaToken.image(
               height: defaultSize,
               width: defaultSize,
+              cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                  context, defaultSize),
+              cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                  context, defaultSize),
             )
           ],
         ),

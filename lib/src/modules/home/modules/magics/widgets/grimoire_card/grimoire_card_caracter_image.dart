@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/entities/character.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 
 class GrimoireCardCaracterImage extends StatelessWidget {
   const GrimoireCardCaracterImage({
@@ -53,6 +54,10 @@ class GrimoireCardCaracterImage extends StatelessWidget {
                   height: minusSize,
                   width: minusSize,
                   fit: BoxFit.cover,
+                  cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                      context, minusSize),
+                  cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                      context, minusSize),
                   errorBuilder: (_, __, ___) => const SizedBox.shrink(),
                 ),
               ),
@@ -61,11 +66,19 @@ class GrimoireCardCaracterImage extends StatelessWidget {
                 character.imageAsset!,
                 height: 38,
                 width: 38,
+                cacheHeight:
+                    PerformanceUtils.cacheImageSizeCalculated(context, 38),
+                cacheWidth:
+                    PerformanceUtils.cacheImageSizeCalculated(context, 38),
                 fit: BoxFit.cover,
               ),
             Assets.images.bordaToken.image(
               height: defaultSize,
               width: defaultSize,
+              cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                  context, defaultSize),
+              cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                  context, defaultSize),
             )
           ],
         ),

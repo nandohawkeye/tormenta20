@@ -11,6 +11,7 @@ import 'package:tormenta20/src/modules/home/modules/add_edit_board/add_edit_boar
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/extensions/context_ext.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 import 'package:tormenta20/src/shared/widgets/error_image_placeholder.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
@@ -91,6 +92,12 @@ class _AddEditBoardBannerState extends State<AddEditBoardBanner> {
                                       fit: BoxFit.cover,
                                       height: context.width / 3.5,
                                       width: context.width / 2,
+                                      cacheHeight: PerformanceUtils
+                                          .cacheImageSizeCalculated(
+                                              context, context.width / 3.5),
+                                      cacheWidth: PerformanceUtils
+                                          .cacheImageSizeCalculated(
+                                              context, context.width / 2),
                                       errorBuilder: (_, __, ___) => SizedBox(
                                           height: context.width / 3.5,
                                           width: context.width / 2,

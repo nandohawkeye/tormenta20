@@ -51,21 +51,24 @@ class _InitBoardFieldState extends State<InitBoardField> {
               );
             }
 
+            const double width = 300;
+
             return SizedBox(
               height: 225 * context.realTextScale,
               width: double.infinity,
-              child: ListView.separated(
+              child: ListView.builder(
                 itemCount: boards.length,
+                itemExtent: width + T20UI.smallSpaceSize,
                 padding: const EdgeInsets.only(
                   bottom: T20UI.spaceSize,
                   right: T20UI.screenContentSpaceSize,
                   left: T20UI.screenContentSpaceSize,
                 ),
                 scrollDirection: Axis.horizontal,
-                separatorBuilder: T20UI.separatorBuilderHorizontal,
                 itemBuilder: (_, index) {
                   return BoardCard(
                     board: boards[index],
+                    width: width,
                   );
                 },
               ),

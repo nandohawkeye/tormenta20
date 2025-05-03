@@ -11,6 +11,7 @@ import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_vie
 import 'package:tormenta20/src/shared/entities/character_board.dart';
 import 'package:tormenta20/src/shared/utils/character_alignment_type_utils.dart';
 import 'package:tormenta20/src/shared/utils/character_utils.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 
 class BoardViewCharacterCard extends StatelessWidget {
   const BoardViewCharacterCard({
@@ -65,6 +66,12 @@ class BoardViewCharacterCard extends StatelessWidget {
                                 height: imageSize,
                                 width: imageSize,
                                 fit: BoxFit.cover,
+                                cacheHeight:
+                                    PerformanceUtils.cacheImageSizeCalculated(
+                                        context, imageSize),
+                                cacheWidth:
+                                    PerformanceUtils.cacheImageSizeCalculated(
+                                        context, imageSize),
                                 errorBuilder: (_, __, ___) =>
                                     const SizedBox.shrink(),
                               ),
@@ -76,12 +83,24 @@ class BoardViewCharacterCard extends StatelessWidget {
                                 height: imageSize,
                                 width: imageSize,
                                 fit: BoxFit.cover,
+                                cacheHeight:
+                                    PerformanceUtils.cacheImageSizeCalculated(
+                                        context, imageSize),
+                                cacheWidth:
+                                    PerformanceUtils.cacheImageSizeCalculated(
+                                        context, imageSize),
                               ),
                             ),
                           Assets.images.bordaToken.image(
                             height: imageSize + 6,
                             width: imageSize + 6,
                             fit: BoxFit.cover,
+                            cacheHeight:
+                                PerformanceUtils.cacheImageSizeCalculated(
+                                    context, imageSize + 6),
+                            cacheWidth:
+                                PerformanceUtils.cacheImageSizeCalculated(
+                                    context, imageSize + 6),
                           ),
                         ],
                       ),

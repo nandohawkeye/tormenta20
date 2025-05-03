@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/shared/services/divinities_service.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 
 class DivinityCard extends StatelessWidget {
   const DivinityCard(this.id, {super.key});
@@ -27,6 +28,10 @@ class DivinityCard extends StatelessWidget {
               divinity.assetPath,
               height: 30,
               width: 30,
+              cacheHeight:
+                  PerformanceUtils.cacheImageSizeCalculated(context, 30),
+              cacheWidth:
+                  PerformanceUtils.cacheImageSizeCalculated(context, 30),
             ),
           ],
         ),

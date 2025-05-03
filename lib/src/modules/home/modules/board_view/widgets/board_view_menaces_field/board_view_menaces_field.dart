@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_menace_options_bottomsheet/baord_view_menace_options_bottomsheet.dart';
+import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_menaces_field/board_view_menace_field_card_prototype.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_menaces_field/board_view_menane_field_card.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/manace_screen_button.dart';
 import 'package:tormenta20/src/modules/home/modules/menace/menace_screen.dart';
@@ -92,14 +93,14 @@ class BoardViewMenacesField extends StatelessWidget {
                       const DividerLevelTwo(verticalPadding: 0),
                       SizedBox(
                         width: double.infinity,
-                        child: ListView.separated(
+                        child: ListView.builder(
                           shrinkWrap: true,
                           primary: false,
                           padding: EdgeInsets.zero,
                           physics: const NeverScrollableScrollPhysics(),
+                          prototypeItem:
+                              const BoardViewMenaneFieldCardPrototype(),
                           itemCount: menaces.length,
-                          separatorBuilder: (_, __) =>
-                              const DividerLevelTwo(verticalPadding: 0),
                           itemBuilder: (_, index) {
                             return BoardViewMenaneFieldCard(
                               menace: menaces[index],

@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 
 class BoardCardPlayerImage extends StatelessWidget {
   const BoardCardPlayerImage({
@@ -53,6 +54,10 @@ class BoardCardPlayerImage extends StatelessWidget {
                   height: minusSize,
                   width: minusSize,
                   fit: BoxFit.cover,
+                  cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                      context, minusSize),
+                  cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                      context, minusSize),
                   errorBuilder: (_, __, ___) => const SizedBox.shrink(),
                 ),
               ),
@@ -62,10 +67,18 @@ class BoardCardPlayerImage extends StatelessWidget {
                 height: minusSize,
                 width: minusSize,
                 fit: BoxFit.cover,
+                cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                    context, minusSize),
+                cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                    context, minusSize),
               ),
             Assets.images.bordaToken.image(
               height: defaultSize,
               width: defaultSize,
+              cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                  context, defaultSize),
+              cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                  context, defaultSize),
             )
           ],
         ),

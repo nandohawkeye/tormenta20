@@ -5,6 +5,7 @@ import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 
 class IntroPageTree extends StatefulWidget {
   const IntroPageTree({super.key});
@@ -59,6 +60,10 @@ class _IntroPageTreeState extends State<IntroPageTree> {
                       Assets.images.knight.path,
                       height: 100,
                       width: 100,
+                      cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                          context, 100),
+                      cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                          context, 100),
                     ),
                   ),
                 ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_player_character/add_edit_player_character.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_player_card.dart';
+import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_player_card_prototype.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_player_options/board_view_player_options.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/character_screen_button.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
@@ -98,14 +99,13 @@ class BoardViewPlayersField extends StatelessWidget {
                       const DividerLevelTwo(verticalPadding: 0),
                       SizedBox(
                         width: double.infinity,
-                        child: ListView.separated(
+                        child: ListView.builder(
                           shrinkWrap: true,
                           primary: false,
                           padding: EdgeInsets.zero,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: players.length,
-                          separatorBuilder: (_, __) =>
-                              const DividerLevelTwo(verticalPadding: 0),
+                          prototypeItem: const BoardViewPlayerCardPrototype(),
                           itemBuilder: (_, index) {
                             return BoardViewPlayerCard(
                               player: players[index],

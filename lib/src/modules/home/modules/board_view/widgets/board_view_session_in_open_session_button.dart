@@ -6,6 +6,7 @@ import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/extensions/duration_ext.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 import 'package:tormenta20/src/shared/widgets/main_button.dart';
 
 class BoardViewSessionInOpenSessionButton extends StatefulWidget {
@@ -81,6 +82,10 @@ class _BoardViewSessionInOpenSessionButtonState
                     height: 60,
                     width: 60,
                     Assets.images.knight.path,
+                    cacheHeight:
+                        PerformanceUtils.cacheImageSizeCalculated(context, 60),
+                    cacheWidth:
+                        PerformanceUtils.cacheImageSizeCalculated(context, 60),
                   ),
                   T20UI.spaceWidth,
                   Expanded(

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace_expertise/add_edit_menace_expertise_card.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace_expertise/add_edit_menace_expertise_card_prototype.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace_expertise/add_edit_menace_expertise_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace_expertise/widgets/add_edit_menace_create_expertise_bottomsheet.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace_expertise/widgets/add_edit_menace_selected_expertise_bottomsheet.dart';
@@ -92,7 +93,7 @@ class _AddEditMenaceExpertiseScreenState
     return ScreenBase(
       label: 'Pericías',
       onSaveLabel: 'Criar',
-      body: ListView.separated(
+      body: ListView.builder(
         shrinkWrap: true,
         primary: false,
         physics: const NeverScrollableScrollPhysics(),
@@ -101,7 +102,7 @@ class _AddEditMenaceExpertiseScreenState
           horizontal: T20UI.screenContentSpaceSize,
         ),
         itemCount: store.expertises.length,
-        separatorBuilder: T20UI.separatorBuilderVertical,
+        prototypeItem: const AddEditMenaceExpertiseCardPrototype(),
         itemBuilder: (_, index) {
           return AddEditMenaceExpertiseCard(
             expertise: store.expertises[index],

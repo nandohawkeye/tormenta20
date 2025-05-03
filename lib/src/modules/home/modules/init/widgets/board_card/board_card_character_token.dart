@@ -9,6 +9,7 @@ import 'package:tormenta20/src/shared/entities/character_board.dart';
 import 'package:tormenta20/src/shared/extensions/context_ext.dart';
 import 'package:tormenta20/src/shared/utils/character_alignment_type_utils.dart';
 import 'package:tormenta20/src/shared/utils/character_utils.dart';
+import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 
 class BoardCardCharacterToken extends StatelessWidget {
   const BoardCardCharacterToken({
@@ -74,6 +75,11 @@ class BoardCardCharacterToken extends StatelessWidget {
                           height: minusSize,
                           width: minusSize,
                           fit: BoxFit.cover,
+                          cacheHeight:
+                              PerformanceUtils.cacheImageSizeCalculated(
+                                  context, minusSize),
+                          cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                              context, minusSize),
                           errorBuilder: (_, __, ___) => const SizedBox.shrink(),
                         ),
                       ),
@@ -83,10 +89,18 @@ class BoardCardCharacterToken extends StatelessWidget {
                         height: minusSize,
                         width: minusSize,
                         fit: BoxFit.cover,
+                        cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                            context, minusSize),
+                        cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                            context, minusSize),
                       ),
                     Assets.images.bordaToken.image(
                       height: defaultSize,
                       width: defaultSize,
+                      cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                          context, defaultSize),
+                      cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                          context, defaultSize),
                     )
                   ],
                 ),

@@ -40,6 +40,9 @@ class GrimoireHeader extends StatelessWidget {
     }
 
     final listHeight = 110 * MediaQuery.of(context).textScaler.scale(1);
+    const double width = 235;
+
+    //TODO parei nesse
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -68,17 +71,18 @@ class GrimoireHeader extends StatelessWidget {
                 )
               : SizedBox(
                   height: listHeight,
-                  child: ListView.separated(
+                  child: ListView.builder(
                     shrinkWrap: true,
                     padding: const EdgeInsets.symmetric(
                       horizontal: T20UI.screenContentSpaceSize,
                     ),
                     scrollDirection: Axis.horizontal,
                     itemCount: store.grimories.length,
-                    separatorBuilder: T20UI.separatorBuilderHorizontal,
+                    itemExtent: width + T20UI.smallSpaceSize,
                     itemBuilder: (_, index) => GrimoireCard(
                       grimoire: store.grimories[index],
                       height: listHeight,
+                      width: width,
                     ),
                   ),
                 ),
