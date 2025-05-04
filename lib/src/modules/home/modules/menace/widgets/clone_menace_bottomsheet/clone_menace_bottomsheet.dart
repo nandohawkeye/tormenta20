@@ -71,103 +71,113 @@ class _CloneMenaceBottomsheetState extends State<CloneMenaceBottomsheet> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               T20UI.spaceHeight,
-              AnimatedBuilder(
-                animation: _store,
-                builder: (_, __) {
-                  final imageAsset = _store.imageAsset;
-                  final imagePath = _store.imagePath;
-                  return TokenSelector(
-                    allTokens: Assets.tokens.values.map((t) => t.path).toList(),
-                    changeAsset: _store.setImageAsset,
-                    changePath: _store.setImagePath,
-                    initalImageAsset: imageAsset,
-                    initialImagePath: imagePath,
-                    isMenace: true,
-                    size: 80,
-                  );
-                },
+              RepaintBoundary(
+                child: ListenableBuilder(
+                  listenable: _store,
+                  builder: (_, __) {
+                    final imageAsset = _store.imageAsset;
+                    final imagePath = _store.imagePath;
+                    return TokenSelector(
+                      allTokens:
+                          Assets.tokens.values.map((t) => t.path).toList(),
+                      changeAsset: _store.setImageAsset,
+                      changePath: _store.setImagePath,
+                      initalImageAsset: imageAsset,
+                      initialImagePath: imagePath,
+                      isMenace: true,
+                      size: 80,
+                    );
+                  },
+                ),
               ),
               T20UI.spaceHeight,
               T20UI.spaceHeight,
-              Padding(
-                padding: T20UI.horizontallScreenPadding,
-                child: Form(
-                  key: _formKey,
-                  child: NameTextField(
-                    initialName: widget.menace.name,
-                    onchange: _store.changeName,
+              RepaintBoundary(
+                child: Padding(
+                  padding: T20UI.horizontallScreenPadding,
+                  child: Form(
+                    key: _formKey,
+                    child: NameTextField(
+                      initialName: widget.menace.name,
+                      onchange: _store.changeName,
+                    ),
                   ),
                 ),
               ),
               T20UI.spaceHeight,
-              AnimatedBuilder(
-                animation: _store,
-                builder: (_, __) {
-                  final state = _store.state;
+              RepaintBoundary(
+                child: ListenableBuilder(
+                  listenable: _store,
+                  builder: (_, __) {
+                    final state = _store.state;
 
-                  if (state == CloneMenaceStates.error) {
-                    return Padding(
-                      padding: T20UI.horizontallScreenPadding
-                          .copyWith(bottom: T20UI.spaceSize),
-                      child: Text(
-                        'Não foi possível clonar ameaça',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: palette.accent,
-                          fontFamily: FontFamily.tormenta,
+                    if (state == CloneMenaceStates.error) {
+                      return Padding(
+                        padding: T20UI.horizontallScreenPadding
+                            .copyWith(bottom: T20UI.spaceSize),
+                        child: Text(
+                          'Não foi possível clonar ameaça',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: palette.accent,
+                            fontFamily: FontFamily.tormenta,
+                          ),
                         ),
-                      ),
-                    );
-                  }
+                      );
+                    }
 
-                  return const SizedBox.shrink();
-                },
+                    return const SizedBox.shrink();
+                  },
+                ),
               ),
             ],
           ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const DividerLevelTwo(verticalPadding: 0),
-              Padding(
-                padding: T20UI.allPadding,
-                child: AnimatedBuilder(
-                  animation: _store,
-                  builder: (_, __) {
-                    final state = _store.state;
-                    final buttonLabel = state == CloneMenaceStates.loading
-                        ? 'Clonando...'
-                        : state == CloneMenaceStates.success
-                            ? 'Sucesso!'
-                            : state == CloneMenaceStates.error
-                                ? 'Tentar novamente'
-                                : 'Clonar';
-                    return Row(
-                      children: [
-                        if (state == CloneMenaceStates.loading)
-                          const CustomLoader(size: 50),
-                        Expanded(
-                          child: MainButton(
-                            label: buttonLabel,
-                            icon: state == CloneMenaceStates.success
-                                ? FontAwesomeIcons.solidCircleCheck
-                                : null,
-                            isEnable: state == CloneMenaceStates.error ||
-                                state == CloneMenaceStates.idle,
-                            onTap: () {
-                              if (_formKey.currentState?.validate() ?? false) {
-                                _store.clone();
-                              }
-                            },
+          RepaintBoundary(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const DividerLevelTwo(verticalPadding: 0),
+                Padding(
+                  padding: T20UI.allPadding,
+                  child: ListenableBuilder(
+                    listenable: _store,
+                    builder: (_, __) {
+                      final state = _store.state;
+                      final buttonLabel = state == CloneMenaceStates.loading
+                          ? 'Clonando...'
+                          : state == CloneMenaceStates.success
+                              ? 'Sucesso!'
+                              : state == CloneMenaceStates.error
+                                  ? 'Tentar novamente'
+                                  : 'Clonar';
+                      return Row(
+                        children: [
+                          if (state == CloneMenaceStates.loading)
+                            const CustomLoader(size: 50),
+                          Expanded(
+                            child: MainButton(
+                              label: buttonLabel,
+                              icon: state == CloneMenaceStates.success
+                                  ? FontAwesomeIcons.solidCircleCheck
+                                  : null,
+                              isEnable: state == CloneMenaceStates.error ||
+                                  state == CloneMenaceStates.idle,
+                              onTap: () {
+                                if (_formKey.currentState?.validate() ??
+                                    false) {
+                                  _store.clone();
+                                }
+                              },
+                            ),
                           ),
-                        ),
-                        const SimpleCloseButton()
-                      ],
-                    );
-                  },
-                ),
-              )
-            ],
+                          const SimpleCloseButton()
+                        ],
+                      );
+                    },
+                  ),
+                )
+              ],
+            ),
           )
         ],
       ),

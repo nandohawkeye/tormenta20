@@ -42,18 +42,18 @@ class GrimoireHeader extends StatelessWidget {
     final listHeight = 110 * MediaQuery.of(context).textScaler.scale(1);
     const double width = 235;
 
-    //TODO parei nesse
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: T20UI.allPadding,
-          child: Labels('Grimórios'),
+        const RepaintBoundary(
+          child: Padding(
+            padding: T20UI.allPadding,
+            child: Labels('Grimórios'),
+          ),
         ),
-        AnimatedBuilder(
-          animation: store,
+        ListenableBuilder(
+          listenable: store,
           builder: (_, __) => store.grimories.isEmpty
               ? Padding(
                   padding: const EdgeInsets.only(

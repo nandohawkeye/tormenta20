@@ -36,40 +36,37 @@ class _BoardSessionsScreenState extends State<BoardSessionsScreen> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const ScreenHeader(label: 'Sessões'),
+          const RepaintBoundary(child: ScreenHeader(label: 'Sessões')),
           const Divider(),
-          AnimatedBuilder(
-            animation: _store,
-            builder: (_, __) {
-              return BoardSessionsList(
-                sessions: _store.sessions,
-                createCloseSession: _store.createCloseCombat,
-                updatedSession: _store.updateSession,
-              );
-            },
+          BoardSessionsList(
+            store: _store,
+            createCloseSession: _store.createCloseCombat,
+            updatedSession: _store.updateSession,
           ),
-          AnimatedBuilder(
-            animation: _store,
-            builder: (_, __) {
-              return BoardSessionsScreenBottomWidgets(
-                _store.currentSession,
-                createCloseSession: _store.createCloseSession,
-                createCombat: _store.createCloseCombat,
-                showCombat: () {
-                  final currentCombat = _store.getCurrentCombat();
-                  if (currentCombat != null) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => BoardCombatScreen(
-                          combat: currentCombat,
+          RepaintBoundary(
+            child: ListenableBuilder(
+              listenable: _store,
+              builder: (_, __) {
+                return BoardSessionsScreenBottomWidgets(
+                  _store.currentSession,
+                  createCloseSession: _store.createCloseSession,
+                  createCombat: _store.createCloseCombat,
+                  showCombat: () {
+                    final currentCombat = _store.getCurrentCombat();
+                    if (currentCombat != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => BoardCombatScreen(
+                            combat: currentCombat,
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                },
-              );
-            },
+                      );
+                    }
+                  },
+                );
+              },
+            ),
           )
         ],
       ),

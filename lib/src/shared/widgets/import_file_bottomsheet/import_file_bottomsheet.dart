@@ -53,43 +53,50 @@ class _ImportFileBottomsheetState extends State<ImportFileBottomsheet> {
           const ImportFileBottomsheetHeader(),
           const DividerLevelTwo(verticalPadding: 0),
           T20UI.spaceHeight,
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Padding(
-                padding: T20UI.horizontalPadding,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AnimatedBuilder(
-                      animation: _store,
-                      builder: (_, __) {
-                        final file = _store.file;
-                        final isValid = _store.isValid;
-                        final title = _store.title;
+          RepaintBoundary(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: T20UI.horizontalPadding,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ListenableBuilder(
+                        listenable: _store,
+                        builder: (_, __) {
+                          final file = _store.file;
+                          final isValid = _store.isValid;
+                          final title = _store.title;
 
-                        if (file != null) {
-                          return ImportFileBotomsheetFileCard(
-                            title: title,
-                            file: file,
-                            isValid: isValid,
-                            getFile: _store.getFile,
-                          );
-                        }
-                        return const ImportFileBottomsheetFileEmptyCard();
-                      },
-                    ),
-                    ImportFileBottomsheetWarning(_store)
-                  ],
+                          if (file != null) {
+                            return ImportFileBotomsheetFileCard(
+                              title: title,
+                              file: file,
+                              isValid: isValid,
+                              getFile: _store.getFile,
+                            );
+                          }
+                          return const ImportFileBottomsheetFileEmptyCard();
+                        },
+                      ),
+                      ImportFileBottomsheetWarning(_store)
+                    ],
+                  ),
                 ),
-              ),
-              T20UI.spaceHeight,
-            ],
+                T20UI.spaceHeight,
+              ],
+            ),
           ),
-          ImportFileBottomsheetButtons(_store, onImport: _import)
+          RepaintBoundary(
+            child: ImportFileBottomsheetButtons(
+              _store,
+              onImport: _import,
+            ),
+          )
         ],
       ),
     );

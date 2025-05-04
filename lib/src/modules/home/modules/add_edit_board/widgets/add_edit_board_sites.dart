@@ -59,41 +59,47 @@ class _AddEditBoardLinksState extends State<AddEditBoardLinks> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: T20UI.horizontalPadding.copyWith(top: T20UI.spaceSize),
-          child: const Labels('Links'),
-        ),
-        T20UI.spaceHeight,
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: T20UI.screenContentSpaceSize,
-          ),
-          child: MainButton(
-            label: 'Adicionar link',
-            backgroundColor: palette.cardBackground,
-            onTap: () => addEditSite(null),
+        RepaintBoundary(
+          child: Padding(
+            padding: T20UI.horizontalPadding.copyWith(top: T20UI.spaceSize),
+            child: const Labels('Links'),
           ),
         ),
         T20UI.spaceHeight,
-        ValueListenableBuilder(
-          valueListenable: _store.sites,
-          builder: (_, links, __) {
-            final list = links ?? [];
+        RepaintBoundary(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: T20UI.screenContentSpaceSize,
+            ),
+            child: MainButton(
+              label: 'Adicionar link',
+              backgroundColor: palette.cardBackground,
+              onTap: () => addEditSite(null),
+            ),
+          ),
+        ),
+        T20UI.spaceHeight,
+        RepaintBoundary(
+          child: ValueListenableBuilder(
+            valueListenable: _store.sites,
+            builder: (_, links, __) {
+              final list = links ?? [];
 
-            return ListView.builder(
-              shrinkWrap: true,
-              padding: EdgeInsets.zero,
-              physics: const NeverScrollableScrollPhysics(),
-              primary: false,
-              itemCount: list.length,
-              prototypeItem: const AddEditBoardSiteCardPrototype(),
-              itemBuilder: (_, index) => AddEditBoardSiteCard(
-                link: list[index],
-                onRemove: _store.remove,
-                onSelect: addEditSite,
-              ),
-            );
-          },
+              return ListView.builder(
+                shrinkWrap: true,
+                padding: EdgeInsets.zero,
+                physics: const NeverScrollableScrollPhysics(),
+                primary: false,
+                itemCount: list.length,
+                prototypeItem: const AddEditBoardSiteCardPrototype(),
+                itemBuilder: (_, index) => AddEditBoardSiteCard(
+                  link: list[index],
+                  onRemove: _store.remove,
+                  onSelect: addEditSite,
+                ),
+              );
+            },
+          ),
         )
       ],
     );

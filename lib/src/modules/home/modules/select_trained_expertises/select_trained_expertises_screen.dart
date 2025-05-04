@@ -43,36 +43,38 @@ class _SelectTrainedExpertisesScreenState
           Navigator.pop(context, selects);
         }
       },
-      body: AnimatedBuilder(
-        animation: _store,
-        builder: (_, __) {
-          final expertises = _store.expertises;
+      body: RepaintBoundary(
+        child: ListenableBuilder(
+          listenable: _store,
+          builder: (_, __) {
+            final expertises = _store.expertises;
 
-          if (expertises.isEmpty) {
-            return const SizedBox.shrink();
-          }
+            if (expertises.isEmpty) {
+              return const SizedBox.shrink();
+            }
 
-          final selecteds = _store.selectedExpertises;
+            final selecteds = _store.selectedExpertises;
 
-          return ListView.builder(
-            padding: const EdgeInsets.symmetric(
-              horizontal: T20UI.screenContentSpaceSize,
-              vertical: T20UI.spaceSize,
-            ),
-            shrinkWrap: true,
-            primary: false,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: expertises.length,
-            itemExtent: T20UI.inputHeight + T20UI.smallSpaceSize,
-            itemBuilder: (_, index) {
-              return SelectTrainedExpertisesScreenCard(
-                expertise: expertises[index],
-                selecteds: selecteds,
-                onTap: _store.setSelectedExpertise,
-              );
-            },
-          );
-        },
+            return ListView.builder(
+              padding: const EdgeInsets.symmetric(
+                horizontal: T20UI.screenContentSpaceSize,
+                vertical: T20UI.spaceSize,
+              ),
+              shrinkWrap: true,
+              primary: false,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: expertises.length,
+              itemExtent: T20UI.inputHeight + T20UI.smallSpaceSize,
+              itemBuilder: (_, index) {
+                return SelectTrainedExpertisesScreenCard(
+                  expertise: expertises[index],
+                  selecteds: selecteds,
+                  onTap: _store.setSelectedExpertise,
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }

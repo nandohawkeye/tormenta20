@@ -16,8 +16,8 @@ class ShowBoardMaterialsBottomsheetList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: store,
+    return ListenableBuilder(
+      listenable: store,
       builder: (_, __) {
         final materials = store.materials;
 

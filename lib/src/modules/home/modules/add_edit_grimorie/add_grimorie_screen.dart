@@ -83,16 +83,19 @@ class _AddGrimorieScreenState extends State<AddGrimorieScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          AddGrimorieBottomsheetNameField(
-            validator: DefaultInputValidator.valid,
-            formKey: _formKey,
-            name: _name,
-            errorName: _errorName,
+          RepaintBoundary(
+            child: AddGrimorieBottomsheetNameField(
+              validator: DefaultInputValidator.valid,
+              formKey: _formKey,
+              name: _name,
+              errorName: _errorName,
+            ),
           ),
           T20UI.spaceHeight,
-          AddGrimorieBottomsheetDescField(desc: _desc),
+          RepaintBoundary(child: AddGrimorieBottomsheetDescField(desc: _desc)),
           T20UI.spaceHeight,
-          AddGrimorieBottomsheetIconField(iconAsset: _iconAsset)
+          RepaintBoundary(
+              child: AddGrimorieBottomsheetIconField(iconAsset: _iconAsset))
         ],
       ),
     );

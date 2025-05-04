@@ -10,44 +10,46 @@ class GrimorieCharactersList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: store,
-      builder: (_, __) {
-        final characters = store.characters;
-        final grimoireCharacters = store.grimoire.characters;
+    return RepaintBoundary(
+      child: ListenableBuilder(
+        listenable: store,
+        builder: (_, __) {
+          final characters = store.characters;
+          final grimoireCharacters = store.grimoire.characters;
 
-        if (characters.isEmpty) {
-          return const SizedBox.shrink();
-        }
+          if (characters.isEmpty) {
+            return const SizedBox.shrink();
+          }
 
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: T20UI.inputHeight,
-              child: ListView.separated(
-                shrinkWrap: true,
-                padding: T20UI.horizontallScreenPadding,
-                scrollDirection: Axis.horizontal,
-                itemCount: characters.length,
-                separatorBuilder: T20UI.separatorBuilderHorizontal,
-                itemBuilder: (_, index) {
-                  return GrimorieCharactersListCard(
-                    character: characters[index],
-                    grimoireCharacters: grimoireCharacters,
-                    onAdd: store.onAddCharacter,
-                    onRemove: store.onRemoveCharacter,
-                  );
-                },
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: T20UI.inputHeight,
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  padding: T20UI.horizontallScreenPadding,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: characters.length,
+                  separatorBuilder: T20UI.separatorBuilderHorizontal,
+                  itemBuilder: (_, index) {
+                    return GrimorieCharactersListCard(
+                      character: characters[index],
+                      grimoireCharacters: grimoireCharacters,
+                      onAdd: store.onAddCharacter,
+                      onRemove: store.onRemoveCharacter,
+                    );
+                  },
+                ),
               ),
-            ),
-            T20UI.spaceHeight,
-            const Divider(),
-            T20UI.spaceHeight,
-          ],
-        );
-      },
+              T20UI.spaceHeight,
+              const Divider(),
+              T20UI.spaceHeight,
+            ],
+          );
+        },
+      ),
     );
   }
 }

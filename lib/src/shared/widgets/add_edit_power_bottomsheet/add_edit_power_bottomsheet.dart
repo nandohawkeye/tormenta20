@@ -50,73 +50,79 @@ class _AddEditGeneralSkillsBottomSheetState
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              T20UI.spaceHeight,
-              Padding(
-                padding: T20UI.horizontalPadding,
-                child: Text(
-                  'Poder',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontFamily: FontFamily.tormenta,
-                  ),
-                ),
-              ),
-              T20UI.spaceHeight,
-            ],
-          ),
-          const DividerLevelTwo(verticalPadding: 0),
-          T20UI.spaceHeight,
-          Form(
-            key: _formKey,
+          const RepaintBoundary(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                T20UI.spaceHeight,
                 Padding(
                   padding: T20UI.horizontalPadding,
-                  child: Column(
-                    children: [
-                      AddEditPowerBottomsheetTitle(
-                        onchange: _setTitle,
-                        initialTitle: widget.initial?.name,
-                      ),
-                      T20UI.spaceHeight,
-                      AddEditPowerBottomsheetDesc(
-                        onchange: _setDesc,
-                        initialDesc: widget.initial?.desc,
-                      ),
-                    ],
-                  ),
-                ),
-                T20UI.spaceHeight,
-                AddEditPowerBottomsheetTypeSelector(
-                  AddEditPowerBottomsheetTypeStore(
-                    widget.initial?.type,
+                  child: Text(
+                    'Poder',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: FontFamily.tormenta,
+                    ),
                   ),
                 ),
                 T20UI.spaceHeight,
               ],
             ),
           ),
-          AddEditGeneralSkillsMainButtons(
-            onSave: () {
-              if (_formKey.currentState!.validate()) {
-                final power = Power(
-                  characterUuid: widget.parentUuid,
-                  uuid: widget.initial?.uuid ?? const Uuid().v4(),
-                  name: _title!,
-                  desc: _desc!,
-                  type: PowerType.general,
-                );
+          const DividerLevelTwo(verticalPadding: 0),
+          T20UI.spaceHeight,
+          RepaintBoundary(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: T20UI.horizontalPadding,
+                    child: Column(
+                      children: [
+                        AddEditPowerBottomsheetTitle(
+                          onchange: _setTitle,
+                          initialTitle: widget.initial?.name,
+                        ),
+                        T20UI.spaceHeight,
+                        AddEditPowerBottomsheetDesc(
+                          onchange: _setDesc,
+                          initialDesc: widget.initial?.desc,
+                        ),
+                      ],
+                    ),
+                  ),
+                  T20UI.spaceHeight,
+                  AddEditPowerBottomsheetTypeSelector(
+                    AddEditPowerBottomsheetTypeStore(
+                      widget.initial?.type,
+                    ),
+                  ),
+                  T20UI.spaceHeight,
+                ],
+              ),
+            ),
+          ),
+          RepaintBoundary(
+            child: AddEditGeneralSkillsMainButtons(
+              onSave: () {
+                if (_formKey.currentState!.validate()) {
+                  final power = Power(
+                    characterUuid: widget.parentUuid,
+                    uuid: widget.initial?.uuid ?? const Uuid().v4(),
+                    name: _title!,
+                    desc: _desc!,
+                    type: PowerType.general,
+                  );
 
-                Navigator.pop(context, power);
-              }
-            },
+                  Navigator.pop(context, power);
+                }
+              },
+            ),
           )
         ],
       ),

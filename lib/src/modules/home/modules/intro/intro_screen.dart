@@ -42,17 +42,19 @@ class _IntroScreenState extends State<IntroScreen> {
       child: Column(
         children: [
           verticalSpace,
-          const AppLogo(width: 180),
+          const RepaintBoundary(child: AppLogo(width: 180)),
           Expanded(
-            child: PageView(
-              physics: const NeverScrollableScrollPhysics(),
-              controller: _pageController,
-              children: const [
-                IntroPageOne(),
-                IntroPageTwo(),
-                IntroPageTree(),
-                IntroPageFour(),
-              ],
+            child: RepaintBoundary(
+              child: PageView(
+                physics: const NeverScrollableScrollPhysics(),
+                controller: _pageController,
+                children: const [
+                  IntroPageOne(),
+                  IntroPageTwo(),
+                  IntroPageTree(),
+                  IntroPageFour(),
+                ],
+              ),
             ),
           ),
           IntroScreenButtons(_pageController, fromSplash: widget.fromSplash),

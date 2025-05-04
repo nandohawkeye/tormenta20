@@ -24,30 +24,32 @@ class AboutCustomTabBar extends StatelessWidget {
       );
     }
 
-    return Padding(
-      padding: T20UI.allPadding,
-      child: AnimatedBuilder(
-        animation: store,
-        builder: (_, __) {
-          final currentPage = store.currentPage;
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              AboutCustomTabBarItem(
-                title: 'Sobre',
-                page: 0,
-                changePage: changePage,
-                currentPage: currentPage,
-              ),
-              AboutCustomTabBarItem(
-                title: 'Ajustes',
-                page: 1,
-                changePage: changePage,
-                currentPage: currentPage,
-              )
-            ],
-          );
-        },
+    return RepaintBoundary(
+      child: Padding(
+        padding: T20UI.allPadding,
+        child: ListenableBuilder(
+          listenable: store,
+          builder: (_, __) {
+            final currentPage = store.currentPage;
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AboutCustomTabBarItem(
+                  title: 'Sobre',
+                  page: 0,
+                  changePage: changePage,
+                  currentPage: currentPage,
+                ),
+                AboutCustomTabBarItem(
+                  title: 'Ajustes',
+                  page: 1,
+                  changePage: changePage,
+                  currentPage: currentPage,
+                )
+              ],
+            );
+          },
+        ),
       ),
     );
   }

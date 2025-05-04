@@ -11,8 +11,8 @@ class MagicsWrap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: store,
+    return ListenableBuilder(
+      listenable: store,
       builder: (_, __) => store.magics.isEmpty
           ? const Padding(
               padding: EdgeInsets.only(top: 100),

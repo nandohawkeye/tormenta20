@@ -40,8 +40,8 @@ class _SelectMenacesScreenState extends State<SelectMenacesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _store,
+    return ListenableBuilder(
+      listenable: _store,
       builder: (_, __) {
         final menaces = _store.menaces;
         final selecteds = _store.selectedMenaces;

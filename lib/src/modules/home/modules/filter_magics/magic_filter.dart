@@ -41,52 +41,54 @@ class _MagicFilterState extends State<MagicFilter> {
         final result = _store.onConfirmChanges();
         Navigator.pop(context, result);
       },
-      body: Padding(
-        padding: T20UI.horizontallScreenPadding,
-        child: AnimatedBuilder(
-          animation: _store,
-          builder: (_, __) => Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              T20UI.spaceHeight,
-              MagicFilterTypes(
-                itens: _store.types,
-                itensSelected: _store.typesSelecteds,
-                onTap: _store.onTap,
-              ),
-              T20UI.spaceHeight,
-              MagicFilterRanges(
-                itens: _store.ranges,
-                itensSelected: _store.rangesSelecteds,
-                onTap: _store.onTap,
-              ),
-              T20UI.spaceHeight,
-              MagicFilterDuration(
-                itens: _store.durations,
-                itensSelected: _store.durationsSelecteds,
-                onTap: _store.onTap,
-              ),
-              T20UI.spaceHeight,
-              MagicFilterExecutions(
-                itens: _store.executions,
-                itensSelected: _store.executionsSelecteds,
-                onTap: _store.onTap,
-              ),
-              T20UI.spaceHeight,
-              MagicFilterResistences(
-                itens: _store.resistencies,
-                itensSelected: _store.resistenciesSelecteds,
-                onTap: _store.onTap,
-              ),
-              T20UI.spaceHeight,
-              MagicFilterSchools(
-                itens: _store.schools,
-                itensSelected: _store.schoolsSelecteds,
-                onTap: _store.onTap,
-              ),
-              T20UI.spaceHeight,
-            ],
+      body: RepaintBoundary(
+        child: Padding(
+          padding: T20UI.horizontallScreenPadding,
+          child: ListenableBuilder(
+            listenable: _store,
+            builder: (_, __) => Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                T20UI.spaceHeight,
+                MagicFilterTypes(
+                  itens: _store.types,
+                  itensSelected: _store.typesSelecteds,
+                  onTap: _store.onTap,
+                ),
+                T20UI.spaceHeight,
+                MagicFilterRanges(
+                  itens: _store.ranges,
+                  itensSelected: _store.rangesSelecteds,
+                  onTap: _store.onTap,
+                ),
+                T20UI.spaceHeight,
+                MagicFilterDuration(
+                  itens: _store.durations,
+                  itensSelected: _store.durationsSelecteds,
+                  onTap: _store.onTap,
+                ),
+                T20UI.spaceHeight,
+                MagicFilterExecutions(
+                  itens: _store.executions,
+                  itensSelected: _store.executionsSelecteds,
+                  onTap: _store.onTap,
+                ),
+                T20UI.spaceHeight,
+                MagicFilterResistences(
+                  itens: _store.resistencies,
+                  itensSelected: _store.resistenciesSelecteds,
+                  onTap: _store.onTap,
+                ),
+                T20UI.spaceHeight,
+                MagicFilterSchools(
+                  itens: _store.schools,
+                  itensSelected: _store.schoolsSelecteds,
+                  onTap: _store.onTap,
+                ),
+                T20UI.spaceHeight,
+              ],
+            ),
           ),
         ),
       ),

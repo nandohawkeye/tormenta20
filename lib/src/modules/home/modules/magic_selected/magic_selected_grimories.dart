@@ -18,8 +18,8 @@ class MagicSelectedGrimories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: store,
+    return ListenableBuilder(
+      listenable: store,
       builder: (_, __) {
         return store.grimories.isEmpty || !enableGrimories
             ? const SizedBox.shrink()

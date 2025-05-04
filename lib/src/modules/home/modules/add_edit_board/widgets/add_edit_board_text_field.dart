@@ -24,56 +24,60 @@ class AddEditBoardTextFields extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Form(
-          key: formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: T20UI.screenContentSpaceSize,
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: AddEditBoardNameField(
-                        controller.changeName,
-                        initialValue: controller.name,
-                      ),
-                    ),
-                    if (!isPlayerMode) T20UI.spaceWidth,
-                    if (!isPlayerMode)
+        RepaintBoundary(
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: T20UI.screenContentSpaceSize,
+                  ),
+                  child: Row(
+                    children: [
                       Expanded(
-                        child: AddEditBoardLevelField(
-                          controller.changeLevel,
-                          initialValue: controller.level.toString(),
+                        child: AddEditBoardNameField(
+                          controller.changeName,
+                          initialValue: controller.name,
                         ),
-                      )
-                  ],
+                      ),
+                      if (!isPlayerMode) T20UI.spaceWidth,
+                      if (!isPlayerMode)
+                        Expanded(
+                          child: AddEditBoardLevelField(
+                            controller.changeLevel,
+                            initialValue: controller.level.toString(),
+                          ),
+                        )
+                    ],
+                  ),
                 ),
-              ),
-              T20UI.spaceHeight,
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: T20UI.screenContentSpaceSize,
+                T20UI.spaceHeight,
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: T20UI.screenContentSpaceSize,
+                  ),
+                  child: AddEditBoardAdventureField(
+                    controller.changeAdventure,
+                    initialValue: controller.adventure,
+                  ),
                 ),
-                child: AddEditBoardAdventureField(
-                  controller.changeAdventure,
-                  initialValue: controller.adventure,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         T20UI.spaceHeight,
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: T20UI.screenContentSpaceSize,
-          ),
-          child: AddEditBoardDescField(
-            controller.changeDesc,
-            initialValue: controller.desc,
+        RepaintBoundary(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: T20UI.screenContentSpaceSize,
+            ),
+            child: AddEditBoardDescField(
+              controller.changeDesc,
+              initialValue: controller.desc,
+            ),
           ),
         ),
       ],

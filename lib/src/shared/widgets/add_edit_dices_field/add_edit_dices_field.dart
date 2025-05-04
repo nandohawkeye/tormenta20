@@ -109,78 +109,85 @@ class _AddEditDicesFieldState extends State<AddEditDicesField> {
                       ),
                       child: Text('Dados ${widget.isExtra ? 'extra' : ''}'),
                     ),
-                    ValueListenableBuilder(
-                      valueListenable: _roolDices,
-                      builder: (_, dices, __) {
-                        if (dices.isEmpty) {
-                          return const SizedBox.shrink();
-                        }
+                    RepaintBoundary(
+                      child: ValueListenableBuilder(
+                        valueListenable: _roolDices,
+                        builder: (_, dices, __) {
+                          if (dices.isEmpty) {
+                            return const SizedBox.shrink();
+                          }
 
-                        return const SizedBox(height: T20UI.inputHeight + 12);
-                      },
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: T20UI.smallSpaceSize,
-                        right: T20UI.smallSpaceSize,
-                        bottom: T20UI.smallSpaceSize,
+                          return const SizedBox(height: T20UI.inputHeight + 12);
+                        },
                       ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: TextFormField(
-                              controller: _quantEditController,
-                              style: const TextStyle(fontSize: 16),
-                              textInputAction: TextInputAction.next,
-                              keyboardType: TextInputType.number,
-                              textCapitalization: TextCapitalization.sentences,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'[0-9]'))
-                              ],
-                              decoration: InputDecoration(
-                                labelText: 'Quantidade',
-                                fillColor: palette.backgroundLevelTwo,
+                    ),
+                    RepaintBoundary(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          left: T20UI.smallSpaceSize,
+                          right: T20UI.smallSpaceSize,
+                          bottom: T20UI.smallSpaceSize,
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TextFormField(
+                                controller: _quantEditController,
+                                style: const TextStyle(fontSize: 16),
+                                textInputAction: TextInputAction.next,
+                                keyboardType: TextInputType.number,
+                                textCapitalization:
+                                    TextCapitalization.sentences,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]'))
+                                ],
+                                decoration: InputDecoration(
+                                  labelText: 'Quantidade',
+                                  fillColor: palette.backgroundLevelTwo,
+                                ),
                               ),
                             ),
-                          ),
-                          const SizedBox(width: T20UI.smallSpaceSize),
-                          Expanded(
-                            child: TextFormField(
-                              controller: _dicesEditController,
-                              style: const TextStyle(fontSize: 16),
-                              textInputAction: TextInputAction.next,
-                              keyboardType: TextInputType.number,
-                              textCapitalization: TextCapitalization.sentences,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'[0-9]'))
-                              ],
-                              decoration: InputDecoration(
-                                labelText: 'Dado',
-                                prefix: const Text('D',
-                                    style: TextStyle(fontSize: 16)),
-                                fillColor: palette.backgroundLevelTwo,
+                            const SizedBox(width: T20UI.smallSpaceSize),
+                            Expanded(
+                              child: TextFormField(
+                                controller: _dicesEditController,
+                                style: const TextStyle(fontSize: 16),
+                                textInputAction: TextInputAction.next,
+                                keyboardType: TextInputType.number,
+                                textCapitalization:
+                                    TextCapitalization.sentences,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]'))
+                                ],
+                                decoration: InputDecoration(
+                                  labelText: 'Dado',
+                                  prefix: const Text('D',
+                                      style: TextStyle(fontSize: 16)),
+                                  fillColor: palette.backgroundLevelTwo,
+                                ),
                               ),
                             ),
-                          ),
-                          const SizedBox(width: T20UI.smallSpaceSize),
-                          SimpleButton(
-                            icon: FontAwesomeIcons.plus,
-                            backgroundColor: palette.backgroundLevelTwo,
-                            iconColor: palette.accent,
-                            onTap: () {
-                              final quantity = _quantEditController.text;
-                              final diceValue = _dicesEditController.text;
+                            const SizedBox(width: T20UI.smallSpaceSize),
+                            SimpleButton(
+                              icon: FontAwesomeIcons.plus,
+                              backgroundColor: palette.backgroundLevelTwo,
+                              iconColor: palette.accent,
+                              onTap: () {
+                                final quantity = _quantEditController.text;
+                                final diceValue = _dicesEditController.text;
 
-                              if (quantity.isEmpty || diceValue.isEmpty) return;
+                                if (quantity.isEmpty || diceValue.isEmpty)
+                                  return;
 
-                              final dice =
-                                  DiceAdapters.create(quantity, diceValue);
-                              _addDice(dice);
-                            },
-                          )
-                        ],
+                                final dice =
+                                    DiceAdapters.create(quantity, diceValue);
+                                _addDice(dice);
+                              },
+                            )
+                          ],
+                        ),
                       ),
                     )
                   ],
@@ -223,10 +230,12 @@ class _AddEditDicesFieldState extends State<AddEditDicesField> {
             )
           ],
         ),
-        WarningWidget(
-          isObrigatory: widget.isObrigatory,
-          hasError: widget.hasError,
-          helpText: widget.helpText,
+        RepaintBoundary(
+          child: WarningWidget(
+            isObrigatory: widget.isObrigatory,
+            hasError: widget.hasError,
+            helpText: widget.helpText,
+          ),
         )
       ],
     );

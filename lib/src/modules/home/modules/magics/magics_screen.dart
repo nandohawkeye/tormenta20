@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
@@ -38,42 +39,49 @@ class _MagicsScreenState extends State<MagicsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: AnimatedBuilder(
-        animation: _magicStore,
-        builder: (_, __) => _magicStore.searchEnable
-            ? const SizedBox.shrink()
-            : SimpleButton(
-                icon: FontAwesomeIcons.plus,
-                backgroundColor: palette.selected,
-                iconColor: palette.onSelected,
-                onTap: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) =>
-                          const AddGrimorieScreen(initialGrimoire: null),
+      floatingActionButton: RepaintBoundary(
+        child: ListenableBuilder(
+          listenable: _magicStore,
+          builder: (_, __) => _magicStore.searchEnable
+              ? const SizedBox.shrink()
+              : AnimationConfiguration.synchronized(
+                  duration: T20UI.defaultDurationAnimation,
+                  child: FadeInAnimation(
+                    child: SimpleButton(
+                      icon: FontAwesomeIcons.plus,
+                      backgroundColor: palette.selected,
+                      iconColor: palette.onSelected,
+                      onTap: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) =>
+                                const AddGrimorieScreen(initialGrimoire: null),
+                          ),
+                        ).then(
+                          (result) async {
+                            if (result != null) {
+                              await _grimoriesStore
+                                  .insertGrimoire(result)
+                                  .then((failure) {
+                                if (failure == null) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) =>
+                                          GrimorieScreen(grimoire: result),
+                                    ),
+                                  );
+                                }
+                              });
+                            }
+                          },
+                        );
+                      },
                     ),
-                  ).then(
-                    (result) async {
-                      if (result != null) {
-                        await _grimoriesStore
-                            .insertGrimoire(result)
-                            .then((failure) {
-                          if (failure == null) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) =>
-                                    GrimorieScreen(grimoire: result),
-                              ),
-                            );
-                          }
-                        });
-                      }
-                    },
-                  );
-                },
-              ),
+                  ),
+                ),
+        ),
       ),
       body: Stack(
         children: [
@@ -82,31 +90,35 @@ class _MagicsScreenState extends State<MagicsScreen> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AnimatedBuilder(
-                  animation: _magicStore,
-                  builder: (_, __) => _magicStore.searchEnable
-                      ? const SizedBox.shrink()
-                      : GrimoireHeader(_grimoriesStore),
+                RepaintBoundary(
+                  child: ListenableBuilder(
+                    listenable: _magicStore,
+                    builder: (_, __) => _magicStore.searchEnable
+                        ? const SizedBox.shrink()
+                        : GrimoireHeader(_grimoriesStore),
+                  ),
                 ),
                 MagicsHeader(_magicStore),
-                AnimatedBuilder(
-                  animation: _magicStore,
-                  builder: (_, __) {
-                    final selecteds = _magicStore.circlesSelecteds;
-                    return MagicCirclesSelector(
-                      selecteds: selecteds,
-                      onChangeCircleSelected:
-                          _magicStore.onChangeCircleSelected,
-                    );
-                  },
+                RepaintBoundary(
+                  child: ListenableBuilder(
+                    listenable: _magicStore,
+                    builder: (_, __) {
+                      final selecteds = _magicStore.circlesSelecteds;
+                      return MagicCirclesSelector(
+                        selecteds: selecteds,
+                        onChangeCircleSelected:
+                            _magicStore.onChangeCircleSelected,
+                      );
+                    },
+                  ),
                 ),
                 T20UI.spaceHeight,
-                MagicsWrap(store: _magicStore),
+                RepaintBoundary(child: MagicsWrap(store: _magicStore)),
                 const SizedBox(height: 100)
               ],
             ),
           ),
-          MagicSearchFilter(store: _magicStore)
+          RepaintBoundary(child: MagicSearchFilter(store: _magicStore))
         ],
       ),
     );

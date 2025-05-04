@@ -40,23 +40,25 @@ class _ShowBoardMaterialsBottomsheetState
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              T20UI.spaceHeight,
-              Padding(
-                padding: T20UI.horizontalPadding,
-                child: Text(
-                  'Materiais',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontFamily: FontFamily.tormenta,
+          const RepaintBoundary(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                T20UI.spaceHeight,
+                Padding(
+                  padding: T20UI.horizontalPadding,
+                  child: Text(
+                    'Materiais',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: FontFamily.tormenta,
+                    ),
                   ),
                 ),
-              ),
-              T20UI.spaceHeight,
-            ],
+                T20UI.spaceHeight,
+              ],
+            ),
           ),
           const DividerLevelTwo(verticalPadding: 0),
           ShowBoardMaterialsBottomsheetList(_store),

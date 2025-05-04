@@ -38,67 +38,71 @@ class _AddEditBoardMaterialsState extends State<AddEditBoardMaterials> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: T20UI.horizontalPadding.copyWith(top: T20UI.spaceSize),
-          child: const Labels('Materiais'),
+        RepaintBoundary(
+          child: Padding(
+            padding: T20UI.horizontalPadding.copyWith(top: T20UI.spaceSize),
+            child: const Labels('Materiais'),
+          ),
         ),
         T20UI.spaceHeight,
-        ValueListenableBuilder(
-          valueListenable: _store.materials,
-          builder: (_, materials, __) {
-            final list = materials ?? [];
-            if (list.isEmpty) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: T20UI.screenContentSpaceSize,
-                ),
-                child: MainButton(
-                  label: 'Adicionar material',
-                  backgroundColor: palette.cardBackground,
-                  onTap: _store.onSelectFiles,
-                ),
-              );
-            }
+        RepaintBoundary(
+          child: ValueListenableBuilder(
+            valueListenable: _store.materials,
+            builder: (_, materials, __) {
+              final list = materials ?? [];
+              if (list.isEmpty) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: T20UI.screenContentSpaceSize,
+                  ),
+                  child: MainButton(
+                    label: 'Adicionar material',
+                    backgroundColor: palette.cardBackground,
+                    onTap: _store.onSelectFiles,
+                  ),
+                );
+              }
 
-            return SizedBox(
-              height: 120,
-              child: ListView.builder(
-                padding: T20UI.horizontalPadding,
-                scrollDirection: Axis.horizontal,
-                itemCount: list.length + 1,
-                itemExtent: 120 + T20UI.smallSpaceSize,
-                itemBuilder: (_, index) {
-                  if (index == 0) {
-                    return Padding(
-                      padding:
-                          const EdgeInsets.only(right: T20UI.smallSpaceSize),
-                      child: SizedBox(
-                        height: 120,
-                        width: 120,
-                        child: Card(
-                          child: InkWell(
-                            borderRadius: T20UI.borderRadius,
-                            onTap: _store.onSelectFiles,
-                            child: const Center(
-                              child: Icon(
-                                FontAwesomeIcons.plus,
-                                size: 34,
+              return SizedBox(
+                height: 120,
+                child: ListView.builder(
+                  padding: T20UI.horizontalPadding,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: list.length + 1,
+                  itemExtent: 120 + T20UI.smallSpaceSize,
+                  itemBuilder: (_, index) {
+                    if (index == 0) {
+                      return Padding(
+                        padding:
+                            const EdgeInsets.only(right: T20UI.smallSpaceSize),
+                        child: SizedBox(
+                          height: 120,
+                          width: 120,
+                          child: Card(
+                            child: InkWell(
+                              borderRadius: T20UI.borderRadius,
+                              onTap: _store.onSelectFiles,
+                              child: const Center(
+                                child: Icon(
+                                  FontAwesomeIcons.plus,
+                                  size: 34,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  }
+                      );
+                    }
 
-                  return AddEditBoardMaterialCard(
-                    material: list[index - 1],
-                    onTap: _store.onRemove,
-                  );
-                },
-              ),
-            );
-          },
+                    return AddEditBoardMaterialCard(
+                      material: list[index - 1],
+                      onTap: _store.onRemove,
+                    );
+                  },
+                ),
+              );
+            },
+          ),
         )
       ],
     );

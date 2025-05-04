@@ -72,8 +72,8 @@ class _CharacterScreenState extends State<CharacterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _store,
+    return ListenableBuilder(
+      listenable: _store,
       builder: (_, __) {
         final character = _store.character;
         final grimoire = character.grimorie;

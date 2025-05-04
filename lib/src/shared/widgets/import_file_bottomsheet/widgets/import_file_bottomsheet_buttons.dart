@@ -26,15 +26,16 @@ class ImportFileBottomsheetButtons extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: AnimatedBuilder(
-                    animation: store,
-                    builder: (_, __) {
-                      final isValid = store.isValid;
-                      return MainButton(
-                        label: isValid == true ? 'Importar' : 'Buscar arquivo',
-                        onTap: isValid == true ? onImport : store.getFile,
-                      );
-                    }),
+                child: ListenableBuilder(
+                  listenable: store,
+                  builder: (_, __) {
+                    final isValid = store.isValid;
+                    return MainButton(
+                      label: isValid == true ? 'Importar' : 'Buscar arquivo',
+                      onTap: isValid == true ? onImport : store.getFile,
+                    );
+                  },
+                ),
               ),
               const SimpleCloseButton()
             ],

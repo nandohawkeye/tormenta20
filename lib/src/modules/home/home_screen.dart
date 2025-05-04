@@ -3,8 +3,10 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
+import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/home_screen_store.dart';
 import 'package:tormenta20/src/modules/home/modules/about/about_screen.dart';
@@ -87,60 +89,54 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-        animation: _store,
-        builder: (_, __) {
-          return Scaffold(
-            appBar: AppBar(
-              title: const AppLogo(
-                height: 42,
-                width: 180,
+    return ListenableBuilder(
+      listenable: _store,
+      builder: (_, __) {
+        final currentIndex = _store.index;
+        return Scaffold(
+          appBar: AppBar(
+            title: const AppLogo(
+              height: 42,
+              width: 180,
+            ),
+            actions: [
+              if (currentIndex != 2)
+                AnimationConfiguration.synchronized(
+                  duration: T20UI.defaultDurationAnimation,
+                  child: FadeInAnimation(
+                    child: SimpleButton(
+                      icon: FontAwesomeIcons.solidLightbulb,
+                      backgroundColor: palette.background,
+                      iconSize: 20,
+                      onTap: _openTypeBotomSheet,
+                    ),
+                  ),
+                ),
+            ],
+          ),
+          body: _pages[currentIndex],
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: currentIndex,
+            showUnselectedLabels: false,
+            showSelectedLabels: false,
+            onTap: _store.changeIndex,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(FontAwesomeIcons.diceD20),
+                label: 'Inicio',
               ),
-              actions: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    AnimatedBuilder(
-                      animation: _store,
-                      builder: (_, __) {
-                        if (_store.index == 2) {
-                          return const SizedBox.shrink();
-                        }
-
-                        return SimpleButton(
-                          icon: FontAwesomeIcons.solidLightbulb,
-                          backgroundColor: palette.background,
-                          iconSize: 20,
-                          onTap: _openTypeBotomSheet,
-                        );
-                      },
-                    )
-                  ],
-                ),
-              ],
-            ),
-            body: _pages[_store.index],
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: _store.index,
-              showUnselectedLabels: false,
-              showSelectedLabels: false,
-              onTap: _store.changeIndex,
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(FontAwesomeIcons.diceD20),
-                  label: 'Inicio',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(FontAwesomeIcons.hatWizard),
-                  label: 'Magias',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(FontAwesomeIcons.gear),
-                  label: 'Sobre',
-                ),
-              ],
-            ),
-          );
-        });
+              BottomNavigationBarItem(
+                icon: Icon(FontAwesomeIcons.hatWizard),
+                label: 'Magias',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(FontAwesomeIcons.gear),
+                label: 'Sobre',
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

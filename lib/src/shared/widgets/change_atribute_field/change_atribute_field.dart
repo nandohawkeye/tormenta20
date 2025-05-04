@@ -36,41 +36,45 @@ class ChangeAtributeField extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                AnimatedBuilder(
-                  animation: store,
-                  builder: (_, __) {
-                    final value = store.value;
-                    final isNegative = value.isNegative;
-                    return ScrollAnimatedIntCount(
-                      count: value.abs(),
-                      height: 40,
-                      width: 15,
-                      isNegative: isNegative,
-                      textStyle: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    );
-                  },
+                RepaintBoundary(
+                  child: ListenableBuilder(
+                    listenable: store,
+                    builder: (_, __) {
+                      final value = store.value;
+                      final isNegative = value.isNegative;
+                      return ScrollAnimatedIntCount(
+                        count: value.abs(),
+                        height: 40,
+                        width: 15,
+                        isNegative: isNegative,
+                        textStyle: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ],
             ),
-            Row(
-              children: [
-                SimpleButton(
-                  backgroundColor: palette.backgroundLevelTwo,
-                  iconColor: palette.icon,
-                  icon: FontAwesomeIcons.minus,
-                  onTap: store.declement,
-                ),
-                T20UI.smallSpaceWidth,
-                SimpleButton(
-                  backgroundColor: palette.backgroundLevelTwo,
-                  iconColor: palette.icon,
-                  icon: FontAwesomeIcons.plus,
-                  onTap: store.increment,
-                ),
-              ],
+            RepaintBoundary(
+              child: Row(
+                children: [
+                  SimpleButton(
+                    backgroundColor: palette.backgroundLevelTwo,
+                    iconColor: palette.icon,
+                    icon: FontAwesomeIcons.minus,
+                    onTap: store.declement,
+                  ),
+                  T20UI.smallSpaceWidth,
+                  SimpleButton(
+                    backgroundColor: palette.backgroundLevelTwo,
+                    iconColor: palette.icon,
+                    icon: FontAwesomeIcons.plus,
+                    onTap: store.increment,
+                  ),
+                ],
+              ),
             )
           ],
         ),

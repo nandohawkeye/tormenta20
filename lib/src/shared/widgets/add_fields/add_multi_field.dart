@@ -40,25 +40,28 @@ class AddMultiField<T extends EntityBase> extends StatelessWidget {
           height: (95),
           child: Stack(
             children: [
-              AnimatedBuilder(
-                animation: store,
-                builder: (_, __) {
-                  final hasError = store.hasError;
-                  return AddFieldBody(
-                    label: label,
-                    hasError: hasError,
-                  );
-                },
+              RepaintBoundary(
+                child: ListenableBuilder(
+                  listenable: store,
+                  builder: (_, __) {
+                    final hasError = store.hasError;
+                    return AddFieldBody(
+                      label: label,
+                      hasError: hasError,
+                    );
+                  },
+                ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: SizedBox(
-                    height: T20UI.inputHeight,
-                    width: double.infinity,
-                    child: AnimatedBuilder(
-                        animation: store,
+              RepaintBoundary(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: SizedBox(
+                      height: T20UI.inputHeight,
+                      width: double.infinity,
+                      child: ListenableBuilder(
+                        listenable: store,
                         builder: (_, __) {
                           final list = store.data;
                           if (list.isEmpty) {
@@ -101,23 +104,27 @@ class AddMultiField<T extends EntityBase> extends StatelessWidget {
                               );
                             },
                           );
-                        }),
+                        },
+                      ),
+                    ),
                   ),
                 ),
               )
             ],
           ),
         ),
-        AnimatedBuilder(
-          animation: store,
-          builder: (_, __) {
-            final hasError = store.hasError;
-            return WarningWidget(
-              hasError: hasError,
-              isObrigatory: isObrigatory,
-              helpText: helpText,
-            );
-          },
+        RepaintBoundary(
+          child: ListenableBuilder(
+            listenable: store,
+            builder: (_, __) {
+              final hasError = store.hasError;
+              return WarningWidget(
+                hasError: hasError,
+                isObrigatory: isObrigatory,
+                helpText: helpText,
+              );
+            },
+          ),
         )
       ],
     );

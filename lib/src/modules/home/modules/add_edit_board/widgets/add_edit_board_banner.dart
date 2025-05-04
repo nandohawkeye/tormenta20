@@ -63,12 +63,15 @@ class _AddEditBoardBannerState extends State<AddEditBoardBanner> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: T20UI.horizontalPadding.copyWith(top: T20UI.spaceSize),
-          child: const Labels('Banner'),
+        RepaintBoundary(
+          child: Padding(
+            padding: T20UI.horizontalPadding.copyWith(top: T20UI.spaceSize),
+            child: const Labels('Banner'),
+          ),
         ),
         T20UI.spaceHeight,
-        ValueListenableBuilder(
+        RepaintBoundary(
+          child: ValueListenableBuilder(
             valueListenable: _bannerPath,
             builder: (_, bannerPath, __) {
               if (bannerPath != null) {
@@ -152,7 +155,9 @@ class _AddEditBoardBannerState extends State<AddEditBoardBanner> {
                   ),
                 ],
               );
-            })
+            },
+          ),
+        )
       ],
     );
   }

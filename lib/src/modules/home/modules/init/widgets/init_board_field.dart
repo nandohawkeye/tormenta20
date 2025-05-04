@@ -31,49 +31,53 @@ class _InitBoardFieldState extends State<InitBoardField> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: T20UI.allPadding,
-          child: Labels('Mesas e aventuras'),
+        const RepaintBoundary(
+          child: Padding(
+            padding: T20UI.allPadding,
+            child: Labels('Mesas e aventuras'),
+          ),
         ),
-        AnimatedBuilder(
-          animation: _store,
-          builder: (_, __) {
-            final boards = _store.boards;
+        RepaintBoundary(
+          child: ListenableBuilder(
+            listenable: _store,
+            builder: (_, __) {
+              final boards = _store.boards;
 
-            if (boards.isEmpty) {
-              return const Padding(
-                padding: EdgeInsets.only(
-                  bottom: T20UI.spaceSize,
-                  right: T20UI.screenContentSpaceSize,
-                  left: T20UI.screenContentSpaceSize,
+              if (boards.isEmpty) {
+                return const Padding(
+                  padding: EdgeInsets.only(
+                    bottom: T20UI.spaceSize,
+                    right: T20UI.screenContentSpaceSize,
+                    left: T20UI.screenContentSpaceSize,
+                  ),
+                  child: BoardScreenImageButton(),
+                );
+              }
+
+              const double width = 300;
+
+              return SizedBox(
+                height: 225 * context.realTextScale,
+                width: double.infinity,
+                child: ListView.builder(
+                  itemCount: boards.length,
+                  itemExtent: width + T20UI.smallSpaceSize,
+                  padding: const EdgeInsets.only(
+                    bottom: T20UI.spaceSize,
+                    right: T20UI.screenContentSpaceSize,
+                    left: T20UI.screenContentSpaceSize,
+                  ),
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (_, index) {
+                    return BoardCard(
+                      board: boards[index],
+                      width: width,
+                    );
+                  },
                 ),
-                child: BoardScreenImageButton(),
               );
-            }
-
-            const double width = 300;
-
-            return SizedBox(
-              height: 225 * context.realTextScale,
-              width: double.infinity,
-              child: ListView.builder(
-                itemCount: boards.length,
-                itemExtent: width + T20UI.smallSpaceSize,
-                padding: const EdgeInsets.only(
-                  bottom: T20UI.spaceSize,
-                  right: T20UI.screenContentSpaceSize,
-                  left: T20UI.screenContentSpaceSize,
-                ),
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (_, index) {
-                  return BoardCard(
-                    board: boards[index],
-                    width: width,
-                  );
-                },
-              ),
-            );
-          },
+            },
+          ),
         ),
       ],
     );

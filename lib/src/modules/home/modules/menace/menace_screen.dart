@@ -81,8 +81,8 @@ class _MenaceScreenState extends State<MenaceScreen> {
       );
     }
 
-    return AnimatedBuilder(
-      animation: _store,
+    return ListenableBuilder(
+      listenable: _store,
       builder: (_, __) {
         final menace = _store.menace;
         final tabIndex = _store.tabIndex;

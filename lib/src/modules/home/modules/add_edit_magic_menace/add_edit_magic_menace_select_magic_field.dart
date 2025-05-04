@@ -75,39 +75,43 @@ class _AddEditMagicMenaceSelectMagicFieldState
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AnimatedBuilder(
-          animation: Listenable.merge([
-            widget.hasError,
-            _magicSelected,
-          ]),
-          builder: (_, __) {
-            final selected = _magicSelected.value;
-            final hasError = widget.hasError.value;
-            return MainButton(
-              label: selected == null ? 'Selecionar magia' : selected.name,
-              backgroundColor:
-                  hasError ? palette.selected : palette.backgroundLevelOne,
-              onTap: () => _onSelectMagic(selected),
-            );
-          },
-        ),
-        Padding(
-          padding: const EdgeInsets.only(
-            left: T20UI.spaceSize,
-            top: T20UI.smallSpaceSize,
-          ),
-          child: ValueListenableBuilder(
-            valueListenable: widget.hasError,
-            builder: (_, hasError, __) {
-              return Text(
-                hasError ? 'É obrigatório!' : 'obrigatório',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: hasError ? palette.accent : palette.textDisable,
-                  fontWeight: hasError ? FontWeight.bold : FontWeight.w500,
-                ),
+        RepaintBoundary(
+          child: ListenableBuilder(
+            listenable: Listenable.merge([
+              widget.hasError,
+              _magicSelected,
+            ]),
+            builder: (_, __) {
+              final selected = _magicSelected.value;
+              final hasError = widget.hasError.value;
+              return MainButton(
+                label: selected == null ? 'Selecionar magia' : selected.name,
+                backgroundColor:
+                    hasError ? palette.selected : palette.backgroundLevelOne,
+                onTap: () => _onSelectMagic(selected),
               );
             },
+          ),
+        ),
+        RepaintBoundary(
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: T20UI.spaceSize,
+              top: T20UI.smallSpaceSize,
+            ),
+            child: ValueListenableBuilder(
+              valueListenable: widget.hasError,
+              builder: (_, hasError, __) {
+                return Text(
+                  hasError ? 'É obrigatório!' : 'obrigatório',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: hasError ? palette.accent : palette.textDisable,
+                    fontWeight: hasError ? FontWeight.bold : FontWeight.w500,
+                  ),
+                );
+              },
+            ),
           ),
         ),
       ],

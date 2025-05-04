@@ -30,8 +30,8 @@ class GrimorieMagicList extends StatelessWidget {
       });
     }
 
-    return AnimatedBuilder(
-      animation: store,
+    return ListenableBuilder(
+      listenable: store,
       builder: (_, __) {
         final magics = store.grimoire.magicsCharacters;
         if (magics.isEmpty) {

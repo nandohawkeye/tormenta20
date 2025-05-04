@@ -11,40 +11,42 @@ class AddEditCharacterDiceSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: store,
-      builder: (_, __) {
-        final dices = store.dices;
-        final selected = store.selected;
+    return RepaintBoundary(
+      child: ListenableBuilder(
+        listenable: store,
+        builder: (_, __) {
+          final dices = store.dices;
+          final selected = store.selected;
 
-        if (dices.isEmpty) {
-          return const SizedBox.shrink();
-        }
+          if (dices.isEmpty) {
+            return const SizedBox.shrink();
+          }
 
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            T20UI.spaceHeight,
-            SizedBox(
-              height: T20UI.inputHeight,
-              child: ListView.builder(
-                shrinkWrap: true,
-                padding: T20UI.horizontallScreenPadding,
-                scrollDirection: Axis.horizontal,
-                itemCount: dices.length,
-                prototypeItem: const AddEditCharacterDiceCardPrototype(),
-                itemBuilder: (_, index) {
-                  return AddEditCharacterDiceCard(
-                    atributeRollDice: dices[index],
-                    selected: selected,
-                    onTap: store.setSelected,
-                  );
-                },
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              T20UI.spaceHeight,
+              SizedBox(
+                height: T20UI.inputHeight,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  padding: T20UI.horizontallScreenPadding,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: dices.length,
+                  prototypeItem: const AddEditCharacterDiceCardPrototype(),
+                  itemBuilder: (_, index) {
+                    return AddEditCharacterDiceCard(
+                      atributeRollDice: dices[index],
+                      selected: selected,
+                      onTap: store.setSelected,
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
-        );
-      },
+            ],
+          );
+        },
+      ),
     );
   }
 }

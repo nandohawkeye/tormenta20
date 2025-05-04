@@ -57,82 +57,87 @@ class _AddEditBoardPlayerBroodSelectorState extends State<DivinitySelector> {
           height: (95),
           child: Stack(
             children: [
-              Padding(
-                padding: T20UI.horizontallScreenPadding,
-                child: SizedBox(
-                  width: double.infinity,
-                  child: AnimatedBuilder(
-                    animation: Listenable.merge([_selected]),
-                    builder: (_, __) {
-                      final selected = _selected.value;
-                      return AnimatedContainer(
-                        duration: T20UI.defaultDurationAnimation,
-                        decoration: BoxDecoration(
-                          borderRadius: T20UI.borderRadius,
-                          color: palette.backgroundLevelOne,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            top: T20UI.smallSpaceSize,
-                            left: T20UI.screenContentSpaceSize - 6,
+              RepaintBoundary(
+                child: Padding(
+                  padding: T20UI.horizontallScreenPadding,
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ListenableBuilder(
+                      listenable: Listenable.merge([_selected]),
+                      builder: (_, __) {
+                        final selected = _selected.value;
+                        return AnimatedContainer(
+                          duration: T20UI.defaultDurationAnimation,
+                          decoration: BoxDecoration(
+                            borderRadius: T20UI.borderRadius,
+                            color: palette.backgroundLevelOne,
                           ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                  'Divindade: ${selected != null ? selected.name : ''}'),
-                              const SizedBox(
-                                height: T20UI.inputHeight,
-                              )
-                            ],
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              top: T20UI.smallSpaceSize,
+                              left: T20UI.screenContentSpaceSize - 6,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                    'Divindade: ${selected != null ? selected.name : ''}'),
+                                const SizedBox(
+                                  height: T20UI.inputHeight,
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: SizedBox(
-                    height: T20UI.inputHeight,
-                    width: double.infinity,
-                    child: ValueListenableBuilder(
-                      valueListenable: _selected,
-                      builder: (_, selected, __) {
-                        return ListView.builder(
-                          shrinkWrap: true,
-                          padding: const EdgeInsets.only(
-                            left: T20UI.screenContentSpaceSize +
-                                T20UI.smallSpaceSize,
-                            right: T20UI.screenContentSpaceSize +
-                                T20UI.smallSpaceSize,
-                          ),
-                          scrollDirection: Axis.horizontal,
-                          itemExtent: T20UI.inputHeight + T20UI.smallSpaceSize,
-                          itemCount: (_allDivinities.length + 1),
-                          itemBuilder: (_, index) {
-                            if (index == 0) {
-                              return Padding(
-                                padding: const EdgeInsets.only(
-                                    right: T20UI.smallSpaceSize),
-                                child: SelectorSecundarySimpleButton(
-                                  icon: FontAwesomeIcons.xmark,
-                                  onTap: () => _setSelected(null),
-                                ),
-                              );
-                            }
+              RepaintBoundary(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: SizedBox(
+                      height: T20UI.inputHeight,
+                      width: double.infinity,
+                      child: ValueListenableBuilder(
+                        valueListenable: _selected,
+                        builder: (_, selected, __) {
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.only(
+                              left: T20UI.screenContentSpaceSize +
+                                  T20UI.smallSpaceSize,
+                              right: T20UI.screenContentSpaceSize +
+                                  T20UI.smallSpaceSize,
+                            ),
+                            scrollDirection: Axis.horizontal,
+                            itemExtent:
+                                T20UI.inputHeight + T20UI.smallSpaceSize,
+                            itemCount: (_allDivinities.length + 1),
+                            itemBuilder: (_, index) {
+                              if (index == 0) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(
+                                      right: T20UI.smallSpaceSize),
+                                  child: SelectorSecundarySimpleButton(
+                                    icon: FontAwesomeIcons.xmark,
+                                    onTap: () => _setSelected(null),
+                                  ),
+                                );
+                              }
 
-                            return DivinitySelectorCard(
-                              divinity: _allDivinities[index - 1],
-                              onSelect: _setSelected,
-                              selected: selected,
-                            );
-                          },
-                        );
-                      },
+                              return DivinitySelectorCard(
+                                divinity: _allDivinities[index - 1],
+                                onSelect: _setSelected,
+                                selected: selected,
+                              );
+                            },
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),

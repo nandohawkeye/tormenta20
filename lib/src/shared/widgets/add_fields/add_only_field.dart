@@ -35,96 +35,101 @@ class AddOnlyField<T extends EntityBase> extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: T20UI.screenContentSpaceSize,
-          ),
-          child: SizedBox(
-            width: double.infinity,
-            child: AnimatedBuilder(
-              animation: store,
-              builder: (_, __) {
-                final selected = store.data;
-                final hasError = store.hasError;
-                return AnimatedContainer(
-                  duration: T20UI.defaultDurationAnimation,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 2,
-                      color: hasError
-                          ? palette.accent
-                          : palette.backgroundLevelOne,
-                    ),
-                    borderRadius: T20UI.borderRadius,
-                    color: palette.backgroundLevelOne,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          top: T20UI.smallSpaceSize,
-                          left: T20UI.screenContentSpaceSize,
-                          bottom: T20UI.smallSpaceSize,
-                        ),
-                        child: Text(label),
+        RepaintBoundary(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: T20UI.screenContentSpaceSize,
+            ),
+            child: SizedBox(
+              width: double.infinity,
+              child: ListenableBuilder(
+                listenable: store,
+                builder: (_, __) {
+                  final selected = store.data;
+                  final hasError = store.hasError;
+                  return AnimatedContainer(
+                    duration: T20UI.defaultDurationAnimation,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 2,
+                        color: hasError
+                            ? palette.accent
+                            : palette.backgroundLevelOne,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                                horizontal: T20UI.smallSpaceSize)
-                            .copyWith(
-                          bottom: T20UI.smallSpaceSize,
-                        ),
-                        child: SizedBox(
-                          height: T20UI.inputHeight,
-                          width: double.infinity,
-                          child: Row(
-                            children: [
-                              if (selected != null)
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    right: T20UI.smallSpaceSize,
-                                  ),
-                                  child: SimpleButton(
-                                    icon: FontAwesomeIcons.solidTrashCan,
-                                    backgroundColor: palette.backgroundLevelTwo,
-                                    iconColor: palette.accent,
-                                    onTap: () => onAdd(null),
-                                  ),
-                                ),
-                              Expanded(
-                                child: MainButton(
-                                  label: selected == null
-                                      ? mainButtonLabel
-                                      : selected.exibitionLabel,
-                                  fontFamily: selected == null
-                                      ? FontFamily.tormenta
-                                      : null,
-                                  backgroundColor: palette.backgroundLevelTwo,
-                                  onTap: () => onAdd(selected),
-                                ),
-                              ),
-                            ],
+                      borderRadius: T20UI.borderRadius,
+                      color: palette.backgroundLevelOne,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: T20UI.smallSpaceSize,
+                            left: T20UI.screenContentSpaceSize,
+                            bottom: T20UI.smallSpaceSize,
                           ),
+                          child: Text(label),
                         ),
-                      )
-                    ],
-                  ),
-                );
-              },
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                                  horizontal: T20UI.smallSpaceSize)
+                              .copyWith(
+                            bottom: T20UI.smallSpaceSize,
+                          ),
+                          child: SizedBox(
+                            height: T20UI.inputHeight,
+                            width: double.infinity,
+                            child: Row(
+                              children: [
+                                if (selected != null)
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      right: T20UI.smallSpaceSize,
+                                    ),
+                                    child: SimpleButton(
+                                      icon: FontAwesomeIcons.solidTrashCan,
+                                      backgroundColor:
+                                          palette.backgroundLevelTwo,
+                                      iconColor: palette.accent,
+                                      onTap: () => onAdd(null),
+                                    ),
+                                  ),
+                                Expanded(
+                                  child: MainButton(
+                                    label: selected == null
+                                        ? mainButtonLabel
+                                        : selected.exibitionLabel,
+                                    fontFamily: selected == null
+                                        ? FontFamily.tormenta
+                                        : null,
+                                    backgroundColor: palette.backgroundLevelTwo,
+                                    onTap: () => onAdd(selected),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ),
-        AnimatedBuilder(
-          animation: store,
-          builder: (_, __) {
-            final hasError = store.hasError;
-            return WarningWidget(
-              hasError: hasError,
-              isObrigatory: isObrigatory,
-              helpText: helpText,
-            );
-          },
+        RepaintBoundary(
+          child: ListenableBuilder(
+            listenable: store,
+            builder: (_, __) {
+              final hasError = store.hasError;
+              return WarningWidget(
+                hasError: hasError,
+                isObrigatory: isObrigatory,
+                helpText: helpText,
+              );
+            },
+          ),
         )
       ],
     );

@@ -1,10 +1,10 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/modules/home/modules/intro/widgets/intro_page_text_animated.dart';
 import 'package:tormenta20/src/shared/widgets/image_fade_slide.dart';
 
 class IntroPageTwo extends StatefulWidget {
@@ -99,36 +99,21 @@ class _IntroPageTwoState extends State<IntroPageTwo> {
                                     'Você deseja jogar?',
                                     maxLines: 10,
                                     style: TextStyle(
-                                        fontSize: 24,
-                                        fontFamily: FontFamily.tormenta,
-                                        color: palette.selected),
+                                      fontSize: 24,
+                                      fontFamily: FontFamily.tormenta,
+                                      color: palette.selected,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           const SizedBox(height: 4),
                           if (stage > 2)
-                            AnimationConfiguration.synchronized(
+                            const AnimationConfiguration.synchronized(
                               duration: T20UI.defaultDurationAnimation,
                               child: FadeInAnimation(
-                                child: AnimatedTextKit(
-                                  animatedTexts: [
-                                    TypewriterAnimatedText(
-                                      'Crie seus personagens...',
-                                      textStyle: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                      cursor: ' 🎲',
-                                      textAlign: TextAlign.center,
-                                      speed: const Duration(milliseconds: 85),
-                                    ),
-                                  ],
-                                  repeatForever: false,
-                                  isRepeatingAnimation: false,
-                                  displayFullTextOnTap: false,
-                                  stopPauseOnTap: true,
-                                ),
+                                child: IntroPageTextAnimated(
+                                    text: 'Crie seus personagens...'),
                               ),
                             ),
                         ],
@@ -167,27 +152,11 @@ class _IntroPageTwoState extends State<IntroPageTwo> {
                           ),
                         const SizedBox(height: 4),
                         if (stage > 5)
-                          AnimationConfiguration.synchronized(
+                          const AnimationConfiguration.synchronized(
                             duration: T20UI.defaultDurationAnimation,
                             child: FadeInAnimation(
-                              child: AnimatedTextKit(
-                                animatedTexts: [
-                                  TypewriterAnimatedText(
-                                    'Então crie suas ameaças...',
-                                    textStyle: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    cursor: ' 🎲',
-                                    textAlign: TextAlign.center,
-                                    speed: const Duration(milliseconds: 85),
-                                  ),
-                                ],
-                                repeatForever: false,
-                                isRepeatingAnimation: false,
-                                displayFullTextOnTap: false,
-                                stopPauseOnTap: true,
-                              ),
+                              child: IntroPageTextAnimated(
+                                  text: 'Então crie suas ameaças...'),
                             ),
                           ),
                       ],

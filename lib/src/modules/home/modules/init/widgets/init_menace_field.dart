@@ -42,47 +42,51 @@ class _InitMenaceFieldState extends State<InitMenaceField> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: T20UI.allPadding,
-          child: Labels('Ameaças'),
+        const RepaintBoundary(
+          child: Padding(
+            padding: T20UI.allPadding,
+            child: Labels('Ameaças'),
+          ),
         ),
-        AnimatedBuilder(
-          animation: _store,
-          builder: (_, __) {
-            final menaces = _store.menaces;
+        RepaintBoundary(
+          child: ListenableBuilder(
+            listenable: _store,
+            builder: (_, __) {
+              final menaces = _store.menaces;
 
-            if (menaces.isEmpty) {
-              return const Padding(
-                padding: EdgeInsets.only(
-                  bottom: T20UI.spaceSize,
-                  right: T20UI.screenContentSpaceSize,
-                  left: T20UI.screenContentSpaceSize,
+              if (menaces.isEmpty) {
+                return const Padding(
+                  padding: EdgeInsets.only(
+                    bottom: T20UI.spaceSize,
+                    right: T20UI.screenContentSpaceSize,
+                    left: T20UI.screenContentSpaceSize,
+                  ),
+                  child: ManaceScreenButton(),
+                );
+              }
+
+              return SizedBox(
+                height: 120 * context.realTextScale,
+                width: double.infinity,
+                child: ListView.separated(
+                  itemCount: menaces.length,
+                  padding: const EdgeInsets.only(
+                    bottom: T20UI.spaceSize,
+                    right: T20UI.screenContentSpaceSize,
+                    left: T20UI.screenContentSpaceSize,
+                  ),
+                  scrollDirection: Axis.horizontal,
+                  separatorBuilder: T20UI.separatorBuilderHorizontal,
+                  itemBuilder: (_, index) {
+                    return MenaceCard(
+                      menace: menaces[index],
+                      onTap: _onShowMenace,
+                    );
+                  },
                 ),
-                child: ManaceScreenButton(),
               );
-            }
-
-            return SizedBox(
-              height: 120 * context.realTextScale,
-              width: double.infinity,
-              child: ListView.separated(
-                itemCount: menaces.length,
-                padding: const EdgeInsets.only(
-                  bottom: T20UI.spaceSize,
-                  right: T20UI.screenContentSpaceSize,
-                  left: T20UI.screenContentSpaceSize,
-                ),
-                scrollDirection: Axis.horizontal,
-                separatorBuilder: T20UI.separatorBuilderHorizontal,
-                itemBuilder: (_, index) {
-                  return MenaceCard(
-                    menace: menaces[index],
-                    onTap: _onShowMenace,
-                  );
-                },
-              ),
-            );
-          },
+            },
+          ),
         ),
       ],
     );

@@ -23,46 +23,50 @@ class MagicsHeader extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              AnimatedBuilder(
-                animation: store,
-                builder: (_, __) => SimpleButton(
-                  icon: FontAwesomeIcons.sliders,
-                  backgroundColor: store.hasFilterAplied
-                      ? palette.selected
-                      : palette.background,
-                  iconColor: store.hasFilterAplied ? palette.icon : null,
-                  onTap: () async {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => MagicFilter(dto: store.toFilterDto()),
+              RepaintBoundary(
+                child: ListenableBuilder(
+                  listenable: store,
+                  builder: (_, __) => SimpleButton(
+                    icon: FontAwesomeIcons.sliders,
+                    backgroundColor: store.hasFilterAplied
+                        ? palette.selected
+                        : palette.background,
+                    iconColor: store.hasFilterAplied ? palette.icon : null,
+                    onTap: () async {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => MagicFilter(dto: store.toFilterDto()),
+                        ),
+                      ).then(
+                        (value) {
+                          if (value != null) {
+                            store.changeFilters(value);
+                          }
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
+              RepaintBoundary(
+                child: ListenableBuilder(
+                  listenable: store,
+                  builder: (_, __) {
+                    if (store.searchEnable) {
+                      return const SizedBox.shrink();
+                    }
+
+                    return Padding(
+                      padding: const EdgeInsets.only(left: T20UI.spaceSize),
+                      child: SimpleButton(
+                        icon: FontAwesomeIcons.magnifyingGlass,
+                        backgroundColor: palette.background,
+                        onTap: () => store.changeSearchEnable(true),
                       ),
-                    ).then(
-                      (value) {
-                        if (value != null) {
-                          store.changeFilters(value);
-                        }
-                      },
                     );
                   },
                 ),
-              ),
-              AnimatedBuilder(
-                animation: store,
-                builder: (_, __) {
-                  if (store.searchEnable) {
-                    return const SizedBox.shrink();
-                  }
-
-                  return Padding(
-                    padding: const EdgeInsets.only(left: T20UI.spaceSize),
-                    child: SimpleButton(
-                      icon: FontAwesomeIcons.magnifyingGlass,
-                      backgroundColor: palette.background,
-                      onTap: () => store.changeSearchEnable(true),
-                    ),
-                  );
-                },
               ),
             ],
           )

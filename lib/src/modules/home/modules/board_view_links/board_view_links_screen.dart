@@ -45,23 +45,22 @@ class _BoardViewLinksState extends State<BoardViewLinks> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _store,
-      builder: (_, __) {
-        final links = _store.links;
+    return Scaffold(
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const RepaintBoundary(child: ScreenHeader(label: 'Links')),
+          const Divider(),
+          Expanded(
+            child: RepaintBoundary(
+              child: ListenableBuilder(
+                  listenable: _store,
+                  builder: (_, __) {
+                    final links = _store.links;
 
-        links.sort((a, b) => a.title.compareTo(b.title));
-
-        return Scaffold(
-          body: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const ScreenHeader(label: 'Links'),
-              const Divider(),
-              Expanded(
-                child: links.isEmpty
-                    ? const Center(
+                    if (links.isEmpty) {
+                      return const Center(
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -75,37 +74,42 @@ class _BoardViewLinksState extends State<BoardViewLinks> {
                             ),
                           ],
                         ),
-                      )
-                    : SingleChildScrollView(
-                        padding: EdgeInsets.only(
-                          left: T20UI.screenContentSpaceSize,
-                          right: T20UI.screenContentSpaceSize,
-                          bottom: T20UI.spaceSize +
-                              MediaQuery.of(context).padding.bottom,
-                          top: T20UI.spaceSize,
-                        ),
-                        child: Column(
-                          children: [
-                            ...links.map(
-                              (link) => BoardViewLinksCard(
-                                link,
-                                onDelete: _store.deleteLink,
-                                onSelected: _addEditSite,
-                              ),
-                            ),
-                            T20UI.safeAreaBottom(context, additionalHeight: 40)
-                          ],
-                        ),
+                      );
+                    }
+
+                    links.sort((a, b) => a.title.compareTo(b.title));
+                    return SingleChildScrollView(
+                      padding: EdgeInsets.only(
+                        left: T20UI.screenContentSpaceSize,
+                        right: T20UI.screenContentSpaceSize,
+                        bottom: T20UI.spaceSize +
+                            MediaQuery.of(context).padding.bottom,
+                        top: T20UI.spaceSize,
                       ),
-              ),
-              ScreenSaveMainButtons(
-                label: 'Adicionar link',
-                onSave: () => _addEditSite(null),
-              )
-            ],
+                      child: Column(
+                        children: [
+                          ...links.map(
+                            (link) => BoardViewLinksCard(
+                              link,
+                              onDelete: _store.deleteLink,
+                              onSelected: _addEditSite,
+                            ),
+                          ),
+                          T20UI.safeAreaBottom(context, additionalHeight: 40)
+                        ],
+                      ),
+                    );
+                  }),
+            ),
           ),
-        );
-      },
+          RepaintBoundary(
+            child: ScreenSaveMainButtons(
+              label: 'Adicionar link',
+              onSave: () => _addEditSite(null),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

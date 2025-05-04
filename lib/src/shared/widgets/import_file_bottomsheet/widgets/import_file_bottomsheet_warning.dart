@@ -9,8 +9,8 @@ class ImportFileBottomsheetWarning extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: store,
+    return ListenableBuilder(
+      listenable: store,
       builder: (_, __) {
         final isValid = store.isValid;
         final hasErrorImport = store.hasErrorImport;

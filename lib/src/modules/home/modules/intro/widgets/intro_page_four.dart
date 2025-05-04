@@ -1,10 +1,10 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/modules/home/modules/intro/widgets/intro_page_text_animated.dart';
 import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 
 class IntroPageFour extends StatefulWidget {
@@ -125,27 +125,12 @@ class _IntroPageFourState extends State<IntroPageFour> {
                             ),
                           const SizedBox(height: 4),
                           if (stage > 2)
-                            AnimationConfiguration.synchronized(
+                            const AnimationConfiguration.synchronized(
                               duration: T20UI.defaultDurationAnimation,
                               child: FadeInAnimation(
-                                child: AnimatedTextKit(
-                                  animatedTexts: [
-                                    TypewriterAnimatedText(
-                                      'Sou o desenvolvedor dessa aplicação, se quiser trocar uma ideia ou dar agluma dica sobre o projeto pode conferir minhas redes sociais na sessão de "Sobre"',
-                                      textStyle: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                      cursor: ' 🎲',
-                                      textAlign: TextAlign.center,
-                                      speed: const Duration(milliseconds: 85),
-                                    ),
-                                  ],
-                                  repeatForever: false,
-                                  isRepeatingAnimation: false,
-                                  displayFullTextOnTap: false,
-                                  stopPauseOnTap: true,
-                                ),
+                                child: IntroPageTextAnimated(
+                                    text:
+                                        'Sou o desenvolvedor dessa aplicação, se quiser trocar uma ideia ou dar agluma dica sobre o projeto pode conferir minhas redes sociais na sessão de "Sobre"'),
                               ),
                             ),
                         ],
@@ -187,27 +172,12 @@ class _IntroPageFourState extends State<IntroPageFour> {
                             ),
                           const SizedBox(height: 4),
                           if (stage > 5)
-                            AnimationConfiguration.synchronized(
+                            const AnimationConfiguration.synchronized(
                               duration: T20UI.defaultDurationAnimation,
                               child: FadeInAnimation(
-                                child: AnimatedTextKit(
-                                  animatedTexts: [
-                                    TypewriterAnimatedText(
-                                      'O produto Tormenta20 e os conteúdos (exceto alguns descriminados na sessão de "Sobre") utilizados nesse projeto, pertencem a Jambô editora e tem os direitos reservados a mesma.',
-                                      textStyle: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                      cursor: ' 🎲',
-                                      textAlign: TextAlign.center,
-                                      speed: const Duration(milliseconds: 85),
-                                    ),
-                                  ],
-                                  repeatForever: false,
-                                  isRepeatingAnimation: false,
-                                  displayFullTextOnTap: false,
-                                  stopPauseOnTap: true,
-                                ),
+                                child: IntroPageTextAnimated(
+                                    text:
+                                        'O produto Tormenta20 e os conteúdos (exceto alguns descriminados na sessão de "Sobre") utilizados nesse projeto, pertencem a Jambô editora e tem os direitos reservados a mesma.'),
                               ),
                             ),
                         ],

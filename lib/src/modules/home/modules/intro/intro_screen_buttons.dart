@@ -83,73 +83,80 @@ class _IntroScreenButtonsState extends State<IntroScreenButtons> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          ValueListenableBuilder(
-            valueListenable: _enableBackButon,
-            builder: (_, isEnable, __) {
-              return TextButton(
-                onPressed: !isEnable
-                    ? null
-                    : () {
-                        final currentPage = widget.pageController.page ?? 0;
-                        if (currentPage > 0) {
-                          widget.pageController.animateToPage(
-                              (currentPage - 1).toInt(),
-                              duration: const Duration(seconds: 1),
-                              curve: Curves.bounceOut);
-                        }
-                      },
-                child: Text(
-                  'Voltar',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                      color:
-                          !isEnable ? Colors.transparent : palette.textDisable),
-                ),
-              );
-            },
-          ),
-          AnimationConfiguration.synchronized(
-            duration: T20UI.defaultDurationAnimation,
-            child: ScaleAnimation(
-              child: SizedBox(
-                height: T20UI.inputHeight + 12,
-                width: T20UI.inputHeight + 12,
-                child: Card(
-                  color: palette.selected,
-                  shape: const CircleBorder(),
-                  child: InkWell(
-                      borderRadius: BorderRadius.circular(2000),
-                      onTap: () async {
-                        final currentPage = widget.pageController.page ?? 0;
-                        if (currentPage < 3) {
-                          widget.pageController.animateToPage(
-                              (currentPage + 1).toInt(),
-                              duration: const Duration(seconds: 2),
-                              curve: Curves.bounceOut);
-                        } else {
-                          if (widget.fromSplash) {
-                            await _toHome();
-                          } else {
-                            Navigator.pop(context);
+          RepaintBoundary(
+            child: ValueListenableBuilder(
+              valueListenable: _enableBackButon,
+              builder: (_, isEnable, __) {
+                return TextButton(
+                  onPressed: !isEnable
+                      ? null
+                      : () {
+                          final currentPage = widget.pageController.page ?? 0;
+                          if (currentPage > 0) {
+                            widget.pageController.animateToPage(
+                                (currentPage - 1).toInt(),
+                                duration: const Duration(seconds: 1),
+                                curve: Curves.bounceOut);
                           }
-                        }
-                      },
-                      child: const Icon(FontAwesomeIcons.arrowRight)),
+                        },
+                  child: Text(
+                    'Voltar',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        color: !isEnable
+                            ? Colors.transparent
+                            : palette.textDisable),
+                  ),
+                );
+              },
+            ),
+          ),
+          RepaintBoundary(
+            child: AnimationConfiguration.synchronized(
+              duration: T20UI.defaultDurationAnimation,
+              child: ScaleAnimation(
+                child: SizedBox(
+                  height: T20UI.inputHeight + 12,
+                  width: T20UI.inputHeight + 12,
+                  child: Card(
+                    color: palette.selected,
+                    shape: const CircleBorder(),
+                    child: InkWell(
+                        borderRadius: BorderRadius.circular(2000),
+                        onTap: () async {
+                          final currentPage = widget.pageController.page ?? 0;
+                          if (currentPage < 3) {
+                            widget.pageController.animateToPage(
+                                (currentPage + 1).toInt(),
+                                duration: const Duration(seconds: 2),
+                                curve: Curves.bounceOut);
+                          } else {
+                            if (widget.fromSplash) {
+                              await _toHome();
+                            } else {
+                              Navigator.pop(context);
+                            }
+                          }
+                        },
+                        child: const Icon(FontAwesomeIcons.arrowRight)),
+                  ),
                 ),
               ),
             ),
           ),
-          TextButton(
-            onPressed: widget.fromSplash
-                ? () async => await _toHome()
-                : () => Navigator.pop(context),
-            child: Text(
-              widget.fromSplash ? 'Pular' : 'Fechar',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                color: palette.textDisable,
-                fontSize: 16,
+          RepaintBoundary(
+            child: TextButton(
+              onPressed: widget.fromSplash
+                  ? () async => await _toHome()
+                  : () => Navigator.pop(context),
+              child: Text(
+                widget.fromSplash ? 'Pular' : 'Fechar',
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  color: palette.textDisable,
+                  fontSize: 16,
+                ),
               ),
             ),
           ),

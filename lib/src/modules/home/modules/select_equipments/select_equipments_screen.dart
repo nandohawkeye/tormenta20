@@ -41,42 +41,46 @@ class _SelectEquipmentsScreenState extends State<SelectEquipmentsScreen> {
     return ScreenBase(
       label: 'Selecione o equipamento',
       body: widget.equipaments.isEmpty
-          ? Padding(
-              padding: EdgeInsets.only(top: context.height / 3),
-              child: const Center(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(FontAwesomeIcons.ghost),
-                    SizedBox(width: T20UI.smallSpaceSize),
-                    Text(
-                      'Nenhum equipamento',
-                      style: TextStyle(
-                        fontSize: 16,
+          ? RepaintBoundary(
+              child: Padding(
+                padding: EdgeInsets.only(top: context.height / 3),
+                child: const Center(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(FontAwesomeIcons.ghost),
+                      SizedBox(width: T20UI.smallSpaceSize),
+                      Text(
+                        'Nenhum equipamento',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             )
-          : Padding(
-              padding: T20UI.horizontallScreenPadding,
-              child: ValueListenableBuilder(
-                valueListenable: _selected,
-                builder: (_, selected, __) {
-                  return Column(
-                    children: [
-                      T20UI.spaceHeight,
-                      ...widget.equipaments.map(
-                        (equipment) => SelectEquipmentsCard(
-                          equipment: equipment,
-                          selected: selected,
-                          onTap: _onChange,
-                        ),
-                      )
-                    ],
-                  );
-                },
+          : RepaintBoundary(
+              child: Padding(
+                padding: T20UI.horizontallScreenPadding,
+                child: ValueListenableBuilder(
+                  valueListenable: _selected,
+                  builder: (_, selected, __) {
+                    return Column(
+                      children: [
+                        T20UI.spaceHeight,
+                        ...widget.equipaments.map(
+                          (equipment) => SelectEquipmentsCard(
+                            equipment: equipment,
+                            selected: selected,
+                            onTap: _onChange,
+                          ),
+                        )
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
       onSaveLabel: 'Confirmar',

@@ -69,48 +69,51 @@ class _BottomSheetBoardShortcutFieldState
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: T20UI.horizontalPadding,
-          child: Row(
-            children: [
-              Expanded(
-                child: TextFormField(
-                  onChanged: _setUrl,
-                  initialValue: widget.initialValue,
-                  style: const TextStyle(fontSize: 16),
-                  textInputAction: TextInputAction.next,
-                  keyboardType: TextInputType.name,
-                  textCapitalization: TextCapitalization.none,
-                  decoration: InputDecoration(
-                    labelText: BoardShortcutsUtils.handleLabel(widget.type),
-                    fillColor: palette.backgroundLevelOne,
-                    suffixIcon: AnimatedBuilder(
-                      animation: Listenable.merge([_url, _animation]),
-                      builder: (_, __) {
-                        return widget.type == BoardShortcutsType.whats
-                            ? WhatsappSvgIcon(
-                                color: _animation.value ?? palette.textPrimary,
-                              )
-                            : Icon(
-                                BoardShortcutsUtils.handleIcon(
-                                    widget.type, _url.value ?? ''),
-                                size: T20UI.iconSize,
-                                color: _animation.value,
-                              );
-                      },
+    return RepaintBoundary(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: T20UI.horizontalPadding,
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    onChanged: _setUrl,
+                    initialValue: widget.initialValue,
+                    style: const TextStyle(fontSize: 16),
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.name,
+                    textCapitalization: TextCapitalization.none,
+                    decoration: InputDecoration(
+                      labelText: BoardShortcutsUtils.handleLabel(widget.type),
+                      fillColor: palette.backgroundLevelOne,
+                      suffixIcon: ListenableBuilder(
+                        listenable: Listenable.merge([_url, _animation]),
+                        builder: (_, __) {
+                          return widget.type == BoardShortcutsType.whats
+                              ? WhatsappSvgIcon(
+                                  color:
+                                      _animation.value ?? palette.textPrimary,
+                                )
+                              : Icon(
+                                  BoardShortcutsUtils.handleIcon(
+                                      widget.type, _url.value ?? ''),
+                                  size: T20UI.iconSize,
+                                  color: _animation.value,
+                                );
+                        },
+                      ),
+                      helperText: widget.helperText,
                     ),
-                    helperText: widget.helperText,
                   ),
                 ),
-              ),
-            ],
-          ),
-        )
-      ],
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }

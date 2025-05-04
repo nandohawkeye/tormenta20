@@ -52,14 +52,16 @@ class _SelectorCheckableState extends State<SelectorCheckable> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(widget.label),
-                ValueListenableBuilder(
-                  valueListenable: _checked,
-                  builder: (_, checked, __) {
-                    return CustomChecked(
-                      value: checked,
-                      isEnabledToTap: false,
-                    );
-                  },
+                RepaintBoundary(
+                  child: ValueListenableBuilder(
+                    valueListenable: _checked,
+                    builder: (_, checked, __) {
+                      return CustomChecked(
+                        value: checked,
+                        isEnabledToTap: false,
+                      );
+                    },
+                  ),
                 )
               ],
             ),

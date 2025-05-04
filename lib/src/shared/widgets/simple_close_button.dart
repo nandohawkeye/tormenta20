@@ -32,41 +32,43 @@ class _SimpleCloseButtonState extends State<SimpleCloseButton> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _store,
-      builder: (_, __) {
-        final isEnable = _store.config?.enableBottomBackButton ?? false;
+    return RepaintBoundary(
+      child: ListenableBuilder(
+        listenable: _store,
+        builder: (_, __) {
+          final isEnable = _store.config?.enableBottomBackButton ?? false;
 
-        if (!isEnable && !widget.isObrigatory) {
-          return const SizedBox.shrink();
-        }
+          if (!isEnable && !widget.isObrigatory) {
+            return const SizedBox.shrink();
+          }
 
-        return Padding(
-          padding: const EdgeInsets.only(left: T20UI.spaceSize),
-          child: SizedBox(
-            height: T20UI.inputHeight,
-            width: T20UI.inputHeight,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: T20UI.borderRadius,
-                color: widget.backgroundColor ?? palette.backgroundLevelOne,
-              ),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
+          return Padding(
+            padding: const EdgeInsets.only(left: T20UI.spaceSize),
+            child: SizedBox(
+              height: T20UI.inputHeight,
+              width: T20UI.inputHeight,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
                   borderRadius: T20UI.borderRadius,
-                  splashColor: palette.accent.withValues(alpha: .4),
-                  onTap: widget.onTap ?? () => Navigator.pop(context),
-                  child: Icon(
-                    FontAwesomeIcons.chevronLeft,
-                    color: palette.icon,
+                  color: widget.backgroundColor ?? palette.backgroundLevelOne,
+                ),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    borderRadius: T20UI.borderRadius,
+                    splashColor: palette.accent.withValues(alpha: .4),
+                    onTap: widget.onTap ?? () => Navigator.pop(context),
+                    child: Icon(
+                      FontAwesomeIcons.chevronLeft,
+                      color: palette.icon,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

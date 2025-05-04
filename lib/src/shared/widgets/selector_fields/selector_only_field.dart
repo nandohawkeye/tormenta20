@@ -45,64 +45,68 @@ class SelectorOnlyField<T> extends StatelessWidget {
           height: (95),
           child: Stack(
             children: [
-              AnimatedBuilder(
-                animation: store,
-                builder: (_, __) {
-                  final hasError = store.hasError;
-                  return SelectorFieldBody(
-                    label: label,
-                    backgroundColor: bodyColor,
-                    hasError: hasError,
-                  );
-                },
+              RepaintBoundary(
+                child: ListenableBuilder(
+                  listenable: store,
+                  builder: (_, __) {
+                    final hasError = store.hasError;
+                    return SelectorFieldBody(
+                      label: label,
+                      backgroundColor: bodyColor,
+                      hasError: hasError,
+                    );
+                  },
+                ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: SizedBox(
-                    height: T20UI.inputHeight,
-                    width: double.infinity,
-                    child: AnimatedBuilder(
-                      animation: store,
-                      builder: (_, __) {
-                        final selected = store.data;
+              RepaintBoundary(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: SizedBox(
+                      height: T20UI.inputHeight,
+                      width: double.infinity,
+                      child: ListenableBuilder(
+                        listenable: store,
+                        builder: (_, __) {
+                          final selected = store.data;
 
-                        return ListView.separated(
-                          shrinkWrap: true,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: T20UI.screenContentSpaceSize +
-                                T20UI.smallSpaceSize,
-                          ),
-                          scrollDirection: Axis.horizontal,
-                          separatorBuilder: T20UI.separatorBuilderHorizontal,
-                          itemCount: itens.length + (hasRemoveAll ? 1 : 0),
-                          itemBuilder: (_, index) {
-                            if (hasRemoveAll && index == 0) {
-                              return SelectorSecundarySimpleButton(
-                                icon: FontAwesomeIcons.xmark,
-                                onTap: () {
-                                  if (onChange != null) {
-                                    onChange!(null);
-                                  } else {
-                                    store.onChange(null);
-                                  }
-                                },
+                          return ListView.separated(
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: T20UI.screenContentSpaceSize +
+                                  T20UI.smallSpaceSize,
+                            ),
+                            scrollDirection: Axis.horizontal,
+                            separatorBuilder: T20UI.separatorBuilderHorizontal,
+                            itemCount: itens.length + (hasRemoveAll ? 1 : 0),
+                            itemBuilder: (_, index) {
+                              if (hasRemoveAll && index == 0) {
+                                return SelectorSecundarySimpleButton(
+                                  icon: FontAwesomeIcons.xmark,
+                                  onTap: () {
+                                    if (onChange != null) {
+                                      onChange!(null);
+                                    } else {
+                                      store.onChange(null);
+                                    }
+                                  },
+                                );
+                              }
+
+                              return SelectorOnlyCard<T>(
+                                handleTitle: handleTitle,
+                                type: itens[index - (hasRemoveAll ? 1 : 0)],
+                                selected: selected,
+                                onTap: !isEnableChange
+                                    ? (_) {}
+                                    : onChange ?? store.onChange,
+                                backgroundColor: cardColor,
                               );
-                            }
-
-                            return SelectorOnlyCard<T>(
-                              handleTitle: handleTitle,
-                              type: itens[index - (hasRemoveAll ? 1 : 0)],
-                              selected: selected,
-                              onTap: !isEnableChange
-                                  ? (_) {}
-                                  : onChange ?? store.onChange,
-                              backgroundColor: cardColor,
-                            );
-                          },
-                        );
-                      },
+                            },
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
@@ -110,16 +114,18 @@ class SelectorOnlyField<T> extends StatelessWidget {
             ],
           ),
         ),
-        AnimatedBuilder(
-          animation: store,
-          builder: (_, __) {
-            final hasError = store.hasError;
-            return WarningWidget(
-              hasError: hasError,
-              isObrigatory: isObrigatory,
-              helpText: helpText,
-            );
-          },
+        RepaintBoundary(
+          child: ListenableBuilder(
+            listenable: store,
+            builder: (_, __) {
+              final hasError = store.hasError;
+              return WarningWidget(
+                hasError: hasError,
+                isObrigatory: isObrigatory,
+                helpText: helpText,
+              );
+            },
+          ),
         )
       ],
     );

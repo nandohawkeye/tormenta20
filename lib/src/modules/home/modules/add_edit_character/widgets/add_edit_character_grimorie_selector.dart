@@ -60,89 +60,81 @@ class _AddEditBoardPlayerBroodSelectorState
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: T20UI.screenContentSpaceSize,
-              ),
-              child: SizedBox(
-                width: double.infinity,
-                child: AnimatedContainer(
-                  duration: T20UI.defaultDurationAnimation,
-                  decoration: BoxDecoration(
-                    borderRadius: T20UI.borderRadius,
-                    color: palette.backgroundLevelOne,
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: T20UI.screenContentSpaceSize,
+      ),
+      child: SizedBox(
+        width: double.infinity,
+        child: AnimatedContainer(
+          duration: T20UI.defaultDurationAnimation,
+          decoration: BoxDecoration(
+            borderRadius: T20UI.borderRadius,
+            color: palette.backgroundLevelOne,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const RepaintBoundary(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    top: T20UI.smallSpaceSize,
+                    left: T20UI.screenContentSpaceSize - 6,
+                    bottom: T20UI.smallSpaceSize,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.only(
-                          top: T20UI.smallSpaceSize,
-                          left: T20UI.screenContentSpaceSize - 6,
-                          bottom: T20UI.smallSpaceSize,
-                        ),
-                        child: Text('Grimório'),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                                horizontal: T20UI.smallSpaceSize)
-                            .copyWith(
-                          bottom: T20UI.smallSpaceSize,
-                        ),
-                        child: ValueListenableBuilder(
-                          valueListenable: _selected,
-                          builder: (_, selected, __) {
-                            return SizedBox(
-                              height: T20UI.inputHeight,
-                              width: double.infinity,
-                              child: Row(
-                                children: [
-                                  if (selected != null)
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                        right: T20UI.smallSpaceSize,
-                                      ),
-                                      child: SimpleButton(
-                                        icon: FontAwesomeIcons.solidTrashCan,
-                                        backgroundColor:
-                                            palette.backgroundLevelTwo,
-                                        iconColor: palette.accent,
-                                        onTap: () => _onChange(null),
-                                      ),
-                                    ),
-                                  Expanded(
-                                    child: MainButton(
-                                      label: selected == null
-                                          ? 'Selecionar'
-                                          : selected.name,
-                                      fontFamily: selected == null
-                                          ? FontFamily.tormenta
-                                          : null,
-                                      backgroundColor:
-                                          palette.backgroundLevelTwo,
-                                      onTap: () => _onAdd(selected),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                      )
-                    ],
-                  ),
+                  child: Text('Grimório'),
                 ),
               ),
-            ),
-          ],
+              RepaintBoundary(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                          horizontal: T20UI.smallSpaceSize)
+                      .copyWith(
+                    bottom: T20UI.smallSpaceSize,
+                  ),
+                  child: ValueListenableBuilder(
+                    valueListenable: _selected,
+                    builder: (_, selected, __) {
+                      return SizedBox(
+                        height: T20UI.inputHeight,
+                        width: double.infinity,
+                        child: Row(
+                          children: [
+                            if (selected != null)
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  right: T20UI.smallSpaceSize,
+                                ),
+                                child: SimpleButton(
+                                  icon: FontAwesomeIcons.solidTrashCan,
+                                  backgroundColor: palette.backgroundLevelTwo,
+                                  iconColor: palette.accent,
+                                  onTap: () => _onChange(null),
+                                ),
+                              ),
+                            Expanded(
+                              child: MainButton(
+                                label: selected == null
+                                    ? 'Selecionar'
+                                    : selected.name,
+                                fontFamily: selected == null
+                                    ? FontFamily.tormenta
+                                    : null,
+                                backgroundColor: palette.backgroundLevelTwo,
+                                onTap: () => _onAdd(selected),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
-      ],
+      ),
     );
   }
 }

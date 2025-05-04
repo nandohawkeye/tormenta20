@@ -44,44 +44,50 @@ class _AddMagicsScreenState extends State<AddMagicsScreen> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ScreenHeader(
-              label:
-                  'Selecione ${widget.multiSelect ? 'as magias' : 'a magia'}'),
+          RepaintBoundary(
+            child: ScreenHeader(
+                label:
+                    'Selecione ${widget.multiSelect ? 'as magias' : 'a magia'}'),
+          ),
           const Divider(),
           Expanded(
-            child: AnimatedBuilder(
-              animation: _store,
-              builder: (_, __) => _store.magics.isEmpty
-                  ? const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(FontAwesomeIcons.ghost),
-                        T20UI.smallSpaceWidth,
-                        Text(
-                          'Nenhuma magia disponível',
-                          style: TextStyle(fontSize: 16),
+            child: RepaintBoundary(
+              child: ListenableBuilder(
+                listenable: _store,
+                builder: (_, __) => _store.magics.isEmpty
+                    ? const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(FontAwesomeIcons.ghost),
+                          T20UI.smallSpaceWidth,
+                          Text(
+                            'Nenhuma magia disponível',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      )
+                    : ListView.separated(
+                        padding: T20UI.allPadding,
+                        shrinkWrap: true,
+                        itemCount: _store.magics.length,
+                        separatorBuilder: T20UI.separatorBuilderVertical,
+                        itemBuilder: (_, index) => AddMagicsCard(
+                          magic: _store.magics[index],
+                          searchFilter: _store.searchFilter,
+                          disabledMagics: _store.disabledMagics,
+                          selectedMagics: _store.selectedMagics,
+                          multiSelect: widget.multiSelect,
+                          onTap: _store.onSelectMagic,
                         ),
-                      ],
-                    )
-                  : ListView.separated(
-                      padding: T20UI.allPadding,
-                      shrinkWrap: true,
-                      itemCount: _store.magics.length,
-                      separatorBuilder: T20UI.separatorBuilderVertical,
-                      itemBuilder: (_, index) => AddMagicsCard(
-                        magic: _store.magics[index],
-                        searchFilter: _store.searchFilter,
-                        disabledMagics: _store.disabledMagics,
-                        selectedMagics: _store.selectedMagics,
-                        multiSelect: widget.multiSelect,
-                        onTap: _store.onSelectMagic,
                       ),
-                    ),
+              ),
             ),
           ),
-          AddMagicScreenBottomWidgets(
-            _store,
-            multiSelect: widget.multiSelect,
+          RepaintBoundary(
+            child: AddMagicScreenBottomWidgets(
+              _store,
+              multiSelect: widget.multiSelect,
+            ),
           )
         ],
       ),

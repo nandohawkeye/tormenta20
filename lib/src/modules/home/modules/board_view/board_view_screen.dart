@@ -41,8 +41,8 @@ class _BoardViewScreenState extends State<BoardViewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _store,
+    return ListenableBuilder(
+      listenable: _store,
       builder: (_, __) {
         final board = _store.board;
         final menaces = board.menaces;

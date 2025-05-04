@@ -71,8 +71,8 @@ class AddMagicScreenBottomWidgets extends StatelessWidget {
                           },
                         );
                       },
-                      child: AnimatedBuilder(
-                        animation: store,
+                      child: ListenableBuilder(
+                        listenable: store,
                         builder: (_, __) => Icon(
                           FontAwesomeIcons.sliders,
                           color: store.hasFilterAplied
@@ -87,15 +87,17 @@ class AddMagicScreenBottomWidgets extends StatelessWidget {
             ],
           ),
         ),
-        AnimatedBuilder(
-          animation: store,
-          builder: (_, __) {
-            final selecteds = store.circlesSelecteds;
-            return MagicCirclesSelector(
-              selecteds: selecteds,
-              onChangeCircleSelected: store.onChangeCircleSelected,
-            );
-          },
+        RepaintBoundary(
+          child: ListenableBuilder(
+            listenable: store,
+            builder: (_, __) {
+              final selecteds = store.circlesSelecteds;
+              return MagicCirclesSelector(
+                selecteds: selecteds,
+                onChangeCircleSelected: store.onChangeCircleSelected,
+              );
+            },
+          ),
         ),
         T20UI.spaceHeight,
         const Divider(),

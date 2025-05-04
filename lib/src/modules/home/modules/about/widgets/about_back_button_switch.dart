@@ -23,45 +23,47 @@ class _AboutBackButtonSwitchState extends State<AboutBackButtonSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: AnimatedBuilder(
-        animation: _store,
-        builder: (_, __) {
-          final isEnable = _store.config?.enableBottomBackButton ?? false;
-          return Card(
-            child: InkWell(
-              borderRadius: T20UI.borderRadius,
-              onTap: () => _store.changeEnableBackButton(!isEnable),
-              child: Padding(
-                padding: T20UI.allPadding,
-                child: Row(
-                  children: [
-                    const Flexible(
-                      child: Text(
-                        'Habilite ou desabilite o botão de voltar na parte inferior do aplicativo, defina para uma melhor experiência no seu dispositivo',
-                        maxLines: 5,
-                      ),
-                    ),
-                    T20UI.spaceWidth,
-                    Theme(
-                      data: Theme.of(context).copyWith(useMaterial3: true),
-                      child: IgnorePointer(
-                        child: Switch(
-                          value: isEnable,
-                          activeColor: palette.accent,
-                          activeTrackColor: palette.background,
-                          inactiveThumbColor: palette.backgroundLevelOne,
-                          onChanged: (_) {},
+    return RepaintBoundary(
+      child: SizedBox(
+        width: double.infinity,
+        child: ListenableBuilder(
+          listenable: _store,
+          builder: (_, __) {
+            final isEnable = _store.config?.enableBottomBackButton ?? false;
+            return Card(
+              child: InkWell(
+                borderRadius: T20UI.borderRadius,
+                onTap: () => _store.changeEnableBackButton(!isEnable),
+                child: Padding(
+                  padding: T20UI.allPadding,
+                  child: Row(
+                    children: [
+                      const Flexible(
+                        child: Text(
+                          'Habilite ou desabilite o botão de voltar na parte inferior do aplicativo, defina para uma melhor experiência no seu dispositivo',
+                          maxLines: 5,
                         ),
                       ),
-                    ),
-                  ],
+                      T20UI.spaceWidth,
+                      Theme(
+                        data: Theme.of(context).copyWith(useMaterial3: true),
+                        child: IgnorePointer(
+                          child: Switch(
+                            value: isEnable,
+                            activeColor: palette.accent,
+                            activeTrackColor: palette.background,
+                            inactiveThumbColor: palette.backgroundLevelOne,
+                            onChanged: (_) {},
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

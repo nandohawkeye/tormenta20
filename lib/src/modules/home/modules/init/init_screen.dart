@@ -1,7 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_board/add_edit_board_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_character/add_edit_character.dart';
@@ -70,28 +72,35 @@ class InitScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      floatingActionButton: SimpleButton(
-        icon: FontAwesomeIcons.plus,
-        backgroundColor: palette.selected,
-        iconColor: palette.onSelected,
-        onTap: () async {
-          await BottomsheetUtils.show<InitAddOptions?>(
-            context: context,
-            child: const InitAddOptionsBottomsheet(),
-          ).then((result) {
-            if (result == InitAddOptions.board) {
-              callBoard();
-            }
+      floatingActionButton: RepaintBoundary(
+        child: AnimationConfiguration.synchronized(
+          duration: T20UI.defaultDurationAnimation,
+          child: FadeInAnimation(
+            child: SimpleButton(
+              icon: FontAwesomeIcons.plus,
+              backgroundColor: palette.selected,
+              iconColor: palette.onSelected,
+              onTap: () async {
+                await BottomsheetUtils.show<InitAddOptions?>(
+                  context: context,
+                  child: const InitAddOptionsBottomsheet(),
+                ).then((result) {
+                  if (result == InitAddOptions.board) {
+                    callBoard();
+                  }
 
-            if (result == InitAddOptions.menace) {
-              callMenace();
-            }
+                  if (result == InitAddOptions.menace) {
+                    callMenace();
+                  }
 
-            if (result == InitAddOptions.character) {
-              callCharacter();
-            }
-          });
-        },
+                  if (result == InitAddOptions.character) {
+                    callCharacter();
+                  }
+                });
+              },
+            ),
+          ),
+        ),
       ),
       body: const SingleChildScrollView(
         child: Column(

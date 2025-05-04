@@ -59,31 +59,37 @@ class _IncrementDecremetInputState extends State<IncrementDecremetInput> {
               child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Card(
-                child: InkWell(
-                  borderRadius: T20UI.borderRadius,
-                  onTap: _decrement,
-                  child: const SizedBox(
-                    height: T20UI.inputHeight,
-                    width: T20UI.inputHeight,
-                    child: Icon(FontAwesomeIcons.minus),
+              RepaintBoundary(
+                child: Card(
+                  child: InkWell(
+                    borderRadius: T20UI.borderRadius,
+                    onTap: _decrement,
+                    child: const SizedBox(
+                      height: T20UI.inputHeight,
+                      width: T20UI.inputHeight,
+                      child: Icon(FontAwesomeIcons.minus),
+                    ),
                   ),
                 ),
               ),
-              ValueListenableBuilder(
-                valueListenable: _valueNotifier,
-                builder: (_, value, __) {
-                  return AnimatedVerticalCountText(value);
-                },
+              RepaintBoundary(
+                child: ValueListenableBuilder(
+                  valueListenable: _valueNotifier,
+                  builder: (_, value, __) {
+                    return AnimatedVerticalCountText(value);
+                  },
+                ),
               ),
-              Card(
-                child: InkWell(
-                  borderRadius: T20UI.borderRadius,
-                  onTap: _increment,
-                  child: const SizedBox(
-                    height: T20UI.inputHeight,
-                    width: T20UI.inputHeight,
-                    child: Icon(FontAwesomeIcons.plus),
+              RepaintBoundary(
+                child: Card(
+                  child: InkWell(
+                    borderRadius: T20UI.borderRadius,
+                    onTap: _increment,
+                    child: const SizedBox(
+                      height: T20UI.inputHeight,
+                      width: T20UI.inputHeight,
+                      child: Icon(FontAwesomeIcons.plus),
+                    ),
                   ),
                 ),
               ),

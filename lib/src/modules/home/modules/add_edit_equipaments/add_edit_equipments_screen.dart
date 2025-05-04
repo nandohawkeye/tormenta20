@@ -65,42 +65,46 @@ class _AddEditActionScreenState extends State<AddEditEquipmentsScreen> {
     return ScreenBase(
       scrollController: _scrollController,
       label: '${widget.equipament != null ? 'Editando ' : ''}Equipamento',
-      body: Form(
-        key: _formKey,
-        child: AnimatedBuilder(
-          animation: _controller.typeStore,
-          builder: (_, __) {
-            final type = _controller.typeStore.data;
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                T20UI.spaceHeight,
-                AddEditEquipmentScreenItem(
-                  hasInited: false,
-                  child: AddEditEquipamentType(
-                    _controller.typeStore,
-                    isEnableToChange: widget.equipament == null,
-                    onChange: _controller.onChangeType,
+      body: RepaintBoundary(
+        child: Form(
+          key: _formKey,
+          child: ListenableBuilder(
+            listenable: _controller.typeStore,
+            builder: (_, __) {
+              final type = _controller.typeStore.data;
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  T20UI.spaceHeight,
+                  AddEditEquipmentScreenItem(
+                    hasInited: false,
+                    child: AddEditEquipamentType(
+                      _controller.typeStore,
+                      isEnableToChange: widget.equipament == null,
+                      onChange: _controller.onChangeType,
+                    ),
                   ),
-                ),
-                if (type == Weapon) WeaponWidgetsGroup(_controller, _hasInited),
-                if (type == Armor) ArmorWidgetsGroup(_controller, _hasInited),
-                if (type == Shield) ShieldWidgetsGroup(_controller, _hasInited),
-                if (type == Ammunition)
-                  AmmunitionWidgetsGroup(_controller, _hasInited),
-                if (type == GeneralItem)
-                  GeneralItemWidgetsGroup(_controller, _hasInited),
-                if (type == Saddlebag)
-                  SaddbackWidgetsGroup(_controller, _hasInited),
-                if (type == Backpack)
-                  BackpackWidgetsGroup(_controller, _hasInited),
-                if (type == AdventureBackpack)
-                  AdventureBackpackWidgetsGroup(_controller, _hasInited),
-              ],
-            );
-          },
+                  if (type == Weapon)
+                    WeaponWidgetsGroup(_controller, _hasInited),
+                  if (type == Armor) ArmorWidgetsGroup(_controller, _hasInited),
+                  if (type == Shield)
+                    ShieldWidgetsGroup(_controller, _hasInited),
+                  if (type == Ammunition)
+                    AmmunitionWidgetsGroup(_controller, _hasInited),
+                  if (type == GeneralItem)
+                    GeneralItemWidgetsGroup(_controller, _hasInited),
+                  if (type == Saddlebag)
+                    SaddbackWidgetsGroup(_controller, _hasInited),
+                  if (type == Backpack)
+                    BackpackWidgetsGroup(_controller, _hasInited),
+                  if (type == AdventureBackpack)
+                    AdventureBackpackWidgetsGroup(_controller, _hasInited),
+                ],
+              );
+            },
+          ),
         ),
       ),
       onSave: () {

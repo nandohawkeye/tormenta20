@@ -77,58 +77,62 @@ class _AddEditBoardShortcutsState extends State<AddEditBoardShortcuts> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: T20UI.horizontalPadding.copyWith(top: T20UI.spaceSize),
-          child: const Labels('Atalhos'),
+        RepaintBoundary(
+          child: Padding(
+            padding: T20UI.horizontalPadding.copyWith(top: T20UI.spaceSize),
+            child: const Labels('Atalhos'),
+          ),
         ),
         T20UI.spaceHeight,
-        ValueListenableBuilder(
-          valueListenable: _shortcuts,
-          builder: (_, shortcuts, __) {
-            if (shortcuts.isEmpty) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: T20UI.screenContentSpaceSize,
-                ),
-                child: MainButton(
-                  label: 'Adicionar atalhos',
-                  backgroundColor: palette.cardBackground,
-                  onTap: _onChangeShortcuts,
-                ),
-              );
-            }
+        RepaintBoundary(
+          child: ValueListenableBuilder(
+            valueListenable: _shortcuts,
+            builder: (_, shortcuts, __) {
+              if (shortcuts.isEmpty) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: T20UI.screenContentSpaceSize,
+                  ),
+                  child: MainButton(
+                    label: 'Adicionar atalhos',
+                    backgroundColor: palette.cardBackground,
+                    onTap: _onChangeShortcuts,
+                  ),
+                );
+              }
 
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (shortcuts.whatsLink != null)
-                  AddEditBoardShortcutCard(
-                    url: shortcuts.whatsLink!,
-                    type: BoardShortcutsType.whats,
-                    onTap: _onChangeShortcuts,
-                  ),
-                if (shortcuts.dicordLink != null)
-                  AddEditBoardShortcutCard(
-                    url: shortcuts.dicordLink!,
-                    type: BoardShortcutsType.discord,
-                    onTap: _onChangeShortcuts,
-                  ),
-                if (shortcuts.drivefilesLink != null)
-                  AddEditBoardShortcutCard(
-                    url: shortcuts.drivefilesLink!,
-                    type: BoardShortcutsType.drive,
-                    onTap: _onChangeShortcuts,
-                  ),
-                if (shortcuts.telegramLink != null)
-                  AddEditBoardShortcutCard(
-                    url: shortcuts.telegramLink!,
-                    type: BoardShortcutsType.telegran,
-                    onTap: _onChangeShortcuts,
-                  ),
-              ],
-            );
-          },
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (shortcuts.whatsLink != null)
+                    AddEditBoardShortcutCard(
+                      url: shortcuts.whatsLink!,
+                      type: BoardShortcutsType.whats,
+                      onTap: _onChangeShortcuts,
+                    ),
+                  if (shortcuts.dicordLink != null)
+                    AddEditBoardShortcutCard(
+                      url: shortcuts.dicordLink!,
+                      type: BoardShortcutsType.discord,
+                      onTap: _onChangeShortcuts,
+                    ),
+                  if (shortcuts.drivefilesLink != null)
+                    AddEditBoardShortcutCard(
+                      url: shortcuts.drivefilesLink!,
+                      type: BoardShortcutsType.drive,
+                      onTap: _onChangeShortcuts,
+                    ),
+                  if (shortcuts.telegramLink != null)
+                    AddEditBoardShortcutCard(
+                      url: shortcuts.telegramLink!,
+                      type: BoardShortcutsType.telegran,
+                      onTap: _onChangeShortcuts,
+                    ),
+                ],
+              );
+            },
+          ),
         )
       ],
     );

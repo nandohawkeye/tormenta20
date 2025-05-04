@@ -47,66 +47,72 @@ class _AddEditGeneralSkillsBottomSheetState
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              T20UI.spaceHeight,
-              Padding(
-                padding: T20UI.horizontalPadding,
-                child: Text(
-                  'Habilidade geral',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontFamily: FontFamily.tormenta,
-                  ),
-                ),
-              ),
-              T20UI.spaceHeight,
-            ],
-          ),
-          const DividerLevelTwo(verticalPadding: 0),
-          T20UI.spaceHeight,
-          Form(
-            key: _formKey,
+          const RepaintBoundary(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                T20UI.spaceHeight,
                 Padding(
                   padding: T20UI.horizontalPadding,
-                  child: Column(
-                    children: [
-                      AddEditGeneralSkillsTitleTextfield(
-                        onchange: _setTitle,
-                        initialTitle: widget.skill?.name,
-                      ),
-                      T20UI.spaceHeight,
-                      AddEditGeneralSkillsDescTextfield(
-                        onchange: _setDesc,
-                        initialDesc: widget.skill?.desc,
-                      ),
-                    ],
+                  child: Text(
+                    'Habilidade geral',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: FontFamily.tormenta,
+                    ),
                   ),
                 ),
                 T20UI.spaceHeight,
               ],
             ),
           ),
-          AddEditGeneralSkillsMainButtons(
-            onSave: () {
-              if (_formKey.currentState!.validate()) {
-                final newSkill = GeneralSkill(
-                  parentUuid: widget.menaceUuid,
-                  uuid: widget.skill?.uuid ?? const Uuid().v4(),
-                  name: _title!,
-                  desc: _desc!,
-                );
+          const DividerLevelTwo(verticalPadding: 0),
+          T20UI.spaceHeight,
+          RepaintBoundary(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: T20UI.horizontalPadding,
+                    child: Column(
+                      children: [
+                        AddEditGeneralSkillsTitleTextfield(
+                          onchange: _setTitle,
+                          initialTitle: widget.skill?.name,
+                        ),
+                        T20UI.spaceHeight,
+                        AddEditGeneralSkillsDescTextfield(
+                          onchange: _setDesc,
+                          initialDesc: widget.skill?.desc,
+                        ),
+                      ],
+                    ),
+                  ),
+                  T20UI.spaceHeight,
+                ],
+              ),
+            ),
+          ),
+          RepaintBoundary(
+            child: AddEditGeneralSkillsMainButtons(
+              onSave: () {
+                if (_formKey.currentState!.validate()) {
+                  final newSkill = GeneralSkill(
+                    parentUuid: widget.menaceUuid,
+                    uuid: widget.skill?.uuid ?? const Uuid().v4(),
+                    name: _title!,
+                    desc: _desc!,
+                  );
 
-                Navigator.pop(context, newSkill);
-              }
-            },
+                  Navigator.pop(context, newSkill);
+                }
+              },
+            ),
           )
         ],
       ),

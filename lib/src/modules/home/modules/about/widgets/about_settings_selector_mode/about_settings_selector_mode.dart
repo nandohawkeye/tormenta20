@@ -24,35 +24,37 @@ class _AboutSettingsSelectorModeState extends State<AboutSettingsSelectorMode> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: T20UI.inputHeight,
-      width: double.infinity,
-      child: AnimatedBuilder(
-        animation: store,
-        builder: (_, __) {
-          final selected = store.config?.mode ?? PlayMode.full;
-          return Row(
-            children: [
-              AboutSettingsSelectorModeCard(
-                mode: PlayMode.full,
-                selected: selected,
-                onTap: store.changeConfigMode,
-              ),
-              T20UI.spaceWidth,
-              AboutSettingsSelectorModeCard(
-                mode: PlayMode.player,
-                selected: selected,
-                onTap: store.changeConfigMode,
-              ),
-              T20UI.spaceWidth,
-              AboutSettingsSelectorModeCard(
-                mode: PlayMode.master,
-                selected: selected,
-                onTap: store.changeConfigMode,
-              ),
-            ],
-          );
-        },
+    return RepaintBoundary(
+      child: SizedBox(
+        height: T20UI.inputHeight,
+        width: double.infinity,
+        child: ListenableBuilder(
+          listenable: store,
+          builder: (_, __) {
+            final selected = store.config?.mode ?? PlayMode.full;
+            return Row(
+              children: [
+                AboutSettingsSelectorModeCard(
+                  mode: PlayMode.full,
+                  selected: selected,
+                  onTap: store.changeConfigMode,
+                ),
+                T20UI.spaceWidth,
+                AboutSettingsSelectorModeCard(
+                  mode: PlayMode.player,
+                  selected: selected,
+                  onTap: store.changeConfigMode,
+                ),
+                T20UI.spaceWidth,
+                AboutSettingsSelectorModeCard(
+                  mode: PlayMode.master,
+                  selected: selected,
+                  onTap: store.changeConfigMode,
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

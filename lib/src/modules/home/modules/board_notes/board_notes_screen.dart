@@ -71,97 +71,103 @@ class _BoardNotesScreenState extends State<BoardNotesScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: kTextTabBarHeight + T20UI.spaceSize),
-          const Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              T20UI.spaceHeight,
-              Padding(
-                padding: T20UI.horizontalPadding,
-                child: Labels('Anotações'),
-              ),
-              T20UI.spaceHeight,
-            ],
+          const RepaintBoundary(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                T20UI.spaceHeight,
+                Padding(
+                  padding: T20UI.horizontalPadding,
+                  child: Labels('Anotações'),
+                ),
+                T20UI.spaceHeight,
+              ],
+            ),
           ),
           const Divider(),
           Expanded(
-            child: AnimatedBuilder(
-              animation: _store,
-              builder: (_, __) {
-                final notes = _store.notes;
+            child: RepaintBoundary(
+              child: ListenableBuilder(
+                listenable: _store,
+                builder: (_, __) {
+                  final notes = _store.notes;
 
-                if (notes.isEmpty) {
-                  return const Center(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(FontAwesomeIcons.ghost),
-                        SizedBox(width: T20UI.smallSpaceSize),
-                        Text(
-                          'Nenhuma anotação',
-                          style: TextStyle(
-                            fontSize: 16,
+                  if (notes.isEmpty) {
+                    return const Center(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(FontAwesomeIcons.ghost),
+                          SizedBox(width: T20UI.smallSpaceSize),
+                          Text(
+                            'Nenhuma anotação',
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
+                    );
+                  }
+
+                  notes.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
+                  return ListView.separated(
+                    padding: const EdgeInsets.only(
+                      left: T20UI.screenContentSpaceSize,
+                      right: T20UI.screenContentSpaceSize,
+                      bottom: T20UI.spaceSize,
+                      top: T20UI.spaceSize,
+                    ),
+                    itemCount: notes.length,
+                    separatorBuilder: T20UI.separatorBuilderVertical,
+                    itemBuilder: (_, index) => BoardNoteCard(
+                      note: notes[index],
+                      onRemove: _deleteNote,
+                      onSelected: _addEditNote,
                     ),
                   );
-                }
-
-                notes.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
-                return ListView.separated(
-                  padding: const EdgeInsets.only(
-                    left: T20UI.screenContentSpaceSize,
-                    right: T20UI.screenContentSpaceSize,
-                    bottom: T20UI.spaceSize,
-                    top: T20UI.spaceSize,
-                  ),
-                  itemCount: notes.length,
-                  separatorBuilder: T20UI.separatorBuilderVertical,
-                  itemBuilder: (_, index) => BoardNoteCard(
-                    note: notes[index],
-                    onRemove: _deleteNote,
-                    onSelected: _addEditNote,
-                  ),
-                );
-              },
+                },
+              ),
             ),
           ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Divider(),
-              Padding(
-                padding: T20UI.allPadding,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: MainButton(
-                        label: 'Criar',
-                        onTap: () => _addEditNote(null),
+          RepaintBoundary(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Divider(),
+                Padding(
+                  padding: T20UI.allPadding,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: MainButton(
+                          label: 'Criar',
+                          onTap: () => _addEditNote(null),
+                        ),
                       ),
-                    ),
-                    T20UI.spaceWidth,
-                    AnimatedBuilder(
-                      animation: _store,
-                      builder: (_, __) {
-                        final onliFavoriteds = _store.onliFavoriteds;
-                        return SimpleButton(
-                          icon: onliFavoriteds
-                              ? FontAwesomeIcons.star
-                              : FontAwesomeIcons.solidStar,
-                          backgroundColor: palette.selected,
-                          iconColor: palette.indicator,
-                          onTap: _store.changeOnlyFavorited,
-                        );
-                      },
-                    ),
-                    const SimpleCloseButton()
-                  ],
+                      T20UI.spaceWidth,
+                      ListenableBuilder(
+                        listenable: _store,
+                        builder: (_, __) {
+                          final onliFavoriteds = _store.onliFavoriteds;
+                          return SimpleButton(
+                            icon: onliFavoriteds
+                                ? FontAwesomeIcons.star
+                                : FontAwesomeIcons.solidStar,
+                            backgroundColor: palette.selected,
+                            iconColor: palette.indicator,
+                            onTap: _store.changeOnlyFavorited,
+                          );
+                        },
+                      ),
+                      const SimpleCloseButton()
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           T20UI.safeAreaBottom(context),
         ],

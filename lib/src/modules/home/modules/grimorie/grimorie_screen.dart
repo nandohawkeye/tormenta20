@@ -67,124 +67,134 @@ class _GrimorieScreenState extends State<GrimorieScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: kToolbarHeight),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              AnimatedBuilder(
-                animation: _store,
-                builder: (_, __) => Hero(
-                  tag: _store.grimoire.uuid,
-                  child: Material(
-                    color: Colors.transparent,
-                    child: Row(
-                      children: [
-                        T20UI.spaceWidth,
-                        SizedBox(
-                          height: 20,
-                          width: 20,
-                          child: SvgPicture.asset(
-                            _store.grimoire.iconAsset,
-                            color: palette.icon,
+          RepaintBoundary(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ListenableBuilder(
+                  listenable: _store,
+                  builder: (_, __) => Hero(
+                    tag: _store.grimoire.uuid,
+                    child: Material(
+                      color: Colors.transparent,
+                      child: Row(
+                        children: [
+                          T20UI.spaceWidth,
+                          SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: SvgPicture.asset(
+                              _store.grimoire.iconAsset,
+                              color: palette.icon,
+                            ),
                           ),
-                        ),
-                        const SizedBox(width: 6),
-                        Labels(
-                          _store.grimoire.name,
-                          maxLines: 2,
-                          fontSize: 24,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          T20UI.spaceHeight,
-          AnimatedBuilder(
-            animation: _store,
-            builder: (_, __) => (_store.grimoire.desc?.isEmpty ?? true)
-                ? const Divider()
-                : Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: T20UI.screenContentSpaceSize,
-                    ),
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: Text(
-                        _store.grimoire.desc ?? '',
-                        maxLines: 2000000,
-                        style: TextStyle(
-                          color: palette.textSecundary,
-                          fontWeight: FontWeight.w500,
-                        ),
+                          const SizedBox(width: 6),
+                          Labels(
+                            _store.grimoire.name,
+                            maxLines: 2,
+                            fontSize: 24,
+                          ),
+                        ],
                       ),
                     ),
                   ),
+                ),
+              ],
+            ),
+          ),
+          T20UI.spaceHeight,
+          RepaintBoundary(
+            child: ListenableBuilder(
+              listenable: _store,
+              builder: (_, __) => (_store.grimoire.desc?.isEmpty ?? true)
+                  ? const Divider()
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: T20UI.screenContentSpaceSize,
+                      ),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          _store.grimoire.desc ?? '',
+                          maxLines: 2000000,
+                          style: TextStyle(
+                            color: palette.textSecundary,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+            ),
           ),
           T20UI.spaceHeight,
           GrimorieCharactersList(_store),
-          const Padding(
-            padding: T20UI.horizontalPadding,
-            child: Labels('Magias'),
+          const RepaintBoundary(
+            child: Padding(
+              padding: T20UI.horizontalPadding,
+              child: Labels('Magias'),
+            ),
           ),
           T20UI.spaceHeight,
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  GrimorieMagicList(_store),
-                  T20UI.safeAreaBottom(context, additionalHeight: 70)
-                ],
+            child: RepaintBoundary(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    GrimorieMagicList(_store),
+                    T20UI.safeAreaBottom(context, additionalHeight: 70)
+                  ],
+                ),
               ),
             ),
           ),
-          ScreenSaveMainButtons(
-            label: "Adicionar magias",
-            onSave: addMagic,
-            extraRightWidgets: [
-              T20UI.spaceWidth,
-              SimpleButton(
-                icon: FontAwesomeIcons.bars,
-                iconColor: palette.icon,
-                onTap: () {
-                  BottomsheetUtils.show<grimorieOption?>(
-                    context: context,
-                    child: const GrimorieOptionsBottomsheet(),
-                  ).then((result) async {
-                    if (result == grimorieOption.delete) {
-                      await BottomsheetUtils.show<bool?>(
-                        context: context,
-                        child: const DeleteGrimorieBottomsheet(),
-                      ).then((result) async {
-                        if (result != null && result) {
-                          await _store.deleteGrimoire().then((failure) {
-                            if (failure == null) {
-                              Navigator.pop(context);
-                            }
-                          });
-                        }
-                      });
-                    }
+          RepaintBoundary(
+            child: ScreenSaveMainButtons(
+              label: "Adicionar magias",
+              onSave: addMagic,
+              extraRightWidgets: [
+                T20UI.spaceWidth,
+                SimpleButton(
+                  icon: FontAwesomeIcons.bars,
+                  iconColor: palette.icon,
+                  onTap: () {
+                    BottomsheetUtils.show<grimorieOption?>(
+                      context: context,
+                      child: const GrimorieOptionsBottomsheet(),
+                    ).then((result) async {
+                      if (result == grimorieOption.delete) {
+                        await BottomsheetUtils.show<bool?>(
+                          context: context,
+                          child: const DeleteGrimorieBottomsheet(),
+                        ).then((result) async {
+                          if (result != null && result) {
+                            await _store.deleteGrimoire().then((failure) {
+                              if (failure == null) {
+                                Navigator.pop(context);
+                              }
+                            });
+                          }
+                        });
+                      }
 
-                    if (result == grimorieOption.edit) {
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => AddGrimorieScreen(
-                              initialGrimoire: _store.grimoire),
-                        ),
-                      ).then((result) async {
-                        if (result != null) {
-                          _store.updateGrimorie(result);
-                        }
-                      });
-                    }
-                  });
-                },
-              ),
-            ],
+                      if (result == grimorieOption.edit) {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => AddGrimorieScreen(
+                                initialGrimoire: _store.grimoire),
+                          ),
+                        ).then((result) async {
+                          if (result != null) {
+                            _store.updateGrimorie(result);
+                          }
+                        });
+                      }
+                    });
+                  },
+                ),
+              ],
+            ),
           ),
         ],
       ),

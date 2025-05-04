@@ -11,8 +11,8 @@ class MagicSearchFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: store,
+    return ListenableBuilder(
+      listenable: store,
       builder: (_, __) => store.searchEnable
           ? Align(
               alignment: Alignment.bottomCenter,

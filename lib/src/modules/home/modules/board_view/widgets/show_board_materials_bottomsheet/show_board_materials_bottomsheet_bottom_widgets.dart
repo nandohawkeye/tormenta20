@@ -28,54 +28,58 @@ class ShowBoardMaterialsBottomsheetBottomWidgets extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: AnimatedBuilder(
-                    animation: store,
-                    builder: (_, __) {
-                      final mode = store.mode;
-                      final toDelete = store.materialToDelete;
+                child: RepaintBoundary(
+                  child: ListenableBuilder(
+                      listenable: store,
+                      builder: (_, __) {
+                        final mode = store.mode;
+                        final toDelete = store.materialToDelete;
 
-                      return MainButton(
-                        label: mode == ShowBoardMaterialBottomSheetMode.add
-                            ? 'Adicionar'
-                            : 'Deletar',
-                        backgroundColor:
-                            (mode == ShowBoardMaterialBottomSheetMode.delete &&
-                                    toDelete.isEmpty)
-                                ? palette.backgroundLevelTwo
-                                : palette.selected,
-                        onTap: () {
-                          if (mode == ShowBoardMaterialBottomSheetMode.add) {
-                            store.addFiles();
-                          } else {
-                            if (toDelete.isNotEmpty) {
-                              store.deleteMaterials();
+                        return MainButton(
+                          label: mode == ShowBoardMaterialBottomSheetMode.add
+                              ? 'Adicionar'
+                              : 'Deletar',
+                          backgroundColor: (mode ==
+                                      ShowBoardMaterialBottomSheetMode.delete &&
+                                  toDelete.isEmpty)
+                              ? palette.backgroundLevelTwo
+                              : palette.selected,
+                          onTap: () {
+                            if (mode == ShowBoardMaterialBottomSheetMode.add) {
+                              store.addFiles();
+                            } else {
+                              if (toDelete.isNotEmpty) {
+                                store.deleteMaterials();
+                              }
                             }
-                          }
-                        },
-                      );
-                    }),
+                          },
+                        );
+                      }),
+                ),
               ),
               T20UI.spaceWidth,
-              AnimatedBuilder(
-                animation: store,
-                builder: (_, __) {
-                  final mode = store.mode;
-                  return SimpleButton(
-                    icon: mode == ShowBoardMaterialBottomSheetMode.add
-                        ? FontAwesomeIcons.solidTrashCan
-                        : FontAwesomeIcons.plus,
-                    iconColor: palette.onSelected,
-                    backgroundColor: palette.selected,
-                    onTap: () {
-                      if (mode == ShowBoardMaterialBottomSheetMode.add) {
-                        store
-                            .chageMode(ShowBoardMaterialBottomSheetMode.delete);
-                      } else {
-                        store.chageMode(ShowBoardMaterialBottomSheetMode.add);
-                      }
-                    },
-                  );
-                },
+              RepaintBoundary(
+                child: ListenableBuilder(
+                  listenable: store,
+                  builder: (_, __) {
+                    final mode = store.mode;
+                    return SimpleButton(
+                      icon: mode == ShowBoardMaterialBottomSheetMode.add
+                          ? FontAwesomeIcons.solidTrashCan
+                          : FontAwesomeIcons.plus,
+                      iconColor: palette.onSelected,
+                      backgroundColor: palette.selected,
+                      onTap: () {
+                        if (mode == ShowBoardMaterialBottomSheetMode.add) {
+                          store.chageMode(
+                              ShowBoardMaterialBottomSheetMode.delete);
+                        } else {
+                          store.chageMode(ShowBoardMaterialBottomSheetMode.add);
+                        }
+                      },
+                    );
+                  },
+                ),
               ),
               const SimpleCloseButton()
             ],

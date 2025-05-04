@@ -41,53 +41,58 @@ class SelectorMultiField<T> extends StatelessWidget {
           height: (95),
           child: Stack(
             children: [
-              AnimatedBuilder(
-                animation: store,
-                builder: (_, __) {
-                  final hasError = store.hasError;
-                  return SelectorFieldBody(
-                    label: label,
-                    hasError: hasError,
-                  );
-                },
+              RepaintBoundary(
+                child: ListenableBuilder(
+                  listenable: store,
+                  builder: (_, __) {
+                    final hasError = store.hasError;
+                    return SelectorFieldBody(
+                      label: label,
+                      hasError: hasError,
+                    );
+                  },
+                ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: SizedBox(
-                    height: T20UI.inputHeight,
-                    width: double.infinity,
-                    child: AnimatedBuilder(
-                      animation: store,
-                      builder: (_, __) {
-                        final selecteds = store.data;
-                        return ListView.separated(
-                          shrinkWrap: true,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: T20UI.screenContentSpaceSize +
-                                T20UI.smallSpaceSize,
-                          ),
-                          scrollDirection: Axis.horizontal,
-                          separatorBuilder: T20UI.separatorBuilderHorizontal,
-                          itemCount: itens.length + (hasRemoverAll ? 1 : 0),
-                          itemBuilder: (_, index) {
-                            if (hasRemoverAll && index == 0) {
-                              return SelectorSecundarySimpleButton(
-                                icon: FontAwesomeIcons.xmark,
-                                onTap: removeAll ?? store.removeAll,
-                              );
-                            }
+              RepaintBoundary(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: SizedBox(
+                      height: T20UI.inputHeight,
+                      width: double.infinity,
+                      child: ListenableBuilder(
+                        listenable: store,
+                        builder: (_, __) {
+                          final selecteds = store.data;
+                          return ListView.separated(
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: T20UI.screenContentSpaceSize +
+                                  T20UI.smallSpaceSize,
+                            ),
+                            scrollDirection: Axis.horizontal,
+                            separatorBuilder: T20UI.separatorBuilderHorizontal,
+                            itemCount: itens.length + (hasRemoverAll ? 1 : 0),
+                            itemBuilder: (_, index) {
+                              if (hasRemoverAll && index == 0) {
+                                return SelectorSecundarySimpleButton(
+                                  icon: FontAwesomeIcons.xmark,
+                                  onTap: removeAll ?? store.removeAll,
+                                );
+                              }
 
-                            return SelectorMultiCard<T>(
-                              handleTitle: handleTitle,
-                              type: itens[index - (removeAll != null ? 1 : 0)],
-                              selecteds: selecteds,
-                              onTap: onTapItem ?? store.put,
-                            );
-                          },
-                        );
-                      },
+                              return SelectorMultiCard<T>(
+                                handleTitle: handleTitle,
+                                type:
+                                    itens[index - (removeAll != null ? 1 : 0)],
+                                selecteds: selecteds,
+                                onTap: onTapItem ?? store.put,
+                              );
+                            },
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
@@ -95,16 +100,18 @@ class SelectorMultiField<T> extends StatelessWidget {
             ],
           ),
         ),
-        AnimatedBuilder(
-          animation: store,
-          builder: (_, __) {
-            final hasError = store.hasError;
-            return WarningWidget(
-              hasError: hasError,
-              isObrigatory: isObrigatory,
-              helpText: helpText,
-            );
-          },
+        RepaintBoundary(
+          child: ListenableBuilder(
+            listenable: store,
+            builder: (_, __) {
+              final hasError = store.hasError;
+              return WarningWidget(
+                hasError: hasError,
+                isObrigatory: isObrigatory,
+                helpText: helpText,
+              );
+            },
+          ),
         )
       ],
     );

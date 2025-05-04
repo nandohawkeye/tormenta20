@@ -46,53 +46,57 @@ class _BottomSheetAddBoardLinkState extends State<BottomSheetAddBoardLink> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const BottomSheetAddBoardLinkHeader(),
+          const RepaintBoundary(child: BottomSheetAddBoardLinkHeader()),
           const DividerLevelTwo(verticalPadding: 0),
           T20UI.spaceHeight,
-          Form(
-            key: _formKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: T20UI.horizontalPadding,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: BottomSheetAddBoardLinkTitleField(
-                          onchange: _setTitle,
-                          initialTitle: widget.link?.title,
+          RepaintBoundary(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: T20UI.horizontalPadding,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: BottomSheetAddBoardLinkTitleField(
+                            onchange: _setTitle,
+                            initialTitle: widget.link?.title,
+                          ),
                         ),
-                      ),
-                      T20UI.spaceWidth,
-                      Expanded(
-                        child: BottomSheetAddBoardLinkURLField(
-                          onchange: _setURL,
-                          initialTitle: widget.link?.link,
+                        T20UI.spaceWidth,
+                        Expanded(
+                          child: BottomSheetAddBoardLinkURLField(
+                            onchange: _setURL,
+                            initialTitle: widget.link?.link,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                T20UI.spaceHeight,
-              ],
+                  T20UI.spaceHeight,
+                ],
+              ),
             ),
           ),
-          BottomSheetAddBoardLinkMainButtons(
-            onSave: () {
-              if (_formKey.currentState!.validate()) {
-                final newLink = BoardLink(
-                  boardUuid: widget.boardUuid,
-                  uuid: widget.link?.uuid ?? const Uuid().v4(),
-                  title: _title!,
-                  link: _url!,
-                );
+          RepaintBoundary(
+            child: BottomSheetAddBoardLinkMainButtons(
+              onSave: () {
+                if (_formKey.currentState!.validate()) {
+                  final newLink = BoardLink(
+                    boardUuid: widget.boardUuid,
+                    uuid: widget.link?.uuid ?? const Uuid().v4(),
+                    title: _title!,
+                    link: _url!,
+                  );
 
-                Navigator.pop(context, newLink);
-              }
-            },
+                  Navigator.pop(context, newLink);
+                }
+              },
+            ),
           )
         ],
       ),

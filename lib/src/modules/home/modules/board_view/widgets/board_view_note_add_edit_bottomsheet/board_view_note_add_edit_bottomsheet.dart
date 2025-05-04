@@ -48,56 +48,60 @@ class _BoardViewNoteAddEditBottomsheetState
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const BoardViewNoteAddEditBottomsheetHeader(),
+          const RepaintBoundary(child: BoardViewNoteAddEditBottomsheetHeader()),
           const DividerLevelTwo(verticalPadding: 0),
           T20UI.spaceHeight,
-          Form(
-            key: _formKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: T20UI.horizontalPadding,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: BoardViewNoteAddEditBottomsheetNoteField(
-                          onchange: _setNoteText,
-                          initialNote: widget.note?.note,
+          RepaintBoundary(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: T20UI.horizontalPadding,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: BoardViewNoteAddEditBottomsheetNoteField(
+                            onchange: _setNoteText,
+                            initialNote: widget.note?.note,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                T20UI.spaceHeight,
-              ],
+                  T20UI.spaceHeight,
+                ],
+              ),
             ),
           ),
-          ValueListenableBuilder(
-            valueListenable: _isFavorited,
-            builder: (_, isFavorited, __) {
-              return BoardViewNoteAddEditBottomsheetBottomButtons(
-                isFavorited: isFavorited,
-                changeFavorited: _changeFavorited,
-                onSave: () {
-                  if (_formKey.currentState!.validate()) {
-                    final updateAt = DateTime.now();
+          RepaintBoundary(
+            child: ValueListenableBuilder(
+              valueListenable: _isFavorited,
+              builder: (_, isFavorited, __) {
+                return BoardViewNoteAddEditBottomsheetBottomButtons(
+                  isFavorited: isFavorited,
+                  changeFavorited: _changeFavorited,
+                  onSave: () {
+                    if (_formKey.currentState!.validate()) {
+                      final updateAt = DateTime.now();
 
-                    final newNote = BoardNote(
-                        boardUuid: widget.boardUuid,
-                        uuid: widget.note?.uuid ?? const Uuid().v4(),
-                        note: _noteText!,
-                        isFavorited: _isFavorited.value,
-                        updatedAt: updateAt,
-                        createdAt: widget.note?.createdAt ?? updateAt);
+                      final newNote = BoardNote(
+                          boardUuid: widget.boardUuid,
+                          uuid: widget.note?.uuid ?? const Uuid().v4(),
+                          note: _noteText!,
+                          isFavorited: _isFavorited.value,
+                          updatedAt: updateAt,
+                          createdAt: widget.note?.createdAt ?? updateAt);
 
-                    Navigator.pop(context, newNote);
-                  }
-                },
-              );
-            },
+                      Navigator.pop(context, newNote);
+                    }
+                  },
+                );
+              },
+            ),
           )
         ],
       ),

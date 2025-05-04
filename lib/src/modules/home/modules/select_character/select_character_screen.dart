@@ -37,8 +37,8 @@ class _SelectCharacterScreenState extends State<SelectCharacterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _store,
+    return ListenableBuilder(
+      listenable: _store,
       builder: (_, __) {
         final characters = _store.characters;
         final selected = _store.selected;
@@ -57,7 +57,6 @@ class _SelectCharacterScreenState extends State<SelectCharacterScreen> {
 
               final failiure = await _store.saveCharacterBoard(selected);
               if (failiure == null) {
-                print('deu boa');
                 Navigator.pop(context);
               }
             }

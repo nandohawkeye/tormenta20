@@ -41,81 +41,89 @@ class _PdfViewScreenState extends State<PdfViewScreen> {
       child: Column(
         children: [
           const SizedBox(height: kTextTabBarHeight + (T20UI.spaceSize * 3)),
-          AnimatedBuilder(
-              animation: _store,
-              builder: (_, __) {
-                final enableToView = _store.isEnableLable;
-                final isOnlyPage = _store.isOnlyPage;
-                final current = _store.currentPage;
-                final count = _store.pagesCount;
+          RepaintBoundary(
+            child: ListenableBuilder(
+                listenable: _store,
+                builder: (_, __) {
+                  final enableToView = _store.isEnableLable;
+                  final isOnlyPage = _store.isOnlyPage;
+                  final current = _store.currentPage;
+                  final count = _store.pagesCount;
 
-                final String label = isOnlyPage
-                    ? 'Página única'
-                    : enableToView
-                        ? 'Página ${current.toString().padLeft(2, '0')} de ${count.toString().padLeft(2, '0')}'
-                        : '';
+                  final String label = isOnlyPage
+                      ? 'Página única'
+                      : enableToView
+                          ? 'Página ${current.toString().padLeft(2, '0')} de ${count.toString().padLeft(2, '0')}'
+                          : '';
 
-                return Text(
-                  label,
-                  style: TextStyle(
-                    color: palette.accent,
-                    fontFamily: FontFamily.tormenta,
-                    fontSize: 24,
-                  ),
-                );
-              }),
+                  return Text(
+                    label,
+                    style: TextStyle(
+                      color: palette.accent,
+                      fontFamily: FontFamily.tormenta,
+                      fontSize: 24,
+                    ),
+                  );
+                }),
+          ),
           T20UI.spaceHeight,
           Expanded(
-            child: PDF(
-              backgroundColor: palette.background,
-              autoSpacing: true,
-              pageFling: true,
-              onPageChanged: _store.changePage,
-            ).fromPath(
-              widget.path,
-              key: ValueKey(widget.path),
+            child: RepaintBoundary(
+              child: PDF(
+                backgroundColor: palette.background,
+                autoSpacing: true,
+                pageFling: true,
+                onPageChanged: _store.changePage,
+              ).fromPath(
+                widget.path,
+                key: ValueKey(widget.path),
+              ),
             ),
           ),
           T20UI.spaceHeight,
-          AnimatedBuilder(
-            animation: _store,
-            builder: (_, __) {
-              return AnimatedOpacity(
-                opacity: _store.enableIndicatorMorePages ? 1 : 0,
-                duration: T20UI.defaultDurationAnimation,
-                child: Transform.rotate(
-                  angle: 33,
-                  child: Lottie.asset(
-                    height: 30,
-                    width: 30,
-                    Assets.lottie.arrows,
-                    repeat: true,
-                    fit: BoxFit.cover,
-                    decoder: LottieUtils.lottieFormatDecoder,
-                  ),
-                ),
-              );
-            },
-          ),
-          Padding(
-            padding: T20UI.horizontalPadding.copyWith(
-              top: T20UI.spaceSize * 2,
-              bottom: T20UI.spaceSize + MediaQuery.of(context).padding.bottom,
-            ),
-            child: SizedBox(
-              height: T20UI.inputHeight,
-              width: double.infinity,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: MainButton(
-                      label: 'Compatilhar',
-                      onTap: () async =>
-                          await Share.shareXFiles([XFile(widget.path)]),
+          RepaintBoundary(
+            child: ListenableBuilder(
+              listenable: _store,
+              builder: (_, __) {
+                return AnimatedOpacity(
+                  opacity: _store.enableIndicatorMorePages ? 1 : 0,
+                  duration: T20UI.defaultDurationAnimation,
+                  child: Transform.rotate(
+                    angle: 33,
+                    child: Lottie.asset(
+                      height: 30,
+                      width: 30,
+                      Assets.lottie.arrows,
+                      repeat: true,
+                      fit: BoxFit.cover,
+                      decoder: LottieUtils.lottieFormatDecoder,
                     ),
                   ),
-                  const SimpleCloseButton()
-                ],
+                );
+              },
+            ),
+          ),
+          RepaintBoundary(
+            child: Padding(
+              padding: T20UI.horizontalPadding.copyWith(
+                top: T20UI.spaceSize * 2,
+                bottom: T20UI.spaceSize + MediaQuery.of(context).padding.bottom,
+              ),
+              child: SizedBox(
+                height: T20UI.inputHeight,
+                width: double.infinity,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: MainButton(
+                        label: 'Compatilhar',
+                        onTap: () async =>
+                            await Share.shareXFiles([XFile(widget.path)]),
+                      ),
+                    ),
+                    const SimpleCloseButton()
+                  ],
+                ),
               ),
             ),
           )

@@ -50,43 +50,45 @@ class _BoardMaterialCardPdfThumbState extends State<BoardMaterialCardPdfThumb> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: widget.size,
-      width: widget.size,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: palette.cardBackground,
-          borderRadius: T20UI.borderRadius,
-        ),
-        child: AnimatedBuilder(
-          animation: Listenable.merge([_thumb, _error]),
-          builder: (_, __) {
-            final hasError = _error.value;
-            final thumb = _thumb.value;
+    return RepaintBoundary(
+      child: SizedBox(
+        height: widget.size,
+        width: widget.size,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: palette.cardBackground,
+            borderRadius: T20UI.borderRadius,
+          ),
+          child: ListenableBuilder(
+            listenable: Listenable.merge([_thumb, _error]),
+            builder: (_, __) {
+              final hasError = _error.value;
+              final thumb = _thumb.value;
 
-            if (hasError) {
-              return const ErrorImagePlaceholder();
-            }
+              if (hasError) {
+                return const ErrorImagePlaceholder();
+              }
 
-            if (thumb == null) {
-              return const Center(child: CustomLoader());
-            }
+              if (thumb == null) {
+                return const Center(child: CustomLoader());
+              }
 
-            return ClipRRect(
-              borderRadius: T20UI.borderRadius,
-              child: Image.memory(
-                height: widget.size,
-                width: widget.size,
-                fit: BoxFit.cover,
-                cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
-                    context, widget.size),
-                cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                    context, widget.size),
-                thumb,
-                errorBuilder: (_, __, ___) => const ErrorImagePlaceholder(),
-              ),
-            );
-          },
+              return ClipRRect(
+                borderRadius: T20UI.borderRadius,
+                child: Image.memory(
+                  height: widget.size,
+                  width: widget.size,
+                  fit: BoxFit.cover,
+                  cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                      context, widget.size),
+                  cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                      context, widget.size),
+                  thumb,
+                  errorBuilder: (_, __, ___) => const ErrorImagePlaceholder(),
+                ),
+              );
+            },
+          ),
         ),
       ),
     );

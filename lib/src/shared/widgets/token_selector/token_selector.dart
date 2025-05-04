@@ -73,8 +73,8 @@ class _AddEditBoardPlayerTokensState extends State<TokenSelector> {
     return SizedBox(
       height: widget.size + 15,
       width: double.infinity,
-      child: AnimatedBuilder(
-        animation: Listenable.merge([_filePath, _assetPath]),
+      child: ListenableBuilder(
+        listenable: Listenable.merge([_filePath, _assetPath]),
         builder: (_, __) {
           final filePath = _filePath.value;
           final assetPath = _assetPath.value;
