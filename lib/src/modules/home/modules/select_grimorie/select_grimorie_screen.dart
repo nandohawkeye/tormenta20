@@ -95,7 +95,7 @@ class _SelectGrimorieScreenState extends State<SelectGrimorieScreen> {
 
           final selected = _store.selected;
 
-          return ListView.separated(
+          return ListView.builder(
             padding: const EdgeInsets.symmetric(
               horizontal: T20UI.screenContentSpaceSize,
               vertical: T20UI.spaceSize,
@@ -104,7 +104,6 @@ class _SelectGrimorieScreenState extends State<SelectGrimorieScreen> {
             primary: false,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: grimories.length,
-            separatorBuilder: T20UI.separatorBuilderVertical,
             itemBuilder: (_, index) {
               return SelectGrimorieScreenCard(
                 grimoire: grimories[index],

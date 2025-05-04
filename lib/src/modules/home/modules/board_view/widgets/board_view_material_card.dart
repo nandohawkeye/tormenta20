@@ -31,79 +31,85 @@ class BoardViewMaterialCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final isSelectedToDelete = toDelete.contains(material.uuid);
     const double size = 120;
-    return InkWell(
-      borderRadius: T20UI.borderRadius,
-      onTap: () {
-        if (mode == ShowBoardMaterialBottomSheetMode.delete) {
-          onDelete(material.uuid);
-        } else {
-          if (material.type == BoardMaterialTypes.image) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => ImageViewScreen(
-                  path: material.path,
-                  heroTag: material.uuid,
-                ),
-              ),
-            );
-          }
-
-          if (material.type == BoardMaterialTypes.pdf) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => PdfViewScreen(path: material.path),
-              ),
-            );
-          }
-        }
-      },
-      child: Hero(
-        tag: material.uuid,
-        child: Material(
-          color: Colors.transparent,
-          child: Stack(
-            children: [
-              SizedBox(
-                height: size,
-                width: size,
-                child: material.type == BoardMaterialTypes.image
-                    ? ClipRRect(
-                        borderRadius: T20UI.borderRadius,
-                        child: Image.file(
-                          height: size,
-                          width: size,
-                          fit: BoxFit.cover,
-                          File(material.path),
-                          cacheHeight:
-                              PerformanceUtils.cacheImageSizeCalculated(
-                                  context, size),
-                          cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                              context, size),
-                          errorBuilder: (_, __, ___) =>
-                              const ErrorImagePlaceholder(),
-                        ),
-                      )
-                    : BoardMaterialCardPdfThumb(
-                        material.path,
-                        size: size,
-                      ),
-              ),
-              if (mode == ShowBoardMaterialBottomSheetMode.delete)
-                Positioned(
-                  top: T20UI.smallSpaceSize,
-                  right: T20UI.smallSpaceSize,
-                  child: CustomChecked(
-                    value: isSelectedToDelete,
-                    isEnabledToTap: false,
-                    disabledColor: palette.backgroundLevelOne,
+    return Row(
+      children: [
+        InkWell(
+          borderRadius: T20UI.borderRadius,
+          onTap: () {
+            if (mode == ShowBoardMaterialBottomSheetMode.delete) {
+              onDelete(material.uuid);
+            } else {
+              if (material.type == BoardMaterialTypes.image) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ImageViewScreen(
+                      path: material.path,
+                      heroTag: material.uuid,
+                    ),
                   ),
-                )
-            ],
+                );
+              }
+
+              if (material.type == BoardMaterialTypes.pdf) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => PdfViewScreen(path: material.path),
+                  ),
+                );
+              }
+            }
+          },
+          child: Hero(
+            tag: material.uuid,
+            child: Material(
+              color: Colors.transparent,
+              child: Stack(
+                children: [
+                  SizedBox(
+                    height: size,
+                    width: size,
+                    child: material.type == BoardMaterialTypes.image
+                        ? ClipRRect(
+                            borderRadius: T20UI.borderRadius,
+                            child: Image.file(
+                              height: size,
+                              width: size,
+                              fit: BoxFit.cover,
+                              File(material.path),
+                              cacheHeight:
+                                  PerformanceUtils.cacheImageSizeCalculated(
+                                      context, size),
+                              cacheWidth:
+                                  PerformanceUtils.cacheImageSizeCalculated(
+                                      context, size),
+                              errorBuilder: (_, __, ___) =>
+                                  const ErrorImagePlaceholder(),
+                            ),
+                          )
+                        : BoardMaterialCardPdfThumb(
+                            material.path,
+                            size: size,
+                          ),
+                  ),
+                  if (mode == ShowBoardMaterialBottomSheetMode.delete)
+                    Positioned(
+                      top: T20UI.smallSpaceSize,
+                      right: T20UI.smallSpaceSize,
+                      child: CustomChecked(
+                        value: isSelectedToDelete,
+                        isEnabledToTap: false,
+                        disabledColor: palette.backgroundLevelOne,
+                      ),
+                    )
+                ],
+              ),
+            ),
           ),
         ),
-      ),
+        T20UI.smallSpaceWidth,
+      ],
     );
   }
 }

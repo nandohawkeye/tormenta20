@@ -91,7 +91,7 @@ class _SelectCharacterScreenState extends State<SelectCharacterScreen> {
                     children: [
                       Icon(FontAwesomeIcons.ghost),
                       T20UI.smallSpaceWidth,
-                      Text('Nenhuma personagem encontrado',
+                      Text('Nenhum personagem encontrado',
                           style: TextStyle(fontSize: 16)),
                     ],
                   ),

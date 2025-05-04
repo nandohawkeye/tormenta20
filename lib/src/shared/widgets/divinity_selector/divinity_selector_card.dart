@@ -20,39 +20,42 @@ class DivinitySelectorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isSelected = selected?.id == divinity.id;
-    return InkWell(
-      onTap: () => onSelect(divinity),
-      child: ClipRRect(
-        borderRadius: T20UI.borderRadius,
-        child: SizedBox(
-          height: T20UI.inputHeight,
-          width: T20UI.inputHeight,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Image.asset(
-                divinity.assetPath,
-                height: T20UI.inputHeight,
-                width: T20UI.inputHeight,
-                cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
-                    context, T20UI.inputHeight),
-                cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                    context, T20UI.inputHeight),
-              ),
-              if (isSelected)
-                AnimationConfiguration.synchronized(
-                  duration: T20UI.defaultDurationAnimation,
-                  child: ScaleAnimation(
-                    child: SizedBox(
-                      height: T20UI.inputHeight,
-                      width: T20UI.inputHeight,
-                      child: ColoredBox(
-                        color: palette.selected.withValues(alpha: .7),
+    return Padding(
+      padding: const EdgeInsets.only(right: T20UI.smallSpaceSize),
+      child: InkWell(
+        onTap: () => onSelect(divinity),
+        child: ClipRRect(
+          borderRadius: T20UI.borderRadius,
+          child: SizedBox(
+            height: T20UI.inputHeight,
+            width: T20UI.inputHeight,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Image.asset(
+                  divinity.assetPath,
+                  height: T20UI.inputHeight,
+                  width: T20UI.inputHeight,
+                  cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                      context, T20UI.inputHeight),
+                  cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                      context, T20UI.inputHeight),
+                ),
+                if (isSelected)
+                  AnimationConfiguration.synchronized(
+                    duration: T20UI.defaultDurationAnimation,
+                    child: ScaleAnimation(
+                      child: SizedBox(
+                        height: T20UI.inputHeight,
+                        width: T20UI.inputHeight,
+                        child: ColoredBox(
+                          color: palette.selected.withValues(alpha: .7),
+                        ),
                       ),
                     ),
-                  ),
-                )
-            ],
+                  )
+              ],
+            ),
           ),
         ),
       ),

@@ -66,7 +66,7 @@ abstract class T20UI {
       extra + spaceSize + MediaQuery.of(context).padding.bottom;
 
   static Widget separatorBuilderVertical(_, __) =>
-      const SizedBox(height: spaceSize);
+      const SizedBox(height: smallSpaceSize);
   static Widget separatorBuilderHorizontal(_, __) =>
       const SizedBox(width: smallSpaceSize);
   static Border cardBorder(PaletteBase pallete) =>

@@ -22,45 +22,50 @@ class EmptyTokenSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(20000),
-      onTap: onEmpty,
-      child: SizedBox(
-        height: size + 10,
-        width: size + 10,
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 2.5),
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: SizedBox(
-                  height: size,
-                  width: size,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: colorBase ?? palette.backgroundLevelOne,
-                    ),
-                    child: Icon(
-                      FontAwesomeIcons.xmark,
-                      color: palette.accent,
+    return Row(
+      children: [
+        InkWell(
+          borderRadius: BorderRadius.circular(20000),
+          onTap: onEmpty,
+          child: SizedBox(
+            height: size + 10,
+            width: size + 10,
+            child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 2.5),
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: SizedBox(
+                      height: size,
+                      width: size,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: colorBase ?? palette.backgroundLevelOne,
+                        ),
+                        child: Icon(
+                          FontAwesomeIcons.xmark,
+                          color: palette.accent,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
+                if (isEmpty)
+                  TokenCardBord(
+                    size: size,
+                    isMenace: isMenace,
+                  ),
+                const TokenCardTag(
+                  tag: 'Vazio',
+                )
+              ],
             ),
-            if (isEmpty)
-              TokenCardBord(
-                size: size,
-                isMenace: isMenace,
-              ),
-            const TokenCardTag(
-              tag: 'Vazio',
-            )
-          ],
+          ),
         ),
-      ),
+        const SizedBox(width: 4),
+      ],
     );
   }
 }

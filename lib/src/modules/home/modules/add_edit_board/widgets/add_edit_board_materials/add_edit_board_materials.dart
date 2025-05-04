@@ -60,28 +60,30 @@ class _AddEditBoardMaterialsState extends State<AddEditBoardMaterials> {
               );
             }
 
-            //TODO ver no android
-
             return SizedBox(
               height: 120,
               child: ListView.builder(
                 padding: T20UI.horizontalPadding,
                 scrollDirection: Axis.horizontal,
-                itemCount: list.length,
-                itemExtent: 120,
+                itemCount: list.length + 1,
+                itemExtent: 120 + T20UI.smallSpaceSize,
                 itemBuilder: (_, index) {
                   if (index == 0) {
-                    return SizedBox(
-                      height: 120,
-                      width: 120,
-                      child: Card(
-                        child: InkWell(
-                          borderRadius: T20UI.borderRadius,
-                          onTap: _store.onSelectFiles,
-                          child: const Center(
-                            child: Icon(
-                              FontAwesomeIcons.plus,
-                              size: 34,
+                    return Padding(
+                      padding:
+                          const EdgeInsets.only(right: T20UI.smallSpaceSize),
+                      child: SizedBox(
+                        height: 120,
+                        width: 120,
+                        child: Card(
+                          child: InkWell(
+                            borderRadius: T20UI.borderRadius,
+                            onTap: _store.onSelectFiles,
+                            child: const Center(
+                              child: Icon(
+                                FontAwesomeIcons.plus,
+                                size: 34,
+                              ),
                             ),
                           ),
                         ),

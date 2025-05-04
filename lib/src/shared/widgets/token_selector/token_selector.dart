@@ -74,49 +74,50 @@ class _AddEditBoardPlayerTokensState extends State<TokenSelector> {
       height: widget.size + 15,
       width: double.infinity,
       child: AnimatedBuilder(
-          animation: Listenable.merge([_filePath, _assetPath]),
-          builder: (_, __) {
-            final filePath = _filePath.value;
-            final assetPath = _assetPath.value;
-            final isEmpty = filePath == null && assetPath == null;
+        animation: Listenable.merge([_filePath, _assetPath]),
+        builder: (_, __) {
+          final filePath = _filePath.value;
+          final assetPath = _assetPath.value;
+          final isEmpty = filePath == null && assetPath == null;
 
-            return ListView.separated(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              padding: T20UI.horizontalPadding,
-              separatorBuilder: (_, __) => const SizedBox(width: 4),
-              itemCount: widget.allTokens.length + 2,
-              itemBuilder: (_, index) {
-                if (index == 0) {
-                  return EmptyTokenSelector(
-                    isEmpty: isEmpty,
-                    isMenace: widget.isMenace,
-                    onEmpty: _onEmpty,
-                    size: widget.size,
-                    colorBase: widget.colorBase,
-                  );
-                }
+          return ListView.builder(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            padding: T20UI.horizontalPadding,
+            itemCount: widget.allTokens.length + 2,
+            itemExtent: widget.size + 10 + 4,
+            itemBuilder: (_, index) {
+              if (index == 0) {
+                return EmptyTokenSelector(
+                  isEmpty: isEmpty,
+                  isMenace: widget.isMenace,
+                  onEmpty: _onEmpty,
+                  size: widget.size,
+                  colorBase: widget.colorBase,
+                );
+              }
 
-                if (index == 1) {
-                  return AddEditBoardPlayerFileImageSelector(
-                    onSelectFile: _setFilePath,
-                    filePath: filePath,
-                    size: widget.size,
-                    isMenace: widget.isMenace,
-                    colorBase: widget.colorBase,
-                  );
-                }
-
-                return TokenCard(
-                  assetPath: widget.allTokens[index - 2],
-                  selected: assetPath,
-                  onTap: _setAssetPath,
+              if (index == 1) {
+                return AddEditBoardPlayerFileImageSelector(
+                  onSelectFile: _setFilePath,
+                  filePath: filePath,
                   size: widget.size,
                   isMenace: widget.isMenace,
+                  colorBase: widget.colorBase,
                 );
-              },
-            );
-          }),
+              }
+
+              return TokenCard(
+                assetPath: widget.allTokens[index - 2],
+                selected: assetPath,
+                onTap: _setAssetPath,
+                size: widget.size,
+                isMenace: widget.isMenace,
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

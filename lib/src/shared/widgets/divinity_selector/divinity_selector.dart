@@ -102,7 +102,7 @@ class _AddEditBoardPlayerBroodSelectorState extends State<DivinitySelector> {
                     child: ValueListenableBuilder(
                       valueListenable: _selected,
                       builder: (_, selected, __) {
-                        return ListView.separated(
+                        return ListView.builder(
                           shrinkWrap: true,
                           padding: const EdgeInsets.only(
                             left: T20UI.screenContentSpaceSize +
@@ -111,13 +111,17 @@ class _AddEditBoardPlayerBroodSelectorState extends State<DivinitySelector> {
                                 T20UI.smallSpaceSize,
                           ),
                           scrollDirection: Axis.horizontal,
-                          separatorBuilder: T20UI.separatorBuilderHorizontal,
+                          itemExtent: T20UI.inputHeight + T20UI.smallSpaceSize,
                           itemCount: (_allDivinities.length + 1),
                           itemBuilder: (_, index) {
                             if (index == 0) {
-                              return SelectorSecundarySimpleButton(
-                                icon: FontAwesomeIcons.xmark,
-                                onTap: () => _setSelected(null),
+                              return Padding(
+                                padding: const EdgeInsets.only(
+                                    right: T20UI.smallSpaceSize),
+                                child: SelectorSecundarySimpleButton(
+                                  icon: FontAwesomeIcons.xmark,
+                                  onTap: () => _setSelected(null),
+                                ),
                               );
                             }
 

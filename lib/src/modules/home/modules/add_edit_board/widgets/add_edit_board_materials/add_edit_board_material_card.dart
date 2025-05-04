@@ -23,54 +23,60 @@ class AddEditBoardMaterialCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const double size = 120;
-    return InkWell(
-      borderRadius: T20UI.borderRadius,
-      onTap: () => onTap(material),
-      child: Stack(
-        children: [
-          SizedBox(
+    return Row(
+      children: [
+        InkWell(
+          borderRadius: T20UI.borderRadius,
+          onTap: () => onTap(material),
+          child: SizedBox(
             height: size,
             width: size,
-            child: material.type == BoardMaterialTypes.image
-                ? ClipRRect(
-                    borderRadius: T20UI.borderRadius,
-                    child: Image.file(
-                      height: size,
-                      width: size,
-                      fit: BoxFit.cover,
-                      File(material.path),
-                      cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
-                          context, size),
-                      cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                          context, size),
-                      errorBuilder: (_, __, ___) =>
-                          const ErrorImagePlaceholder(),
+            child: Stack(
+              children: [
+                material.type == BoardMaterialTypes.image
+                    ? ClipRRect(
+                        borderRadius: T20UI.borderRadius,
+                        child: Image.file(
+                          height: size,
+                          width: size,
+                          fit: BoxFit.cover,
+                          File(material.path),
+                          cacheHeight:
+                              PerformanceUtils.cacheImageSizeCalculated(
+                                  context, size),
+                          cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                              context, size),
+                          errorBuilder: (_, __, ___) =>
+                              const ErrorImagePlaceholder(),
+                        ),
+                      )
+                    : BoardMaterialCardPdfThumb(
+                        material.path,
+                        size: size,
+                      ),
+                Positioned(
+                  top: 4,
+                  right: 4,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                        color: palette.selected,
+                        borderRadius: BorderRadius.circular(8)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Icon(
+                        FontAwesomeIcons.solidTrashCan,
+                        color: palette.indicator.withValues(alpha: .85),
+                        size: 14,
+                      ),
                     ),
-                  )
-                : BoardMaterialCardPdfThumb(
-                    material.path,
-                    size: size,
                   ),
-          ),
-          Positioned(
-            top: 4,
-            right: 4,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                  color: palette.selected,
-                  borderRadius: BorderRadius.circular(8)),
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Icon(
-                  FontAwesomeIcons.solidTrashCan,
-                  color: palette.indicator.withValues(alpha: .85),
-                  size: 14,
-                ),
-              ),
+                )
+              ],
             ),
-          )
-        ],
-      ),
+          ),
+        ),
+        T20UI.smallSpaceWidth,
+      ],
     );
   }
 }

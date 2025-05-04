@@ -36,8 +36,6 @@ class ShowBoardMaterialsBottomsheetList extends StatelessWidget {
         final mode = store.mode;
         final toDelete = store.materialToDelete;
 
-        //TODO ver no android
-
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -45,14 +43,14 @@ class ShowBoardMaterialsBottomsheetList extends StatelessWidget {
             SizedBox(
               height: 120,
               width: double.infinity,
-              child: ListView.separated(
+              child: ListView.builder(
                 shrinkWrap: true,
                 padding: const EdgeInsets.symmetric(
                   horizontal: T20UI.screenContentSpaceSize,
                 ),
                 scrollDirection: Axis.horizontal,
                 itemCount: materials.length,
-                separatorBuilder: T20UI.separatorBuilderHorizontal,
+                itemExtent: 120 + T20UI.smallSpaceSize,
                 itemBuilder: (_, index) {
                   return BoardViewMaterialCard(
                     material: materials[index],

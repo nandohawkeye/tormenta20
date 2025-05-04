@@ -22,44 +22,50 @@ class SelectGrimorieScreenCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isSelected = grimoire.uuid == selected?.uuid;
-    return SizedBox(
-      height: T20UI.inputHeight,
-      child: Card(
-        child: InkWell(
-          borderRadius: T20UI.borderRadius,
-          onTap: () => onTap(grimoire),
-          child: Padding(
-            padding: const EdgeInsets.only(
-                left: T20UI.smallSpaceSize, right: T20UI.smallSpaceSize),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(
+          height: T20UI.inputHeight,
+          child: Card(
+            child: InkWell(
+              borderRadius: T20UI.borderRadius,
+              onTap: () => onTap(grimoire),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: T20UI.smallSpaceSize, right: T20UI.spaceSize),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    T20UI.smallSpaceWidth,
-                    SvgPicture.asset(
-                      grimoire.iconAsset,
-                      height: 20,
-                      width: 20,
-                      color: palette.icon,
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        T20UI.smallSpaceWidth,
+                        SvgPicture.asset(
+                          grimoire.iconAsset,
+                          height: 20,
+                          width: 20,
+                          color: palette.icon,
+                        ),
+                        T20UI.smallSpaceWidth,
+                        Text(
+                          grimoire.name,
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      ],
                     ),
-                    T20UI.smallSpaceWidth,
-                    Text(
-                      grimoire.name,
-                      style: const TextStyle(fontSize: 16),
+                    CustomChecked(
+                      value: isSelected,
+                      isEnabledToTap: false,
                     ),
                   ],
                 ),
-                CustomChecked(
-                  value: isSelected,
-                  isEnabledToTap: false,
-                ),
-              ],
+              ),
             ),
           ),
         ),
-      ),
+        T20UI.smallSpaceHeight,
+      ],
     );
   }
 }

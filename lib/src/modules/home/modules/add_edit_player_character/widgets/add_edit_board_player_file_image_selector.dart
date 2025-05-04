@@ -27,71 +27,76 @@ class AddEditBoardPlayerFileImageSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(20000),
-      onTap: () async {
-        FilePickerResult? result =
-            await GetIt.I<FilePicker>().pickFiles(type: FileType.image);
+    return Row(
+      children: [
+        InkWell(
+          borderRadius: BorderRadius.circular(20000),
+          onTap: () async {
+            FilePickerResult? result =
+                await GetIt.I<FilePicker>().pickFiles(type: FileType.image);
 
-        final path = result?.files.single.path;
+            final path = result?.files.single.path;
 
-        if (path != null) {
-          onSelectFile.call(path);
-        }
-      },
-      child: SizedBox(
-        height: size + 10,
-        width: size + 10,
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 2.5),
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: SizedBox(
-                  height: size,
-                  width: size,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: colorBase ?? palette.backgroundLevelOne,
+            if (path != null) {
+              onSelectFile.call(path);
+            }
+          },
+          child: SizedBox(
+            height: size + 10,
+            width: size + 10,
+            child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 2.5),
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: SizedBox(
+                      height: size,
+                      width: size,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: colorBase ?? palette.backgroundLevelOne,
+                        ),
+                        child: filePath != null
+                            ? ClipOval(
+                                child: Image.file(
+                                  File(filePath!),
+                                  height: size,
+                                  width: size,
+                                  fit: BoxFit.cover,
+                                  cacheHeight:
+                                      PerformanceUtils.cacheImageSizeCalculated(
+                                          context, size),
+                                  cacheWidth:
+                                      PerformanceUtils.cacheImageSizeCalculated(
+                                          context, size),
+                                  errorBuilder: (_, __, ___) =>
+                                      const ErrorImagePlaceholder(),
+                                ),
+                              )
+                            : Icon(
+                                FontAwesomeIcons.solidImage,
+                                color: palette.accent,
+                              ),
+                      ),
                     ),
-                    child: filePath != null
-                        ? ClipOval(
-                            child: Image.file(
-                              File(filePath!),
-                              height: size,
-                              width: size,
-                              fit: BoxFit.cover,
-                              cacheHeight:
-                                  PerformanceUtils.cacheImageSizeCalculated(
-                                      context, size),
-                              cacheWidth:
-                                  PerformanceUtils.cacheImageSizeCalculated(
-                                      context, size),
-                              errorBuilder: (_, __, ___) =>
-                                  const ErrorImagePlaceholder(),
-                            ),
-                          )
-                        : Icon(
-                            FontAwesomeIcons.solidImage,
-                            color: palette.accent,
-                          ),
                   ),
                 ),
-              ),
+                if (filePath != null)
+                  TokenCardBord(
+                    size: size,
+                    isMenace: isMenace,
+                  ),
+                const TokenCardTag(
+                  tag: 'Galeria',
+                )
+              ],
             ),
-            if (filePath != null)
-              TokenCardBord(
-                size: size,
-                isMenace: isMenace,
-              ),
-            const TokenCardTag(
-              tag: 'Galeria',
-            )
-          ],
+          ),
         ),
-      ),
+        const SizedBox(width: 4),
+      ],
     );
   }
 }

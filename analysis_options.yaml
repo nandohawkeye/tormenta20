@@ -1,4 +1,6 @@
 analyzer:
+  plugins:
+      - dart_code_metrics
   exclude:
     - "**/*.g.dart"
     - "lib/src/core/modules/**"
@@ -26,6 +28,9 @@ linter:
   # `// ignore_for_file: name_of_lint` syntax on the line or in the file
   # producing the lint.
   rules:
+    - prefer_const_constructors
+    - prefer_const_literals_to_create_immutables
+    - unnecessary_const
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
 

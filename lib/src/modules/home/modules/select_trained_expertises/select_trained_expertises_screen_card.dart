@@ -21,37 +21,43 @@ class SelectTrainedExpertisesScreenCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isSelected = selecteds.any((s) => s.id == expertise.id);
-    return SizedBox(
-      height: T20UI.inputHeight,
-      child: Card(
-        child: InkWell(
-          borderRadius: T20UI.borderRadius,
-          onTap: () => onTap(expertise),
-          child: Padding(
-            padding: const EdgeInsets.only(
-                left: T20UI.smallSpaceSize, right: T20UI.smallSpaceSize),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(
+          height: T20UI.inputHeight,
+          child: Card(
+            child: InkWell(
+              borderRadius: T20UI.borderRadius,
+              onTap: () => onTap(expertise),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: T20UI.smallSpaceSize, right: T20UI.spaceSize),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    T20UI.smallSpaceWidth,
-                    Text(
-                      expertise.name.capitalize(),
-                      style: const TextStyle(fontSize: 16),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        T20UI.smallSpaceWidth,
+                        Text(
+                          expertise.name.capitalize(),
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
+                    CustomChecked(
+                      value: isSelected,
+                      isEnabledToTap: false,
                     ),
                   ],
                 ),
-                CustomChecked(
-                  value: isSelected,
-                  isEnabledToTap: false,
-                ),
-              ],
+              ),
             ),
           ),
         ),
-      ),
+        T20UI.smallSpaceHeight,
+      ],
     );
   }
 }

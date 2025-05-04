@@ -98,7 +98,7 @@ class _SelectMenacesScreenState extends State<SelectMenacesScreen> {
                     ],
                   ),
                 )
-              : ListView.separated(
+              : ListView.builder(
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
                   primary: false,
@@ -106,7 +106,6 @@ class _SelectMenacesScreenState extends State<SelectMenacesScreen> {
                     top: T20UI.spaceSize,
                   ),
                   itemCount: menaces.length,
-                  separatorBuilder: T20UI.separatorBuilderVertical,
                   itemBuilder: (_, index) {
                     return SelectMenacesScreenCard(
                       menace: menaces[index],

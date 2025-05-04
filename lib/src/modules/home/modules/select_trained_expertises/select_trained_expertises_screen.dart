@@ -54,7 +54,7 @@ class _SelectTrainedExpertisesScreenState
 
           final selecteds = _store.selectedExpertises;
 
-          return ListView.separated(
+          return ListView.builder(
             padding: const EdgeInsets.symmetric(
               horizontal: T20UI.screenContentSpaceSize,
               vertical: T20UI.spaceSize,
@@ -63,7 +63,7 @@ class _SelectTrainedExpertisesScreenState
             primary: false,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: expertises.length,
-            separatorBuilder: T20UI.separatorBuilderVertical,
+            itemExtent: T20UI.inputHeight + T20UI.smallSpaceSize,
             itemBuilder: (_, index) {
               return SelectTrainedExpertisesScreenCard(
                 expertise: expertises[index],

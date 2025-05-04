@@ -24,43 +24,48 @@ class TokenCard extends StatelessWidget {
     final isSelected = assetPath == selected;
     final label =
         assetPath.split('/').last.replaceAll('_', ' ').replaceAll('.png', '');
-    return InkWell(
-      borderRadius: BorderRadius.circular(20000),
-      onTap: () => onTap(assetPath),
-      child: SizedBox(
-        height: size + 10,
-        width: size + 10,
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 2.5),
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: ClipOval(
-                  child: Image.asset(
-                    assetPath,
-                    height: size,
-                    width: size,
-                    fit: BoxFit.cover,
-                    cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
-                        context, size),
-                    cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                        context, size),
+    return Row(
+      children: [
+        InkWell(
+          borderRadius: BorderRadius.circular(20000),
+          onTap: () => onTap(assetPath),
+          child: SizedBox(
+            height: size + 10,
+            width: size + 10,
+            child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 2.5),
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: ClipOval(
+                      child: Image.asset(
+                        assetPath,
+                        height: size,
+                        width: size,
+                        fit: BoxFit.cover,
+                        cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
+                            context, size),
+                        cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
+                            context, size),
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                if (isSelected)
+                  TokenCardBord(
+                    size: size,
+                    isMenace: isMenace,
+                  ),
+                TokenCardTag(
+                  tag: label == 'Anao' ? 'Anão' : label,
+                )
+              ],
             ),
-            if (isSelected)
-              TokenCardBord(
-                size: size,
-                isMenace: isMenace,
-              ),
-            TokenCardTag(
-              tag: label == 'Anao' ? 'Anão' : label,
-            )
-          ],
+          ),
         ),
-      ),
+        const SizedBox(width: 4)
+      ],
     );
   }
 }
