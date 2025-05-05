@@ -2,7 +2,10 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
+import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/entities/board/board_adapters.dart';
+import 'package:tormenta20/src/shared/entities/board/board_player.dart';
+import 'package:tormenta20/src/shared/entities/board/board_player_adapters.dart';
 import 'package:tormenta20/src/shared/utils/backup_utils.dart';
 import 'package:tormenta20/src/shared/utils/crypto_utils.dart';
 import 'package:tormenta20/src/shared/widgets/import_file_bottomsheet/import_file_storage_service.dart';
@@ -37,6 +40,15 @@ class ImportFileStore extends ChangeNotifier {
       _validate(File(result.paths.first!));
     }
   }
+
+  final List<Board> _boards = [];
+  List<Board> get boards => _boards;
+
+  Board? _boardSelected;
+  Board? get boardSelected => _boardSelected;
+
+  bool _isCharacterMode = false;
+  bool get isCharacterMode => _isCharacterMode;
 
   bool? _isValid;
   bool? get isValid => _isValid;
@@ -79,8 +91,21 @@ class ImportFileStore extends ChangeNotifier {
       _title = 'Convite para a mesa';
     }
 
+    if (json.containsKey('character')) {
+      _title = 'Personagem';
+      _data = json['character'];
+      await _getBoards();
+      _isCharacterMode = true;
+    }
+
     _isValid = true;
     notifyListeners();
+  }
+
+  Future<void> _getBoards() async {
+    await _storageService.getBoards().then((resp) {
+      _boards.addAll(resp.boards ?? []);
+    });
   }
 
   Future<bool> import() async {
@@ -110,5 +135,13 @@ class ImportFileStore extends ChangeNotifier {
     }
 
     return true;
+  }
+
+  Future<BoardPlayer?> createBoardPlayer() async {
+    if (_boardSelected == null || _data == null) return null;
+
+    _data!.addAll({'board_uuid': _boardSelected!.uuid});
+
+    return BoardPlayerAdapters.fromJson(_data!);
   }
 }

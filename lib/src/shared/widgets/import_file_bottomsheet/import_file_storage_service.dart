@@ -14,4 +14,8 @@ class ImportFileStorageService extends DriftStorageService {
           linksToDelete: linksToDelete,
         );
   }
+
+  Future<({List<Board>? boards, Failure? failure})> getBoards() async {
+    return super.dataBase.boardDAO.getBoardsForMaster();
+  }
 }
