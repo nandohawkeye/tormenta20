@@ -79,7 +79,6 @@ class AddMultiField<T extends EntityBase> extends StatelessWidget {
                           }
 
                           return ListView.separated(
-                            shrinkWrap: true,
                             padding: const EdgeInsets.only(
                               left: T20UI.smallSpaceSize +
                                   T20UI.screenContentSpaceSize,

@@ -28,7 +28,6 @@ class GrimorieCharactersList extends StatelessWidget {
               SizedBox(
                 height: T20UI.inputHeight,
                 child: ListView.separated(
-                  shrinkWrap: true,
                   padding: T20UI.horizontallScreenPadding,
                   scrollDirection: Axis.horizontal,
                   itemCount: characters.length,

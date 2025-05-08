@@ -18,7 +18,6 @@ class MenaceTabs extends StatelessWidget {
       height: T20UI.inputHeight,
       child: ListView(
         padding: T20UI.horizontallScreenPadding,
-        shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         children: [
           MenaceTabCard(

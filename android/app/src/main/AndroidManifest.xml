@@ -18,7 +18,7 @@
 
 
     <application
-        android:label="tormenta20"
+        android:label="T20"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon"
         android:allowBackup="false"

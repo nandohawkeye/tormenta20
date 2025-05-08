@@ -106,7 +106,6 @@ class _AddEditBoardPlayerBroodSelectorState extends State<DivinitySelector> {
                         valueListenable: _selected,
                         builder: (_, selected, __) {
                           return ListView.builder(
-                            shrinkWrap: true,
                             padding: const EdgeInsets.only(
                               left: T20UI.screenContentSpaceSize +
                                   T20UI.smallSpaceSize,

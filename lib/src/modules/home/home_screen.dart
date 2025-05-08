@@ -95,10 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
         final currentIndex = _store.index;
         return Scaffold(
           appBar: AppBar(
-            title: const AppLogo(
-              height: 42,
-              width: 180,
-            ),
+            title: const AppLogo(width: 160),
             actions: [
               if (currentIndex != 2)
                 AnimationConfiguration.synchronized(

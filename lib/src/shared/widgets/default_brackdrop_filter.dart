@@ -11,17 +11,21 @@ class DefaultBrackdropFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimationConfiguration.synchronized(
-      child: ScaleAnimation(
-        duration: T20UI.defaultDurationAnimation,
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 6.0, sigmaY: 6.0),
-          child: GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: Container(
-              color: palette.accent.withValues(alpha: .12),
-              height: context.height,
-              width: context.width,
+    return RepaintBoundary(
+      child: AnimationConfiguration.synchronized(
+        child: ScaleAnimation(
+          duration: T20UI.defaultDurationAnimation,
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+            child: GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: SizedBox(
+                height: context.height,
+                width: context.width,
+                child: ColoredBox(
+                  color: palette.accent.withValues(alpha: .12),
+                ),
+              ),
             ),
           ),
         ),

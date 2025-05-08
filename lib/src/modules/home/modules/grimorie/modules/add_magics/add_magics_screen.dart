@@ -68,7 +68,6 @@ class _AddMagicsScreenState extends State<AddMagicsScreen> {
                       )
                     : ListView.separated(
                         padding: T20UI.allPadding,
-                        shrinkWrap: true,
                         itemCount: _store.magics.length,
                         separatorBuilder: T20UI.separatorBuilderVertical,
                         itemBuilder: (_, index) => AddMagicsCard(

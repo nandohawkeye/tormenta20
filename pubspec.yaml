@@ -86,17 +86,14 @@ flutter_icons:
   image_path_android: "assets/images/icon_logo_t20.png"
   image_path_ios: "assets/images/icon_logo_t20.png"
   adaptive_icon_background: "#000000"
-  adaptive_icon_foreground: "assets/images/icon_logo_t20.png"
-
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-
-# The following section is specific to Flutter packages.
+  adaptive_icon_foreground: "assets/images/icon_logo_adaptative.png"
 
 flutter_native_splash:
   color: "#000000"
-  # image: assets/images/logo.png
+  image: assets/images/splash.png
   android_12:
+    image: assets/images/splash_clean.png
+    icon_background_color: "#000000"
     # The image parameter sets the splash screen icon image.  If this parameter is not specified,
     # the app's launcher icon will be used instead.
     # Please note that the splash screen will be clipped to a circle on the center of the screen.

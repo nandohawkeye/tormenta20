@@ -152,9 +152,6 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/banner.jpg
-  AssetGenImage get banner => const AssetGenImage('assets/images/banner.jpg');
-
   /// File path: assets/images/borda_token.png
   AssetGenImage get bordaToken =>
       const AssetGenImage('assets/images/borda_token.png');
@@ -172,10 +169,6 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/fire.png
   AssetGenImage get fire => const AssetGenImage('assets/images/fire.png');
-
-  /// File path: assets/images/icon_logo_t20.png
-  AssetGenImage get iconLogoT20 =>
-      const AssetGenImage('assets/images/icon_logo_t20.png');
 
   /// File path: assets/images/instagram.png
   AssetGenImage get instagram =>
@@ -207,21 +200,23 @@ class $AssetsImagesGen {
   AssetGenImage get spellbook =>
       const AssetGenImage('assets/images/spellbook.png');
 
+  /// File path: assets/images/taverna.png
+  AssetGenImage get taverna => const AssetGenImage('assets/images/taverna.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
-        banner,
         bordaToken,
         bordaTokenAmeaca,
         developer,
         fire,
-        iconLogoT20,
         instagram,
         jambo,
         knight,
         logo,
         manuscript,
         pdf,
-        spellbook
+        spellbook,
+        taverna
       ];
 }
 
@@ -829,85 +824,85 @@ class $AssetsImagesMenacesGen {
 class $AssetsImagesPantheonGen {
   const $AssetsImagesPantheonGen();
 
-  /// File path: assets/images/pantheon/Aharadak.jpg
+  /// File path: assets/images/pantheon/Aharadak.png
   AssetGenImage get aharadak =>
-      const AssetGenImage('assets/images/pantheon/Aharadak.jpg');
+      const AssetGenImage('assets/images/pantheon/Aharadak.png');
 
-  /// File path: assets/images/pantheon/Allihanna.jpg
+  /// File path: assets/images/pantheon/Allihanna.png
   AssetGenImage get allihanna =>
-      const AssetGenImage('assets/images/pantheon/Allihanna.jpg');
+      const AssetGenImage('assets/images/pantheon/Allihanna.png');
 
-  /// File path: assets/images/pantheon/Arsenal.jpg
+  /// File path: assets/images/pantheon/Arsenal.png
   AssetGenImage get arsenal =>
-      const AssetGenImage('assets/images/pantheon/Arsenal.jpg');
+      const AssetGenImage('assets/images/pantheon/Arsenal.png');
 
-  /// File path: assets/images/pantheon/Azgher.jpg
+  /// File path: assets/images/pantheon/Azgher.png
   AssetGenImage get azgher =>
-      const AssetGenImage('assets/images/pantheon/Azgher.jpg');
+      const AssetGenImage('assets/images/pantheon/Azgher.png');
 
-  /// File path: assets/images/pantheon/Hynnin.jpg
+  /// File path: assets/images/pantheon/Hynnin.png
   AssetGenImage get hynnin =>
-      const AssetGenImage('assets/images/pantheon/Hynnin.jpg');
+      const AssetGenImage('assets/images/pantheon/Hynnin.png');
 
-  /// File path: assets/images/pantheon/Kallyadranoch.jpg
+  /// File path: assets/images/pantheon/Kallyadranoch.png
   AssetGenImage get kallyadranoch =>
-      const AssetGenImage('assets/images/pantheon/Kallyadranoch.jpg');
+      const AssetGenImage('assets/images/pantheon/Kallyadranoch.png');
 
-  /// File path: assets/images/pantheon/Khalmir.jpg
+  /// File path: assets/images/pantheon/Khalmir.png
   AssetGenImage get khalmir =>
-      const AssetGenImage('assets/images/pantheon/Khalmir.jpg');
+      const AssetGenImage('assets/images/pantheon/Khalmir.png');
 
-  /// File path: assets/images/pantheon/Lena.jpg
+  /// File path: assets/images/pantheon/Lena.png
   AssetGenImage get lena =>
-      const AssetGenImage('assets/images/pantheon/Lena.jpg');
+      const AssetGenImage('assets/images/pantheon/Lena.png');
 
-  /// File path: assets/images/pantheon/Lin-Wu.jpg
+  /// File path: assets/images/pantheon/Lin-Wu.png
   AssetGenImage get linWu =>
-      const AssetGenImage('assets/images/pantheon/Lin-Wu.jpg');
+      const AssetGenImage('assets/images/pantheon/Lin-Wu.png');
 
-  /// File path: assets/images/pantheon/Marah.jpg
+  /// File path: assets/images/pantheon/Marah.png
   AssetGenImage get marah =>
-      const AssetGenImage('assets/images/pantheon/Marah.jpg');
+      const AssetGenImage('assets/images/pantheon/Marah.png');
 
-  /// File path: assets/images/pantheon/Megalokk.jpg
+  /// File path: assets/images/pantheon/Megalokk.png
   AssetGenImage get megalokk =>
-      const AssetGenImage('assets/images/pantheon/Megalokk.jpg');
+      const AssetGenImage('assets/images/pantheon/Megalokk.png');
 
-  /// File path: assets/images/pantheon/Nimb.jpg
+  /// File path: assets/images/pantheon/Nimb.png
   AssetGenImage get nimb =>
-      const AssetGenImage('assets/images/pantheon/Nimb.jpg');
+      const AssetGenImage('assets/images/pantheon/Nimb.png');
 
-  /// File path: assets/images/pantheon/Oceano.jpg
+  /// File path: assets/images/pantheon/Oceano.png
   AssetGenImage get oceano =>
-      const AssetGenImage('assets/images/pantheon/Oceano.jpg');
+      const AssetGenImage('assets/images/pantheon/Oceano.png');
 
-  /// File path: assets/images/pantheon/Ssszaas.jpg
+  /// File path: assets/images/pantheon/Ssszaas.png
   AssetGenImage get ssszaas =>
-      const AssetGenImage('assets/images/pantheon/Ssszaas.jpg');
+      const AssetGenImage('assets/images/pantheon/Ssszaas.png');
 
-  /// File path: assets/images/pantheon/Tanna-Toh.jpg
+  /// File path: assets/images/pantheon/Tanna-Toh.png
   AssetGenImage get tannaToh =>
-      const AssetGenImage('assets/images/pantheon/Tanna-Toh.jpg');
+      const AssetGenImage('assets/images/pantheon/Tanna-Toh.png');
 
-  /// File path: assets/images/pantheon/Tenebra.jpg
+  /// File path: assets/images/pantheon/Tenebra.png
   AssetGenImage get tenebra =>
-      const AssetGenImage('assets/images/pantheon/Tenebra.jpg');
+      const AssetGenImage('assets/images/pantheon/Tenebra.png');
 
-  /// File path: assets/images/pantheon/Thwor.jpg
+  /// File path: assets/images/pantheon/Thwor.png
   AssetGenImage get thwor =>
-      const AssetGenImage('assets/images/pantheon/Thwor.jpg');
+      const AssetGenImage('assets/images/pantheon/Thwor.png');
 
-  /// File path: assets/images/pantheon/Thyatis.jpg
+  /// File path: assets/images/pantheon/Thyatis.png
   AssetGenImage get thyatis =>
-      const AssetGenImage('assets/images/pantheon/Thyatis.jpg');
+      const AssetGenImage('assets/images/pantheon/Thyatis.png');
 
-  /// File path: assets/images/pantheon/Valkaria.jpg
+  /// File path: assets/images/pantheon/Valkaria.png
   AssetGenImage get valkaria =>
-      const AssetGenImage('assets/images/pantheon/Valkaria.jpg');
+      const AssetGenImage('assets/images/pantheon/Valkaria.png');
 
-  /// File path: assets/images/pantheon/Wynna.jpg
+  /// File path: assets/images/pantheon/Wynna.png
   AssetGenImage get wynna =>
-      const AssetGenImage('assets/images/pantheon/Wynna.jpg');
+      const AssetGenImage('assets/images/pantheon/Wynna.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [

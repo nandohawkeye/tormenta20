@@ -72,7 +72,6 @@ class SelectorOnlyField<T> extends StatelessWidget {
                           final selected = store.data;
 
                           return ListView.separated(
-                            shrinkWrap: true,
                             padding: const EdgeInsets.symmetric(
                               horizontal: T20UI.screenContentSpaceSize +
                                   T20UI.smallSpaceSize,

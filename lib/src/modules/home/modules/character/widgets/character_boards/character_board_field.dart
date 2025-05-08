@@ -31,7 +31,6 @@ class CharacterBoardField extends StatelessWidget {
           height: T20UI.inputHeight,
           width: double.infinity,
           child: ListView.separated(
-            shrinkWrap: true,
             padding: T20UI.horizontallScreenPadding,
             scrollDirection: Axis.horizontal,
             separatorBuilder: T20UI.separatorBuilderHorizontal,

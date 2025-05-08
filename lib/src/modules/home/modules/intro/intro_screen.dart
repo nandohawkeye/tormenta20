@@ -42,7 +42,7 @@ class _IntroScreenState extends State<IntroScreen> {
       child: Column(
         children: [
           verticalSpace,
-          const RepaintBoundary(child: AppLogo(width: 180)),
+          const RepaintBoundary(child: AppLogo(width: 160)),
           Expanded(
             child: RepaintBoundary(
               child: PageView(

@@ -81,11 +81,10 @@ class _AddEditBoardPlayerTokensState extends State<TokenSelector> {
           final isEmpty = filePath == null && assetPath == null;
 
           return ListView.builder(
-            shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             padding: T20UI.horizontalPadding,
             itemCount: widget.allTokens.length + 2,
-            itemExtent: widget.size + 10 + 4,
+            itemExtent: widget.size + 14,
             itemBuilder: (_, index) {
               if (index == 0) {
                 return EmptyTokenSelector(

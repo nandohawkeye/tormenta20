@@ -66,7 +66,6 @@ class SelectorMultiField<T> extends StatelessWidget {
                         builder: (_, __) {
                           final selecteds = store.data;
                           return ListView.separated(
-                            shrinkWrap: true,
                             padding: const EdgeInsets.symmetric(
                               horizontal: T20UI.screenContentSpaceSize +
                                   T20UI.smallSpaceSize,

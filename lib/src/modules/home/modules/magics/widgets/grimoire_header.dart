@@ -72,7 +72,6 @@ class GrimoireHeader extends StatelessWidget {
               : SizedBox(
                   height: listHeight,
                   child: ListView.builder(
-                    shrinkWrap: true,
                     padding: const EdgeInsets.symmetric(
                       horizontal: T20UI.screenContentSpaceSize,
                     ),

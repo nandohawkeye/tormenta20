@@ -34,7 +34,7 @@ class BoardViewBanner extends StatelessWidget {
                       width: width,
                       fit: BoxFit.cover,
                       errorBuilder: (_, __, ___) => Image.asset(
-                        Assets.images.banner.path,
+                        Assets.images.taverna.path,
                         height: height,
                         width: width,
                         fit: BoxFit.cover,
@@ -45,7 +45,7 @@ class BoardViewBanner extends StatelessWidget {
                       ),
                     )
                   : Image.asset(
-                      Assets.images.banner.path,
+                      Assets.images.taverna.path,
                       height: height,
                       width: width,
                       fit: BoxFit.cover,
