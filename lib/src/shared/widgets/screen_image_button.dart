@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 
 class ScreenImageButton extends StatelessWidget {
   const ScreenImageButton({
     super.key,
     required this.imageAsset,
-    required this.title,
+    this.title,
     required this.subtitle,
     required this.onTap,
     this.imageSize = 60,
@@ -17,12 +19,14 @@ class ScreenImageButton extends StatelessWidget {
     this.hasBorder = false,
     this.background,
     this.borderRadius,
+    this.onTapRemove,
   });
 
   final String imageAsset;
-  final String title;
+  final String? title;
   final String subtitle;
   final Function() onTap;
+  final Function()? onTapRemove;
   final double imageSize;
   final double titleSize;
   final double subtitleSize;
@@ -65,15 +69,22 @@ class ScreenImageButton extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                        color: palette.accent,
-                        fontFamily: FontFamily.tormenta,
-                        fontSize: titleSize,
+                    if (title != null)
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title!,
+                            style: TextStyle(
+                              color: palette.accent,
+                              fontFamily: FontFamily.tormenta,
+                              fontSize: titleSize,
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                        ],
                       ),
-                    ),
-                    const SizedBox(height: 6),
                     Text(
                       subtitle,
                       maxLines: 4,
@@ -85,6 +96,18 @@ class ScreenImageButton extends StatelessWidget {
                   ],
                 ),
               ),
+              if (onTapRemove != null)
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    T20UI.spaceWidth,
+                    SimpleButton(
+                      backgroundColor: palette.accent.withValues(alpha: .1),
+                      icon: FontAwesomeIcons.xmark,
+                      onTap: onTapRemove!,
+                    )
+                  ],
+                )
             ],
           ),
         ),

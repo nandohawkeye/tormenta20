@@ -1,19 +1,13 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
-import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/home_screen_store.dart';
 import 'package:tormenta20/src/modules/home/modules/about/about_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/init/init_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/magics_screen.dart';
-import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
-import 'package:tormenta20/src/modules/home/widgets/tip_home_bottomsheet/tip_home_bottomsheet.dart';
 import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/app_logo.dart';
 import 'package:tormenta20/src/shared/widgets/import_file_bottomsheet/import_file_bottomsheet.dart';
@@ -80,13 +74,6 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void _openTypeBotomSheet() {
-    BottomsheetUtils.show(
-      context: context,
-      child: const TipHomeBottomsheet(),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
@@ -96,20 +83,14 @@ class _HomeScreenState extends State<HomeScreen> {
         return Scaffold(
           appBar: AppBar(
             title: const AppLogo(width: 160),
-            actions: [
-              if (currentIndex != 2)
-                AnimationConfiguration.synchronized(
-                  duration: T20UI.defaultDurationAnimation,
-                  child: FadeInAnimation(
-                    child: SimpleButton(
-                      icon: FontAwesomeIcons.solidLightbulb,
-                      backgroundColor: palette.background,
-                      iconSize: 20,
-                      onTap: _openTypeBotomSheet,
-                    ),
-                  ),
-                ),
-            ],
+            // actions: [
+            //   SimpleButton(
+            //     icon: FontAwesomeIcons.shareNodes,
+            //     backgroundColor: palette.background,
+            //     iconSize: 24,
+            //     onTap: () {},
+            //   )
+            // ],
           ),
           body: _pages[currentIndex],
           bottomNavigationBar: BottomNavigationBar(

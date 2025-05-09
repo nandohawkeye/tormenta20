@@ -13,6 +13,7 @@ class AboutSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const space = T20UI.spaceHeight;
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +42,7 @@ class AboutSettings extends StatelessWidget {
             style: TextStyle(fontSize: 12),
           ),
         ),
-        T20UI.spaceHeight,
+        space,
         Padding(
           padding: T20UI.horizontallScreenPadding,
           child: AboutSettingsBackupCard(
@@ -56,26 +57,26 @@ class AboutSettings extends StatelessWidget {
             },
           ),
         ),
-        T20UI.spaceHeight,
+        space,
         const Divider(),
-        T20UI.spaceHeight,
+        space,
         const Padding(
           padding: T20UI.horizontalPadding,
           child: Labels('Modo'),
         ),
-        T20UI.spaceHeight,
+        space,
         const Padding(
           padding: T20UI.horizontallScreenPadding,
           child: AboutSettingsSelectorMode(),
         ),
-        T20UI.spaceHeight,
+        space,
         const Divider(),
-        T20UI.spaceHeight,
+        space,
         const Padding(
           padding: T20UI.horizontalPadding,
           child: Labels('Botão de voltar'),
         ),
-        T20UI.spaceHeight,
+        space,
         const Padding(
           padding: T20UI.horizontallScreenPadding,
           child: AboutBackButtonSwitch(),

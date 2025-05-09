@@ -13,6 +13,7 @@ import 'package:tormenta20/src/modules/home/modules/init/widgets/init_add_option
 import 'package:tormenta20/src/modules/home/modules/init/widgets/init_board_field.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/init_character_field.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/init_menace_field.dart';
+import 'package:tormenta20/src/modules/home/modules/init/widgets/init_tip_field.dart';
 import 'package:tormenta20/src/modules/home/modules/menace/menace_screen.dart';
 import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
@@ -109,6 +110,7 @@ class InitScreen extends StatelessWidget {
             InitBoardField(),
             InitCharacterField(),
             InitMenaceField(),
+            InitTipField(),
             SizedBox(height: 100),
           ],
         ),

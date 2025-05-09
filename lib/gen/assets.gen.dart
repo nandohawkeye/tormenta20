@@ -203,6 +203,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/taverna.png
   AssetGenImage get taverna => const AssetGenImage('assets/images/taverna.png');
 
+  /// File path: assets/images/tip.png
+  AssetGenImage get tip => const AssetGenImage('assets/images/tip.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         bordaToken,
@@ -216,7 +219,8 @@ class $AssetsImagesGen {
         manuscript,
         pdf,
         spellbook,
-        taverna
+        taverna,
+        tip
       ];
 }
 
