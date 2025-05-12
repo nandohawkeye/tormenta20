@@ -83,16 +83,16 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon" 
   ios: true
-  image_path_android: "assets/images/icon_logo_t20.png"
-  image_path_ios: "assets/images/icon_logo_t20.png"
+  image_path_android: "assets/images/logo_t20.png"
+  image_path_ios: "assets/images/logo_t20.png"
   adaptive_icon_background: "#000000"
-  adaptive_icon_foreground: "assets/images/icon_logo_adaptative.png"
+  adaptive_icon_foreground: "assets/images/logo_t20_adaptative.png"
 
 flutter_native_splash:
   color: "#000000"
-  image: assets/images/splash.png
+  image: assets/images/logo_t20.png
   android_12:
-    image: assets/images/splash_clean.png
+    image: assets/images/logo_t20_adaptative.png
     icon_background_color: "#000000"
     # The image parameter sets the splash screen icon image.  If this parameter is not specified,
     # the app's launcher icon will be used instead.
