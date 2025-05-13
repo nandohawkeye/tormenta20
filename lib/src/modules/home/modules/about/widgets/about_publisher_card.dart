@@ -3,7 +3,6 @@ import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/modules/home/modules/about/widgets/about_publisher_card_links.dart';
 import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 import 'package:tormenta20/src/shared/utils/url_utils.dart';
 
@@ -77,7 +76,7 @@ class AboutPublisherCard extends StatelessWidget {
                           ),
                           const SizedBox(height: 4),
                           const Text(
-                            'Conheça mais sobre a editora Jambô clicando aqui e conhecendo suas redes sociais abaixo',
+                            'Conheça mais sobre a editora Jambô, a criadora do universo Tormenta 20 e vários outros mundos, clicando aqui!',
                             maxLines: 10,
                             style: TextStyle(fontWeight: FontWeight.w500),
                           ),
@@ -88,7 +87,6 @@ class AboutPublisherCard extends StatelessWidget {
                 ),
               ),
             ),
-            const AboutPublisherCardLinks(),
           ],
         ),
       ),

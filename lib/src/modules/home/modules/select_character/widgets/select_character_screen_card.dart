@@ -142,16 +142,6 @@ class SelectCharacterScreenCard extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 12, color: palette.textSecundary),
                         ),
-                        T20UI.spaceWidth,
-                        Icon(FontAwesomeIcons.solidEye,
-                            size: 12, color: palette.textSecundary),
-                        const SizedBox(width: 4),
-                        Text(
-                          character.perception.toString().padLeft(2, '0'),
-                          maxLines: 2,
-                          style: TextStyle(
-                              fontSize: 12, color: palette.textSecundary),
-                        ),
                       ],
                     )
                   ],

@@ -26,7 +26,6 @@ import 'package:tormenta20/src/shared/widgets/textfields/displacements_textfield
 import 'package:tormenta20/src/shared/widgets/textfields/life_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/textfields/mana_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/textfields/name_textfield.dart';
-import 'package:tormenta20/src/shared/widgets/textfields/perception_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/textfields/senses_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/token_selector/token_selector.dart';
 
@@ -133,22 +132,11 @@ class _AddEditCharacterState extends State<AddEditCharacter> {
             T20UI.spaceHeight,
             Padding(
               padding: T20UI.horizontallScreenPadding,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: PerceptionTextfield(
-                      onchange: _controller.onChangePerception,
-                      initialPerception: widget.initial?.perception,
-                    ),
-                  ),
-                  T20UI.spaceWidth,
-                  Expanded(
-                    child: DefenseTextField(
-                      onchange: _controller.onChangeDefense,
-                      initialDefense: widget.initial?.defense,
-                    ),
-                  ),
-                ],
+              child: DefenseTextField(
+                label: 'Defesa base',
+                helperText: 'será somada com DES e o bônus de armadura/escudo',
+                onchange: _controller.onChangeDefense,
+                initialDefense: widget.initial?.defense ?? 10,
               ),
             ),
             T20UI.spaceHeight,

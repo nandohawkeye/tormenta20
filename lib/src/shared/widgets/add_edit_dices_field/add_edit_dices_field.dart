@@ -178,8 +178,9 @@ class _AddEditDicesFieldState extends State<AddEditDicesField> {
                                 final quantity = _quantEditController.text;
                                 final diceValue = _dicesEditController.text;
 
-                                if (quantity.isEmpty || diceValue.isEmpty)
+                                if (quantity.isEmpty || diceValue.isEmpty) {
                                   return;
+                                }
 
                                 final dice =
                                     DiceAdapters.create(quantity, diceValue);

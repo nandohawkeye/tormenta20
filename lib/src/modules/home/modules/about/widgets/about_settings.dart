@@ -3,8 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_back_button_switch.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_settings_backup_card.dart';
-import 'package:tormenta20/src/modules/home/modules/about/widgets/about_settings_selector_mode/about_settings_selector_mode.dart';
-import 'package:tormenta20/src/modules/home/widgets/labels.dart';
 import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/import_file_bottomsheet/import_file_bottomsheet.dart';
 
@@ -56,25 +54,6 @@ class AboutSettings extends StatelessWidget {
               );
             },
           ),
-        ),
-        space,
-        const Divider(),
-        space,
-        const Padding(
-          padding: T20UI.horizontalPadding,
-          child: Labels('Modo'),
-        ),
-        space,
-        const Padding(
-          padding: T20UI.horizontallScreenPadding,
-          child: AboutSettingsSelectorMode(),
-        ),
-        space,
-        const Divider(),
-        space,
-        const Padding(
-          padding: T20UI.horizontalPadding,
-          child: Labels('Botão de voltar'),
         ),
         space,
         const Padding(

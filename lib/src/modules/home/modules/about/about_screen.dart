@@ -3,6 +3,7 @@ import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/about/about_custom_tab_bar.dart';
 import 'package:tormenta20/src/modules/home/modules/about/about_store.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_screen_infos.dart';
+import 'package:tormenta20/src/modules/home/modules/about/widgets/about_screen_tips.dart';
 import 'package:tormenta20/src/modules/home/modules/about/widgets/about_settings.dart';
 
 class AboutScreen extends StatefulWidget {
@@ -49,6 +50,7 @@ class _AboutScreenState extends State<AboutScreen> {
               children: const [
                 AboutScreenInfos(),
                 AboutSettings(),
+                AboutScreenTips()
               ],
             ),
           )

@@ -101,7 +101,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 21;
+  int get schemaVersion => 22;
 
   @override
   MigrationStrategy get migration {
@@ -245,6 +245,15 @@ class AppDatabase extends _$AppDatabase {
 
             if (from < 21) {
               await m.addColumn(tibarsTable, tibarsTable.hasInitialRoll);
+            }
+
+            if (from < 22) {
+              await m.drop(characterTable);
+              await m.drop(characterBoardTable);
+              await m.createTable(characterTable);
+              await m.createTable(characterBoardTable);
+              // await m.alterTable(TableMigration(characterBoardTable));
+              // await m.alterTable(TableMigration(characterTable));
             }
           },
         );

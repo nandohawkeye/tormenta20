@@ -1,4 +1,5 @@
 import 'package:tormenta20/src/shared/entities/board/board.dart';
+import 'package:tormenta20/src/shared/entities/board/board_player.dart';
 import 'package:tormenta20/src/shared/failures/failure.dart';
 import 'package:tormenta20/src/shared/services/drift_storage_service.dart';
 
@@ -13,6 +14,12 @@ class ImportFileStorageService extends DriftStorageService {
           materialsToDelete: materialsToDelete,
           linksToDelete: linksToDelete,
         );
+  }
+
+  Future<Failure?> saveBoardPlayer({
+    required BoardPlayer boardPlayer,
+  }) {
+    return super.dataBase.boardDAO.saveBoardPlayer(boardPlayer);
   }
 
   Future<({List<Board>? boards, Failure? failure})> getBoards() async {

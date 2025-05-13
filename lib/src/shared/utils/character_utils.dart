@@ -41,12 +41,12 @@ abstract class CharacterUtils {
     } else if (value == 'elfodomar') {
       return 'Elfo-do-mar';
     } else if (value.contains('sereiatritao')) {
-      return 'Sereia - Tritão';
+      return 'Sereia/Tritão';
     } else if (value.contains('silfide')) {
       return 'Sílfide';
     } else if (value.contains('suraggels')) {
       final last = value.split('_').last;
-      return 'Suraggels ($last)';
+      return last.capitalize();
     } else if (value.contains('anao')) {
       return 'Anão';
     } else {

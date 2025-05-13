@@ -19,7 +19,7 @@ class AboutSimpleLinkButton extends StatelessWidget {
         height: T20UI.inputHeight,
         width: T20UI.inputHeight,
         child: Card(
-          color: palette.selected,
+          color: palette.backgroundLevelTwo,
           child: InkWell(
             borderRadius: T20UI.borderRadius,
             onTap: onTap,

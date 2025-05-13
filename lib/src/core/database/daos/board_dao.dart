@@ -10,6 +10,7 @@ import 'package:tormenta20/src/core/database/tables/board_player_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_table.dart';
 import 'package:tormenta20/src/core/database/tables/character_board_table.dart';
 import 'package:tormenta20/src/core/database/tables/character_table.dart';
+import 'package:tormenta20/src/core/database/tables/classe_character_table.dart';
 import 'package:tormenta20/src/core/database/tables/menace_link_board_table.dart';
 import 'package:tormenta20/src/core/database/tables/menace_table.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
@@ -46,6 +47,7 @@ part 'board_dao.g.dart';
   MenaceTable,
   CharacterBoardTable,
   CharacterTable,
+  ClasseCharacterTable,
 ])
 class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
   BoardDAO(super.db);
@@ -655,6 +657,12 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
                 ),
               ),
               leftOuterJoin(
+                classeCharacterTable,
+                classeCharacterTable.characterUuid.equalsExp(
+                  characterBoardTable.boarduuid,
+                ),
+              ),
+              leftOuterJoin(
                 boardLinkTable,
                 boardTable.uuid.equalsExp(
                   boardLinkTable.boardUuid,
@@ -712,6 +720,8 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
                   final combatData = row.readTableOrNull(boardCombatTable);
                   final characterBoardData =
                       row.readTableOrNull(characterBoardTable);
+                  final classeCharacterData =
+                      row.readTableOrNull(classeCharacterTable);
                   final menaceLinkData =
                       row.readTableOrNull(menaceLinkBoardTable);
                   final menaceData = row.readTableOrNull(menaceTable);
@@ -764,6 +774,14 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
                     boardsDTO[boardData.uuid]!
                         .characterData
                         .add(characterBoardData);
+                  }
+
+                  if (classeCharacterData != null &&
+                      !(boardsDTO[boardData.uuid]!.classesData.any(
+                          (data) => data.uuid == classeCharacterData.uuid))) {
+                    boardsDTO[boardData.uuid]!
+                        .classesData
+                        .add(classeCharacterData);
                   }
 
                   if (playerData != null &&

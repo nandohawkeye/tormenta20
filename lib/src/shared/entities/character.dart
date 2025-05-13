@@ -22,7 +22,6 @@ class Character extends EntityBase {
   final String? imagePath;
   final String? imageAsset;
   final String? displacement;
-  final int? perception;
   final int? strength;
   final int? dexterity;
   final int? constitution;
@@ -57,7 +56,6 @@ class Character extends EntityBase {
     required this.mana,
     required this.creatureSize,
     this.displacement,
-    this.perception,
     this.strength,
     this.dexterity,
     this.constitution,
@@ -104,7 +102,6 @@ class Character extends EntityBase {
       imageAsset: imageAsset,
       intelligence: intelligence,
       imagePath: imagePath,
-      perception: perception,
       senses: senses,
       strength: strength,
       wisdom: wisdom,
@@ -127,7 +124,6 @@ class Character extends EntityBase {
       other.mana == mana &&
       other.creatureSize == creatureSize &&
       other.displacement == displacement &&
-      other.perception == perception &&
       other.strength == strength &&
       other.dexterity == dexterity &&
       other.constitution == constitution &&
@@ -160,7 +156,6 @@ class Character extends EntityBase {
       mana.hashCode ^
       creatureSize.hashCode ^
       displacement.hashCode ^
-      perception.hashCode ^
       strength.hashCode ^
       dexterity.hashCode ^
       constitution.hashCode ^

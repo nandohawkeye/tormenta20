@@ -40,6 +40,7 @@ class AddEditCharacterController {
       originsStore = AddEditCharacterOriginsStore([]);
       trainedExpertisesStore = AddEditCharacterTrainedExpertisesStore([]);
       alignmentStore = AddEditCharacterAlignmentStore(null);
+      _defense = 10;
     } else {
       _isEdit = true;
       _uuid = initial.uuid;
@@ -50,7 +51,6 @@ class AddEditCharacterController {
       _senses = initial.senses;
       _displacement = initial.displacement;
       _defense = initial.defense;
-      _perception = initial.perception;
       _imageAsset = initial.imageAsset;
       _imagePath = initial.imagePath;
       _divinityId = initial.divinityId;
@@ -162,14 +162,6 @@ class AddEditCharacterController {
     _mana = int.parse(value);
   }
 
-  int? _perception;
-  int? get perception => _perception;
-  void onChangePerception(String? value) {
-    if (value == null) return;
-
-    _perception = int.parse(value);
-  }
-
   int? _defense;
   int? get defense => _defense;
   void onChangeDefense(String? value) {
@@ -217,7 +209,6 @@ class AddEditCharacterController {
         defense: _defense!,
         life: _life!,
         mana: _mana!,
-        perception: _perception,
         strength: atributeDicesStore.dices
             .firstWhere((d) => d.atribute == Atribute.strength)
             .atributeValue,
@@ -262,7 +253,6 @@ class AddEditCharacterController {
         defense: _defense!,
         life: _life!,
         mana: _mana!,
-        perception: _perception,
         strength: strengthStore.value,
         dexterity: dexterityStore.value,
         constitution: constituionStore.value,

@@ -10,24 +10,32 @@ class AboutCustomTabBarItem extends StatelessWidget {
     required this.page,
     required this.currentPage,
     required this.changePage,
+    required this.mainAxisAlignment,
   });
 
   final String title;
   final int page;
   final int currentPage;
   final Function(int) changePage;
+  final MainAxisAlignment mainAxisAlignment;
 
   @override
   Widget build(BuildContext context) {
     final isSelected = page == currentPage;
     return Expanded(
-      child: InkWell(
-        borderRadius: T20UI.borderRadius,
-        onTap: () => changePage(page),
-        child: Labels(
-          title,
-          textColor: isSelected ? palette.textPrimary : palette.textDisable,
-        ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: mainAxisAlignment,
+        children: [
+          InkWell(
+            borderRadius: T20UI.borderRadius,
+            onTap: () => changePage(page),
+            child: Labels(
+              title,
+              textColor: isSelected ? palette.textPrimary : palette.textDisable,
+            ),
+          ),
+        ],
       ),
     );
   }

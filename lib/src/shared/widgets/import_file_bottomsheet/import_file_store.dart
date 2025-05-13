@@ -46,6 +46,10 @@ class ImportFileStore extends ChangeNotifier {
 
   Board? _boardSelected;
   Board? get boardSelected => _boardSelected;
+  void setSelectedBoard(Board? board) {
+    _boardSelected = board;
+    notifyListeners();
+  }
 
   bool _isCharacterMode = false;
   bool get isCharacterMode => _isCharacterMode;
@@ -109,20 +113,28 @@ class ImportFileStore extends ChangeNotifier {
   }
 
   Future<bool> import() async {
-    final data = _data;
-    if (data == null) return false;
+    if (_data == null) return false;
 
     _hasErrorImport = false;
     notifyListeners();
 
     try {
       if (_title.toLowerCase().contains('mesa')) {
-        final board = BoardAdapters.fronJson(data);
+        final board = BoardAdapters.fronJson(_data!);
         await _storageService.saveBoard(
           board: board,
           materialsToDelete: [],
           linksToDelete: [],
         );
+      }
+
+      if (_title.toLowerCase().contains('personagem')) {
+        if (boardSelected == null) return false;
+
+        _data!.addAll({'board_uuid': boardSelected!.uuid});
+
+        final player = BoardPlayerAdapters.fromJson(_data!);
+        await _storageService.saveBoardPlayer(boardPlayer: player);
       }
     } catch (e) {
       if (kDebugMode) {

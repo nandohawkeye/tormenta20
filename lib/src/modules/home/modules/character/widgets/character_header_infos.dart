@@ -68,19 +68,6 @@ class CharacterHeaderInfos extends StatelessWidget {
               style: TextStyle(
                   color: palette.textSecundary, fontWeight: FontWeight.w500),
             ),
-            T20UI.spaceWidth,
-            Icon(
-              FontAwesomeIcons.personRays,
-              size: 14,
-              color: palette.textSecundary,
-            ),
-            const SizedBox(width: 4),
-            Text(
-              character.perception.toString().padLeft(2, '0'),
-              maxLines: 2,
-              style: TextStyle(
-                  color: palette.textSecundary, fontWeight: FontWeight.w500),
-            ),
           ],
         ),
         if (character.senses?.isNotEmpty ?? false)

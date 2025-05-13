@@ -38,7 +38,6 @@ class BoardViewStore extends ChangeNotifier {
             _subCharacters ??= resp.character?.listen((data) {
               _boardCharacters.clear();
               _boardCharacters.addAll(data);
-              print('characters: ${_boardCharacters.length}');
 
               notifyListeners();
             });
@@ -79,7 +78,7 @@ class BoardViewStore extends ChangeNotifier {
   late Board _board;
   Board get board => _board;
 
-  List<CharacterBoard> _boardCharacters = [];
+  final List<CharacterBoard> _boardCharacters = [];
   List<CharacterBoard> get boardCharacters => _boardCharacters;
 
   bool _boardDeleted = false;

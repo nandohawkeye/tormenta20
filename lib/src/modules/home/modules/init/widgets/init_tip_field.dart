@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/modules/home/modules/tips/tips_screen.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
-import 'package:tormenta20/src/modules/home/widgets/tip_home_bottomsheet/tip_home_bottomsheet.dart';
-import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/screen_image_button.dart';
 
 class InitTipField extends StatelessWidget {
@@ -34,9 +33,11 @@ class InitTipField extends StatelessWidget {
                   'Opa! Chegou agora!? \nClica aqui para conferir dicas para se divertir ao máximo com o T20',
               onTapRemove: () {},
               onTap: () {
-                BottomsheetUtils.show(
-                  context: context,
-                  child: const TipHomeBottomsheet(),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const TipsScreen(),
+                  ),
                 );
               },
             ),

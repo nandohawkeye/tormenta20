@@ -120,52 +120,41 @@ class BoardViewCharacterCard extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 4),
-                          Row(
-                            children: [
-                              Text(
-                                CharacterUtils.handleBroodTitle(
-                                    character.brood.name),
-                                style: TextStyle(
-                                    color: palette.textSecundary, fontSize: 14),
-                              ),
-                              T20UI.smallSpaceWidth,
-                              Icon(
-                                CharacterAlignmentTypeUtils.handleIcon(
-                                    character.alignmentType.name),
-                                size: 12,
-                                color: palette.textSecundary,
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
-                                CharacterAlignmentTypeUtils.handleTitle(
-                                    character.alignmentType.name),
-                                maxLines: 2,
-                                style: TextStyle(
-                                    color: palette.textSecundary,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 12),
-                              )
-                            ],
+                          Flexible(
+                            child: Row(
+                              children: [
+                                Text(
+                                  CharacterUtils.handleBroodTitle(
+                                      character.brood.name),
+                                  style: TextStyle(
+                                      color: palette.textSecundary,
+                                      fontSize: 14),
+                                ),
+                                T20UI.smallSpaceWidth,
+                                Icon(
+                                  CharacterAlignmentTypeUtils.handleIcon(
+                                      character.alignmentType.name),
+                                  size: 12,
+                                  color: palette.textSecundary,
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  CharacterAlignmentTypeUtils.handleTitle(
+                                      character.alignmentType.name),
+                                  maxLines: 2,
+                                  style: TextStyle(
+                                      color: palette.textSecundary,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12),
+                                ),
+                              ],
+                            ),
                           ),
                           const SizedBox(height: 4),
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Icon(FontAwesomeIcons.arrowUp,
-                                  color: palette.textSecundary, size: 12),
-                              const SizedBox(width: 2),
-                              Text(
-                                character.classes.length
-                                    .toString()
-                                    .padLeft(2, '0'),
-                                maxLines: 2,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: palette.textSecundary,
-                                ),
-                              ),
-                              T20UI.spaceWidth,
                               Icon(FontAwesomeIcons.shieldHalved,
                                   color: palette.textSecundary, size: 12),
                               const SizedBox(width: 4),
@@ -177,30 +166,20 @@ class BoardViewCharacterCard extends StatelessWidget {
                                   color: palette.textSecundary,
                                 ),
                               ),
-                              if (character.perception != null)
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    T20UI.spaceWidth,
-                                    Icon(
-                                      FontAwesomeIcons.solidEye,
-                                      size: 12,
-                                      color: palette.textSecundary,
-                                    ),
-                                    const SizedBox(width: 4),
-                                    Text(
-                                      character.perception
-                                          .toString()
-                                          .padLeft(2, '0'),
-                                      maxLines: 2,
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: palette.textSecundary,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ],
+                              T20UI.smallSpaceWidth,
+                              Icon(FontAwesomeIcons.arrowUp,
+                                  color: palette.textSecundary, size: 12),
+                              const SizedBox(width: 2),
+                              Flexible(
+                                child: Text(
+                                  '${character.classes.length.toString().padLeft(2, '0')}    ${CharacterUtils.handleAllClassesTypeTitle(character.classes.map((e) => e.type))}',
+                                  maxLines: 2,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: palette.textSecundary,
+                                  ),
                                 ),
+                              ),
                             ],
                           )
                         ],

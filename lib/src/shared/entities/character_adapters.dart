@@ -1,4 +1,5 @@
 import 'package:drift/drift.dart';
+import 'package:flutter/foundation.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/shared/entities/action/action.dart';
 import 'package:tormenta20/src/shared/entities/action/action_adapters.dart';
@@ -22,6 +23,7 @@ import 'package:tormenta20/src/shared/entities/equipament/armor.dart';
 import 'package:tormenta20/src/shared/entities/equipament/armor_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/backpack.dart';
 import 'package:tormenta20/src/shared/entities/equipament/backpack_adapters.dart';
+import 'package:tormenta20/src/shared/entities/equipament/classe_character_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/general_item.dart';
@@ -32,12 +34,14 @@ import 'package:tormenta20/src/shared/entities/equipament/shield.dart';
 import 'package:tormenta20/src/shared/entities/equipament/shield_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon_adapters.dart';
+import 'package:tormenta20/src/shared/entities/export_import_type.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire_adapters.dart';
 import 'package:tormenta20/src/shared/entities/origin.dart';
 import 'package:tormenta20/src/shared/entities/origin_adapters.dart';
 import 'package:tormenta20/src/shared/entities/power.dart';
 import 'package:tormenta20/src/shared/entities/power_adapaters.dart';
 import 'package:tormenta20/src/shared/entities/trained_expertise_adapters.dart';
+import 'package:tormenta20/src/shared/utils/export_import_utils.dart';
 
 abstract class CharacterAdapters {
   static Character fromDriftDto(CharacterDto dto) {
@@ -81,7 +85,6 @@ abstract class CharacterAdapters {
       imageAsset: dto.data.imageAsset,
       imagePath: dto.data.imagePath,
       intelligence: dto.data.intelligence,
-      perception: dto.data.perception,
       senses: dto.data.senses,
       strength: dto.data.strength,
       wisdom: dto.data.wisdom,
@@ -121,7 +124,6 @@ abstract class CharacterAdapters {
       imageAsset: data.imageAsset,
       imagePath: data.imagePath,
       intelligence: data.intelligence,
-      perception: data.perception,
       senses: data.senses,
       strength: data.strength,
       wisdom: data.wisdom,
@@ -257,7 +259,6 @@ abstract class CharacterAdapters {
       imageAsset: data['image_asset'],
       imagePath: null,
       intelligence: data['intelligence'],
-      perception: data['perception'],
       senses: data['senses'],
       strength: data['strength'],
       wisdom: data['wisdom'],
@@ -293,7 +294,6 @@ abstract class CharacterAdapters {
       'image_asset': entity.imageAsset,
       'image_path': null,
       'intelligence': entity.intelligence,
-      'perception': entity.perception,
       'senses': entity.senses,
       'strength': entity.strength,
       'wisdom': entity.wisdom,
@@ -458,7 +458,6 @@ abstract class CharacterAdapters {
       life: Value(entity.life),
       mana: Value(entity.mana),
       name: Value(entity.name),
-      perception: Value(entity.perception ?? 0),
       senses: Value(entity.senses),
       strength: Value(entity.strength ?? 0),
       trainedExpertisesIndexes: Value(
@@ -466,5 +465,45 @@ abstract class CharacterAdapters {
       updatedAt: Value(entity.updatedAt.millisecondsSinceEpoch),
       wisdom: Value(entity.wisdom ?? 0),
     );
+  }
+
+  static Map<String, dynamic>? toExportMaster(Character entity) {
+    try {
+      var base = ExportImportUtils.toExportBase(ExportImportType.binding);
+
+      if (base == null) return null;
+
+      final initiativeIsTrained =
+          entity.trainedExpertises.any((e) => e.name == 'iniciativa');
+
+      final initiative = entity.dexterity ?? 0 + (initiativeIsTrained ? 2 : 0);
+
+      Map<String, dynamic> characterData = {
+        'character_name': entity.name,
+        'brood_index': entity.brood.index,
+        'life': entity.life,
+        'mana': entity.mana,
+        'defense': entity.defense,
+        'initiative': initiative,
+        'classe_indexes': entity.classe == null
+            ? ''
+            : ClasseCharacterAdapters.toStringValue(
+                [entity.classe].map((cl) => cl!.type)),
+      };
+
+      if (entity.imageAsset != null) {
+        characterData.addAll({'image_asset': entity.imageAsset});
+      }
+
+      base.addAll({'character': characterData});
+
+      return base;
+    } catch (e) {
+      if (kDebugMode) {
+        print('error: $e');
+      }
+
+      return null;
+    }
   }
 }

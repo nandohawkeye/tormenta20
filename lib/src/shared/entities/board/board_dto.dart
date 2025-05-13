@@ -13,4 +13,5 @@ class BoardDriftDto {
   List<MenaceLinkBoardTableData> linkMenaceData = [];
   List<MenaceTableData> menaceData = [];
   List<CharacterBoardTableData> characterData = [];
+  List<ClasseCharacterTableData> classesData = [];
 }

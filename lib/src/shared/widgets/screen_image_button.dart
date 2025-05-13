@@ -102,8 +102,9 @@ class ScreenImageButton extends StatelessWidget {
                   children: [
                     T20UI.spaceWidth,
                     SimpleButton(
-                      backgroundColor: palette.accent.withValues(alpha: .1),
+                      backgroundColor: Colors.transparent,
                       icon: FontAwesomeIcons.xmark,
+                      iconSize: 24,
                       onTap: onTapRemove!,
                     )
                   ],

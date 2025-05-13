@@ -244,7 +244,7 @@ final ThemeData theme = ThemeData(
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarBrightness: Brightness.dark,
       systemNavigationBarColor: palette.background,
-      systemNavigationBarIconBrightness: Brightness.dark,
+      systemNavigationBarIconBrightness: Brightness.light,
       statusBarIconBrightness: Brightness.light,
       statusBarColor: palette.appBar,
     ),

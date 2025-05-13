@@ -1,5 +1,4 @@
 import 'package:drift/drift.dart';
-import 'package:flutter/foundation.dart';
 import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/shared/entities/action/action.dart';
 import 'package:tormenta20/src/shared/entities/action/action_adapters.dart';
@@ -19,7 +18,6 @@ import 'package:tormenta20/src/shared/entities/equipament/ammunition_adapters.da
 import 'package:tormenta20/src/shared/entities/equipament/armor_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/backpack.dart';
 import 'package:tormenta20/src/shared/entities/equipament/backpack_adapters.dart';
-import 'package:tormenta20/src/shared/entities/equipament/classe_character_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/general_item_adapters.dart';
@@ -31,14 +29,12 @@ import 'package:tormenta20/src/shared/entities/equipament/weapon_adapters.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise_adapters.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise_base.dart';
-import 'package:tormenta20/src/shared/entities/export_import_type.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire_adapters.dart';
 import 'package:tormenta20/src/shared/entities/origin.dart';
 import 'package:tormenta20/src/shared/entities/origin_adapters.dart';
 import 'package:tormenta20/src/shared/entities/power.dart';
 import 'package:tormenta20/src/shared/entities/power_adapaters.dart';
 import 'package:tormenta20/src/shared/services/expertises_base_service.dart';
-import 'package:tormenta20/src/shared/utils/export_import_utils.dart';
 import 'package:uuid/uuid.dart';
 
 abstract class CharacterBoardAdapters {
@@ -103,7 +99,6 @@ abstract class CharacterBoardAdapters {
       imageAsset: dto.characterBoardsData.imageAsset,
       imagePath: dto.characterBoardsData.imagePath,
       intelligence: dto.characterBoardsData.intelligence,
-      perception: dto.characterBoardsData.perception,
       senses: dto.characterBoardsData.senses,
       strength: dto.characterBoardsData.strength,
       wisdom: dto.characterBoardsData.wisdom,
@@ -119,7 +114,8 @@ abstract class CharacterBoardAdapters {
     );
   }
 
-  static CharacterBoard fromDriftData(CharacterBoardTableData data) {
+  static CharacterBoard fromDriftData(CharacterBoardTableData data,
+      [List<ClasseCharacterTableData> classesData = const []]) {
     return CharacterBoard(
       uuid: data.uuid,
       parentuuid: data.parentuuid,
@@ -142,7 +138,6 @@ abstract class CharacterBoardAdapters {
       imageAsset: data.imageAsset,
       imagePath: data.imagePath,
       intelligence: data.intelligence,
-      perception: data.perception,
       senses: data.senses,
       strength: data.strength,
       wisdom: data.wisdom,
@@ -154,7 +149,8 @@ abstract class CharacterBoardAdapters {
       inWearableSlots: data.inWearableSlots,
       expertises: [],
       grimorie: null,
-      classes: [],
+      classes:
+          classesData.map(ClasseCharacterTypeAdapters.fromDriftData).toList(),
       powers: [],
       origins: [],
       equipments: [],
@@ -261,7 +257,6 @@ abstract class CharacterBoardAdapters {
       imageAsset: entity.imageAsset,
       imagePath: entity.imagePath,
       intelligence: entity.intelligence,
-      perception: entity.perception,
       senses: entity.senses,
       strength: entity.strength,
       wisdom: entity.wisdom,
@@ -304,7 +299,6 @@ abstract class CharacterBoardAdapters {
       life: Value(entity.life),
       mana: Value(entity.mana),
       name: Value(entity.name),
-      perception: Value(entity.perception ?? 0),
       senses: Value(entity.senses),
       strength: Value(entity.strength ?? 0),
       updatedAt: Value(entity.updatedAt.millisecondsSinceEpoch),
@@ -342,7 +336,6 @@ abstract class CharacterBoardAdapters {
       imageAsset: data['image_asset'],
       imagePath: null,
       intelligence: data['intelligence'],
-      perception: data['perception'],
       senses: data['senses'],
       strength: data['strength'],
       wisdom: data['wisdom'],
@@ -363,6 +356,9 @@ abstract class CharacterBoardAdapters {
   }
 
   static Map<String, dynamic> toJson(CharacterBoard entity) {
+    final perceptionIsTrained =
+        entity.expertises.firstWhere((e) => e.name == 'percepção').isTrained;
+    final perception = entity.wisdom ?? 0 + (perceptionIsTrained ? 2 : 0);
     return {
       'uuid': entity.uuid,
       'parent_uuid': entity.parentuuid,
@@ -384,7 +380,7 @@ abstract class CharacterBoardAdapters {
       'divinity_id': entity.divinityId,
       'image_asset': entity.imageAsset,
       'intelligence': entity.intelligence,
-      'perception': entity.perception,
+      'perception': perception,
       'senses': entity.senses,
       'strength': entity.strength,
       'wisdom': entity.wisdom,
@@ -394,38 +390,8 @@ abstract class CharacterBoardAdapters {
       'in_right_hand': entity.inRightHand,
       'in_two_hands': entity.inTwoHands,
       'in_wearable_slots': entity.inWearableSlots,
+      'classe_indexes':
+          entity.classes.map((cl) => cl.type.index).toList().join(','),
     };
-  }
-
-  static Map<String, dynamic>? toExportMaster(CharacterBoard entity) {
-    try {
-      var base = ExportImportUtils.toExportBase(ExportImportType.binding);
-
-      if (base == null) return null;
-
-      Map<String, dynamic> characterData = {
-        'character_name': entity.name,
-        'brood_index': entity.brood.index,
-        'life': entity.life,
-        'mana': entity.mana,
-        'defense': entity.defense,
-        'classes': ClasseCharacterAdapters.toStringValue(
-            entity.classes.map((cl) => cl.type)),
-      };
-
-      if (entity.imageAsset != null) {
-        characterData.addAll({'image_asset': entity.imageAsset});
-      }
-
-      base.addAll({'character': characterData});
-
-      return base;
-    } catch (e) {
-      if (kDebugMode) {
-        print('error: $e');
-      }
-
-      return null;
-    }
   }
 }

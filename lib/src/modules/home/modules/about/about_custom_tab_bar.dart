@@ -39,12 +39,21 @@ class AboutCustomTabBar extends StatelessWidget {
                   page: 0,
                   changePage: changePage,
                   currentPage: currentPage,
+                  mainAxisAlignment: MainAxisAlignment.start,
                 ),
                 AboutCustomTabBarItem(
                   title: 'Ajustes',
                   page: 1,
                   changePage: changePage,
                   currentPage: currentPage,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                ),
+                AboutCustomTabBarItem(
+                  title: 'Dicas',
+                  page: 2,
+                  changePage: changePage,
+                  currentPage: currentPage,
+                  mainAxisAlignment: MainAxisAlignment.end,
                 )
               ],
             );

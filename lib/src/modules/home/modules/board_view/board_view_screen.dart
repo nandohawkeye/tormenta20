@@ -12,6 +12,7 @@ import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_vie
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_players_field.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_sessions.dart';
 import 'package:tormenta20/src/modules/home/modules/board_view/widgets/board_view_text_fields.dart';
+import 'package:tormenta20/src/modules/home/modules/character_record/character_record_screen.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
 import 'package:tormenta20/src/shared/entities/board/board_mode_type.dart';
 
@@ -93,7 +94,16 @@ class _BoardViewScreenState extends State<BoardViewScreen> {
                 deleteBoard: _store.deleteBoard,
                 createCloseSession: _store.createCloseSession,
                 character: character,
-                showCharacterRecord: () {},
+                showCharacterRecord: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => CharacterRecordScreen(
+                        character: characters.firstWhere((e) => e.isAlive),
+                      ),
+                    ),
+                  );
+                },
                 showCombat: () {
                   final currentCombat = _store.getCurrentCombat();
                   if (currentCombat != null) {

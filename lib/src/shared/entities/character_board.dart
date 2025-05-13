@@ -26,7 +26,6 @@ class CharacterBoard extends EntityBase {
   final String? imagePath;
   final String? imageAsset;
   final String? displacement;
-  final int? perception;
   final int? strength;
   final int? dexterity;
   final int? constitution;
@@ -67,7 +66,6 @@ class CharacterBoard extends EntityBase {
     required this.mana,
     required this.creatureSize,
     this.displacement,
-    this.perception,
     this.strength,
     this.dexterity,
     this.constitution,
@@ -147,7 +145,6 @@ class CharacterBoard extends EntityBase {
       imagePath: imagePath ?? this.imagePath,
       imageAsset: imageAsset ?? this.imageAsset,
       displacement: displacement ?? this.displacement,
-      perception: perception ?? this.perception,
       strength: strength ?? this.strength,
       dexterity: dexterity ?? this.dexterity,
       constitution: constitution ?? this.constitution,
@@ -190,7 +187,6 @@ class CharacterBoard extends EntityBase {
       other.currentMana == currentMana &&
       other.creatureSize == creatureSize &&
       other.displacement == displacement &&
-      other.perception == perception &&
       other.strength == strength &&
       other.dexterity == dexterity &&
       other.constitution == constitution &&
@@ -230,7 +226,6 @@ class CharacterBoard extends EntityBase {
       currentMana.hashCode ^
       creatureSize.hashCode ^
       displacement.hashCode ^
-      perception.hashCode ^
       strength.hashCode ^
       dexterity.hashCode ^
       constitution.hashCode ^

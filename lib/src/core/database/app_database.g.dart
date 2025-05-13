@@ -14411,12 +14411,6 @@ class $CharacterTableTable extends CharacterTable
   late final GeneratedColumn<int> divinityId = GeneratedColumn<int>(
       'divinity_id', aliasedName, true,
       type: DriftSqlType.int, requiredDuringInsert: false);
-  static const VerificationMeta _perceptionMeta =
-      const VerificationMeta('perception');
-  @override
-  late final GeneratedColumn<int> perception = GeneratedColumn<int>(
-      'perception', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _defenseMeta =
       const VerificationMeta('defense');
   @override
@@ -14519,7 +14513,6 @@ class $CharacterTableTable extends CharacterTable
         displacement,
         senses,
         divinityId,
-        perception,
         defense,
         life,
         mana,
@@ -14584,14 +14577,6 @@ class $CharacterTableTable extends CharacterTable
           _divinityIdMeta,
           divinityId.isAcceptableOrUnknown(
               data['divinity_id']!, _divinityIdMeta));
-    }
-    if (data.containsKey('perception')) {
-      context.handle(
-          _perceptionMeta,
-          perception.isAcceptableOrUnknown(
-              data['perception']!, _perceptionMeta));
-    } else if (isInserting) {
-      context.missing(_perceptionMeta);
     }
     if (data.containsKey('defense')) {
       context.handle(_defenseMeta,
@@ -14723,8 +14708,6 @@ class $CharacterTableTable extends CharacterTable
           .read(DriftSqlType.string, data['${effectivePrefix}senses']),
       divinityId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}divinity_id']),
-      perception: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}perception'])!,
       defense: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}defense'])!,
       life: attachedDatabase.typeMapping
@@ -14776,7 +14759,6 @@ class CharacterTableData extends DataClass
   final String? displacement;
   final String? senses;
   final int? divinityId;
-  final int perception;
   final int defense;
   final int life;
   final int mana;
@@ -14801,7 +14783,6 @@ class CharacterTableData extends DataClass
       this.displacement,
       this.senses,
       this.divinityId,
-      required this.perception,
       required this.defense,
       required this.life,
       required this.mana,
@@ -14838,7 +14819,6 @@ class CharacterTableData extends DataClass
     if (!nullToAbsent || divinityId != null) {
       map['divinity_id'] = Variable<int>(divinityId);
     }
-    map['perception'] = Variable<int>(perception);
     map['defense'] = Variable<int>(defense);
     map['life'] = Variable<int>(life);
     map['mana'] = Variable<int>(mana);
@@ -14881,7 +14861,6 @@ class CharacterTableData extends DataClass
       divinityId: divinityId == null && nullToAbsent
           ? const Value.absent()
           : Value(divinityId),
-      perception: Value(perception),
       defense: Value(defense),
       life: Value(life),
       mana: Value(mana),
@@ -14916,7 +14895,6 @@ class CharacterTableData extends DataClass
       displacement: serializer.fromJson<String?>(json['displacement']),
       senses: serializer.fromJson<String?>(json['senses']),
       divinityId: serializer.fromJson<int?>(json['divinityId']),
-      perception: serializer.fromJson<int>(json['perception']),
       defense: serializer.fromJson<int>(json['defense']),
       life: serializer.fromJson<int>(json['life']),
       mana: serializer.fromJson<int>(json['mana']),
@@ -14947,7 +14925,6 @@ class CharacterTableData extends DataClass
       'displacement': serializer.toJson<String?>(displacement),
       'senses': serializer.toJson<String?>(senses),
       'divinityId': serializer.toJson<int?>(divinityId),
-      'perception': serializer.toJson<int>(perception),
       'defense': serializer.toJson<int>(defense),
       'life': serializer.toJson<int>(life),
       'mana': serializer.toJson<int>(mana),
@@ -14976,7 +14953,6 @@ class CharacterTableData extends DataClass
           Value<String?> displacement = const Value.absent(),
           Value<String?> senses = const Value.absent(),
           Value<int?> divinityId = const Value.absent(),
-          int? perception,
           int? defense,
           int? life,
           int? mana,
@@ -15002,7 +14978,6 @@ class CharacterTableData extends DataClass
             displacement.present ? displacement.value : this.displacement,
         senses: senses.present ? senses.value : this.senses,
         divinityId: divinityId.present ? divinityId.value : this.divinityId,
-        perception: perception ?? this.perception,
         defense: defense ?? this.defense,
         life: life ?? this.life,
         mana: mana ?? this.mana,
@@ -15036,8 +15011,6 @@ class CharacterTableData extends DataClass
       senses: data.senses.present ? data.senses.value : this.senses,
       divinityId:
           data.divinityId.present ? data.divinityId.value : this.divinityId,
-      perception:
-          data.perception.present ? data.perception.value : this.perception,
       defense: data.defense.present ? data.defense.value : this.defense,
       life: data.life.present ? data.life.value : this.life,
       mana: data.mana.present ? data.mana.value : this.mana,
@@ -15080,7 +15053,6 @@ class CharacterTableData extends DataClass
           ..write('displacement: $displacement, ')
           ..write('senses: $senses, ')
           ..write('divinityId: $divinityId, ')
-          ..write('perception: $perception, ')
           ..write('defense: $defense, ')
           ..write('life: $life, ')
           ..write('mana: $mana, ')
@@ -15110,7 +15082,6 @@ class CharacterTableData extends DataClass
         displacement,
         senses,
         divinityId,
-        perception,
         defense,
         life,
         mana,
@@ -15139,7 +15110,6 @@ class CharacterTableData extends DataClass
           other.displacement == this.displacement &&
           other.senses == this.senses &&
           other.divinityId == this.divinityId &&
-          other.perception == this.perception &&
           other.defense == this.defense &&
           other.life == this.life &&
           other.mana == this.mana &&
@@ -15166,7 +15136,6 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
   final Value<String?> displacement;
   final Value<String?> senses;
   final Value<int?> divinityId;
-  final Value<int> perception;
   final Value<int> defense;
   final Value<int> life;
   final Value<int> mana;
@@ -15192,7 +15161,6 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
     this.displacement = const Value.absent(),
     this.senses = const Value.absent(),
     this.divinityId = const Value.absent(),
-    this.perception = const Value.absent(),
     this.defense = const Value.absent(),
     this.life = const Value.absent(),
     this.mana = const Value.absent(),
@@ -15219,7 +15187,6 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
     this.displacement = const Value.absent(),
     this.senses = const Value.absent(),
     this.divinityId = const Value.absent(),
-    required int perception,
     required int defense,
     required int life,
     required int mana,
@@ -15239,7 +15206,6 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
     this.rowid = const Value.absent(),
   })  : uuid = Value(uuid),
         name = Value(name),
-        perception = Value(perception),
         defense = Value(defense),
         life = Value(life),
         mana = Value(mana),
@@ -15262,7 +15228,6 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
     Expression<String>? displacement,
     Expression<String>? senses,
     Expression<int>? divinityId,
-    Expression<int>? perception,
     Expression<int>? defense,
     Expression<int>? life,
     Expression<int>? mana,
@@ -15289,7 +15254,6 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
       if (displacement != null) 'displacement': displacement,
       if (senses != null) 'senses': senses,
       if (divinityId != null) 'divinity_id': divinityId,
-      if (perception != null) 'perception': perception,
       if (defense != null) 'defense': defense,
       if (life != null) 'life': life,
       if (mana != null) 'mana': mana,
@@ -15319,7 +15283,6 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
       Value<String?>? displacement,
       Value<String?>? senses,
       Value<int?>? divinityId,
-      Value<int>? perception,
       Value<int>? defense,
       Value<int>? life,
       Value<int>? mana,
@@ -15345,7 +15308,6 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
       displacement: displacement ?? this.displacement,
       senses: senses ?? this.senses,
       divinityId: divinityId ?? this.divinityId,
-      perception: perception ?? this.perception,
       defense: defense ?? this.defense,
       life: life ?? this.life,
       mana: mana ?? this.mana,
@@ -15390,9 +15352,6 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
     }
     if (divinityId.present) {
       map['divinity_id'] = Variable<int>(divinityId.value);
-    }
-    if (perception.present) {
-      map['perception'] = Variable<int>(perception.value);
     }
     if (defense.present) {
       map['defense'] = Variable<int>(defense.value);
@@ -15459,7 +15418,6 @@ class CharacterTableCompanion extends UpdateCompanion<CharacterTableData> {
           ..write('displacement: $displacement, ')
           ..write('senses: $senses, ')
           ..write('divinityId: $divinityId, ')
-          ..write('perception: $perception, ')
           ..write('defense: $defense, ')
           ..write('life: $life, ')
           ..write('mana: $mana, ')
@@ -16399,12 +16357,6 @@ class $CharacterBoardTableTable extends CharacterBoardTable
   late final GeneratedColumn<int> divinityId = GeneratedColumn<int>(
       'divinity_id', aliasedName, true,
       type: DriftSqlType.int, requiredDuringInsert: false);
-  static const VerificationMeta _perceptionMeta =
-      const VerificationMeta('perception');
-  @override
-  late final GeneratedColumn<int> perception = GeneratedColumn<int>(
-      'perception', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _defenseMeta =
       const VerificationMeta('defense');
   @override
@@ -16548,7 +16500,6 @@ class $CharacterBoardTableTable extends CharacterBoardTable
         displacement,
         senses,
         divinityId,
-        perception,
         defense,
         life,
         mana,
@@ -16634,14 +16585,6 @@ class $CharacterBoardTableTable extends CharacterBoardTable
           _divinityIdMeta,
           divinityId.isAcceptableOrUnknown(
               data['divinity_id']!, _divinityIdMeta));
-    }
-    if (data.containsKey('perception')) {
-      context.handle(
-          _perceptionMeta,
-          perception.isAcceptableOrUnknown(
-              data['perception']!, _perceptionMeta));
-    } else if (isInserting) {
-      context.missing(_perceptionMeta);
     }
     if (data.containsKey('defense')) {
       context.handle(_defenseMeta,
@@ -16817,8 +16760,6 @@ class $CharacterBoardTableTable extends CharacterBoardTable
           .read(DriftSqlType.string, data['${effectivePrefix}senses']),
       divinityId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}divinity_id']),
-      perception: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}perception'])!,
       defense: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}defense'])!,
       life: attachedDatabase.typeMapping
@@ -16883,7 +16824,6 @@ class CharacterBoardTableData extends DataClass
   final String? displacement;
   final String? senses;
   final int? divinityId;
-  final int perception;
   final int defense;
   final int life;
   final int mana;
@@ -16916,7 +16856,6 @@ class CharacterBoardTableData extends DataClass
       this.displacement,
       this.senses,
       this.divinityId,
-      required this.perception,
       required this.defense,
       required this.life,
       required this.mana,
@@ -16961,7 +16900,6 @@ class CharacterBoardTableData extends DataClass
     if (!nullToAbsent || divinityId != null) {
       map['divinity_id'] = Variable<int>(divinityId);
     }
-    map['perception'] = Variable<int>(perception);
     map['defense'] = Variable<int>(defense);
     map['life'] = Variable<int>(life);
     map['mana'] = Variable<int>(mana);
@@ -17017,7 +16955,6 @@ class CharacterBoardTableData extends DataClass
       divinityId: divinityId == null && nullToAbsent
           ? const Value.absent()
           : Value(divinityId),
-      perception: Value(perception),
       defense: Value(defense),
       life: Value(life),
       mana: Value(mana),
@@ -17066,7 +17003,6 @@ class CharacterBoardTableData extends DataClass
       displacement: serializer.fromJson<String?>(json['displacement']),
       senses: serializer.fromJson<String?>(json['senses']),
       divinityId: serializer.fromJson<int?>(json['divinityId']),
-      perception: serializer.fromJson<int>(json['perception']),
       defense: serializer.fromJson<int>(json['defense']),
       life: serializer.fromJson<int>(json['life']),
       mana: serializer.fromJson<int>(json['mana']),
@@ -17104,7 +17040,6 @@ class CharacterBoardTableData extends DataClass
       'displacement': serializer.toJson<String?>(displacement),
       'senses': serializer.toJson<String?>(senses),
       'divinityId': serializer.toJson<int?>(divinityId),
-      'perception': serializer.toJson<int>(perception),
       'defense': serializer.toJson<int>(defense),
       'life': serializer.toJson<int>(life),
       'mana': serializer.toJson<int>(mana),
@@ -17140,7 +17075,6 @@ class CharacterBoardTableData extends DataClass
           Value<String?> displacement = const Value.absent(),
           Value<String?> senses = const Value.absent(),
           Value<int?> divinityId = const Value.absent(),
-          int? perception,
           int? defense,
           int? life,
           int? mana,
@@ -17174,7 +17108,6 @@ class CharacterBoardTableData extends DataClass
             displacement.present ? displacement.value : this.displacement,
         senses: senses.present ? senses.value : this.senses,
         divinityId: divinityId.present ? divinityId.value : this.divinityId,
-        perception: perception ?? this.perception,
         defense: defense ?? this.defense,
         life: life ?? this.life,
         mana: mana ?? this.mana,
@@ -17217,8 +17150,6 @@ class CharacterBoardTableData extends DataClass
       senses: data.senses.present ? data.senses.value : this.senses,
       divinityId:
           data.divinityId.present ? data.divinityId.value : this.divinityId,
-      perception:
-          data.perception.present ? data.perception.value : this.perception,
       defense: data.defense.present ? data.defense.value : this.defense,
       life: data.life.present ? data.life.value : this.life,
       mana: data.mana.present ? data.mana.value : this.mana,
@@ -17274,7 +17205,6 @@ class CharacterBoardTableData extends DataClass
           ..write('displacement: $displacement, ')
           ..write('senses: $senses, ')
           ..write('divinityId: $divinityId, ')
-          ..write('perception: $perception, ')
           ..write('defense: $defense, ')
           ..write('life: $life, ')
           ..write('mana: $mana, ')
@@ -17312,7 +17242,6 @@ class CharacterBoardTableData extends DataClass
         displacement,
         senses,
         divinityId,
-        perception,
         defense,
         life,
         mana,
@@ -17349,7 +17278,6 @@ class CharacterBoardTableData extends DataClass
           other.displacement == this.displacement &&
           other.senses == this.senses &&
           other.divinityId == this.divinityId &&
-          other.perception == this.perception &&
           other.defense == this.defense &&
           other.life == this.life &&
           other.mana == this.mana &&
@@ -17385,7 +17313,6 @@ class CharacterBoardTableCompanion
   final Value<String?> displacement;
   final Value<String?> senses;
   final Value<int?> divinityId;
-  final Value<int> perception;
   final Value<int> defense;
   final Value<int> life;
   final Value<int> mana;
@@ -17419,7 +17346,6 @@ class CharacterBoardTableCompanion
     this.displacement = const Value.absent(),
     this.senses = const Value.absent(),
     this.divinityId = const Value.absent(),
-    this.perception = const Value.absent(),
     this.defense = const Value.absent(),
     this.life = const Value.absent(),
     this.mana = const Value.absent(),
@@ -17454,7 +17380,6 @@ class CharacterBoardTableCompanion
     this.displacement = const Value.absent(),
     this.senses = const Value.absent(),
     this.divinityId = const Value.absent(),
-    required int perception,
     required int defense,
     required int life,
     required int mana,
@@ -17482,7 +17407,6 @@ class CharacterBoardTableCompanion
         parentuuid = Value(parentuuid),
         boarduuid = Value(boarduuid),
         name = Value(name),
-        perception = Value(perception),
         defense = Value(defense),
         life = Value(life),
         mana = Value(mana),
@@ -17510,7 +17434,6 @@ class CharacterBoardTableCompanion
     Expression<String>? displacement,
     Expression<String>? senses,
     Expression<int>? divinityId,
-    Expression<int>? perception,
     Expression<int>? defense,
     Expression<int>? life,
     Expression<int>? mana,
@@ -17545,7 +17468,6 @@ class CharacterBoardTableCompanion
       if (displacement != null) 'displacement': displacement,
       if (senses != null) 'senses': senses,
       if (divinityId != null) 'divinity_id': divinityId,
-      if (perception != null) 'perception': perception,
       if (defense != null) 'defense': defense,
       if (life != null) 'life': life,
       if (mana != null) 'mana': mana,
@@ -17582,7 +17504,6 @@ class CharacterBoardTableCompanion
       Value<String?>? displacement,
       Value<String?>? senses,
       Value<int?>? divinityId,
-      Value<int>? perception,
       Value<int>? defense,
       Value<int>? life,
       Value<int>? mana,
@@ -17616,7 +17537,6 @@ class CharacterBoardTableCompanion
       displacement: displacement ?? this.displacement,
       senses: senses ?? this.senses,
       divinityId: divinityId ?? this.divinityId,
-      perception: perception ?? this.perception,
       defense: defense ?? this.defense,
       life: life ?? this.life,
       mana: mana ?? this.mana,
@@ -17672,9 +17592,6 @@ class CharacterBoardTableCompanion
     }
     if (divinityId.present) {
       map['divinity_id'] = Variable<int>(divinityId.value);
-    }
-    if (perception.present) {
-      map['perception'] = Variable<int>(perception.value);
     }
     if (defense.present) {
       map['defense'] = Variable<int>(defense.value);
@@ -17760,7 +17677,6 @@ class CharacterBoardTableCompanion
           ..write('displacement: $displacement, ')
           ..write('senses: $senses, ')
           ..write('divinityId: $divinityId, ')
-          ..write('perception: $perception, ')
           ..write('defense: $defense, ')
           ..write('life: $life, ')
           ..write('mana: $mana, ')
@@ -23585,7 +23501,6 @@ typedef $$CharacterTableTableCreateCompanionBuilder = CharacterTableCompanion
   Value<String?> displacement,
   Value<String?> senses,
   Value<int?> divinityId,
-  required int perception,
   required int defense,
   required int life,
   required int mana,
@@ -23613,7 +23528,6 @@ typedef $$CharacterTableTableUpdateCompanionBuilder = CharacterTableCompanion
   Value<String?> displacement,
   Value<String?> senses,
   Value<int?> divinityId,
-  Value<int> perception,
   Value<int> defense,
   Value<int> life,
   Value<int> mana,
@@ -23658,7 +23572,6 @@ class $$CharacterTableTableTableManager extends RootTableManager<
             Value<String?> displacement = const Value.absent(),
             Value<String?> senses = const Value.absent(),
             Value<int?> divinityId = const Value.absent(),
-            Value<int> perception = const Value.absent(),
             Value<int> defense = const Value.absent(),
             Value<int> life = const Value.absent(),
             Value<int> mana = const Value.absent(),
@@ -23685,7 +23598,6 @@ class $$CharacterTableTableTableManager extends RootTableManager<
             displacement: displacement,
             senses: senses,
             divinityId: divinityId,
-            perception: perception,
             defense: defense,
             life: life,
             mana: mana,
@@ -23712,7 +23624,6 @@ class $$CharacterTableTableTableManager extends RootTableManager<
             Value<String?> displacement = const Value.absent(),
             Value<String?> senses = const Value.absent(),
             Value<int?> divinityId = const Value.absent(),
-            required int perception,
             required int defense,
             required int life,
             required int mana,
@@ -23739,7 +23650,6 @@ class $$CharacterTableTableTableManager extends RootTableManager<
             displacement: displacement,
             senses: senses,
             divinityId: divinityId,
-            perception: perception,
             defense: defense,
             life: life,
             mana: mana,
@@ -23796,11 +23706,6 @@ class $$CharacterTableTableFilterComposer
 
   ColumnFilters<int> get divinityId => $state.composableBuilder(
       column: $state.table.divinityId,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get perception => $state.composableBuilder(
-      column: $state.table.perception,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -23921,11 +23826,6 @@ class $$CharacterTableTableOrderingComposer
 
   ColumnOrderings<int> get divinityId => $state.composableBuilder(
       column: $state.table.divinityId,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get perception => $state.composableBuilder(
-      column: $state.table.perception,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
@@ -24373,7 +24273,6 @@ typedef $$CharacterBoardTableTableCreateCompanionBuilder
   Value<String?> displacement,
   Value<String?> senses,
   Value<int?> divinityId,
-  required int perception,
   required int defense,
   required int life,
   required int mana,
@@ -24409,7 +24308,6 @@ typedef $$CharacterBoardTableTableUpdateCompanionBuilder
   Value<String?> displacement,
   Value<String?> senses,
   Value<int?> divinityId,
-  Value<int> perception,
   Value<int> defense,
   Value<int> life,
   Value<int> mana,
@@ -24462,7 +24360,6 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             Value<String?> displacement = const Value.absent(),
             Value<String?> senses = const Value.absent(),
             Value<int?> divinityId = const Value.absent(),
-            Value<int> perception = const Value.absent(),
             Value<int> defense = const Value.absent(),
             Value<int> life = const Value.absent(),
             Value<int> mana = const Value.absent(),
@@ -24497,7 +24394,6 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             displacement: displacement,
             senses: senses,
             divinityId: divinityId,
-            perception: perception,
             defense: defense,
             life: life,
             mana: mana,
@@ -24532,7 +24428,6 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             Value<String?> displacement = const Value.absent(),
             Value<String?> senses = const Value.absent(),
             Value<int?> divinityId = const Value.absent(),
-            required int perception,
             required int defense,
             required int life,
             required int mana,
@@ -24567,7 +24462,6 @@ class $$CharacterBoardTableTableTableManager extends RootTableManager<
             displacement: displacement,
             senses: senses,
             divinityId: divinityId,
-            perception: perception,
             defense: defense,
             life: life,
             mana: mana,
@@ -24640,11 +24534,6 @@ class $$CharacterBoardTableTableFilterComposer
 
   ColumnFilters<int> get divinityId => $state.composableBuilder(
       column: $state.table.divinityId,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<int> get perception => $state.composableBuilder(
-      column: $state.table.perception,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -24804,11 +24693,6 @@ class $$CharacterBoardTableTableOrderingComposer
 
   ColumnOrderings<int> get divinityId => $state.composableBuilder(
       column: $state.table.divinityId,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get perception => $state.composableBuilder(
-      column: $state.table.perception,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 

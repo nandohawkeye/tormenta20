@@ -8,9 +8,13 @@ class DefenseTextField extends StatefulWidget {
     super.key,
     this.initialDefense,
     required this.onchange,
+    this.helperText,
+    this.label,
   });
 
   final int? initialDefense;
+  final String? helperText;
+  final String? label;
   final Function(String?) onchange;
 
   @override
@@ -51,9 +55,9 @@ class _BottomSheetAddBoardLinkTitleFieldState extends State<DefenseTextField> {
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           validator: DefaultInputValidator.valid,
           decoration: InputDecoration(
-            labelText: 'Defesa',
+            labelText: widget.label ?? 'Defesa',
             fillColor: palette.backgroundLevelOne,
-            helperText: 'obrigatório',
+            helperText: widget.helperText ?? 'obrigatório',
             errorText: error,
           ),
         );

@@ -74,7 +74,8 @@ class AboutDeveloperCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            'Olá meu nome é Nando!',
+                            'Meu nome é Nando e sou o desenvolvedor do T20',
+                            maxLines: 2,
                             style: TextStyle(
                               color: palette.accent,
                               fontFamily: FontFamily.tormenta,

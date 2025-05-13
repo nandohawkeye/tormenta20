@@ -149,28 +149,6 @@ class BoardViewCharacterDeathCharacterCard extends StatelessWidget {
                                 maxLines: 2,
                                 style: const TextStyle(fontSize: 12),
                               ),
-                              if (character.perception != null)
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    T20UI.spaceWidth,
-                                    const Icon(
-                                      FontAwesomeIcons.solidEye,
-                                      size: 12,
-                                    ),
-                                    const SizedBox(width: 4),
-                                    Text(
-                                      character.perception
-                                          .toString()
-                                          .padLeft(2, '0'),
-                                      maxLines: 2,
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ],
-                                ),
                             ],
                           ),
                           const SizedBox(height: 4),

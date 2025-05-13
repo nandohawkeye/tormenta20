@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_character/add_edit_character.dart';
 import 'package:tormenta20/src/modules/home/modules/character/character_store.dart';
@@ -18,6 +19,9 @@ import 'package:tormenta20/src/modules/home/modules/character/widgets/character_
 import 'package:tormenta20/src/modules/home/modules/character/widgets/character_trained_expertises.dart';
 import 'package:tormenta20/src/modules/home/modules/character/widgets/delete_character_bottomsheet/delete_character_bottomsheet.dart';
 import 'package:tormenta20/src/shared/entities/character.dart';
+import 'package:tormenta20/src/shared/entities/character_adapters.dart';
+import 'package:tormenta20/src/shared/extensions/string_ext.dart';
+import 'package:tormenta20/src/shared/utils/backup_utils.dart';
 import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/widgets/screen_base.dart';
 
@@ -147,7 +151,18 @@ class _CharacterScreenState extends State<CharacterScreen> {
                 _callRemove();
               }
 
-              if (result == CharacterOption.export) {}
+              if (result == CharacterOption.export) {
+                final data = CharacterAdapters.toExportMaster(character);
+
+                if (data == null) return;
+
+                final file = await BackupUtils.createTempJson(data,
+                    'personagem_${character.name.toLowerCase().replaceAllDiacritics().trim().replaceAll(' ', '')}');
+
+                if (file == null) return;
+
+                Share.shareXFiles([XFile(file.path)]);
+              }
             });
           },
         );

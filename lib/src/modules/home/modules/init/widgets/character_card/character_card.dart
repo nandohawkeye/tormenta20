@@ -96,25 +96,6 @@ class CharacterCard extends StatelessWidget {
                         style: TextStyle(
                             color: palette.textSecundary, fontSize: 12),
                       ),
-                      if (character.perception != null)
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            T20UI.spaceWidth,
-                            Icon(
-                              FontAwesomeIcons.solidEye,
-                              size: 12,
-                              color: palette.textSecundary,
-                            ),
-                            const SizedBox(width: 4),
-                            Text(
-                              character.perception.toString().padLeft(2, '0'),
-                              maxLines: 2,
-                              style: TextStyle(
-                                  color: palette.textSecundary, fontSize: 12),
-                            ),
-                          ],
-                        )
                     ],
                   ),
                 ],

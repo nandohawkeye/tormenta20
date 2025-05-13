@@ -15,6 +15,7 @@ import 'package:tormenta20/src/shared/entities/board/board_player.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player_adapters.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session.dart';
 import 'package:tormenta20/src/shared/entities/board/board_session_adapters.dart';
+import 'package:tormenta20/src/shared/entities/character_board.dart';
 import 'package:tormenta20/src/shared/entities/character_board_adapters.dart';
 import 'package:tormenta20/src/shared/entities/export_import_type.dart';
 import 'package:tormenta20/src/shared/entities/menace_adapters.dart';
@@ -86,8 +87,17 @@ abstract class BoardAdapters {
         dto.linkMenaceData.map(MenaceLinkBoardAdapters.fromDriftData).toList();
     final menaces = dto.menaceData.map(MenaceAdapters.fromDriftData).toList();
 
-    final characters =
-        dto.characterData.map(CharacterBoardAdapters.fromDriftData).toList();
+    List<CharacterBoard> characters = [];
+
+    for (var character in dto.characterData) {
+      final characterBoard = CharacterBoardAdapters.fromDriftData(
+          character,
+          dto.classesData
+              .where((e) => e.characterUuid == character.uuid)
+              .toList());
+      characters.add(characterBoard);
+    }
+
     return Board(
       uuid: dto.boardData.uuid,
       adventureName: dto.boardData.adventureName,
@@ -223,8 +233,6 @@ abstract class BoardAdapters {
       }
 
       base.addAll({'board': boardData});
-
-      print('base: $base');
 
       return base;
     } catch (e) {

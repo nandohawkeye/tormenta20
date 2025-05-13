@@ -8,7 +8,6 @@ class CharacterTable extends Table {
   TextColumn get displacement => text().nullable()();
   TextColumn get senses => text().nullable()();
   IntColumn get divinityId => integer().nullable()();
-  IntColumn get perception => integer()();
   IntColumn get defense => integer()();
   IntColumn get life => integer()();
   IntColumn get mana => integer()();

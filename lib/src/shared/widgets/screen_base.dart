@@ -8,24 +8,26 @@ class ScreenBase extends StatelessWidget {
     super.key,
     required this.body,
     required this.label,
-    required this.onSave,
+    this.onSave,
     this.extraRightWidgets,
     this.onBack,
     this.onSaveLabel,
     this.extraLeftWidgets,
     this.scrollController,
     this.extraTopWidgets,
+    this.isEnableBackButton = true,
   });
 
   final Widget body;
   final String label;
   final ScrollController? scrollController;
-  final Function() onSave;
+  final Function()? onSave;
   final List<Widget>? extraRightWidgets;
   final Function()? onBack;
   final String? onSaveLabel;
   final List<Widget>? extraLeftWidgets;
   final List<Widget>? extraTopWidgets;
+  final bool isEnableBackButton;
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +54,7 @@ class ScreenBase extends StatelessWidget {
             extraTopWidgets: extraTopWidgets,
             label: onSaveLabel,
             onBack: onBack,
+            isEnableBackButton: isEnableBackButton,
           )
         ],
       ),

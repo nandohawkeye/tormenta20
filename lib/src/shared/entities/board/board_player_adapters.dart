@@ -3,6 +3,7 @@ import 'package:tormenta20/src/core/database/app_database.dart';
 import 'package:tormenta20/src/shared/entities/board/board_player.dart';
 import 'package:tormenta20/src/shared/entities/brood.dart';
 import 'package:tormenta20/src/shared/entities/equipament/classe_character_adapters.dart';
+import 'package:uuid/uuid.dart';
 
 abstract class BoardPlayerAdapters {
   static BoardPlayerTableCompanion toCompanion(BoardPlayer entity) {
@@ -54,8 +55,8 @@ abstract class BoardPlayerAdapters {
     final now = DateTime.now();
 
     return BoardPlayer(
-      playerName: data['player_name'],
-      uuid: data['uuid'],
+      playerName: data['player_name'] ?? 'Player',
+      uuid: data['uuid'] ?? const Uuid().v4(),
       boardUuid: data['board_uuid'],
       characterName: data['character_name'],
       brood: Brood.values[data['brood_index']],
@@ -68,7 +69,7 @@ abstract class BoardPlayerAdapters {
       mana: data['mana'],
       defense: data['defense'],
       isAlive: true,
-      initiative: data['initiative'],
+      initiative: data['initiative'] ?? 1,
     );
   }
 }
