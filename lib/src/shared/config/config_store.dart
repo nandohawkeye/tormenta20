@@ -50,4 +50,14 @@ class ConfigStore extends ChangeNotifier {
 
     if (failure == null) _putConfig(upConfig);
   }
+
+  void disableHomeTypes() async {
+    final upConfig = _config?.copyWithEnableHomeTypes(false);
+
+    if (upConfig == null) return;
+
+    final failure = await _storageService.updateConfig(upConfig);
+
+    if (failure == null) _putConfig(upConfig);
+  }
 }

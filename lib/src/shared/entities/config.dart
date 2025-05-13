@@ -5,12 +5,14 @@ class Config {
   final PlayMode mode;
   final bool showApresetation;
   final bool enableBottomBackButton;
+  final bool enableHomeTipes;
 
   Config({
     required this.id,
     required this.mode,
     required this.showApresetation,
     required this.enableBottomBackButton,
+    required this.enableHomeTipes,
   });
 
   Config copyWithNewMode(PlayMode mode) {
@@ -19,6 +21,7 @@ class Config {
       mode: mode,
       showApresetation: showApresetation,
       enableBottomBackButton: enableBottomBackButton,
+      enableHomeTipes: enableHomeTipes,
     );
   }
 
@@ -28,6 +31,7 @@ class Config {
       mode: mode,
       showApresetation: true,
       enableBottomBackButton: enableBottomBackButton,
+      enableHomeTipes: enableHomeTipes,
     );
   }
 
@@ -37,6 +41,17 @@ class Config {
       mode: mode,
       showApresetation: showApresetation,
       enableBottomBackButton: enableBottomBackButton,
+      enableHomeTipes: enableHomeTipes,
+    );
+  }
+
+  Config copyWithEnableHomeTypes(bool enableHomeTipes) {
+    return Config(
+      id: id,
+      mode: mode,
+      showApresetation: showApresetation,
+      enableBottomBackButton: enableBottomBackButton,
+      enableHomeTipes: enableHomeTipes,
     );
   }
 

@@ -10,6 +10,7 @@ abstract class ConfigAdapters {
       mode: PlayMode.values[data.modeIndex],
       enableBottomBackButton: data.enableBottomBackButton,
       showApresetation: data.showApresetation,
+      enableHomeTipes: data.enableHomeTipes,
     );
   }
 
@@ -19,6 +20,7 @@ abstract class ConfigAdapters {
       modeIndex: Value(entity.mode.index),
       enableBottomBackButton: Value(entity.enableBottomBackButton),
       showApresetation: Value(entity.showApresetation),
+      enableHomeTipes: Value(entity.enableHomeTipes),
     );
   }
 }

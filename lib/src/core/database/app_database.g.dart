@@ -14130,9 +14130,24 @@ class $ConfigTableTable extends ConfigTable
           defaultConstraints: GeneratedColumn.constraintIsAlways(
               'CHECK ("enable_bottom_back_button" IN (0, 1))'),
           defaultValue: const Constant(true));
+  static const VerificationMeta _enableHomeTipesMeta =
+      const VerificationMeta('enableHomeTipes');
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, modeIndex, showApresetation, enableBottomBackButton];
+  late final GeneratedColumn<bool> enableHomeTipes = GeneratedColumn<bool>(
+      'enable_home_tipes', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'CHECK ("enable_home_tipes" IN (0, 1))'),
+      defaultValue: const Constant(true));
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        modeIndex,
+        showApresetation,
+        enableBottomBackButton,
+        enableHomeTipes
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -14162,6 +14177,12 @@ class $ConfigTableTable extends ConfigTable
           enableBottomBackButton.isAcceptableOrUnknown(
               data['enable_bottom_back_button']!, _enableBottomBackButtonMeta));
     }
+    if (data.containsKey('enable_home_tipes')) {
+      context.handle(
+          _enableHomeTipesMeta,
+          enableHomeTipes.isAcceptableOrUnknown(
+              data['enable_home_tipes']!, _enableHomeTipesMeta));
+    }
     return context;
   }
 
@@ -14180,6 +14201,8 @@ class $ConfigTableTable extends ConfigTable
       enableBottomBackButton: attachedDatabase.typeMapping.read(
           DriftSqlType.bool,
           data['${effectivePrefix}enable_bottom_back_button'])!,
+      enableHomeTipes: attachedDatabase.typeMapping.read(
+          DriftSqlType.bool, data['${effectivePrefix}enable_home_tipes'])!,
     );
   }
 
@@ -14194,11 +14217,13 @@ class ConfigTableData extends DataClass implements Insertable<ConfigTableData> {
   final int modeIndex;
   final bool showApresetation;
   final bool enableBottomBackButton;
+  final bool enableHomeTipes;
   const ConfigTableData(
       {required this.id,
       required this.modeIndex,
       required this.showApresetation,
-      required this.enableBottomBackButton});
+      required this.enableBottomBackButton,
+      required this.enableHomeTipes});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -14206,6 +14231,7 @@ class ConfigTableData extends DataClass implements Insertable<ConfigTableData> {
     map['mode_index'] = Variable<int>(modeIndex);
     map['show_apresetation'] = Variable<bool>(showApresetation);
     map['enable_bottom_back_button'] = Variable<bool>(enableBottomBackButton);
+    map['enable_home_tipes'] = Variable<bool>(enableHomeTipes);
     return map;
   }
 
@@ -14215,6 +14241,7 @@ class ConfigTableData extends DataClass implements Insertable<ConfigTableData> {
       modeIndex: Value(modeIndex),
       showApresetation: Value(showApresetation),
       enableBottomBackButton: Value(enableBottomBackButton),
+      enableHomeTipes: Value(enableHomeTipes),
     );
   }
 
@@ -14227,6 +14254,7 @@ class ConfigTableData extends DataClass implements Insertable<ConfigTableData> {
       showApresetation: serializer.fromJson<bool>(json['showApresetation']),
       enableBottomBackButton:
           serializer.fromJson<bool>(json['enableBottomBackButton']),
+      enableHomeTipes: serializer.fromJson<bool>(json['enableHomeTipes']),
     );
   }
   @override
@@ -14237,6 +14265,7 @@ class ConfigTableData extends DataClass implements Insertable<ConfigTableData> {
       'modeIndex': serializer.toJson<int>(modeIndex),
       'showApresetation': serializer.toJson<bool>(showApresetation),
       'enableBottomBackButton': serializer.toJson<bool>(enableBottomBackButton),
+      'enableHomeTipes': serializer.toJson<bool>(enableHomeTipes),
     };
   }
 
@@ -14244,13 +14273,15 @@ class ConfigTableData extends DataClass implements Insertable<ConfigTableData> {
           {int? id,
           int? modeIndex,
           bool? showApresetation,
-          bool? enableBottomBackButton}) =>
+          bool? enableBottomBackButton,
+          bool? enableHomeTipes}) =>
       ConfigTableData(
         id: id ?? this.id,
         modeIndex: modeIndex ?? this.modeIndex,
         showApresetation: showApresetation ?? this.showApresetation,
         enableBottomBackButton:
             enableBottomBackButton ?? this.enableBottomBackButton,
+        enableHomeTipes: enableHomeTipes ?? this.enableHomeTipes,
       );
   ConfigTableData copyWithCompanion(ConfigTableCompanion data) {
     return ConfigTableData(
@@ -14262,6 +14293,9 @@ class ConfigTableData extends DataClass implements Insertable<ConfigTableData> {
       enableBottomBackButton: data.enableBottomBackButton.present
           ? data.enableBottomBackButton.value
           : this.enableBottomBackButton,
+      enableHomeTipes: data.enableHomeTipes.present
+          ? data.enableHomeTipes.value
+          : this.enableHomeTipes,
     );
   }
 
@@ -14271,14 +14305,15 @@ class ConfigTableData extends DataClass implements Insertable<ConfigTableData> {
           ..write('id: $id, ')
           ..write('modeIndex: $modeIndex, ')
           ..write('showApresetation: $showApresetation, ')
-          ..write('enableBottomBackButton: $enableBottomBackButton')
+          ..write('enableBottomBackButton: $enableBottomBackButton, ')
+          ..write('enableHomeTipes: $enableHomeTipes')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, modeIndex, showApresetation, enableBottomBackButton);
+  int get hashCode => Object.hash(
+      id, modeIndex, showApresetation, enableBottomBackButton, enableHomeTipes);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -14286,7 +14321,8 @@ class ConfigTableData extends DataClass implements Insertable<ConfigTableData> {
           other.id == this.id &&
           other.modeIndex == this.modeIndex &&
           other.showApresetation == this.showApresetation &&
-          other.enableBottomBackButton == this.enableBottomBackButton);
+          other.enableBottomBackButton == this.enableBottomBackButton &&
+          other.enableHomeTipes == this.enableHomeTipes);
 }
 
 class ConfigTableCompanion extends UpdateCompanion<ConfigTableData> {
@@ -14294,23 +14330,27 @@ class ConfigTableCompanion extends UpdateCompanion<ConfigTableData> {
   final Value<int> modeIndex;
   final Value<bool> showApresetation;
   final Value<bool> enableBottomBackButton;
+  final Value<bool> enableHomeTipes;
   const ConfigTableCompanion({
     this.id = const Value.absent(),
     this.modeIndex = const Value.absent(),
     this.showApresetation = const Value.absent(),
     this.enableBottomBackButton = const Value.absent(),
+    this.enableHomeTipes = const Value.absent(),
   });
   ConfigTableCompanion.insert({
     this.id = const Value.absent(),
     this.modeIndex = const Value.absent(),
     this.showApresetation = const Value.absent(),
     this.enableBottomBackButton = const Value.absent(),
+    this.enableHomeTipes = const Value.absent(),
   });
   static Insertable<ConfigTableData> custom({
     Expression<int>? id,
     Expression<int>? modeIndex,
     Expression<bool>? showApresetation,
     Expression<bool>? enableBottomBackButton,
+    Expression<bool>? enableHomeTipes,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -14318,6 +14358,7 @@ class ConfigTableCompanion extends UpdateCompanion<ConfigTableData> {
       if (showApresetation != null) 'show_apresetation': showApresetation,
       if (enableBottomBackButton != null)
         'enable_bottom_back_button': enableBottomBackButton,
+      if (enableHomeTipes != null) 'enable_home_tipes': enableHomeTipes,
     });
   }
 
@@ -14325,13 +14366,15 @@ class ConfigTableCompanion extends UpdateCompanion<ConfigTableData> {
       {Value<int>? id,
       Value<int>? modeIndex,
       Value<bool>? showApresetation,
-      Value<bool>? enableBottomBackButton}) {
+      Value<bool>? enableBottomBackButton,
+      Value<bool>? enableHomeTipes}) {
     return ConfigTableCompanion(
       id: id ?? this.id,
       modeIndex: modeIndex ?? this.modeIndex,
       showApresetation: showApresetation ?? this.showApresetation,
       enableBottomBackButton:
           enableBottomBackButton ?? this.enableBottomBackButton,
+      enableHomeTipes: enableHomeTipes ?? this.enableHomeTipes,
     );
   }
 
@@ -14351,6 +14394,9 @@ class ConfigTableCompanion extends UpdateCompanion<ConfigTableData> {
       map['enable_bottom_back_button'] =
           Variable<bool>(enableBottomBackButton.value);
     }
+    if (enableHomeTipes.present) {
+      map['enable_home_tipes'] = Variable<bool>(enableHomeTipes.value);
+    }
     return map;
   }
 
@@ -14360,7 +14406,8 @@ class ConfigTableCompanion extends UpdateCompanion<ConfigTableData> {
           ..write('id: $id, ')
           ..write('modeIndex: $modeIndex, ')
           ..write('showApresetation: $showApresetation, ')
-          ..write('enableBottomBackButton: $enableBottomBackButton')
+          ..write('enableBottomBackButton: $enableBottomBackButton, ')
+          ..write('enableHomeTipes: $enableHomeTipes')
           ..write(')'))
         .toString();
   }
@@ -23392,6 +23439,7 @@ typedef $$ConfigTableTableCreateCompanionBuilder = ConfigTableCompanion
   Value<int> modeIndex,
   Value<bool> showApresetation,
   Value<bool> enableBottomBackButton,
+  Value<bool> enableHomeTipes,
 });
 typedef $$ConfigTableTableUpdateCompanionBuilder = ConfigTableCompanion
     Function({
@@ -23399,6 +23447,7 @@ typedef $$ConfigTableTableUpdateCompanionBuilder = ConfigTableCompanion
   Value<int> modeIndex,
   Value<bool> showApresetation,
   Value<bool> enableBottomBackButton,
+  Value<bool> enableHomeTipes,
 });
 
 class $$ConfigTableTableTableManager extends RootTableManager<
@@ -23422,24 +23471,28 @@ class $$ConfigTableTableTableManager extends RootTableManager<
             Value<int> modeIndex = const Value.absent(),
             Value<bool> showApresetation = const Value.absent(),
             Value<bool> enableBottomBackButton = const Value.absent(),
+            Value<bool> enableHomeTipes = const Value.absent(),
           }) =>
               ConfigTableCompanion(
             id: id,
             modeIndex: modeIndex,
             showApresetation: showApresetation,
             enableBottomBackButton: enableBottomBackButton,
+            enableHomeTipes: enableHomeTipes,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
             Value<int> modeIndex = const Value.absent(),
             Value<bool> showApresetation = const Value.absent(),
             Value<bool> enableBottomBackButton = const Value.absent(),
+            Value<bool> enableHomeTipes = const Value.absent(),
           }) =>
               ConfigTableCompanion.insert(
             id: id,
             modeIndex: modeIndex,
             showApresetation: showApresetation,
             enableBottomBackButton: enableBottomBackButton,
+            enableHomeTipes: enableHomeTipes,
           ),
         ));
 }
@@ -23466,6 +23519,11 @@ class $$ConfigTableTableFilterComposer
       column: $state.table.enableBottomBackButton,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get enableHomeTipes => $state.composableBuilder(
+      column: $state.table.enableHomeTipes,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
 }
 
 class $$ConfigTableTableOrderingComposer
@@ -23488,6 +23546,11 @@ class $$ConfigTableTableOrderingComposer
 
   ColumnOrderings<bool> get enableBottomBackButton => $state.composableBuilder(
       column: $state.table.enableBottomBackButton,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get enableHomeTipes => $state.composableBuilder(
+      column: $state.table.enableHomeTipes,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }

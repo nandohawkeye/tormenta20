@@ -7,6 +7,8 @@ class ConfigTable extends Table {
       boolean().withDefault(const Constant(false))();
   BoolColumn get enableBottomBackButton =>
       boolean().withDefault(const Constant(true))();
+  BoolColumn get enableHomeTipes =>
+      boolean().withDefault(const Constant(true))();
 
   @override
   Set<Column>? get primaryKey => {id};
