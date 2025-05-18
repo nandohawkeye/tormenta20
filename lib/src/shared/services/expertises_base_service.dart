@@ -64,6 +64,8 @@ class ExpertisesBaseService {
   final _percepcao =
       ExpertiseBase(id: 21, name: 'percepção', atribute: Atribute.wisdom);
 
+  ExpertiseBase get percepcao => _percepcao;
+
   final _pilotagem =
       ExpertiseBase(id: 22, name: 'pilotagem', atribute: Atribute.dexterity);
 
@@ -103,7 +105,7 @@ class ExpertisesBaseService {
         _luta,
         _misticismo,
         _nobreza,
-        _percepcao,
+        percepcao,
         _pilotagem,
         _pontaria,
         _reflexos,
