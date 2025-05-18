@@ -17,7 +17,7 @@ Este projeto ainda está em desenvolvimento, foram realizados testes práticos e
 
 ## ⚙️ Questões técnicas de design patterns utilizados
 
-✅ Este projeto está sendo desenvolvido com o Flutter SDK 3.24.3 e (Flutter)Dart SDK 3.5.3.
+✅ Este projeto está sendo desenvolvido com o Flutter SDK 3.29.2 e (Flutter)Dart SDK 3.7.2.
 
 Para este projeto está sendo utilizado separação de pastas modular, sendo os principais: core/modules/shared.
 No core está contido tudo que é utilizado na main do projeto ou instâncias que estão no cerne do projeto como o local dataBase.
