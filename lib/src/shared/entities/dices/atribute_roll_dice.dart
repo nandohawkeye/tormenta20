@@ -9,18 +9,18 @@ class AtributeRollDice extends Dice {
   AtributeRollDice({
     required super.uuid,
     super.quantity = 4,
-    super.dice = 6,
+    super.sides = 6,
   });
 
   @override
-  String toString() => '${quantity}D$dice';
+  String toString() => '${quantity}D$sides';
 
   @override
   bool operator ==(other) =>
       other is AtributeRollDice &&
       other.uuid == uuid &&
       other.quantity == quantity &&
-      other.dice == dice &&
+      other.sides == sides &&
       other.rolledDicesValue == rolledDicesValue &&
       other.atributeValue == atributeValue &&
       other.atribute == atribute;
@@ -29,7 +29,7 @@ class AtributeRollDice extends Dice {
   int get hashCode =>
       uuid.hashCode ^
       quantity.hashCode ^
-      dice.hashCode ^
+      sides.hashCode ^
       rolledDicesValue.hashCode ^
       atributeValue.hashCode ^
       atribute.hashCode;

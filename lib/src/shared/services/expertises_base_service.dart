@@ -37,6 +37,8 @@ class ExpertisesBaseService {
   final _iniciativa =
       ExpertiseBase(id: 12, name: 'iniciativa', atribute: Atribute.dexterity);
 
+  ExpertiseBase get iniciativa => _iniciativa;
+
   final _intimidacao =
       ExpertiseBase(id: 13, name: 'intimidação', atribute: Atribute.charisma);
 
@@ -74,6 +76,8 @@ class ExpertisesBaseService {
 
   final _reflexos =
       ExpertiseBase(id: 24, name: 'reflexos', atribute: Atribute.dexterity);
+
+  ExpertiseBase get reflexos => _reflexos;
 
   final _religiao =
       ExpertiseBase(id: 25, name: 'religião', atribute: Atribute.wisdom);

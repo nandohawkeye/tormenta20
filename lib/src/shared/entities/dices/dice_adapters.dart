@@ -7,15 +7,15 @@ abstract class DiceAdapters {
     return Dice(
       uuid: const Uuid().v4(),
       quantity: int.parse(list[0]),
-      dice: int.parse(list[1]),
+      sides: int.parse(list[1]),
     );
   }
 
   static Dice create(String quantity, String diceValue) => Dice(
         uuid: const Uuid().v4(),
         quantity: int.parse(quantity),
-        dice: int.parse(diceValue),
+        sides: int.parse(diceValue),
       );
 
-  static String toMacro(Dice dice) => '${dice.quantity}D${dice.dice}';
+  static String toMacro(Dice dice) => '${dice.quantity}D${dice.sides}';
 }
