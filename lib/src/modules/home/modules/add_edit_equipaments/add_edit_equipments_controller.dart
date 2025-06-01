@@ -377,6 +377,7 @@ class AddEditEquipmentsController {
   }
 
   Equipment _createEquipment() {
+    final now = DateTime.now();
     if (typeStore.data == Weapon) {
       final weapon = Weapon(
         name: _name!,
@@ -400,6 +401,8 @@ class AddEditEquipmentsController {
         isNatural: _isNaturalWeapon,
         isUnarmed: _isUnarmed,
         spaceOcuped: _ocupadeSpace ?? 0,
+        createdAt: now,
+        updatedAt: now,
       );
 
       return weapon;
@@ -418,6 +421,8 @@ class AddEditEquipmentsController {
         defenseBonus: _defenseBonus!,
         penalty: _penalty!,
         defenseInUse: false,
+        createdAt: now,
+        updatedAt: now,
       );
 
       return armor;
@@ -436,6 +441,8 @@ class AddEditEquipmentsController {
         defenseBonus: _defenseBonus!,
         penalty: _penalty!,
         defenseInUse: false,
+        createdAt: now,
+        updatedAt: now,
       );
 
       return shield;
@@ -451,6 +458,8 @@ class AddEditEquipmentsController {
         spaceOcuped: _ocupadeSpace ?? 0,
         type: generalItemTypeStore.data!,
         price: _price,
+        createdAt: now,
+        updatedAt: now,
       );
 
       return general;
@@ -465,6 +474,8 @@ class AddEditEquipmentsController {
         specialMaterial: materialTypeStore.data,
         quantity: _quantity!,
         price: _price,
+        createdAt: now,
+        updatedAt: now,
       );
 
       return ammunition;
@@ -473,6 +484,8 @@ class AddEditEquipmentsController {
         uuid: _uuid,
         parentUuid: _parentUuid,
         price: _price,
+        createdAt: now,
+        updatedAt: now,
       );
 
       return backpack;
@@ -481,6 +494,8 @@ class AddEditEquipmentsController {
         uuid: _uuid,
         parentUuid: _parentUuid,
         price: _price,
+        createdAt: now,
+        updatedAt: now,
       );
 
       return adventureBackpack;
@@ -489,6 +504,8 @@ class AddEditEquipmentsController {
         uuid: _uuid,
         parentUuid: _parentUuid,
         price: _price,
+        createdAt: now,
+        updatedAt: now,
       );
 
       return saddlebag;
@@ -500,6 +517,8 @@ class AddEditEquipmentsController {
         storedIn: _storedIn,
         improvements: improvementTypeStore.data,
         specialMaterial: materialTypeStore.data,
+        createdAt: now,
+        updatedAt: now,
       );
 
       return equipment;

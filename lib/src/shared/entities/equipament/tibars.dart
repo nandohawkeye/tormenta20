@@ -7,12 +7,14 @@ class Tibars extends Equipment implements Spaceable {
   final int bronze;
   final bool hasInitialRoll;
 
-  Tibars({
+  const Tibars({
     super.storedIn,
     required this.gold,
     required this.silver,
     required this.bronze,
     required super.uuid,
+    required super.createdAt,
+    required super.updatedAt,
     required super.parentUuid,
     this.hasInitialRoll = false,
     super.improvements = const [],
@@ -26,22 +28,13 @@ class Tibars extends Equipment implements Spaceable {
       other is Tibars &&
       other.uuid == uuid &&
       other.parentUuid == parentUuid &&
-      other.gold == gold &&
-      other.silver == silver &&
-      other.bronze == bronze &&
-      other.spaceOcuped == spaceOcuped &&
-      other.hasInitialRoll == hasInitialRoll &&
-      other.storedIn == storedIn;
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt;
 
   @override
   int get hashCode =>
       uuid.hashCode ^
       parentUuid.hashCode ^
-      name.hashCode ^
-      gold.hashCode ^
-      silver.hashCode ^
-      bronze.hashCode ^
-      bronze.hashCode ^
-      hasInitialRoll.hashCode ^
-      storedIn.hashCode;
+      createdAt.hashCode ^
+      updatedAt.hashCode;
 }

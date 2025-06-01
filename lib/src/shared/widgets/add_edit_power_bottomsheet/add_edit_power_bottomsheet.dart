@@ -111,12 +111,15 @@ class _AddEditGeneralSkillsBottomSheetState
             child: AddEditGeneralSkillsMainButtons(
               onSave: () {
                 if (_formKey.currentState!.validate()) {
+                  final now = DateTime.now();
                   final power = Power(
                     characterUuid: widget.parentUuid,
                     uuid: widget.initial?.uuid ?? const Uuid().v4(),
                     name: _title!,
                     desc: _desc!,
                     type: PowerType.general,
+                    createdAt: widget.initial?.createdAt ?? now,
+                    updatedAt: now,
                   );
 
                   Navigator.pop(context, power);

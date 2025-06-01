@@ -20,12 +20,12 @@ class AddEditMenaceCreateExpertiseBottomsheet extends StatefulWidget {
     required this.expertiseBase,
     this.valueFinal,
     required this.parentUuid,
-    this.expertiseUuid,
+    this.expertise,
   });
 
   final ExpertiseBase? expertiseBase;
   final String parentUuid;
-  final String? expertiseUuid;
+  final Expertise? expertise;
   final int? valueFinal;
 
   @override
@@ -66,7 +66,7 @@ class _AddEditSelectedExpertiseBottomsheetState
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: widget.expertiseUuid == null,
+      canPop: widget.expertise == null,
       child: BottomSheetBase(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -145,14 +145,19 @@ class _AddEditSelectedExpertiseBottomsheetState
 
                               if (!isValidate) return;
 
+                              final now = DateTime.now();
+
                               final expertise = Expertise(
                                 id: widget.expertiseBase?.id ?? 0,
-                                uuid: widget.expertiseUuid ?? const Uuid().v4(),
+                                uuid:
+                                    widget.expertise?.uuid ?? const Uuid().v4(),
                                 name: _name!,
                                 atribute: _atributeStore.data!,
                                 parentUuid: widget.parentUuid,
                                 valueFinal: _value,
                                 isTrained: false,
+                                createdAt: widget.expertise?.createdAt ?? now,
+                                updatedAt: now,
                               );
 
                               Navigator.pop(context, expertise);

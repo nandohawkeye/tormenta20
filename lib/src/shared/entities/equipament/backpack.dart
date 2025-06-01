@@ -5,9 +5,11 @@ class Backpack extends Equipment implements HasSpace {
   final double? price;
   final String? suffix;
 
-  Backpack({
+  const Backpack({
     required super.uuid,
     required super.parentUuid,
+    required super.createdAt,
+    required super.updatedAt,
     this.price,
     this.suffix,
     super.improvements = const [],
@@ -18,11 +20,14 @@ class Backpack extends Equipment implements HasSpace {
     required String uuid,
     required String parentUuid,
   }) {
+    final now = DateTime.now();
     return Backpack(
       uuid: uuid,
       parentUuid: parentUuid,
       price: price,
       suffix: suffix,
+      createdAt: now,
+      updatedAt: now,
     );
   }
 
@@ -37,15 +42,13 @@ class Backpack extends Equipment implements HasSpace {
       other is Backpack &&
       other.uuid == uuid &&
       other.parentUuid == parentUuid &&
-      other.name == name &&
-      other.suffix == suffix &&
-      other.price == price;
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt;
 
   @override
   int get hashCode =>
       uuid.hashCode ^
       parentUuid.hashCode ^
-      name.hashCode ^
-      suffix.hashCode ^
-      price.hashCode;
+      createdAt.hashCode ^
+      updatedAt.hashCode;
 }

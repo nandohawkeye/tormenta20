@@ -7,6 +7,8 @@ class Power extends EntityBase {
   final String desc;
   final PowerType type;
   final String characterUuid;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
   Power({
     required this.uuid,
@@ -14,6 +16,8 @@ class Power extends EntityBase {
     required this.desc,
     required this.type,
     required this.characterUuid,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   Power copyWith({
@@ -23,11 +27,14 @@ class Power extends EntityBase {
     PowerType? type,
     String? characterUuid,
   }) {
+    final now = DateTime.now();
     return Power(
       uuid: uuid ?? this.uuid,
       name: name ?? this.name,
       desc: desc ?? this.desc,
       type: type ?? this.type,
+      createdAt: now,
+      updatedAt: now,
       characterUuid: characterUuid ?? this.characterUuid,
     );
   }
@@ -42,16 +49,16 @@ class Power extends EntityBase {
   bool operator ==(other) =>
       other is Power &&
       other.uuid == uuid &&
-      other.name == name &&
-      other.desc == desc &&
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt &&
       other.type == type &&
       other.characterUuid == characterUuid;
 
   @override
   int get hashCode =>
       uuid.hashCode ^
-      name.hashCode ^
-      desc.hashCode ^
+      createdAt.hashCode ^
+      updatedAt.hashCode ^
       type.hashCode ^
       characterUuid.hashCode;
 }

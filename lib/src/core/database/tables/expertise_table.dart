@@ -9,6 +9,8 @@ class ExpertiseTable extends Table {
   IntColumn get bonus => integer().nullable()();
   IntColumn get valueFinal => integer().nullable()();
   BoolColumn get isTrained => boolean()();
+  IntColumn get createdAt => integer()();
+  IntColumn get updatedAt => integer()();
 
   @override
   Set<Column>? get primaryKey => {uuid};

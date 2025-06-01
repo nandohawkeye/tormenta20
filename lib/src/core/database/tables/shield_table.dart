@@ -14,6 +14,8 @@ class ShieldTable extends Table {
   IntColumn get defenseBonus => integer()();
   IntColumn get penalty => integer()();
   BoolColumn get inUse => boolean().withDefault(const Constant(false))();
+  IntColumn get createdAt => integer()();
+  IntColumn get updatedAt => integer()();
 
   @override
   Set<Column>? get primaryKey => {uuid};

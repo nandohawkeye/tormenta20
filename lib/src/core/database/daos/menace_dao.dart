@@ -422,6 +422,14 @@ class MenaceDAO extends DatabaseAccessor<AppDatabase> with _$MenaceDAOMixin {
         },
       );
 
+      (update(boardTable)
+        ..where((tbl) => tbl.uuid.equals(entities.first.boardUuid))
+        ..write(
+          BoardTableCompanion(
+            updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+          ),
+        ));
+
       return null;
     } catch (e, st) {
       if (kDebugMode) {
@@ -440,6 +448,14 @@ class MenaceDAO extends DatabaseAccessor<AppDatabase> with _$MenaceDAOMixin {
                 tbl.boardUuid.equals(boardUuid) &
                 tbl.menaceUuid.equals(menaceUuid)))
           .go();
+
+      (update(boardTable)
+        ..where((tbl) => tbl.uuid.equals(boardUuid))
+        ..write(
+          BoardTableCompanion(
+            updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+          ),
+        ));
 
       return null;
     } catch (e, st) {

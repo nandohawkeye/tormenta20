@@ -85,12 +85,15 @@ class _BottomSheetAddBoardLinkState extends State<BottomSheetAddBoardLink> {
           RepaintBoundary(
             child: BottomSheetAddBoardLinkMainButtons(
               onSave: () {
+                final now = DateTime.now();
                 if (_formKey.currentState!.validate()) {
                   final newLink = BoardLink(
                     boardUuid: widget.boardUuid,
                     uuid: widget.link?.uuid ?? const Uuid().v4(),
                     title: _title!,
                     link: _url!,
+                    createdAt: widget.link?.createdAt ?? now,
+                    updatedAt: now,
                   );
 
                   Navigator.pop(context, newLink);

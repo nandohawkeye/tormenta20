@@ -24,12 +24,15 @@ class AddEditActionController {
       _setExtraDice(initialValue.extraDamageDices);
       classTypeStore = AddEditActionClassTypeStore(initialValue.runtimeType);
       typeStore = AddEditActionTypeStore(initialValue.type);
+      _createdAt = initialValue.createdAt;
     } else {
       _uuid = const Uuid().v4();
       classTypeStore = AddEditActionClassTypeStore(ActionEnt);
       typeStore = AddEditActionTypeStore(ActionType.passive);
     }
   }
+
+  DateTime? _createdAt;
 
   late final AddEditActionTypeStore typeStore;
   late final AddEditActionClassTypeStore classTypeStore;
@@ -170,6 +173,7 @@ class AddEditActionController {
 
   ActionEnt? onSave() {
     final type = classTypeStore.data;
+    final now = DateTime.now();
 
     if (type == HandToHand) {
       return HandToHand(
@@ -186,6 +190,8 @@ class AddEditActionController {
         criticalMultiplier: _criticalMultiplier,
         equipament: _equipment,
         equipamentUuid: _equipment?.uuid,
+        createdAt: _createdAt ?? now,
+        updatedAt: now,
       );
     }
 
@@ -204,6 +210,8 @@ class AddEditActionController {
         criticalMultiplier: _criticalMultiplier,
         equipament: _equipment,
         equipamentUuid: _equipment?.uuid,
+        createdAt: _createdAt ?? now,
+        updatedAt: now,
       );
     }
 
@@ -222,6 +230,8 @@ class AddEditActionController {
       criticalMultiplier: _criticalMultiplier,
       equipament: _equipment,
       equipamentUuid: _equipment?.uuid,
+      createdAt: _createdAt ?? now,
+      updatedAt: now,
     );
   }
 

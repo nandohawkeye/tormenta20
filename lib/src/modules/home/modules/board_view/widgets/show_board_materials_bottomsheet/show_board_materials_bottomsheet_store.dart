@@ -92,7 +92,7 @@ class ShowBoardMaterialsBottomsheetStore extends ChangeNotifier {
   }
 
   void deleteMaterials() async =>
-      await _storageService.deleteMaterials(_materialToDelete);
+      await _storageService.deleteMaterials(_materialToDelete, _boardUuid);
 
   @override
   void dispose() {

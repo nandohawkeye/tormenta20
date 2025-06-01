@@ -25,7 +25,7 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
   final bool isUnarmed;
   final int? steps;
 
-  Weapon({
+  const Weapon({
     this.desc,
     super.storedIn,
     required super.improvements,
@@ -35,6 +35,8 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
     required super.parentUuid,
     required super.name,
     required this.purpose,
+    required super.createdAt,
+    required super.updatedAt,
     required WieldableType wieldableType,
     required this.proficiency,
     required this.skills,
@@ -55,6 +57,7 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
     required String uuid,
     required String parentUuid,
   }) {
+    final now = DateTime.now();
     return Weapon(
       desc: desc,
       storedIn: storedIn,
@@ -77,6 +80,8 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
       isNatural: isNatural,
       isUnarmed: isUnarmed,
       spaceOcuped: _space,
+      createdAt: now,
+      updatedAt: now,
     );
   }
 
@@ -91,48 +96,13 @@ class Weapon extends Equipment implements Spaceable, Wieldable {
       other is Weapon &&
       other.uuid == uuid &&
       other.parentUuid == parentUuid &&
-      other.desc == desc &&
-      other.type == type &&
-      other.steps == steps &&
-      other.spaceOcuped == spaceOcuped &&
-      other.critical == critical &&
-      other.range == range &&
-      other.criticalMultiplier == criticalMultiplier &&
-      other.price == price &&
-      other.purpose == purpose &&
-      other.proficiency == proficiency &&
-      other.skills == skills &&
-      other.isNatural == isNatural &&
-      other.isUnarmed == isUnarmed &&
-      other.spaceOcuped == spaceOcuped &&
-      other._space == _space &&
-      other._wieldableType == _wieldableType &&
-      other.storedIn == storedIn &&
-      other.improvements == improvements &&
-      other.specialMaterial == specialMaterial;
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt;
 
   @override
   int get hashCode =>
       uuid.hashCode ^
       parentUuid.hashCode ^
-      name.hashCode ^
-      desc.hashCode ^
-      type.hashCode ^
-      steps.hashCode ^
-      spaceOcuped.hashCode ^
-      critical.hashCode ^
-      range.hashCode ^
-      criticalMultiplier.hashCode ^
-      price.hashCode ^
-      purpose.hashCode ^
-      proficiency.hashCode ^
-      skills.hashCode ^
-      isNatural.hashCode ^
-      isUnarmed.hashCode ^
-      spaceOcuped.hashCode ^
-      _space.hashCode ^
-      _wieldableType.hashCode ^
-      storedIn.hashCode ^
-      improvements.hashCode ^
-      specialMaterial.hashCode;
+      createdAt.hashCode ^
+      updatedAt.hashCode;
 }

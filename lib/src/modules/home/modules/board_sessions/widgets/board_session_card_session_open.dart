@@ -77,7 +77,11 @@ class _BoardSessionCardSessionOpenState
       child: EditSessionEnvironmentBottomsheet(session: widget.session),
     ).then((result) async {
       if (result != null) {
-        final upSession = widget.session.copyWith(environment: result);
+        final now = DateTime.now();
+        final upSession = widget.session.copyWith(
+          environment: result,
+          updatedAt: now,
+        );
         widget.updatedSession(upSession);
       }
     });

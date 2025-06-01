@@ -26,25 +26,12 @@ class Grimoire extends EntityBase {
   @override
   bool operator ==(other) =>
       other is Grimoire &&
-      other.desc == desc &&
-      other.name == name &&
-      other.createdAt == createdAt &&
-      other.updatedAt == updatedAt &&
       other.uuid == uuid &&
-      other.iconAsset == iconAsset &&
-      other.characters == characters &&
-      other.magicsCharacters == magicsCharacters;
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt;
 
   @override
-  int get hashCode =>
-      desc.hashCode ^
-      name.hashCode ^
-      createdAt.hashCode ^
-      updatedAt.hashCode ^
-      uuid.hashCode ^
-      characters.hashCode ^
-      magicsCharacters.hashCode ^
-      iconAsset.hashCode;
+  int get hashCode => uuid.hashCode ^ createdAt.hashCode ^ updatedAt.hashCode;
 
   @override
   String get exibitionLabel => name;

@@ -30,31 +30,8 @@ class ConditionsBase {
   });
 
   @override
-  bool operator ==(other) =>
-      other is ConditionsBase &&
-      other.id == id &&
-      other.name == name &&
-      other.desc == desc &&
-      other.expertises == expertises &&
-      other.dice == dice &&
-      other.inAllExpertises == inAllExpertises &&
-      other.inMana == inMana &&
-      other.inAttack == inAttack &&
-      other.inDefense == inDefense &&
-      other.inDisplacment == inDisplacment &&
-      other.atributes == atributes;
+  bool operator ==(other) => other is ConditionsBase && other.id == id;
 
   @override
-  int get hashCode =>
-      id.hashCode ^
-      name.hashCode ^
-      desc.hashCode ^
-      expertises.hashCode ^
-      dice.hashCode ^
-      inAllExpertises.hashCode ^
-      inMana.hashCode ^
-      inAttack.hashCode ^
-      inDefense.hashCode ^
-      atributes.hashCode ^
-      inDisplacment.hashCode;
+  int get hashCode => id.hashCode ^ name.hashCode;
 }

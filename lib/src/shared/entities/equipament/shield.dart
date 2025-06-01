@@ -12,12 +12,14 @@ class Shield extends Equipment implements Spaceable, Defensible {
   final int penalty;
   final String? desc;
 
-  Shield({
+  const Shield({
     required super.uuid,
     required super.parentUuid,
     required super.name,
     required double spaceOcuped,
     required bool defenseInUse,
+    required super.createdAt,
+    required super.updatedAt,
     required this.type,
     this.price,
     required this.defenseBonus,
@@ -34,6 +36,7 @@ class Shield extends Equipment implements Spaceable, Defensible {
     required String uuid,
     required String parentUuid,
   }) {
+    final now = DateTime.now();
     return Shield(
       uuid: uuid,
       parentUuid: parentUuid,
@@ -48,6 +51,8 @@ class Shield extends Equipment implements Spaceable, Defensible {
       storedIn: storedIn,
       improvements: improvements,
       specialMaterial: specialMaterial,
+      createdAt: now,
+      updatedAt: now,
     );
   }
 
@@ -59,33 +64,15 @@ class Shield extends Equipment implements Spaceable, Defensible {
       other is Shield &&
       other.uuid == uuid &&
       other.parentUuid == parentUuid &&
-      other.name == name &&
-      other._space == _space &&
-      other.type == type &&
-      other.price == price &&
-      other.defenseBonus == defenseBonus &&
-      other.penalty == penalty &&
-      other.desc == desc &&
-      other.inUse == inUse &&
-      other.storedIn == storedIn &&
-      other.improvements == improvements &&
-      other.specialMaterial == specialMaterial;
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt;
 
   @override
   int get hashCode =>
       uuid.hashCode ^
       parentUuid.hashCode ^
-      name.hashCode ^
-      _space.hashCode ^
-      type.hashCode ^
-      price.hashCode ^
-      defenseBonus.hashCode ^
-      penalty.hashCode ^
-      desc.hashCode ^
-      storedIn.hashCode ^
-      improvements.hashCode ^
-      inUse.hashCode ^
-      specialMaterial.hashCode;
+      createdAt.hashCode ^
+      updatedAt.hashCode;
 
   @override
   bool get inUse => _inUse;

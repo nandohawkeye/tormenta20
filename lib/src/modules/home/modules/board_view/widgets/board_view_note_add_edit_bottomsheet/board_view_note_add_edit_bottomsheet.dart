@@ -89,12 +89,13 @@ class _BoardViewNoteAddEditBottomsheetState
                       final updateAt = DateTime.now();
 
                       final newNote = BoardNote(
-                          boardUuid: widget.boardUuid,
-                          uuid: widget.note?.uuid ?? const Uuid().v4(),
-                          note: _noteText!,
-                          isFavorited: _isFavorited.value,
-                          updatedAt: updateAt,
-                          createdAt: widget.note?.createdAt ?? updateAt);
+                        boardUuid: widget.boardUuid,
+                        uuid: widget.note?.uuid ?? const Uuid().v4(),
+                        note: _noteText!,
+                        isFavorited: _isFavorited.value,
+                        updatedAt: updateAt,
+                        createdAt: widget.note?.createdAt ?? updateAt,
+                      );
 
                       Navigator.pop(context, newNote);
                     }

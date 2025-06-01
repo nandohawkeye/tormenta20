@@ -88,10 +88,12 @@ class BoardViewStore extends ChangeNotifier {
     final sessions = board.sessions.where((ss) => ss.isOpen).toList();
 
     if (sessions.isEmpty) {
+      final now = DateTime.now();
       final session = BoardSession(
         uuid: const Uuid().v4(),
         boardUuid: _board.uuid,
-        startedAt: DateTime.now(),
+        startedAt: now,
+        updatedAt: now,
         combats: [],
       );
 
@@ -99,8 +101,9 @@ class BoardViewStore extends ChangeNotifier {
       return;
     }
 
+    final now = DateTime.now();
     sessions.sort((a, b) => b.startedAt.compareTo(a.startedAt));
-    final closeSession = sessions.first.copyWith(endAt: DateTime.now());
+    final closeSession = sessions.first.copyWith(endAt: now, updatedAt: now);
     await _storageService.saveSession(closeSession);
   }
 
@@ -128,6 +131,7 @@ class BoardViewStore extends ChangeNotifier {
       turn: 1,
     );
     await _storageService.saveCombat(combat);
+    await _storageService.saveSession(currentSession.copyWith());
   }
 
   BoardCombat? getCurrentCombat() {

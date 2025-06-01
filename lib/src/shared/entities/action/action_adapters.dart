@@ -19,6 +19,8 @@ abstract class ActionAdapters {
       critical: data.critical,
       criticalMultiplier: data.criticalMultiplier,
       equipamentUuid: data.equipamentUuid,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(data.createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data.updatedAt),
     );
   }
 
@@ -37,6 +39,8 @@ abstract class ActionAdapters {
       critical: Value(entity.critical),
       criticalMultiplier: Value(entity.criticalMultiplier),
       typeIndex: Value(entity.type.index),
+      createdAt: Value(entity.createdAt.millisecondsSinceEpoch),
+      updatedAt: Value(entity.updatedAt.millisecondsSinceEpoch),
     );
   }
 
@@ -55,6 +59,8 @@ abstract class ActionAdapters {
       critical: data['critical'],
       criticalMultiplier: data['critical_multiplier'],
       equipamentUuid: data['equipament_uuid'],
+      createdAt: DateTime.fromMillisecondsSinceEpoch(data['created_at']),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data['updated_at']),
     );
   }
 
@@ -73,6 +79,8 @@ abstract class ActionAdapters {
       'critical': entity.critical,
       'critical_multiplier': entity.criticalMultiplier,
       'equipament_uuid': entity.equipamentUuid,
+      'created_at': entity.createdAt.millisecondsSinceEpoch,
+      'updated_at': entity.updatedAt.millisecondsSinceEpoch,
     };
   }
 }

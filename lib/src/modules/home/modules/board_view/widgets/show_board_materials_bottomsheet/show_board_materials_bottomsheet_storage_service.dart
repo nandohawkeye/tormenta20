@@ -12,7 +12,7 @@ class ShowBoardMaterialsBottomsheetStorageService extends DriftStorageService {
     return super.dataBase.boardDAO.saveMaterials(materials);
   }
 
-  Future<Failure?> deleteMaterials(List<String> uuids) {
-    return super.dataBase.boardDAO.deleteMaterials(uuids);
+  Future<Failure?> deleteMaterials(List<String> uuids, String boardUuid) {
+    return super.dataBase.boardDAO.deleteMaterials(uuids, boardUuid);
   }
 }

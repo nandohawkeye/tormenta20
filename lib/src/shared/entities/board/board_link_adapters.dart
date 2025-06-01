@@ -9,6 +9,8 @@ abstract class BoardLinkAdapters {
       link: Value<String>(entity.link),
       boardUuid: Value<String>(entity.boardUuid),
       title: Value<String>(entity.title),
+      createdAt: Value<int>(entity.createdAt.millisecondsSinceEpoch),
+      updatedAt: Value<int>(entity.updatedAt.millisecondsSinceEpoch),
     );
   }
 
@@ -18,6 +20,8 @@ abstract class BoardLinkAdapters {
       link: data.link,
       boardUuid: data.boardUuid,
       title: data.title,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(data.createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data.updatedAt),
     );
   }
 
@@ -26,6 +30,9 @@ abstract class BoardLinkAdapters {
       'uuid': entity.uuid,
       'title': entity.title,
       'link': entity.link,
+      'board_uuid': entity.boardUuid,
+      'created_at': entity.createdAt.millisecondsSinceEpoch,
+      'updated_at': entity.updatedAt.millisecondsSinceEpoch,
     };
   }
 
@@ -35,6 +42,8 @@ abstract class BoardLinkAdapters {
       link: data['link'],
       boardUuid: boardUuid,
       title: data['title'],
+      createdAt: DateTime.fromMillisecondsSinceEpoch(data['created_at']),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data['updated_at']),
     );
   }
 }

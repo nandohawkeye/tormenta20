@@ -11,6 +11,7 @@ abstract class ExpertiseAdapters {
     String menaceUuid,
     int valueFinal,
   ) {
+    final now = DateTime.now();
     return Expertise(
       id: base.id,
       name: base.name,
@@ -19,6 +20,8 @@ abstract class ExpertiseAdapters {
       parentUuid: menaceUuid,
       uuid: const Uuid().v4(),
       valueFinal: valueFinal,
+      createdAt: now,
+      updatedAt: now,
     );
   }
 
@@ -27,6 +30,7 @@ abstract class ExpertiseAdapters {
     String characterUuid,
     bool isTrained,
   ) {
+    final now = DateTime.now();
     return Expertise(
       id: base.id,
       name: base.name,
@@ -34,6 +38,8 @@ abstract class ExpertiseAdapters {
       atribute: base.atribute,
       parentUuid: characterUuid,
       uuid: const Uuid().v4(),
+      createdAt: now,
+      updatedAt: now,
     );
   }
 
@@ -47,6 +53,8 @@ abstract class ExpertiseAdapters {
       isTrained: data.isTrained,
       bonus: data.bonus,
       valueFinal: data.valueFinal,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(data.createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data.updatedAt),
     );
   }
 
@@ -60,6 +68,8 @@ abstract class ExpertiseAdapters {
       isTrained: data['is_trained'],
       bonus: data['bonus'],
       valueFinal: data['value_final'],
+      createdAt: DateTime.fromMillisecondsSinceEpoch(data['created_at']),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data['updated_at']),
     );
   }
 
@@ -73,6 +83,8 @@ abstract class ExpertiseAdapters {
       'is_trained': entity.isTrained,
       'bonus': entity.bonus,
       'value_final': entity.valueFinal,
+      'created_at': entity.createdAt.millisecondsSinceEpoch,
+      'updated_at': entity.updatedAt.millisecondsSinceEpoch,
     };
   }
 
@@ -86,6 +98,8 @@ abstract class ExpertiseAdapters {
       bonus: Value(entity.bonus),
       valueFinal: Value(entity.valueFinal),
       isTrained: Value(entity.isTrained),
+      createdAt: Value(entity.createdAt.millisecondsSinceEpoch),
+      updatedAt: Value(entity.updatedAt.millisecondsSinceEpoch),
     );
   }
 }

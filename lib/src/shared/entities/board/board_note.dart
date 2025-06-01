@@ -6,7 +6,7 @@ class BoardNote {
   final String boardUuid;
   final bool isFavorited;
 
-  BoardNote({
+  const BoardNote({
     required this.uuid,
     required this.note,
     required this.createdAt,

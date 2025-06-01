@@ -11,6 +11,8 @@ abstract class PowerAdapters {
       desc: data.desc,
       type: PowerType.values[data.typeIndex],
       characterUuid: data.characterUuid,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(data.createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data.updatedAt),
     );
   }
 
@@ -21,6 +23,8 @@ abstract class PowerAdapters {
       desc: Value(entity.desc),
       typeIndex: Value(entity.type.index),
       characterUuid: Value(entity.characterUuid),
+      createdAt: Value(entity.createdAt.millisecondsSinceEpoch),
+      updatedAt: Value(entity.updatedAt.millisecondsSinceEpoch),
     );
   }
 
@@ -31,6 +35,8 @@ abstract class PowerAdapters {
       desc: data['desc'],
       type: PowerType.values[data['type_index']],
       characterUuid: data['character_uuid'],
+      createdAt: DateTime.fromMillisecondsSinceEpoch(data['created_at']),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data['updated_at']),
     );
   }
 
@@ -41,6 +47,8 @@ abstract class PowerAdapters {
       'desc': entity.desc,
       'type_index': entity.type.index,
       'character_uuid': entity.characterUuid,
+      'created_at': entity.createdAt.millisecondsSinceEpoch,
+      'updated_at': entity.updatedAt.millisecondsSinceEpoch,
     };
   }
 }

@@ -24,6 +24,8 @@ abstract class ShieldAdapters {
       specialMaterial: specialMaterial,
       storedIn: data.storedIn,
       defenseInUse: data.inUse,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(data.createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data.updatedAt),
     );
   }
 
@@ -43,6 +45,8 @@ abstract class ShieldAdapters {
       specialMaterialIndex: Value(entity.specialMaterial?.index),
       storedIn: Value(entity.storedIn),
       inUse: Value(entity.inUse),
+      createdAt: Value(entity.createdAt.millisecondsSinceEpoch),
+      updatedAt: Value(entity.updatedAt.millisecondsSinceEpoch),
     );
   }
 
@@ -68,6 +72,8 @@ abstract class ShieldAdapters {
       specialMaterial: specialMaterial,
       storedIn: data['stored_in'],
       defenseInUse: data['in_use'],
+      createdAt: DateTime.fromMillisecondsSinceEpoch(data['created_at']),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data['updated_at']),
     );
   }
 
@@ -86,6 +92,8 @@ abstract class ShieldAdapters {
       'special_material_index': entity.specialMaterial?.index,
       'stored_in': entity.storedIn,
       'in_use': entity.inUse,
+      'created_at': entity.createdAt.millisecondsSinceEpoch,
+      'updated_at': entity.updatedAt.millisecondsSinceEpoch,
     };
   }
 }

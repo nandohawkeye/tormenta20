@@ -174,74 +174,11 @@ class CharacterBoard extends EntityBase {
   bool operator ==(other) =>
       other is CharacterBoard &&
       other.uuid == uuid &&
-      other.classes == classes &&
-      other.imagePath == imagePath &&
-      other.name == name &&
-      other.brood == brood &&
-      other.divinityId == divinityId &&
-      other.origins == origins &&
-      other.defense == defense &&
-      other.life == life &&
-      other.mana == mana &&
-      other.currentLife == currentLife &&
-      other.currentMana == currentMana &&
-      other.creatureSize == creatureSize &&
-      other.displacement == displacement &&
-      other.strength == strength &&
-      other.dexterity == dexterity &&
-      other.constitution == constitution &&
-      other.intelligence == intelligence &&
-      other.wisdom == wisdom &&
-      other.charisma == charisma &&
       other.createdAt == createdAt &&
-      other.updatedAt == updatedAt &&
-      other.grimorie == grimorie &&
-      other.senses == senses &&
-      other.equipments == equipments &&
-      other.actions == actions &&
-      other.expertises == expertises &&
-      other.powers == powers &&
-      other.parentuuid == parentuuid &&
-      other.boardUuid == boardUuid &&
-      other.isAlive == isAlive &&
-      other.alignmentType == alignmentType &&
-      other.imageAsset == imageAsset;
+      other.updatedAt == updatedAt;
 
   @override
-  int get hashCode =>
-      uuid.hashCode ^
-      classes.hashCode ^
-      imagePath.hashCode ^
-      name.hashCode ^
-      isAlive.hashCode ^
-      boardUuid.hashCode ^
-      parentuuid.hashCode ^
-      divinityId.hashCode ^
-      origins.hashCode ^
-      brood.hashCode ^
-      defense.hashCode ^
-      life.hashCode ^
-      mana.hashCode ^
-      currentLife.hashCode ^
-      currentMana.hashCode ^
-      creatureSize.hashCode ^
-      displacement.hashCode ^
-      strength.hashCode ^
-      dexterity.hashCode ^
-      constitution.hashCode ^
-      intelligence.hashCode ^
-      wisdom.hashCode ^
-      charisma.hashCode ^
-      createdAt.hashCode ^
-      updatedAt.hashCode ^
-      grimorie.hashCode ^
-      senses.hashCode ^
-      equipments.hashCode ^
-      actions.hashCode ^
-      expertises.hashCode ^
-      powers.hashCode ^
-      alignmentType.hashCode ^
-      imageAsset.hashCode;
+  int get hashCode => uuid.hashCode ^ createdAt.hashCode ^ updatedAt.hashCode;
 
   @override
   String get exibitionLabel => name;

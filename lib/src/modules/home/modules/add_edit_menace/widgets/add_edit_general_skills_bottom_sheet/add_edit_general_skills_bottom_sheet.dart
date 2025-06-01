@@ -102,11 +102,14 @@ class _AddEditGeneralSkillsBottomSheetState
             child: AddEditGeneralSkillsMainButtons(
               onSave: () {
                 if (_formKey.currentState!.validate()) {
+                  final now = DateTime.now();
                   final newSkill = GeneralSkill(
                     parentUuid: widget.menaceUuid,
                     uuid: widget.skill?.uuid ?? const Uuid().v4(),
                     name: _title!,
                     desc: _desc!,
+                    createdAt: widget.skill?.createdAt ?? now,
+                    updatedAt: now,
                   );
 
                   Navigator.pop(context, newSkill);

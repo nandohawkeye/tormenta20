@@ -53,7 +53,7 @@ class _AddEditMenaceExpertiseScreenState
       child: AddEditMenaceSelectedExpertiseBottomsheet(
         expertiseBase: base,
         parentUuid: widget.parentUuid,
-        expertiseUuid: widget.expertise?.uuid,
+        expertise: widget.expertise,
         valueFinal: widget.expertise?.valueFinal,
       ),
     ).then((result) {
@@ -74,7 +74,7 @@ class _AddEditMenaceExpertiseScreenState
       child: AddEditMenaceCreateExpertiseBottomsheet(
         expertiseBase: base,
         parentUuid: widget.parentUuid,
-        expertiseUuid: widget.expertise?.uuid,
+        expertise: widget.expertise,
         valueFinal: widget.expertise?.valueFinal,
       ),
     ).then((result) {

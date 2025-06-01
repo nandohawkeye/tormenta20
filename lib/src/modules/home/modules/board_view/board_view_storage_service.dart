@@ -45,11 +45,13 @@ class BoardViewStorageService extends DriftStorageService {
     return super.dataBase.characterDAO.deleteBoardCharacter(character);
   }
 
-  Future<Failure?> removeLinkMenaceBoard(
-      {required String boardUuid, required String menaceUuid}) {
-    return super
-        .dataBase
-        .menaceDAO
-        .removeLinkMenaceBoard(boardUuid: boardUuid, menaceUuid: menaceUuid);
+  Future<Failure?> removeLinkMenaceBoard({
+    required String boardUuid,
+    required String menaceUuid,
+  }) {
+    return super.dataBase.menaceDAO.removeLinkMenaceBoard(
+          boardUuid: boardUuid,
+          menaceUuid: menaceUuid,
+        );
   }
 }

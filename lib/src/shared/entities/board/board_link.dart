@@ -3,12 +3,16 @@ class BoardLink {
   final String link;
   final String boardUuid;
   final String title;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
-  BoardLink({
+  const BoardLink({
     required this.uuid,
     required this.link,
     required this.boardUuid,
     required this.title,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   @override
@@ -16,10 +20,13 @@ class BoardLink {
       other is BoardLink &&
       other.uuid == uuid &&
       other.boardUuid == boardUuid &&
-      other.link == link &&
-      other.title == title;
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt;
 
   @override
   int get hashCode =>
-      uuid.hashCode ^ boardUuid.hashCode ^ link.hashCode ^ title.hashCode;
+      uuid.hashCode ^
+      boardUuid.hashCode ^
+      createdAt.hashCode ^
+      updatedAt.hashCode;
 }

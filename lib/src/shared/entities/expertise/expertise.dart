@@ -7,8 +7,10 @@ class Expertise extends ExpertiseBase {
   final int? bonus;
   final bool isTrained;
   final int? valueFinal;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
-  Expertise({
+  const Expertise({
     this.bonus,
     this.valueFinal,
     required super.id,
@@ -17,12 +19,15 @@ class Expertise extends ExpertiseBase {
     required this.parentUuid,
     required this.uuid,
     required this.isTrained,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   Expertise cloneWith({
     required String uuid,
     required String parentUuid,
   }) {
+    final now = DateTime.now();
     return Expertise(
       id: id,
       name: name,
@@ -32,6 +37,8 @@ class Expertise extends ExpertiseBase {
       uuid: uuid,
       parentUuid: parentUuid,
       isTrained: isTrained,
+      createdAt: now,
+      updatedAt: now,
     );
   }
 
@@ -39,23 +46,15 @@ class Expertise extends ExpertiseBase {
   bool operator ==(other) =>
       other is Expertise &&
       other.id == id &&
-      other.name == name &&
-      other.atribute == atribute &&
-      other.bonus == bonus &&
-      other.isTrained == isTrained &&
-      other.uuid == uuid &&
-      other.valueFinal == valueFinal &&
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt &&
       other.parentUuid == parentUuid;
 
   @override
   int get hashCode =>
       id.hashCode ^
-      name.hashCode ^
-      atribute.hashCode ^
-      bonus.hashCode ^
-      isTrained.hashCode ^
-      uuid.hashCode ^
-      valueFinal.hashCode ^
+      createdAt.hashCode ^
+      updatedAt.hashCode ^
       parentUuid.hashCode;
 
   @override

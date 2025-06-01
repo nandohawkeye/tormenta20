@@ -8,12 +8,14 @@ class GeneralItem extends Equipment implements Spaceable {
   final double? price;
   final GeneralItemType type;
 
-  GeneralItem({
+  const GeneralItem({
     this.desc,
     required super.uuid,
     required super.parentUuid,
     required super.name,
     required double spaceOcuped,
+    required super.createdAt,
+    required super.updatedAt,
     this.price,
     required this.type,
     super.storedIn,
@@ -26,6 +28,7 @@ class GeneralItem extends Equipment implements Spaceable {
     required String uuid,
     required String parentUuid,
   }) {
+    final now = DateTime.now();
     return GeneralItem(
       uuid: uuid,
       parentUuid: parentUuid,
@@ -37,6 +40,8 @@ class GeneralItem extends Equipment implements Spaceable {
       storedIn: storedIn,
       improvements: improvements,
       specialMaterial: specialMaterial,
+      createdAt: now,
+      updatedAt: now,
     );
   }
 
@@ -48,22 +53,13 @@ class GeneralItem extends Equipment implements Spaceable {
       other is GeneralItem &&
       other.uuid == uuid &&
       other.parentUuid == parentUuid &&
-      other._space == _space &&
-      other.desc == desc &&
-      other.price == price &&
-      other.storedIn == storedIn &&
-      other.improvements == improvements &&
-      other.specialMaterial == specialMaterial;
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt;
 
   @override
   int get hashCode =>
       uuid.hashCode ^
       parentUuid.hashCode ^
-      name.hashCode ^
-      _space.hashCode ^
-      desc.hashCode ^
-      price.hashCode ^
-      storedIn.hashCode ^
-      improvements.hashCode ^
-      specialMaterial.hashCode;
+      createdAt.hashCode ^
+      updatedAt.hashCode;
 }

@@ -2,11 +2,13 @@ import 'package:tormenta20/src/shared/entities/action/action.dart';
 import 'package:tormenta20/src/shared/entities/action/action_type.dart';
 
 class DistanceAttack extends ActionEnt {
-  DistanceAttack({
+  const DistanceAttack({
     required super.uuid,
     required super.parentUuid,
     required super.name,
     required super.desc,
+    required super.createdAt,
+    required super.updatedAt,
     super.cd,
     super.pm,
     super.critical,
@@ -23,6 +25,7 @@ class DistanceAttack extends ActionEnt {
     required String uuid,
     required String parentUuid,
   }) {
+    final now = DateTime.now();
     return DistanceAttack(
       uuid: uuid,
       parentUuid: parentUuid,
@@ -37,6 +40,8 @@ class DistanceAttack extends ActionEnt {
       criticalMultiplier: criticalMultiplier,
       equipament: equipament,
       equipamentUuid: equipamentUuid,
+      createdAt: now,
+      updatedAt: now,
     );
   }
 
@@ -45,33 +50,13 @@ class DistanceAttack extends ActionEnt {
       other is DistanceAttack &&
       other.uuid == uuid &&
       other.parentUuid == parentUuid &&
-      other.name == name &&
-      other.desc == desc &&
-      other.type == type &&
-      other.pm == pm &&
-      other.cd == cd &&
-      other.damageDices == damageDices &&
-      other.extraDamageDices == extraDamageDices &&
-      other.mediumDamageValue == mediumDamageValue &&
-      other.critical == critical &&
-      other.criticalMultiplier == criticalMultiplier &&
-      other.equipament == equipament &&
-      other.equipamentUuid == equipamentUuid;
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt;
 
   @override
   int get hashCode =>
       uuid.hashCode ^
       parentUuid.hashCode ^
-      name.hashCode ^
-      desc.hashCode ^
-      type.hashCode ^
-      pm.hashCode ^
-      cd.hashCode ^
-      damageDices.hashCode ^
-      extraDamageDices.hashCode ^
-      mediumDamageValue.hashCode ^
-      critical.hashCode ^
-      criticalMultiplier.hashCode ^
-      equipament.hashCode ^
-      equipamentUuid.hashCode;
+      createdAt.hashCode ^
+      updatedAt.hashCode;
 }

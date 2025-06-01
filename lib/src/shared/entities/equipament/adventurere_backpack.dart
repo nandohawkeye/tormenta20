@@ -4,6 +4,8 @@ class AdventureBackpack extends Backpack {
   AdventureBackpack({
     required super.uuid,
     required super.parentUuid,
+    required super.createdAt,
+    required super.updatedAt,
     super.price,
   }) : super(suffix: ' de aventureiro');
 
@@ -18,10 +20,13 @@ class AdventureBackpack extends Backpack {
     required String uuid,
     required String parentUuid,
   }) {
+    final now = DateTime.now();
     return AdventureBackpack(
       uuid: uuid,
       parentUuid: parentUuid,
       price: price,
+      createdAt: now,
+      updatedAt: now,
     );
   }
 
@@ -30,15 +35,13 @@ class AdventureBackpack extends Backpack {
       other is AdventureBackpack &&
       other.uuid == uuid &&
       other.parentUuid == parentUuid &&
-      other.name == name &&
-      other.suffix == suffix &&
-      other.price == price;
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt;
 
   @override
   int get hashCode =>
       uuid.hashCode ^
       parentUuid.hashCode ^
-      name.hashCode ^
-      suffix.hashCode ^
-      price.hashCode;
+      createdAt.hashCode ^
+      updatedAt.hashCode;
 }

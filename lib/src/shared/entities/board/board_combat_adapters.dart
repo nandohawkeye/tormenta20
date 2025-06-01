@@ -7,9 +7,9 @@ abstract class BoardCombatAdapters {
     return BoardCombatTableCompanion(
       uuid: Value<String>(entity.uuid),
       boardUuid: Value<String>(entity.boardUuid),
-      startedAt: Value<DateTime>(entity.startedAt),
+      startedAt: Value(entity.startedAt.millisecondsSinceEpoch),
       sessionUuid: Value<String>(entity.sessionUuid),
-      endAt: Value<DateTime?>(entity.endAt),
+      endAt: Value(entity.endAt?.millisecondsSinceEpoch),
       turn: Value<int>(entity.turn),
     );
   }
@@ -19,9 +19,11 @@ abstract class BoardCombatAdapters {
       uuid: data.uuid,
       sessionUuid: data.sessionUuid,
       boardUuid: data.boardUuid,
-      startedAt: data.startedAt,
+      startedAt: DateTime.fromMillisecondsSinceEpoch(data.startedAt),
       turn: data.turn,
-      endAt: data.endAt,
+      endAt: data.endAt == null
+          ? null
+          : DateTime.fromMillisecondsSinceEpoch(data.endAt!),
     );
   }
 
@@ -31,8 +33,8 @@ abstract class BoardCombatAdapters {
       'board_uuid': entity.boardUuid,
       'session_uuid': entity.sessionUuid,
       'turn': entity.turn,
-      'started_at': entity.startedAt.toIso8601String(),
-      'end_at': entity.endAt?.toIso8601String(),
+      'started_at': entity.startedAt.millisecondsSinceEpoch,
+      'end_at': entity.endAt?.millisecondsSinceEpoch,
     };
   }
 
@@ -42,9 +44,11 @@ abstract class BoardCombatAdapters {
       uuid: data['uuid'],
       sessionUuid: data['session_uuid'],
       boardUuid: data['board_uuid'],
-      startedAt: DateTime.tryParse(data['started_at']) ?? now,
+      startedAt: data['started_at'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(data['started_at'])
+          : now,
       turn: data['turn'],
-      endAt: DateTime.tryParse(data['end_at']),
+      endAt: DateTime.fromMillisecondsSinceEpoch(data['end_at']),
     );
   }
 }

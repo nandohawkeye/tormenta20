@@ -24,6 +24,8 @@ abstract class ArmorAdapters {
       specialMaterial: specialMaterial,
       storedIn: data.storedIn,
       defenseInUse: data.inUse,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(data.createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data.updatedAt),
     );
   }
 
@@ -43,6 +45,8 @@ abstract class ArmorAdapters {
       specialMaterialIndex: Value(entity.specialMaterial?.index),
       storedIn: Value(entity.storedIn),
       inUse: Value(entity.inUse),
+      createdAt: Value(entity.createdAt.millisecondsSinceEpoch),
+      updatedAt: Value(entity.updatedAt.millisecondsSinceEpoch),
     );
   }
 
@@ -55,19 +59,22 @@ abstract class ArmorAdapters {
     }
 
     return Armor(
-        uuid: data['uuid'],
-        defenseBonus: data['defense_bonus'],
-        penalty: data['penalty'],
-        spaceOcuped: data['ocuped_space'],
-        type: ArmorType.values[data['type_index']],
-        parentUuid: data['parent_uuid'],
-        price: (data['price'] as double?),
-        name: data['name'],
-        desc: data['desc'],
-        improvements: ImprovementTypeAdapter.fromString(data['improvements']),
-        specialMaterial: specialMaterial,
-        storedIn: data['stored_in'],
-        defenseInUse: data['in_use']);
+      uuid: data['uuid'],
+      defenseBonus: data['defense_bonus'],
+      penalty: data['penalty'],
+      spaceOcuped: data['ocuped_space'],
+      type: ArmorType.values[data['type_index']],
+      parentUuid: data['parent_uuid'],
+      price: (data['price'] as double?),
+      name: data['name'],
+      desc: data['desc'],
+      improvements: ImprovementTypeAdapter.fromString(data['improvements']),
+      specialMaterial: specialMaterial,
+      storedIn: data['stored_in'],
+      defenseInUse: data['in_use'],
+      createdAt: DateTime.fromMillisecondsSinceEpoch(data['created_at']),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data['updated_at']),
+    );
   }
 
   static Map<String, dynamic> toJson(Armor entity) {
@@ -85,6 +92,8 @@ abstract class ArmorAdapters {
       'special_material_index': entity.specialMaterial?.index,
       'stored_in': entity.storedIn,
       'in_use': entity.inUse,
+      'created_at': entity.createdAt.millisecondsSinceEpoch,
+      'updated_at': entity.updatedAt.millisecondsSinceEpoch,
     };
   }
 }

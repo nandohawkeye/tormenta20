@@ -9,6 +9,8 @@ abstract class GeneralSkillAdapters {
       name: data.name,
       desc: data.desc,
       parentUuid: data.parentUuid,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(data.createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data.updatedAt),
     );
   }
 
@@ -18,6 +20,8 @@ abstract class GeneralSkillAdapters {
       name: json['name'] as String,
       desc: json['desc'] as String,
       parentUuid: json['parent_uuid'] as String,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(json['created_at']),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(json['updated_at']),
     );
   }
 
@@ -27,6 +31,8 @@ abstract class GeneralSkillAdapters {
       'name': entity.name,
       'desc': entity.desc,
       'parent_uuid': entity.parentUuid,
+      'created_at': entity.createdAt.millisecondsSinceEpoch,
+      'updated_at': entity.updatedAt.millisecondsSinceEpoch,
     };
   }
 
@@ -36,6 +42,8 @@ abstract class GeneralSkillAdapters {
       name: Value(entity.name),
       desc: Value(entity.desc),
       parentUuid: Value(entity.parentUuid),
+      createdAt: Value(entity.createdAt.millisecondsSinceEpoch),
+      updatedAt: Value(entity.updatedAt.millisecondsSinceEpoch),
     );
   }
 }

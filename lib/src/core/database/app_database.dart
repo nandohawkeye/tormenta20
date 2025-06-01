@@ -101,7 +101,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 23;
+  int get schemaVersion => 25;
 
   @override
   MigrationStrategy get migration {
@@ -259,6 +259,59 @@ class AppDatabase extends _$AppDatabase {
             if (from < 23) {
               await m.drop(configTable);
               await m.createTable(configTable);
+            }
+
+            if (from < 24) {
+              await m.addColumn(actionDistanceAttackTable,
+                  actionDistanceAttackTable.createdAt);
+              await m.addColumn(actionDistanceAttackTable,
+                  actionDistanceAttackTable.updatedAt);
+              await m.addColumn(
+                  actionHandToHandTable, actionHandToHandTable.createdAt);
+              await m.addColumn(
+                  actionHandToHandTable, actionHandToHandTable.updatedAt);
+              await m.addColumn(actionTable, actionTable.createdAt);
+              await m.addColumn(actionTable, actionTable.updatedAt);
+              await m.addColumn(
+                  adventureBackpackTable, adventureBackpackTable.createdAt);
+              await m.addColumn(
+                  adventureBackpackTable, adventureBackpackTable.updatedAt);
+              await m.addColumn(ammunitionTable, ammunitionTable.createdAt);
+              await m.addColumn(ammunitionTable, ammunitionTable.updatedAt);
+              await m.addColumn(armorTable, armorTable.createdAt);
+              await m.addColumn(armorTable, armorTable.updatedAt);
+              await m.addColumn(backpackTable, backpackTable.createdAt);
+              await m.addColumn(backpackTable, backpackTable.updatedAt);
+              await m.addColumn(boardLinkTable, boardLinkTable.createdAt);
+              await m.addColumn(boardLinkTable, boardLinkTable.updatedAt);
+              await m.addColumn(
+                  boardMaterialTable, boardMaterialTable.createdAt);
+              await m.addColumn(boardSessionTable, boardSessionTable.updatedAt);
+              await m.addColumn(equipmentTable, equipmentTable.createdAt);
+              await m.addColumn(equipmentTable, equipmentTable.updatedAt);
+              await m.addColumn(expertiseTable, expertiseTable.createdAt);
+              await m.addColumn(expertiseTable, expertiseTable.updatedAt);
+              await m.addColumn(generalItemTable, generalItemTable.createdAt);
+              await m.addColumn(generalItemTable, generalItemTable.updatedAt);
+              await m.addColumn(generalSkillTable, generalSkillTable.createdAt);
+              await m.addColumn(generalSkillTable, generalSkillTable.updatedAt);
+              await m.addColumn(originTable, originTable.createdAt);
+              await m.addColumn(originTable, originTable.updatedAt);
+              await m.addColumn(powerTable, powerTable.createdAt);
+              await m.addColumn(powerTable, powerTable.updatedAt);
+              await m.addColumn(saddlebagTable, saddlebagTable.createdAt);
+              await m.addColumn(saddlebagTable, saddlebagTable.updatedAt);
+              await m.addColumn(shieldTable, shieldTable.createdAt);
+              await m.addColumn(shieldTable, shieldTable.updatedAt);
+              await m.addColumn(tibarsTable, tibarsTable.createdAt);
+              await m.addColumn(tibarsTable, tibarsTable.updatedAt);
+              await m.addColumn(weaponTable, weaponTable.createdAt);
+              await m.addColumn(weaponTable, weaponTable.updatedAt);
+            }
+
+            if (from < 25) {
+              await m.alterTable(TableMigration(boardCombatTable));
+              await m.alterTable(TableMigration(boardSessionTable));
             }
           },
         );

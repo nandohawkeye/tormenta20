@@ -6,7 +6,7 @@ class BoardMaterial {
   final String path;
   final String boardUuid;
 
-  BoardMaterial({
+  const BoardMaterial({
     required this.uuid,
     required this.type,
     required this.path,

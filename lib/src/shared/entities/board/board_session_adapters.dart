@@ -8,19 +8,24 @@ import 'package:tormenta20/src/shared/entities/board/session_environment.dart';
 abstract class BoardSessionAdapters {
   static BoardSessionTableCompanion toCompanion(BoardSession entity) {
     return BoardSessionTableCompanion(
-        uuid: Value<String>(entity.uuid),
-        boardUuid: Value<String>(entity.boardUuid),
-        startedAt: Value<DateTime>(entity.startedAt),
-        endAt: Value<DateTime?>(entity.endAt),
-        environmentIndex: Value<int?>(entity.environment?.index));
+      uuid: Value<String>(entity.uuid),
+      boardUuid: Value<String>(entity.boardUuid),
+      startedAt: Value(entity.startedAt.millisecondsSinceEpoch),
+      endAt: Value(entity.endAt?.millisecondsSinceEpoch),
+      environmentIndex: Value<int?>(entity.environment?.index),
+      updatedAt: Value(entity.updatedAt.millisecondsSinceEpoch),
+    );
   }
 
   static BoardSession fromDriftData(BoardSessionTableData data) {
     return BoardSession(
       uuid: data.uuid,
       boardUuid: data.boardUuid,
-      startedAt: data.startedAt,
-      endAt: data.endAt,
+      startedAt: DateTime.fromMillisecondsSinceEpoch(data.startedAt),
+      endAt: data.endAt == null
+          ? null
+          : DateTime.fromMillisecondsSinceEpoch(data.endAt!),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data.updatedAt),
       environment: SessionEnvironment.values[data.environmentIndex ?? 0],
       combats: [],
     );
@@ -30,8 +35,11 @@ abstract class BoardSessionAdapters {
     return BoardSession(
       uuid: dto.data.uuid,
       boardUuid: dto.data.boardUuid,
-      startedAt: dto.data.startedAt,
-      endAt: dto.data.endAt,
+      startedAt: DateTime.fromMillisecondsSinceEpoch(dto.data.startedAt),
+      endAt: dto.data.endAt == null
+          ? null
+          : DateTime.fromMillisecondsSinceEpoch(dto.data.endAt!),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(dto.data.updatedAt),
       environment: SessionEnvironment.values[dto.data.environmentIndex ?? 0],
       combats: dto.combats.map(BoardCombatAdapters.fromDriftData).toList(),
     );
@@ -41,9 +49,10 @@ abstract class BoardSessionAdapters {
     return {
       'uuid': entity.uuid,
       'board_uuid': entity.boardUuid,
-      'started_at': entity.startedAt.toIso8601String(),
-      'end_at': entity.endAt?.toIso8601String(),
+      'started_at': entity.startedAt.millisecondsSinceEpoch,
+      'end_at': entity.endAt?.millisecondsSinceEpoch,
       'environment_index': entity.environment?.index,
+      'updated_at': entity.updatedAt.millisecondsSinceEpoch
     };
   }
 
@@ -52,9 +61,12 @@ abstract class BoardSessionAdapters {
     return BoardSession(
       uuid: data['uuid'],
       boardUuid: data['board_uuid'],
-      startedAt: DateTime.tryParse(data['started_at']) ?? now,
-      endAt: DateTime.tryParse(data['end_at']),
+      startedAt: data['started_at'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(data['started_at'])
+          : now,
+      endAt: data['end_at'] == null ? null : DateTime.tryParse(data['end_at']),
       environment: SessionEnvironment.values[data['environment_index'] ?? 0],
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data['updated_at']),
       combats: [],
     );
   }

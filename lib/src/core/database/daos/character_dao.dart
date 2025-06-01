@@ -1316,6 +1316,14 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
         }
       });
 
+      (update(boardTable)
+        ..where((tbl) => tbl.uuid.equals(character.boardUuid))
+        ..write(
+          BoardTableCompanion(
+            updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+          ),
+        ));
+
       return null;
     } catch (e) {
       return Failure(e.toString());
@@ -1395,6 +1403,14 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
               ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
             .go();
       }
+
+      (update(boardTable)
+        ..where((tbl) => tbl.uuid.equals(character.boardUuid))
+        ..write(
+          BoardTableCompanion(
+            updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+          ),
+        ));
 
       return null;
     } catch (e) {

@@ -4,9 +4,11 @@ import 'package:tormenta20/src/shared/entities/equipament/has_space.dart';
 class Saddlebag extends Equipment implements HasSpace {
   final double? price;
 
-  Saddlebag({
+  const Saddlebag({
     required super.uuid,
     required super.parentUuid,
+    required super.createdAt,
+    required super.updatedAt,
     this.price,
     super.improvements = const [],
   }) : super(name: 'Alforja');
@@ -16,10 +18,13 @@ class Saddlebag extends Equipment implements HasSpace {
     required String uuid,
     required String parentUuid,
   }) {
+    final now = DateTime.now();
     return Saddlebag(
       uuid: uuid,
       parentUuid: parentUuid,
       price: price,
+      createdAt: now,
+      updatedAt: now,
     );
   }
 
@@ -34,10 +39,13 @@ class Saddlebag extends Equipment implements HasSpace {
       other is Saddlebag &&
       other.uuid == uuid &&
       other.parentUuid == parentUuid &&
-      other.name == name &&
-      other.price == price;
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt;
 
   @override
   int get hashCode =>
-      uuid.hashCode ^ parentUuid.hashCode ^ name.hashCode ^ price.hashCode;
+      uuid.hashCode ^
+      parentUuid.hashCode ^
+      createdAt.hashCode ^
+      updatedAt.hashCode;
 }

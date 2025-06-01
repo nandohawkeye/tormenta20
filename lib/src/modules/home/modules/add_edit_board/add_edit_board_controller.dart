@@ -27,12 +27,15 @@ class AddEditBoardController {
       _links.addAll(initialBoard.links);
       _mode = initialBoard.mode;
     } else {
+      final now = DateTime.now();
       _boardUuid = const Uuid().v4();
       _links.add(BoardLink(
         boardUuid: _boardUuid,
         uuid: const Uuid().v4(),
         title: 'Mapa de Arton',
         link: 'https://mapadearton.fichasdenimb.com.br',
+        createdAt: now,
+        updatedAt: now,
       ));
     }
   }

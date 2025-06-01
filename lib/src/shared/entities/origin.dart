@@ -5,12 +5,16 @@ class Origin extends EntityBase {
   final String name;
   final String desc;
   final String characterUuid;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
   Origin({
     required this.uuid,
     required this.name,
     required this.desc,
     required this.characterUuid,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   Origin copyWith({
@@ -19,10 +23,13 @@ class Origin extends EntityBase {
     String? desc,
     String? characterUuid,
   }) {
+    final now = DateTime.now();
     return Origin(
       uuid: uuid ?? this.uuid,
       name: name ?? this.name,
       desc: desc ?? this.desc,
+      createdAt: now,
+      updatedAt: now,
       characterUuid: characterUuid ?? this.characterUuid,
     );
   }
@@ -37,11 +44,14 @@ class Origin extends EntityBase {
   bool operator ==(other) =>
       other is Origin &&
       other.uuid == uuid &&
-      other.name == name &&
-      other.desc == desc &&
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt &&
       other.characterUuid == characterUuid;
 
   @override
   int get hashCode =>
-      uuid.hashCode ^ name.hashCode ^ desc.hashCode ^ characterUuid.hashCode;
+      uuid.hashCode ^
+      createdAt.hashCode ^
+      updatedAt.hashCode ^
+      characterUuid.hashCode;
 }

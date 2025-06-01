@@ -57,6 +57,14 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
       await into(boardCombatTable)
           .insertOnConflictUpdate(BoardCombatAdapters.toCompanion(combat));
 
+      (update(boardTable)
+        ..where((tbl) => tbl.uuid.equals(combat.boardUuid))
+        ..write(
+          BoardTableCompanion(
+            updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+          ),
+        ));
+
       return null;
     } catch (e) {
       return Failure(e.toString());
@@ -64,12 +72,22 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
   }
 
   Future<Failure?> saveSession(BoardSession session) async {
+    print('session: $session');
     try {
       await into(boardSessionTable)
           .insertOnConflictUpdate(BoardSessionAdapters.toCompanion(session));
 
+      (update(boardTable)
+        ..where((tbl) => tbl.uuid.equals(session.boardUuid))
+        ..write(
+          BoardTableCompanion(
+            updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+          ),
+        ));
+
       return null;
     } catch (e) {
+      print('erro $e');
       return Failure(e.toString());
     }
   }
@@ -80,6 +98,16 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
         batch.insertAllOnConflictUpdate(boardMaterialTable,
             materials.map(BoardMaterialsAdapters.toCompanion));
       });
+
+      if (materials.isEmpty) return null;
+
+      (update(boardTable)
+        ..where((tbl) => tbl.uuid.equals(materials.first.boardUuid))
+        ..write(
+          BoardTableCompanion(
+            updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+          ),
+        ));
 
       return null;
     } catch (e) {
@@ -92,6 +120,14 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
       await into(boardNoteTable)
           .insertOnConflictUpdate(BoardNoteAdapters.toCompanion(note));
 
+      (update(boardTable)
+        ..where((tbl) => tbl.uuid.equals(note.boardUuid))
+        ..write(
+          BoardTableCompanion(
+            updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+          ),
+        ));
+
       return null;
     } catch (e) {
       return Failure(e.toString());
@@ -102,6 +138,14 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
     try {
       await into(boardLinkTable)
           .insertOnConflictUpdate(BoardLinkAdapters.toCompanion(link));
+
+      (update(boardTable)
+        ..where((tbl) => tbl.uuid.equals(link.boardUuid))
+        ..write(
+          BoardTableCompanion(
+            updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+          ),
+        ));
 
       return null;
     } catch (e) {
@@ -120,13 +164,21 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
     }
   }
 
-  Future<Failure?> deleteMaterials(List<String> uuids) async {
+  Future<Failure?> deleteMaterials(List<String> uuids, String boardUuid) async {
     try {
       await Future.forEach(uuids, (uuid) async {
         await (delete(boardMaterialTable)
               ..where((tbl) => tbl.uuid.equals(uuid)))
             .go();
       });
+
+      (update(boardTable)
+        ..where((tbl) => tbl.uuid.equals(boardUuid))
+        ..write(
+          BoardTableCompanion(
+            updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+          ),
+        ));
 
       return null;
     } catch (e) {
@@ -138,6 +190,14 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
     try {
       await (delete(boardNoteTable)..where((tbl) => tbl.uuid.equals(note.uuid)))
           .go();
+
+      (update(boardTable)
+        ..where((tbl) => tbl.uuid.equals(note.boardUuid))
+        ..write(
+          BoardTableCompanion(
+            updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+          ),
+        ));
 
       return null;
     } catch (e) {
@@ -192,6 +252,14 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
             ..where((tbl) => tbl.uuid.equals(player.uuid)))
           .go();
 
+      (update(boardTable)
+        ..where((tbl) => tbl.uuid.equals(player.boardUuid))
+        ..write(
+          BoardTableCompanion(
+            updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+          ),
+        ));
+
       return null;
     } catch (e) {
       return Failure(e.toString());
@@ -205,6 +273,14 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
             [CharacterBoardAdapters.toDriftCompanion(character)]);
       });
 
+      (update(boardTable)
+        ..where((tbl) => tbl.uuid.equals(character.boardUuid))
+        ..write(
+          BoardTableCompanion(
+            updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+          ),
+        ));
+
       return null;
     } catch (e) {
       return Failure(e.toString());
@@ -217,6 +293,14 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
         batch.insertAllOnConflictUpdate(
             boardPlayerTable, [BoardPlayerAdapters.toCompanion(player)]);
       });
+
+      (update(boardTable)
+        ..where((tbl) => tbl.uuid.equals(player.boardUuid))
+        ..write(
+          BoardTableCompanion(
+            updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+          ),
+        ));
 
       return null;
     } catch (e) {

@@ -151,78 +151,11 @@ class Menace extends EntityBase {
   bool operator ==(other) =>
       other is Menace &&
       other.uuid == uuid &&
-      other.nd == nd &&
-      other.type == type &&
-      other.name == name &&
-      other.creatureSize == creatureSize &&
-      other.combatRole == combatRole &&
-      other.initiative == initiative &&
-      other.perception == perception &&
-      other.defense == defense &&
-      other.mana == mana &&
-      other.life == life &&
-      other.actions == actions &&
-      other.expertises == expertises &&
-      other.treasures == treasures &&
-      other.senses == senses &&
-      other.imagePath == imagePath &&
-      other.imageAsset == imageAsset &&
-      other.generalSkills == generalSkills &&
-      other.fortResistence == fortResistence &&
-      other.refResistence == refResistence &&
-      other.vonResistence == vonResistence &&
-      other.strength == strength &&
-      other.charisma == charisma &&
-      other.constitution == constitution &&
-      other.dexterity == dexterity &&
-      other.wisdom == wisdom &&
-      other.charisma == charisma &&
-      other.equipments == equipments &&
-      other.desc == desc &&
-      other.extraInfos == extraInfos &&
-      other.divinityId == divinityId &&
-      other.casterInfos == casterInfos &&
-      other.magics == magics &&
-      other.boardsLinkeds == boardsLinkeds &&
-      other.boards == boards;
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt;
 
   @override
-  int get hashCode =>
-      uuid.hashCode ^
-      nd.hashCode ^
-      type.hashCode ^
-      name.hashCode ^
-      creatureSize.hashCode ^
-      combatRole.hashCode ^
-      initiative.hashCode ^
-      defense.hashCode ^
-      perception.hashCode ^
-      mana.hashCode ^
-      life.hashCode ^
-      actions.hashCode ^
-      expertises.hashCode ^
-      treasures.hashCode ^
-      senses.hashCode ^
-      imagePath.hashCode ^
-      imageAsset.hashCode ^
-      generalSkills.hashCode ^
-      fortResistence.hashCode ^
-      refResistence.hashCode ^
-      vonResistence.hashCode ^
-      strength.hashCode ^
-      charisma.hashCode ^
-      constitution.hashCode ^
-      dexterity.hashCode ^
-      wisdom.hashCode ^
-      charisma.hashCode ^
-      equipments.hashCode ^
-      desc.hashCode ^
-      extraInfos.hashCode ^
-      divinityId.hashCode ^
-      casterInfos.hashCode ^
-      magics.hashCode ^
-      boardsLinkeds.hashCode ^
-      boards.hashCode;
+  int get hashCode => uuid.hashCode ^ createdAt.hashCode ^ updatedAt.hashCode;
 
   @override
   String get exibitionLabel => name;

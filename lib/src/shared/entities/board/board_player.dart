@@ -18,7 +18,7 @@ class BoardPlayer {
   final bool isAlive;
   final int initiative;
 
-  BoardPlayer({
+  const BoardPlayer({
     this.imagePath,
     this.imageAsset,
     required this.playerName,
@@ -61,35 +61,13 @@ class BoardPlayer {
       other is BoardPlayer &&
       other.uuid == uuid &&
       other.boardUuid == boardUuid &&
-      other.playerName == playerName &&
-      other.imagePath == imagePath &&
-      other.characterName == characterName &&
-      other.brood == brood &&
       other.updatedAt == updatedAt &&
-      other.createdAt == createdAt &&
-      other.imageAsset == imageAsset &&
-      other.classes == classes &&
-      other.life == life &&
-      other.mana == mana &&
-      other.defense == defense &&
-      other.isAlive == isAlive &&
-      other.initiative == initiative;
+      other.createdAt == createdAt;
 
   @override
   int get hashCode =>
       uuid.hashCode ^
       boardUuid.hashCode ^
-      playerName.hashCode ^
-      imagePath.hashCode ^
-      characterName.hashCode ^
       createdAt.hashCode ^
-      updatedAt.hashCode ^
-      brood.hashCode ^
-      imageAsset.hashCode ^
-      classes.hashCode ^
-      life.hashCode ^
-      mana.hashCode ^
-      defense.hashCode ^
-      isAlive.hashCode ^
-      initiative.hashCode;
+      updatedAt.hashCode;
 }

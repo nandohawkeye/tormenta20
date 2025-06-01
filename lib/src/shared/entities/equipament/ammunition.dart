@@ -6,7 +6,7 @@ class Ammunition extends Equipment implements Spaceable {
   final String? desc;
   final double? price;
 
-  Ammunition({
+  const Ammunition({
     required super.uuid,
     required super.parentUuid,
     required super.name,
@@ -15,6 +15,8 @@ class Ammunition extends Equipment implements Spaceable {
     super.specialMaterial,
     required this.quantity,
     required this.price,
+    required super.createdAt,
+    required super.updatedAt,
     this.desc,
   });
 
@@ -23,6 +25,7 @@ class Ammunition extends Equipment implements Spaceable {
     required String uuid,
     required String parentUuid,
   }) {
+    final now = DateTime.now();
     return Ammunition(
       uuid: uuid,
       parentUuid: parentUuid,
@@ -33,6 +36,8 @@ class Ammunition extends Equipment implements Spaceable {
       quantity: quantity,
       price: price,
       desc: desc,
+      createdAt: now,
+      updatedAt: now,
     );
   }
 
@@ -44,19 +49,13 @@ class Ammunition extends Equipment implements Spaceable {
       other is Ammunition &&
       other.uuid == uuid &&
       other.parentUuid == parentUuid &&
-      other.name == name &&
-      other.quantity == quantity &&
-      other.price == price &&
-      other.desc == desc &&
-      other.storedIn == storedIn;
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt;
 
   @override
   int get hashCode =>
       uuid.hashCode ^
       parentUuid.hashCode ^
-      name.hashCode ^
-      quantity.hashCode ^
-      price.hashCode ^
-      desc.hashCode ^
-      storedIn.hashCode;
+      createdAt.hashCode ^
+      updatedAt.hashCode;
 }

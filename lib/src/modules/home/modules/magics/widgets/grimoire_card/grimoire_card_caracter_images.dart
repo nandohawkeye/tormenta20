@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/grimoire_card/grimoire_card_caracter_image.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/grimoire_card/grimoire_card_caracter_rest_count_images.dart';
 import 'package:tormenta20/src/shared/entities/character.dart';
@@ -21,12 +22,15 @@ class GrimoireCardCaracterImages extends StatelessWidget {
     final defaultSize = (40 * context.realTextScale);
 
     if (characters.isEmpty) {
-      return const Padding(
-        padding: EdgeInsets.only(bottom: 8, right: 4),
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 8, right: 4),
         child: Text(
           'Ninguém ta usando ainda, vincule-o a um personagem.',
           maxLines: 2,
-          style: TextStyle(fontWeight: FontWeight.w500),
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+            color: palette.textSecundary,
+          ),
         ),
       );
     }

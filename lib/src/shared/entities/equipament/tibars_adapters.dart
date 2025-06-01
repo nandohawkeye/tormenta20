@@ -12,6 +12,8 @@ abstract class TibarsAdapters {
       parentUuid: data.parentUuid,
       storedIn: data.storedIn,
       hasInitialRoll: data.hasInitialRoll,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(data.createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data.updatedAt),
     );
   }
 
@@ -24,6 +26,8 @@ abstract class TibarsAdapters {
       gold: Value(entity.gold),
       silver: Value(entity.silver),
       hasInitialRoll: Value(entity.hasInitialRoll),
+      createdAt: Value(entity.createdAt.millisecondsSinceEpoch),
+      updatedAt: Value(entity.updatedAt.millisecondsSinceEpoch),
     );
   }
 }

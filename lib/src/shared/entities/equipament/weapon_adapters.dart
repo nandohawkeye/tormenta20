@@ -37,6 +37,8 @@ abstract class WeaponAdapters {
       improvements: ImprovementTypeAdapter.fromString(data.improvements),
       specialMaterial: specialMaterial,
       storedIn: data.storedIn,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(data.createdAt),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data.updatedAt),
     );
   }
 
@@ -64,6 +66,8 @@ abstract class WeaponAdapters {
       skillIndexes: Value(WeaponSkillsAdapter.toStringValue(entity.skills)),
       steps: Value(entity.steps),
       wieldableIndex: Value(entity.wieldableType.index),
+      createdAt: Value(entity.createdAt.millisecondsSinceEpoch),
+      updatedAt: Value(entity.updatedAt.millisecondsSinceEpoch),
     );
   }
 
@@ -95,6 +99,8 @@ abstract class WeaponAdapters {
       steps: data['steps'],
       improvements: ImprovementTypeAdapter.fromString(data['improvements']),
       wieldableType: WieldableType.values[data['wieldable_type_index']],
+      createdAt: DateTime.fromMillisecondsSinceEpoch(data['created_at']),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(data['updated_at']),
       specialMaterial: specialMaterial,
     );
   }
@@ -120,6 +126,8 @@ abstract class WeaponAdapters {
       'steps': entity.steps,
       'improvements': ImprovementTypeAdapter.toStringValue(entity.improvements),
       'wieldable_type_index': entity.wieldableType.index,
+      'created_at': entity.createdAt.millisecondsSinceEpoch,
+      'updated_at': entity.updatedAt.millisecondsSinceEpoch,
     };
   }
 }

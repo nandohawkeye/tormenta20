@@ -28,13 +28,20 @@ import 'package:uuid/uuid.dart';
 class AddEditCharacterController {
   AddEditCharacterController(Character? initial) {
     if (initial == null) {
+      final now = DateTime.now();
       _uuid = const Uuid().v4();
       atributeDicesStore = AddEditCharacterAtributeDicesStore();
       broodStore = AddEditCharacterBroodStore(Brood.humano);
       classeStore = AddEditCharacterClasseStore(null);
       sizeStore = AddEditCharacterSizeStore(CreatureSizeCategory.medium);
-      equipmentStore = AddEditCharacterEquipmentStore(
-          [Backpack(uuid: const Uuid().v4(), parentUuid: _uuid)]);
+      equipmentStore = AddEditCharacterEquipmentStore([
+        Backpack(
+          uuid: const Uuid().v4(),
+          parentUuid: _uuid,
+          createdAt: now,
+          updatedAt: now,
+        )
+      ]);
       actionsStore = AddEditCharacterActionsStore([]);
       powersStore = AddEditCharacterPowersStore([]);
       originsStore = AddEditCharacterOriginsStore([]);

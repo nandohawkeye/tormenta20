@@ -210,6 +210,8 @@ abstract class CharacterBoardAdapters {
         storedIn: storeInUuid,
         uuid: const Uuid().v4(),
         parentUuid: characterUuid,
+        createdAt: now,
+        updatedAt: now,
       ),
     );
 

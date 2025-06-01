@@ -9,11 +9,15 @@ class Equipment extends EntityBase {
   final String? storedIn;
   final List<ImprovementTypes> improvements;
   final SpecialMaterialTypes? specialMaterial;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
-  Equipment({
+  const Equipment({
     required this.uuid,
     required this.parentUuid,
     required this.name,
+    required this.createdAt,
+    required this.updatedAt,
     this.storedIn,
     required this.improvements,
     this.specialMaterial,
@@ -23,6 +27,7 @@ class Equipment extends EntityBase {
     required String uuid,
     required String parentUuid,
   }) {
+    final now = DateTime.now();
     return Equipment(
       uuid: uuid,
       parentUuid: parentUuid,
@@ -30,6 +35,8 @@ class Equipment extends EntityBase {
       storedIn: storedIn,
       improvements: improvements,
       specialMaterial: specialMaterial,
+      createdAt: now,
+      updatedAt: now,
     );
   }
 
@@ -38,19 +45,15 @@ class Equipment extends EntityBase {
       other is Equipment &&
       other.uuid == uuid &&
       other.parentUuid == parentUuid &&
-      other.name == name &&
-      other.storedIn == storedIn &&
-      other.improvements == improvements &&
-      other.specialMaterial == specialMaterial;
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt;
 
   @override
   int get hashCode =>
       uuid.hashCode ^
       parentUuid.hashCode ^
-      name.hashCode ^
-      storedIn.hashCode ^
-      improvements.hashCode ^
-      specialMaterial.hashCode;
+      createdAt.hashCode ^
+      updatedAt.hashCode;
 
   @override
   String get exibitionLabel => name;

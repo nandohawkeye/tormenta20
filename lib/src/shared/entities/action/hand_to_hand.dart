@@ -2,11 +2,13 @@ import 'package:tormenta20/src/shared/entities/action/action.dart';
 import 'package:tormenta20/src/shared/entities/action/action_type.dart';
 
 class HandToHand extends ActionEnt {
-  HandToHand({
+  const HandToHand({
     required super.uuid,
     required super.parentUuid,
     required super.name,
     required super.desc,
+    required super.createdAt,
+    required super.updatedAt,
     super.cd,
     super.pm,
     super.critical,
@@ -23,6 +25,7 @@ class HandToHand extends ActionEnt {
     required String uuid,
     required String parentUuid,
   }) {
+    final now = DateTime.now();
     return HandToHand(
       uuid: uuid,
       parentUuid: parentUuid,
@@ -37,6 +40,8 @@ class HandToHand extends ActionEnt {
       criticalMultiplier: criticalMultiplier,
       equipament: equipament,
       equipamentUuid: equipamentUuid,
+      createdAt: now,
+      updatedAt: now,
     );
   }
 
@@ -45,18 +50,8 @@ class HandToHand extends ActionEnt {
       other is HandToHand &&
       other.uuid == uuid &&
       other.parentUuid == parentUuid &&
-      other.name == name &&
-      other.desc == desc &&
-      other.type == type &&
-      other.pm == pm &&
-      other.cd == cd &&
-      other.damageDices == damageDices &&
-      other.extraDamageDices == extraDamageDices &&
-      other.mediumDamageValue == mediumDamageValue &&
-      other.critical == critical &&
-      other.criticalMultiplier == criticalMultiplier &&
-      other.equipament == equipament &&
-      other.equipamentUuid == equipamentUuid;
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt;
 
   @override
   int get hashCode =>

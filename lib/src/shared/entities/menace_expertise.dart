@@ -6,6 +6,8 @@ class MenaceExpertise extends EntityBase {
   final String menaceUuid;
   final int expertiseParentId;
   final int value;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
   MenaceExpertise({
     required this.uuid,
@@ -13,6 +15,8 @@ class MenaceExpertise extends EntityBase {
     required this.menaceUuid,
     required this.expertiseParentId,
     required this.value,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   @override
@@ -20,6 +24,8 @@ class MenaceExpertise extends EntityBase {
       other is MenaceExpertise &&
       other.uuid == uuid &&
       other.name == name &&
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt &&
       other.menaceUuid == menaceUuid &&
       other.expertiseParentId == expertiseParentId &&
       other.value == value;
@@ -28,6 +34,8 @@ class MenaceExpertise extends EntityBase {
   int get hashCode =>
       uuid.hashCode ^
       name.hashCode ^
+      createdAt.hashCode ^
+      updatedAt.hashCode ^
       menaceUuid.hashCode ^
       expertiseParentId.hashCode ^
       value.hashCode;

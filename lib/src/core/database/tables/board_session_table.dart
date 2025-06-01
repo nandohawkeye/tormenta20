@@ -4,8 +4,9 @@ class BoardSessionTable extends Table {
   TextColumn get uuid => text()();
   TextColumn get boardUuid => text()();
   IntColumn get environmentIndex => integer().nullable()();
-  DateTimeColumn get startedAt => dateTime()();
-  DateTimeColumn get endAt => dateTime().nullable()();
+  IntColumn get startedAt => integer()();
+  IntColumn get endAt => integer().nullable()();
+  IntColumn get updatedAt => integer()();
 
   @override
   Set<Column>? get primaryKey => {uuid};

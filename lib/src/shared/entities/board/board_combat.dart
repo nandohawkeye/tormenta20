@@ -6,7 +6,7 @@ class BoardCombat {
   final DateTime? endAt;
   final int turn;
 
-  BoardCombat({
+  const BoardCombat({
     required this.uuid,
     required this.boardUuid,
     required this.sessionUuid,

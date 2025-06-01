@@ -6,7 +6,7 @@ class ExpertiseBase extends EntityBase {
   final String name;
   final Atribute atribute;
 
-  ExpertiseBase({
+  const ExpertiseBase({
     required this.id,
     required this.name,
     required this.atribute,

@@ -1,5 +1,5 @@
 class Defensible {
   final bool inUse;
 
-  Defensible({required this.inUse});
+  const Defensible({required this.inUse});
 }

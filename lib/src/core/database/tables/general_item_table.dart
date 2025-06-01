@@ -11,6 +11,8 @@ class GeneralItemTable extends Table {
   TextColumn get desc => text().nullable()();
   RealColumn get ocupedSpace => real()();
   IntColumn get typeIndex => integer()();
+  IntColumn get createdAt => integer()();
+  IntColumn get updatedAt => integer()();
 
   @override
   Set<Column>? get primaryKey => {uuid};

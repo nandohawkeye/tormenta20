@@ -39,10 +39,12 @@ class BoardSessionsStore extends ChangeNotifier {
 
   void createCloseSession() async {
     if (currentSession == null) {
+      final now = DateTime.now();
       final session = BoardSession(
         uuid: const Uuid().v4(),
         boardUuid: _boardUuid,
-        startedAt: DateTime.now(),
+        startedAt: now,
+        updatedAt: now,
         combats: [],
       );
 
@@ -50,7 +52,8 @@ class BoardSessionsStore extends ChangeNotifier {
       return;
     }
 
-    final closeSession = currentSession!.copyWith(endAt: DateTime.now());
+    final now = DateTime.now();
+    final closeSession = currentSession!.copyWith(endAt: now, updatedAt: now);
     await _storageService.saveSession(closeSession);
   }
 

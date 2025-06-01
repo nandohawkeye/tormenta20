@@ -14,6 +14,8 @@ class ActionHandToHandTable extends Table {
   IntColumn get critical => integer().nullable()();
   IntColumn get criticalMultiplier => integer().nullable()();
   IntColumn get typeIndex => integer()();
+  IntColumn get createdAt => integer()();
+  IntColumn get updatedAt => integer()();
 
   @override
   Set<Column>? get primaryKey => {uuid};

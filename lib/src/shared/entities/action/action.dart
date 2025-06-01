@@ -17,13 +17,17 @@ class ActionEnt extends EntityBase {
   final int? criticalMultiplier;
   final Equipment? equipament;
   final String? equipamentUuid;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
-  ActionEnt({
+  const ActionEnt({
     required this.uuid,
     required this.parentUuid,
     required this.name,
     required this.desc,
     required this.type,
+    required this.createdAt,
+    required this.updatedAt,
     this.pm,
     this.cd,
     this.damageDices,
@@ -39,6 +43,7 @@ class ActionEnt extends EntityBase {
     required String uuid,
     required String parentUuid,
   }) {
+    final now = DateTime.now();
     return ActionEnt(
       uuid: uuid,
       parentUuid: parentUuid,
@@ -54,6 +59,8 @@ class ActionEnt extends EntityBase {
       criticalMultiplier: criticalMultiplier,
       equipament: equipament,
       equipamentUuid: equipamentUuid,
+      createdAt: now,
+      updatedAt: now,
     );
   }
 
@@ -62,35 +69,15 @@ class ActionEnt extends EntityBase {
       other is ActionEnt &&
       other.uuid == uuid &&
       other.parentUuid == parentUuid &&
-      other.name == name &&
-      other.desc == desc &&
-      other.type == type &&
-      other.pm == pm &&
-      other.cd == cd &&
-      other.damageDices == damageDices &&
-      other.extraDamageDices == extraDamageDices &&
-      other.mediumDamageValue == mediumDamageValue &&
-      other.critical == critical &&
-      other.criticalMultiplier == criticalMultiplier &&
-      other.equipament == equipament &&
-      other.equipamentUuid == equipamentUuid;
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt;
 
   @override
   int get hashCode =>
       uuid.hashCode ^
       parentUuid.hashCode ^
-      name.hashCode ^
-      desc.hashCode ^
-      type.hashCode ^
-      pm.hashCode ^
-      cd.hashCode ^
-      damageDices.hashCode ^
-      extraDamageDices.hashCode ^
-      mediumDamageValue.hashCode ^
-      critical.hashCode ^
-      criticalMultiplier.hashCode ^
-      equipament.hashCode ^
-      equipamentUuid.hashCode;
+      createdAt.hashCode ^
+      updatedAt.hashCode;
 
   @override
   String get exibitionLabel => name;

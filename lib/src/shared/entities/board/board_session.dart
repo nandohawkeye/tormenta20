@@ -8,12 +8,14 @@ class BoardSession {
   final DateTime? endAt;
   final SessionEnvironment? environment;
   final List<BoardCombat> combats;
+  final DateTime updatedAt;
 
   BoardSession({
     required this.uuid,
     required this.boardUuid,
     required this.startedAt,
     required this.combats,
+    required this.updatedAt,
     this.endAt,
     this.environment,
   });
@@ -24,6 +26,7 @@ class BoardSession {
     DateTime? startedAt,
     DateTime? endAt,
     SessionEnvironment? environment,
+    DateTime? updatedAt,
   }) {
     return BoardSession(
       uuid: uuid ?? this.uuid,
@@ -32,6 +35,7 @@ class BoardSession {
       endAt: endAt ?? this.endAt,
       combats: combats,
       environment: environment,
+      updatedAt: updatedAt ?? DateTime.now(),
     );
   }
 
@@ -42,7 +46,7 @@ class BoardSession {
       other.boardUuid == boardUuid &&
       other.startedAt == startedAt &&
       other.endAt == endAt &&
-      other.combats == combats &&
+      other.updatedAt == updatedAt &&
       other.environment == environment;
 
   @override
@@ -51,6 +55,6 @@ class BoardSession {
       boardUuid.hashCode ^
       startedAt.hashCode ^
       endAt.hashCode ^
-      combats.hashCode ^
+      updatedAt.hashCode ^
       environment.hashCode;
 }

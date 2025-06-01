@@ -65,52 +65,9 @@ class Board {
   bool operator ==(other) =>
       other is Board &&
       other.uuid == uuid &&
-      other.bannerPath == bannerPath &&
-      other.desc == desc &&
-      other.adventureName == adventureName &&
-      other.name == name &&
       other.createdAt == createdAt &&
-      other.materials == materials &&
-      other.links == links &&
-      other.sessions == sessions &&
-      other.players == players &&
-      other.level == level &&
-      other.updatedAt == updatedAt &&
-      other.mode == mode &&
-      other.whatsGroupLink == whatsGroupLink &&
-      other.telegramGroupLink == telegramGroupLink &&
-      other.discordServerLink == discordServerLink &&
-      other.driveFilesLink == driveFilesLink &&
-      other.characters == characters &&
-      other.isFavorited == isFavorited &&
-      other.notes == notes &&
-      other.menaces == menaces &&
-      other.combats == combats &&
-      other.menacesLinkToBoard == menacesLinkToBoard;
+      other.updatedAt == updatedAt;
 
   @override
-  int get hashCode =>
-      uuid.hashCode ^
-      bannerPath.hashCode ^
-      desc.hashCode ^
-      adventureName.hashCode ^
-      name.hashCode ^
-      createdAt.hashCode ^
-      updatedAt.hashCode ^
-      materials.hashCode ^
-      links.hashCode ^
-      sessions.hashCode ^
-      players.hashCode ^
-      level.hashCode ^
-      mode.hashCode ^
-      whatsGroupLink.hashCode ^
-      telegramGroupLink.hashCode ^
-      discordServerLink.hashCode ^
-      driveFilesLink.hashCode ^
-      characters.hashCode ^
-      isFavorited.hashCode ^
-      notes.hashCode ^
-      menaces.hashCode ^
-      combats.hashCode ^
-      menacesLinkToBoard.hashCode;
+  int get hashCode => uuid.hashCode ^ createdAt.hashCode ^ updatedAt.hashCode;
 }

@@ -2,7 +2,7 @@ class HasSpace {
   final int maxSpaces;
   final int normalSpaces;
 
-  HasSpace({
+  const HasSpace({
     required this.maxSpaces,
     required this.normalSpaces,
   });

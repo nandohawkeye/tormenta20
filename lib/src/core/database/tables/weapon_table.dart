@@ -22,6 +22,8 @@ class WeaponTable extends Table {
   TextColumn get skillIndexes => text().nullable()();
   BoolColumn get isNatural => boolean()();
   BoolColumn get isUnarmed => boolean()();
+  IntColumn get createdAt => integer()();
+  IntColumn get updatedAt => integer()();
 
   @override
   Set<Column>? get primaryKey => {uuid};
