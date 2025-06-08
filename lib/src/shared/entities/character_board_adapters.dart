@@ -4,11 +4,14 @@ import 'package:tormenta20/src/shared/entities/action/action.dart';
 import 'package:tormenta20/src/shared/entities/action/action_adapters.dart';
 import 'package:tormenta20/src/shared/entities/action/distance_attack_adapters.dart';
 import 'package:tormenta20/src/shared/entities/action/hand_to_hand_adapters.dart';
+import 'package:tormenta20/src/shared/entities/atributes.dart';
 import 'package:tormenta20/src/shared/entities/brood.dart';
 import 'package:tormenta20/src/shared/entities/character.dart';
 import 'package:tormenta20/src/shared/entities/character_alignment_type.dart';
 import 'package:tormenta20/src/shared/entities/character_board.dart';
 import 'package:tormenta20/src/shared/entities/character_board_dto.dart';
+import 'package:tormenta20/src/shared/entities/character_conditions.dart';
+import 'package:tormenta20/src/shared/entities/character_conditions_adapters.dart';
 import 'package:tormenta20/src/shared/entities/classe_character_type_adapters.dart';
 import 'package:tormenta20/src/shared/entities/classe_type_character.dart';
 import 'package:tormenta20/src/shared/entities/creature_size_category.dart';
@@ -45,8 +48,9 @@ abstract class CharacterBoardAdapters {
     powers.addAll(dto.powers.map(PowerAdapters.fromDriftData));
     List<ActionEnt> actions = [];
     actions.addAll(dto.actions.map(ActionAdapters.fromDriftData));
-    actions
-        .addAll(dto.distanceAttacks.map(DistanceAttackAdapters.fromDriftData));
+    actions.addAll(
+      dto.distanceAttacks.map(DistanceAttackAdapters.fromDriftData),
+    );
     actions.addAll(dto.handToHands.map(HandToHandAdapters.fromDriftData));
 
     List<ClasseTypeCharacter> classes = [];
@@ -55,10 +59,16 @@ abstract class CharacterBoardAdapters {
     List<Expertise> expertises = [];
     expertises.addAll(dto.expertises.map(ExpertiseAdapters.fromDriftData));
 
+    List<CharacterConditions> conditions = [];
+    conditions.addAll(
+      dto.conditions.map(CharacterConditionsAdapters.fromDriftData),
+    );
+
     List<Equipment> equipments = [];
     equipments.addAll(dto.equipments.map(EquipmentAdapters.fromDriftData));
     equipments.addAll(
-        dto.adventureBackpacks.map(AdventureBackpackAdapters.fromDriftData));
+      dto.adventureBackpacks.map(AdventureBackpackAdapters.fromDriftData),
+    );
     equipments.addAll(dto.backpacks.map(BackpackAdapters.fromDriftData));
     equipments.addAll(dto.ammunitions.map(AmmunitionAdapters.fromDriftData));
     equipments.addAll(dto.armors.map(ArmorAdapters.fromDriftData));
@@ -82,9 +92,11 @@ abstract class CharacterBoardAdapters {
           CharacterAlignmentType.values[dto.characterBoardsData.aligmentIndex],
       brood: Brood.values[dto.characterBoardsData.broodIndex],
       createdAt: DateTime.fromMillisecondsSinceEpoch(
-          dto.characterBoardsData.createdAt),
+        dto.characterBoardsData.createdAt,
+      ),
       updatedAt: DateTime.fromMillisecondsSinceEpoch(
-          dto.characterBoardsData.updatedAt),
+        dto.characterBoardsData.updatedAt,
+      ),
       creatureSize: CreatureSizeCategory
           .values[dto.characterBoardsData.creatureSizeIndex],
       defense: dto.characterBoardsData.defense,
@@ -111,11 +123,16 @@ abstract class CharacterBoardAdapters {
       origins: origins,
       equipments: equipments,
       actions: actions,
+      handToHandAtribute:
+          Atribute.values[dto.characterBoardsData.handToHandAtributeIndex ?? 0],
+      conditions: conditions,
     );
   }
 
-  static CharacterBoard fromDriftData(CharacterBoardTableData data,
-      [List<ClasseCharacterTableData> classesData = const []]) {
+  static CharacterBoard fromDriftData(
+    CharacterBoardTableData data, [
+    List<ClasseCharacterTableData> classesData = const [],
+  ]) {
     return CharacterBoard(
       uuid: data.uuid,
       parentuuid: data.parentuuid,
@@ -149,17 +166,22 @@ abstract class CharacterBoardAdapters {
       inWearableSlots: data.inWearableSlots,
       expertises: [],
       grimorie: null,
-      classes:
-          classesData.map(ClasseCharacterTypeAdapters.fromDriftData).toList(),
+      classes: classesData
+          .map(ClasseCharacterTypeAdapters.fromDriftData)
+          .toList(),
       powers: [],
       origins: [],
       equipments: [],
       actions: [],
+      conditions: [],
+      handToHandAtribute: Atribute.values[data.handToHandAtributeIndex ?? 0],
     );
   }
 
   static CharacterBoard createFromCharacter(
-      Character entity, String boardUuid) {
+    Character entity,
+    String boardUuid,
+  ) {
     final now = DateTime.now();
     final characterUuid = const Uuid().v4();
     List<Power> powers = [];
@@ -167,29 +189,35 @@ abstract class CharacterBoardAdapters {
     List<ActionEnt> actions = [];
     List<Equipment> equipments = [];
     List<Expertise> expertises = [];
-    List<ExpertiseBase> baseExpertises =
-        ExpertisesBaseService().getExpertises();
-    final classe = entity.classe
-        ?.copyWith(uuid: const Uuid().v4(), characterUuid: characterUuid);
+    List<ExpertiseBase> baseExpertises = ExpertisesBaseService()
+        .getExpertises();
+    final classe = entity.classe?.copyWith(
+      uuid: const Uuid().v4(),
+      characterUuid: characterUuid,
+    );
 
     for (var power in entity.powers) {
-      powers.add(power.copyWith(
-          uuid: const Uuid().v4(), characterUuid: characterUuid));
+      powers.add(
+        power.copyWith(uuid: const Uuid().v4(), characterUuid: characterUuid),
+      );
     }
 
     for (var origin in entity.origins) {
-      origins.add(origin.copyWith(
-          uuid: const Uuid().v4(), characterUuid: characterUuid));
+      origins.add(
+        origin.copyWith(uuid: const Uuid().v4(), characterUuid: characterUuid),
+      );
     }
 
     for (var action in entity.actions) {
       actions.add(
-          action.cloneWith(uuid: const Uuid().v4(), parentUuid: characterUuid));
+        action.cloneWith(uuid: const Uuid().v4(), parentUuid: characterUuid),
+      );
     }
 
     for (var equipment in entity.equipments) {
-      equipments.add(equipment.cloneWith(
-          uuid: const Uuid().v4(), parentUuid: characterUuid));
+      equipments.add(
+        equipment.cloneWith(uuid: const Uuid().v4(), parentUuid: characterUuid),
+      );
     }
 
     String? storeInUuid;
@@ -228,11 +256,7 @@ abstract class CharacterBoardAdapters {
     for (var base in baseExpertises) {
       if (!(entity.trainedExpertises.any((e) => e.id == base.id))) {
         expertises.add(
-          ExpertiseAdapters.createfromBaseCharacter(
-            base,
-            characterUuid,
-            false,
-          ),
+          ExpertiseAdapters.createfromBaseCharacter(base, characterUuid, false),
         );
       }
     }
@@ -275,6 +299,8 @@ abstract class CharacterBoardAdapters {
       origins: origins,
       equipments: equipments,
       actions: actions,
+      conditions: [],
+      handToHandAtribute: Atribute.strength,
     );
   }
 
@@ -347,6 +373,8 @@ abstract class CharacterBoardAdapters {
       inRightHand: data['in_right_hand'],
       inTwoHands: data['in_two_hands'],
       inWearableSlots: data['in_wearable_slots'],
+      handToHandAtribute:
+          Atribute.values[data['hand_to_hand_atribute_index'] ?? 0],
       expertises: [],
       grimorie: null,
       classes: [],
@@ -354,12 +382,14 @@ abstract class CharacterBoardAdapters {
       origins: [],
       equipments: [],
       actions: [],
+      conditions: [],
     );
   }
 
   static Map<String, dynamic> toJson(CharacterBoard entity) {
-    final perceptionIsTrained =
-        entity.expertises.firstWhere((e) => e.name == 'percepção').isTrained;
+    final perceptionIsTrained = entity.expertises
+        .firstWhere((e) => e.name == 'percepção')
+        .isTrained;
     final perception = entity.wisdom ?? 0 + (perceptionIsTrained ? 2 : 0);
     return {
       'uuid': entity.uuid,
@@ -392,8 +422,10 @@ abstract class CharacterBoardAdapters {
       'in_right_hand': entity.inRightHand,
       'in_two_hands': entity.inTwoHands,
       'in_wearable_slots': entity.inWearableSlots,
-      'classe_indexes':
-          entity.classes.map((cl) => cl.type.index).toList().join(','),
+      'classe_indexes': entity.classes
+          .map((cl) => cl.type.index)
+          .toList()
+          .join(','),
     };
   }
 }

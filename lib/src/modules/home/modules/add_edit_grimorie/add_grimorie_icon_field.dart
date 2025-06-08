@@ -27,13 +27,8 @@ class AddGrimorieBottomsheetIconField extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Icone',
-                  style: TextStyle(fontSize: 16),
-                ),
-                const SizedBox(
-                  height: T20UI.screenContentSpaceSize,
-                ),
+                const Text('Icone', style: TextStyle(fontSize: 16)),
+                const SizedBox(height: T20UI.screenContentSpaceSize),
                 Center(
                   child: ValueListenableBuilder(
                     valueListenable: iconAsset,
@@ -44,7 +39,7 @@ class AddGrimorieBottomsheetIconField extends StatelessWidget {
                       children: Assets.icons.values
                           .map(
                             (asset) => AddGrimorieBottomsheetIconFieldItem(
-                              asset: asset,
+                              asset: asset.path,
                               assetSelected: assetSelected,
                               onSelectedAsset: (value) =>
                                   iconAsset.value = value,
@@ -53,7 +48,7 @@ class AddGrimorieBottomsheetIconField extends StatelessWidget {
                           .toList(),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),

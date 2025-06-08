@@ -32,6 +32,7 @@ class CharacterBoardTable extends Table {
   TextColumn get inRightHand => text().nullable()();
   TextColumn get inTwoHands => text().nullable()();
   TextColumn get inWearableSlots => text().nullable()();
+  IntColumn get handToHandAtributeIndex => integer().nullable()();
 
   @override
   Set<Column>? get primaryKey => {uuid};

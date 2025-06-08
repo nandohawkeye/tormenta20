@@ -2,8 +2,10 @@ import 'package:tormenta20/src/shared/entities/atributes.dart';
 import 'package:tormenta20/src/shared/entities/dices/dice.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise_base.dart';
 
-class ConditionsBase {
-  final int id;
+class CharacterConditions {
+  final String uuid;
+  final int conditionId;
+  final String parentUuid;
   final String name;
   final String desc;
   final Dice? dice;
@@ -14,9 +16,13 @@ class ConditionsBase {
   final bool inDisplacment;
   final List<Atribute> atributes;
   final List<ExpertiseBase> expertises;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
-  ConditionsBase({
-    required this.id,
+  const CharacterConditions({
+    required this.uuid,
+    required this.conditionId,
+    required this.parentUuid,
     required this.name,
     required this.desc,
     required this.dice,
@@ -27,12 +33,26 @@ class ConditionsBase {
     required this.expertises,
     required this.inDisplacment,
     required this.inAllExpertises,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   @override
   bool operator ==(other) =>
-      other is ConditionsBase && other.id == id && other.name == name;
+      other is CharacterConditions &&
+      other.conditionId == conditionId &&
+      other.name == name &&
+      other.uuid == uuid &&
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt &&
+      other.parentUuid == parentUuid;
 
   @override
-  int get hashCode => id.hashCode ^ name.hashCode;
+  int get hashCode =>
+      conditionId.hashCode ^
+      name.hashCode ^
+      uuid.hashCode ^
+      createdAt.hashCode ^
+      updatedAt.hashCode ^
+      parentUuid.hashCode;
 }

@@ -9,6 +9,7 @@ import 'package:tormenta20/src/core/database/tables/board_note_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_player_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_table.dart';
 import 'package:tormenta20/src/core/database/tables/character_board_table.dart';
+import 'package:tormenta20/src/core/database/tables/character_condition_table.dart';
 import 'package:tormenta20/src/core/database/tables/character_table.dart';
 import 'package:tormenta20/src/core/database/tables/classe_character_table.dart';
 import 'package:tormenta20/src/core/database/tables/menace_link_board_table.dart';
@@ -35,27 +36,31 @@ import 'package:tormenta20/src/shared/failures/failure.dart';
 
 part 'board_dao.g.dart';
 
-@DriftAccessor(tables: [
-  BoardTable,
-  BoardMaterialTable,
-  BoardPlayerTable,
-  BoardSessionTable,
-  BoardLinkTable,
-  BoardCombatTable,
-  BoardNoteTable,
-  MenaceLinkBoardTable,
-  MenaceTable,
-  CharacterBoardTable,
-  CharacterTable,
-  ClasseCharacterTable,
-])
+@DriftAccessor(
+  tables: [
+    BoardTable,
+    BoardMaterialTable,
+    BoardPlayerTable,
+    BoardSessionTable,
+    BoardLinkTable,
+    BoardCombatTable,
+    BoardNoteTable,
+    MenaceLinkBoardTable,
+    MenaceTable,
+    CharacterBoardTable,
+    CharacterTable,
+    ClasseCharacterTable,
+    CharacterConditionTable,
+  ],
+)
 class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
   BoardDAO(super.db);
 
   Future<Failure?> saveCombat(BoardCombat combat) async {
     try {
-      await into(boardCombatTable)
-          .insertOnConflictUpdate(BoardCombatAdapters.toCompanion(combat));
+      await into(
+        boardCombatTable,
+      ).insertOnConflictUpdate(BoardCombatAdapters.toCompanion(combat));
 
       (update(boardTable)
         ..where((tbl) => tbl.uuid.equals(combat.boardUuid))
@@ -74,8 +79,9 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
   Future<Failure?> saveSession(BoardSession session) async {
     print('session: $session');
     try {
-      await into(boardSessionTable)
-          .insertOnConflictUpdate(BoardSessionAdapters.toCompanion(session));
+      await into(
+        boardSessionTable,
+      ).insertOnConflictUpdate(BoardSessionAdapters.toCompanion(session));
 
       (update(boardTable)
         ..where((tbl) => tbl.uuid.equals(session.boardUuid))
@@ -95,8 +101,10 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
   Future<Failure?> saveMaterials(List<BoardMaterial> materials) async {
     try {
       await batch((batch) {
-        batch.insertAllOnConflictUpdate(boardMaterialTable,
-            materials.map(BoardMaterialsAdapters.toCompanion));
+        batch.insertAllOnConflictUpdate(
+          boardMaterialTable,
+          materials.map(BoardMaterialsAdapters.toCompanion),
+        );
       });
 
       if (materials.isEmpty) return null;
@@ -117,8 +125,9 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
 
   Future<Failure?> saveNote(BoardNote note) async {
     try {
-      await into(boardNoteTable)
-          .insertOnConflictUpdate(BoardNoteAdapters.toCompanion(note));
+      await into(
+        boardNoteTable,
+      ).insertOnConflictUpdate(BoardNoteAdapters.toCompanion(note));
 
       (update(boardTable)
         ..where((tbl) => tbl.uuid.equals(note.boardUuid))
@@ -136,8 +145,9 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
 
   Future<Failure?> saveLink(BoardLink link) async {
     try {
-      await into(boardLinkTable)
-          .insertOnConflictUpdate(BoardLinkAdapters.toCompanion(link));
+      await into(
+        boardLinkTable,
+      ).insertOnConflictUpdate(BoardLinkAdapters.toCompanion(link));
 
       (update(boardTable)
         ..where((tbl) => tbl.uuid.equals(link.boardUuid))
@@ -155,8 +165,9 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
 
   Future<Failure?> deleteLink(BoardLink link) async {
     try {
-      await (delete(boardLinkTable)..where((tbl) => tbl.uuid.equals(link.uuid)))
-          .go();
+      await (delete(
+        boardLinkTable,
+      )..where((tbl) => tbl.uuid.equals(link.uuid))).go();
 
       return null;
     } catch (e) {
@@ -167,9 +178,9 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
   Future<Failure?> deleteMaterials(List<String> uuids, String boardUuid) async {
     try {
       await Future.forEach(uuids, (uuid) async {
-        await (delete(boardMaterialTable)
-              ..where((tbl) => tbl.uuid.equals(uuid)))
-            .go();
+        await (delete(
+          boardMaterialTable,
+        )..where((tbl) => tbl.uuid.equals(uuid))).go();
       });
 
       (update(boardTable)
@@ -188,8 +199,9 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
 
   Future<Failure?> deleteNote(BoardNote note) async {
     try {
-      await (delete(boardNoteTable)..where((tbl) => tbl.uuid.equals(note.uuid)))
-          .go();
+      await (delete(
+        boardNoteTable,
+      )..where((tbl) => tbl.uuid.equals(note.uuid))).go();
 
       (update(boardTable)
         ..where((tbl) => tbl.uuid.equals(note.boardUuid))
@@ -212,33 +224,34 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
 
     try {
       await Future.forEach(players, (player) async {
-        await (delete(boardPlayerTable)
-              ..where((tbl) => tbl.uuid.equals(player.uuid)))
-            .go();
+        await (delete(
+          boardPlayerTable,
+        )..where((tbl) => tbl.uuid.equals(player.uuid))).go();
       });
 
-      await (delete(characterBoardTable)
-            ..where((tbl) => tbl.boarduuid.equals(board.uuid)))
-          .go();
+      await (delete(
+        characterBoardTable,
+      )..where((tbl) => tbl.boarduuid.equals(board.uuid))).go();
 
-      await (delete(menaceLinkBoardTable)
-            ..where((tbl) => tbl.boardUuid.equals(board.uuid)))
-          .go();
+      await (delete(
+        menaceLinkBoardTable,
+      )..where((tbl) => tbl.boardUuid.equals(board.uuid))).go();
 
       await Future.forEach(links, (link) async {
-        await (delete(boardLinkTable)
-              ..where((tbl) => tbl.uuid.equals(link.uuid)))
-            .go();
+        await (delete(
+          boardLinkTable,
+        )..where((tbl) => tbl.uuid.equals(link.uuid))).go();
       });
 
       await Future.forEach(materials, (material) async {
-        await (delete(boardMaterialTable)
-              ..where((tbl) => tbl.uuid.equals(material.uuid)))
-            .go();
+        await (delete(
+          boardMaterialTable,
+        )..where((tbl) => tbl.uuid.equals(material.uuid))).go();
       });
 
-      await (delete(boardTable)..where((tbl) => tbl.uuid.equals(board.uuid)))
-          .go();
+      await (delete(
+        boardTable,
+      )..where((tbl) => tbl.uuid.equals(board.uuid))).go();
 
       return null;
     } catch (e) {
@@ -248,9 +261,9 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
 
   Future<Failure?> deleteBoardPlayer(BoardPlayer player) async {
     try {
-      await (delete(boardPlayerTable)
-            ..where((tbl) => tbl.uuid.equals(player.uuid)))
-          .go();
+      await (delete(
+        boardPlayerTable,
+      )..where((tbl) => tbl.uuid.equals(player.uuid))).go();
 
       (update(boardTable)
         ..where((tbl) => tbl.uuid.equals(player.boardUuid))
@@ -269,8 +282,9 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
   Future<Failure?> saveCharacterBoard(CharacterBoard character) async {
     try {
       await batch((batch) {
-        batch.insertAllOnConflictUpdate(characterBoardTable,
-            [CharacterBoardAdapters.toDriftCompanion(character)]);
+        batch.insertAllOnConflictUpdate(characterBoardTable, [
+          CharacterBoardAdapters.toDriftCompanion(character),
+        ]);
       });
 
       (update(boardTable)
@@ -290,8 +304,9 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
   Future<Failure?> saveBoardPlayer(BoardPlayer player) async {
     try {
       await batch((batch) {
-        batch.insertAllOnConflictUpdate(
-            boardPlayerTable, [BoardPlayerAdapters.toCompanion(player)]);
+        batch.insertAllOnConflictUpdate(boardPlayerTable, [
+          BoardPlayerAdapters.toCompanion(player),
+        ]);
       });
 
       (update(boardTable)
@@ -315,26 +330,32 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
   }) async {
     try {
       await batch((batch) {
+        batch.insertAllOnConflictUpdate(boardTable, [
+          BoardAdapters.toCompanion(entity),
+        ]);
         batch.insertAllOnConflictUpdate(
-            boardTable, [BoardAdapters.toCompanion(entity)]);
+          boardLinkTable,
+          entity.links.map(BoardLinkAdapters.toCompanion),
+        );
         batch.insertAllOnConflictUpdate(
-            boardLinkTable, entity.links.map(BoardLinkAdapters.toCompanion));
-        batch.insertAllOnConflictUpdate(boardMaterialTable,
-            entity.materials.map(BoardMaterialsAdapters.toCompanion));
+          boardMaterialTable,
+          entity.materials.map(BoardMaterialsAdapters.toCompanion),
+        );
       });
 
       if (materialsToDelete.isNotEmpty) {
         Future.forEach(materialsToDelete, (uuid) async {
-          await (delete(boardMaterialTable)
-                ..where((tbl) => tbl.uuid.equals(uuid)))
-              .go();
+          await (delete(
+            boardMaterialTable,
+          )..where((tbl) => tbl.uuid.equals(uuid))).go();
         });
       }
 
       if (linksToDelete.isNotEmpty) {
         Future.forEach(linksToDelete, (uuid) async {
-          await (delete(boardLinkTable)..where((tbl) => tbl.uuid.equals(uuid)))
-              .go();
+          await (delete(
+            boardLinkTable,
+          )..where((tbl) => tbl.uuid.equals(uuid))).go();
         });
       }
 
@@ -349,45 +370,47 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
   }
 
   Future<({Failure? failure, Stream<List<BoardSession>>? sessions})>
-      watchSessions(String boardUuid) async {
+  watchSessions(String boardUuid) async {
     try {
       return (
         failure: null,
-        sessions: (select(boardSessionTable)
-              ..where((tbl) => tbl.boardUuid.equals(boardUuid)))
-            .join([
-              leftOuterJoin(
-                boardCombatTable,
-                boardSessionTable.uuid.equalsExp(
-                  boardCombatTable.sessionUuid,
-                ),
-              ),
-            ])
-            .watch()
-            .map((rows) {
-              Map<String, BoardSessionDto> sessionDto = {};
+        sessions:
+            (select(boardSessionTable)
+                  ..where((tbl) => tbl.boardUuid.equals(boardUuid)))
+                .join([
+                  leftOuterJoin(
+                    boardCombatTable,
+                    boardSessionTable.uuid.equalsExp(
+                      boardCombatTable.sessionUuid,
+                    ),
+                  ),
+                ])
+                .watch()
+                .map((rows) {
+                  Map<String, BoardSessionDto> sessionDto = {};
 
-              for (var row in rows) {
-                final sessionData = row.readTable(boardSessionTable);
-                final combatData = row.readTableOrNull(boardCombatTable);
+                  for (var row in rows) {
+                    final sessionData = row.readTable(boardSessionTable);
+                    final combatData = row.readTableOrNull(boardCombatTable);
 
-                if (!(sessionDto.containsKey(sessionData.uuid))) {
-                  sessionDto.addAll(
-                      {sessionData.uuid: BoardSessionDto(data: sessionData)});
-                }
+                    if (!(sessionDto.containsKey(sessionData.uuid))) {
+                      sessionDto.addAll({
+                        sessionData.uuid: BoardSessionDto(data: sessionData),
+                      });
+                    }
 
-                if (combatData != null &&
-                    !(sessionDto[sessionData.uuid]!
-                        .combats
-                        .any((combat) => combat.uuid == combatData.uuid))) {
-                  sessionDto[sessionData.uuid]!.combats.add(combatData);
-                }
-              }
+                    if (combatData != null &&
+                        !(sessionDto[sessionData.uuid]!.combats.any(
+                          (combat) => combat.uuid == combatData.uuid,
+                        ))) {
+                      sessionDto[sessionData.uuid]!.combats.add(combatData);
+                    }
+                  }
 
-              return sessionDto.entries
-                  .map((entry) => BoardSessionAdapters.fromDto(entry.value))
-                  .toList();
-            })
+                  return sessionDto.entries
+                      .map((entry) => BoardSessionAdapters.fromDto(entry.value))
+                      .toList();
+                }),
       );
     } catch (e) {
       return (failure: Failure(e.toString()), sessions: null);
@@ -395,14 +418,17 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
   }
 
   Future<({Failure? failure, Stream<List<BoardNote>>? notes})> watchNotes(
-      String boardUuid) async {
+    String boardUuid,
+  ) async {
     try {
       return (
         failure: null,
-        notes: (select(boardNoteTable)
-              ..where((tbl) => tbl.boardUuid.equals(boardUuid)))
-            .watch()
-            .map((rows) => rows.map(BoardNoteAdapters.fromDriftData).toList())
+        notes:
+            (select(
+              boardNoteTable,
+            )..where((tbl) => tbl.boardUuid.equals(boardUuid))).watch().map(
+              (rows) => rows.map(BoardNoteAdapters.fromDriftData).toList(),
+            ),
       );
     } catch (e) {
       return (failure: Failure(e.toString()), notes: null);
@@ -410,14 +436,17 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
   }
 
   Future<({Failure? failure, Stream<List<BoardLink>>? links})> watchLinks(
-      String boardUuid) async {
+    String boardUuid,
+  ) async {
     try {
       return (
         failure: null,
-        links: (select(boardLinkTable)
-              ..where((tbl) => tbl.boardUuid.equals(boardUuid)))
-            .watch()
-            .map((rows) => rows.map(BoardLinkAdapters.fromDriftData).toList())
+        links:
+            (select(
+              boardLinkTable,
+            )..where((tbl) => tbl.boardUuid.equals(boardUuid))).watch().map(
+              (rows) => rows.map(BoardLinkAdapters.fromDriftData).toList(),
+            ),
       );
     } catch (e) {
       return (failure: Failure(e.toString()), links: null);
@@ -425,15 +454,16 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
   }
 
   Future<({Failure? failure, Stream<List<BoardMaterial>>? materials})>
-      watchMaterials(String boardUuid) async {
+  watchMaterials(String boardUuid) async {
     try {
       return (
         failure: null,
-        materials: (select(boardMaterialTable)
-              ..where((tbl) => tbl.boardUuid.equals(boardUuid)))
-            .watch()
-            .map((rows) =>
-                rows.map(BoardMaterialsAdapters.fromDriftData).toList())
+        materials:
+            (select(
+              boardMaterialTable,
+            )..where((tbl) => tbl.boardUuid.equals(boardUuid))).watch().map(
+              (rows) => rows.map(BoardMaterialsAdapters.fromDriftData).toList(),
+            ),
       );
     } catch (e) {
       return (failure: Failure(e.toString()), materials: null);
@@ -441,76 +471,59 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
   }
 
   Future<({Failure? failure, Stream<List<Board>>? boards})>
-      watchBoards() async {
-    final query = select(boardTable).join([
-      leftOuterJoin(
-        boardPlayerTable,
-        boardTable.uuid.equalsExp(
-          boardPlayerTable.boardUuid,
-        ),
-      ),
-      leftOuterJoin(
-        characterBoardTable,
-        boardTable.uuid.equalsExp(
-          characterBoardTable.boarduuid,
-        ),
-      ),
-      leftOuterJoin(
-        boardLinkTable,
-        boardTable.uuid.equalsExp(
-          boardLinkTable.boardUuid,
-        ),
-      ),
-      leftOuterJoin(
-        boardMaterialTable,
-        boardTable.uuid.equalsExp(
-          boardMaterialTable.boardUuid,
-        ),
-      ),
-      leftOuterJoin(
-        boardNoteTable,
-        boardTable.uuid.equalsExp(
-          boardNoteTable.boardUuid,
-        ),
-      ),
-      leftOuterJoin(
-        boardSessionTable,
-        boardTable.uuid.equalsExp(
-          boardSessionTable.boardUuid,
-        ),
-      ),
-      leftOuterJoin(
-        boardCombatTable,
-        boardTable.uuid.equalsExp(
-          boardCombatTable.boardUuid,
-        ),
-      ),
-      leftOuterJoin(
-        menaceLinkBoardTable,
-        boardTable.uuid.equalsExp(
-          menaceLinkBoardTable.boardUuid,
-        ),
-      ),
-      leftOuterJoin(
-        menaceTable,
-        menaceLinkBoardTable.menaceUuid.equalsExp(
-          menaceTable.uuid,
-        ),
-      ),
-    ])
-      ..addColumns([
-        boardTable.name,
-        boardTable.adventureName,
-        boardTable.bannerPath,
-        boardTable.createdAt,
-        boardTable.updatedAt,
-      ])
-      ..orderBy([
-        OrderingTerm(
-          expression: boardTable.updatedAt,
-          mode: OrderingMode.desc,
-        )
-      ]);
+  watchBoards() async {
+    final query =
+        select(boardTable).join([
+            leftOuterJoin(
+              boardPlayerTable,
+              boardTable.uuid.equalsExp(boardPlayerTable.boardUuid),
+            ),
+            leftOuterJoin(
+              characterBoardTable,
+              boardTable.uuid.equalsExp(characterBoardTable.boarduuid),
+            ),
+            leftOuterJoin(
+              boardLinkTable,
+              boardTable.uuid.equalsExp(boardLinkTable.boardUuid),
+            ),
+            leftOuterJoin(
+              boardMaterialTable,
+              boardTable.uuid.equalsExp(boardMaterialTable.boardUuid),
+            ),
+            leftOuterJoin(
+              boardNoteTable,
+              boardTable.uuid.equalsExp(boardNoteTable.boardUuid),
+            ),
+            leftOuterJoin(
+              boardSessionTable,
+              boardTable.uuid.equalsExp(boardSessionTable.boardUuid),
+            ),
+            leftOuterJoin(
+              boardCombatTable,
+              boardTable.uuid.equalsExp(boardCombatTable.boardUuid),
+            ),
+            leftOuterJoin(
+              menaceLinkBoardTable,
+              boardTable.uuid.equalsExp(menaceLinkBoardTable.boardUuid),
+            ),
+            leftOuterJoin(
+              menaceTable,
+              menaceLinkBoardTable.menaceUuid.equalsExp(menaceTable.uuid),
+            ),
+          ])
+          ..addColumns([
+            boardTable.name,
+            boardTable.adventureName,
+            boardTable.bannerPath,
+            boardTable.createdAt,
+            boardTable.updatedAt,
+          ])
+          ..orderBy([
+            OrderingTerm(
+              expression: boardTable.updatedAt,
+              mode: OrderingMode.desc,
+            ),
+          ]);
     try {
       return (
         failure: null,
@@ -530,70 +543,71 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
             final characterBoardData = row.readTableOrNull(characterBoardTable);
 
             if (!(boardsDTO.containsKey(boardData.uuid))) {
-              boardsDTO.addAll(
-                  {boardData.uuid: BoardDriftDto(boardData: boardData)});
+              boardsDTO.addAll({
+                boardData.uuid: BoardDriftDto(boardData: boardData),
+              });
             }
 
             if (playerData != null &&
-                !(boardsDTO[boardData.uuid]!
-                    .playersData
-                    .any((data) => data.uuid == playerData.uuid))) {
+                !(boardsDTO[boardData.uuid]!.playersData.any(
+                  (data) => data.uuid == playerData.uuid,
+                ))) {
               boardsDTO[boardData.uuid]!.playersData.add(playerData);
             }
 
             if (noteData != null &&
-                !(boardsDTO[boardData.uuid]!
-                    .notesData
-                    .any((data) => data.uuid == noteData.uuid))) {
+                !(boardsDTO[boardData.uuid]!.notesData.any(
+                  (data) => data.uuid == noteData.uuid,
+                ))) {
               boardsDTO[boardData.uuid]!.notesData.add(noteData);
             }
 
             if (characterBoardData != null &&
-                !(boardsDTO[boardData.uuid]!
-                    .characterData
-                    .any((data) => data.uuid == characterBoardData.uuid))) {
+                !(boardsDTO[boardData.uuid]!.characterData.any(
+                  (data) => data.uuid == characterBoardData.uuid,
+                ))) {
               boardsDTO[boardData.uuid]!.characterData.add(characterBoardData);
             }
 
             if (menaceLinkData != null &&
-                !(boardsDTO[boardData.uuid]!
-                    .linkMenaceData
-                    .any((data) => data.uuid == menaceLinkData.uuid))) {
+                !(boardsDTO[boardData.uuid]!.linkMenaceData.any(
+                  (data) => data.uuid == menaceLinkData.uuid,
+                ))) {
               boardsDTO[boardData.uuid]!.linkMenaceData.add(menaceLinkData);
             }
 
             if (menaceData != null &&
-                !(boardsDTO[boardData.uuid]!
-                    .menaceData
-                    .any((data) => data.uuid == menaceData.uuid))) {
+                !(boardsDTO[boardData.uuid]!.menaceData.any(
+                  (data) => data.uuid == menaceData.uuid,
+                ))) {
               boardsDTO[boardData.uuid]!.menaceData.add(menaceData);
             }
 
             if (sessionData != null &&
-                !(boardsDTO[boardData.uuid]!
-                    .sessionsData
-                    .any((data) => data.uuid == sessionData.uuid))) {
+                !(boardsDTO[boardData.uuid]!.sessionsData.any(
+                  (data) => data.uuid == sessionData.uuid,
+                ))) {
               boardsDTO[boardData.uuid]!.sessionsData.add(sessionData);
             }
 
             if (combatData != null &&
-                !(boardsDTO[boardData.uuid]!
-                    .combatsData
-                    .any((data) => data.uuid == combatData.uuid))) {
+                !(boardsDTO[boardData.uuid]!.combatsData.any(
+                  (data) => data.uuid == combatData.uuid,
+                ))) {
               boardsDTO[boardData.uuid]!.combatsData.add(combatData);
             }
 
             if (linkData != null &&
-                !(boardsDTO[boardData.uuid]!
-                    .linksData
-                    .any((l) => l.uuid == linkData.uuid))) {
+                !(boardsDTO[boardData.uuid]!.linksData.any(
+                  (l) => l.uuid == linkData.uuid,
+                ))) {
               boardsDTO[boardData.uuid]!.linksData.add(linkData);
             }
 
             if (materialData != null &&
-                !(boardsDTO[boardData.uuid]!
-                    .materialsData
-                    .any((m) => m.uuid == materialData.uuid))) {
+                !(boardsDTO[boardData.uuid]!.materialsData.any(
+                  (m) => m.uuid == materialData.uuid,
+                ))) {
               boardsDTO[boardData.uuid]!.materialsData.add(materialData);
             }
           }
@@ -601,7 +615,7 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
           return boardsDTO.values
               .map((g) => BoardAdapters.fromDriftDto(g))
               .toList();
-        })
+        }),
       );
     } catch (e) {
       return (failure: Failure(e.toString()), boards: null);
@@ -609,53 +623,56 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
   }
 
   Future<({Failure? failure, Stream<List<Board>>? boards})>
-      watchBoardsWithLinkMenace() async {
+  watchBoardsWithLinkMenace() async {
     try {
       return (
         failure: null,
-        boards: (select(boardTable)
-              ..where((tbl) => tbl.modeIndex.equals(0))
-              ..addColumns([
-                boardTable.name,
-                boardTable.adventureName,
-                boardTable.bannerPath,
-                boardTable.createdAt,
-                boardTable.updatedAt,
-              ]))
-            .join([
-              innerJoin(
-                menaceLinkBoardTable,
-                boardTable.uuid.equalsExp(
-                  menaceLinkBoardTable.boardUuid,
-                ),
-              ),
-            ])
-            .watch()
-            .map((rows) {
-              Map<String, BoardDriftDto> boardsDTO = {};
+        boards:
+            (select(boardTable)
+                  ..where((tbl) => tbl.modeIndex.equals(0))
+                  ..addColumns([
+                    boardTable.name,
+                    boardTable.adventureName,
+                    boardTable.bannerPath,
+                    boardTable.createdAt,
+                    boardTable.updatedAt,
+                  ]))
+                .join([
+                  innerJoin(
+                    menaceLinkBoardTable,
+                    boardTable.uuid.equalsExp(menaceLinkBoardTable.boardUuid),
+                  ),
+                ])
+                .watch()
+                .map((rows) {
+                  Map<String, BoardDriftDto> boardsDTO = {};
 
-              for (var row in rows) {
-                final boardData = row.readTable(boardTable);
-                final menaceLinkData =
-                    row.readTableOrNull(menaceLinkBoardTable);
+                  for (var row in rows) {
+                    final boardData = row.readTable(boardTable);
+                    final menaceLinkData = row.readTableOrNull(
+                      menaceLinkBoardTable,
+                    );
 
-                if (!(boardsDTO.containsKey(boardData.uuid))) {
-                  boardsDTO.addAll(
-                      {boardData.uuid: BoardDriftDto(boardData: boardData)});
-                }
+                    if (!(boardsDTO.containsKey(boardData.uuid))) {
+                      boardsDTO.addAll({
+                        boardData.uuid: BoardDriftDto(boardData: boardData),
+                      });
+                    }
 
-                if (menaceLinkData != null &&
-                    !(boardsDTO[boardData.uuid]!
-                        .linkMenaceData
-                        .any((data) => data.uuid == menaceLinkData.uuid))) {
-                  boardsDTO[boardData.uuid]!.linkMenaceData.add(menaceLinkData);
-                }
-              }
+                    if (menaceLinkData != null &&
+                        !(boardsDTO[boardData.uuid]!.linkMenaceData.any(
+                          (data) => data.uuid == menaceLinkData.uuid,
+                        ))) {
+                      boardsDTO[boardData.uuid]!.linkMenaceData.add(
+                        menaceLinkData,
+                      );
+                    }
+                  }
 
-              return boardsDTO.values
-                  .map((g) => BoardAdapters.fromDriftDto(g))
-                  .toList();
-            })
+                  return boardsDTO.values
+                      .map((g) => BoardAdapters.fromDriftDto(g))
+                      .toList();
+                }),
       );
     } catch (e) {
       return (failure: Failure(e.toString()), boards: null);
@@ -664,19 +681,22 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
 
   Future<({Failure? failure, List<Board>? boards})> getBoardsForMaster() async {
     try {
-      final result = await (select(boardTable)
-            ..where((tbl) => tbl.modeIndex.equals(0))
-            ..addColumns([
-              boardTable.name,
-              boardTable.adventureName,
-              boardTable.uuid,
-              boardTable.createdAt,
-              boardTable.updatedAt,
-            ]))
-          .get()
-          .then((rows) {
-        return rows.map((row) => BoardAdapters.fromDriftData(row)).toList();
-      });
+      final result =
+          await (select(boardTable)
+                ..where((tbl) => tbl.modeIndex.equals(0))
+                ..addColumns([
+                  boardTable.name,
+                  boardTable.adventureName,
+                  boardTable.uuid,
+                  boardTable.createdAt,
+                  boardTable.updatedAt,
+                ]))
+              .get()
+              .then((rows) {
+                return rows
+                    .map((row) => BoardAdapters.fromDriftData(row))
+                    .toList();
+              });
 
       return (failure: null, boards: result);
     } catch (e) {
@@ -685,36 +705,35 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
   }
 
   Future<({Failure? failure, Stream<List<Board>>? boards})>
-      watchOnlyBoardsToCharacter(String characterUuid) async {
+  watchOnlyBoardsToCharacter(String characterUuid) async {
     try {
       return (
         failure: null,
-        boards: (select(boardTable)
-              ..where((tbl) => tbl.modeIndex.equals(1))
-              ..addColumns([
-                boardTable.name,
-                boardTable.adventureName,
-                boardTable.bannerPath,
-                boardTable.createdAt,
-                boardTable.updatedAt,
-              ]).join([
-                innerJoin(
-                  characterBoardTable,
-                  characterBoardTable.parentuuid.equals(
-                    characterUuid,
-                  ),
-                ),
-              ]))
-            .watch()
-            .map((rows) {
-          List<Board> boards = [];
+        boards:
+            (select(boardTable)
+                  ..where((tbl) => tbl.modeIndex.equals(1))
+                  ..addColumns([
+                    boardTable.name,
+                    boardTable.adventureName,
+                    boardTable.bannerPath,
+                    boardTable.createdAt,
+                    boardTable.updatedAt,
+                  ]).join([
+                    innerJoin(
+                      characterBoardTable,
+                      characterBoardTable.parentuuid.equals(characterUuid),
+                    ),
+                  ]))
+                .watch()
+                .map((rows) {
+                  List<Board> boards = [];
 
-          for (var row in rows) {
-            boards.add(BoardAdapters.fromDriftData(row));
-          }
+                  for (var row in rows) {
+                    boards.add(BoardAdapters.fromDriftData(row));
+                  }
 
-          return boards;
-        })
+                  return boards;
+                }),
       );
     } catch (e) {
       return (failure: Failure(e.toString()), boards: null);
@@ -722,7 +741,8 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
   }
 
   Future<({Failure? failure, Stream<Board?>? boards})> watchSingleBoard(
-      String uuid) async {
+    String uuid,
+  ) async {
     try {
       return (
         failure: null,
@@ -730,15 +750,11 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
             .join([
               leftOuterJoin(
                 boardPlayerTable,
-                boardTable.uuid.equalsExp(
-                  boardPlayerTable.boardUuid,
-                ),
+                boardTable.uuid.equalsExp(boardPlayerTable.boardUuid),
               ),
               leftOuterJoin(
                 characterBoardTable,
-                boardTable.uuid.equalsExp(
-                  characterBoardTable.boarduuid,
-                ),
+                boardTable.uuid.equalsExp(characterBoardTable.boarduuid),
               ),
               leftOuterJoin(
                 classeCharacterTable,
@@ -748,158 +764,146 @@ class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {
               ),
               leftOuterJoin(
                 boardLinkTable,
-                boardTable.uuid.equalsExp(
-                  boardLinkTable.boardUuid,
-                ),
+                boardTable.uuid.equalsExp(boardLinkTable.boardUuid),
               ),
               leftOuterJoin(
                 boardMaterialTable,
-                boardTable.uuid.equalsExp(
-                  boardMaterialTable.boardUuid,
-                ),
+                boardTable.uuid.equalsExp(boardMaterialTable.boardUuid),
               ),
               leftOuterJoin(
                 boardNoteTable,
-                boardTable.uuid.equalsExp(
-                  boardNoteTable.boardUuid,
-                ),
+                boardTable.uuid.equalsExp(boardNoteTable.boardUuid),
               ),
               leftOuterJoin(
                 boardSessionTable,
-                boardTable.uuid.equalsExp(
-                  boardSessionTable.boardUuid,
-                ),
+                boardTable.uuid.equalsExp(boardSessionTable.boardUuid),
               ),
               leftOuterJoin(
                 boardCombatTable,
-                boardTable.uuid.equalsExp(
-                  boardCombatTable.boardUuid,
-                ),
+                boardTable.uuid.equalsExp(boardCombatTable.boardUuid),
               ),
               leftOuterJoin(
                 menaceLinkBoardTable,
-                boardTable.uuid.equalsExp(
-                  menaceLinkBoardTable.boardUuid,
-                ),
+                boardTable.uuid.equalsExp(menaceLinkBoardTable.boardUuid),
               ),
               leftOuterJoin(
                 menaceTable,
-                menaceLinkBoardTable.menaceUuid.equalsExp(
-                  menaceTable.uuid,
-                ),
+                menaceLinkBoardTable.menaceUuid.equalsExp(menaceTable.uuid),
               ),
             ])
             .watch()
-            .map(
-              (rows) {
-                Map<String, BoardDriftDto> boardsDTO = {};
+            .map((rows) {
+              Map<String, BoardDriftDto> boardsDTO = {};
 
-                for (var row in rows) {
-                  final boardData = row.readTable(boardTable);
-                  final playerData = row.readTableOrNull(boardPlayerTable);
-                  final linkData = row.readTableOrNull(boardLinkTable);
-                  final materialData = row.readTableOrNull(boardMaterialTable);
-                  final noteData = row.readTableOrNull(boardNoteTable);
-                  final sessionData = row.readTableOrNull(boardSessionTable);
-                  final combatData = row.readTableOrNull(boardCombatTable);
-                  final characterBoardData =
-                      row.readTableOrNull(characterBoardTable);
-                  final classeCharacterData =
-                      row.readTableOrNull(classeCharacterTable);
-                  final menaceLinkData =
-                      row.readTableOrNull(menaceLinkBoardTable);
-                  final menaceData = row.readTableOrNull(menaceTable);
+              for (var row in rows) {
+                final boardData = row.readTable(boardTable);
+                final playerData = row.readTableOrNull(boardPlayerTable);
+                final linkData = row.readTableOrNull(boardLinkTable);
+                final materialData = row.readTableOrNull(boardMaterialTable);
+                final noteData = row.readTableOrNull(boardNoteTable);
+                final sessionData = row.readTableOrNull(boardSessionTable);
+                final combatData = row.readTableOrNull(boardCombatTable);
+                final characterBoardData = row.readTableOrNull(
+                  characterBoardTable,
+                );
+                final classeCharacterData = row.readTableOrNull(
+                  classeCharacterTable,
+                );
+                final menaceLinkData = row.readTableOrNull(
+                  menaceLinkBoardTable,
+                );
+                final menaceData = row.readTableOrNull(menaceTable);
 
-                  if (!(boardsDTO.containsKey(boardData.uuid))) {
-                    boardsDTO.addAll(
-                        {boardData.uuid: BoardDriftDto(boardData: boardData)});
-                  }
-
-                  if (noteData != null &&
-                      !(boardsDTO[boardData.uuid]!
-                          .notesData
-                          .any((data) => data.uuid == noteData.uuid))) {
-                    boardsDTO[boardData.uuid]!.notesData.add(noteData);
-                  }
-
-                  if (sessionData != null &&
-                      !(boardsDTO[boardData.uuid]!
-                          .sessionsData
-                          .any((data) => data.uuid == sessionData.uuid))) {
-                    boardsDTO[boardData.uuid]!.sessionsData.add(sessionData);
-                  }
-
-                  if (combatData != null &&
-                      !(boardsDTO[boardData.uuid]!
-                          .combatsData
-                          .any((data) => data.uuid == combatData.uuid))) {
-                    boardsDTO[boardData.uuid]!.combatsData.add(combatData);
-                  }
-
-                  if (menaceLinkData != null &&
-                      !(boardsDTO[boardData.uuid]!
-                          .linkMenaceData
-                          .any((data) => data.uuid == menaceLinkData.uuid))) {
-                    boardsDTO[boardData.uuid]!
-                        .linkMenaceData
-                        .add(menaceLinkData);
-                  }
-
-                  if (menaceData != null &&
-                      !(boardsDTO[boardData.uuid]!
-                          .menaceData
-                          .any((data) => data.uuid == menaceData.uuid))) {
-                    boardsDTO[boardData.uuid]!.menaceData.add(menaceData);
-                  }
-
-                  if (characterBoardData != null &&
-                      !(boardsDTO[boardData.uuid]!.characterData.any(
-                          (data) => data.uuid == characterBoardData.uuid))) {
-                    boardsDTO[boardData.uuid]!
-                        .characterData
-                        .add(characterBoardData);
-                  }
-
-                  if (classeCharacterData != null &&
-                      !(boardsDTO[boardData.uuid]!.classesData.any(
-                          (data) => data.uuid == classeCharacterData.uuid))) {
-                    boardsDTO[boardData.uuid]!
-                        .classesData
-                        .add(classeCharacterData);
-                  }
-
-                  if (playerData != null &&
-                      !(boardsDTO[boardData.uuid]!
-                          .playersData
-                          .any((data) => data.uuid == playerData.uuid))) {
-                    boardsDTO[boardData.uuid]!.playersData.add(playerData);
-                  }
-
-                  if (linkData != null &&
-                      !(boardsDTO[boardData.uuid]!
-                          .linksData
-                          .any((l) => l.uuid == linkData.uuid))) {
-                    boardsDTO[boardData.uuid]!.linksData.add(linkData);
-                  }
-
-                  if (materialData != null &&
-                      !(boardsDTO[boardData.uuid]!
-                          .materialsData
-                          .any((m) => m.uuid == materialData.uuid))) {
-                    boardsDTO[boardData.uuid]!.materialsData.add(materialData);
-                  }
+                if (!(boardsDTO.containsKey(boardData.uuid))) {
+                  boardsDTO.addAll({
+                    boardData.uuid: BoardDriftDto(boardData: boardData),
+                  });
                 }
 
-                if (boardsDTO.values.isEmpty) {
-                  return null;
+                if (noteData != null &&
+                    !(boardsDTO[boardData.uuid]!.notesData.any(
+                      (data) => data.uuid == noteData.uuid,
+                    ))) {
+                  boardsDTO[boardData.uuid]!.notesData.add(noteData);
                 }
 
-                return boardsDTO.values
-                    .map((g) => BoardAdapters.fromDriftDto(g))
-                    .toList()
-                    .first;
-              },
-            )
+                if (sessionData != null &&
+                    !(boardsDTO[boardData.uuid]!.sessionsData.any(
+                      (data) => data.uuid == sessionData.uuid,
+                    ))) {
+                  boardsDTO[boardData.uuid]!.sessionsData.add(sessionData);
+                }
+
+                if (combatData != null &&
+                    !(boardsDTO[boardData.uuid]!.combatsData.any(
+                      (data) => data.uuid == combatData.uuid,
+                    ))) {
+                  boardsDTO[boardData.uuid]!.combatsData.add(combatData);
+                }
+
+                if (menaceLinkData != null &&
+                    !(boardsDTO[boardData.uuid]!.linkMenaceData.any(
+                      (data) => data.uuid == menaceLinkData.uuid,
+                    ))) {
+                  boardsDTO[boardData.uuid]!.linkMenaceData.add(menaceLinkData);
+                }
+
+                if (menaceData != null &&
+                    !(boardsDTO[boardData.uuid]!.menaceData.any(
+                      (data) => data.uuid == menaceData.uuid,
+                    ))) {
+                  boardsDTO[boardData.uuid]!.menaceData.add(menaceData);
+                }
+
+                if (characterBoardData != null &&
+                    !(boardsDTO[boardData.uuid]!.characterData.any(
+                      (data) => data.uuid == characterBoardData.uuid,
+                    ))) {
+                  boardsDTO[boardData.uuid]!.characterData.add(
+                    characterBoardData,
+                  );
+                }
+
+                if (classeCharacterData != null &&
+                    !(boardsDTO[boardData.uuid]!.classesData.any(
+                      (data) => data.uuid == classeCharacterData.uuid,
+                    ))) {
+                  boardsDTO[boardData.uuid]!.classesData.add(
+                    classeCharacterData,
+                  );
+                }
+
+                if (playerData != null &&
+                    !(boardsDTO[boardData.uuid]!.playersData.any(
+                      (data) => data.uuid == playerData.uuid,
+                    ))) {
+                  boardsDTO[boardData.uuid]!.playersData.add(playerData);
+                }
+
+                if (linkData != null &&
+                    !(boardsDTO[boardData.uuid]!.linksData.any(
+                      (l) => l.uuid == linkData.uuid,
+                    ))) {
+                  boardsDTO[boardData.uuid]!.linksData.add(linkData);
+                }
+
+                if (materialData != null &&
+                    !(boardsDTO[boardData.uuid]!.materialsData.any(
+                      (m) => m.uuid == materialData.uuid,
+                    ))) {
+                  boardsDTO[boardData.uuid]!.materialsData.add(materialData);
+                }
+              }
+
+              if (boardsDTO.values.isEmpty) {
+                return null;
+              }
+
+              return boardsDTO.values
+                  .map((g) => BoardAdapters.fromDriftDto(g))
+                  .toList()
+                  .first;
+            }),
       );
     } catch (e) {
       return (failure: Failure(e.toString()), boards: null);

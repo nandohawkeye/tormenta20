@@ -22,7 +22,7 @@ final ThemeData theme = ThemeData(
     primaryContainer: palette.inputColor,
     surface: palette.background,
   ),
-  dialogTheme: DialogTheme(
+  dialogTheme: DialogThemeData(
     backgroundColor: palette.inputColor,
     titleTextStyle: TextStyle(color: palette.textPrimary),
     elevation: 30,
@@ -53,7 +53,7 @@ final ThemeData theme = ThemeData(
     endIndent: T20UI.screenContentSpaceSize,
   ),
   iconTheme: IconThemeData(color: palette.icon, size: T20UI.iconSize),
-  cardTheme: CardTheme(
+  cardTheme: CardThemeData(
     shape: T20UI.defaultBorder(palette),
     elevation: 0,
     margin: EdgeInsets.zero,

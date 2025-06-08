@@ -10,6 +10,7 @@ import 'package:tormenta20/src/core/database/tables/armor_table.dart';
 import 'package:tormenta20/src/core/database/tables/backpack_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_table.dart';
 import 'package:tormenta20/src/core/database/tables/character_board_table.dart';
+import 'package:tormenta20/src/core/database/tables/character_condition_table.dart';
 import 'package:tormenta20/src/core/database/tables/character_table.dart';
 import 'package:tormenta20/src/core/database/tables/classe_character_table.dart';
 import 'package:tormenta20/src/core/database/tables/equipment_table.dart';
@@ -66,104 +67,116 @@ import 'package:tormenta20/src/shared/failures/failure.dart';
 
 part 'character_dao.g.dart';
 
-@DriftAccessor(tables: [
-  GrimoireTable,
-  CharacterTable,
-  ClasseCharacterTable,
-  OriginTable,
-  PowerTable,
-  CharacterBoardTable,
-  BoardTable,
-  AdventureBackpackTable,
-  EquipmentTable,
-  AmmunitionTable,
-  ArmorTable,
-  BackpackTable,
-  GeneralItemTable,
-  GeneralSkillTable,
-  MagicMenaceTable,
-  SaddlebagTable,
-  ShieldTable,
-  WeaponTable,
-  ActionTable,
-  TibarsTable,
-  ExpertiseTable,
-  ActionHandToHandTable,
-  ActionDistanceAttackTable,
-])
+@DriftAccessor(
+  tables: [
+    GrimoireTable,
+    CharacterTable,
+    ClasseCharacterTable,
+    OriginTable,
+    PowerTable,
+    CharacterBoardTable,
+    BoardTable,
+    AdventureBackpackTable,
+    EquipmentTable,
+    AmmunitionTable,
+    ArmorTable,
+    BackpackTable,
+    GeneralItemTable,
+    GeneralSkillTable,
+    MagicMenaceTable,
+    SaddlebagTable,
+    ShieldTable,
+    WeaponTable,
+    ActionTable,
+    TibarsTable,
+    ExpertiseTable,
+    ActionHandToHandTable,
+    ActionDistanceAttackTable,
+    CharacterConditionTable,
+  ],
+)
 class CharacterDAO extends DatabaseAccessor<AppDatabase>
     with _$CharacterDAOMixin {
   CharacterDAO(super.db);
 
   Future<({Failure? failure, Stream<List<Character>>? characters})>
-      watchCharacters() async {
+  watchCharacters() async {
     try {
       return (
         failure: null,
-        characters: (select(characterTable)
-              ..addColumns([
-                characterTable.name,
-                characterTable.uuid,
-                characterTable.defense,
-                characterTable.life,
-                characterTable.mana,
-                characterTable.createdAt,
-                characterTable.updatedAt,
-                characterTable.creatureSizeIndex,
-                characterTable.imageAsset,
-                characterTable.imagePath,
-                characterTable.aligmentIndex,
-              ])
-              ..orderBy([
-                (t) => OrderingTerm(
-                    expression: characterTable.updatedAt,
-                    mode: OrderingMode.desc)
-              ]))
-            .join([
-              leftOuterJoin(
-                classeCharacterTable,
-                characterTable.uuid.equalsExp(
-                  classeCharacterTable.characterUuid,
-                ),
-              ),
-              leftOuterJoin(
-                characterBoardTable,
-                characterTable.uuid.equalsExp(
-                  characterBoardTable.parentuuid,
-                ),
-              ),
-            ])
-            .watch()
-            .map((rows) {
-              Map<String, CharacterDto> characterDTO = {};
+        characters:
+            (select(characterTable)
+                  ..addColumns([
+                    characterTable.name,
+                    characterTable.uuid,
+                    characterTable.defense,
+                    characterTable.life,
+                    characterTable.mana,
+                    characterTable.createdAt,
+                    characterTable.updatedAt,
+                    characterTable.creatureSizeIndex,
+                    characterTable.imageAsset,
+                    characterTable.imagePath,
+                    characterTable.aligmentIndex,
+                  ])
+                  ..orderBy([
+                    (t) => OrderingTerm(
+                      expression: characterTable.updatedAt,
+                      mode: OrderingMode.desc,
+                    ),
+                  ]))
+                .join([
+                  leftOuterJoin(
+                    classeCharacterTable,
+                    characterTable.uuid.equalsExp(
+                      classeCharacterTable.characterUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    characterBoardTable,
+                    characterTable.uuid.equalsExp(
+                      characterBoardTable.parentuuid,
+                    ),
+                  ),
+                ])
+                .watch()
+                .map((rows) {
+                  Map<String, CharacterDto> characterDTO = {};
 
-              for (var row in rows) {
-                final characterData = row.readTable(characterTable);
-                final classeData = row.readTable(classeCharacterTable);
-                final characterBoardData =
-                    row.readTableOrNull(characterBoardTable);
+                  for (var row in rows) {
+                    final characterData = row.readTable(characterTable);
+                    final classeData = row.readTable(classeCharacterTable);
+                    final characterBoardData = row.readTableOrNull(
+                      characterBoardTable,
+                    );
 
-                if (!(characterDTO.containsKey(characterData.uuid))) {
-                  characterDTO.addAll(
-                      {characterData.uuid: CharacterDto(characterData)});
-                }
+                    if (!(characterDTO.containsKey(characterData.uuid))) {
+                      characterDTO.addAll({
+                        characterData.uuid: CharacterDto(characterData),
+                      });
+                    }
 
-                characterDTO[characterData.uuid]!.classe = classeData;
+                    characterDTO[characterData.uuid]!.classe = classeData;
 
-                if (characterBoardData != null &&
-                    !(characterDTO[characterData.uuid]!.characterBoardsData.any(
-                        (characterBoard) =>
-                            characterBoard.uuid == characterBoardData.uuid))) {
-                  characterDTO[characterData.uuid]!
-                      .characterBoardsData
-                      .add(characterBoardData);
-                }
-              }
+                    if (characterBoardData != null &&
+                        !(characterDTO[characterData.uuid]!.characterBoardsData
+                            .any(
+                              (characterBoard) =>
+                                  characterBoard.uuid ==
+                                  characterBoardData.uuid,
+                            ))) {
+                      characterDTO[characterData.uuid]!.characterBoardsData.add(
+                        characterBoardData,
+                      );
+                    }
+                  }
 
-              return characterDTO.entries
-                  .map((entry) => CharacterAdapters.fromDriftDto(entry.value))
-                  .toList();
-            })
+                  return characterDTO.entries
+                      .map(
+                        (entry) => CharacterAdapters.fromDriftDto(entry.value),
+                      )
+                      .toList();
+                }),
       );
     } catch (e) {
       return (failure: Failure(e.toString()), characters: null);
@@ -171,282 +184,275 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
   }
 
   Future<({Failure? failure, Stream<Character?>? character})> watchCharacter(
-      String uuid) async {
+    String uuid,
+  ) async {
     try {
       return (
         failure: null,
-        character: (select(characterTable)
-              ..where((tbl) => tbl.uuid.equals(uuid)))
-            .join([
-              leftOuterJoin(
-                classeCharacterTable,
-                characterTable.uuid.equalsExp(
-                  classeCharacterTable.characterUuid,
-                ),
-              ),
-              leftOuterJoin(
-                characterBoardTable,
-                characterTable.uuid.equalsExp(
-                  characterBoardTable.parentuuid,
-                ),
-              ),
-              leftOuterJoin(
-                grimoireTable,
-                characterTable.grimoireUuid.equalsExp(
-                  grimoireTable.uuid,
-                ),
-              ),
-              leftOuterJoin(
-                actionTable,
-                characterTable.uuid.equalsExp(
-                  actionTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                actionHandToHandTable,
-                characterTable.uuid.equalsExp(
-                  actionHandToHandTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                actionDistanceAttackTable,
-                characterTable.uuid.equalsExp(
-                  actionDistanceAttackTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                equipmentTable,
-                characterTable.uuid.equalsExp(
-                  equipmentTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                adventureBackpackTable,
-                characterTable.uuid.equalsExp(
-                  adventureBackpackTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                backpackTable,
-                characterTable.uuid.equalsExp(
-                  backpackTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                ammunitionTable,
-                characterTable.uuid.equalsExp(
-                  ammunitionTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                armorTable,
-                characterTable.uuid.equalsExp(
-                  armorTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                generalItemTable,
-                characterTable.uuid.equalsExp(
-                  generalItemTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                saddlebagTable,
-                characterTable.uuid.equalsExp(
-                  saddlebagTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                shieldTable,
-                characterTable.uuid.equalsExp(
-                  shieldTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                weaponTable,
-                characterTable.uuid.equalsExp(
-                  weaponTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                originTable,
-                characterTable.uuid.equalsExp(
-                  originTable.characterUuid,
-                ),
-              ),
-              leftOuterJoin(
-                powerTable,
-                characterTable.uuid.equalsExp(
-                  powerTable.characterUuid,
-                ),
-              ),
-            ])
-            .watch()
-            .map((rows) {
-              Map<String, CharacterDto> characterDTO = {};
+        character:
+            (select(characterTable)..where((tbl) => tbl.uuid.equals(uuid)))
+                .join([
+                  leftOuterJoin(
+                    classeCharacterTable,
+                    characterTable.uuid.equalsExp(
+                      classeCharacterTable.characterUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    characterBoardTable,
+                    characterTable.uuid.equalsExp(
+                      characterBoardTable.parentuuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    grimoireTable,
+                    characterTable.grimoireUuid.equalsExp(grimoireTable.uuid),
+                  ),
+                  leftOuterJoin(
+                    actionTable,
+                    characterTable.uuid.equalsExp(actionTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    actionHandToHandTable,
+                    characterTable.uuid.equalsExp(
+                      actionHandToHandTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    actionDistanceAttackTable,
+                    characterTable.uuid.equalsExp(
+                      actionDistanceAttackTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    equipmentTable,
+                    characterTable.uuid.equalsExp(equipmentTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    adventureBackpackTable,
+                    characterTable.uuid.equalsExp(
+                      adventureBackpackTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    backpackTable,
+                    characterTable.uuid.equalsExp(backpackTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    ammunitionTable,
+                    characterTable.uuid.equalsExp(ammunitionTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    armorTable,
+                    characterTable.uuid.equalsExp(armorTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    generalItemTable,
+                    characterTable.uuid.equalsExp(generalItemTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    saddlebagTable,
+                    characterTable.uuid.equalsExp(saddlebagTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    shieldTable,
+                    characterTable.uuid.equalsExp(shieldTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    weaponTable,
+                    characterTable.uuid.equalsExp(weaponTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    originTable,
+                    characterTable.uuid.equalsExp(originTable.characterUuid),
+                  ),
+                  leftOuterJoin(
+                    powerTable,
+                    characterTable.uuid.equalsExp(powerTable.characterUuid),
+                  ),
+                ])
+                .watch()
+                .map((rows) {
+                  Map<String, CharacterDto> characterDTO = {};
 
-              for (var row in rows) {
-                final characterData = row.readTable(characterTable);
-                final classeData = row.readTable(classeCharacterTable);
-                final characterBoardData =
-                    row.readTableOrNull(characterBoardTable);
-                final grimoireData = row.readTableOrNull(grimoireTable);
-                final actionData = row.readTableOrNull(actionTable);
-                final handToHandData =
-                    row.readTableOrNull(actionHandToHandTable);
-                final actionDistance =
-                    row.readTableOrNull(actionDistanceAttackTable);
-                final equipmentData = row.readTableOrNull(equipmentTable);
-                final adventureBackpackData =
-                    row.readTableOrNull(adventureBackpackTable);
-                final backpackData = row.readTableOrNull(backpackTable);
-                final ammunitionData = row.readTableOrNull(ammunitionTable);
-                final armorData = row.readTableOrNull(armorTable);
-                final generalItemData = row.readTableOrNull(generalItemTable);
-                final saddlebagData = row.readTableOrNull(saddlebagTable);
-                final shieldData = row.readTableOrNull(shieldTable);
-                final weaponData = row.readTableOrNull(weaponTable);
-                final originData = row.readTableOrNull(originTable);
-                final powerData = row.readTableOrNull(powerTable);
+                  for (var row in rows) {
+                    final characterData = row.readTable(characterTable);
+                    final classeData = row.readTable(classeCharacterTable);
+                    final characterBoardData = row.readTableOrNull(
+                      characterBoardTable,
+                    );
+                    final grimoireData = row.readTableOrNull(grimoireTable);
+                    final actionData = row.readTableOrNull(actionTable);
+                    final handToHandData = row.readTableOrNull(
+                      actionHandToHandTable,
+                    );
+                    final actionDistance = row.readTableOrNull(
+                      actionDistanceAttackTable,
+                    );
+                    final equipmentData = row.readTableOrNull(equipmentTable);
+                    final adventureBackpackData = row.readTableOrNull(
+                      adventureBackpackTable,
+                    );
+                    final backpackData = row.readTableOrNull(backpackTable);
+                    final ammunitionData = row.readTableOrNull(ammunitionTable);
+                    final armorData = row.readTableOrNull(armorTable);
+                    final generalItemData = row.readTableOrNull(
+                      generalItemTable,
+                    );
+                    final saddlebagData = row.readTableOrNull(saddlebagTable);
+                    final shieldData = row.readTableOrNull(shieldTable);
+                    final weaponData = row.readTableOrNull(weaponTable);
+                    final originData = row.readTableOrNull(originTable);
+                    final powerData = row.readTableOrNull(powerTable);
 
-                if (!(characterDTO.containsKey(characterData.uuid))) {
-                  characterDTO.addAll(
-                      {characterData.uuid: CharacterDto(characterData)});
-                }
+                    if (!(characterDTO.containsKey(characterData.uuid))) {
+                      characterDTO.addAll({
+                        characterData.uuid: CharacterDto(characterData),
+                      });
+                    }
 
-                characterDTO[characterData.uuid]!.classe = classeData;
+                    characterDTO[characterData.uuid]!.classe = classeData;
 
-                if (characterBoardData != null &&
-                    !(characterDTO[characterData.uuid]!.characterBoardsData.any(
-                        (characterBoard) =>
-                            characterBoard.uuid == characterBoardData.uuid))) {
-                  characterDTO[characterData.uuid]!
-                      .characterBoardsData
-                      .add(characterBoardData);
-                }
+                    if (characterBoardData != null &&
+                        !(characterDTO[characterData.uuid]!.characterBoardsData
+                            .any(
+                              (characterBoard) =>
+                                  characterBoard.uuid ==
+                                  characterBoardData.uuid,
+                            ))) {
+                      characterDTO[characterData.uuid]!.characterBoardsData.add(
+                        characterBoardData,
+                      );
+                    }
 
-                if (actionData != null &&
-                    !(characterDTO[characterData.uuid]!
-                        .actions
-                        .any((item) => item.uuid == actionData.uuid))) {
-                  characterDTO[characterData.uuid]!.actions.add(actionData);
-                }
+                    if (actionData != null &&
+                        !(characterDTO[characterData.uuid]!.actions.any(
+                          (item) => item.uuid == actionData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.actions.add(actionData);
+                    }
 
-                if (handToHandData != null &&
-                    !(characterDTO[characterData.uuid]!
-                        .handToHands
-                        .any((item) => item.uuid == handToHandData.uuid))) {
-                  characterDTO[characterData.uuid]!
-                      .handToHands
-                      .add(handToHandData);
-                }
+                    if (handToHandData != null &&
+                        !(characterDTO[characterData.uuid]!.handToHands.any(
+                          (item) => item.uuid == handToHandData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.handToHands.add(
+                        handToHandData,
+                      );
+                    }
 
-                if (actionDistance != null &&
-                    !(characterDTO[characterData.uuid]!
-                        .distanceAttacks
-                        .any((item) => item.uuid == actionDistance.uuid))) {
-                  characterDTO[characterData.uuid]!
-                      .distanceAttacks
-                      .add(actionDistance);
-                }
+                    if (actionDistance != null &&
+                        !(characterDTO[characterData.uuid]!.distanceAttacks.any(
+                          (item) => item.uuid == actionDistance.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.distanceAttacks.add(
+                        actionDistance,
+                      );
+                    }
 
-                if (equipmentData != null &&
-                    !(characterDTO[characterData.uuid]!
-                        .equipments
-                        .any((item) => item.uuid == equipmentData.uuid))) {
-                  characterDTO[characterData.uuid]!
-                      .equipments
-                      .add(equipmentData);
-                }
+                    if (equipmentData != null &&
+                        !(characterDTO[characterData.uuid]!.equipments.any(
+                          (item) => item.uuid == equipmentData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.equipments.add(
+                        equipmentData,
+                      );
+                    }
 
-                if (adventureBackpackData != null &&
-                    !(characterDTO[characterData.uuid]!.equipments.any(
-                        (item) => item.uuid == adventureBackpackData.uuid))) {
-                  characterDTO[characterData.uuid]!
-                      .adventureBackpacks
-                      .add(adventureBackpackData);
-                }
+                    if (adventureBackpackData != null &&
+                        !(characterDTO[characterData.uuid]!.equipments.any(
+                          (item) => item.uuid == adventureBackpackData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.adventureBackpacks.add(
+                        adventureBackpackData,
+                      );
+                    }
 
-                if (backpackData != null &&
-                    !(characterDTO[characterData.uuid]!
-                        .backpacks
-                        .any((item) => item.uuid == backpackData.uuid))) {
-                  characterDTO[characterData.uuid]!.backpacks.add(backpackData);
-                }
+                    if (backpackData != null &&
+                        !(characterDTO[characterData.uuid]!.backpacks.any(
+                          (item) => item.uuid == backpackData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.backpacks.add(
+                        backpackData,
+                      );
+                    }
 
-                if (ammunitionData != null &&
-                    !(characterDTO[characterData.uuid]!
-                        .ammunitions
-                        .any((item) => item.uuid == ammunitionData.uuid))) {
-                  characterDTO[characterData.uuid]!
-                      .ammunitions
-                      .add(ammunitionData);
-                }
+                    if (ammunitionData != null &&
+                        !(characterDTO[characterData.uuid]!.ammunitions.any(
+                          (item) => item.uuid == ammunitionData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.ammunitions.add(
+                        ammunitionData,
+                      );
+                    }
 
-                if (armorData != null &&
-                    !(characterDTO[characterData.uuid]!
-                        .armors
-                        .any((item) => item.uuid == armorData.uuid))) {
-                  characterDTO[characterData.uuid]!.armors.add(armorData);
-                }
+                    if (armorData != null &&
+                        !(characterDTO[characterData.uuid]!.armors.any(
+                          (item) => item.uuid == armorData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.armors.add(armorData);
+                    }
 
-                if (generalItemData != null &&
-                    !(characterDTO[characterData.uuid]!
-                        .generalItens
-                        .any((item) => item.uuid == generalItemData.uuid))) {
-                  characterDTO[characterData.uuid]!
-                      .generalItens
-                      .add(generalItemData);
-                }
+                    if (generalItemData != null &&
+                        !(characterDTO[characterData.uuid]!.generalItens.any(
+                          (item) => item.uuid == generalItemData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.generalItens.add(
+                        generalItemData,
+                      );
+                    }
 
-                if (saddlebagData != null &&
-                    !(characterDTO[characterData.uuid]!
-                        .saddlebags
-                        .any((item) => item.uuid == saddlebagData.uuid))) {
-                  characterDTO[characterData.uuid]!
-                      .saddlebags
-                      .add(saddlebagData);
-                }
+                    if (saddlebagData != null &&
+                        !(characterDTO[characterData.uuid]!.saddlebags.any(
+                          (item) => item.uuid == saddlebagData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.saddlebags.add(
+                        saddlebagData,
+                      );
+                    }
 
-                if (shieldData != null &&
-                    !(characterDTO[characterData.uuid]!
-                        .shields
-                        .any((item) => item.uuid == shieldData.uuid))) {
-                  characterDTO[characterData.uuid]!.shields.add(shieldData);
-                }
+                    if (shieldData != null &&
+                        !(characterDTO[characterData.uuid]!.shields.any(
+                          (item) => item.uuid == shieldData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.shields.add(shieldData);
+                    }
 
-                if (weaponData != null &&
-                    !(characterDTO[characterData.uuid]!
-                        .weapons
-                        .any((item) => item.uuid == weaponData.uuid))) {
-                  characterDTO[characterData.uuid]!.weapons.add(weaponData);
-                }
+                    if (weaponData != null &&
+                        !(characterDTO[characterData.uuid]!.weapons.any(
+                          (item) => item.uuid == weaponData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.weapons.add(weaponData);
+                    }
 
-                if (originData != null &&
-                    !(characterDTO[characterData.uuid]!
-                        .origins
-                        .any((item) => item.uuid == originData.uuid))) {
-                  characterDTO[characterData.uuid]!.origins.add(originData);
-                }
+                    if (originData != null &&
+                        !(characterDTO[characterData.uuid]!.origins.any(
+                          (item) => item.uuid == originData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.origins.add(originData);
+                    }
 
-                if (powerData != null &&
-                    !(characterDTO[characterData.uuid]!
-                        .powers
-                        .any((item) => item.uuid == powerData.uuid))) {
-                  characterDTO[characterData.uuid]!.powers.add(powerData);
-                }
+                    if (powerData != null &&
+                        !(characterDTO[characterData.uuid]!.powers.any(
+                          (item) => item.uuid == powerData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.powers.add(powerData);
+                    }
 
-                if (grimoireData != null) {
-                  characterDTO[characterData.uuid]!.grimoireData = grimoireData;
-                }
-              }
+                    if (grimoireData != null) {
+                      characterDTO[characterData.uuid]!.grimoireData =
+                          grimoireData;
+                    }
+                  }
 
-              final characters = characterDTO.entries
-                  .map((entry) => CharacterAdapters.fromDriftDto(entry.value))
-                  .toList();
+                  final characters = characterDTO.entries
+                      .map(
+                        (entry) => CharacterAdapters.fromDriftDto(entry.value),
+                      )
+                      .toList();
 
-              return characters.isEmpty ? null : characters.first;
-            })
+                  return characters.isEmpty ? null : characters.first;
+                }),
       );
     } catch (e) {
       return (failure: Failure(e.toString()), character: null);
@@ -454,324 +460,329 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
   }
 
   Future<({Failure? failure, Stream<List<CharacterBoard>>? character})>
-      watchCharactersBoardFromBoard(String boardUuid) async {
+  watchCharactersBoardFromBoard(String boardUuid) async {
     try {
       return (
         failure: null,
-        character: (select(characterBoardTable)
-              ..where((tbl) => tbl.boarduuid.equals(boardUuid)))
-            .join([
-              leftOuterJoin(
-                classeCharacterTable,
-                characterBoardTable.uuid.equalsExp(
-                  classeCharacterTable.characterUuid,
-                ),
-              ),
-              leftOuterJoin(
-                expertiseTable,
-                characterBoardTable.uuid.equalsExp(
-                  expertiseTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                characterTable,
-                characterTable.uuid.equalsExp(
-                  characterBoardTable.parentuuid,
-                ),
-              ),
-              leftOuterJoin(
-                grimoireTable,
-                characterTable.grimoireUuid.equalsExp(
-                  grimoireTable.uuid,
-                ),
-              ),
-              leftOuterJoin(
-                actionTable,
-                characterBoardTable.uuid.equalsExp(
-                  actionTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                actionHandToHandTable,
-                characterBoardTable.uuid.equalsExp(
-                  actionHandToHandTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                actionDistanceAttackTable,
-                characterBoardTable.uuid.equalsExp(
-                  actionDistanceAttackTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                tibarsTable,
-                characterBoardTable.uuid.equalsExp(
-                  tibarsTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                equipmentTable,
-                characterBoardTable.uuid.equalsExp(
-                  equipmentTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                adventureBackpackTable,
-                characterBoardTable.uuid.equalsExp(
-                  adventureBackpackTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                backpackTable,
-                characterBoardTable.uuid.equalsExp(
-                  backpackTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                ammunitionTable,
-                characterBoardTable.uuid.equalsExp(
-                  ammunitionTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                armorTable,
-                characterBoardTable.uuid.equalsExp(
-                  armorTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                generalItemTable,
-                characterBoardTable.uuid.equalsExp(
-                  generalItemTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                saddlebagTable,
-                characterBoardTable.uuid.equalsExp(
-                  saddlebagTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                shieldTable,
-                characterBoardTable.uuid.equalsExp(
-                  shieldTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                weaponTable,
-                characterBoardTable.uuid.equalsExp(
-                  weaponTable.parentUuid,
-                ),
-              ),
-              leftOuterJoin(
-                originTable,
-                characterBoardTable.uuid.equalsExp(
-                  originTable.characterUuid,
-                ),
-              ),
-              leftOuterJoin(
-                powerTable,
-                characterBoardTable.uuid.equalsExp(
-                  powerTable.characterUuid,
-                ),
-              ),
-            ])
-            .watch()
-            .map((rows) {
-              Map<String, CharacterBoardDto> characterBoardDTO = {};
+        character:
+            (select(characterBoardTable)
+                  ..where((tbl) => tbl.boarduuid.equals(boardUuid)))
+                .join([
+                  leftOuterJoin(
+                    classeCharacterTable,
+                    characterBoardTable.uuid.equalsExp(
+                      classeCharacterTable.characterUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    expertiseTable,
+                    characterBoardTable.uuid.equalsExp(
+                      expertiseTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    characterTable,
+                    characterTable.uuid.equalsExp(
+                      characterBoardTable.parentuuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    characterConditionTable,
+                    characterTable.uuid.equalsExp(
+                      characterConditionTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    grimoireTable,
+                    characterTable.grimoireUuid.equalsExp(grimoireTable.uuid),
+                  ),
+                  leftOuterJoin(
+                    actionTable,
+                    characterBoardTable.uuid.equalsExp(actionTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    actionHandToHandTable,
+                    characterBoardTable.uuid.equalsExp(
+                      actionHandToHandTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    actionDistanceAttackTable,
+                    characterBoardTable.uuid.equalsExp(
+                      actionDistanceAttackTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    tibarsTable,
+                    characterBoardTable.uuid.equalsExp(tibarsTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    equipmentTable,
+                    characterBoardTable.uuid.equalsExp(
+                      equipmentTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    adventureBackpackTable,
+                    characterBoardTable.uuid.equalsExp(
+                      adventureBackpackTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    backpackTable,
+                    characterBoardTable.uuid.equalsExp(
+                      backpackTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    ammunitionTable,
+                    characterBoardTable.uuid.equalsExp(
+                      ammunitionTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    armorTable,
+                    characterBoardTable.uuid.equalsExp(armorTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    generalItemTable,
+                    characterBoardTable.uuid.equalsExp(
+                      generalItemTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    saddlebagTable,
+                    characterBoardTable.uuid.equalsExp(
+                      saddlebagTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    shieldTable,
+                    characterBoardTable.uuid.equalsExp(shieldTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    weaponTable,
+                    characterBoardTable.uuid.equalsExp(weaponTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    originTable,
+                    characterBoardTable.uuid.equalsExp(
+                      originTable.characterUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    powerTable,
+                    characterBoardTable.uuid.equalsExp(
+                      powerTable.characterUuid,
+                    ),
+                  ),
+                ])
+                .watch()
+                .map((rows) {
+                  Map<String, CharacterBoardDto> characterBoardDTO = {};
 
-              for (var row in rows) {
-                final classeData = row.readTableOrNull(classeCharacterTable);
-                final expertiseData = row.readTableOrNull(expertiseTable);
-                final characterBoardData = row.readTable(characterBoardTable);
-                final grimoireData = row.readTableOrNull(grimoireTable);
-                final actionData = row.readTableOrNull(actionTable);
-                final handToHandData =
-                    row.readTableOrNull(actionHandToHandTable);
-                final actionDistance =
-                    row.readTableOrNull(actionDistanceAttackTable);
-                final equipmentData = row.readTableOrNull(equipmentTable);
-                final tibarsData = row.readTableOrNull(tibarsTable);
-                final adventureBackpackData =
-                    row.readTableOrNull(adventureBackpackTable);
-                final backpackData = row.readTableOrNull(backpackTable);
-                final ammunitionData = row.readTableOrNull(ammunitionTable);
-                final armorData = row.readTableOrNull(armorTable);
-                final generalItemData = row.readTableOrNull(generalItemTable);
-                final saddlebagData = row.readTableOrNull(saddlebagTable);
-                final shieldData = row.readTableOrNull(shieldTable);
-                final weaponData = row.readTableOrNull(weaponTable);
-                final originData = row.readTableOrNull(originTable);
-                final powerData = row.readTableOrNull(powerTable);
+                  for (var row in rows) {
+                    final classeData = row.readTableOrNull(
+                      classeCharacterTable,
+                    );
+                    final expertiseData = row.readTableOrNull(expertiseTable);
+                    final characterBoardData = row.readTable(
+                      characterBoardTable,
+                    );
+                    final grimoireData = row.readTableOrNull(grimoireTable);
+                    final actionData = row.readTableOrNull(actionTable);
+                    final conditionData = row.readTableOrNull(
+                      characterConditionTable,
+                    );
+                    final handToHandData = row.readTableOrNull(
+                      actionHandToHandTable,
+                    );
+                    final actionDistance = row.readTableOrNull(
+                      actionDistanceAttackTable,
+                    );
+                    final equipmentData = row.readTableOrNull(equipmentTable);
+                    final tibarsData = row.readTableOrNull(tibarsTable);
+                    final adventureBackpackData = row.readTableOrNull(
+                      adventureBackpackTable,
+                    );
+                    final backpackData = row.readTableOrNull(backpackTable);
+                    final ammunitionData = row.readTableOrNull(ammunitionTable);
+                    final armorData = row.readTableOrNull(armorTable);
+                    final generalItemData = row.readTableOrNull(
+                      generalItemTable,
+                    );
+                    final saddlebagData = row.readTableOrNull(saddlebagTable);
+                    final shieldData = row.readTableOrNull(shieldTable);
+                    final weaponData = row.readTableOrNull(weaponTable);
+                    final originData = row.readTableOrNull(originTable);
+                    final powerData = row.readTableOrNull(powerTable);
 
-                if (!(characterBoardDTO.containsKey(characterBoardData.uuid))) {
-                  characterBoardDTO.addAll({
-                    characterBoardData.uuid: CharacterBoardDto(
-                      characterBoardsData: characterBoardData,
-                      tibars: tibarsData,
-                    )
-                  });
-                }
+                    if (!(characterBoardDTO.containsKey(
+                      characterBoardData.uuid,
+                    ))) {
+                      characterBoardDTO.addAll({
+                        characterBoardData.uuid: CharacterBoardDto(
+                          characterBoardsData: characterBoardData,
+                          tibars: tibarsData,
+                        ),
+                      });
+                    }
 
-                if (expertiseData != null &&
-                    !(characterBoardDTO[characterBoardData.uuid]!
-                        .expertises
-                        .any((expertise) =>
-                            expertise.uuid == expertiseData.uuid))) {
-                  characterBoardDTO[characterBoardData.uuid]!
-                      .expertises
-                      .add(expertiseData);
-                }
+                    if (expertiseData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.expertises
+                            .any(
+                              (expertise) =>
+                                  expertise.uuid == expertiseData.uuid,
+                            ))) {
+                      characterBoardDTO[characterBoardData.uuid]!.expertises
+                          .add(expertiseData);
+                    }
 
-                if (classeData != null &&
-                    !(characterBoardDTO[characterBoardData.uuid]!
-                        .classes
-                        .any((classe) => classe.uuid == classeData.uuid))) {
-                  characterBoardDTO[characterBoardData.uuid]!
-                      .classes
-                      .add(classeData);
-                }
+                    if (classeData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.classes
+                            .any((classe) => classe.uuid == classeData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.classes.add(
+                        classeData,
+                      );
+                    }
 
-                if (actionData != null &&
-                    !(characterBoardDTO[characterBoardData.uuid]!
-                        .actions
-                        .any((item) => item.uuid == actionData.uuid))) {
-                  characterBoardDTO[characterBoardData.uuid]!
-                      .actions
-                      .add(actionData);
-                }
+                    if (actionData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.actions
+                            .any((item) => item.uuid == actionData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.actions.add(
+                        actionData,
+                      );
+                    }
 
-                if (handToHandData != null &&
-                    !(characterBoardDTO[characterBoardData.uuid]!
-                        .handToHands
-                        .any((item) => item.uuid == handToHandData.uuid))) {
-                  characterBoardDTO[characterBoardData.uuid]!
-                      .handToHands
-                      .add(handToHandData);
-                }
+                    if (handToHandData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!
+                            .handToHands
+                            .any((item) => item.uuid == handToHandData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.handToHands
+                          .add(handToHandData);
+                    }
 
-                if (actionDistance != null &&
-                    !(characterBoardDTO[characterBoardData.uuid]!
-                        .distanceAttacks
-                        .any((item) => item.uuid == actionDistance.uuid))) {
-                  characterBoardDTO[characterBoardData.uuid]!
-                      .distanceAttacks
-                      .add(actionDistance);
-                }
+                    if (actionDistance != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!
+                            .distanceAttacks
+                            .any((item) => item.uuid == actionDistance.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!
+                          .distanceAttacks
+                          .add(actionDistance);
+                    }
 
-                if (equipmentData != null &&
-                    !(characterBoardDTO[characterBoardData.uuid]!
-                        .equipments
-                        .any((item) => item.uuid == equipmentData.uuid))) {
-                  characterBoardDTO[characterBoardData.uuid]!
-                      .equipments
-                      .add(equipmentData);
-                }
+                    if (equipmentData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.equipments
+                            .any((item) => item.uuid == equipmentData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.equipments
+                          .add(equipmentData);
+                    }
 
-                if (adventureBackpackData != null &&
-                    !(characterBoardDTO[characterBoardData.uuid]!
-                        .equipments
-                        .any((item) =>
-                            item.uuid == adventureBackpackData.uuid))) {
-                  characterBoardDTO[characterBoardData.uuid]!
-                      .adventureBackpacks
-                      .add(adventureBackpackData);
-                }
+                    if (adventureBackpackData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.equipments
+                            .any(
+                              (item) => item.uuid == adventureBackpackData.uuid,
+                            ))) {
+                      characterBoardDTO[characterBoardData.uuid]!
+                          .adventureBackpacks
+                          .add(adventureBackpackData);
+                    }
 
-                if (backpackData != null &&
-                    !(characterBoardDTO[characterBoardData.uuid]!
-                        .backpacks
-                        .any((item) => item.uuid == backpackData.uuid))) {
-                  characterBoardDTO[characterBoardData.uuid]!
-                      .backpacks
-                      .add(backpackData);
-                }
+                    if (backpackData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.backpacks
+                            .any((item) => item.uuid == backpackData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.backpacks.add(
+                        backpackData,
+                      );
+                    }
 
-                if (ammunitionData != null &&
-                    !(characterBoardDTO[characterBoardData.uuid]!
-                        .ammunitions
-                        .any((item) => item.uuid == ammunitionData.uuid))) {
-                  characterBoardDTO[characterBoardData.uuid]!
-                      .ammunitions
-                      .add(ammunitionData);
-                }
+                    if (ammunitionData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!
+                            .ammunitions
+                            .any((item) => item.uuid == ammunitionData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.ammunitions
+                          .add(ammunitionData);
+                    }
 
-                if (armorData != null &&
-                    !(characterBoardDTO[characterBoardData.uuid]!
-                        .armors
-                        .any((item) => item.uuid == armorData.uuid))) {
-                  characterBoardDTO[characterBoardData.uuid]!
-                      .armors
-                      .add(armorData);
-                }
+                    if (armorData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.armors
+                            .any((item) => item.uuid == armorData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.armors.add(
+                        armorData,
+                      );
+                    }
 
-                if (generalItemData != null &&
-                    !(characterBoardDTO[characterBoardData.uuid]!
-                        .generalItens
-                        .any((item) => item.uuid == generalItemData.uuid))) {
-                  characterBoardDTO[characterBoardData.uuid]!
-                      .generalItens
-                      .add(generalItemData);
-                }
+                    if (generalItemData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!
+                            .generalItens
+                            .any(
+                              (item) => item.uuid == generalItemData.uuid,
+                            ))) {
+                      characterBoardDTO[characterBoardData.uuid]!.generalItens
+                          .add(generalItemData);
+                    }
 
-                if (saddlebagData != null &&
-                    !(characterBoardDTO[characterBoardData.uuid]!
-                        .saddlebags
-                        .any((item) => item.uuid == saddlebagData.uuid))) {
-                  characterBoardDTO[characterBoardData.uuid]!
-                      .saddlebags
-                      .add(saddlebagData);
-                }
+                    if (saddlebagData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.saddlebags
+                            .any((item) => item.uuid == saddlebagData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.saddlebags
+                          .add(saddlebagData);
+                    }
 
-                if (shieldData != null &&
-                    !(characterBoardDTO[characterBoardData.uuid]!
-                        .shields
-                        .any((item) => item.uuid == shieldData.uuid))) {
-                  characterBoardDTO[characterBoardData.uuid]!
-                      .shields
-                      .add(shieldData);
-                }
+                    if (shieldData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.shields
+                            .any((item) => item.uuid == shieldData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.shields.add(
+                        shieldData,
+                      );
+                    }
 
-                if (weaponData != null &&
-                    !(characterBoardDTO[characterBoardData.uuid]!
-                        .weapons
-                        .any((item) => item.uuid == weaponData.uuid))) {
-                  characterBoardDTO[characterBoardData.uuid]!
-                      .weapons
-                      .add(weaponData);
-                }
+                    if (weaponData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.weapons
+                            .any((item) => item.uuid == weaponData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.weapons.add(
+                        weaponData,
+                      );
+                    }
 
-                if (originData != null &&
-                    !(characterBoardDTO[characterBoardData.uuid]!
-                        .origins
-                        .any((item) => item.uuid == originData.uuid))) {
-                  characterBoardDTO[characterBoardData.uuid]!
-                      .origins
-                      .add(originData);
-                }
+                    if (originData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.origins
+                            .any((item) => item.uuid == originData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.origins.add(
+                        originData,
+                      );
+                    }
 
-                if (powerData != null &&
-                    !(characterBoardDTO[characterBoardData.uuid]!
-                        .powers
-                        .any((item) => item.uuid == powerData.uuid))) {
-                  characterBoardDTO[characterBoardData.uuid]!
-                      .powers
-                      .add(powerData);
-                }
+                    if (powerData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.powers
+                            .any((item) => item.uuid == powerData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.powers.add(
+                        powerData,
+                      );
+                    }
 
-                if (grimoireData != null) {
-                  characterBoardDTO[characterBoardData.uuid]!.grimoireData =
-                      grimoireData;
-                }
-              }
+                    if (conditionData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.conditions
+                            .any((item) => item.uuid == conditionData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.conditions
+                          .add(conditionData);
+                    }
 
-              final characters = characterBoardDTO.entries
-                  .map((entry) =>
-                      CharacterBoardAdapters.fromDriftDto(entry.value))
-                  .toList();
+                    if (grimoireData != null) {
+                      characterBoardDTO[characterBoardData.uuid]!.grimoireData =
+                          grimoireData;
+                    }
+                  }
 
-              return characters;
-            })
+                  final characters = characterBoardDTO.entries
+                      .map(
+                        (entry) =>
+                            CharacterBoardAdapters.fromDriftDto(entry.value),
+                      )
+                      .toList();
+
+                  return characters;
+                }),
       );
     } catch (e) {
       return (failure: Failure(e.toString()), character: null);
@@ -780,9 +791,9 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
 
   Future<Failure?> updateOnlyCharacter({required Character entity}) async {
     try {
-      await into(characterTable).insertOnConflictUpdate(
-        CharacterAdapters.toDriftCompanion(entity),
-      );
+      await into(
+        characterTable,
+      ).insertOnConflictUpdate(CharacterAdapters.toDriftCompanion(entity));
 
       return null;
     } catch (e, st) {
@@ -797,76 +808,76 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
   Future<Failure?> deleteCharacter({required Character entity}) async {
     try {
       if (entity.origins.isNotEmpty) {
-        await (delete(originTable)
-              ..where((tbl) => tbl.characterUuid.equals(entity.uuid)))
-            .go();
+        await (delete(
+          originTable,
+        )..where((tbl) => tbl.characterUuid.equals(entity.uuid))).go();
       }
 
       if (entity.powers.isNotEmpty) {
-        await (delete(powerTable)
-              ..where((tbl) => tbl.characterUuid.equals(entity.uuid)))
-            .go();
+        await (delete(
+          powerTable,
+        )..where((tbl) => tbl.characterUuid.equals(entity.uuid))).go();
       }
 
       if (entity.classe != null) {
-        await (delete(classeCharacterTable)
-              ..where((tbl) => tbl.characterUuid.equals(entity.uuid)))
-            .go();
+        await (delete(
+          classeCharacterTable,
+        )..where((tbl) => tbl.characterUuid.equals(entity.uuid))).go();
       }
 
       if (entity.actions.isNotEmpty) {
-        await (delete(actionHandToHandTable)
-              ..where((tbl) => tbl.parentUuid.equals(entity.uuid)))
-            .go();
-        await (delete(actionDistanceAttackTable)
-              ..where((tbl) => tbl.parentUuid.equals(entity.uuid)))
-            .go();
-        await (delete(actionTable)
-              ..where((tbl) => tbl.parentUuid.equals(entity.uuid)))
-            .go();
+        await (delete(
+          actionHandToHandTable,
+        )..where((tbl) => tbl.parentUuid.equals(entity.uuid))).go();
+        await (delete(
+          actionDistanceAttackTable,
+        )..where((tbl) => tbl.parentUuid.equals(entity.uuid))).go();
+        await (delete(
+          actionTable,
+        )..where((tbl) => tbl.parentUuid.equals(entity.uuid))).go();
       }
 
       if (entity.equipments.isNotEmpty) {
-        await (delete(adventureBackpackTable)
-              ..where((tbl) => tbl.parentUuid.equals(entity.uuid)))
-            .go();
+        await (delete(
+          adventureBackpackTable,
+        )..where((tbl) => tbl.parentUuid.equals(entity.uuid))).go();
 
-        await (delete(ammunitionTable)
-              ..where((tbl) => tbl.parentUuid.equals(entity.uuid)))
-            .go();
+        await (delete(
+          ammunitionTable,
+        )..where((tbl) => tbl.parentUuid.equals(entity.uuid))).go();
 
-        await (delete(armorTable)
-              ..where((tbl) => tbl.parentUuid.equals(entity.uuid)))
-            .go();
+        await (delete(
+          armorTable,
+        )..where((tbl) => tbl.parentUuid.equals(entity.uuid))).go();
 
-        await (delete(backpackTable)
-              ..where((tbl) => tbl.parentUuid.equals(entity.uuid)))
-            .go();
+        await (delete(
+          backpackTable,
+        )..where((tbl) => tbl.parentUuid.equals(entity.uuid))).go();
 
-        await (delete(generalItemTable)
-              ..where((tbl) => tbl.parentUuid.equals(entity.uuid)))
-            .go();
+        await (delete(
+          generalItemTable,
+        )..where((tbl) => tbl.parentUuid.equals(entity.uuid))).go();
 
-        await (delete(saddlebagTable)
-              ..where((tbl) => tbl.parentUuid.equals(entity.uuid)))
-            .go();
+        await (delete(
+          saddlebagTable,
+        )..where((tbl) => tbl.parentUuid.equals(entity.uuid))).go();
 
-        await (delete(shieldTable)
-              ..where((tbl) => tbl.parentUuid.equals(entity.uuid)))
-            .go();
+        await (delete(
+          shieldTable,
+        )..where((tbl) => tbl.parentUuid.equals(entity.uuid))).go();
 
-        await (delete(weaponTable)
-              ..where((tbl) => tbl.parentUuid.equals(entity.uuid)))
-            .go();
+        await (delete(
+          weaponTable,
+        )..where((tbl) => tbl.parentUuid.equals(entity.uuid))).go();
 
-        await (delete(equipmentTable)
-              ..where((tbl) => tbl.parentUuid.equals(entity.uuid)))
-            .go();
+        await (delete(
+          equipmentTable,
+        )..where((tbl) => tbl.parentUuid.equals(entity.uuid))).go();
       }
 
-      await (delete(characterTable)
-            ..where((tbl) => tbl.uuid.equals(entity.uuid)))
-          .go();
+      await (delete(
+        characterTable,
+      )..where((tbl) => tbl.uuid.equals(entity.uuid))).go();
 
       return null;
     } catch (e, st) {
@@ -936,151 +947,146 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
         }
       }
 
-      await batch(
-        (batch) {
+      await batch((batch) {
+        batch.insertAllOnConflictUpdate(characterTable, [
+          CharacterAdapters.toDriftCompanion(entity),
+        ]);
+
+        if (entity.classe != null) {
+          batch.insertAllOnConflictUpdate(classeCharacterTable, [
+            ClasseCharacterTypeAdapters.toDriftCompanion(entity.classe!),
+          ]);
+        }
+
+        if (entity.powers.isNotEmpty) {
           batch.insertAllOnConflictUpdate(
-            characterTable,
-            [CharacterAdapters.toDriftCompanion(entity)],
+            powerTable,
+            entity.powers.map(PowerAdapters.toDriftCompanion),
           );
+        }
 
-          if (entity.classe != null) {
-            batch.insertAllOnConflictUpdate(
-              classeCharacterTable,
-              [ClasseCharacterTypeAdapters.toDriftCompanion(entity.classe!)],
-            );
-          }
+        if (entity.origins.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            originTable,
+            entity.origins.map(OriginAdapters.toDriftCompanion),
+          );
+        }
 
-          if (entity.powers.isNotEmpty) {
-            batch.insertAllOnConflictUpdate(
-              powerTable,
-              entity.powers.map(PowerAdapters.toDriftCompanion),
-            );
-          }
+        if (handToHand.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            actionHandToHandTable,
+            handToHand.map(HandToHandAdapters.toDriftCompanion),
+          );
+        }
 
-          if (entity.origins.isNotEmpty) {
-            batch.insertAllOnConflictUpdate(
-              originTable,
-              entity.origins.map(OriginAdapters.toDriftCompanion),
-            );
-          }
+        if (distanceAttacks.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            actionDistanceAttackTable,
+            distanceAttacks.map(DistanceAttackAdapters.toDriftCompanion),
+          );
+        }
 
-          if (handToHand.isNotEmpty) {
-            batch.insertAllOnConflictUpdate(
-              actionHandToHandTable,
-              handToHand.map(HandToHandAdapters.toDriftCompanion),
-            );
-          }
+        if (actions.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            actionTable,
+            actions.map(ActionAdapters.toDriftCompanion),
+          );
+        }
 
-          if (distanceAttacks.isNotEmpty) {
-            batch.insertAllOnConflictUpdate(
-              actionDistanceAttackTable,
-              distanceAttacks.map(DistanceAttackAdapters.toDriftCompanion),
-            );
-          }
+        if (adventuresBackPack.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            adventureBackpackTable,
+            adventuresBackPack.map(AdventureBackpackAdapters.toDriftCompanion),
+          );
+        }
 
-          if (actions.isNotEmpty) {
-            batch.insertAllOnConflictUpdate(
-              actionTable,
-              actions.map(ActionAdapters.toDriftCompanion),
-            );
-          }
+        if (ammunitions.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            ammunitionTable,
+            ammunitions.map(AmmunitionAdapters.toDriftCompanion),
+          );
+        }
 
-          if (adventuresBackPack.isNotEmpty) {
-            batch.insertAllOnConflictUpdate(
-              adventureBackpackTable,
-              adventuresBackPack
-                  .map(AdventureBackpackAdapters.toDriftCompanion),
-            );
-          }
+        if (armors.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            armorTable,
+            armors.map(ArmorAdapters.toDriftCompanion),
+          );
+        }
 
-          if (ammunitions.isNotEmpty) {
-            batch.insertAllOnConflictUpdate(
-              ammunitionTable,
-              ammunitions.map(AmmunitionAdapters.toDriftCompanion),
-            );
-          }
+        if (backpacks.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            backpackTable,
+            backpacks.map(BackpackAdapters.toDriftCompanion),
+          );
+        }
 
-          if (armors.isNotEmpty) {
-            batch.insertAllOnConflictUpdate(
-              armorTable,
-              armors.map(ArmorAdapters.toDriftCompanion),
-            );
-          }
+        if (generalItems.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            generalItemTable,
+            generalItems.map(GeneralItemAdapters.toDriftCompanion),
+          );
+        }
 
-          if (backpacks.isNotEmpty) {
-            batch.insertAllOnConflictUpdate(
-              backpackTable,
-              backpacks.map(BackpackAdapters.toDriftCompanion),
-            );
-          }
+        if (saddlebags.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            saddlebagTable,
+            saddlebags.map(SaddlebagAdapters.toDriftCompanion),
+          );
+        }
 
-          if (generalItems.isNotEmpty) {
-            batch.insertAllOnConflictUpdate(
-              generalItemTable,
-              generalItems.map(GeneralItemAdapters.toDriftCompanion),
-            );
-          }
+        if (shields.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            shieldTable,
+            shields.map(ShieldAdapters.toDriftCompanion),
+          );
+        }
 
-          if (saddlebags.isNotEmpty) {
-            batch.insertAllOnConflictUpdate(
-              saddlebagTable,
-              saddlebags.map(SaddlebagAdapters.toDriftCompanion),
-            );
-          }
+        if (weapons.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            weaponTable,
+            weapons.map(WeaponAdapters.toDriftCompanion),
+          );
+        }
 
-          if (shields.isNotEmpty) {
-            batch.insertAllOnConflictUpdate(
-              shieldTable,
-              shields.map(ShieldAdapters.toDriftCompanion),
-            );
-          }
-
-          if (weapons.isNotEmpty) {
-            batch.insertAllOnConflictUpdate(
-              weaponTable,
-              weapons.map(WeaponAdapters.toDriftCompanion),
-            );
-          }
-
-          if (equipments.isNotEmpty) {
-            batch.insertAllOnConflictUpdate(
-              equipmentTable,
-              equipments.map(EquipmentAdapters.toDriftCompanion),
-            );
-          }
-        },
-      );
+        if (equipments.isNotEmpty) {
+          batch.insertAllOnConflictUpdate(
+            equipmentTable,
+            equipments.map(EquipmentAdapters.toDriftCompanion),
+          );
+        }
+      });
 
       if (originToDelete.isNotEmpty) {
         Future.forEach(originToDelete, (origin) async {
-          await (delete(originTable)
-                ..where((tbl) => tbl.uuid.equals(origin.uuid)))
-              .go();
+          await (delete(
+            originTable,
+          )..where((tbl) => tbl.uuid.equals(origin.uuid))).go();
         });
       }
 
       if (powerToDelete.isNotEmpty) {
         Future.forEach(powerToDelete, (power) async {
-          await (delete(powerTable)
-                ..where((tbl) => tbl.uuid.equals(power.uuid)))
-              .go();
+          await (delete(
+            powerTable,
+          )..where((tbl) => tbl.uuid.equals(power.uuid))).go();
         });
       }
 
       if (actionsToDelete.isNotEmpty) {
         Future.forEach(actionsToDelete, (action) async {
           if (action is HandToHand) {
-            await (delete(actionHandToHandTable)
-                  ..where((tbl) => tbl.uuid.equals(action.uuid)))
-                .go();
+            await (delete(
+              actionHandToHandTable,
+            )..where((tbl) => tbl.uuid.equals(action.uuid))).go();
           } else if (action is DistanceAttack) {
-            await (delete(actionDistanceAttackTable)
-                  ..where((tbl) => tbl.uuid.equals(action.uuid)))
-                .go();
+            await (delete(
+              actionDistanceAttackTable,
+            )..where((tbl) => tbl.uuid.equals(action.uuid))).go();
           } else {
-            await (delete(actionTable)
-                  ..where((tbl) => tbl.uuid.equals(action.uuid)))
-                .go();
+            await (delete(
+              actionTable,
+            )..where((tbl) => tbl.uuid.equals(action.uuid))).go();
           }
         });
       }
@@ -1088,41 +1094,41 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
       if (equipmentsToDelete.isNotEmpty) {
         Future.forEach(equipmentsToDelete, (item) async {
           if (item is AdventureBackpack) {
-            await (delete(adventureBackpackTable)
-                  ..where((tbl) => tbl.uuid.equals(item.uuid)))
-                .go();
+            await (delete(
+              adventureBackpackTable,
+            )..where((tbl) => tbl.uuid.equals(item.uuid))).go();
           } else if (item is Ammunition) {
-            await (delete(ammunitionTable)
-                  ..where((tbl) => tbl.uuid.equals(item.uuid)))
-                .go();
+            await (delete(
+              ammunitionTable,
+            )..where((tbl) => tbl.uuid.equals(item.uuid))).go();
           } else if (item is Armor) {
-            await (delete(armorTable)
-                  ..where((tbl) => tbl.uuid.equals(item.uuid)))
-                .go();
+            await (delete(
+              armorTable,
+            )..where((tbl) => tbl.uuid.equals(item.uuid))).go();
           } else if (item is Backpack) {
-            await (delete(backpackTable)
-                  ..where((tbl) => tbl.uuid.equals(item.uuid)))
-                .go();
+            await (delete(
+              backpackTable,
+            )..where((tbl) => tbl.uuid.equals(item.uuid))).go();
           } else if (item is GeneralItem) {
-            await (delete(generalItemTable)
-                  ..where((tbl) => tbl.uuid.equals(item.uuid)))
-                .go();
+            await (delete(
+              generalItemTable,
+            )..where((tbl) => tbl.uuid.equals(item.uuid))).go();
           } else if (item is Saddlebag) {
-            await (delete(saddlebagTable)
-                  ..where((tbl) => tbl.uuid.equals(item.uuid)))
-                .go();
+            await (delete(
+              saddlebagTable,
+            )..where((tbl) => tbl.uuid.equals(item.uuid))).go();
           } else if (item is Shield) {
-            await (delete(shieldTable)
-                  ..where((tbl) => tbl.uuid.equals(item.uuid)))
-                .go();
+            await (delete(
+              shieldTable,
+            )..where((tbl) => tbl.uuid.equals(item.uuid))).go();
           } else if (item is Weapon) {
-            await (delete(weaponTable)
-                  ..where((tbl) => tbl.uuid.equals(item.uuid)))
-                .go();
+            await (delete(
+              weaponTable,
+            )..where((tbl) => tbl.uuid.equals(item.uuid))).go();
           } else {
-            await (delete(equipmentTable)
-                  ..where((tbl) => tbl.uuid.equals(item.uuid)))
-                .go();
+            await (delete(
+              equipmentTable,
+            )..where((tbl) => tbl.uuid.equals(item.uuid))).go();
           }
         });
       }
@@ -1193,27 +1199,31 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
 
     try {
       await batch((batch) {
-        batch.insertAllOnConflictUpdate(characterBoardTable,
-            [CharacterBoardAdapters.toDriftCompanion(character)]);
+        batch.insertAllOnConflictUpdate(characterBoardTable, [
+          CharacterBoardAdapters.toDriftCompanion(character),
+        ]);
 
         if (tibars != null) {
-          batch.insertAllOnConflictUpdate(
-              tibarsTable, [TibarsAdapters.toDriftCompanion(tibars)]);
+          batch.insertAllOnConflictUpdate(tibarsTable, [
+            TibarsAdapters.toDriftCompanion(tibars),
+          ]);
         }
 
         if (character.expertises.isNotEmpty) {
           batch.insertAllOnConflictUpdate(
             expertiseTable,
-            character.expertises
-                .map((entity) => ExpertiseAdapters.toDriftCompanion(entity)),
+            character.expertises.map(
+              (entity) => ExpertiseAdapters.toDriftCompanion(entity),
+            ),
           );
         }
 
         if (character.classes.isNotEmpty) {
           batch.insertAllOnConflictUpdate(
             classeCharacterTable,
-            character.classes.map((entity) =>
-                ClasseCharacterTypeAdapters.toDriftCompanion(entity)),
+            character.classes.map(
+              (entity) => ClasseCharacterTypeAdapters.toDriftCompanion(entity),
+            ),
           );
         }
 
@@ -1332,76 +1342,76 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
 
   Future<Failure?> deleteBoardCharacter(CharacterBoard character) async {
     try {
-      await (delete(characterBoardTable)
-            ..where((tbl) => tbl.uuid.equals(character.uuid)))
-          .go();
+      await (delete(
+        characterBoardTable,
+      )..where((tbl) => tbl.uuid.equals(character.uuid))).go();
 
-      await (delete(originTable)
-            ..where((tbl) => tbl.characterUuid.equals(character.uuid)))
-          .go();
+      await (delete(
+        originTable,
+      )..where((tbl) => tbl.characterUuid.equals(character.uuid))).go();
 
-      await (delete(powerTable)
-            ..where((tbl) => tbl.characterUuid.equals(character.uuid)))
-          .go();
+      await (delete(
+        powerTable,
+      )..where((tbl) => tbl.characterUuid.equals(character.uuid))).go();
 
-      await (delete(classeCharacterTable)
-            ..where((tbl) => tbl.characterUuid.equals(character.uuid)))
-          .go();
+      await (delete(
+        classeCharacterTable,
+      )..where((tbl) => tbl.characterUuid.equals(character.uuid))).go();
 
       if (character.expertises.isNotEmpty) {
-        await (delete(expertiseTable)
-              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
-            .go();
+        await (delete(
+          expertiseTable,
+        )..where((tbl) => tbl.parentUuid.equals(character.uuid))).go();
       }
 
       if (character.actions.isNotEmpty) {
-        await (delete(actionHandToHandTable)
-              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
-            .go();
-        await (delete(actionDistanceAttackTable)
-              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
-            .go();
-        await (delete(actionTable)
-              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
-            .go();
+        await (delete(
+          actionHandToHandTable,
+        )..where((tbl) => tbl.parentUuid.equals(character.uuid))).go();
+        await (delete(
+          actionDistanceAttackTable,
+        )..where((tbl) => tbl.parentUuid.equals(character.uuid))).go();
+        await (delete(
+          actionTable,
+        )..where((tbl) => tbl.parentUuid.equals(character.uuid))).go();
       }
 
       if (character.equipments.isNotEmpty) {
-        await (delete(adventureBackpackTable)
-              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
-            .go();
+        await (delete(
+          adventureBackpackTable,
+        )..where((tbl) => tbl.parentUuid.equals(character.uuid))).go();
 
-        await (delete(ammunitionTable)
-              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
-            .go();
+        await (delete(
+          ammunitionTable,
+        )..where((tbl) => tbl.parentUuid.equals(character.uuid))).go();
 
-        await (delete(armorTable)
-              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
-            .go();
+        await (delete(
+          armorTable,
+        )..where((tbl) => tbl.parentUuid.equals(character.uuid))).go();
 
-        await (delete(backpackTable)
-              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
-            .go();
+        await (delete(
+          backpackTable,
+        )..where((tbl) => tbl.parentUuid.equals(character.uuid))).go();
 
-        await (delete(generalItemTable)
-              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
-            .go();
+        await (delete(
+          generalItemTable,
+        )..where((tbl) => tbl.parentUuid.equals(character.uuid))).go();
 
-        await (delete(saddlebagTable)
-              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
-            .go();
+        await (delete(
+          saddlebagTable,
+        )..where((tbl) => tbl.parentUuid.equals(character.uuid))).go();
 
-        await (delete(shieldTable)
-              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
-            .go();
+        await (delete(
+          shieldTable,
+        )..where((tbl) => tbl.parentUuid.equals(character.uuid))).go();
 
-        await (delete(weaponTable)
-              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
-            .go();
+        await (delete(
+          weaponTable,
+        )..where((tbl) => tbl.parentUuid.equals(character.uuid))).go();
 
-        await (delete(equipmentTable)
-              ..where((tbl) => tbl.parentUuid.equals(character.uuid)))
-            .go();
+        await (delete(
+          equipmentTable,
+        )..where((tbl) => tbl.parentUuid.equals(character.uuid))).go();
       }
 
       (update(boardTable)

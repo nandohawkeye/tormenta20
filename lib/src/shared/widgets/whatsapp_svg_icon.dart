@@ -15,7 +15,7 @@ class WhatsappSvgIcon extends StatelessWidget {
     return FittedBox(
       fit: BoxFit.scaleDown,
       child: SvgPicture.asset(
-        Assets.interface.whatsapp,
+        Assets.interface.whatsapp.path,
         color: color,
         height: size,
         width: size,

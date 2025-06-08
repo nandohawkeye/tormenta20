@@ -68,7 +68,7 @@ class BoardSessionsCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SvgPicture.asset(
-                        Assets.icons.sword,
+                        Assets.icons.sword.path,
                         color: palette.accent,
                         height: 22,
                       ),
@@ -86,7 +86,7 @@ class BoardSessionsCard extends StatelessWidget {
                         FontAwesomeIcons.shieldHalved,
                         size: 16,
                         color: palette.accent,
-                      )
+                      ),
                     ],
                   ),
                   T20UI.spaceHeight,
@@ -99,7 +99,8 @@ class BoardSessionsCard extends StatelessWidget {
                     prototypeItem: const BoardSessionCombatCardPrototype(),
                     itemBuilder: (_, index) {
                       return BoardSessionCombatCard(
-                          combat: session.combats[index]);
+                        combat: session.combats[index],
+                      );
                     },
                   ),
                   T20UI.spaceHeight,
@@ -128,17 +129,14 @@ class BoardSessionsCard extends StatelessWidget {
               padding: T20UI.horizontalPadding,
               child: Row(
                 children: [
-                  Text(
-                    session.startedAt.formatted,
-                    style: const TextStyle(),
-                  ),
+                  Text(session.startedAt.formatted, style: const TextStyle()),
                   if (session.endAt != null)
                     Text(
                       isTheSameDay
                           ? ' até ${session.endAt?.formattedHourAndMinute}'
                           : ' até ${session.endAt?.formatted}',
                       style: const TextStyle(),
-                    )
+                    ),
                 ],
               ),
             ),

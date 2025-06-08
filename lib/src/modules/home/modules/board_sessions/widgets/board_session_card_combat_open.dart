@@ -27,9 +27,7 @@ class BoardSessionCardCombatOpen extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => BoardCombatScreen(
-                  combat: selectedCombat,
-                ),
+                builder: (_) => BoardCombatScreen(combat: selectedCombat),
               ),
             );
           },
@@ -42,7 +40,7 @@ class BoardSessionCardCombatOpen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SvgPicture.asset(
-                    Assets.icons.sword,
+                    Assets.icons.sword.path,
                     color: palette.icon,
                     height: 20,
                   ),
@@ -55,7 +53,7 @@ class BoardSessionCardCombatOpen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: T20UI.smallSpaceSize),
-                  const Icon(FontAwesomeIcons.shieldHalved, size: 14)
+                  const Icon(FontAwesomeIcons.shieldHalved, size: 14),
                 ],
               ),
             ),

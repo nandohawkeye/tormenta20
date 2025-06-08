@@ -21,6 +21,7 @@ import 'package:tormenta20/src/core/database/tables/board_combat_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_note_table.dart';
 import 'package:tormenta20/src/core/database/tables/board_player_table.dart';
 import 'package:tormenta20/src/core/database/tables/character_board_table.dart';
+import 'package:tormenta20/src/core/database/tables/character_condition_table.dart';
 import 'package:tormenta20/src/core/database/tables/character_table.dart';
 import 'package:tormenta20/src/core/database/tables/classe_character_table.dart';
 import 'package:tormenta20/src/core/database/tables/config_table.dart';
@@ -87,6 +88,7 @@ part 'app_database.g.dart';
     OriginTable,
     PowerTable,
     CharacterBoardTable,
+    CharacterConditionTable,
   ],
   daos: [
     GrimoireDAO,
@@ -101,7 +103,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 25;
+  int get schemaVersion => 26;
 
   @override
   MigrationStrategy get migration {
@@ -113,213 +115,251 @@ class AppDatabase extends _$AppDatabase {
         print('Migrating from $from to $to');
         await customStatement('PRAGMA foreign_keys = OFF');
 
-        await transaction(
-          () async {
-            if (from < 3) {
-              for (var table in allTables) {
-                await m.deleteTable(table.actualTableName);
-                await m.createTable(table);
-              }
+        await transaction(() async {
+          if (from < 3) {
+            for (var table in allTables) {
+              await m.deleteTable(table.actualTableName);
+              await m.createTable(table);
             }
+          }
 
-            if (from < 4) {
-              await m.addColumn(boardCombatTable, boardCombatTable.turn);
-            }
+          if (from < 4) {
+            await m.addColumn(boardCombatTable, boardCombatTable.turn);
+          }
 
-            if (from < 5) {
-              await m.addColumn(boardPlayerTable, boardPlayerTable.initiative);
-            }
+          if (from < 5) {
+            await m.addColumn(boardPlayerTable, boardPlayerTable.initiative);
+          }
 
-            if (from < 6) {
-              await m.alterTable(TableMigration(grimoireTable));
-            }
+          if (from < 6) {
+            await m.alterTable(TableMigration(grimoireTable));
+          }
 
-            if (from < 7) {
-              await m.alterTable(TableMigration(boardSessionTable));
-            }
+          if (from < 7) {
+            await m.alterTable(TableMigration(boardSessionTable));
+          }
 
-            if (from < 8) {
-              await m.addColumn(
-                  boardSessionTable, boardSessionTable.environmentIndex);
-            }
+          if (from < 8) {
+            await m.addColumn(
+              boardSessionTable,
+              boardSessionTable.environmentIndex,
+            );
+          }
 
-            if (from < 9) {
-              await m.createTable(actionDistanceAttackTable);
-              await m.createTable(actionHandToHandTable);
-              await m.createTable(actionTable);
-              await m.createTable(adventureBackpackTable);
-              await m.createTable(ammunitionTable);
-              await m.createTable(armorTable);
-              await m.createTable(backpackTable);
-              await m.createTable(equipmentTable);
-              await m.createTable(expertiseTable);
-              await m.createTable(generalItemTable);
-              await m.createTable(generalSkillTable);
-              await m.createTable(magicMenaceTable);
-              await m.createTable(menaceLinkBoardTable);
-              await m.createTable(menaceTable);
-              await m.createTable(saddlebagTable);
-              await m.createTable(shieldTable);
-              await m.createTable(tibarsTable);
-              await m.createTable(weaponTable);
-            }
+          if (from < 9) {
+            await m.createTable(actionDistanceAttackTable);
+            await m.createTable(actionHandToHandTable);
+            await m.createTable(actionTable);
+            await m.createTable(adventureBackpackTable);
+            await m.createTable(ammunitionTable);
+            await m.createTable(armorTable);
+            await m.createTable(backpackTable);
+            await m.createTable(equipmentTable);
+            await m.createTable(expertiseTable);
+            await m.createTable(generalItemTable);
+            await m.createTable(generalSkillTable);
+            await m.createTable(magicMenaceTable);
+            await m.createTable(menaceLinkBoardTable);
+            await m.createTable(menaceTable);
+            await m.createTable(saddlebagTable);
+            await m.createTable(shieldTable);
+            await m.createTable(tibarsTable);
+            await m.createTable(weaponTable);
+          }
 
-            if (from < 10) {
-              await m.addColumn(magicCharacterTable, magicCharacterTable.pm);
-              await m.addColumn(magicCharacterTable, magicCharacterTable.cd);
-              await m.addColumn(
-                  magicCharacterTable, magicCharacterTable.mediumDamageValue);
-              await m.addColumn(
-                  magicCharacterTable, magicCharacterTable.damageDices);
-              await m.addColumn(
-                  magicCharacterTable, magicCharacterTable.extraDamageDices);
-            }
+          if (from < 10) {
+            await m.addColumn(magicCharacterTable, magicCharacterTable.pm);
+            await m.addColumn(magicCharacterTable, magicCharacterTable.cd);
+            await m.addColumn(
+              magicCharacterTable,
+              magicCharacterTable.mediumDamageValue,
+            );
+            await m.addColumn(
+              magicCharacterTable,
+              magicCharacterTable.damageDices,
+            );
+            await m.addColumn(
+              magicCharacterTable,
+              magicCharacterTable.extraDamageDices,
+            );
+          }
 
-            if (from < 11) {
-              await m.addColumn(menaceTable, menaceTable.createdAt);
-              await m.addColumn(menaceTable, menaceTable.updatedAt);
-              await m.alterTable(TableMigration(boardNoteTable));
-              await m.alterTable(TableMigration(boardPlayerTable));
-              await m.alterTable(TableMigration(boardTable));
-              await m.createTable(configTable);
-            }
+          if (from < 11) {
+            await m.addColumn(menaceTable, menaceTable.createdAt);
+            await m.addColumn(menaceTable, menaceTable.updatedAt);
+            await m.alterTable(TableMigration(boardNoteTable));
+            await m.alterTable(TableMigration(boardPlayerTable));
+            await m.alterTable(TableMigration(boardTable));
+            await m.createTable(configTable);
+          }
 
-            if (from < 12) {
-              await m.addColumn(
-                  boardPlayerTable, boardPlayerTable.classeIndexes);
-            }
+          if (from < 12) {
+            await m.addColumn(boardPlayerTable, boardPlayerTable.classeIndexes);
+          }
 
-            if (from < 13) {
-              await m.createTable(characterTable);
-              await m.createTable(classeCharacterTable);
-              await m.createTable(originTable);
-              await m.createTable(powerTable);
-              await m.createTable(characterBoardTable);
-              await m.createTable(boardTable);
-            }
+          if (from < 13) {
+            await m.createTable(characterTable);
+            await m.createTable(classeCharacterTable);
+            await m.createTable(originTable);
+            await m.createTable(powerTable);
+            await m.createTable(characterBoardTable);
+            await m.createTable(boardTable);
+          }
 
-            if (from < 14) {
-              await m.addColumn(characterTable, characterTable.aligmentIndex);
-              await m.alterTable(TableMigration(characterTable));
-            }
+          if (from < 14) {
+            await m.addColumn(characterTable, characterTable.aligmentIndex);
+            await m.alterTable(TableMigration(characterTable));
+          }
 
-            if (from < 15) {
-              await m.alterTable(TableMigration(characterBoardTable));
-              await m.alterTable(TableMigration(characterTable));
-            }
+          if (from < 15) {
+            await m.alterTable(TableMigration(characterBoardTable));
+            await m.alterTable(TableMigration(characterTable));
+          }
 
-            if (from < 16) {
-              await m.addColumn(
-                  characterBoardTable, characterBoardTable.aligmentIndex);
-              await m.alterTable(TableMigration(characterBoardTable));
-            }
+          if (from < 16) {
+            await m.addColumn(
+              characterBoardTable,
+              characterBoardTable.aligmentIndex,
+            );
+            await m.alterTable(TableMigration(characterBoardTable));
+          }
 
-            if (from < 17) {
-              await m.addColumn(
-                  configTable, configTable.enableBottomBackButton);
-            }
+          if (from < 17) {
+            await m.addColumn(configTable, configTable.enableBottomBackButton);
+          }
 
-            if (from < 18) {
-              await m.addColumn(shieldTable, shieldTable.inUse);
-              await m.addColumn(armorTable, armorTable.inUse);
-            }
+          if (from < 18) {
+            await m.addColumn(shieldTable, shieldTable.inUse);
+            await m.addColumn(armorTable, armorTable.inUse);
+          }
 
-            if (from < 19) {
-              await m.addColumn(
-                  characterBoardTable, characterBoardTable.currentLife);
-              await m.addColumn(
-                  characterBoardTable, characterBoardTable.currentMana);
-              await m.addColumn(
-                  characterBoardTable, characterBoardTable.inLeftHand);
-              await m.addColumn(
-                  characterBoardTable, characterBoardTable.inRightHand);
-              await m.addColumn(
-                  characterBoardTable, characterBoardTable.inTwoHands);
-              await m.addColumn(
-                  characterBoardTable, characterBoardTable.inWearableSlots);
-            }
+          if (from < 19) {
+            await m.addColumn(
+              characterBoardTable,
+              characterBoardTable.currentLife,
+            );
+            await m.addColumn(
+              characterBoardTable,
+              characterBoardTable.currentMana,
+            );
+            await m.addColumn(
+              characterBoardTable,
+              characterBoardTable.inLeftHand,
+            );
+            await m.addColumn(
+              characterBoardTable,
+              characterBoardTable.inRightHand,
+            );
+            await m.addColumn(
+              characterBoardTable,
+              characterBoardTable.inTwoHands,
+            );
+            await m.addColumn(
+              characterBoardTable,
+              characterBoardTable.inWearableSlots,
+            );
+          }
 
-            if (from < 20) {
-              await m.alterTable(TableMigration(characterBoardTable));
-            }
+          if (from < 20) {
+            await m.alterTable(TableMigration(characterBoardTable));
+          }
 
-            if (from < 21) {
-              await m.addColumn(tibarsTable, tibarsTable.hasInitialRoll);
-            }
+          if (from < 21) {
+            await m.addColumn(tibarsTable, tibarsTable.hasInitialRoll);
+          }
 
-            if (from < 22) {
-              await m.drop(characterTable);
-              await m.drop(characterBoardTable);
-              await m.createTable(characterTable);
-              await m.createTable(characterBoardTable);
-              // await m.alterTable(TableMigration(characterBoardTable));
-              // await m.alterTable(TableMigration(characterTable));
-            }
+          if (from < 22) {
+            await m.drop(characterTable);
+            await m.drop(characterBoardTable);
+            await m.createTable(characterTable);
+            await m.createTable(characterBoardTable);
+            // await m.alterTable(TableMigration(characterBoardTable));
+            // await m.alterTable(TableMigration(characterTable));
+          }
 
-            if (from < 23) {
-              await m.drop(configTable);
-              await m.createTable(configTable);
-            }
+          if (from < 23) {
+            await m.drop(configTable);
+            await m.createTable(configTable);
+          }
 
-            if (from < 24) {
-              await m.addColumn(actionDistanceAttackTable,
-                  actionDistanceAttackTable.createdAt);
-              await m.addColumn(actionDistanceAttackTable,
-                  actionDistanceAttackTable.updatedAt);
-              await m.addColumn(
-                  actionHandToHandTable, actionHandToHandTable.createdAt);
-              await m.addColumn(
-                  actionHandToHandTable, actionHandToHandTable.updatedAt);
-              await m.addColumn(actionTable, actionTable.createdAt);
-              await m.addColumn(actionTable, actionTable.updatedAt);
-              await m.addColumn(
-                  adventureBackpackTable, adventureBackpackTable.createdAt);
-              await m.addColumn(
-                  adventureBackpackTable, adventureBackpackTable.updatedAt);
-              await m.addColumn(ammunitionTable, ammunitionTable.createdAt);
-              await m.addColumn(ammunitionTable, ammunitionTable.updatedAt);
-              await m.addColumn(armorTable, armorTable.createdAt);
-              await m.addColumn(armorTable, armorTable.updatedAt);
-              await m.addColumn(backpackTable, backpackTable.createdAt);
-              await m.addColumn(backpackTable, backpackTable.updatedAt);
-              await m.addColumn(boardLinkTable, boardLinkTable.createdAt);
-              await m.addColumn(boardLinkTable, boardLinkTable.updatedAt);
-              await m.addColumn(
-                  boardMaterialTable, boardMaterialTable.createdAt);
-              await m.addColumn(boardSessionTable, boardSessionTable.updatedAt);
-              await m.addColumn(equipmentTable, equipmentTable.createdAt);
-              await m.addColumn(equipmentTable, equipmentTable.updatedAt);
-              await m.addColumn(expertiseTable, expertiseTable.createdAt);
-              await m.addColumn(expertiseTable, expertiseTable.updatedAt);
-              await m.addColumn(generalItemTable, generalItemTable.createdAt);
-              await m.addColumn(generalItemTable, generalItemTable.updatedAt);
-              await m.addColumn(generalSkillTable, generalSkillTable.createdAt);
-              await m.addColumn(generalSkillTable, generalSkillTable.updatedAt);
-              await m.addColumn(originTable, originTable.createdAt);
-              await m.addColumn(originTable, originTable.updatedAt);
-              await m.addColumn(powerTable, powerTable.createdAt);
-              await m.addColumn(powerTable, powerTable.updatedAt);
-              await m.addColumn(saddlebagTable, saddlebagTable.createdAt);
-              await m.addColumn(saddlebagTable, saddlebagTable.updatedAt);
-              await m.addColumn(shieldTable, shieldTable.createdAt);
-              await m.addColumn(shieldTable, shieldTable.updatedAt);
-              await m.addColumn(tibarsTable, tibarsTable.createdAt);
-              await m.addColumn(tibarsTable, tibarsTable.updatedAt);
-              await m.addColumn(weaponTable, weaponTable.createdAt);
-              await m.addColumn(weaponTable, weaponTable.updatedAt);
-            }
+          if (from < 24) {
+            await m.addColumn(
+              actionDistanceAttackTable,
+              actionDistanceAttackTable.createdAt,
+            );
+            await m.addColumn(
+              actionDistanceAttackTable,
+              actionDistanceAttackTable.updatedAt,
+            );
+            await m.addColumn(
+              actionHandToHandTable,
+              actionHandToHandTable.createdAt,
+            );
+            await m.addColumn(
+              actionHandToHandTable,
+              actionHandToHandTable.updatedAt,
+            );
+            await m.addColumn(actionTable, actionTable.createdAt);
+            await m.addColumn(actionTable, actionTable.updatedAt);
+            await m.addColumn(
+              adventureBackpackTable,
+              adventureBackpackTable.createdAt,
+            );
+            await m.addColumn(
+              adventureBackpackTable,
+              adventureBackpackTable.updatedAt,
+            );
+            await m.addColumn(ammunitionTable, ammunitionTable.createdAt);
+            await m.addColumn(ammunitionTable, ammunitionTable.updatedAt);
+            await m.addColumn(armorTable, armorTable.createdAt);
+            await m.addColumn(armorTable, armorTable.updatedAt);
+            await m.addColumn(backpackTable, backpackTable.createdAt);
+            await m.addColumn(backpackTable, backpackTable.updatedAt);
+            await m.addColumn(boardLinkTable, boardLinkTable.createdAt);
+            await m.addColumn(boardLinkTable, boardLinkTable.updatedAt);
+            await m.addColumn(boardMaterialTable, boardMaterialTable.createdAt);
+            await m.addColumn(boardSessionTable, boardSessionTable.updatedAt);
+            await m.addColumn(equipmentTable, equipmentTable.createdAt);
+            await m.addColumn(equipmentTable, equipmentTable.updatedAt);
+            await m.addColumn(expertiseTable, expertiseTable.createdAt);
+            await m.addColumn(expertiseTable, expertiseTable.updatedAt);
+            await m.addColumn(generalItemTable, generalItemTable.createdAt);
+            await m.addColumn(generalItemTable, generalItemTable.updatedAt);
+            await m.addColumn(generalSkillTable, generalSkillTable.createdAt);
+            await m.addColumn(generalSkillTable, generalSkillTable.updatedAt);
+            await m.addColumn(originTable, originTable.createdAt);
+            await m.addColumn(originTable, originTable.updatedAt);
+            await m.addColumn(powerTable, powerTable.createdAt);
+            await m.addColumn(powerTable, powerTable.updatedAt);
+            await m.addColumn(saddlebagTable, saddlebagTable.createdAt);
+            await m.addColumn(saddlebagTable, saddlebagTable.updatedAt);
+            await m.addColumn(shieldTable, shieldTable.createdAt);
+            await m.addColumn(shieldTable, shieldTable.updatedAt);
+            await m.addColumn(tibarsTable, tibarsTable.createdAt);
+            await m.addColumn(tibarsTable, tibarsTable.updatedAt);
+            await m.addColumn(weaponTable, weaponTable.createdAt);
+            await m.addColumn(weaponTable, weaponTable.updatedAt);
+          }
 
-            if (from < 25) {
-              await m.alterTable(TableMigration(boardCombatTable));
-              await m.alterTable(TableMigration(boardSessionTable));
-            }
-          },
-        );
+          if (from < 25) {
+            await m.alterTable(TableMigration(boardCombatTable));
+            await m.alterTable(TableMigration(boardSessionTable));
+          }
+
+          if (from < 26) {
+            await m.createTable(characterConditionTable);
+            await m.addColumn(
+              characterBoardTable,
+              characterBoardTable.handToHandAtributeIndex,
+            );
+          }
+        });
 
         // Assert that the schema is valid after migrations
         if (kDebugMode) {
-          final wrongForeignKeys =
-              await customSelect('PRAGMA foreign_key_check').get();
+          final wrongForeignKeys = await customSelect(
+            'PRAGMA foreign_key_check',
+          ).get();
           assert(
             wrongForeignKeys.isEmpty,
             '${wrongForeignKeys.map((e) => e.data)}',
@@ -358,11 +398,9 @@ class AppDatabase extends _$AppDatabase {
 }
 
 LazyDatabase _openConnection() {
-  return LazyDatabase(
-    () async {
-      final dbFolder = await getApplicationDocumentsDirectory();
-      final file = File(p.join(dbFolder.path, 'db.sqlite'));
-      return NativeDatabase(file);
-    },
-  );
+  return LazyDatabase(() async {
+    final dbFolder = await getApplicationDocumentsDirectory();
+    final file = File(p.join(dbFolder.path, 'db.sqlite'));
+    return NativeDatabase(file);
+  });
 }

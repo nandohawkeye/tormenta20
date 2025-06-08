@@ -20,7 +20,9 @@ class SelectGrimorieScreenCard extends StatelessWidget {
           child: Card(
             child: Padding(
               padding: const EdgeInsets.only(
-                  left: T20UI.smallSpaceSize, right: T20UI.spaceSize),
+                left: T20UI.smallSpaceSize,
+                right: T20UI.spaceSize,
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -29,7 +31,7 @@ class SelectGrimorieScreenCard extends StatelessWidget {
                     children: [
                       T20UI.smallSpaceWidth,
                       SvgPicture.asset(
-                        Assets.icons.book,
+                        Assets.icons.book.path,
                         height: 20,
                         width: 20,
                         color: palette.icon,

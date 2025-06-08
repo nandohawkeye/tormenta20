@@ -34,7 +34,7 @@ class BoardViewCombatButton extends StatelessWidget {
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
                   child: SvgPicture.asset(
-                    Assets.icons.sword,
+                    Assets.icons.sword.path,
                     color: palette.icon,
                     height: 26,
                     width: 26,

@@ -44,7 +44,8 @@ class _AddGrimorieScreenState extends State<AddGrimorieScreen> {
     _errorName = ValueNotifier<String?>(null);
 
     _iconAsset = ValueNotifier<String>(
-        widget.initialGrimoire?.iconAsset ?? Assets.icons.book);
+      widget.initialGrimoire?.iconAsset ?? Assets.icons.book.path,
+    );
   }
 
   @override
@@ -95,7 +96,8 @@ class _AddGrimorieScreenState extends State<AddGrimorieScreen> {
           RepaintBoundary(child: AddGrimorieBottomsheetDescField(desc: _desc)),
           T20UI.spaceHeight,
           RepaintBoundary(
-              child: AddGrimorieBottomsheetIconField(iconAsset: _iconAsset))
+            child: AddGrimorieBottomsheetIconField(iconAsset: _iconAsset),
+          ),
         ],
       ),
     );

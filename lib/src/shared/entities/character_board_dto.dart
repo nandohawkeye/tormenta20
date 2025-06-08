@@ -22,9 +22,7 @@ class CharacterBoardDto {
   TibarsTableData? tibars;
 
   List<ExpertiseTableData> expertises = [];
+  List<CharacterConditionTableData> conditions = [];
 
-  CharacterBoardDto({
-    required this.characterBoardsData,
-    tibars,
-  });
+  CharacterBoardDto({required this.characterBoardsData, tibars});
 }

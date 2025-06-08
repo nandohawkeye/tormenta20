@@ -36,7 +36,7 @@ class _CustomLoaderState extends State<CustomLoader>
     return Lottie.asset(
       height: widget.size,
       width: widget.size,
-      Assets.lottie.loading,
+      Assets.lottie.loading.path,
       controller: _controller,
       repeat: true,
       fit: BoxFit.cover,

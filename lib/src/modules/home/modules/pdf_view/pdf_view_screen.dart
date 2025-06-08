@@ -12,11 +12,7 @@ import 'package:tormenta20/src/shared/widgets/main_button.dart';
 import 'package:tormenta20/src/shared/widgets/simple_close_button.dart';
 
 class PdfViewScreen extends StatefulWidget {
-  const PdfViewScreen({
-    super.key,
-    required this.path,
-    this.screenLabel,
-  });
+  const PdfViewScreen({super.key, required this.path, this.screenLabel});
 
   final String path;
   final String? screenLabel;
@@ -43,28 +39,29 @@ class _PdfViewScreenState extends State<PdfViewScreen> {
           const SizedBox(height: kTextTabBarHeight + (T20UI.spaceSize * 3)),
           RepaintBoundary(
             child: ListenableBuilder(
-                listenable: _store,
-                builder: (_, __) {
-                  final enableToView = _store.isEnableLable;
-                  final isOnlyPage = _store.isOnlyPage;
-                  final current = _store.currentPage;
-                  final count = _store.pagesCount;
+              listenable: _store,
+              builder: (_, __) {
+                final enableToView = _store.isEnableLable;
+                final isOnlyPage = _store.isOnlyPage;
+                final current = _store.currentPage;
+                final count = _store.pagesCount;
 
-                  final String label = isOnlyPage
-                      ? 'Página única'
-                      : enableToView
-                          ? 'Página ${current.toString().padLeft(2, '0')} de ${count.toString().padLeft(2, '0')}'
-                          : '';
+                final String label = isOnlyPage
+                    ? 'Página única'
+                    : enableToView
+                    ? 'Página ${current.toString().padLeft(2, '0')} de ${count.toString().padLeft(2, '0')}'
+                    : '';
 
-                  return Text(
-                    label,
-                    style: TextStyle(
-                      color: palette.accent,
-                      fontFamily: FontFamily.tormenta,
-                      fontSize: 24,
-                    ),
-                  );
-                }),
+                return Text(
+                  label,
+                  style: TextStyle(
+                    color: palette.accent,
+                    fontFamily: FontFamily.tormenta,
+                    fontSize: 24,
+                  ),
+                );
+              },
+            ),
           ),
           T20UI.spaceHeight,
           Expanded(
@@ -74,10 +71,7 @@ class _PdfViewScreenState extends State<PdfViewScreen> {
                 autoSpacing: true,
                 pageFling: true,
                 onPageChanged: _store.changePage,
-              ).fromPath(
-                widget.path,
-                key: ValueKey(widget.path),
-              ),
+              ).fromPath(widget.path, key: ValueKey(widget.path)),
             ),
           ),
           T20UI.spaceHeight,
@@ -93,7 +87,7 @@ class _PdfViewScreenState extends State<PdfViewScreen> {
                     child: Lottie.asset(
                       height: 30,
                       width: 30,
-                      Assets.lottie.arrows,
+                      Assets.lottie.arrows.path,
                       repeat: true,
                       fit: BoxFit.cover,
                       decoder: LottieUtils.lottieFormatDecoder,
@@ -121,12 +115,12 @@ class _PdfViewScreenState extends State<PdfViewScreen> {
                             await Share.shareXFiles([XFile(widget.path)]),
                       ),
                     ),
-                    const SimpleCloseButton()
+                    const SimpleCloseButton(),
                   ],
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

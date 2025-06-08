@@ -1,6 +1,8 @@
 import 'package:tormenta20/src/shared/entities/action/action.dart';
+import 'package:tormenta20/src/shared/entities/atributes.dart';
 import 'package:tormenta20/src/shared/entities/brood.dart';
 import 'package:tormenta20/src/shared/entities/character_alignment_type.dart';
+import 'package:tormenta20/src/shared/entities/character_conditions.dart';
 import 'package:tormenta20/src/shared/entities/classe_type_character.dart';
 import 'package:tormenta20/src/shared/entities/creature_size_category.dart';
 import 'package:tormenta20/src/shared/entities/entity_base.dart';
@@ -48,6 +50,8 @@ class CharacterBoard extends EntityBase {
   final String? inRightHand;
   final String? inTwoHands;
   final String? inWearableSlots;
+  final Atribute handToHandAtribute;
+  final List<CharacterConditions> conditions;
 
   CharacterBoard({
     required this.uuid,
@@ -87,6 +91,8 @@ class CharacterBoard extends EntityBase {
     this.inRightHand,
     this.inTwoHands,
     this.inWearableSlots,
+    required this.handToHandAtribute,
+    required this.conditions,
   });
 
   CharacterBoard copyWith({
@@ -128,6 +134,8 @@ class CharacterBoard extends EntityBase {
     String? inRightHand,
     String? inTwoHands,
     String? inWearableSlots,
+    Atribute? handToHandAtribute,
+    List<CharacterConditions>? conditions,
   }) {
     return CharacterBoard(
       uuid: uuid ?? this.uuid,
@@ -167,6 +175,8 @@ class CharacterBoard extends EntityBase {
       inRightHand: inRightHand ?? this.inRightHand,
       inTwoHands: inTwoHands ?? this.inTwoHands,
       inWearableSlots: inWearableSlots ?? this.inWearableSlots,
+      conditions: conditions ?? this.conditions,
+      handToHandAtribute: handToHandAtribute ?? this.handToHandAtribute,
     );
   }
 
