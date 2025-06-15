@@ -18,6 +18,7 @@ import 'package:tormenta20/src/modules/home/modules/character/widgets/character_
 import 'package:tormenta20/src/modules/home/modules/character/widgets/character_tabs/character_tabs.dart';
 import 'package:tormenta20/src/modules/home/modules/character/widgets/character_trained_expertises.dart';
 import 'package:tormenta20/src/modules/home/modules/character/widgets/delete_character_bottomsheet/delete_character_bottomsheet.dart';
+import 'package:tormenta20/src/modules/home/modules/grimorie/grimorie_screen.dart';
 import 'package:tormenta20/src/shared/entities/character.dart';
 import 'package:tormenta20/src/shared/entities/character_adapters.dart';
 import 'package:tormenta20/src/shared/extensions/string_ext.dart';
@@ -57,9 +58,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
   void _callEdit(Character character) {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (_) => AddEditCharacter(initial: character),
-      ),
+      MaterialPageRoute(builder: (_) => AddEditCharacter(initial: character)),
     );
   }
 
@@ -89,7 +88,17 @@ class _CharacterScreenState extends State<CharacterScreen> {
           extraRightWidgets: grimoire != null
               ? [
                   T20UI.spaceWidth,
-                  CharacterGrimoireButton(grimoire),
+                  CharacterGrimoireButton(
+                    grimoire,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => GrimorieScreen(grimoire: grimoire),
+                        ),
+                      );
+                    },
+                  ),
                 ]
               : [],
           extraTopWidgets: [
@@ -123,11 +132,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
               ),
               T20UI.spaceHeight,
               const Divider(),
-              CharacterBoardField(
-                _store,
-                character: character,
-                boards: boards,
-              ),
+              CharacterBoardField(_store, character: character, boards: boards),
               if (tabIndexSelected == 0) CharacterActions(character.actions),
               if (tabIndexSelected == 1)
                 CharacterEquipments(character.equipments),
@@ -156,8 +161,10 @@ class _CharacterScreenState extends State<CharacterScreen> {
 
                 if (data == null) return;
 
-                final file = await BackupUtils.createTempJson(data,
-                    'personagem_${character.name.toLowerCase().replaceAllDiacritics().trim().replaceAll(' ', '')}');
+                final file = await BackupUtils.createTempJson(
+                  data,
+                  'personagem_${character.name.toLowerCase().replaceAllDiacritics().trim().replaceAll(' ', '')}',
+                );
 
                 if (file == null) return;
 

@@ -30,10 +30,7 @@ import 'package:tormenta20/src/shared/widgets/textfields/senses_textfield.dart';
 import 'package:tormenta20/src/shared/widgets/token_selector/token_selector.dart';
 
 class AddEditCharacter extends StatefulWidget {
-  const AddEditCharacter({
-    super.key,
-    this.initial,
-  });
+  const AddEditCharacter({super.key, this.initial});
 
   final Character? initial;
 
@@ -60,7 +57,7 @@ class _AddEditCharacterState extends State<AddEditCharacter> {
   @override
   Widget build(BuildContext context) {
     return ScreenBase(
-      label: 'Criar personagem',
+      label: '${widget.initial == null ? 'Criar' : 'Editar'} personagem',
       onSave: () async {
         if (_formKey.currentState?.validate() ?? false) {
           final character = await _controller.onSave();
@@ -82,7 +79,7 @@ class _AddEditCharacterState extends State<AddEditCharacter> {
             TokenSelector(
               allTokens: [
                 ...Assets.tokensLendas.values.map((t) => t.path),
-                ...Assets.tokens.values.map((t) => t.path)
+                ...Assets.tokens.values.map((t) => t.path),
               ],
               isMenace: false,
               changeAsset: _controller.changeAsset,
@@ -140,6 +137,8 @@ class _AddEditCharacterState extends State<AddEditCharacter> {
               ),
             ),
             T20UI.spaceHeight,
+            AddEditCharacterAlignmentSelector(_controller.alignmentStore),
+            T20UI.spaceHeight,
             Padding(
               padding: T20UI.horizontallScreenPadding,
               child: SensesTextfield(
@@ -196,8 +195,7 @@ class _AddEditCharacterState extends State<AddEditCharacter> {
               onchange: _controller.changeGrimoire,
               initialSelected: widget.initial?.grimorie,
             ),
-            T20UI.spaceHeight,
-            AddEditCharacterAlignmentSelector(_controller.alignmentStore),
+
             T20UI.spaceHeight,
           ],
         ),

@@ -29,6 +29,7 @@ import 'package:tormenta20/src/core/database/tables/equipment_table.dart';
 import 'package:tormenta20/src/core/database/tables/expertise_table.dart';
 import 'package:tormenta20/src/core/database/tables/general_item_table.dart';
 import 'package:tormenta20/src/core/database/tables/general_skill_table.dart';
+import 'package:tormenta20/src/core/database/tables/global_modifier_table.dart';
 import 'package:tormenta20/src/core/database/tables/grimoire_table.dart';
 import 'package:tormenta20/src/core/database/tables/magic_character_table.dart';
 import 'package:tormenta20/src/core/database/tables/magic_menace_table.dart';
@@ -89,6 +90,7 @@ part 'app_database.g.dart';
     PowerTable,
     CharacterBoardTable,
     CharacterConditionTable,
+    GlobalModifierTable,
   ],
   daos: [
     GrimoireDAO,
@@ -103,7 +105,7 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 26;
+  int get schemaVersion => 27;
 
   @override
   MigrationStrategy get migration {
@@ -351,6 +353,20 @@ class AppDatabase extends _$AppDatabase {
             await m.addColumn(
               characterBoardTable,
               characterBoardTable.handToHandAtributeIndex,
+            );
+          }
+
+          if (from < 27) {
+            await m.createTable(globalModifierTable);
+            await m.addColumn(expertiseTable, expertiseTable.onlyTrained);
+            await m.addColumn(expertiseTable, expertiseTable.armorPenalty);
+            await m.addColumn(
+              characterBoardTable,
+              characterBoardTable.arcaneArmorEnabled,
+            );
+            await m.addColumn(
+              characterBoardTable,
+              characterBoardTable.arcaneArmorBaseDefense,
             );
           }
         });

@@ -16,4 +16,20 @@ abstract class CreatureSizeUtils {
       return value.capitalize().trim();
     }
   }
+
+  static String handleInfo(String value) {
+    if (value.contains('tiny')) {
+      return '(1,5m)  +5/–5';
+    } else if (value.contains('small')) {
+      return '(1,5m)  +2/–2';
+    } else if (value.contains('medium')) {
+      return '(1,5m)  0';
+    } else if (value.contains('big')) {
+      return '(3m)  –2/+2';
+    } else if (value.contains('huge')) {
+      return '(4,5m)  –5/+5';
+    } else {
+      return '(9m) –10/+10';
+    }
+  }
 }

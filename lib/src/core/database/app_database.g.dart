@@ -17601,6 +17601,34 @@ class $ExpertiseTableTable extends ExpertiseTable
     type: DriftSqlType.int,
     requiredDuringInsert: true,
   );
+  static const VerificationMeta _onlyTrainedMeta = const VerificationMeta(
+    'onlyTrained',
+  );
+  @override
+  late final GeneratedColumn<bool> onlyTrained = GeneratedColumn<bool>(
+    'only_trained',
+    aliasedName,
+    true,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("only_trained" IN (0, 1))',
+    ),
+  );
+  static const VerificationMeta _armorPenaltyMeta = const VerificationMeta(
+    'armorPenalty',
+  );
+  @override
+  late final GeneratedColumn<bool> armorPenalty = GeneratedColumn<bool>(
+    'armor_penalty',
+    aliasedName,
+    true,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("armor_penalty" IN (0, 1))',
+    ),
+  );
   @override
   List<GeneratedColumn> get $columns => [
     uuid,
@@ -17613,6 +17641,8 @@ class $ExpertiseTableTable extends ExpertiseTable
     isTrained,
     createdAt,
     updatedAt,
+    onlyTrained,
+    armorPenalty,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -17702,6 +17732,24 @@ class $ExpertiseTableTable extends ExpertiseTable
     } else if (isInserting) {
       context.missing(_updatedAtMeta);
     }
+    if (data.containsKey('only_trained')) {
+      context.handle(
+        _onlyTrainedMeta,
+        onlyTrained.isAcceptableOrUnknown(
+          data['only_trained']!,
+          _onlyTrainedMeta,
+        ),
+      );
+    }
+    if (data.containsKey('armor_penalty')) {
+      context.handle(
+        _armorPenaltyMeta,
+        armorPenalty.isAcceptableOrUnknown(
+          data['armor_penalty']!,
+          _armorPenaltyMeta,
+        ),
+      );
+    }
     return context;
   }
 
@@ -17751,6 +17799,14 @@ class $ExpertiseTableTable extends ExpertiseTable
         DriftSqlType.int,
         data['${effectivePrefix}updated_at'],
       )!,
+      onlyTrained: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}only_trained'],
+      ),
+      armorPenalty: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}armor_penalty'],
+      ),
     );
   }
 
@@ -17772,6 +17828,8 @@ class ExpertiseTableData extends DataClass
   final bool isTrained;
   final int createdAt;
   final int updatedAt;
+  final bool? onlyTrained;
+  final bool? armorPenalty;
   const ExpertiseTableData({
     required this.uuid,
     required this.name,
@@ -17783,6 +17841,8 @@ class ExpertiseTableData extends DataClass
     required this.isTrained,
     required this.createdAt,
     required this.updatedAt,
+    this.onlyTrained,
+    this.armorPenalty,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -17801,6 +17861,12 @@ class ExpertiseTableData extends DataClass
     map['is_trained'] = Variable<bool>(isTrained);
     map['created_at'] = Variable<int>(createdAt);
     map['updated_at'] = Variable<int>(updatedAt);
+    if (!nullToAbsent || onlyTrained != null) {
+      map['only_trained'] = Variable<bool>(onlyTrained);
+    }
+    if (!nullToAbsent || armorPenalty != null) {
+      map['armor_penalty'] = Variable<bool>(armorPenalty);
+    }
     return map;
   }
 
@@ -17820,6 +17886,12 @@ class ExpertiseTableData extends DataClass
       isTrained: Value(isTrained),
       createdAt: Value(createdAt),
       updatedAt: Value(updatedAt),
+      onlyTrained: onlyTrained == null && nullToAbsent
+          ? const Value.absent()
+          : Value(onlyTrained),
+      armorPenalty: armorPenalty == null && nullToAbsent
+          ? const Value.absent()
+          : Value(armorPenalty),
     );
   }
 
@@ -17839,6 +17911,8 @@ class ExpertiseTableData extends DataClass
       isTrained: serializer.fromJson<bool>(json['isTrained']),
       createdAt: serializer.fromJson<int>(json['createdAt']),
       updatedAt: serializer.fromJson<int>(json['updatedAt']),
+      onlyTrained: serializer.fromJson<bool?>(json['onlyTrained']),
+      armorPenalty: serializer.fromJson<bool?>(json['armorPenalty']),
     );
   }
   @override
@@ -17855,6 +17929,8 @@ class ExpertiseTableData extends DataClass
       'isTrained': serializer.toJson<bool>(isTrained),
       'createdAt': serializer.toJson<int>(createdAt),
       'updatedAt': serializer.toJson<int>(updatedAt),
+      'onlyTrained': serializer.toJson<bool?>(onlyTrained),
+      'armorPenalty': serializer.toJson<bool?>(armorPenalty),
     };
   }
 
@@ -17869,6 +17945,8 @@ class ExpertiseTableData extends DataClass
     bool? isTrained,
     int? createdAt,
     int? updatedAt,
+    Value<bool?> onlyTrained = const Value.absent(),
+    Value<bool?> armorPenalty = const Value.absent(),
   }) => ExpertiseTableData(
     uuid: uuid ?? this.uuid,
     name: name ?? this.name,
@@ -17880,6 +17958,8 @@ class ExpertiseTableData extends DataClass
     isTrained: isTrained ?? this.isTrained,
     createdAt: createdAt ?? this.createdAt,
     updatedAt: updatedAt ?? this.updatedAt,
+    onlyTrained: onlyTrained.present ? onlyTrained.value : this.onlyTrained,
+    armorPenalty: armorPenalty.present ? armorPenalty.value : this.armorPenalty,
   );
   ExpertiseTableData copyWithCompanion(ExpertiseTableCompanion data) {
     return ExpertiseTableData(
@@ -17899,6 +17979,12 @@ class ExpertiseTableData extends DataClass
       isTrained: data.isTrained.present ? data.isTrained.value : this.isTrained,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
       updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      onlyTrained: data.onlyTrained.present
+          ? data.onlyTrained.value
+          : this.onlyTrained,
+      armorPenalty: data.armorPenalty.present
+          ? data.armorPenalty.value
+          : this.armorPenalty,
     );
   }
 
@@ -17914,7 +18000,9 @@ class ExpertiseTableData extends DataClass
           ..write('valueFinal: $valueFinal, ')
           ..write('isTrained: $isTrained, ')
           ..write('createdAt: $createdAt, ')
-          ..write('updatedAt: $updatedAt')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('onlyTrained: $onlyTrained, ')
+          ..write('armorPenalty: $armorPenalty')
           ..write(')'))
         .toString();
   }
@@ -17931,6 +18019,8 @@ class ExpertiseTableData extends DataClass
     isTrained,
     createdAt,
     updatedAt,
+    onlyTrained,
+    armorPenalty,
   );
   @override
   bool operator ==(Object other) =>
@@ -17945,7 +18035,9 @@ class ExpertiseTableData extends DataClass
           other.valueFinal == this.valueFinal &&
           other.isTrained == this.isTrained &&
           other.createdAt == this.createdAt &&
-          other.updatedAt == this.updatedAt);
+          other.updatedAt == this.updatedAt &&
+          other.onlyTrained == this.onlyTrained &&
+          other.armorPenalty == this.armorPenalty);
 }
 
 class ExpertiseTableCompanion extends UpdateCompanion<ExpertiseTableData> {
@@ -17959,6 +18051,8 @@ class ExpertiseTableCompanion extends UpdateCompanion<ExpertiseTableData> {
   final Value<bool> isTrained;
   final Value<int> createdAt;
   final Value<int> updatedAt;
+  final Value<bool?> onlyTrained;
+  final Value<bool?> armorPenalty;
   final Value<int> rowid;
   const ExpertiseTableCompanion({
     this.uuid = const Value.absent(),
@@ -17971,6 +18065,8 @@ class ExpertiseTableCompanion extends UpdateCompanion<ExpertiseTableData> {
     this.isTrained = const Value.absent(),
     this.createdAt = const Value.absent(),
     this.updatedAt = const Value.absent(),
+    this.onlyTrained = const Value.absent(),
+    this.armorPenalty = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   ExpertiseTableCompanion.insert({
@@ -17984,6 +18080,8 @@ class ExpertiseTableCompanion extends UpdateCompanion<ExpertiseTableData> {
     required bool isTrained,
     required int createdAt,
     required int updatedAt,
+    this.onlyTrained = const Value.absent(),
+    this.armorPenalty = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : uuid = Value(uuid),
        name = Value(name),
@@ -18004,6 +18102,8 @@ class ExpertiseTableCompanion extends UpdateCompanion<ExpertiseTableData> {
     Expression<bool>? isTrained,
     Expression<int>? createdAt,
     Expression<int>? updatedAt,
+    Expression<bool>? onlyTrained,
+    Expression<bool>? armorPenalty,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -18017,6 +18117,8 @@ class ExpertiseTableCompanion extends UpdateCompanion<ExpertiseTableData> {
       if (isTrained != null) 'is_trained': isTrained,
       if (createdAt != null) 'created_at': createdAt,
       if (updatedAt != null) 'updated_at': updatedAt,
+      if (onlyTrained != null) 'only_trained': onlyTrained,
+      if (armorPenalty != null) 'armor_penalty': armorPenalty,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -18032,6 +18134,8 @@ class ExpertiseTableCompanion extends UpdateCompanion<ExpertiseTableData> {
     Value<bool>? isTrained,
     Value<int>? createdAt,
     Value<int>? updatedAt,
+    Value<bool?>? onlyTrained,
+    Value<bool?>? armorPenalty,
     Value<int>? rowid,
   }) {
     return ExpertiseTableCompanion(
@@ -18045,6 +18149,8 @@ class ExpertiseTableCompanion extends UpdateCompanion<ExpertiseTableData> {
       isTrained: isTrained ?? this.isTrained,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
+      onlyTrained: onlyTrained ?? this.onlyTrained,
+      armorPenalty: armorPenalty ?? this.armorPenalty,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -18082,6 +18188,12 @@ class ExpertiseTableCompanion extends UpdateCompanion<ExpertiseTableData> {
     if (updatedAt.present) {
       map['updated_at'] = Variable<int>(updatedAt.value);
     }
+    if (onlyTrained.present) {
+      map['only_trained'] = Variable<bool>(onlyTrained.value);
+    }
+    if (armorPenalty.present) {
+      map['armor_penalty'] = Variable<bool>(armorPenalty.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -18101,6 +18213,8 @@ class ExpertiseTableCompanion extends UpdateCompanion<ExpertiseTableData> {
           ..write('isTrained: $isTrained, ')
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
+          ..write('onlyTrained: $onlyTrained, ')
+          ..write('armorPenalty: $armorPenalty, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -21602,6 +21716,29 @@ class $CharacterBoardTableTable extends CharacterBoardTable
         type: DriftSqlType.int,
         requiredDuringInsert: false,
       );
+  static const VerificationMeta _arcaneArmorEnabledMeta =
+      const VerificationMeta('arcaneArmorEnabled');
+  @override
+  late final GeneratedColumn<bool> arcaneArmorEnabled = GeneratedColumn<bool>(
+    'arcane_armor_enabled',
+    aliasedName,
+    true,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("arcane_armor_enabled" IN (0, 1))',
+    ),
+  );
+  static const VerificationMeta _arcaneArmorBaseDefenseMeta =
+      const VerificationMeta('arcaneArmorBaseDefense');
+  @override
+  late final GeneratedColumn<int> arcaneArmorBaseDefense = GeneratedColumn<int>(
+    'arcane_armor_base_defense',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
   @override
   List<GeneratedColumn> get $columns => [
     uuid,
@@ -21636,6 +21773,8 @@ class $CharacterBoardTableTable extends CharacterBoardTable
     inTwoHands,
     inWearableSlots,
     handToHandAtributeIndex,
+    arcaneArmorEnabled,
+    arcaneArmorBaseDefense,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -21922,6 +22061,24 @@ class $CharacterBoardTableTable extends CharacterBoardTable
         ),
       );
     }
+    if (data.containsKey('arcane_armor_enabled')) {
+      context.handle(
+        _arcaneArmorEnabledMeta,
+        arcaneArmorEnabled.isAcceptableOrUnknown(
+          data['arcane_armor_enabled']!,
+          _arcaneArmorEnabledMeta,
+        ),
+      );
+    }
+    if (data.containsKey('arcane_armor_base_defense')) {
+      context.handle(
+        _arcaneArmorBaseDefenseMeta,
+        arcaneArmorBaseDefense.isAcceptableOrUnknown(
+          data['arcane_armor_base_defense']!,
+          _arcaneArmorBaseDefenseMeta,
+        ),
+      );
+    }
     return context;
   }
 
@@ -22062,6 +22219,14 @@ class $CharacterBoardTableTable extends CharacterBoardTable
         DriftSqlType.int,
         data['${effectivePrefix}hand_to_hand_atribute_index'],
       ),
+      arcaneArmorEnabled: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}arcane_armor_enabled'],
+      ),
+      arcaneArmorBaseDefense: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}arcane_armor_base_defense'],
+      ),
     );
   }
 
@@ -22105,6 +22270,8 @@ class CharacterBoardTableData extends DataClass
   final String? inTwoHands;
   final String? inWearableSlots;
   final int? handToHandAtributeIndex;
+  final bool? arcaneArmorEnabled;
+  final int? arcaneArmorBaseDefense;
   const CharacterBoardTableData({
     required this.uuid,
     required this.parentuuid,
@@ -22138,6 +22305,8 @@ class CharacterBoardTableData extends DataClass
     this.inTwoHands,
     this.inWearableSlots,
     this.handToHandAtributeIndex,
+    this.arcaneArmorEnabled,
+    this.arcaneArmorBaseDefense,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -22198,6 +22367,12 @@ class CharacterBoardTableData extends DataClass
         handToHandAtributeIndex,
       );
     }
+    if (!nullToAbsent || arcaneArmorEnabled != null) {
+      map['arcane_armor_enabled'] = Variable<bool>(arcaneArmorEnabled);
+    }
+    if (!nullToAbsent || arcaneArmorBaseDefense != null) {
+      map['arcane_armor_base_defense'] = Variable<int>(arcaneArmorBaseDefense);
+    }
     return map;
   }
 
@@ -22257,6 +22432,12 @@ class CharacterBoardTableData extends DataClass
       handToHandAtributeIndex: handToHandAtributeIndex == null && nullToAbsent
           ? const Value.absent()
           : Value(handToHandAtributeIndex),
+      arcaneArmorEnabled: arcaneArmorEnabled == null && nullToAbsent
+          ? const Value.absent()
+          : Value(arcaneArmorEnabled),
+      arcaneArmorBaseDefense: arcaneArmorBaseDefense == null && nullToAbsent
+          ? const Value.absent()
+          : Value(arcaneArmorBaseDefense),
     );
   }
 
@@ -22300,6 +22481,12 @@ class CharacterBoardTableData extends DataClass
       handToHandAtributeIndex: serializer.fromJson<int?>(
         json['handToHandAtributeIndex'],
       ),
+      arcaneArmorEnabled: serializer.fromJson<bool?>(
+        json['arcaneArmorEnabled'],
+      ),
+      arcaneArmorBaseDefense: serializer.fromJson<int?>(
+        json['arcaneArmorBaseDefense'],
+      ),
     );
   }
   @override
@@ -22340,6 +22527,8 @@ class CharacterBoardTableData extends DataClass
       'handToHandAtributeIndex': serializer.toJson<int?>(
         handToHandAtributeIndex,
       ),
+      'arcaneArmorEnabled': serializer.toJson<bool?>(arcaneArmorEnabled),
+      'arcaneArmorBaseDefense': serializer.toJson<int?>(arcaneArmorBaseDefense),
     };
   }
 
@@ -22376,6 +22565,8 @@ class CharacterBoardTableData extends DataClass
     Value<String?> inTwoHands = const Value.absent(),
     Value<String?> inWearableSlots = const Value.absent(),
     Value<int?> handToHandAtributeIndex = const Value.absent(),
+    Value<bool?> arcaneArmorEnabled = const Value.absent(),
+    Value<int?> arcaneArmorBaseDefense = const Value.absent(),
   }) => CharacterBoardTableData(
     uuid: uuid ?? this.uuid,
     parentuuid: parentuuid ?? this.parentuuid,
@@ -22413,6 +22604,12 @@ class CharacterBoardTableData extends DataClass
     handToHandAtributeIndex: handToHandAtributeIndex.present
         ? handToHandAtributeIndex.value
         : this.handToHandAtributeIndex,
+    arcaneArmorEnabled: arcaneArmorEnabled.present
+        ? arcaneArmorEnabled.value
+        : this.arcaneArmorEnabled,
+    arcaneArmorBaseDefense: arcaneArmorBaseDefense.present
+        ? arcaneArmorBaseDefense.value
+        : this.arcaneArmorBaseDefense,
   );
   CharacterBoardTableData copyWithCompanion(CharacterBoardTableCompanion data) {
     return CharacterBoardTableData(
@@ -22482,6 +22679,12 @@ class CharacterBoardTableData extends DataClass
       handToHandAtributeIndex: data.handToHandAtributeIndex.present
           ? data.handToHandAtributeIndex.value
           : this.handToHandAtributeIndex,
+      arcaneArmorEnabled: data.arcaneArmorEnabled.present
+          ? data.arcaneArmorEnabled.value
+          : this.arcaneArmorEnabled,
+      arcaneArmorBaseDefense: data.arcaneArmorBaseDefense.present
+          ? data.arcaneArmorBaseDefense.value
+          : this.arcaneArmorBaseDefense,
     );
   }
 
@@ -22519,7 +22722,9 @@ class CharacterBoardTableData extends DataClass
           ..write('inRightHand: $inRightHand, ')
           ..write('inTwoHands: $inTwoHands, ')
           ..write('inWearableSlots: $inWearableSlots, ')
-          ..write('handToHandAtributeIndex: $handToHandAtributeIndex')
+          ..write('handToHandAtributeIndex: $handToHandAtributeIndex, ')
+          ..write('arcaneArmorEnabled: $arcaneArmorEnabled, ')
+          ..write('arcaneArmorBaseDefense: $arcaneArmorBaseDefense')
           ..write(')'))
         .toString();
   }
@@ -22558,6 +22763,8 @@ class CharacterBoardTableData extends DataClass
     inTwoHands,
     inWearableSlots,
     handToHandAtributeIndex,
+    arcaneArmorEnabled,
+    arcaneArmorBaseDefense,
   ]);
   @override
   bool operator ==(Object other) =>
@@ -22594,7 +22801,9 @@ class CharacterBoardTableData extends DataClass
           other.inRightHand == this.inRightHand &&
           other.inTwoHands == this.inTwoHands &&
           other.inWearableSlots == this.inWearableSlots &&
-          other.handToHandAtributeIndex == this.handToHandAtributeIndex);
+          other.handToHandAtributeIndex == this.handToHandAtributeIndex &&
+          other.arcaneArmorEnabled == this.arcaneArmorEnabled &&
+          other.arcaneArmorBaseDefense == this.arcaneArmorBaseDefense);
 }
 
 class CharacterBoardTableCompanion
@@ -22631,6 +22840,8 @@ class CharacterBoardTableCompanion
   final Value<String?> inTwoHands;
   final Value<String?> inWearableSlots;
   final Value<int?> handToHandAtributeIndex;
+  final Value<bool?> arcaneArmorEnabled;
+  final Value<int?> arcaneArmorBaseDefense;
   final Value<int> rowid;
   const CharacterBoardTableCompanion({
     this.uuid = const Value.absent(),
@@ -22665,6 +22876,8 @@ class CharacterBoardTableCompanion
     this.inTwoHands = const Value.absent(),
     this.inWearableSlots = const Value.absent(),
     this.handToHandAtributeIndex = const Value.absent(),
+    this.arcaneArmorEnabled = const Value.absent(),
+    this.arcaneArmorBaseDefense = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   CharacterBoardTableCompanion.insert({
@@ -22700,6 +22913,8 @@ class CharacterBoardTableCompanion
     this.inTwoHands = const Value.absent(),
     this.inWearableSlots = const Value.absent(),
     this.handToHandAtributeIndex = const Value.absent(),
+    this.arcaneArmorEnabled = const Value.absent(),
+    this.arcaneArmorBaseDefense = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : uuid = Value(uuid),
        parentuuid = Value(parentuuid),
@@ -22755,6 +22970,8 @@ class CharacterBoardTableCompanion
     Expression<String>? inTwoHands,
     Expression<String>? inWearableSlots,
     Expression<int>? handToHandAtributeIndex,
+    Expression<bool>? arcaneArmorEnabled,
+    Expression<int>? arcaneArmorBaseDefense,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -22791,6 +23008,10 @@ class CharacterBoardTableCompanion
       if (inWearableSlots != null) 'in_wearable_slots': inWearableSlots,
       if (handToHandAtributeIndex != null)
         'hand_to_hand_atribute_index': handToHandAtributeIndex,
+      if (arcaneArmorEnabled != null)
+        'arcane_armor_enabled': arcaneArmorEnabled,
+      if (arcaneArmorBaseDefense != null)
+        'arcane_armor_base_defense': arcaneArmorBaseDefense,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -22828,6 +23049,8 @@ class CharacterBoardTableCompanion
     Value<String?>? inTwoHands,
     Value<String?>? inWearableSlots,
     Value<int?>? handToHandAtributeIndex,
+    Value<bool?>? arcaneArmorEnabled,
+    Value<int?>? arcaneArmorBaseDefense,
     Value<int>? rowid,
   }) {
     return CharacterBoardTableCompanion(
@@ -22864,6 +23087,9 @@ class CharacterBoardTableCompanion
       inWearableSlots: inWearableSlots ?? this.inWearableSlots,
       handToHandAtributeIndex:
           handToHandAtributeIndex ?? this.handToHandAtributeIndex,
+      arcaneArmorEnabled: arcaneArmorEnabled ?? this.arcaneArmorEnabled,
+      arcaneArmorBaseDefense:
+          arcaneArmorBaseDefense ?? this.arcaneArmorBaseDefense,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -22969,6 +23195,14 @@ class CharacterBoardTableCompanion
         handToHandAtributeIndex.value,
       );
     }
+    if (arcaneArmorEnabled.present) {
+      map['arcane_armor_enabled'] = Variable<bool>(arcaneArmorEnabled.value);
+    }
+    if (arcaneArmorBaseDefense.present) {
+      map['arcane_armor_base_defense'] = Variable<int>(
+        arcaneArmorBaseDefense.value,
+      );
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -23010,6 +23244,8 @@ class CharacterBoardTableCompanion
           ..write('inTwoHands: $inTwoHands, ')
           ..write('inWearableSlots: $inWearableSlots, ')
           ..write('handToHandAtributeIndex: $handToHandAtributeIndex, ')
+          ..write('arcaneArmorEnabled: $arcaneArmorEnabled, ')
+          ..write('arcaneArmorBaseDefense: $arcaneArmorBaseDefense, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -23916,6 +24152,685 @@ class CharacterConditionTableCompanion
   }
 }
 
+class $GlobalModifierTableTable extends GlobalModifierTable
+    with TableInfo<$GlobalModifierTableTable, GlobalModifierTableData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $GlobalModifierTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _uuidMeta = const VerificationMeta('uuid');
+  @override
+  late final GeneratedColumn<String> uuid = GeneratedColumn<String>(
+    'uuid',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _parentUuidMeta = const VerificationMeta(
+    'parentUuid',
+  );
+  @override
+  late final GeneratedColumn<String> parentUuid = GeneratedColumn<String>(
+    'parent_uuid',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _roolMeta = const VerificationMeta('rool');
+  @override
+  late final GeneratedColumn<int> rool = GeneratedColumn<int>(
+    'rool',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _bonusAttackMeta = const VerificationMeta(
+    'bonusAttack',
+  );
+  @override
+  late final GeneratedColumn<int> bonusAttack = GeneratedColumn<int>(
+    'bonus_attack',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _expertisesMeta = const VerificationMeta(
+    'expertises',
+  );
+  @override
+  late final GeneratedColumn<int> expertises = GeneratedColumn<int>(
+    'expertises',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _resistancesMeta = const VerificationMeta(
+    'resistances',
+  );
+  @override
+  late final GeneratedColumn<int> resistances = GeneratedColumn<int>(
+    'resistances',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _damageMeta = const VerificationMeta('damage');
+  @override
+  late final GeneratedColumn<int> damage = GeneratedColumn<int>(
+    'damage',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _defenseMeta = const VerificationMeta(
+    'defense',
+  );
+  @override
+  late final GeneratedColumn<int> defense = GeneratedColumn<int>(
+    'defense',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _bonusArmorMeta = const VerificationMeta(
+    'bonusArmor',
+  );
+  @override
+  late final GeneratedColumn<int> bonusArmor = GeneratedColumn<int>(
+    'bonus_armor',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _bonusShieldMeta = const VerificationMeta(
+    'bonusShield',
+  );
+  @override
+  late final GeneratedColumn<int> bonusShield = GeneratedColumn<int>(
+    'bonus_shield',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _othersMeta = const VerificationMeta('others');
+  @override
+  late final GeneratedColumn<int> others = GeneratedColumn<int>(
+    'others',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    uuid,
+    parentUuid,
+    rool,
+    bonusAttack,
+    expertises,
+    resistances,
+    damage,
+    defense,
+    bonusArmor,
+    bonusShield,
+    others,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'global_modifier_table';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<GlobalModifierTableData> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('uuid')) {
+      context.handle(
+        _uuidMeta,
+        uuid.isAcceptableOrUnknown(data['uuid']!, _uuidMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_uuidMeta);
+    }
+    if (data.containsKey('parent_uuid')) {
+      context.handle(
+        _parentUuidMeta,
+        parentUuid.isAcceptableOrUnknown(data['parent_uuid']!, _parentUuidMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_parentUuidMeta);
+    }
+    if (data.containsKey('rool')) {
+      context.handle(
+        _roolMeta,
+        rool.isAcceptableOrUnknown(data['rool']!, _roolMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_roolMeta);
+    }
+    if (data.containsKey('bonus_attack')) {
+      context.handle(
+        _bonusAttackMeta,
+        bonusAttack.isAcceptableOrUnknown(
+          data['bonus_attack']!,
+          _bonusAttackMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_bonusAttackMeta);
+    }
+    if (data.containsKey('expertises')) {
+      context.handle(
+        _expertisesMeta,
+        expertises.isAcceptableOrUnknown(data['expertises']!, _expertisesMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_expertisesMeta);
+    }
+    if (data.containsKey('resistances')) {
+      context.handle(
+        _resistancesMeta,
+        resistances.isAcceptableOrUnknown(
+          data['resistances']!,
+          _resistancesMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_resistancesMeta);
+    }
+    if (data.containsKey('damage')) {
+      context.handle(
+        _damageMeta,
+        damage.isAcceptableOrUnknown(data['damage']!, _damageMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_damageMeta);
+    }
+    if (data.containsKey('defense')) {
+      context.handle(
+        _defenseMeta,
+        defense.isAcceptableOrUnknown(data['defense']!, _defenseMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_defenseMeta);
+    }
+    if (data.containsKey('bonus_armor')) {
+      context.handle(
+        _bonusArmorMeta,
+        bonusArmor.isAcceptableOrUnknown(data['bonus_armor']!, _bonusArmorMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_bonusArmorMeta);
+    }
+    if (data.containsKey('bonus_shield')) {
+      context.handle(
+        _bonusShieldMeta,
+        bonusShield.isAcceptableOrUnknown(
+          data['bonus_shield']!,
+          _bonusShieldMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_bonusShieldMeta);
+    }
+    if (data.containsKey('others')) {
+      context.handle(
+        _othersMeta,
+        others.isAcceptableOrUnknown(data['others']!, _othersMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_othersMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {uuid};
+  @override
+  GlobalModifierTableData map(
+    Map<String, dynamic> data, {
+    String? tablePrefix,
+  }) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return GlobalModifierTableData(
+      uuid: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}uuid'],
+      )!,
+      parentUuid: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}parent_uuid'],
+      )!,
+      rool: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}rool'],
+      )!,
+      bonusAttack: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}bonus_attack'],
+      )!,
+      expertises: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}expertises'],
+      )!,
+      resistances: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}resistances'],
+      )!,
+      damage: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}damage'],
+      )!,
+      defense: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}defense'],
+      )!,
+      bonusArmor: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}bonus_armor'],
+      )!,
+      bonusShield: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}bonus_shield'],
+      )!,
+      others: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}others'],
+      )!,
+    );
+  }
+
+  @override
+  $GlobalModifierTableTable createAlias(String alias) {
+    return $GlobalModifierTableTable(attachedDatabase, alias);
+  }
+}
+
+class GlobalModifierTableData extends DataClass
+    implements Insertable<GlobalModifierTableData> {
+  final String uuid;
+  final String parentUuid;
+  final int rool;
+  final int bonusAttack;
+  final int expertises;
+  final int resistances;
+  final int damage;
+  final int defense;
+  final int bonusArmor;
+  final int bonusShield;
+  final int others;
+  const GlobalModifierTableData({
+    required this.uuid,
+    required this.parentUuid,
+    required this.rool,
+    required this.bonusAttack,
+    required this.expertises,
+    required this.resistances,
+    required this.damage,
+    required this.defense,
+    required this.bonusArmor,
+    required this.bonusShield,
+    required this.others,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['uuid'] = Variable<String>(uuid);
+    map['parent_uuid'] = Variable<String>(parentUuid);
+    map['rool'] = Variable<int>(rool);
+    map['bonus_attack'] = Variable<int>(bonusAttack);
+    map['expertises'] = Variable<int>(expertises);
+    map['resistances'] = Variable<int>(resistances);
+    map['damage'] = Variable<int>(damage);
+    map['defense'] = Variable<int>(defense);
+    map['bonus_armor'] = Variable<int>(bonusArmor);
+    map['bonus_shield'] = Variable<int>(bonusShield);
+    map['others'] = Variable<int>(others);
+    return map;
+  }
+
+  GlobalModifierTableCompanion toCompanion(bool nullToAbsent) {
+    return GlobalModifierTableCompanion(
+      uuid: Value(uuid),
+      parentUuid: Value(parentUuid),
+      rool: Value(rool),
+      bonusAttack: Value(bonusAttack),
+      expertises: Value(expertises),
+      resistances: Value(resistances),
+      damage: Value(damage),
+      defense: Value(defense),
+      bonusArmor: Value(bonusArmor),
+      bonusShield: Value(bonusShield),
+      others: Value(others),
+    );
+  }
+
+  factory GlobalModifierTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return GlobalModifierTableData(
+      uuid: serializer.fromJson<String>(json['uuid']),
+      parentUuid: serializer.fromJson<String>(json['parentUuid']),
+      rool: serializer.fromJson<int>(json['rool']),
+      bonusAttack: serializer.fromJson<int>(json['bonusAttack']),
+      expertises: serializer.fromJson<int>(json['expertises']),
+      resistances: serializer.fromJson<int>(json['resistances']),
+      damage: serializer.fromJson<int>(json['damage']),
+      defense: serializer.fromJson<int>(json['defense']),
+      bonusArmor: serializer.fromJson<int>(json['bonusArmor']),
+      bonusShield: serializer.fromJson<int>(json['bonusShield']),
+      others: serializer.fromJson<int>(json['others']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'uuid': serializer.toJson<String>(uuid),
+      'parentUuid': serializer.toJson<String>(parentUuid),
+      'rool': serializer.toJson<int>(rool),
+      'bonusAttack': serializer.toJson<int>(bonusAttack),
+      'expertises': serializer.toJson<int>(expertises),
+      'resistances': serializer.toJson<int>(resistances),
+      'damage': serializer.toJson<int>(damage),
+      'defense': serializer.toJson<int>(defense),
+      'bonusArmor': serializer.toJson<int>(bonusArmor),
+      'bonusShield': serializer.toJson<int>(bonusShield),
+      'others': serializer.toJson<int>(others),
+    };
+  }
+
+  GlobalModifierTableData copyWith({
+    String? uuid,
+    String? parentUuid,
+    int? rool,
+    int? bonusAttack,
+    int? expertises,
+    int? resistances,
+    int? damage,
+    int? defense,
+    int? bonusArmor,
+    int? bonusShield,
+    int? others,
+  }) => GlobalModifierTableData(
+    uuid: uuid ?? this.uuid,
+    parentUuid: parentUuid ?? this.parentUuid,
+    rool: rool ?? this.rool,
+    bonusAttack: bonusAttack ?? this.bonusAttack,
+    expertises: expertises ?? this.expertises,
+    resistances: resistances ?? this.resistances,
+    damage: damage ?? this.damage,
+    defense: defense ?? this.defense,
+    bonusArmor: bonusArmor ?? this.bonusArmor,
+    bonusShield: bonusShield ?? this.bonusShield,
+    others: others ?? this.others,
+  );
+  GlobalModifierTableData copyWithCompanion(GlobalModifierTableCompanion data) {
+    return GlobalModifierTableData(
+      uuid: data.uuid.present ? data.uuid.value : this.uuid,
+      parentUuid: data.parentUuid.present
+          ? data.parentUuid.value
+          : this.parentUuid,
+      rool: data.rool.present ? data.rool.value : this.rool,
+      bonusAttack: data.bonusAttack.present
+          ? data.bonusAttack.value
+          : this.bonusAttack,
+      expertises: data.expertises.present
+          ? data.expertises.value
+          : this.expertises,
+      resistances: data.resistances.present
+          ? data.resistances.value
+          : this.resistances,
+      damage: data.damage.present ? data.damage.value : this.damage,
+      defense: data.defense.present ? data.defense.value : this.defense,
+      bonusArmor: data.bonusArmor.present
+          ? data.bonusArmor.value
+          : this.bonusArmor,
+      bonusShield: data.bonusShield.present
+          ? data.bonusShield.value
+          : this.bonusShield,
+      others: data.others.present ? data.others.value : this.others,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('GlobalModifierTableData(')
+          ..write('uuid: $uuid, ')
+          ..write('parentUuid: $parentUuid, ')
+          ..write('rool: $rool, ')
+          ..write('bonusAttack: $bonusAttack, ')
+          ..write('expertises: $expertises, ')
+          ..write('resistances: $resistances, ')
+          ..write('damage: $damage, ')
+          ..write('defense: $defense, ')
+          ..write('bonusArmor: $bonusArmor, ')
+          ..write('bonusShield: $bonusShield, ')
+          ..write('others: $others')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    uuid,
+    parentUuid,
+    rool,
+    bonusAttack,
+    expertises,
+    resistances,
+    damage,
+    defense,
+    bonusArmor,
+    bonusShield,
+    others,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is GlobalModifierTableData &&
+          other.uuid == this.uuid &&
+          other.parentUuid == this.parentUuid &&
+          other.rool == this.rool &&
+          other.bonusAttack == this.bonusAttack &&
+          other.expertises == this.expertises &&
+          other.resistances == this.resistances &&
+          other.damage == this.damage &&
+          other.defense == this.defense &&
+          other.bonusArmor == this.bonusArmor &&
+          other.bonusShield == this.bonusShield &&
+          other.others == this.others);
+}
+
+class GlobalModifierTableCompanion
+    extends UpdateCompanion<GlobalModifierTableData> {
+  final Value<String> uuid;
+  final Value<String> parentUuid;
+  final Value<int> rool;
+  final Value<int> bonusAttack;
+  final Value<int> expertises;
+  final Value<int> resistances;
+  final Value<int> damage;
+  final Value<int> defense;
+  final Value<int> bonusArmor;
+  final Value<int> bonusShield;
+  final Value<int> others;
+  final Value<int> rowid;
+  const GlobalModifierTableCompanion({
+    this.uuid = const Value.absent(),
+    this.parentUuid = const Value.absent(),
+    this.rool = const Value.absent(),
+    this.bonusAttack = const Value.absent(),
+    this.expertises = const Value.absent(),
+    this.resistances = const Value.absent(),
+    this.damage = const Value.absent(),
+    this.defense = const Value.absent(),
+    this.bonusArmor = const Value.absent(),
+    this.bonusShield = const Value.absent(),
+    this.others = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  GlobalModifierTableCompanion.insert({
+    required String uuid,
+    required String parentUuid,
+    required int rool,
+    required int bonusAttack,
+    required int expertises,
+    required int resistances,
+    required int damage,
+    required int defense,
+    required int bonusArmor,
+    required int bonusShield,
+    required int others,
+    this.rowid = const Value.absent(),
+  }) : uuid = Value(uuid),
+       parentUuid = Value(parentUuid),
+       rool = Value(rool),
+       bonusAttack = Value(bonusAttack),
+       expertises = Value(expertises),
+       resistances = Value(resistances),
+       damage = Value(damage),
+       defense = Value(defense),
+       bonusArmor = Value(bonusArmor),
+       bonusShield = Value(bonusShield),
+       others = Value(others);
+  static Insertable<GlobalModifierTableData> custom({
+    Expression<String>? uuid,
+    Expression<String>? parentUuid,
+    Expression<int>? rool,
+    Expression<int>? bonusAttack,
+    Expression<int>? expertises,
+    Expression<int>? resistances,
+    Expression<int>? damage,
+    Expression<int>? defense,
+    Expression<int>? bonusArmor,
+    Expression<int>? bonusShield,
+    Expression<int>? others,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (uuid != null) 'uuid': uuid,
+      if (parentUuid != null) 'parent_uuid': parentUuid,
+      if (rool != null) 'rool': rool,
+      if (bonusAttack != null) 'bonus_attack': bonusAttack,
+      if (expertises != null) 'expertises': expertises,
+      if (resistances != null) 'resistances': resistances,
+      if (damage != null) 'damage': damage,
+      if (defense != null) 'defense': defense,
+      if (bonusArmor != null) 'bonus_armor': bonusArmor,
+      if (bonusShield != null) 'bonus_shield': bonusShield,
+      if (others != null) 'others': others,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  GlobalModifierTableCompanion copyWith({
+    Value<String>? uuid,
+    Value<String>? parentUuid,
+    Value<int>? rool,
+    Value<int>? bonusAttack,
+    Value<int>? expertises,
+    Value<int>? resistances,
+    Value<int>? damage,
+    Value<int>? defense,
+    Value<int>? bonusArmor,
+    Value<int>? bonusShield,
+    Value<int>? others,
+    Value<int>? rowid,
+  }) {
+    return GlobalModifierTableCompanion(
+      uuid: uuid ?? this.uuid,
+      parentUuid: parentUuid ?? this.parentUuid,
+      rool: rool ?? this.rool,
+      bonusAttack: bonusAttack ?? this.bonusAttack,
+      expertises: expertises ?? this.expertises,
+      resistances: resistances ?? this.resistances,
+      damage: damage ?? this.damage,
+      defense: defense ?? this.defense,
+      bonusArmor: bonusArmor ?? this.bonusArmor,
+      bonusShield: bonusShield ?? this.bonusShield,
+      others: others ?? this.others,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (uuid.present) {
+      map['uuid'] = Variable<String>(uuid.value);
+    }
+    if (parentUuid.present) {
+      map['parent_uuid'] = Variable<String>(parentUuid.value);
+    }
+    if (rool.present) {
+      map['rool'] = Variable<int>(rool.value);
+    }
+    if (bonusAttack.present) {
+      map['bonus_attack'] = Variable<int>(bonusAttack.value);
+    }
+    if (expertises.present) {
+      map['expertises'] = Variable<int>(expertises.value);
+    }
+    if (resistances.present) {
+      map['resistances'] = Variable<int>(resistances.value);
+    }
+    if (damage.present) {
+      map['damage'] = Variable<int>(damage.value);
+    }
+    if (defense.present) {
+      map['defense'] = Variable<int>(defense.value);
+    }
+    if (bonusArmor.present) {
+      map['bonus_armor'] = Variable<int>(bonusArmor.value);
+    }
+    if (bonusShield.present) {
+      map['bonus_shield'] = Variable<int>(bonusShield.value);
+    }
+    if (others.present) {
+      map['others'] = Variable<int>(others.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('GlobalModifierTableCompanion(')
+          ..write('uuid: $uuid, ')
+          ..write('parentUuid: $parentUuid, ')
+          ..write('rool: $rool, ')
+          ..write('bonusAttack: $bonusAttack, ')
+          ..write('expertises: $expertises, ')
+          ..write('resistances: $resistances, ')
+          ..write('damage: $damage, ')
+          ..write('defense: $defense, ')
+          ..write('bonusArmor: $bonusArmor, ')
+          ..write('bonusShield: $bonusShield, ')
+          ..write('others: $others, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -23974,6 +24889,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $CharacterBoardTableTable(this);
   late final $CharacterConditionTableTable characterConditionTable =
       $CharacterConditionTableTable(this);
+  late final $GlobalModifierTableTable globalModifierTable =
+      $GlobalModifierTableTable(this);
   late final GrimoireDAO grimoireDAO = GrimoireDAO(this as AppDatabase);
   late final BoardDAO boardDAO = BoardDAO(this as AppDatabase);
   late final MagicCharacterDAO magicCharacterDAO = MagicCharacterDAO(
@@ -24021,6 +24938,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     powerTable,
     characterBoardTable,
     characterConditionTable,
+    globalModifierTable,
   ];
 }
 
@@ -32533,6 +33451,8 @@ typedef $$ExpertiseTableTableCreateCompanionBuilder =
       required bool isTrained,
       required int createdAt,
       required int updatedAt,
+      Value<bool?> onlyTrained,
+      Value<bool?> armorPenalty,
       Value<int> rowid,
     });
 typedef $$ExpertiseTableTableUpdateCompanionBuilder =
@@ -32547,6 +33467,8 @@ typedef $$ExpertiseTableTableUpdateCompanionBuilder =
       Value<bool> isTrained,
       Value<int> createdAt,
       Value<int> updatedAt,
+      Value<bool?> onlyTrained,
+      Value<bool?> armorPenalty,
       Value<int> rowid,
     });
 
@@ -32606,6 +33528,16 @@ class $$ExpertiseTableTableFilterComposer
 
   ColumnFilters<int> get updatedAt => $composableBuilder(
     column: $table.updatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get onlyTrained => $composableBuilder(
+    column: $table.onlyTrained,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get armorPenalty => $composableBuilder(
+    column: $table.armorPenalty,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -32668,6 +33600,16 @@ class $$ExpertiseTableTableOrderingComposer
     column: $table.updatedAt,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<bool> get onlyTrained => $composableBuilder(
+    column: $table.onlyTrained,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get armorPenalty => $composableBuilder(
+    column: $table.armorPenalty,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$ExpertiseTableTableAnnotationComposer
@@ -32714,6 +33656,16 @@ class $$ExpertiseTableTableAnnotationComposer
 
   GeneratedColumn<int> get updatedAt =>
       $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+
+  GeneratedColumn<bool> get onlyTrained => $composableBuilder(
+    column: $table.onlyTrained,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<bool> get armorPenalty => $composableBuilder(
+    column: $table.armorPenalty,
+    builder: (column) => column,
+  );
 }
 
 class $$ExpertiseTableTableTableManager
@@ -32763,6 +33715,8 @@ class $$ExpertiseTableTableTableManager
                 Value<bool> isTrained = const Value.absent(),
                 Value<int> createdAt = const Value.absent(),
                 Value<int> updatedAt = const Value.absent(),
+                Value<bool?> onlyTrained = const Value.absent(),
+                Value<bool?> armorPenalty = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => ExpertiseTableCompanion(
                 uuid: uuid,
@@ -32775,6 +33729,8 @@ class $$ExpertiseTableTableTableManager
                 isTrained: isTrained,
                 createdAt: createdAt,
                 updatedAt: updatedAt,
+                onlyTrained: onlyTrained,
+                armorPenalty: armorPenalty,
                 rowid: rowid,
               ),
           createCompanionCallback:
@@ -32789,6 +33745,8 @@ class $$ExpertiseTableTableTableManager
                 required bool isTrained,
                 required int createdAt,
                 required int updatedAt,
+                Value<bool?> onlyTrained = const Value.absent(),
+                Value<bool?> armorPenalty = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => ExpertiseTableCompanion.insert(
                 uuid: uuid,
@@ -32801,6 +33759,8 @@ class $$ExpertiseTableTableTableManager
                 isTrained: isTrained,
                 createdAt: createdAt,
                 updatedAt: updatedAt,
+                onlyTrained: onlyTrained,
+                armorPenalty: armorPenalty,
                 rowid: rowid,
               ),
           withReferenceMapper: (p0) => p0
@@ -34470,6 +35430,8 @@ typedef $$CharacterBoardTableTableCreateCompanionBuilder =
       Value<String?> inTwoHands,
       Value<String?> inWearableSlots,
       Value<int?> handToHandAtributeIndex,
+      Value<bool?> arcaneArmorEnabled,
+      Value<int?> arcaneArmorBaseDefense,
       Value<int> rowid,
     });
 typedef $$CharacterBoardTableTableUpdateCompanionBuilder =
@@ -34506,6 +35468,8 @@ typedef $$CharacterBoardTableTableUpdateCompanionBuilder =
       Value<String?> inTwoHands,
       Value<String?> inWearableSlots,
       Value<int?> handToHandAtributeIndex,
+      Value<bool?> arcaneArmorEnabled,
+      Value<int?> arcaneArmorBaseDefense,
       Value<int> rowid,
     });
 
@@ -34675,6 +35639,16 @@ class $$CharacterBoardTableTableFilterComposer
 
   ColumnFilters<int> get handToHandAtributeIndex => $composableBuilder(
     column: $table.handToHandAtributeIndex,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get arcaneArmorEnabled => $composableBuilder(
+    column: $table.arcaneArmorEnabled,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get arcaneArmorBaseDefense => $composableBuilder(
+    column: $table.arcaneArmorBaseDefense,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -34847,6 +35821,16 @@ class $$CharacterBoardTableTableOrderingComposer
     column: $table.handToHandAtributeIndex,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<bool> get arcaneArmorEnabled => $composableBuilder(
+    column: $table.arcaneArmorEnabled,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get arcaneArmorBaseDefense => $composableBuilder(
+    column: $table.arcaneArmorBaseDefense,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$CharacterBoardTableTableAnnotationComposer
@@ -34987,6 +35971,16 @@ class $$CharacterBoardTableTableAnnotationComposer
     column: $table.handToHandAtributeIndex,
     builder: (column) => column,
   );
+
+  GeneratedColumn<bool> get arcaneArmorEnabled => $composableBuilder(
+    column: $table.arcaneArmorEnabled,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get arcaneArmorBaseDefense => $composableBuilder(
+    column: $table.arcaneArmorBaseDefense,
+    builder: (column) => column,
+  );
 }
 
 class $$CharacterBoardTableTableTableManager
@@ -35064,6 +36058,8 @@ class $$CharacterBoardTableTableTableManager
                 Value<String?> inTwoHands = const Value.absent(),
                 Value<String?> inWearableSlots = const Value.absent(),
                 Value<int?> handToHandAtributeIndex = const Value.absent(),
+                Value<bool?> arcaneArmorEnabled = const Value.absent(),
+                Value<int?> arcaneArmorBaseDefense = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => CharacterBoardTableCompanion(
                 uuid: uuid,
@@ -35098,6 +36094,8 @@ class $$CharacterBoardTableTableTableManager
                 inTwoHands: inTwoHands,
                 inWearableSlots: inWearableSlots,
                 handToHandAtributeIndex: handToHandAtributeIndex,
+                arcaneArmorEnabled: arcaneArmorEnabled,
+                arcaneArmorBaseDefense: arcaneArmorBaseDefense,
                 rowid: rowid,
               ),
           createCompanionCallback:
@@ -35134,6 +36132,8 @@ class $$CharacterBoardTableTableTableManager
                 Value<String?> inTwoHands = const Value.absent(),
                 Value<String?> inWearableSlots = const Value.absent(),
                 Value<int?> handToHandAtributeIndex = const Value.absent(),
+                Value<bool?> arcaneArmorEnabled = const Value.absent(),
+                Value<int?> arcaneArmorBaseDefense = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => CharacterBoardTableCompanion.insert(
                 uuid: uuid,
@@ -35168,6 +36168,8 @@ class $$CharacterBoardTableTableTableManager
                 inTwoHands: inTwoHands,
                 inWearableSlots: inWearableSlots,
                 handToHandAtributeIndex: handToHandAtributeIndex,
+                arcaneArmorEnabled: arcaneArmorEnabled,
+                arcaneArmorBaseDefense: arcaneArmorBaseDefense,
                 rowid: rowid,
               ),
           withReferenceMapper: (p0) => p0
@@ -35620,6 +36622,348 @@ typedef $$CharacterConditionTableTableProcessedTableManager =
       CharacterConditionTableData,
       PrefetchHooks Function()
     >;
+typedef $$GlobalModifierTableTableCreateCompanionBuilder =
+    GlobalModifierTableCompanion Function({
+      required String uuid,
+      required String parentUuid,
+      required int rool,
+      required int bonusAttack,
+      required int expertises,
+      required int resistances,
+      required int damage,
+      required int defense,
+      required int bonusArmor,
+      required int bonusShield,
+      required int others,
+      Value<int> rowid,
+    });
+typedef $$GlobalModifierTableTableUpdateCompanionBuilder =
+    GlobalModifierTableCompanion Function({
+      Value<String> uuid,
+      Value<String> parentUuid,
+      Value<int> rool,
+      Value<int> bonusAttack,
+      Value<int> expertises,
+      Value<int> resistances,
+      Value<int> damage,
+      Value<int> defense,
+      Value<int> bonusArmor,
+      Value<int> bonusShield,
+      Value<int> others,
+      Value<int> rowid,
+    });
+
+class $$GlobalModifierTableTableFilterComposer
+    extends Composer<_$AppDatabase, $GlobalModifierTableTable> {
+  $$GlobalModifierTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get uuid => $composableBuilder(
+    column: $table.uuid,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get parentUuid => $composableBuilder(
+    column: $table.parentUuid,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get rool => $composableBuilder(
+    column: $table.rool,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get bonusAttack => $composableBuilder(
+    column: $table.bonusAttack,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get expertises => $composableBuilder(
+    column: $table.expertises,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get resistances => $composableBuilder(
+    column: $table.resistances,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get damage => $composableBuilder(
+    column: $table.damage,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get defense => $composableBuilder(
+    column: $table.defense,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get bonusArmor => $composableBuilder(
+    column: $table.bonusArmor,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get bonusShield => $composableBuilder(
+    column: $table.bonusShield,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get others => $composableBuilder(
+    column: $table.others,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$GlobalModifierTableTableOrderingComposer
+    extends Composer<_$AppDatabase, $GlobalModifierTableTable> {
+  $$GlobalModifierTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get uuid => $composableBuilder(
+    column: $table.uuid,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get parentUuid => $composableBuilder(
+    column: $table.parentUuid,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get rool => $composableBuilder(
+    column: $table.rool,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get bonusAttack => $composableBuilder(
+    column: $table.bonusAttack,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get expertises => $composableBuilder(
+    column: $table.expertises,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get resistances => $composableBuilder(
+    column: $table.resistances,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get damage => $composableBuilder(
+    column: $table.damage,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get defense => $composableBuilder(
+    column: $table.defense,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get bonusArmor => $composableBuilder(
+    column: $table.bonusArmor,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get bonusShield => $composableBuilder(
+    column: $table.bonusShield,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get others => $composableBuilder(
+    column: $table.others,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$GlobalModifierTableTableAnnotationComposer
+    extends Composer<_$AppDatabase, $GlobalModifierTableTable> {
+  $$GlobalModifierTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get uuid =>
+      $composableBuilder(column: $table.uuid, builder: (column) => column);
+
+  GeneratedColumn<String> get parentUuid => $composableBuilder(
+    column: $table.parentUuid,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get rool =>
+      $composableBuilder(column: $table.rool, builder: (column) => column);
+
+  GeneratedColumn<int> get bonusAttack => $composableBuilder(
+    column: $table.bonusAttack,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get expertises => $composableBuilder(
+    column: $table.expertises,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get resistances => $composableBuilder(
+    column: $table.resistances,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get damage =>
+      $composableBuilder(column: $table.damage, builder: (column) => column);
+
+  GeneratedColumn<int> get defense =>
+      $composableBuilder(column: $table.defense, builder: (column) => column);
+
+  GeneratedColumn<int> get bonusArmor => $composableBuilder(
+    column: $table.bonusArmor,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get bonusShield => $composableBuilder(
+    column: $table.bonusShield,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get others =>
+      $composableBuilder(column: $table.others, builder: (column) => column);
+}
+
+class $$GlobalModifierTableTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $GlobalModifierTableTable,
+          GlobalModifierTableData,
+          $$GlobalModifierTableTableFilterComposer,
+          $$GlobalModifierTableTableOrderingComposer,
+          $$GlobalModifierTableTableAnnotationComposer,
+          $$GlobalModifierTableTableCreateCompanionBuilder,
+          $$GlobalModifierTableTableUpdateCompanionBuilder,
+          (
+            GlobalModifierTableData,
+            BaseReferences<
+              _$AppDatabase,
+              $GlobalModifierTableTable,
+              GlobalModifierTableData
+            >,
+          ),
+          GlobalModifierTableData,
+          PrefetchHooks Function()
+        > {
+  $$GlobalModifierTableTableTableManager(
+    _$AppDatabase db,
+    $GlobalModifierTableTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$GlobalModifierTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$GlobalModifierTableTableOrderingComposer(
+                $db: db,
+                $table: table,
+              ),
+          createComputedFieldComposer: () =>
+              $$GlobalModifierTableTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<String> uuid = const Value.absent(),
+                Value<String> parentUuid = const Value.absent(),
+                Value<int> rool = const Value.absent(),
+                Value<int> bonusAttack = const Value.absent(),
+                Value<int> expertises = const Value.absent(),
+                Value<int> resistances = const Value.absent(),
+                Value<int> damage = const Value.absent(),
+                Value<int> defense = const Value.absent(),
+                Value<int> bonusArmor = const Value.absent(),
+                Value<int> bonusShield = const Value.absent(),
+                Value<int> others = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => GlobalModifierTableCompanion(
+                uuid: uuid,
+                parentUuid: parentUuid,
+                rool: rool,
+                bonusAttack: bonusAttack,
+                expertises: expertises,
+                resistances: resistances,
+                damage: damage,
+                defense: defense,
+                bonusArmor: bonusArmor,
+                bonusShield: bonusShield,
+                others: others,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String uuid,
+                required String parentUuid,
+                required int rool,
+                required int bonusAttack,
+                required int expertises,
+                required int resistances,
+                required int damage,
+                required int defense,
+                required int bonusArmor,
+                required int bonusShield,
+                required int others,
+                Value<int> rowid = const Value.absent(),
+              }) => GlobalModifierTableCompanion.insert(
+                uuid: uuid,
+                parentUuid: parentUuid,
+                rool: rool,
+                bonusAttack: bonusAttack,
+                expertises: expertises,
+                resistances: resistances,
+                damage: damage,
+                defense: defense,
+                bonusArmor: bonusArmor,
+                bonusShield: bonusShield,
+                others: others,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$GlobalModifierTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $GlobalModifierTableTable,
+      GlobalModifierTableData,
+      $$GlobalModifierTableTableFilterComposer,
+      $$GlobalModifierTableTableOrderingComposer,
+      $$GlobalModifierTableTableAnnotationComposer,
+      $$GlobalModifierTableTableCreateCompanionBuilder,
+      $$GlobalModifierTableTableUpdateCompanionBuilder,
+      (
+        GlobalModifierTableData,
+        BaseReferences<
+          _$AppDatabase,
+          $GlobalModifierTableTable,
+          GlobalModifierTableData
+        >,
+      ),
+      GlobalModifierTableData,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -35701,4 +37045,6 @@ class $AppDatabaseManager {
         _db,
         _db.characterConditionTable,
       );
+  $$GlobalModifierTableTableTableManager get globalModifierTable =>
+      $$GlobalModifierTableTableTableManager(_db, _db.globalModifierTable);
 }

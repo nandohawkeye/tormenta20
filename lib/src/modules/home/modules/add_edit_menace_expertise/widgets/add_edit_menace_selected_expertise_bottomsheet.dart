@@ -125,6 +125,8 @@ class _AddEditSelectedExpertiseBottomsheetState
                                 isTrained: false,
                                 createdAt: widget.expertise?.createdAt ?? now,
                                 updatedAt: now,
+                                onlyTrained: widget.expertiseBase.onlyTrained,
+                                armorPenalty: widget.expertiseBase.armorPenalty,
                               );
 
                               Navigator.pop(context, expertise);
@@ -132,12 +134,12 @@ class _AddEditSelectedExpertiseBottomsheetState
                           },
                         ),
                       ),
-                      const SimpleCloseButton()
+                      const SimpleCloseButton(),
                     ],
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

@@ -12,6 +12,7 @@ import 'package:tormenta20/src/core/database/tables/character_board_table.dart';
 import 'package:tormenta20/src/core/database/tables/character_condition_table.dart';
 import 'package:tormenta20/src/core/database/tables/character_table.dart';
 import 'package:tormenta20/src/core/database/tables/classe_character_table.dart';
+import 'package:tormenta20/src/core/database/tables/global_modifier_table.dart';
 import 'package:tormenta20/src/core/database/tables/menace_link_board_table.dart';
 import 'package:tormenta20/src/core/database/tables/menace_table.dart';
 import 'package:tormenta20/src/shared/entities/board/board.dart';
@@ -51,6 +52,7 @@ part 'board_dao.g.dart';
     CharacterTable,
     ClasseCharacterTable,
     CharacterConditionTable,
+    GlobalModifierTable,
   ],
 )
 class BoardDAO extends DatabaseAccessor<AppDatabase> with _$BoardDAOMixin {

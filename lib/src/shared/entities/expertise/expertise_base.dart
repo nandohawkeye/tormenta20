@@ -5,11 +5,15 @@ class ExpertiseBase extends EntityBase {
   final int id;
   final String name;
   final Atribute atribute;
+  final bool onlyTrained;
+  final bool armorPenalty;
 
   const ExpertiseBase({
     required this.id,
     required this.name,
     required this.atribute,
+    required this.onlyTrained,
+    required this.armorPenalty,
   });
 
   @override

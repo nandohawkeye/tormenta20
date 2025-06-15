@@ -17,6 +17,7 @@ import 'package:tormenta20/src/core/database/tables/equipment_table.dart';
 import 'package:tormenta20/src/core/database/tables/expertise_table.dart';
 import 'package:tormenta20/src/core/database/tables/general_item_table.dart';
 import 'package:tormenta20/src/core/database/tables/general_skill_table.dart';
+import 'package:tormenta20/src/core/database/tables/global_modifier_table.dart';
 import 'package:tormenta20/src/core/database/tables/grimoire_table.dart';
 import 'package:tormenta20/src/core/database/tables/magic_menace_table.dart';
 import 'package:tormenta20/src/core/database/tables/origin_table.dart';
@@ -59,6 +60,7 @@ import 'package:tormenta20/src/shared/entities/equipament/tibars_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon_adapters.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise_adapters.dart';
+import 'package:tormenta20/src/shared/entities/global_modifiers_adapters.dart';
 import 'package:tormenta20/src/shared/entities/origin.dart';
 import 'package:tormenta20/src/shared/entities/origin_adapters.dart';
 import 'package:tormenta20/src/shared/entities/power.dart';
@@ -93,6 +95,7 @@ part 'character_dao.g.dart';
     ActionHandToHandTable,
     ActionDistanceAttackTable,
     CharacterConditionTable,
+    GlobalModifierTable,
   ],
 )
 class CharacterDAO extends DatabaseAccessor<AppDatabase>
@@ -517,6 +520,12 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
                     characterBoardTable.uuid.equalsExp(tibarsTable.parentUuid),
                   ),
                   leftOuterJoin(
+                    globalModifierTable,
+                    characterBoardTable.uuid.equalsExp(
+                      globalModifierTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
                     equipmentTable,
                     characterBoardTable.uuid.equalsExp(
                       equipmentTable.parentUuid,
@@ -602,6 +611,9 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
                     );
                     final equipmentData = row.readTableOrNull(equipmentTable);
                     final tibarsData = row.readTableOrNull(tibarsTable);
+                    final globlaModifierData = row.readTableOrNull(
+                      globalModifierTable,
+                    );
                     final adventureBackpackData = row.readTableOrNull(
                       adventureBackpackTable,
                     );
@@ -624,6 +636,7 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
                         characterBoardData.uuid: CharacterBoardDto(
                           characterBoardsData: characterBoardData,
                           tibars: tibarsData,
+                          globalModifiers: globlaModifierData,
                         ),
                       });
                     }
@@ -782,6 +795,345 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
                       .toList();
 
                   return characters;
+                }),
+      );
+    } catch (e) {
+      return (failure: Failure(e.toString()), character: null);
+    }
+  }
+
+  Future<({Failure? failure, Stream<CharacterBoard>? character})>
+  watchCharactersBoardFromUuid(String uuid) async {
+    try {
+      return (
+        failure: null,
+        character:
+            (select(characterBoardTable)..where((tbl) => tbl.uuid.equals(uuid)))
+                .join([
+                  leftOuterJoin(
+                    classeCharacterTable,
+                    characterBoardTable.uuid.equalsExp(
+                      classeCharacterTable.characterUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    expertiseTable,
+                    characterBoardTable.uuid.equalsExp(
+                      expertiseTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    characterTable,
+                    characterTable.uuid.equalsExp(
+                      characterBoardTable.parentuuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    characterConditionTable,
+                    characterTable.uuid.equalsExp(
+                      characterConditionTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    grimoireTable,
+                    characterTable.grimoireUuid.equalsExp(grimoireTable.uuid),
+                  ),
+                  leftOuterJoin(
+                    actionTable,
+                    characterBoardTable.uuid.equalsExp(actionTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    actionHandToHandTable,
+                    characterBoardTable.uuid.equalsExp(
+                      actionHandToHandTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    actionDistanceAttackTable,
+                    characterBoardTable.uuid.equalsExp(
+                      actionDistanceAttackTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    tibarsTable,
+                    characterBoardTable.uuid.equalsExp(tibarsTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    globalModifierTable,
+                    characterBoardTable.uuid.equalsExp(
+                      globalModifierTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    equipmentTable,
+                    characterBoardTable.uuid.equalsExp(
+                      equipmentTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    adventureBackpackTable,
+                    characterBoardTable.uuid.equalsExp(
+                      adventureBackpackTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    backpackTable,
+                    characterBoardTable.uuid.equalsExp(
+                      backpackTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    ammunitionTable,
+                    characterBoardTable.uuid.equalsExp(
+                      ammunitionTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    armorTable,
+                    characterBoardTable.uuid.equalsExp(armorTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    generalItemTable,
+                    characterBoardTable.uuid.equalsExp(
+                      generalItemTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    saddlebagTable,
+                    characterBoardTable.uuid.equalsExp(
+                      saddlebagTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    shieldTable,
+                    characterBoardTable.uuid.equalsExp(shieldTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    weaponTable,
+                    characterBoardTable.uuid.equalsExp(weaponTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    originTable,
+                    characterBoardTable.uuid.equalsExp(
+                      originTable.characterUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    powerTable,
+                    characterBoardTable.uuid.equalsExp(
+                      powerTable.characterUuid,
+                    ),
+                  ),
+                ])
+                .watch()
+                .map((rows) {
+                  Map<String, CharacterBoardDto> characterBoardDTO = {};
+
+                  for (var row in rows) {
+                    final classeData = row.readTableOrNull(
+                      classeCharacterTable,
+                    );
+                    final expertiseData = row.readTableOrNull(expertiseTable);
+                    final characterBoardData = row.readTable(
+                      characterBoardTable,
+                    );
+                    final grimoireData = row.readTableOrNull(grimoireTable);
+                    final actionData = row.readTableOrNull(actionTable);
+                    final conditionData = row.readTableOrNull(
+                      characterConditionTable,
+                    );
+                    final handToHandData = row.readTableOrNull(
+                      actionHandToHandTable,
+                    );
+                    final actionDistance = row.readTableOrNull(
+                      actionDistanceAttackTable,
+                    );
+                    final equipmentData = row.readTableOrNull(equipmentTable);
+                    final tibarsData = row.readTableOrNull(tibarsTable);
+                    final globlaModifierData = row.readTableOrNull(
+                      globalModifierTable,
+                    );
+                    final adventureBackpackData = row.readTableOrNull(
+                      adventureBackpackTable,
+                    );
+                    final backpackData = row.readTableOrNull(backpackTable);
+                    final ammunitionData = row.readTableOrNull(ammunitionTable);
+                    final armorData = row.readTableOrNull(armorTable);
+                    final generalItemData = row.readTableOrNull(
+                      generalItemTable,
+                    );
+                    final saddlebagData = row.readTableOrNull(saddlebagTable);
+                    final shieldData = row.readTableOrNull(shieldTable);
+                    final weaponData = row.readTableOrNull(weaponTable);
+                    final originData = row.readTableOrNull(originTable);
+                    final powerData = row.readTableOrNull(powerTable);
+
+                    if (!(characterBoardDTO.containsKey(
+                      characterBoardData.uuid,
+                    ))) {
+                      characterBoardDTO.addAll({
+                        characterBoardData.uuid: CharacterBoardDto(
+                          characterBoardsData: characterBoardData,
+                          tibars: tibarsData,
+                          globalModifiers: globlaModifierData,
+                        ),
+                      });
+                    }
+
+                    if (expertiseData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.expertises
+                            .any(
+                              (expertise) =>
+                                  expertise.uuid == expertiseData.uuid,
+                            ))) {
+                      characterBoardDTO[characterBoardData.uuid]!.expertises
+                          .add(expertiseData);
+                    }
+
+                    if (classeData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.classes
+                            .any((classe) => classe.uuid == classeData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.classes.add(
+                        classeData,
+                      );
+                    }
+
+                    if (actionData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.actions
+                            .any((item) => item.uuid == actionData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.actions.add(
+                        actionData,
+                      );
+                    }
+
+                    if (handToHandData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!
+                            .handToHands
+                            .any((item) => item.uuid == handToHandData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.handToHands
+                          .add(handToHandData);
+                    }
+
+                    if (actionDistance != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!
+                            .distanceAttacks
+                            .any((item) => item.uuid == actionDistance.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!
+                          .distanceAttacks
+                          .add(actionDistance);
+                    }
+
+                    if (equipmentData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.equipments
+                            .any((item) => item.uuid == equipmentData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.equipments
+                          .add(equipmentData);
+                    }
+
+                    if (adventureBackpackData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.equipments
+                            .any(
+                              (item) => item.uuid == adventureBackpackData.uuid,
+                            ))) {
+                      characterBoardDTO[characterBoardData.uuid]!
+                          .adventureBackpacks
+                          .add(adventureBackpackData);
+                    }
+
+                    if (backpackData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.backpacks
+                            .any((item) => item.uuid == backpackData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.backpacks.add(
+                        backpackData,
+                      );
+                    }
+
+                    if (ammunitionData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!
+                            .ammunitions
+                            .any((item) => item.uuid == ammunitionData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.ammunitions
+                          .add(ammunitionData);
+                    }
+
+                    if (armorData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.armors
+                            .any((item) => item.uuid == armorData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.armors.add(
+                        armorData,
+                      );
+                    }
+
+                    if (generalItemData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!
+                            .generalItens
+                            .any(
+                              (item) => item.uuid == generalItemData.uuid,
+                            ))) {
+                      characterBoardDTO[characterBoardData.uuid]!.generalItens
+                          .add(generalItemData);
+                    }
+
+                    if (saddlebagData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.saddlebags
+                            .any((item) => item.uuid == saddlebagData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.saddlebags
+                          .add(saddlebagData);
+                    }
+
+                    if (shieldData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.shields
+                            .any((item) => item.uuid == shieldData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.shields.add(
+                        shieldData,
+                      );
+                    }
+
+                    if (weaponData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.weapons
+                            .any((item) => item.uuid == weaponData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.weapons.add(
+                        weaponData,
+                      );
+                    }
+
+                    if (originData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.origins
+                            .any((item) => item.uuid == originData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.origins.add(
+                        originData,
+                      );
+                    }
+
+                    if (powerData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.powers
+                            .any((item) => item.uuid == powerData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.powers.add(
+                        powerData,
+                      );
+                    }
+
+                    if (conditionData != null &&
+                        !(characterBoardDTO[characterBoardData.uuid]!.conditions
+                            .any((item) => item.uuid == conditionData.uuid))) {
+                      characterBoardDTO[characterBoardData.uuid]!.conditions
+                          .add(conditionData);
+                    }
+
+                    if (grimoireData != null) {
+                      characterBoardDTO[characterBoardData.uuid]!.grimoireData =
+                          grimoireData;
+                    }
+                  }
+
+                  final characters = characterBoardDTO.entries
+                      .map(
+                        (entry) =>
+                            CharacterBoardAdapters.fromDriftDto(entry.value),
+                      )
+                      .toList();
+
+                  return characters.first;
                 }),
       );
     } catch (e) {
@@ -1209,6 +1561,14 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
           ]);
         }
 
+        if (character.globalModifiers != null) {
+          batch.insertAllOnConflictUpdate(globalModifierTable, [
+            GlobalModifiersAdapters.toDriftCompanion(
+              character.globalModifiers!,
+            ),
+          ]);
+        }
+
         if (character.expertises.isNotEmpty) {
           batch.insertAllOnConflictUpdate(
             expertiseTable,
@@ -1364,6 +1724,12 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
         )..where((tbl) => tbl.parentUuid.equals(character.uuid))).go();
       }
 
+      if (character.globalModifiers != null) {
+        await (delete(
+          generalItemTable,
+        )..where((tbl) => tbl.parentUuid.equals(character.uuid))).go();
+      }
+
       if (character.actions.isNotEmpty) {
         await (delete(
           actionHandToHandTable,
@@ -1411,6 +1777,10 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
 
         await (delete(
           equipmentTable,
+        )..where((tbl) => tbl.parentUuid.equals(character.uuid))).go();
+
+        await (delete(
+          tibarsTable,
         )..where((tbl) => tbl.parentUuid.equals(character.uuid))).go();
       }
 

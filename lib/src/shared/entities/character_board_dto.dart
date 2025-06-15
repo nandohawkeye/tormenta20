@@ -24,5 +24,11 @@ class CharacterBoardDto {
   List<ExpertiseTableData> expertises = [];
   List<CharacterConditionTableData> conditions = [];
 
-  CharacterBoardDto({required this.characterBoardsData, tibars});
+  GlobalModifierTableData? globalModifiers;
+
+  CharacterBoardDto({
+    required this.characterBoardsData,
+    tibars,
+    this.globalModifiers,
+  });
 }

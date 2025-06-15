@@ -16,6 +16,8 @@ class Expertise extends ExpertiseBase {
     required super.id,
     required super.name,
     required super.atribute,
+    required super.onlyTrained,
+    required super.armorPenalty,
     required this.parentUuid,
     required this.uuid,
     required this.isTrained,
@@ -23,10 +25,7 @@ class Expertise extends ExpertiseBase {
     required this.updatedAt,
   });
 
-  Expertise cloneWith({
-    required String uuid,
-    required String parentUuid,
-  }) {
+  Expertise cloneWith({required String uuid, required String parentUuid}) {
     final now = DateTime.now();
     return Expertise(
       id: id,
@@ -39,6 +38,8 @@ class Expertise extends ExpertiseBase {
       isTrained: isTrained,
       createdAt: now,
       updatedAt: now,
+      onlyTrained: onlyTrained,
+      armorPenalty: armorPenalty,
     );
   }
 

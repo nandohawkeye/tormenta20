@@ -32,6 +32,8 @@ import 'package:tormenta20/src/shared/entities/equipament/weapon_adapters.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise_adapters.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise_base.dart';
+import 'package:tormenta20/src/shared/entities/global_modifiers.dart';
+import 'package:tormenta20/src/shared/entities/global_modifiers_adapters.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire_adapters.dart';
 import 'package:tormenta20/src/shared/entities/origin.dart';
 import 'package:tormenta20/src/shared/entities/origin_adapters.dart';
@@ -126,6 +128,17 @@ abstract class CharacterBoardAdapters {
       handToHandAtribute:
           Atribute.values[dto.characterBoardsData.handToHandAtributeIndex ?? 0],
       conditions: conditions,
+      inLeftHand: dto.characterBoardsData.inLeftHand,
+      inRightHand: dto.characterBoardsData.inRightHand,
+      inTwoHands: dto.characterBoardsData.inTwoHands,
+      inWearableSlots: dto.characterBoardsData.inWearableSlots,
+
+      globalModifiers: dto.globalModifiers == null
+          ? null
+          : GlobalModifiersAdapters.fromDriftData(dto.globalModifiers!),
+      arcaneArmorEnabled: dto.characterBoardsData.arcaneArmorEnabled ?? false,
+      arcaneArmorBaseDefense:
+          dto.characterBoardsData.arcaneArmorBaseDefense ?? 0,
     );
   }
 
@@ -175,6 +188,9 @@ abstract class CharacterBoardAdapters {
       actions: [],
       conditions: [],
       handToHandAtribute: Atribute.values[data.handToHandAtributeIndex ?? 0],
+      globalModifiers: null,
+      arcaneArmorEnabled: data.arcaneArmorEnabled ?? false,
+      arcaneArmorBaseDefense: data.arcaneArmorBaseDefense ?? 0,
     );
   }
 
@@ -261,6 +277,20 @@ abstract class CharacterBoardAdapters {
       }
     }
 
+    final globalModifier = GlobalModifiers(
+      parentUuid: characterUuid,
+      uuid: const Uuid().v7(),
+      rool: 0,
+      bonusAttack: 0,
+      expertises: 0,
+      resistances: 0,
+      damage: 0,
+      defense: 0,
+      bonusArmor: 0,
+      bonusShield: 0,
+      others: 0,
+    );
+
     return CharacterBoard(
       uuid: characterUuid,
       parentuuid: entity.uuid,
@@ -301,6 +331,9 @@ abstract class CharacterBoardAdapters {
       actions: actions,
       conditions: [],
       handToHandAtribute: Atribute.strength,
+      globalModifiers: globalModifier,
+      arcaneArmorEnabled: false,
+      arcaneArmorBaseDefense: 0,
     );
   }
 
@@ -337,6 +370,9 @@ abstract class CharacterBoardAdapters {
       inRightHand: Value(entity.inRightHand),
       inTwoHands: Value(entity.inTwoHands),
       inWearableSlots: Value(entity.inWearableSlots),
+      handToHandAtributeIndex: Value(entity.handToHandAtribute.index),
+      arcaneArmorBaseDefense: Value(entity.arcaneArmorBaseDefense),
+      arcaneArmorEnabled: Value(entity.arcaneArmorEnabled),
     );
   }
 
@@ -383,6 +419,9 @@ abstract class CharacterBoardAdapters {
       equipments: [],
       actions: [],
       conditions: [],
+      globalModifiers: null,
+      arcaneArmorEnabled: data['arcane_armor_enabled'] ?? false,
+      arcaneArmorBaseDefense: data['arcane_armor_base_defense'] ?? 0,
     );
   }
 
@@ -422,6 +461,9 @@ abstract class CharacterBoardAdapters {
       'in_right_hand': entity.inRightHand,
       'in_two_hands': entity.inTwoHands,
       'in_wearable_slots': entity.inWearableSlots,
+      'hand_to_hand_atribute_index': entity.handToHandAtribute.index,
+      'arcane_armor_base_defense': entity.arcaneArmorBaseDefense,
+      'arcane_armor_enabled': entity.arcaneArmorEnabled,
       'classe_indexes': entity.classes
           .map((cl) => cl.type.index)
           .toList()

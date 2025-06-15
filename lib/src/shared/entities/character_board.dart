@@ -8,6 +8,7 @@ import 'package:tormenta20/src/shared/entities/creature_size_category.dart';
 import 'package:tormenta20/src/shared/entities/entity_base.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise.dart';
+import 'package:tormenta20/src/shared/entities/global_modifiers.dart';
 import 'package:tormenta20/src/shared/entities/grimoire/grimoire.dart';
 import 'package:tormenta20/src/shared/entities/origin.dart';
 import 'package:tormenta20/src/shared/entities/power.dart';
@@ -52,6 +53,9 @@ class CharacterBoard extends EntityBase {
   final String? inWearableSlots;
   final Atribute handToHandAtribute;
   final List<CharacterConditions> conditions;
+  final GlobalModifiers? globalModifiers;
+  final bool arcaneArmorEnabled;
+  final int arcaneArmorBaseDefense;
 
   CharacterBoard({
     required this.uuid,
@@ -93,6 +97,9 @@ class CharacterBoard extends EntityBase {
     this.inWearableSlots,
     required this.handToHandAtribute,
     required this.conditions,
+    required this.globalModifiers,
+    required this.arcaneArmorEnabled,
+    required this.arcaneArmorBaseDefense,
   });
 
   CharacterBoard copyWith({
@@ -136,6 +143,9 @@ class CharacterBoard extends EntityBase {
     String? inWearableSlots,
     Atribute? handToHandAtribute,
     List<CharacterConditions>? conditions,
+    GlobalModifiers? globalModifiers,
+    bool? arcaneArmorEnabled,
+    int? arcaneArmorBaseDefense,
   }) {
     return CharacterBoard(
       uuid: uuid ?? this.uuid,
@@ -177,6 +187,10 @@ class CharacterBoard extends EntityBase {
       inWearableSlots: inWearableSlots ?? this.inWearableSlots,
       conditions: conditions ?? this.conditions,
       handToHandAtribute: handToHandAtribute ?? this.handToHandAtribute,
+      globalModifiers: globalModifiers ?? this.globalModifiers,
+      arcaneArmorEnabled: arcaneArmorEnabled ?? this.arcaneArmorEnabled,
+      arcaneArmorBaseDefense:
+          arcaneArmorBaseDefense ?? this.arcaneArmorBaseDefense,
     );
   }
 

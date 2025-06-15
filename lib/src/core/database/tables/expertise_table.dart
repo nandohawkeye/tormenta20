@@ -11,6 +11,8 @@ class ExpertiseTable extends Table {
   BoolColumn get isTrained => boolean()();
   IntColumn get createdAt => integer()();
   IntColumn get updatedAt => integer()();
+  BoolColumn get onlyTrained => boolean().nullable()();
+  BoolColumn get armorPenalty => boolean().nullable()();
 
   @override
   Set<Column>? get primaryKey => {uuid};

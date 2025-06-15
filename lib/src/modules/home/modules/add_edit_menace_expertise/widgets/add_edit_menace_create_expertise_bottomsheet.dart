@@ -37,7 +37,7 @@ class _AddEditSelectedExpertiseBottomsheetState
     extends State<AddEditMenaceCreateExpertiseBottomsheet> {
   final _formKey = GlobalKey<FormState>();
   late final AddEditMenaceCreateExpertiseBottomsheetAtributeStore
-      _atributeStore;
+  _atributeStore;
   String? _name;
   void _setName(String? value) => _name = value;
 
@@ -158,6 +158,10 @@ class _AddEditSelectedExpertiseBottomsheetState
                                 isTrained: false,
                                 createdAt: widget.expertise?.createdAt ?? now,
                                 updatedAt: now,
+                                onlyTrained:
+                                    widget.expertise?.onlyTrained ?? false,
+                                armorPenalty:
+                                    widget.expertise?.armorPenalty ?? false,
                               );
 
                               Navigator.pop(context, expertise);
@@ -165,12 +169,12 @@ class _AddEditSelectedExpertiseBottomsheetState
                           },
                         ),
                       ),
-                      const SimpleCloseButton()
+                      const SimpleCloseButton(),
                     ],
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

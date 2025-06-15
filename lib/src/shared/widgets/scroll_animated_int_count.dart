@@ -31,10 +31,17 @@ class _ScrollAnimatedIntCountState extends State<ScrollAnimatedIntCount> {
   }
 
   void _initializeControllers() {
+    for (var controller in _controllers) {
+      controller.dispose();
+    }
+
+    _controllers.clear();
+
     _controllers = List.generate(
       widget.count.toString().length,
       (index) => FixedExtentScrollController(
-          initialItem: int.parse(widget.count.toString()[index])),
+        initialItem: int.parse(widget.count.toString()[index]),
+      ),
     );
   }
 
@@ -58,7 +65,7 @@ class _ScrollAnimatedIntCountState extends State<ScrollAnimatedIntCount> {
   void _updateControllers() {
     String countStr = widget.count.abs().toString();
 
-    if (_controllers.length < countStr.length) {
+    if (_controllers.length != countStr.length) {
       _initializeControllers();
     }
 
@@ -74,7 +81,7 @@ class _ScrollAnimatedIntCountState extends State<ScrollAnimatedIntCount> {
 
   @override
   Widget build(BuildContext context) {
-    String countStr = widget.count.toString();
+    String countStr = widget.count.abs().toString();
 
     return Center(
       child: Row(
@@ -84,14 +91,10 @@ class _ScrollAnimatedIntCountState extends State<ScrollAnimatedIntCount> {
             SizedBox(
               width: widget.width,
               height: widget.height,
-              child: Center(
-                child: Text(
-                  '-',
-                  style: widget.textStyle,
-                ),
-              ),
+              child: Center(child: Text('-', style: widget.textStyle)),
             ),
           Row(
+            key: ValueKey<int>(countStr.length),
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(countStr.length, (index) {
               return SizedBox(

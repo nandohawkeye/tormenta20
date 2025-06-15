@@ -33,6 +33,8 @@ class CharacterBoardTable extends Table {
   TextColumn get inTwoHands => text().nullable()();
   TextColumn get inWearableSlots => text().nullable()();
   IntColumn get handToHandAtributeIndex => integer().nullable()();
+  BoolColumn get arcaneArmorEnabled => boolean().nullable()();
+  IntColumn get arcaneArmorBaseDefense => integer().nullable()();
 
   @override
   Set<Column>? get primaryKey => {uuid};

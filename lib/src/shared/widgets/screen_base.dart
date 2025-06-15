@@ -7,7 +7,7 @@ class ScreenBase extends StatelessWidget {
   const ScreenBase({
     super.key,
     required this.body,
-    required this.label,
+    this.label,
     this.onSave,
     this.extraRightWidgets,
     this.onBack,
@@ -19,7 +19,7 @@ class ScreenBase extends StatelessWidget {
   });
 
   final Widget body;
-  final String label;
+  final String? label;
   final ScrollController? scrollController;
   final Function()? onSave;
   final List<Widget>? extraRightWidgets;
@@ -37,12 +37,21 @@ class ScreenBase extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ScreenHeader(label: label),
-          const Divider(),
+          if (label != null)
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ScreenHeader(label: label!),
+                const Divider(),
+              ],
+            ),
+
           Expanded(
             child: SingleChildScrollView(
               padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+              ),
               controller: scrollController,
               child: body,
             ),
@@ -55,7 +64,7 @@ class ScreenBase extends StatelessWidget {
             label: onSaveLabel,
             onBack: onBack,
             isEnableBackButton: isEnableBackButton,
-          )
+          ),
         ],
       ),
     );

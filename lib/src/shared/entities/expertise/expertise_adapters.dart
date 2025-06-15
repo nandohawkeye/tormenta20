@@ -22,6 +22,8 @@ abstract class ExpertiseAdapters {
       valueFinal: valueFinal,
       createdAt: now,
       updatedAt: now,
+      onlyTrained: base.onlyTrained,
+      armorPenalty: base.armorPenalty,
     );
   }
 
@@ -40,6 +42,8 @@ abstract class ExpertiseAdapters {
       uuid: const Uuid().v4(),
       createdAt: now,
       updatedAt: now,
+      onlyTrained: base.onlyTrained,
+      armorPenalty: base.armorPenalty,
     );
   }
 
@@ -53,6 +57,8 @@ abstract class ExpertiseAdapters {
       isTrained: data.isTrained,
       bonus: data.bonus,
       valueFinal: data.valueFinal,
+      onlyTrained: data.onlyTrained ?? false,
+      armorPenalty: data.armorPenalty ?? false,
       createdAt: DateTime.fromMillisecondsSinceEpoch(data.createdAt),
       updatedAt: DateTime.fromMillisecondsSinceEpoch(data.updatedAt),
     );
@@ -68,6 +74,8 @@ abstract class ExpertiseAdapters {
       isTrained: data['is_trained'],
       bonus: data['bonus'],
       valueFinal: data['value_final'],
+      onlyTrained: data['only_trained'] ?? false,
+      armorPenalty: data['armor_penalty'] ?? false,
       createdAt: DateTime.fromMillisecondsSinceEpoch(data['created_at']),
       updatedAt: DateTime.fromMillisecondsSinceEpoch(data['updated_at']),
     );
@@ -85,6 +93,8 @@ abstract class ExpertiseAdapters {
       'value_final': entity.valueFinal,
       'created_at': entity.createdAt.millisecondsSinceEpoch,
       'updated_at': entity.updatedAt.millisecondsSinceEpoch,
+      'only_trained': entity.onlyTrained,
+      'armor_penalty': entity.armorPenalty,
     };
   }
 
@@ -100,6 +110,8 @@ abstract class ExpertiseAdapters {
       isTrained: Value(entity.isTrained),
       createdAt: Value(entity.createdAt.millisecondsSinceEpoch),
       updatedAt: Value(entity.updatedAt.millisecondsSinceEpoch),
+      onlyTrained: Value(entity.onlyTrained),
+      armorPenalty: Value(entity.armorPenalty),
     );
   }
 }
