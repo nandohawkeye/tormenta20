@@ -186,6 +186,283 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
     }
   }
 
+  Future<({Failure? failure, Character? character})> getCharacter(
+    String uuid,
+  ) async {
+    try {
+      return (
+        failure: null,
+        character:
+            await (select(characterTable)
+                  ..where((tbl) => tbl.uuid.equals(uuid)))
+                .join([
+                  leftOuterJoin(
+                    classeCharacterTable,
+                    characterTable.uuid.equalsExp(
+                      classeCharacterTable.characterUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    characterBoardTable,
+                    characterTable.uuid.equalsExp(
+                      characterBoardTable.parentuuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    grimoireTable,
+                    characterTable.grimoireUuid.equalsExp(grimoireTable.uuid),
+                  ),
+                  leftOuterJoin(
+                    actionTable,
+                    characterTable.uuid.equalsExp(actionTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    actionHandToHandTable,
+                    characterTable.uuid.equalsExp(
+                      actionHandToHandTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    actionDistanceAttackTable,
+                    characterTable.uuid.equalsExp(
+                      actionDistanceAttackTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    equipmentTable,
+                    characterTable.uuid.equalsExp(equipmentTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    adventureBackpackTable,
+                    characterTable.uuid.equalsExp(
+                      adventureBackpackTable.parentUuid,
+                    ),
+                  ),
+                  leftOuterJoin(
+                    backpackTable,
+                    characterTable.uuid.equalsExp(backpackTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    ammunitionTable,
+                    characterTable.uuid.equalsExp(ammunitionTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    armorTable,
+                    characterTable.uuid.equalsExp(armorTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    generalItemTable,
+                    characterTable.uuid.equalsExp(generalItemTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    saddlebagTable,
+                    characterTable.uuid.equalsExp(saddlebagTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    shieldTable,
+                    characterTable.uuid.equalsExp(shieldTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    weaponTable,
+                    characterTable.uuid.equalsExp(weaponTable.parentUuid),
+                  ),
+                  leftOuterJoin(
+                    originTable,
+                    characterTable.uuid.equalsExp(originTable.characterUuid),
+                  ),
+                  leftOuterJoin(
+                    powerTable,
+                    characterTable.uuid.equalsExp(powerTable.characterUuid),
+                  ),
+                ])
+                .get()
+                .then((rows) {
+                  Map<String, CharacterDto> characterDTO = {};
+
+                  for (var row in rows) {
+                    final characterData = row.readTable(characterTable);
+                    final classeData = row.readTable(classeCharacterTable);
+                    final characterBoardData = row.readTableOrNull(
+                      characterBoardTable,
+                    );
+                    final grimoireData = row.readTableOrNull(grimoireTable);
+                    final actionData = row.readTableOrNull(actionTable);
+                    final handToHandData = row.readTableOrNull(
+                      actionHandToHandTable,
+                    );
+                    final actionDistance = row.readTableOrNull(
+                      actionDistanceAttackTable,
+                    );
+                    final equipmentData = row.readTableOrNull(equipmentTable);
+                    final adventureBackpackData = row.readTableOrNull(
+                      adventureBackpackTable,
+                    );
+                    final backpackData = row.readTableOrNull(backpackTable);
+                    final ammunitionData = row.readTableOrNull(ammunitionTable);
+                    final armorData = row.readTableOrNull(armorTable);
+                    final generalItemData = row.readTableOrNull(
+                      generalItemTable,
+                    );
+                    final saddlebagData = row.readTableOrNull(saddlebagTable);
+                    final shieldData = row.readTableOrNull(shieldTable);
+                    final weaponData = row.readTableOrNull(weaponTable);
+                    final originData = row.readTableOrNull(originTable);
+                    final powerData = row.readTableOrNull(powerTable);
+
+                    if (!(characterDTO.containsKey(characterData.uuid))) {
+                      characterDTO.addAll({
+                        characterData.uuid: CharacterDto(characterData),
+                      });
+                    }
+
+                    characterDTO[characterData.uuid]!.classe = classeData;
+
+                    if (characterBoardData != null &&
+                        !(characterDTO[characterData.uuid]!.characterBoardsData
+                            .any(
+                              (characterBoard) =>
+                                  characterBoard.uuid ==
+                                  characterBoardData.uuid,
+                            ))) {
+                      characterDTO[characterData.uuid]!.characterBoardsData.add(
+                        characterBoardData,
+                      );
+                    }
+
+                    if (actionData != null &&
+                        !(characterDTO[characterData.uuid]!.actions.any(
+                          (item) => item.uuid == actionData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.actions.add(actionData);
+                    }
+
+                    if (handToHandData != null &&
+                        !(characterDTO[characterData.uuid]!.handToHands.any(
+                          (item) => item.uuid == handToHandData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.handToHands.add(
+                        handToHandData,
+                      );
+                    }
+
+                    if (actionDistance != null &&
+                        !(characterDTO[characterData.uuid]!.distanceAttacks.any(
+                          (item) => item.uuid == actionDistance.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.distanceAttacks.add(
+                        actionDistance,
+                      );
+                    }
+
+                    if (equipmentData != null &&
+                        !(characterDTO[characterData.uuid]!.equipments.any(
+                          (item) => item.uuid == equipmentData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.equipments.add(
+                        equipmentData,
+                      );
+                    }
+
+                    if (adventureBackpackData != null &&
+                        !(characterDTO[characterData.uuid]!.equipments.any(
+                          (item) => item.uuid == adventureBackpackData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.adventureBackpacks.add(
+                        adventureBackpackData,
+                      );
+                    }
+
+                    if (backpackData != null &&
+                        !(characterDTO[characterData.uuid]!.backpacks.any(
+                          (item) => item.uuid == backpackData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.backpacks.add(
+                        backpackData,
+                      );
+                    }
+
+                    if (ammunitionData != null &&
+                        !(characterDTO[characterData.uuid]!.ammunitions.any(
+                          (item) => item.uuid == ammunitionData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.ammunitions.add(
+                        ammunitionData,
+                      );
+                    }
+
+                    if (armorData != null &&
+                        !(characterDTO[characterData.uuid]!.armors.any(
+                          (item) => item.uuid == armorData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.armors.add(armorData);
+                    }
+
+                    if (generalItemData != null &&
+                        !(characterDTO[characterData.uuid]!.generalItens.any(
+                          (item) => item.uuid == generalItemData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.generalItens.add(
+                        generalItemData,
+                      );
+                    }
+
+                    if (saddlebagData != null &&
+                        !(characterDTO[characterData.uuid]!.saddlebags.any(
+                          (item) => item.uuid == saddlebagData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.saddlebags.add(
+                        saddlebagData,
+                      );
+                    }
+
+                    if (shieldData != null &&
+                        !(characterDTO[characterData.uuid]!.shields.any(
+                          (item) => item.uuid == shieldData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.shields.add(shieldData);
+                    }
+
+                    if (weaponData != null &&
+                        !(characterDTO[characterData.uuid]!.weapons.any(
+                          (item) => item.uuid == weaponData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.weapons.add(weaponData);
+                    }
+
+                    if (originData != null &&
+                        !(characterDTO[characterData.uuid]!.origins.any(
+                          (item) => item.uuid == originData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.origins.add(originData);
+                    }
+
+                    if (powerData != null &&
+                        !(characterDTO[characterData.uuid]!.powers.any(
+                          (item) => item.uuid == powerData.uuid,
+                        ))) {
+                      characterDTO[characterData.uuid]!.powers.add(powerData);
+                    }
+
+                    if (grimoireData != null) {
+                      characterDTO[characterData.uuid]!.grimoireData =
+                          grimoireData;
+                    }
+                  }
+
+                  final characters = characterDTO.entries
+                      .map(
+                        (entry) => CharacterAdapters.fromDriftDto(entry.value),
+                      )
+                      .toList();
+
+                  return characters.isEmpty ? null : characters.first;
+                }),
+      );
+    } catch (e) {
+      return (failure: Failure(e.toString()), character: null);
+    }
+  }
+
   Future<({Failure? failure, Stream<Character?>? character})> watchCharacter(
     String uuid,
   ) async {

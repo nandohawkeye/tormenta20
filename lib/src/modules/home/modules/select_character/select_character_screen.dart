@@ -48,14 +48,13 @@ class _SelectCharacterScreenState extends State<SelectCharacterScreen> {
             if (characters.isEmpty) {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (_) => const AddEditCharacter(),
-                ),
+                MaterialPageRoute(builder: (_) => const AddEditCharacter()),
               );
             } else {
               if (selected == null) return;
 
               final failiure = await _store.saveCharacterBoard(selected);
+
               if (failiure == null) {
                 Navigator.pop(context);
               }
@@ -80,7 +79,7 @@ class _SelectCharacterScreenState extends State<SelectCharacterScreen> {
                         );
                       },
                     ),
-                  )
+                  ),
                 ],
           body: characters.isEmpty
               ? Padding(
@@ -90,8 +89,10 @@ class _SelectCharacterScreenState extends State<SelectCharacterScreen> {
                     children: [
                       Icon(FontAwesomeIcons.ghost),
                       T20UI.smallSpaceWidth,
-                      Text('Nenhum personagem encontrado',
-                          style: TextStyle(fontSize: 16)),
+                      Text(
+                        'Nenhum personagem encontrado',
+                        style: TextStyle(fontSize: 16),
+                      ),
                     ],
                   ),
                 )

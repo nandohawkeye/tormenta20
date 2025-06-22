@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/character/widgets/character_grimoire_button.dart';
 import 'package:tormenta20/src/modules/home/modules/character_record/character_record_store.dart';
-import 'package:tormenta20/src/modules/home/modules/character_record/widgets/character_record_atributes.dart';
 import 'package:tormenta20/src/modules/home/modules/character_record/widgets/character_record_image.dart';
 import 'package:tormenta20/src/modules/home/modules/character_record/widgets/character_record_indicators.dart';
 import 'package:tormenta20/src/modules/home/modules/character_record/widgets/character_record_info.dart';
-import 'package:tormenta20/src/modules/home/modules/character_record/widgets/character_record_other_infos_list.dart';
 import 'package:tormenta20/src/modules/home/modules/character_record/widgets/character_record_tabs.dart';
+import 'package:tormenta20/src/modules/home/modules/character_record/widgets/stages/character_record_actions_stage.dart';
+import 'package:tormenta20/src/modules/home/modules/character_record/widgets/stages/character_record_conditions_stage.dart';
+import 'package:tormenta20/src/modules/home/modules/character_record/widgets/stages/character_record_equipments_stage.dart';
+import 'package:tormenta20/src/modules/home/modules/character_record/widgets/stages/character_record_expertises_stage.dart';
+import 'package:tormenta20/src/modules/home/modules/character_record/widgets/stages/character_record_origins_stage.dart';
+import 'package:tormenta20/src/modules/home/modules/character_record/widgets/stages/character_record_powers_stage.dart';
+import 'package:tormenta20/src/modules/home/modules/character_record/widgets/stages/character_record_principal_stage.dart';
 import 'package:tormenta20/src/shared/entities/character_board.dart';
 import 'package:tormenta20/src/shared/widgets/screen_base.dart';
 
@@ -87,12 +92,22 @@ class _CharacterRecordScreenState extends State<CharacterRecordScreen> {
           CharacterRecordIndicators(_store),
           T20UI.spaceHeight,
           const Divider(),
-          T20UI.spaceHeight,
-          CharacterRecordAtributes(_store.characterBoard),
-          T20UI.spaceHeight,
-          const Divider(),
-          T20UI.spaceHeight,
-          CharacterRecordOtherInfosList(_store.characterBoard),
+          ListenableBuilder(
+            listenable: _store.tabIndex,
+            builder: (_, _) {
+              final index = _store.tabIndex.value;
+              return switch (index) {
+                0 => CharacterRecordPrincipalStage(_store),
+                1 => CharacterRecordActionsStage(_store),
+                2 => CharacterRecordPowersStage(_store),
+                3 => CharacterRecordExpertisesStage(_store),
+                4 => CharacterRecordEquipmentsStage(_store),
+                5 => CharacterRecordOriginsStage(_store),
+                6 => CharacterRecordConditionsStage(_store),
+                _ => const SizedBox.shrink(),
+              };
+            },
+          ),
         ],
       ),
     );

@@ -36,7 +36,7 @@ abstract class ExpertiseAdapters {
     return Expertise(
       id: base.id,
       name: base.name,
-      isTrained: false,
+      isTrained: isTrained,
       atribute: base.atribute,
       parentUuid: characterUuid,
       uuid: const Uuid().v4(),

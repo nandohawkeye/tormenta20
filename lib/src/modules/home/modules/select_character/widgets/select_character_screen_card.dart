@@ -57,11 +57,6 @@ class SelectCharacterScreenCard extends StatelessWidget {
                           height: imageSize,
                           width: imageSize,
                           fit: BoxFit.cover,
-                          cacheHeight:
-                              PerformanceUtils.cacheImageSizeCalculated(
-                                  context, imageSize),
-                          cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                              context, imageSize),
                           errorBuilder: (_, __, ___) => const SizedBox.shrink(),
                         ),
                       ),
@@ -74,9 +69,13 @@ class SelectCharacterScreenCard extends StatelessWidget {
                           fit: BoxFit.cover,
                           cacheHeight:
                               PerformanceUtils.cacheImageSizeCalculated(
-                                  context, imageSize),
+                                context,
+                                imageSize,
+                              ),
                           cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                              context, imageSize),
+                            context,
+                            imageSize,
+                          ),
                         ),
                       ),
                     Assets.images.bordaToken.image(
@@ -84,9 +83,13 @@ class SelectCharacterScreenCard extends StatelessWidget {
                       width: imageSize + 2,
                       fit: BoxFit.cover,
                       cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
-                          context, imageSize + 2),
+                        context,
+                        imageSize + 2,
+                      ),
                       cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                          context, imageSize + 2),
+                        context,
+                        imageSize + 2,
+                      ),
                     ),
                   ],
                 ),
@@ -105,52 +108,66 @@ class SelectCharacterScreenCard extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       '${CharacterUtils.handleClasseTypeTitle(character.classe?.type.name ?? '')} - ${CharacterUtils.handleBroodTitle(character.brood.name)} - ${CreatureSizeUtils.handleTitle(character.creatureSize.name)}',
-                      style:
-                          TextStyle(fontSize: 12, color: palette.textSecundary),
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: palette.textSecundary,
+                      ),
                     ),
                     const SizedBox(height: 4),
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Icon(FontAwesomeIcons.shieldHalved,
-                            size: 12, color: palette.textSecundary),
+                        Icon(
+                          FontAwesomeIcons.shieldHalved,
+                          size: 12,
+                          color: palette.textSecundary,
+                        ),
                         const SizedBox(width: 4),
                         Text(
                           character.defense.toString().padLeft(2, '0'),
                           maxLines: 2,
                           style: TextStyle(
-                              fontSize: 12, color: palette.textSecundary),
+                            fontSize: 12,
+                            color: palette.textSecundary,
+                          ),
                         ),
                         T20UI.spaceWidth,
-                        Icon(FontAwesomeIcons.solidHeart,
-                            size: 12, color: palette.textSecundary),
+                        Icon(
+                          FontAwesomeIcons.solidHeart,
+                          size: 12,
+                          color: palette.textSecundary,
+                        ),
                         const SizedBox(width: 4),
                         Text(
                           character.life.toString().padLeft(2, '0'),
                           maxLines: 2,
                           style: TextStyle(
-                              fontSize: 12, color: palette.textSecundary),
+                            fontSize: 12,
+                            color: palette.textSecundary,
+                          ),
                         ),
                         T20UI.spaceWidth,
-                        Icon(FontAwesomeIcons.handSparkles,
-                            size: 12, color: palette.textSecundary),
+                        Icon(
+                          FontAwesomeIcons.handSparkles,
+                          size: 12,
+                          color: palette.textSecundary,
+                        ),
                         const SizedBox(width: 4),
                         Text(
                           character.mana.toString().padLeft(2, '0'),
                           maxLines: 2,
                           style: TextStyle(
-                              fontSize: 12, color: palette.textSecundary),
+                            fontSize: 12,
+                            color: palette.textSecundary,
+                          ),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
-              CustomChecked(
-                value: isSelected,
-                isEnabledToTap: false,
-              ),
+              CustomChecked(value: isSelected, isEnabledToTap: false),
               T20UI.smallSpaceWidth,
             ],
           ),

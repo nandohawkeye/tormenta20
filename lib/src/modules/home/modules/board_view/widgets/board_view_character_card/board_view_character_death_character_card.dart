@@ -60,12 +60,6 @@ class BoardViewCharacterDeathCharacterCard extends StatelessWidget {
                                 height: imageSize,
                                 width: imageSize,
                                 fit: BoxFit.cover,
-                                cacheHeight:
-                                    PerformanceUtils.cacheImageSizeCalculated(
-                                        context, imageSize),
-                                cacheWidth:
-                                    PerformanceUtils.cacheImageSizeCalculated(
-                                        context, imageSize),
                                 errorBuilder: (_, __, ___) =>
                                     const SizedBox.shrink(),
                               ),
@@ -79,10 +73,14 @@ class BoardViewCharacterDeathCharacterCard extends StatelessWidget {
                                 fit: BoxFit.cover,
                                 cacheHeight:
                                     PerformanceUtils.cacheImageSizeCalculated(
-                                        context, imageSize),
+                                      context,
+                                      imageSize,
+                                    ),
                                 cacheWidth:
                                     PerformanceUtils.cacheImageSizeCalculated(
-                                        context, imageSize),
+                                      context,
+                                      imageSize,
+                                    ),
                               ),
                             ),
                           Assets.images.bordaToken.image(
@@ -91,10 +89,14 @@ class BoardViewCharacterDeathCharacterCard extends StatelessWidget {
                             fit: BoxFit.cover,
                             cacheHeight:
                                 PerformanceUtils.cacheImageSizeCalculated(
-                                    context, imageSize + 6),
+                                  context,
+                                  imageSize + 6,
+                                ),
                             cacheWidth:
                                 PerformanceUtils.cacheImageSizeCalculated(
-                                    context, imageSize + 6),
+                                  context,
+                                  imageSize + 6,
+                                ),
                           ),
                         ],
                       ),
@@ -109,7 +111,8 @@ class BoardViewCharacterDeathCharacterCard extends StatelessWidget {
                             '${character.name} - ${CharacterUtils.handleBroodTitle(character.brood.name)}',
                             maxLines: 2,
                             style: const TextStyle(
-                                fontFamily: FontFamily.tormenta),
+                              fontFamily: FontFamily.tormenta,
+                            ),
                           ),
                           const SizedBox(height: 4),
                           Row(
@@ -124,8 +127,10 @@ class BoardViewCharacterDeathCharacterCard extends StatelessWidget {
                                 style: const TextStyle(fontSize: 12),
                               ),
                               T20UI.spaceWidth,
-                              const Icon(FontAwesomeIcons.shieldHalved,
-                                  size: 12),
+                              const Icon(
+                                FontAwesomeIcons.shieldHalved,
+                                size: 12,
+                              ),
                               const SizedBox(width: 4),
                               Text(
                                 character.defense.toString().padLeft(2, '0'),
@@ -141,8 +146,10 @@ class BoardViewCharacterDeathCharacterCard extends StatelessWidget {
                                 style: const TextStyle(fontSize: 12),
                               ),
                               T20UI.spaceWidth,
-                              const Icon(FontAwesomeIcons.handSparkles,
-                                  size: 12),
+                              const Icon(
+                                FontAwesomeIcons.handSparkles,
+                                size: 12,
+                              ),
                               const SizedBox(width: 4),
                               Text(
                                 character.mana.toString().padLeft(2, '0'),
@@ -156,19 +163,23 @@ class BoardViewCharacterDeathCharacterCard extends StatelessWidget {
                             children: [
                               Icon(
                                 CharacterAlignmentTypeUtils.handleIcon(
-                                    character.alignmentType.name),
+                                  character.alignmentType.name,
+                                ),
                                 size: 12,
                               ),
                               const SizedBox(width: 4),
                               Text(
                                 CharacterAlignmentTypeUtils.handleTitle(
-                                    character.alignmentType.name),
+                                  character.alignmentType.name,
+                                ),
                                 maxLines: 2,
                                 style: const TextStyle(
-                                    fontWeight: FontWeight.w500, fontSize: 12),
-                              )
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 12,
+                                ),
+                              ),
                             ],
-                          )
+                          ),
                         ],
                       ),
                     ),

@@ -40,10 +40,7 @@ class BoardCardPlayerImage extends StatelessWidget {
                 ),
                 child: const Padding(
                   padding: EdgeInsets.only(left: 1, bottom: 2),
-                  child: Icon(
-                    FontAwesomeIcons.solidUser,
-                    size: 14,
-                  ),
+                  child: Icon(FontAwesomeIcons.solidUser, size: 14),
                 ),
               ),
             ),
@@ -54,10 +51,6 @@ class BoardCardPlayerImage extends StatelessWidget {
                   height: minusSize,
                   width: minusSize,
                   fit: BoxFit.cover,
-                  cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
-                      context, minusSize),
-                  cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                      context, minusSize),
                   errorBuilder: (_, __, ___) => const SizedBox.shrink(),
                 ),
               ),
@@ -68,18 +61,26 @@ class BoardCardPlayerImage extends StatelessWidget {
                 width: minusSize,
                 fit: BoxFit.cover,
                 cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
-                    context, minusSize),
+                  context,
+                  minusSize,
+                ),
                 cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                    context, minusSize),
+                  context,
+                  minusSize,
+                ),
               ),
             Assets.images.bordaToken.image(
               height: defaultSize,
               width: defaultSize,
               cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
-                  context, defaultSize),
+                context,
+                defaultSize,
+              ),
               cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                  context, defaultSize),
-            )
+                context,
+                defaultSize,
+              ),
+            ),
           ],
         ),
       ),

@@ -60,12 +60,6 @@ class BoardViewMenaneFieldCard extends StatelessWidget {
                               height: imageSize,
                               width: imageSize,
                               fit: BoxFit.cover,
-                              cacheHeight:
-                                  PerformanceUtils.cacheImageSizeCalculated(
-                                      context, imageSize),
-                              cacheWidth:
-                                  PerformanceUtils.cacheImageSizeCalculated(
-                                      context, imageSize),
                               errorBuilder: (_, __, ___) =>
                                   const SizedBox.shrink(),
                             ),
@@ -79,10 +73,14 @@ class BoardViewMenaneFieldCard extends StatelessWidget {
                               fit: BoxFit.cover,
                               cacheHeight:
                                   PerformanceUtils.cacheImageSizeCalculated(
-                                      context, imageSize),
+                                    context,
+                                    imageSize,
+                                  ),
                               cacheWidth:
                                   PerformanceUtils.cacheImageSizeCalculated(
-                                      context, imageSize),
+                                    context,
+                                    imageSize,
+                                  ),
                             ),
                           ),
                         Assets.images.bordaTokenAmeaca.image(
@@ -91,9 +89,13 @@ class BoardViewMenaneFieldCard extends StatelessWidget {
                           fit: BoxFit.cover,
                           cacheHeight:
                               PerformanceUtils.cacheImageSizeCalculated(
-                                  context, imageSize + 6),
+                                context,
+                                imageSize + 6,
+                              ),
                           cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                              context, imageSize + 6),
+                            context,
+                            imageSize + 6,
+                          ),
                         ),
                       ],
                     ),
@@ -107,8 +109,9 @@ class BoardViewMenaneFieldCard extends StatelessWidget {
                         Text(
                           '${menace.name} - ND ${menace.nd}',
                           maxLines: 2,
-                          style:
-                              const TextStyle(fontFamily: FontFamily.tormenta),
+                          style: const TextStyle(
+                            fontFamily: FontFamily.tormenta,
+                          ),
                         ),
                         const SizedBox(height: 4),
                         Text(
@@ -144,8 +147,10 @@ class BoardViewMenaneFieldCard extends StatelessWidget {
                               style: const TextStyle(fontSize: 12),
                             ),
                             T20UI.spaceWidth,
-                            const Icon(FontAwesomeIcons.personRunning,
-                                size: 12),
+                            const Icon(
+                              FontAwesomeIcons.personRunning,
+                              size: 12,
+                            ),
                             const SizedBox(width: 2),
                             Text(
                               menace.initiative.toString().padLeft(2, '0'),
@@ -157,12 +162,13 @@ class BoardViewMenaneFieldCard extends StatelessWidget {
                             const SizedBox(width: 2),
                             Text(
                               TreasureTypeUtils.handleMenaceTitle(
-                                  menace.treasures?.name ?? 'none'),
+                                menace.treasures?.name ?? 'none',
+                              ),
                               maxLines: 2,
                               style: const TextStyle(fontSize: 12),
                             ),
                           ],
-                        )
+                        ),
                       ],
                     ),
                   ),

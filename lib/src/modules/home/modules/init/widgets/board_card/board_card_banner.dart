@@ -8,11 +8,7 @@ import 'package:tormenta20/src/shared/extensions/context_ext.dart';
 import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 
 class BoardCardBanner extends StatelessWidget {
-  const BoardCardBanner({
-    super.key,
-    required this.width,
-    required this.board,
-  });
+  const BoardCardBanner({super.key, required this.width, required this.board});
 
   final double width;
   final Board board;
@@ -35,19 +31,19 @@ class BoardCardBanner extends StatelessWidget {
                       height: height,
                       width: width,
                       fit: BoxFit.cover,
-                      cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
-                          context, height),
-                      cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                          context, width),
                       errorBuilder: (_, __, ___) => Image.asset(
                         Assets.images.taverna.path,
                         height: height,
                         width: width,
                         fit: BoxFit.cover,
                         cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
-                            context, height + 50),
+                          context,
+                          height + 50,
+                        ),
                         cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                            context, width),
+                          context,
+                          width,
+                        ),
                       ),
                     )
                   : Image.asset(
@@ -56,9 +52,13 @@ class BoardCardBanner extends StatelessWidget {
                       width: width,
                       fit: BoxFit.cover,
                       cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
-                          context, height + 50),
+                        context,
+                        height + 50,
+                      ),
                       cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                          context, width),
+                        context,
+                        width,
+                      ),
                     ),
               SizedBox(
                 height: height,
@@ -76,7 +76,7 @@ class BoardCardBanner extends StatelessWidget {
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

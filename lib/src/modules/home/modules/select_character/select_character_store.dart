@@ -22,8 +22,20 @@ class SelectCharacterStore extends ChangeNotifier {
   final _storageService = SelectCharacterStorageService();
 
   Future<Failure?> saveCharacterBoard(Character character) async {
-    final characterBoard =
-        CharacterBoardAdapters.createFromCharacter(character, _boardUuid);
+    final completeCharacterResp = await _storageService.getCharacter(character);
+
+    if (completeCharacterResp.failure != null) {
+      return completeCharacterResp.failure;
+    }
+
+    if (completeCharacterResp.character == null) {
+      return const Failure('wrong result');
+    }
+
+    final characterBoard = CharacterBoardAdapters.createFromCharacter(
+      completeCharacterResp.character!,
+      _boardUuid,
+    );
 
     return await _storageService.saveCharacterBoard(characterBoard);
   }

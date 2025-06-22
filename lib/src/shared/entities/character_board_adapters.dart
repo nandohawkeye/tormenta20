@@ -259,6 +259,8 @@ abstract class CharacterBoardAdapters {
       ),
     );
 
+    print('equipments: $equipments');
+
     for (var expertise in entity.trainedExpertises) {
       expertises.add(
         ExpertiseAdapters.createfromBaseCharacter(
@@ -270,7 +272,7 @@ abstract class CharacterBoardAdapters {
     }
 
     for (var base in baseExpertises) {
-      if (!(entity.trainedExpertises.any((e) => e.id == base.id))) {
+      if (!(expertises.any((e) => e.id == base.id))) {
         expertises.add(
           ExpertiseAdapters.createfromBaseCharacter(base, characterUuid, false),
         );

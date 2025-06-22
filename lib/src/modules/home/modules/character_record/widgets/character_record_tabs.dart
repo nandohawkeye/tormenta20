@@ -28,7 +28,7 @@ class CharacterRecordTabs extends StatelessWidget {
           ),
           T20UI.smallSpaceWidth,
           CharacterTabCard(
-            label: 'Ataques',
+            label: 'Ações',
             tabIndex: 1,
             selected: selected,
             onTap: changeTabIndex,

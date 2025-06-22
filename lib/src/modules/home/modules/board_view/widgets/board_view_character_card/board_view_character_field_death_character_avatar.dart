@@ -48,10 +48,6 @@ class BoardViewCharacterFieldDeathCharacterAvatar extends StatelessWidget {
                       height: imageSize,
                       width: imageSize,
                       fit: BoxFit.cover,
-                      cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
-                          context, imageSize),
-                      cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                          context, imageSize),
                       errorBuilder: (_, __, ___) => const SizedBox.shrink(),
                     ),
                   ),
@@ -63,9 +59,13 @@ class BoardViewCharacterFieldDeathCharacterAvatar extends StatelessWidget {
                       width: imageSize,
                       fit: BoxFit.cover,
                       cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
-                          context, imageSize),
+                        context,
+                        imageSize,
+                      ),
                       cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                          context, imageSize),
+                        context,
+                        imageSize,
+                      ),
                     ),
                   ),
                 Assets.images.bordaToken.image(
@@ -73,9 +73,13 @@ class BoardViewCharacterFieldDeathCharacterAvatar extends StatelessWidget {
                   width: imageSize + 6,
                   fit: BoxFit.cover,
                   cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
-                      context, imageSize + 6),
+                    context,
+                    imageSize + 6,
+                  ),
                   cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                      context, imageSize + 6),
+                    context,
+                    imageSize + 6,
+                  ),
                 ),
               ],
             ),

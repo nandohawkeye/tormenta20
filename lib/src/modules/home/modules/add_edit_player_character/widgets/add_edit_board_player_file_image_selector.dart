@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 import 'package:tormenta20/src/shared/widgets/token_selector/token_card_bord.dart';
 import 'package:tormenta20/src/shared/widgets/token_selector/token_card_tag.dart';
 import 'package:tormenta20/src/shared/widgets/error_image_placeholder.dart';
@@ -32,8 +31,9 @@ class AddEditBoardPlayerFileImageSelector extends StatelessWidget {
         InkWell(
           borderRadius: BorderRadius.circular(20000),
           onTap: () async {
-            FilePickerResult? result =
-                await GetIt.I<FilePicker>().pickFiles(type: FileType.image);
+            FilePickerResult? result = await GetIt.I<FilePicker>().pickFiles(
+              type: FileType.image,
+            );
 
             final path = result?.files.single.path;
 
@@ -65,12 +65,7 @@ class AddEditBoardPlayerFileImageSelector extends StatelessWidget {
                                   height: size,
                                   width: size,
                                   fit: BoxFit.cover,
-                                  cacheHeight:
-                                      PerformanceUtils.cacheImageSizeCalculated(
-                                          context, size),
-                                  cacheWidth:
-                                      PerformanceUtils.cacheImageSizeCalculated(
-                                          context, size),
+
                                   errorBuilder: (_, __, ___) =>
                                       const ErrorImagePlaceholder(),
                                 ),
@@ -84,13 +79,8 @@ class AddEditBoardPlayerFileImageSelector extends StatelessWidget {
                   ),
                 ),
                 if (filePath != null)
-                  TokenCardBord(
-                    size: size,
-                    isMenace: isMenace,
-                  ),
-                const TokenCardTag(
-                  tag: 'Galeria',
-                )
+                  TokenCardBord(size: size, isMenace: isMenace),
+                const TokenCardTag(tag: 'Galeria'),
               ],
             ),
           ),

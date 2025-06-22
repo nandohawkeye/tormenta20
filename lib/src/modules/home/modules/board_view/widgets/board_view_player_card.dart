@@ -60,12 +60,6 @@ class BoardViewPlayerCard extends StatelessWidget {
                                 height: imageSize,
                                 width: imageSize,
                                 fit: BoxFit.cover,
-                                cacheHeight:
-                                    PerformanceUtils.cacheImageSizeCalculated(
-                                        context, imageSize),
-                                cacheWidth:
-                                    PerformanceUtils.cacheImageSizeCalculated(
-                                        context, imageSize),
                                 errorBuilder: (_, __, ___) =>
                                     const SizedBox.shrink(),
                               ),
@@ -79,10 +73,14 @@ class BoardViewPlayerCard extends StatelessWidget {
                                 fit: BoxFit.cover,
                                 cacheHeight:
                                     PerformanceUtils.cacheImageSizeCalculated(
-                                        context, imageSize),
+                                      context,
+                                      imageSize,
+                                    ),
                                 cacheWidth:
                                     PerformanceUtils.cacheImageSizeCalculated(
-                                        context, imageSize),
+                                      context,
+                                      imageSize,
+                                    ),
                               ),
                             ),
                           Assets.images.bordaToken.image(
@@ -91,10 +89,14 @@ class BoardViewPlayerCard extends StatelessWidget {
                             fit: BoxFit.cover,
                             cacheHeight:
                                 PerformanceUtils.cacheImageSizeCalculated(
-                                    context, imageSize + 6),
+                                  context,
+                                  imageSize + 6,
+                                ),
                             cacheWidth:
                                 PerformanceUtils.cacheImageSizeCalculated(
-                                    context, imageSize + 6),
+                                  context,
+                                  imageSize + 6,
+                                ),
                           ),
                         ],
                       ),
@@ -109,7 +111,8 @@ class BoardViewPlayerCard extends StatelessWidget {
                             '${player.playerName} - ${player.characterName}',
                             maxLines: 2,
                             style: const TextStyle(
-                                fontFamily: FontFamily.tormenta),
+                              fontFamily: FontFamily.tormenta,
+                            ),
                           ),
                           const SizedBox(height: 4),
                           Text(
@@ -122,8 +125,10 @@ class BoardViewPlayerCard extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const Icon(FontAwesomeIcons.shieldHalved,
-                                  size: 12),
+                              const Icon(
+                                FontAwesomeIcons.shieldHalved,
+                                size: 12,
+                              ),
                               const SizedBox(width: 4),
                               Text(
                                 player.defense.toString().padLeft(2, '0'),
@@ -139,8 +144,10 @@ class BoardViewPlayerCard extends StatelessWidget {
                                 style: const TextStyle(fontSize: 12),
                               ),
                               T20UI.spaceWidth,
-                              const Icon(FontAwesomeIcons.handSparkles,
-                                  size: 12),
+                              const Icon(
+                                FontAwesomeIcons.handSparkles,
+                                size: 12,
+                              ),
                               const SizedBox(width: 4),
                               Text(
                                 player.mana.toString().padLeft(2, '0'),
@@ -148,8 +155,10 @@ class BoardViewPlayerCard extends StatelessWidget {
                                 style: const TextStyle(fontSize: 12),
                               ),
                               T20UI.spaceWidth,
-                              const Icon(FontAwesomeIcons.personRunning,
-                                  size: 12),
+                              const Icon(
+                                FontAwesomeIcons.personRunning,
+                                size: 12,
+                              ),
                               const SizedBox(width: 2),
                               Text(
                                 player.initiative.toString().padLeft(2, '0'),
@@ -157,7 +166,7 @@ class BoardViewPlayerCard extends StatelessWidget {
                                 style: const TextStyle(fontSize: 12),
                               ),
                             ],
-                          )
+                          ),
                         ],
                       ),
                     ),

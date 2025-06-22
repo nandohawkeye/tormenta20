@@ -5,8 +5,14 @@ import 'package:tormenta20/src/shared/services/drift_storage_service.dart';
 
 class SelectCharacterStorageService extends DriftStorageService {
   Future<({Failure? failure, Stream<List<Character>>? characters})>
-      wachCharacters() {
+  wachCharacters() {
     return super.dataBase.characterDAO.watchCharacters();
+  }
+
+  Future<({Character? character, Failure? failure})> getCharacter(
+    Character character,
+  ) {
+    return super.dataBase.characterDAO.getCharacter(character.uuid);
   }
 
   Future<Failure?> saveCharacterBoard(CharacterBoard character) {

@@ -78,20 +78,11 @@ class BoardViewMaterialCard extends StatelessWidget {
                               width: size,
                               fit: BoxFit.cover,
                               File(material.path),
-                              cacheHeight:
-                                  PerformanceUtils.cacheImageSizeCalculated(
-                                      context, size),
-                              cacheWidth:
-                                  PerformanceUtils.cacheImageSizeCalculated(
-                                      context, size),
                               errorBuilder: (_, __, ___) =>
                                   const ErrorImagePlaceholder(),
                             ),
                           )
-                        : BoardMaterialCardPdfThumb(
-                            material.path,
-                            size: size,
-                          ),
+                        : BoardMaterialCardPdfThumb(material.path, size: size),
                   ),
                   if (mode == ShowBoardMaterialBottomSheetMode.delete)
                     Positioned(
@@ -102,7 +93,7 @@ class BoardViewMaterialCard extends StatelessWidget {
                         isEnabledToTap: false,
                         disabledColor: palette.backgroundLevelOne,
                       ),
-                    )
+                    ),
                 ],
               ),
             ),

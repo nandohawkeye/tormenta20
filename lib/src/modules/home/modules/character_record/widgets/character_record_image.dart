@@ -21,6 +21,7 @@ class CharacterRecordImage extends StatelessWidget {
             width: 115,
             height: 115,
             child: Stack(
+              alignment: Alignment.bottomRight,
               children: [
                 CharacterAvatarImage(
                   character: character,
@@ -28,8 +29,8 @@ class CharacterRecordImage extends StatelessWidget {
                   imagePadding: 10,
                 ),
                 AnimationConfiguration.synchronized(
-                  duration: const Duration(seconds: 1),
-                  child: FadeInAnimation(
+                  child: ScaleAnimation(
+                    duration: const Duration(seconds: 1),
                     child: Align(
                       alignment: Alignment.bottomRight,
                       child: DivinityCard(character.divinityId),

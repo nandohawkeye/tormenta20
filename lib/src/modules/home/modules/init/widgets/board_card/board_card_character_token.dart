@@ -61,10 +61,7 @@ class BoardCardCharacterToken extends StatelessWidget {
                         ),
                         child: const Padding(
                           padding: EdgeInsets.only(left: 1, bottom: 2),
-                          child: Icon(
-                            FontAwesomeIcons.solidUser,
-                            size: 14,
-                          ),
+                          child: Icon(FontAwesomeIcons.solidUser, size: 14),
                         ),
                       ),
                     ),
@@ -75,11 +72,6 @@ class BoardCardCharacterToken extends StatelessWidget {
                           height: minusSize,
                           width: minusSize,
                           fit: BoxFit.cover,
-                          cacheHeight:
-                              PerformanceUtils.cacheImageSizeCalculated(
-                                  context, minusSize),
-                          cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                              context, minusSize),
                           errorBuilder: (_, __, ___) => const SizedBox.shrink(),
                         ),
                       ),
@@ -90,18 +82,26 @@ class BoardCardCharacterToken extends StatelessWidget {
                         width: minusSize,
                         fit: BoxFit.cover,
                         cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
-                            context, minusSize),
+                          context,
+                          minusSize,
+                        ),
                         cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                            context, minusSize),
+                          context,
+                          minusSize,
+                        ),
                       ),
                     Assets.images.bordaToken.image(
                       height: defaultSize,
                       width: defaultSize,
                       cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
-                          context, defaultSize),
+                        context,
+                        defaultSize,
+                      ),
                       cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                          context, defaultSize),
-                    )
+                        context,
+                        defaultSize,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -123,27 +123,33 @@ class BoardCardCharacterToken extends StatelessWidget {
                 Text(
                   CharacterUtils.handleBroodTitle(character!.brood.name),
                   style: const TextStyle(
-                      fontWeight: FontWeight.w500, fontSize: 12),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                  ),
                 ),
                 T20UI.smallSpaceWidth,
                 Icon(
                   CharacterAlignmentTypeUtils.handleIcon(
-                      character!.alignmentType.name),
+                    character!.alignmentType.name,
+                  ),
                   size: 12,
                 ),
                 const SizedBox(width: 4),
                 Text(
                   CharacterAlignmentTypeUtils.handleTitle(
-                      character!.alignmentType.name),
+                    character!.alignmentType.name,
+                  ),
                   maxLines: 2,
                   style: const TextStyle(
-                      fontWeight: FontWeight.w500, fontSize: 12),
-                )
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 6),
           ],
-        )
+        ),
       ],
     );
   }

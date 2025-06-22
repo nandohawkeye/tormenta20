@@ -38,10 +38,6 @@ class BoardViewBanner extends StatelessWidget {
                         height: height,
                         width: width,
                         fit: BoxFit.cover,
-                        cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
-                            context, height),
-                        cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                            context, width),
                       ),
                     )
                   : Image.asset(
@@ -50,9 +46,13 @@ class BoardViewBanner extends StatelessWidget {
                       width: width,
                       fit: BoxFit.cover,
                       cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
-                          context, height),
+                        context,
+                        height,
+                      ),
                       cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                          context, width),
+                        context,
+                        width,
+                      ),
                     ),
               SizedBox(
                 height: height,
@@ -73,24 +73,27 @@ class BoardViewBanner extends StatelessWidget {
               ),
               if (board.mode == BoardModeType.master)
                 Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Padding(
-                      padding: T20UI.horizontalPadding,
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                            color: palette.backgroundLevelTwo
-                                .withValues(alpha: .4),
-                            borderRadius: T20UI.borderRadius),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 6, horizontal: 12),
-                          child: Text(
-                            '${board.level}˚ Nivel',
-                            style: const TextStyle(fontWeight: FontWeight.w500),
-                          ),
+                  alignment: Alignment.bottomLeft,
+                  child: Padding(
+                    padding: T20UI.horizontalPadding,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: palette.backgroundLevelTwo.withValues(alpha: .4),
+                        borderRadius: T20UI.borderRadius,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 6,
+                          horizontal: 12,
+                        ),
+                        child: Text(
+                          '${board.level}˚ Nivel',
+                          style: const TextStyle(fontWeight: FontWeight.w500),
                         ),
                       ),
-                    ))
+                    ),
+                  ),
+                ),
             ],
           ),
         ),

@@ -68,12 +68,6 @@ class SelectMenacesScreenCard extends StatelessWidget {
                                 height: imageSize,
                                 width: imageSize,
                                 fit: BoxFit.cover,
-                                cacheHeight:
-                                    PerformanceUtils.cacheImageSizeCalculated(
-                                        context, imageSize),
-                                cacheWidth:
-                                    PerformanceUtils.cacheImageSizeCalculated(
-                                        context, imageSize),
                                 errorBuilder: (_, __, ___) =>
                                     const SizedBox.shrink(),
                               ),
@@ -87,10 +81,14 @@ class SelectMenacesScreenCard extends StatelessWidget {
                                 fit: BoxFit.cover,
                                 cacheHeight:
                                     PerformanceUtils.cacheImageSizeCalculated(
-                                        context, imageSize),
+                                      context,
+                                      imageSize,
+                                    ),
                                 cacheWidth:
                                     PerformanceUtils.cacheImageSizeCalculated(
-                                        context, imageSize),
+                                      context,
+                                      imageSize,
+                                    ),
                               ),
                             ),
                           Assets.images.bordaTokenAmeaca.image(
@@ -99,10 +97,14 @@ class SelectMenacesScreenCard extends StatelessWidget {
                             fit: BoxFit.cover,
                             cacheHeight:
                                 PerformanceUtils.cacheImageSizeCalculated(
-                                    context, imageSize + 2),
+                                  context,
+                                  imageSize + 2,
+                                ),
                             cacheWidth:
                                 PerformanceUtils.cacheImageSizeCalculated(
-                                    context, imageSize + 2),
+                                  context,
+                                  imageSize + 2,
+                                ),
                           ),
                         ],
                       ),
@@ -117,7 +119,8 @@ class SelectMenacesScreenCard extends StatelessWidget {
                             '${menace.name} - ND ${menace.nd}',
                             maxLines: 2,
                             style: const TextStyle(
-                                fontFamily: FontFamily.tormenta),
+                              fontFamily: FontFamily.tormenta,
+                            ),
                           ),
                           const SizedBox(height: 4),
                           Text(
@@ -129,8 +132,10 @@ class SelectMenacesScreenCard extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const Icon(FontAwesomeIcons.shieldHalved,
-                                  size: 12),
+                              const Icon(
+                                FontAwesomeIcons.shieldHalved,
+                                size: 12,
+                              ),
                               const SizedBox(width: 4),
                               Text(
                                 menace.defense.toString().padLeft(2, '0'),
@@ -146,8 +151,10 @@ class SelectMenacesScreenCard extends StatelessWidget {
                                 style: const TextStyle(fontSize: 12),
                               ),
                               T20UI.spaceWidth,
-                              const Icon(FontAwesomeIcons.handSparkles,
-                                  size: 12),
+                              const Icon(
+                                FontAwesomeIcons.handSparkles,
+                                size: 12,
+                              ),
                               const SizedBox(width: 4),
                               Text(
                                 menace.mana.toString().padLeft(2, '0'),
@@ -155,8 +162,10 @@ class SelectMenacesScreenCard extends StatelessWidget {
                                 style: const TextStyle(fontSize: 12),
                               ),
                               T20UI.spaceWidth,
-                              const Icon(FontAwesomeIcons.personRunning,
-                                  size: 12),
+                              const Icon(
+                                FontAwesomeIcons.personRunning,
+                                size: 12,
+                              ),
                               const SizedBox(width: 2),
                               Text(
                                 menace.initiative.toString().padLeft(2, '0'),
@@ -168,12 +177,13 @@ class SelectMenacesScreenCard extends StatelessWidget {
                               const SizedBox(width: 2),
                               Text(
                                 TreasureTypeUtils.handleMenaceTitle(
-                                    menace.treasures?.name ?? 'none'),
+                                  menace.treasures?.name ?? 'none',
+                                ),
                                 maxLines: 2,
                                 style: const TextStyle(fontSize: 12),
                               ),
                             ],
-                          )
+                          ),
                         ],
                       ),
                     ),

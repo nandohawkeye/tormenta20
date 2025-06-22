@@ -39,14 +39,6 @@ class CharacterAvatarImage extends StatelessWidget {
                   height: imageSize,
                   width: imageSize,
                   fit: BoxFit.cover,
-                  cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
-                    context,
-                    imageSize,
-                  ),
-                  cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                    context,
-                    imageSize,
-                  ),
                   errorBuilder: (_, __, ___) => const SizedBox.shrink(),
                 ),
               ),

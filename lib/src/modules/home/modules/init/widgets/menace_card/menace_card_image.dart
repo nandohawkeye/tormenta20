@@ -37,10 +37,7 @@ class MenaceCardImage extends StatelessWidget {
                         color: palette.backgroundLevelTwo,
                       ),
                       child: const Center(
-                        child: Icon(
-                          FontAwesomeIcons.ghost,
-                          size: 24,
-                        ),
+                        child: Icon(FontAwesomeIcons.ghost, size: 24),
                       ),
                     ),
                   ),
@@ -57,10 +54,6 @@ class MenaceCardImage extends StatelessWidget {
                         height: size,
                         width: size,
                         fit: BoxFit.cover,
-                        cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
-                            context, size),
-                        cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                            context, size),
                         errorBuilder: (_, __, ___) => const SizedBox.shrink(),
                       ),
                     ),
@@ -78,9 +71,13 @@ class MenaceCardImage extends StatelessWidget {
                         width: size,
                         fit: BoxFit.cover,
                         cacheHeight: PerformanceUtils.cacheImageSizeCalculated(
-                            context, size),
+                          context,
+                          size,
+                        ),
                         cacheWidth: PerformanceUtils.cacheImageSizeCalculated(
-                            context, size),
+                          context,
+                          size,
+                        ),
                         errorBuilder: (_, __, ___) => const SizedBox.shrink(),
                       ),
                     ),

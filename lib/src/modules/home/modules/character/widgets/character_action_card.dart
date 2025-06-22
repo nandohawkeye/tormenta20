@@ -71,7 +71,7 @@ class CharacterActionCard extends StatelessWidget {
                     children: [
                       if (action.damageDices != null)
                         Text(
-                          '(${action.damageDices}+${action.mediumDamageValue ?? 0}, ${action.critical ?? 20}*${action.criticalMultiplier ?? 1})',
+                          '(${action.damageDices}${(action.mediumDamageValue ?? 0) > 0 ? '+${(action.mediumDamageValue ?? 0)}' : ''}, ${action.critical ?? 20} *${action.criticalMultiplier ?? 1})',
                           style: TextStyle(color: palette.textSecundary),
                         ),
                       if (action.extraDamageDices != null)
