@@ -156,14 +156,44 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/alfange.png
+  AssetGenImage get alfange => const AssetGenImage('assets/images/alfange.png');
+
+  /// File path: assets/images/archery.png
+  AssetGenImage get archery => const AssetGenImage('assets/images/archery.png');
+
+  /// File path: assets/images/armor.png
+  AssetGenImage get armor => const AssetGenImage('assets/images/armor.png');
+
+  /// File path: assets/images/arrow.png
+  AssetGenImage get arrow => const AssetGenImage('assets/images/arrow.png');
+
+  /// File path: assets/images/axe.png
+  AssetGenImage get axe => const AssetGenImage('assets/images/axe.png');
+
   /// File path: assets/images/borda_token.png
   AssetGenImage get bordaToken => const AssetGenImage('assets/images/borda_token.png');
 
   /// File path: assets/images/borda_token_ameaca.png
   AssetGenImage get bordaTokenAmeaca => const AssetGenImage('assets/images/borda_token_ameaca.png');
 
+  /// File path: assets/images/bullet.png
+  AssetGenImage get bullet => const AssetGenImage('assets/images/bullet.png');
+
   /// Directory path: assets/images/caracters
   $AssetsImagesCaractersGen get caracters => const $AssetsImagesCaractersGen();
+
+  /// File path: assets/images/coin.png
+  AssetGenImage get coin => const AssetGenImage('assets/images/coin.png');
+
+  /// File path: assets/images/corrente.png
+  AssetGenImage get corrente => const AssetGenImage('assets/images/corrente.png');
+
+  /// File path: assets/images/crossbow.png
+  AssetGenImage get crossbow => const AssetGenImage('assets/images/crossbow.png');
+
+  /// File path: assets/images/dagger.png
+  AssetGenImage get dagger => const AssetGenImage('assets/images/dagger.png');
 
   /// File path: assets/images/developer.jpg
   AssetGenImage get developer => const AssetGenImage('assets/images/developer.jpg');
@@ -171,17 +201,32 @@ class $AssetsImagesGen {
   /// File path: assets/images/fire.png
   AssetGenImage get fire => const AssetGenImage('assets/images/fire.png');
 
+  /// File path: assets/images/gun.png
+  AssetGenImage get gun => const AssetGenImage('assets/images/gun.png');
+
+  /// File path: assets/images/halberd.png
+  AssetGenImage get halberd => const AssetGenImage('assets/images/halberd.png');
+
   /// File path: assets/images/instagram.png
   AssetGenImage get instagram => const AssetGenImage('assets/images/instagram.png');
 
+  /// File path: assets/images/item.png
+  AssetGenImage get item => const AssetGenImage('assets/images/item.png');
+
   /// File path: assets/images/jambo.jpg
   AssetGenImage get jambo => const AssetGenImage('assets/images/jambo.jpg');
+
+  /// File path: assets/images/katana.png
+  AssetGenImage get katana => const AssetGenImage('assets/images/katana.png');
 
   /// File path: assets/images/knight.png
   AssetGenImage get knight => const AssetGenImage('assets/images/knight.png');
 
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+
+  /// File path: assets/images/mace.png
+  AssetGenImage get mace => const AssetGenImage('assets/images/mace.png');
 
   /// File path: assets/images/manuscript.png
   AssetGenImage get manuscript => const AssetGenImage('assets/images/manuscript.png');
@@ -195,8 +240,32 @@ class $AssetsImagesGen {
   /// File path: assets/images/pdf.png
   AssetGenImage get pdf => const AssetGenImage('assets/images/pdf.png');
 
+  /// File path: assets/images/poison.png
+  AssetGenImage get poison => const AssetGenImage('assets/images/poison.png');
+
+  /// File path: assets/images/potion.png
+  AssetGenImage get potion => const AssetGenImage('assets/images/potion.png');
+
+  /// File path: assets/images/ring.png
+  AssetGenImage get ring => const AssetGenImage('assets/images/ring.png');
+
+  /// File path: assets/images/scythe.png
+  AssetGenImage get scythe => const AssetGenImage('assets/images/scythe.png');
+
+  /// File path: assets/images/shield.png
+  AssetGenImage get shield => const AssetGenImage('assets/images/shield.png');
+
+  /// File path: assets/images/sledgehammer.png
+  AssetGenImage get sledgehammer => const AssetGenImage('assets/images/sledgehammer.png');
+
+  /// File path: assets/images/spear.png
+  AssetGenImage get spear => const AssetGenImage('assets/images/spear.png');
+
   /// File path: assets/images/spellbook.png
   AssetGenImage get spellbook => const AssetGenImage('assets/images/spellbook.png');
+
+  /// File path: assets/images/sword.png
+  AssetGenImage get sword => const AssetGenImage('assets/images/sword.png');
 
   /// File path: assets/images/taverna.png
   AssetGenImage get taverna => const AssetGenImage('assets/images/taverna.png');
@@ -204,21 +273,48 @@ class $AssetsImagesGen {
   /// File path: assets/images/tip.png
   AssetGenImage get tip => const AssetGenImage('assets/images/tip.png');
 
+  /// File path: assets/images/whip.png
+  AssetGenImage get whip => const AssetGenImage('assets/images/whip.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
+    alfange,
+    archery,
+    armor,
+    arrow,
+    axe,
     bordaToken,
     bordaTokenAmeaca,
+    bullet,
+    coin,
+    corrente,
+    crossbow,
+    dagger,
     developer,
     fire,
+    gun,
+    halberd,
     instagram,
+    item,
     jambo,
+    katana,
     knight,
     logo,
+    mace,
     manuscript,
     pdf,
+    poison,
+    potion,
+    ring,
+    scythe,
+    shield,
+    sledgehammer,
+    spear,
     spellbook,
+    sword,
     taverna,
     tip,
+    whip,
   ];
 }
 

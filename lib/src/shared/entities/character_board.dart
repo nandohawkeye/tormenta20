@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:tormenta20/src/shared/entities/action/action.dart';
 import 'package:tormenta20/src/shared/entities/atributes.dart';
 import 'package:tormenta20/src/shared/entities/brood.dart';
@@ -199,7 +200,8 @@ class CharacterBoard extends EntityBase {
       other is CharacterBoard &&
       other.uuid == uuid &&
       other.createdAt == createdAt &&
-      other.updatedAt == updatedAt;
+      other.updatedAt == updatedAt &&
+      listEquals(equipments, other.equipments);
 
   @override
   int get hashCode => uuid.hashCode ^ createdAt.hashCode ^ updatedAt.hashCode;

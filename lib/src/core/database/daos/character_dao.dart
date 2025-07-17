@@ -1248,6 +1248,7 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
                     if (!(characterBoardDTO.containsKey(
                       characterBoardData.uuid,
                     ))) {
+                      print('tibars $tibarsData');
                       characterBoardDTO.addAll({
                         characterBoardData.uuid: CharacterBoardDto(
                           characterBoardsData: characterBoardData,

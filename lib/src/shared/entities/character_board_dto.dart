@@ -28,7 +28,7 @@ class CharacterBoardDto {
 
   CharacterBoardDto({
     required this.characterBoardsData,
-    tibars,
+    this.tibars,
     this.globalModifiers,
   });
 }

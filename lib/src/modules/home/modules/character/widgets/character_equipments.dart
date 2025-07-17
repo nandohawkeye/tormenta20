@@ -16,6 +16,8 @@ class CharacterEquipments extends StatelessWidget {
       return const MenaceEmptyItens('Sem equipamentos');
     }
 
+    print('itens: ${itens.length}');
+
     return AnimationConfiguration.synchronized(
       duration: T20UI.defaultDurationAnimation,
       child: FadeInAnimation(

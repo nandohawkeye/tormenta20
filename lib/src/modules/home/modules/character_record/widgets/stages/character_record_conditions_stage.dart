@@ -44,7 +44,7 @@ class CharacterRecordConditionsStage extends StatelessWidget {
                             Icon(FontAwesomeIcons.skullCrossbones),
                             T20UI.smallSpaceWidth,
                             Text(
-                              'Adicionar condição',
+                              'Adicionar uma condição',
                               style: TextStyle(fontSize: 16),
                             ),
                           ],

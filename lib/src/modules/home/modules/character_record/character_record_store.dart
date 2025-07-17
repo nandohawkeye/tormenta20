@@ -36,7 +36,6 @@ class CharacterRecordStore {
       if (response.character != null) {
         _sub = response.character!.listen((result) {
           if (result != null) {
-            print('result: $result');
             _characterBoard.value = result;
           }
         });
