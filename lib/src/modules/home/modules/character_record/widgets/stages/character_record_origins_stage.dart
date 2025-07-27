@@ -19,22 +19,6 @@ class CharacterRecordOriginsStage extends StatelessWidget {
       builder: (_, _) {
         final origins = store.characterBoard.value.origins;
 
-        if (origins.isEmpty) {
-          return const SizedBox(
-            height: 300,
-            child: Center(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(FontAwesomeIcons.ghost),
-                  SizedBox(width: T20UI.smallSpaceSize),
-                  Text('Nenhuma origem', style: TextStyle(fontSize: 16)),
-                ],
-              ),
-            ),
-          );
-        }
-
         origins.sort((a, b) => a.name.compareTo(b.name));
         return ListView.separated(
           padding: T20UI.horizontallScreenPadding.copyWith(
@@ -42,12 +26,30 @@ class CharacterRecordOriginsStage extends StatelessWidget {
             top: T20UI.spaceSize,
           ),
           shrinkWrap: true,
-          itemCount: origins.length,
-          separatorBuilder: T20UI.separatorBuilderVertical,
+          itemCount: origins.length + 1,
+          separatorBuilder: (_, index) => SizedBox(
+            height: index == 0 ? T20UI.spaceSize : T20UI.smallSpaceSize,
+          ),
           physics: const NeverScrollableScrollPhysics(),
           primary: false,
           itemBuilder: (_, index) {
-            return _Card(origin: origins[index]);
+            if (index == 0) {
+              return const SizedBox(
+                height: 48,
+                child: Card(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(FontAwesomeIcons.compass),
+                      T20UI.smallSpaceWidth,
+                      Text('Adicionar origem', style: TextStyle(fontSize: 16)),
+                    ],
+                  ),
+                ),
+              );
+            }
+
+            return _Card(origin: origins[index - 1]);
           },
         );
       },

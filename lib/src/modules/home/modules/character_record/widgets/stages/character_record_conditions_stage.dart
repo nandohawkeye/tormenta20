@@ -16,48 +16,6 @@ class CharacterRecordConditionsStage extends StatelessWidget {
       builder: (_, _) {
         final conditions = store.characterBoard.value.conditions;
 
-        if (conditions.isEmpty) {
-          return const SizedBox(
-            height: 300,
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(FontAwesomeIcons.handsPraying),
-                      SizedBox(width: T20UI.spaceSize),
-                      Text('Nenhuma condição', style: TextStyle(fontSize: 16)),
-                    ],
-                  ),
-                  T20UI.spaceHeight,
-                  SizedBox(
-                    height: 48,
-                    child: Card(
-                      child: Padding(
-                        padding: T20UI.horizontalPadding,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(FontAwesomeIcons.skullCrossbones),
-                            T20UI.smallSpaceWidth,
-                            Text(
-                              'Adicionar uma condição',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        }
-
         conditions.sort((a, b) => a.name.compareTo(b.name));
         return ListView.separated(
           padding: T20UI.horizontallScreenPadding.copyWith(
@@ -65,12 +23,33 @@ class CharacterRecordConditionsStage extends StatelessWidget {
             top: T20UI.spaceSize,
           ),
           shrinkWrap: true,
-          itemCount: conditions.length,
-          separatorBuilder: T20UI.separatorBuilderVertical,
+          itemCount: conditions.length + 1,
+          separatorBuilder: (_, index) => SizedBox(
+            height: index == 0 ? T20UI.spaceSize : T20UI.smallSpaceSize,
+          ),
           physics: const NeverScrollableScrollPhysics(),
           primary: false,
           itemBuilder: (_, index) {
-            return _Card(condition: conditions[index]);
+            if (index == 0) {
+              return const SizedBox(
+                height: 48,
+                child: Card(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(FontAwesomeIcons.skullCrossbones),
+                      T20UI.smallSpaceWidth,
+                      Text(
+                        'Adicionar condição',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
+
+            return _Card(condition: conditions[index - 1]);
           },
         );
       },

@@ -22,22 +22,6 @@ class CharacterRecordActionsStage extends StatelessWidget {
       builder: (_, _) {
         final actions = store.characterBoard.value.actions;
 
-        if (actions.isEmpty) {
-          return const SizedBox(
-            height: 300,
-            child: Center(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(FontAwesomeIcons.ghost),
-                  SizedBox(width: T20UI.smallSpaceSize),
-                  Text('Nenhuma ação', style: TextStyle(fontSize: 16)),
-                ],
-              ),
-            ),
-          );
-        }
-
         actions.sort((a, b) => a.name.compareTo(b.name));
         return ListView.separated(
           padding: T20UI.horizontallScreenPadding.copyWith(
@@ -45,12 +29,30 @@ class CharacterRecordActionsStage extends StatelessWidget {
             top: T20UI.spaceSize,
           ),
           shrinkWrap: true,
-          itemCount: actions.length,
-          separatorBuilder: T20UI.separatorBuilderVertical,
+          itemCount: actions.length + 1,
+          separatorBuilder: (_, index) => SizedBox(
+            height: index == 0 ? T20UI.spaceSize : T20UI.smallSpaceSize,
+          ),
           physics: const NeverScrollableScrollPhysics(),
           primary: false,
           itemBuilder: (_, index) {
-            return _Card(action: actions[index]);
+            if (index == 0) {
+              return const SizedBox(
+                height: 48,
+                child: Card(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(FontAwesomeIcons.explosion),
+                      T20UI.smallSpaceWidth,
+                      Text('Adicionar ação', style: TextStyle(fontSize: 16)),
+                    ],
+                  ),
+                ),
+              );
+            }
+
+            return _Card(action: actions[index - 1]);
           },
         );
       },

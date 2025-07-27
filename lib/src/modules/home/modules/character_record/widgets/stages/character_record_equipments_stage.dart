@@ -35,22 +35,6 @@ class CharacterRecordEquipmentsStage extends StatelessWidget {
       builder: (_, _) {
         final equipments = store.characterBoard.value.equipments;
 
-        if (equipments.isEmpty) {
-          return const SizedBox(
-            height: 300,
-            child: Center(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(FontAwesomeIcons.ghost),
-                  SizedBox(width: T20UI.smallSpaceSize),
-                  Text('Nenhum equipamento', style: TextStyle(fontSize: 16)),
-                ],
-              ),
-            ),
-          );
-        }
-
         final equipmentsNotStored = equipments
             .where((eq) => eq.storedIn == null)
             .toList();
@@ -65,13 +49,34 @@ class CharacterRecordEquipmentsStage extends StatelessWidget {
             top: T20UI.spaceSize,
           ),
           shrinkWrap: true,
-          itemCount: equipmentsNotStored.length,
-          separatorBuilder: T20UI.separatorBuilderVertical,
+          itemCount: equipmentsNotStored.length + 1,
+          separatorBuilder: (_, index) => SizedBox(
+            height: index == 0 ? T20UI.spaceSize : T20UI.smallSpaceSize,
+          ),
           physics: const NeverScrollableScrollPhysics(),
           primary: false,
           itemBuilder: (_, index) {
+            if (index == 0) {
+              return const SizedBox(
+                height: 48,
+                child: Card(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(FontAwesomeIcons.shield),
+                      T20UI.smallSpaceWidth,
+                      Text(
+                        'Adicionar equipamento',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
+
             return _Card(
-              equipment: equipmentsNotStored[index],
+              equipment: equipmentsNotStored[index - 1],
               allEquipments: equipments,
             );
           },

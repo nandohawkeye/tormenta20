@@ -20,22 +20,6 @@ class CharacterRecordPowersStage extends StatelessWidget {
       builder: (_, _) {
         final powers = store.characterBoard.value.powers;
 
-        if (powers.isEmpty) {
-          return const SizedBox(
-            height: 300,
-            child: Center(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(FontAwesomeIcons.ghost),
-                  SizedBox(width: T20UI.smallSpaceSize),
-                  Text('Nenhum poder', style: TextStyle(fontSize: 16)),
-                ],
-              ),
-            ),
-          );
-        }
-
         powers.sort((a, b) => a.name.compareTo(b.name));
         return ListView.separated(
           padding: T20UI.horizontallScreenPadding.copyWith(
@@ -43,12 +27,30 @@ class CharacterRecordPowersStage extends StatelessWidget {
             top: T20UI.spaceSize,
           ),
           shrinkWrap: true,
-          itemCount: powers.length,
-          separatorBuilder: T20UI.separatorBuilderVertical,
+          itemCount: powers.length + 1,
+          separatorBuilder: (_, index) => SizedBox(
+            height: index == 0 ? T20UI.spaceSize : T20UI.smallSpaceSize,
+          ),
           physics: const NeverScrollableScrollPhysics(),
           primary: false,
           itemBuilder: (_, index) {
-            return _Card(power: powers[index]);
+            if (index == 0) {
+              return const SizedBox(
+                height: 48,
+                child: Card(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(FontAwesomeIcons.fire),
+                      T20UI.smallSpaceWidth,
+                      Text('Adicionar poder', style: TextStyle(fontSize: 16)),
+                    ],
+                  ),
+                ),
+              );
+            }
+
+            return _Card(power: powers[index - 1]);
           },
         );
       },

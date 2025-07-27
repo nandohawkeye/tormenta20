@@ -9,7 +9,6 @@ import 'package:tormenta20/src/modules/home/modules/image_view/image_view_screen
 import 'package:tormenta20/src/modules/home/modules/pdf_view/pdf_view_screen.dart';
 import 'package:tormenta20/src/shared/entities/board/board_material.dart';
 import 'package:tormenta20/src/shared/entities/board/board_material_types.dart';
-import 'package:tormenta20/src/shared/utils/performance_utils.dart';
 import 'package:tormenta20/src/shared/widgets/custom_checked.dart';
 import 'package:tormenta20/src/shared/widgets/error_image_placeholder.dart';
 
