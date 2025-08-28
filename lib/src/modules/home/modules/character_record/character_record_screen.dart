@@ -6,10 +6,12 @@ import 'package:tormenta20/src/modules/home/modules/character_record/widgets/cha
 import 'package:tormenta20/src/modules/home/modules/character_record/widgets/character_record_indicators.dart';
 import 'package:tormenta20/src/modules/home/modules/character_record/widgets/character_record_info.dart';
 import 'package:tormenta20/src/modules/home/modules/character_record/widgets/character_record_tabs.dart';
+import 'package:tormenta20/src/modules/home/modules/character_record/widgets/stages/character_record_actions_others_stage.dart';
 import 'package:tormenta20/src/modules/home/modules/character_record/widgets/stages/character_record_actions_stage.dart';
 import 'package:tormenta20/src/modules/home/modules/character_record/widgets/stages/character_record_conditions_stage.dart';
 import 'package:tormenta20/src/modules/home/modules/character_record/widgets/stages/character_record_equipments_stage.dart';
 import 'package:tormenta20/src/modules/home/modules/character_record/widgets/stages/character_record_expertises_stage.dart';
+import 'package:tormenta20/src/modules/home/modules/character_record/widgets/stages/character_record_global_modifiers_stage.dart';
 import 'package:tormenta20/src/modules/home/modules/character_record/widgets/stages/character_record_origins_stage.dart';
 import 'package:tormenta20/src/modules/home/modules/character_record/widgets/stages/character_record_powers_stage.dart';
 import 'package:tormenta20/src/modules/home/modules/character_record/widgets/stages/character_record_principal_stage.dart';
@@ -104,6 +106,8 @@ class _CharacterRecordScreenState extends State<CharacterRecordScreen> {
                 4 => CharacterRecordEquipmentsStage(_store),
                 5 => CharacterRecordOriginsStage(_store),
                 6 => CharacterRecordConditionsStage(_store),
+                7 => CharacterRecordGlobalModifiersStage(_store),
+                8 => CharacterRecordActionsOthersStage(_store),
                 _ => const SizedBox.shrink(),
               };
             },

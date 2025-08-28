@@ -6,7 +6,9 @@ import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/character_record/character_record_store.dart';
 import 'package:tormenta20/src/shared/entities/power.dart';
 import 'package:tormenta20/src/shared/extensions/string_ext.dart';
+import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/utils/power_type_utils.dart';
+import 'package:tormenta20/src/shared/widgets/add_edit_power_bottomsheet/add_edit_power_bottomsheet.dart';
 
 class CharacterRecordPowersStage extends StatelessWidget {
   const CharacterRecordPowersStage(this.store, {super.key});
@@ -18,7 +20,8 @@ class CharacterRecordPowersStage extends StatelessWidget {
     return ListenableBuilder(
       listenable: store.characterBoard,
       builder: (_, _) {
-        final powers = store.characterBoard.value.powers;
+        final character = store.characterBoard.value;
+        final powers = character.powers;
 
         powers.sort((a, b) => a.name.compareTo(b.name));
         return ListView.separated(
@@ -35,16 +38,28 @@ class CharacterRecordPowersStage extends StatelessWidget {
           primary: false,
           itemBuilder: (_, index) {
             if (index == 0) {
-              return const SizedBox(
+              return SizedBox(
                 height: 48,
                 child: Card(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(FontAwesomeIcons.fire),
-                      T20UI.smallSpaceWidth,
-                      Text('Adicionar poder', style: TextStyle(fontSize: 16)),
-                    ],
+                  child: InkWell(
+                    borderRadius: T20UI.borderRadius,
+                    onTap: () async {
+                      await BottomsheetUtils.show<Power?>(
+                        context: context,
+                        child: AddEditPowerBottomsheet(
+                          initial: null,
+                          parentUuid: character.uuid,
+                        ),
+                      ).then((result) {});
+                    },
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(FontAwesomeIcons.fire),
+                        T20UI.smallSpaceWidth,
+                        Text('Adicionar poder', style: TextStyle(fontSize: 16)),
+                      ],
+                    ),
                   ),
                 ),
               );

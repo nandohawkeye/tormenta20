@@ -4,6 +4,8 @@ import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/character_record/character_record_store.dart';
+import 'package:tormenta20/src/shared/entities/atributes.dart';
+import 'package:tormenta20/src/shared/entities/character_board.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise.dart';
 import 'package:tormenta20/src/shared/extensions/string_ext.dart';
 import 'package:tormenta20/src/shared/utils/atribute_utils.dart';
@@ -18,7 +20,8 @@ class CharacterRecordExpertisesStage extends StatelessWidget {
     return ListenableBuilder(
       listenable: store.characterBoard,
       builder: (_, _) {
-        final expertises = store.characterBoard.value.expertises;
+        final character = store.characterBoard.value;
+        final expertises = character.expertises;
 
         if (expertises.isEmpty) {
           return const SizedBox(
@@ -66,7 +69,10 @@ class CharacterRecordExpertisesStage extends StatelessWidget {
               );
             }
 
-            return _Card(expertise: expertises[index - 1]);
+            return _Card(
+              expertise: expertises[index - 1],
+              character: character,
+            );
           },
         );
       },
@@ -75,51 +81,94 @@ class CharacterRecordExpertisesStage extends StatelessWidget {
 }
 
 class _Card extends StatelessWidget {
-  const _Card({required this.expertise});
+  const _Card({required this.expertise, required this.character});
 
   final Expertise expertise;
+  final CharacterBoard character;
+
+  int _valueForAtribute(Expertise expertise, CharacterBoard character) {
+    final Atribute atribute = expertise.atribute;
+
+    return switch (atribute) {
+      Atribute.strength => character.strength ?? 0,
+      Atribute.charisma => character.charisma ?? 0,
+      Atribute.dexterity => character.dexterity ?? 0,
+      Atribute.constitution => character.constitution ?? 0,
+      Atribute.intelligence => character.intelligence ?? 0,
+      Atribute.wisdom => character.wisdom ?? 0,
+    };
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsetsGeometry.symmetric(
-          vertical: T20UI.smallSpaceSize,
-          horizontal: T20UI.spaceSize,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  expertise.isTrained
-                      ? FontAwesomeIcons.solidStar
-                      : FontAwesomeIcons.star,
-                  color: expertise.isTrained ? Colors.yellow : palette.disable,
-                ),
-                T20UI.spaceWidth,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(expertise.name.capitalize()),
-                    Text(
-                      AtributeUtils.handleTitle(expertise.atribute.name),
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: palette.textSecundary,
+    int bonus = 0;
+    bool isEnable = true;
+    if (expertise.isTrained) {
+      if (character.classes.length < 7) {
+        bonus = 2;
+      } else if (character.classes.length < 15) {
+        bonus = 4;
+      } else {
+        bonus = 6;
+      }
+    }
+
+    if (!expertise.isTrained && expertise.onlyTrained) {
+      isEnable = false;
+    }
+
+    return Opacity(
+      opacity: isEnable ? 1.0 : .4,
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsetsGeometry.symmetric(
+            vertical: T20UI.smallSpaceSize,
+            horizontal: T20UI.spaceSize,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    expertise.isTrained
+                        ? FontAwesomeIcons.solidStar
+                        : FontAwesomeIcons.star,
+                    color: expertise.isTrained
+                        ? Colors.yellow
+                        : palette.disable,
+                  ),
+                  T20UI.spaceWidth,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(expertise.name.capitalize()),
+                      Text(
+                        AtributeUtils.handleTitle(expertise.atribute.name),
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: palette.textSecundary,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
+                ],
+              ),
+              if (expertise.armorPenalty)
+                Icon(
+                  FontAwesomeIcons.shirt,
+                  color: palette.primary.withValues(alpha: .5),
                 ),
-              ],
-            ),
-            const Text(
-              '4',
-              style: TextStyle(fontFamily: FontFamily.tormenta, fontSize: 28),
-            ),
-          ],
+              Text(
+                '${_valueForAtribute(expertise, character) + (character.classes.length / 2).toInt() + bonus}',
+                style: const TextStyle(
+                  fontFamily: FontFamily.tormenta,
+                  fontSize: 28,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

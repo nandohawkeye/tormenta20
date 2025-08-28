@@ -4,6 +4,7 @@ import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_equipaments/add_edit_equipments_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/character_record/character_record_store.dart';
 import 'package:tormenta20/src/modules/home/modules/menace/widgets/menace_equipment_card/menace_equipment_ammunition_fields.dart';
 import 'package:tormenta20/src/modules/home/modules/menace/widgets/menace_equipment_card/menace_equipment_armor_fields.dart';
@@ -33,7 +34,8 @@ class CharacterRecordEquipmentsStage extends StatelessWidget {
     return ListenableBuilder(
       listenable: store.characterBoard,
       builder: (_, _) {
-        final equipments = store.characterBoard.value.equipments;
+        final character = store.characterBoard.value;
+        final equipments = character.equipments;
 
         final equipmentsNotStored = equipments
             .where((eq) => eq.storedIn == null)
@@ -57,19 +59,33 @@ class CharacterRecordEquipmentsStage extends StatelessWidget {
           primary: false,
           itemBuilder: (_, index) {
             if (index == 0) {
-              return const SizedBox(
+              return SizedBox(
                 height: 48,
                 child: Card(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(FontAwesomeIcons.shield),
-                      T20UI.smallSpaceWidth,
-                      Text(
-                        'Adicionar equipamento',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ],
+                  child: InkWell(
+                    borderRadius: T20UI.borderRadius,
+                    onTap: () async {
+                      await Navigator.push<Equipment?>(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => AddEditEquipmentsScreen(
+                            equipament: null,
+                            parentUuid: character.uuid,
+                          ),
+                        ),
+                      ).then((result) {});
+                    },
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(FontAwesomeIcons.shield),
+                        T20UI.smallSpaceWidth,
+                        Text(
+                          'Adicionar equipamento',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
@@ -103,13 +119,13 @@ class _Card extends StatelessWidget {
     return Card(
       child: Row(
         children: [
-          if (storedEquipments.isEmpty)
+          if (storedEquipments.isEmpty && equipment is! HasSpace)
             Padding(
               padding: const EdgeInsets.only(left: T20UI.spaceSize),
               child: Image.asset(
                 EquipmentTypeUtils.handleImagePath(equipment),
-                height: 50,
-                width: 50,
+                height: 40,
+                width: 40,
               ),
             ),
           Flexible(
@@ -234,15 +250,15 @@ class _StoreInCard extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Assets.images.coin.image(height: 50, width: 50),
+              Assets.images.coin.image(height: 40, width: 40),
               T20UI.smallSpaceWidth,
               Flexible(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(equipment.name),
-                    const SizedBox(height: T20UI.smallSpaceSize),
+                    Text(equipment.name, style: const TextStyle(fontSize: 16)),
+                    const SizedBox(height: 4),
                     if (equipment is Tibars)
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -6,6 +6,8 @@ import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/character_record/character_record_store.dart';
 import 'package:tormenta20/src/shared/entities/origin.dart';
 import 'package:tormenta20/src/shared/extensions/string_ext.dart';
+import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
+import 'package:tormenta20/src/shared/widgets/add_edit_origin_bottomsheet/add_edit_origin_bottomsheet.dart';
 
 class CharacterRecordOriginsStage extends StatelessWidget {
   const CharacterRecordOriginsStage(this.store, {super.key});
@@ -17,7 +19,8 @@ class CharacterRecordOriginsStage extends StatelessWidget {
     return ListenableBuilder(
       listenable: store.characterBoard,
       builder: (_, _) {
-        final origins = store.characterBoard.value.origins;
+        final character = store.characterBoard.value;
+        final origins = character.origins;
 
         origins.sort((a, b) => a.name.compareTo(b.name));
         return ListView.separated(
@@ -34,16 +37,31 @@ class CharacterRecordOriginsStage extends StatelessWidget {
           primary: false,
           itemBuilder: (_, index) {
             if (index == 0) {
-              return const SizedBox(
+              return SizedBox(
                 height: 48,
                 child: Card(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(FontAwesomeIcons.compass),
-                      T20UI.smallSpaceWidth,
-                      Text('Adicionar origem', style: TextStyle(fontSize: 16)),
-                    ],
+                  child: InkWell(
+                    borderRadius: T20UI.borderRadius,
+                    onTap: () async {
+                      await BottomsheetUtils.show<Origin?>(
+                        context: context,
+                        child: AddEditOriginBottomsheet(
+                          initialOrigin: null,
+                          parentUuid: character.uuid,
+                        ),
+                      ).then((result) {});
+                    },
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(FontAwesomeIcons.compass),
+                        T20UI.smallSpaceWidth,
+                        Text(
+                          'Adicionar origem',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
@@ -87,7 +105,7 @@ class _Card extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 4),
-                Text(origin.desc, maxLines: 20),
+                Text(origin.desc, maxLines: 200),
               ],
             ),
           ),

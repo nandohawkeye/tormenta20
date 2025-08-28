@@ -224,6 +224,14 @@ class ExpertisesBaseService {
     armorPenalty: false,
   );
 
+  static const _furtividade = ExpertiseBase(
+    id: 28,
+    name: 'furtividade',
+    atribute: Atribute.dexterity,
+    onlyTrained: false,
+    armorPenalty: true,
+  );
+
   List<ExpertiseBase> getExpertises() => [
     _acrobacia,
     _adestramento,
@@ -235,6 +243,7 @@ class ExpertisesBaseService {
     _diplomacia,
     _enganacao,
     _fortitude,
+    _furtividade,
     _guerra,
     _iniciativa,
     _intimidacao,

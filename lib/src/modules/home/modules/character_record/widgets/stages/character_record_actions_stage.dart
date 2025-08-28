@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_action/add_edit_action_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/character_record/character_record_store.dart';
 import 'package:tormenta20/src/shared/entities/action/action.dart';
 import 'package:tormenta20/src/shared/entities/action/distance_attack.dart';
@@ -20,7 +21,9 @@ class CharacterRecordActionsStage extends StatelessWidget {
     return ListenableBuilder(
       listenable: store.characterBoard,
       builder: (_, _) {
-        final actions = store.characterBoard.value.actions;
+        final character = store.characterBoard.value;
+        final equipments = character.equipments;
+        final actions = character.actions;
 
         actions.sort((a, b) => a.name.compareTo(b.name));
         return ListView.separated(
@@ -37,16 +40,31 @@ class CharacterRecordActionsStage extends StatelessWidget {
           primary: false,
           itemBuilder: (_, index) {
             if (index == 0) {
-              return const SizedBox(
+              return SizedBox(
                 height: 48,
                 child: Card(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(FontAwesomeIcons.explosion),
-                      T20UI.smallSpaceWidth,
-                      Text('Adicionar ação', style: TextStyle(fontSize: 16)),
-                    ],
+                  child: InkWell(
+                    borderRadius: T20UI.borderRadius,
+                    onTap: () async {
+                      await Navigator.push<ActionEnt?>(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => AddEditActionScreen(
+                            initialAction: null,
+                            equipments: equipments,
+                            parentUuid: character.uuid,
+                          ),
+                        ),
+                      ).then((result) {});
+                    },
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(FontAwesomeIcons.explosion),
+                        T20UI.smallSpaceWidth,
+                        Text('Adicionar ação', style: TextStyle(fontSize: 16)),
+                      ],
+                    ),
                   ),
                 ),
               );
