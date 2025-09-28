@@ -5,7 +5,7 @@ abstract class PowerTypeUtils {
     if (value.contains('general')) {
       return 'Geral';
     } else if (value.contains('unic')) {
-      return 'Único';
+      return 'único';
     } else if (value.contains('divinity')) {
       return 'Divindade';
     } else {

@@ -17,6 +17,23 @@ class CharacterRecordPowersStage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> onAddEditPower({
+      Power? initial,
+      required String parentUuid,
+    }) async {
+      await BottomsheetUtils.show<Power?>(
+        context: context,
+        child: AddEditPowerBottomsheet(
+          initial: initial,
+          parentUuid: parentUuid,
+        ),
+      ).then((result) async {
+        if (result != null) {
+          await store.savePower(result);
+        }
+      });
+    }
+
     return ListenableBuilder(
       listenable: store.characterBoard,
       builder: (_, _) {
@@ -44,13 +61,7 @@ class CharacterRecordPowersStage extends StatelessWidget {
                   child: InkWell(
                     borderRadius: T20UI.borderRadius,
                     onTap: () async {
-                      await BottomsheetUtils.show<Power?>(
-                        context: context,
-                        child: AddEditPowerBottomsheet(
-                          initial: null,
-                          parentUuid: character.uuid,
-                        ),
-                      ).then((result) {});
+                      await onAddEditPower(parentUuid: character.uuid);
                     },
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -65,7 +76,13 @@ class CharacterRecordPowersStage extends StatelessWidget {
               );
             }
 
-            return _Card(power: powers[index - 1]);
+            return _Card(
+              power: powers[index - 1],
+              onEdit: (entity) async => await onAddEditPower(
+                initial: entity,
+                parentUuid: character.uuid,
+              ),
+            );
           },
         );
       },
@@ -74,40 +91,45 @@ class CharacterRecordPowersStage extends StatelessWidget {
 }
 
 class _Card extends StatelessWidget {
-  const _Card({required this.power});
+  const _Card({required this.power, required this.onEdit});
 
   final Power power;
+  final Function(Power) onEdit;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsetsGeometry.symmetric(
-              horizontal: T20UI.spaceSize,
-              vertical: T20UI.smallSpaceSize,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '${power.name.capitalize()} (${PowerTypeUtils.handleTitle(power.type.name)})',
-                  style: TextStyle(
-                    color: palette.accent,
-                    fontFamily: FontFamily.tormenta,
-                    fontSize: 20,
+      child: InkWell(
+        borderRadius: T20UI.borderRadius,
+        onTap: () => onEdit(power),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsetsGeometry.symmetric(
+                horizontal: T20UI.spaceSize,
+                vertical: T20UI.smallSpaceSize,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${power.name.capitalize()} (${PowerTypeUtils.handleTitle(power.type.name)})',
+                    style: TextStyle(
+                      color: palette.accent,
+                      fontFamily: FontFamily.tormenta,
+                      fontSize: 20,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 4),
-                Text(power.desc, maxLines: 20),
-              ],
+                  const SizedBox(height: 4),
+                  Text(power.desc, maxLines: 20),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

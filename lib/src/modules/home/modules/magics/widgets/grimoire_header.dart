@@ -1,13 +1,16 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/grimorie/grimorie_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/grimories_store.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/grimoire_card/grimoire_card.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
+import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/widgets/screen_image_button.dart';
 
 class GrimoireHeader extends StatelessWidget {
@@ -46,10 +49,21 @@ class GrimoireHeader extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const RepaintBoundary(
+        RepaintBoundary(
           child: Padding(
-            padding: T20UI.allPadding,
-            child: Labels('Grimórios'),
+            padding: T20UI.allPadding.copyWith(top: 0, bottom: 6, right: 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Labels('Grimórios'),
+                SimpleButton(
+                  icon: FontAwesomeIcons.plus,
+                  iconSize: 20,
+                  backgroundColor: palette.background,
+                  onTap: () async => await addGrimoire(),
+                ),
+              ],
+            ),
           ),
         ),
         ListenableBuilder(

@@ -1,12 +1,18 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_character/add_edit_character.dart';
 import 'package:tormenta20/src/modules/home/modules/character/character_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/init/init_store.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/character_card/character_card.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/character_screen_button.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
+import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
+import 'package:tormenta20/src/shared/entities/character.dart';
 import 'package:tormenta20/src/shared/extensions/context_ext.dart';
 
 class InitCharacterField extends StatefulWidget {
@@ -31,10 +37,37 @@ class _InitCharacterFieldState extends State<InitCharacterField> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const RepaintBoundary(
+        RepaintBoundary(
           child: Padding(
-            padding: T20UI.allPadding,
-            child: Labels('Personagens'),
+            padding: T20UI.allPadding.copyWith(bottom: 6, right: 0, top: 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Labels('Personagens Base'),
+                SimpleButton(
+                  icon: FontAwesomeIcons.plus,
+                  iconSize: 20,
+                  backgroundColor: palette.background,
+                  onTap: () async {
+                    await Navigator.push<Character?>(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const AddEditCharacter(),
+                      ),
+                    ).then((result) {
+                      if (result != null) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => CharacterScreen(initial: result),
+                          ),
+                        );
+                      }
+                    });
+                  },
+                ),
+              ],
+            ),
           ),
         ),
         RepaintBoundary(
@@ -82,9 +115,8 @@ class _InitCharacterFieldState extends State<InitCharacterField> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => CharacterScreen(
-                              initial: characters[index],
-                            ),
+                            builder: (_) =>
+                                CharacterScreen(initial: characters[index]),
                           ),
                         );
                       },

@@ -8,6 +8,7 @@ import 'package:tormenta20/src/modules/home/modules/character_record/character_r
 import 'package:tormenta20/src/shared/entities/action/action.dart';
 import 'package:tormenta20/src/shared/entities/action/distance_attack.dart';
 import 'package:tormenta20/src/shared/entities/action/hand_to_hand.dart';
+import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/extensions/string_ext.dart';
 import 'package:tormenta20/src/shared/utils/action_type_utils.dart';
 
@@ -18,6 +19,27 @@ class CharacterRecordActionsStage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> onAddEditAction({
+      ActionEnt? initialAction,
+      required List<Equipment> equipments,
+      required String parentUuid,
+    }) async {
+      await Navigator.push<ActionEnt?>(
+        context,
+        MaterialPageRoute(
+          builder: (_) => AddEditActionScreen(
+            initialAction: initialAction,
+            equipments: equipments,
+            parentUuid: parentUuid,
+          ),
+        ),
+      ).then((result) {
+        if (result != null) {
+          store.saveAction(result);
+        }
+      });
+    }
+
     return ListenableBuilder(
       listenable: store.characterBoard,
       builder: (_, _) {
@@ -46,16 +68,10 @@ class CharacterRecordActionsStage extends StatelessWidget {
                   child: InkWell(
                     borderRadius: T20UI.borderRadius,
                     onTap: () async {
-                      await Navigator.push<ActionEnt?>(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => AddEditActionScreen(
-                            initialAction: null,
-                            equipments: equipments,
-                            parentUuid: character.uuid,
-                          ),
-                        ),
-                      ).then((result) {});
+                      await onAddEditAction(
+                        equipments: equipments,
+                        parentUuid: character.uuid,
+                      );
                     },
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -70,7 +86,14 @@ class CharacterRecordActionsStage extends StatelessWidget {
               );
             }
 
-            return _Card(action: actions[index - 1]);
+            return _Card(
+              action: actions[index - 1],
+              onEdit: (entity) async => await onAddEditAction(
+                initialAction: entity,
+                equipments: equipments,
+                parentUuid: character.uuid,
+              ),
+            );
           },
         );
       },
@@ -79,102 +102,107 @@ class CharacterRecordActionsStage extends StatelessWidget {
 }
 
 class _Card extends StatelessWidget {
-  const _Card({required this.action});
+  const _Card({required this.action, required this.onEdit});
 
   final ActionEnt action;
+  final Function(ActionEnt) onEdit;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsetsGeometry.symmetric(
-              horizontal: T20UI.spaceSize,
-              vertical: T20UI.smallSpaceSize,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (action is DistanceAttack)
-                  Text(
-                    'Ataque á distância',
-                    style: TextStyle(
-                      color: palette.accent,
-                      fontFamily: FontFamily.tormenta,
-                      fontSize: 20,
+      child: InkWell(
+        borderRadius: T20UI.borderRadius,
+        onTap: () => onEdit(action),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsetsGeometry.symmetric(
+                horizontal: T20UI.spaceSize,
+                vertical: T20UI.smallSpaceSize,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (action is DistanceAttack)
+                    Text(
+                      'Ataque á distância',
+                      style: TextStyle(
+                        color: palette.accent,
+                        fontFamily: FontFamily.tormenta,
+                        fontSize: 20,
+                      ),
                     ),
-                  ),
-                if (action is HandToHand)
-                  Text(
-                    'Corpo-a-Corpo',
-                    style: TextStyle(
-                      color: palette.accent,
-                      fontFamily: FontFamily.tormenta,
-                      fontSize: 20,
+                  if (action is HandToHand)
+                    Text(
+                      'Corpo-a-Corpo',
+                      style: TextStyle(
+                        color: palette.accent,
+                        fontFamily: FontFamily.tormenta,
+                        fontSize: 20,
+                      ),
                     ),
-                  ),
-                if ((action is! HandToHand) && (action is! DistanceAttack))
-                  Text(
-                    '${action.name.capitalize()} (${ActionTypeUtils.handleTitle(action.type.name)})',
-                    style: TextStyle(
-                      color: palette.accent,
-                      fontFamily: FontFamily.tormenta,
-                      fontSize: 20,
+                  if ((action is! HandToHand) && (action is! DistanceAttack))
+                    Text(
+                      '${action.name.capitalize()} (${ActionTypeUtils.handleTitle(action.type.name)})',
+                      style: TextStyle(
+                        color: palette.accent,
+                        fontFamily: FontFamily.tormenta,
+                        fontSize: 20,
+                      ),
                     ),
-                  ),
-                const SizedBox(height: 4),
-                Text(
-                  '${((action is HandToHand) || (action is DistanceAttack)) ? '${action.name} - ' : ''}${action.desc}',
-                  maxLines: 2000,
-                ),
-                if ((action.damageDices != null) ||
-                    (action.extraDamageDices != null) ||
-                    (action.pm != null) ||
-                    (action.cd != null))
                   const SizedBox(height: 4),
-                if ((action.damageDices != null) ||
-                    (action.extraDamageDices != null))
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 4),
-                    child: Row(
-                      children: [
-                        if (action.damageDices != null)
-                          Text(
-                            '(${action.damageDices}${(action.mediumDamageValue ?? 0) > 0 ? '+${(action.mediumDamageValue ?? 0)}' : ''}, ${action.critical ?? 20} *${action.criticalMultiplier ?? 1})',
-                            style: TextStyle(color: palette.textSecundary),
-                          ),
-                        if (action.extraDamageDices != null)
-                          Text(
-                            ' +${action.extraDamageDices}',
-                            style: TextStyle(color: palette.textSecundary),
-                          ),
-                      ],
-                    ),
+                  Text(
+                    '${((action is HandToHand) || (action is DistanceAttack)) ? '${action.name} - ' : ''}${action.desc}',
+                    maxLines: 2000,
                   ),
-                Row(
-                  children: [
-                    if (action.pm != null)
-                      Text(
-                        'PM: ${action.pm}',
-                        style: TextStyle(color: palette.textSecundary),
+                  if ((action.damageDices != null) ||
+                      (action.extraDamageDices != null) ||
+                      (action.pm != null) ||
+                      (action.cd != null))
+                    const SizedBox(height: 4),
+                  if ((action.damageDices != null) ||
+                      (action.extraDamageDices != null))
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 4),
+                      child: Row(
+                        children: [
+                          if (action.damageDices != null)
+                            Text(
+                              '(${action.damageDices}${(action.mediumDamageValue ?? 0) > 0 ? '+${(action.mediumDamageValue ?? 0)}' : ''}, ${action.critical ?? 20} *${action.criticalMultiplier ?? 1})',
+                              style: TextStyle(color: palette.textSecundary),
+                            ),
+                          if (action.extraDamageDices != null)
+                            Text(
+                              ' +${action.extraDamageDices}',
+                              style: TextStyle(color: palette.textSecundary),
+                            ),
+                        ],
                       ),
-                    if ((action.pm != null) && (action.cd != null))
-                      const SizedBox(width: 4),
-                    if (action.cd != null)
-                      Text(
-                        'CD: ${action.cd}',
-                        style: TextStyle(color: palette.textSecundary),
-                      ),
-                  ],
-                ),
-              ],
+                    ),
+                  Row(
+                    children: [
+                      if (action.pm != null)
+                        Text(
+                          'PM: ${action.pm}',
+                          style: TextStyle(color: palette.textSecundary),
+                        ),
+                      if ((action.pm != null) && (action.cd != null))
+                        const SizedBox(width: 4),
+                      if (action.cd != null)
+                        Text(
+                          'CD: ${action.cd}',
+                          style: TextStyle(color: palette.textSecundary),
+                        ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -45,7 +45,7 @@ class _InitTipFieldState extends State<InitTipField> {
               RepaintBoundary(
                 child: Padding(
                   padding: const EdgeInsets.only(
-                    bottom: T20UI.spaceSize,
+                    // bottom: T20UI.spaceSize,
                     right: T20UI.screenContentSpaceSize,
                     left: T20UI.screenContentSpaceSize,
                   ),
@@ -57,9 +57,7 @@ class _InitTipFieldState extends State<InitTipField> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (_) => const TipsScreen(),
-                        ),
+                        MaterialPageRoute(builder: (_) => const TipsScreen()),
                       );
                     },
                   ),

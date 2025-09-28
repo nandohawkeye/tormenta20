@@ -16,6 +16,28 @@ class CharacterRecordOriginsStage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> onAddEdit({
+      required String parentUuid,
+      Origin? initialOrigin,
+    }) async {
+      await BottomsheetUtils.show(
+        context: context,
+        child: AddEditOriginBottomsheet(
+          initialOrigin: initialOrigin,
+          parentUuid: parentUuid,
+        ),
+      ).then((result) async {
+        if (result != null && result is Origin) {
+          await store.saveOrigin(result);
+        }
+
+        if (result != null && result is String && result == 'delete') {
+          await store.deleteOrigin(initialOrigin!);
+          //deleta
+        }
+      });
+    }
+
     return ListenableBuilder(
       listenable: store.characterBoard,
       builder: (_, _) {
@@ -43,13 +65,7 @@ class CharacterRecordOriginsStage extends StatelessWidget {
                   child: InkWell(
                     borderRadius: T20UI.borderRadius,
                     onTap: () async {
-                      await BottomsheetUtils.show<Origin?>(
-                        context: context,
-                        child: AddEditOriginBottomsheet(
-                          initialOrigin: null,
-                          parentUuid: character.uuid,
-                        ),
-                      ).then((result) {});
+                      await onAddEdit(parentUuid: character.uuid);
                     },
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -67,7 +83,11 @@ class CharacterRecordOriginsStage extends StatelessWidget {
               );
             }
 
-            return _Card(origin: origins[index - 1]);
+            return _Card(
+              origin: origins[index - 1],
+              onEdit: (entity) =>
+                  onAddEdit(parentUuid: character.uuid, initialOrigin: entity),
+            );
           },
         );
       },
@@ -76,40 +96,45 @@ class CharacterRecordOriginsStage extends StatelessWidget {
 }
 
 class _Card extends StatelessWidget {
-  const _Card({required this.origin});
+  const _Card({required this.origin, required this.onEdit});
 
   final Origin origin;
+  final Function(Origin) onEdit;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsetsGeometry.symmetric(
-              horizontal: T20UI.spaceSize,
-              vertical: T20UI.smallSpaceSize,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  origin.name.capitalize(),
-                  style: TextStyle(
-                    color: palette.accent,
-                    fontFamily: FontFamily.tormenta,
-                    fontSize: 20,
+      child: InkWell(
+        borderRadius: T20UI.borderRadius,
+        onTap: () => onEdit(origin),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsetsGeometry.symmetric(
+                horizontal: T20UI.spaceSize,
+                vertical: T20UI.smallSpaceSize,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    origin.name.capitalize(),
+                    style: TextStyle(
+                      color: palette.accent,
+                      fontFamily: FontFamily.tormenta,
+                      fontSize: 20,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 4),
-                Text(origin.desc, maxLines: 200),
-              ],
+                  const SizedBox(height: 4),
+                  Text(origin.desc, maxLines: 200),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -31,6 +31,25 @@ class CharacterRecordEquipmentsStage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> onAddEdit({
+      required String parentUuid,
+      Equipment? equipament,
+    }) async {
+      await Navigator.push<Equipment?>(
+        context,
+        MaterialPageRoute(
+          builder: (_) => AddEditEquipmentsScreen(
+            equipament: equipament,
+            parentUuid: parentUuid,
+          ),
+        ),
+      ).then((result) async {
+        if (result != null) {
+          await store.saveEquipment(result);
+        }
+      });
+    }
+
     return ListenableBuilder(
       listenable: store.characterBoard,
       builder: (_, _) {
@@ -65,15 +84,7 @@ class CharacterRecordEquipmentsStage extends StatelessWidget {
                   child: InkWell(
                     borderRadius: T20UI.borderRadius,
                     onTap: () async {
-                      await Navigator.push<Equipment?>(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => AddEditEquipmentsScreen(
-                            equipament: null,
-                            parentUuid: character.uuid,
-                          ),
-                        ),
-                      ).then((result) {});
+                      await onAddEdit(parentUuid: character.uuid);
                     },
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -94,6 +105,8 @@ class CharacterRecordEquipmentsStage extends StatelessWidget {
             return _Card(
               equipment: equipmentsNotStored[index - 1],
               allEquipments: equipments,
+              onAddEdit: (equipment) =>
+                  onAddEdit(parentUuid: character.uuid, equipament: equipment),
             );
           },
         );
@@ -103,10 +116,15 @@ class CharacterRecordEquipmentsStage extends StatelessWidget {
 }
 
 class _Card extends StatelessWidget {
-  const _Card({required this.equipment, required this.allEquipments});
+  const _Card({
+    required this.equipment,
+    required this.allEquipments,
+    required this.onAddEdit,
+  });
 
   final Equipment equipment;
   final List<Equipment> allEquipments;
+  final Function(Equipment) onAddEdit;
 
   @override
   Widget build(BuildContext context) {
@@ -117,122 +135,132 @@ class _Card extends StatelessWidget {
         .toList();
 
     return Card(
-      child: Row(
-        children: [
-          if (storedEquipments.isEmpty && equipment is! HasSpace)
-            Padding(
-              padding: const EdgeInsets.only(left: T20UI.spaceSize),
-              child: Image.asset(
-                EquipmentTypeUtils.handleImagePath(equipment),
-                height: 40,
-                width: 40,
+      child: InkWell(
+        borderRadius: T20UI.borderRadius,
+        onTap: storedEquipments.isEmpty ? () => onAddEdit(equipment) : null,
+        child: Row(
+          children: [
+            if (storedEquipments.isEmpty && equipment is! HasSpace)
+              Padding(
+                padding: const EdgeInsets.only(left: T20UI.spaceSize),
+                child: Image.asset(
+                  EquipmentTypeUtils.handleImagePath(equipment),
+                  height: 40,
+                  width: 40,
+                ),
               ),
-            ),
-          Flexible(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsetsGeometry.only(
-                    top: T20UI.smallSpaceSize,
-                    bottom: T20UI.spaceSize - 2,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: T20UI.spaceSize,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              equipment.name.capitalize(),
-                              style: TextStyle(
-                                color: palette.accent,
-                                fontFamily: FontFamily.tormenta,
-                                fontSize: 20,
-                              ),
-                            ),
-                            if (equipment is HasSpace)
+            Flexible(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsetsGeometry.only(
+                      top: T20UI.smallSpaceSize,
+                      bottom: T20UI.spaceSize - 2,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: T20UI.spaceSize,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
                               Text(
-                                '${storedEquipments.length}/${(equipment as HasSpace).normalSpaces}',
-                                style: const TextStyle(
+                                equipment.name.capitalize(),
+                                style: TextStyle(
+                                  color: palette.accent,
                                   fontFamily: FontFamily.tormenta,
                                   fontSize: 20,
                                 ),
                               ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: (equipment is HasSpace)
-                              ? T20UI.spaceSize - 2
-                              : T20UI.spaceSize,
-                        ),
-                        child: Wrap(
-                          children: [
-                            if (equipment is! HasSpace)
-                              Text(
-                                EquipmentTypeUtils.handleTitle(
-                                  equipment.toString(),
-                                ),
-                              )
-                            else if (storedEquipments.isEmpty)
-                              Text(
-                                'Vazia',
-                                style: TextStyle(color: palette.textDisable),
-                              )
-                            else
-                              Column(
-                                children: storedEquipments
-                                    .map((eq) => _StoreInCard(equipment: eq))
-                                    .toList(),
-                              ),
-
-                            if (equipment.specialMaterial != null)
-                              Text(
-                                ' - ${EquipmentSpecialMaterialsUtils.handleTitle(equipment.specialMaterial?.name ?? '')}',
-                              ),
-                            if (equipment.improvements.isNotEmpty)
-                              for (var improvement in equipment.improvements)
+                              if (equipment is HasSpace)
                                 Text(
-                                  ' - ${EquipmentImprovementTypeUtils.handleTitle(improvement.name)}',
+                                  '${storedEquipments.length}/${(equipment as HasSpace).normalSpaces}',
+                                  style: const TextStyle(
+                                    fontFamily: FontFamily.tormenta,
+                                    fontSize: 20,
+                                  ),
                                 ),
-                            if (equipment is Weapon)
-                              ...weaponFiels(equipment as Weapon),
-                            if (equipment is Shield)
-                              ...shieldFiels(equipment as Shield),
-                            if (equipment is Armor)
-                              ...armorFields(equipment as Armor),
-                            if (equipment is Ammunition)
-                              ...ammunitionFields(equipment as Ammunition),
-                            if (equipment is GeneralItem)
-                              ...generalItensFields(equipment as GeneralItem),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 4),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: (equipment is HasSpace)
+                                ? T20UI.spaceSize - 2
+                                : T20UI.spaceSize,
+                          ),
+                          child: Wrap(
+                            children: [
+                              if (equipment is! HasSpace)
+                                Text(
+                                  EquipmentTypeUtils.handleTitle(
+                                    equipment.toString(),
+                                  ),
+                                )
+                              else if (storedEquipments.isEmpty)
+                                Text(
+                                  'Vazia',
+                                  style: TextStyle(color: palette.textDisable),
+                                )
+                              else
+                                Column(
+                                  children: storedEquipments
+                                      .map(
+                                        (eq) => _StoreInCard(
+                                          equipment: eq,
+                                          onAddEdit: onAddEdit,
+                                        ),
+                                      )
+                                      .toList(),
+                                ),
+
+                              if (equipment.specialMaterial != null)
+                                Text(
+                                  ' - ${EquipmentSpecialMaterialsUtils.handleTitle(equipment.specialMaterial?.name ?? '')}',
+                                ),
+                              if (equipment.improvements.isNotEmpty)
+                                for (var improvement in equipment.improvements)
+                                  Text(
+                                    ' - ${EquipmentImprovementTypeUtils.handleTitle(improvement.name)}',
+                                  ),
+                              if (equipment is Weapon)
+                                ...weaponFiels(equipment as Weapon),
+                              if (equipment is Shield)
+                                ...shieldFiels(equipment as Shield),
+                              if (equipment is Armor)
+                                ...armorFields(equipment as Armor),
+                              if (equipment is Ammunition)
+                                ...ammunitionFields(equipment as Ammunition),
+                              if (equipment is GeneralItem)
+                                ...generalItensFields(equipment as GeneralItem),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
 
 class _StoreInCard extends StatelessWidget {
-  const _StoreInCard({required this.equipment});
+  const _StoreInCard({required this.equipment, required this.onAddEdit});
 
   final Equipment equipment;
+  final Function(Equipment) onAddEdit;
 
   @override
   Widget build(BuildContext context) {
@@ -243,44 +271,51 @@ class _StoreInCard extends StatelessWidget {
           borderRadius: T20UI.borderRadius,
           side: BorderSide(color: palette.backgroundLevelTwo),
         ),
-        child: Padding(
-          padding: const EdgeInsetsGeometry.symmetric(
-            vertical: T20UI.smallSpaceSize,
-            horizontal: T20UI.smallSpaceSize + 2,
-          ),
-          child: Row(
-            children: [
-              Assets.images.coin.image(height: 40, width: 40),
-              T20UI.smallSpaceWidth,
-              Flexible(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(equipment.name, style: const TextStyle(fontSize: 16)),
-                    const SizedBox(height: 4),
-                    if (equipment is Tibars)
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Bronze: ${(equipment as Tibars).bronze.toString().padLeft(2, "0")}',
-                            style: TextStyle(color: palette.textSecundary),
-                          ),
-                          Text(
-                            'Prata: ${(equipment as Tibars).silver.toString().padLeft(2, "0")}',
-                            style: TextStyle(color: palette.textSecundary),
-                          ),
-                          Text(
-                            'Ouro: ${(equipment as Tibars).gold.toString().padLeft(2, "0")}',
-                            style: TextStyle(color: palette.textSecundary),
-                          ),
-                        ],
+        child: InkWell(
+          borderRadius: T20UI.borderRadius,
+          onTap: (equipment is Tibars) ? null : () => onAddEdit(equipment),
+          child: Padding(
+            padding: const EdgeInsetsGeometry.symmetric(
+              vertical: T20UI.smallSpaceSize,
+              horizontal: T20UI.smallSpaceSize + 2,
+            ),
+            child: Row(
+              children: [
+                Assets.images.coin.image(height: 40, width: 40),
+                T20UI.smallSpaceWidth,
+                Flexible(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        equipment.name,
+                        style: const TextStyle(fontSize: 16),
                       ),
-                  ],
+                      const SizedBox(height: 4),
+                      if (equipment is Tibars)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Bronze: ${(equipment as Tibars).bronze.toString().padLeft(2, "0")}',
+                              style: TextStyle(color: palette.textSecundary),
+                            ),
+                            Text(
+                              'Prata: ${(equipment as Tibars).silver.toString().padLeft(2, "0")}',
+                              style: TextStyle(color: palette.textSecundary),
+                            ),
+                            Text(
+                              'Ouro: ${(equipment as Tibars).gold.toString().padLeft(2, "0")}',
+                              style: TextStyle(color: palette.textSecundary),
+                            ),
+                          ],
+                        ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

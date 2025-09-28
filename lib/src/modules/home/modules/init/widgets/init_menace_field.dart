@@ -1,11 +1,17 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
+import 'package:tormenta20/src/core/theme/theme.dart';
+import 'package:tormenta20/src/modules/home/modules/add_edit_menace/add_edit_menace_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/init/init_store.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/manace_screen_button.dart';
 import 'package:tormenta20/src/modules/home/modules/init/widgets/menace_card/menace_card.dart';
 import 'package:tormenta20/src/modules/home/modules/menace/menace_screen.dart';
 import 'package:tormenta20/src/modules/home/widgets/labels.dart';
+import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/menace.dart';
 import 'package:tormenta20/src/shared/extensions/context_ext.dart';
 
@@ -28,11 +34,7 @@ class _InitMenaceFieldState extends State<InitMenaceField> {
   _onShowMenace(Menace menace) {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (_) => MenaceScreen(
-          menace: menace,
-        ),
-      ),
+      MaterialPageRoute(builder: (_) => MenaceScreen(menace: menace)),
     );
   }
 
@@ -42,10 +44,37 @@ class _InitMenaceFieldState extends State<InitMenaceField> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const RepaintBoundary(
+        RepaintBoundary(
           child: Padding(
-            padding: T20UI.allPadding,
-            child: Labels('Ameaças'),
+            padding: T20UI.allPadding.copyWith(bottom: 6, right: 0, top: 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Labels('Ameaças'),
+                SimpleButton(
+                  icon: FontAwesomeIcons.plus,
+                  iconSize: 20,
+                  backgroundColor: palette.background,
+                  onTap: () async {
+                    Navigator.push<Menace?>(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const AddEditMenaceScreen(),
+                      ),
+                    ).then((result) {
+                      if (result != null) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => MenaceScreen(menace: result),
+                          ),
+                        );
+                      }
+                    });
+                  },
+                ),
+              ],
+            ),
           ),
         ),
         RepaintBoundary(

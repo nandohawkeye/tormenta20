@@ -9,6 +9,7 @@ class Expertise extends ExpertiseBase {
   final int? valueFinal;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final bool isOffice;
 
   const Expertise({
     this.bonus,
@@ -23,6 +24,7 @@ class Expertise extends ExpertiseBase {
     required this.isTrained,
     required this.createdAt,
     required this.updatedAt,
+    required this.isOffice,
   });
 
   Expertise cloneWith({required String uuid, required String parentUuid}) {
@@ -40,6 +42,7 @@ class Expertise extends ExpertiseBase {
       updatedAt: now,
       onlyTrained: onlyTrained,
       armorPenalty: armorPenalty,
+      isOffice: isOffice,
     );
   }
 

@@ -13,6 +13,7 @@ class ExpertiseTable extends Table {
   IntColumn get updatedAt => integer()();
   BoolColumn get onlyTrained => boolean().nullable()();
   BoolColumn get armorPenalty => boolean().nullable()();
+  BoolColumn get isOffice => boolean().withDefault(const Constant(false))();
 
   @override
   Set<Column>? get primaryKey => {uuid};

@@ -6,7 +6,13 @@ import 'package:tormenta20/gen/assets.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/character_record/character_record_store.dart';
+import 'package:tormenta20/src/modules/home/modules/character_record/widgets/change_creature_size_bottomsheet.dart';
+import 'package:tormenta20/src/modules/home/modules/character_record/widgets/change_displacements_bottomsheet.dart';
+import 'package:tormenta20/src/modules/home/modules/character_record/widgets/change_hand_to_hand_attack_atribute_bottomsheet.dart';
+import 'package:tormenta20/src/modules/home/modules/character_record/widgets/change_senses_bottomsheet.dart';
 import 'package:tormenta20/src/shared/entities/atributes.dart';
+import 'package:tormenta20/src/shared/entities/creature_size_category.dart';
+import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 import 'package:tormenta20/src/shared/utils/creature_size_utils.dart';
 
 class CharacterRecordActionsOthersStage extends StatelessWidget {
@@ -45,21 +51,72 @@ class CharacterRecordActionsOthersStage extends StatelessWidget {
                 title: _atributeHandToHandLabel(atribute),
                 subtitle: 'Atributo de ataque corpo-a-corpo',
                 space: 4.0,
-                onTap: () {},
+                onTap: () async {
+                  BottomsheetUtils.show<Atribute?>(
+                    context: context,
+                    child: ChangeHandToHandAttackAtributeBottomsheet(
+                      atribute: atribute,
+                    ),
+                  ).then((result) async {
+                    if (result == null) return;
+
+                    await store.changeAtributeHandToHand(result);
+                  });
+                },
               ),
               _Item(
                 icon: const Icon(FontAwesomeIcons.personArrowUpFromLine),
                 title:
                     '${CreatureSizeUtils.handleTitle(character.creatureSize.name)}  ${CreatureSizeUtils.handleInfo(character.creatureSize.name)}',
                 subtitle: 'Tamanho',
-                onTap: () {},
+                onTap: () async {
+                  BottomsheetUtils.show<CreatureSizeCategory?>(
+                    context: context,
+                    child: ChangeCreatureSizeBottomsheet(
+                      initialSize: character.creatureSize,
+                    ),
+                  ).then((result) {
+                    if (result == null) return;
+
+                    store.changeCreatureSize(result);
+                  });
+                },
               ),
 
               _Item(
                 icon: const Icon(FontAwesomeIcons.personRunning),
                 title: character.displacement ?? 'Nenhum',
                 subtitle: 'Deslocamento',
-                onTap: () {},
+                onTap: () {
+                  BottomsheetUtils.show<String?>(
+                    context: context,
+                    child: ChangeDisplacementsBottomsheet(
+                      initialDisplacements: character.displacement,
+                    ),
+                  ).then((result) {
+                    if (result == null) return;
+
+                    store.changeDisplacement(result);
+                  });
+                },
+              ),
+
+              _Item(
+                icon: const Icon(FontAwesomeIcons.solidEye),
+                title: character.senses ?? 'Nenhum',
+                subtitle: 'Sentidos',
+                onTap: () {
+                  BottomsheetUtils.show<String?>(
+                    context: context,
+                    child: ChangeSensesBottomsheet(
+                      initialSenses: character.senses,
+                    ),
+                  ).then((result) {
+                    if (result == null) return;
+
+                    store.changeSenses(result);
+                  });
+                },
               ),
             ],
           ),

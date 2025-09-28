@@ -162,6 +162,7 @@ class _AddEditSelectedExpertiseBottomsheetState
                                     widget.expertise?.onlyTrained ?? false,
                                 armorPenalty:
                                     widget.expertise?.armorPenalty ?? false,
+                                isOffice: widget.expertise?.isOffice ?? false,
                               );
 
                               Navigator.pop(context, expertise);

@@ -17629,6 +17629,21 @@ class $ExpertiseTableTable extends ExpertiseTable
       'CHECK ("armor_penalty" IN (0, 1))',
     ),
   );
+  static const VerificationMeta _isOfficeMeta = const VerificationMeta(
+    'isOffice',
+  );
+  @override
+  late final GeneratedColumn<bool> isOffice = GeneratedColumn<bool>(
+    'is_office',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("is_office" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
   @override
   List<GeneratedColumn> get $columns => [
     uuid,
@@ -17643,6 +17658,7 @@ class $ExpertiseTableTable extends ExpertiseTable
     updatedAt,
     onlyTrained,
     armorPenalty,
+    isOffice,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -17750,6 +17766,12 @@ class $ExpertiseTableTable extends ExpertiseTable
         ),
       );
     }
+    if (data.containsKey('is_office')) {
+      context.handle(
+        _isOfficeMeta,
+        isOffice.isAcceptableOrUnknown(data['is_office']!, _isOfficeMeta),
+      );
+    }
     return context;
   }
 
@@ -17807,6 +17829,10 @@ class $ExpertiseTableTable extends ExpertiseTable
         DriftSqlType.bool,
         data['${effectivePrefix}armor_penalty'],
       ),
+      isOffice: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}is_office'],
+      )!,
     );
   }
 
@@ -17830,6 +17856,7 @@ class ExpertiseTableData extends DataClass
   final int updatedAt;
   final bool? onlyTrained;
   final bool? armorPenalty;
+  final bool isOffice;
   const ExpertiseTableData({
     required this.uuid,
     required this.name,
@@ -17843,6 +17870,7 @@ class ExpertiseTableData extends DataClass
     required this.updatedAt,
     this.onlyTrained,
     this.armorPenalty,
+    required this.isOffice,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -17867,6 +17895,7 @@ class ExpertiseTableData extends DataClass
     if (!nullToAbsent || armorPenalty != null) {
       map['armor_penalty'] = Variable<bool>(armorPenalty);
     }
+    map['is_office'] = Variable<bool>(isOffice);
     return map;
   }
 
@@ -17892,6 +17921,7 @@ class ExpertiseTableData extends DataClass
       armorPenalty: armorPenalty == null && nullToAbsent
           ? const Value.absent()
           : Value(armorPenalty),
+      isOffice: Value(isOffice),
     );
   }
 
@@ -17913,6 +17943,7 @@ class ExpertiseTableData extends DataClass
       updatedAt: serializer.fromJson<int>(json['updatedAt']),
       onlyTrained: serializer.fromJson<bool?>(json['onlyTrained']),
       armorPenalty: serializer.fromJson<bool?>(json['armorPenalty']),
+      isOffice: serializer.fromJson<bool>(json['isOffice']),
     );
   }
   @override
@@ -17931,6 +17962,7 @@ class ExpertiseTableData extends DataClass
       'updatedAt': serializer.toJson<int>(updatedAt),
       'onlyTrained': serializer.toJson<bool?>(onlyTrained),
       'armorPenalty': serializer.toJson<bool?>(armorPenalty),
+      'isOffice': serializer.toJson<bool>(isOffice),
     };
   }
 
@@ -17947,6 +17979,7 @@ class ExpertiseTableData extends DataClass
     int? updatedAt,
     Value<bool?> onlyTrained = const Value.absent(),
     Value<bool?> armorPenalty = const Value.absent(),
+    bool? isOffice,
   }) => ExpertiseTableData(
     uuid: uuid ?? this.uuid,
     name: name ?? this.name,
@@ -17960,6 +17993,7 @@ class ExpertiseTableData extends DataClass
     updatedAt: updatedAt ?? this.updatedAt,
     onlyTrained: onlyTrained.present ? onlyTrained.value : this.onlyTrained,
     armorPenalty: armorPenalty.present ? armorPenalty.value : this.armorPenalty,
+    isOffice: isOffice ?? this.isOffice,
   );
   ExpertiseTableData copyWithCompanion(ExpertiseTableCompanion data) {
     return ExpertiseTableData(
@@ -17985,6 +18019,7 @@ class ExpertiseTableData extends DataClass
       armorPenalty: data.armorPenalty.present
           ? data.armorPenalty.value
           : this.armorPenalty,
+      isOffice: data.isOffice.present ? data.isOffice.value : this.isOffice,
     );
   }
 
@@ -18002,7 +18037,8 @@ class ExpertiseTableData extends DataClass
           ..write('createdAt: $createdAt, ')
           ..write('updatedAt: $updatedAt, ')
           ..write('onlyTrained: $onlyTrained, ')
-          ..write('armorPenalty: $armorPenalty')
+          ..write('armorPenalty: $armorPenalty, ')
+          ..write('isOffice: $isOffice')
           ..write(')'))
         .toString();
   }
@@ -18021,6 +18057,7 @@ class ExpertiseTableData extends DataClass
     updatedAt,
     onlyTrained,
     armorPenalty,
+    isOffice,
   );
   @override
   bool operator ==(Object other) =>
@@ -18037,7 +18074,8 @@ class ExpertiseTableData extends DataClass
           other.createdAt == this.createdAt &&
           other.updatedAt == this.updatedAt &&
           other.onlyTrained == this.onlyTrained &&
-          other.armorPenalty == this.armorPenalty);
+          other.armorPenalty == this.armorPenalty &&
+          other.isOffice == this.isOffice);
 }
 
 class ExpertiseTableCompanion extends UpdateCompanion<ExpertiseTableData> {
@@ -18053,6 +18091,7 @@ class ExpertiseTableCompanion extends UpdateCompanion<ExpertiseTableData> {
   final Value<int> updatedAt;
   final Value<bool?> onlyTrained;
   final Value<bool?> armorPenalty;
+  final Value<bool> isOffice;
   final Value<int> rowid;
   const ExpertiseTableCompanion({
     this.uuid = const Value.absent(),
@@ -18067,6 +18106,7 @@ class ExpertiseTableCompanion extends UpdateCompanion<ExpertiseTableData> {
     this.updatedAt = const Value.absent(),
     this.onlyTrained = const Value.absent(),
     this.armorPenalty = const Value.absent(),
+    this.isOffice = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   ExpertiseTableCompanion.insert({
@@ -18082,6 +18122,7 @@ class ExpertiseTableCompanion extends UpdateCompanion<ExpertiseTableData> {
     required int updatedAt,
     this.onlyTrained = const Value.absent(),
     this.armorPenalty = const Value.absent(),
+    this.isOffice = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : uuid = Value(uuid),
        name = Value(name),
@@ -18104,6 +18145,7 @@ class ExpertiseTableCompanion extends UpdateCompanion<ExpertiseTableData> {
     Expression<int>? updatedAt,
     Expression<bool>? onlyTrained,
     Expression<bool>? armorPenalty,
+    Expression<bool>? isOffice,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -18119,6 +18161,7 @@ class ExpertiseTableCompanion extends UpdateCompanion<ExpertiseTableData> {
       if (updatedAt != null) 'updated_at': updatedAt,
       if (onlyTrained != null) 'only_trained': onlyTrained,
       if (armorPenalty != null) 'armor_penalty': armorPenalty,
+      if (isOffice != null) 'is_office': isOffice,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -18136,6 +18179,7 @@ class ExpertiseTableCompanion extends UpdateCompanion<ExpertiseTableData> {
     Value<int>? updatedAt,
     Value<bool?>? onlyTrained,
     Value<bool?>? armorPenalty,
+    Value<bool>? isOffice,
     Value<int>? rowid,
   }) {
     return ExpertiseTableCompanion(
@@ -18151,6 +18195,7 @@ class ExpertiseTableCompanion extends UpdateCompanion<ExpertiseTableData> {
       updatedAt: updatedAt ?? this.updatedAt,
       onlyTrained: onlyTrained ?? this.onlyTrained,
       armorPenalty: armorPenalty ?? this.armorPenalty,
+      isOffice: isOffice ?? this.isOffice,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -18194,6 +18239,9 @@ class ExpertiseTableCompanion extends UpdateCompanion<ExpertiseTableData> {
     if (armorPenalty.present) {
       map['armor_penalty'] = Variable<bool>(armorPenalty.value);
     }
+    if (isOffice.present) {
+      map['is_office'] = Variable<bool>(isOffice.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -18215,6 +18263,7 @@ class ExpertiseTableCompanion extends UpdateCompanion<ExpertiseTableData> {
           ..write('updatedAt: $updatedAt, ')
           ..write('onlyTrained: $onlyTrained, ')
           ..write('armorPenalty: $armorPenalty, ')
+          ..write('isOffice: $isOffice, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -33453,6 +33502,7 @@ typedef $$ExpertiseTableTableCreateCompanionBuilder =
       required int updatedAt,
       Value<bool?> onlyTrained,
       Value<bool?> armorPenalty,
+      Value<bool> isOffice,
       Value<int> rowid,
     });
 typedef $$ExpertiseTableTableUpdateCompanionBuilder =
@@ -33469,6 +33519,7 @@ typedef $$ExpertiseTableTableUpdateCompanionBuilder =
       Value<int> updatedAt,
       Value<bool?> onlyTrained,
       Value<bool?> armorPenalty,
+      Value<bool> isOffice,
       Value<int> rowid,
     });
 
@@ -33538,6 +33589,11 @@ class $$ExpertiseTableTableFilterComposer
 
   ColumnFilters<bool> get armorPenalty => $composableBuilder(
     column: $table.armorPenalty,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get isOffice => $composableBuilder(
+    column: $table.isOffice,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -33610,6 +33666,11 @@ class $$ExpertiseTableTableOrderingComposer
     column: $table.armorPenalty,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<bool> get isOffice => $composableBuilder(
+    column: $table.isOffice,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$ExpertiseTableTableAnnotationComposer
@@ -33666,6 +33727,9 @@ class $$ExpertiseTableTableAnnotationComposer
     column: $table.armorPenalty,
     builder: (column) => column,
   );
+
+  GeneratedColumn<bool> get isOffice =>
+      $composableBuilder(column: $table.isOffice, builder: (column) => column);
 }
 
 class $$ExpertiseTableTableTableManager
@@ -33717,6 +33781,7 @@ class $$ExpertiseTableTableTableManager
                 Value<int> updatedAt = const Value.absent(),
                 Value<bool?> onlyTrained = const Value.absent(),
                 Value<bool?> armorPenalty = const Value.absent(),
+                Value<bool> isOffice = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => ExpertiseTableCompanion(
                 uuid: uuid,
@@ -33731,6 +33796,7 @@ class $$ExpertiseTableTableTableManager
                 updatedAt: updatedAt,
                 onlyTrained: onlyTrained,
                 armorPenalty: armorPenalty,
+                isOffice: isOffice,
                 rowid: rowid,
               ),
           createCompanionCallback:
@@ -33747,6 +33813,7 @@ class $$ExpertiseTableTableTableManager
                 required int updatedAt,
                 Value<bool?> onlyTrained = const Value.absent(),
                 Value<bool?> armorPenalty = const Value.absent(),
+                Value<bool> isOffice = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => ExpertiseTableCompanion.insert(
                 uuid: uuid,
@@ -33761,6 +33828,7 @@ class $$ExpertiseTableTableTableManager
                 updatedAt: updatedAt,
                 onlyTrained: onlyTrained,
                 armorPenalty: armorPenalty,
+                isOffice: isOffice,
                 rowid: rowid,
               ),
           withReferenceMapper: (p0) => p0

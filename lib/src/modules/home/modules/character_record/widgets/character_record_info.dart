@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:tormenta20/gen/fonts.gen.dart';
-import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/shared/entities/character_board.dart';
 import 'package:tormenta20/src/shared/utils/character_alignment_type_utils.dart';
@@ -41,29 +40,10 @@ class CharacterRecordInfo extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        CharacterUtils.handleBroodTitle(character.brood.name),
+                        '${CharacterUtils.handleBroodTitle(character.brood.name)} - ${CharacterAlignmentTypeUtils.handleTitle(character.alignmentType.name)}',
+                        maxLines: 3,
                         style: TextStyle(
                           color: palette.textSecundary,
-                          fontSize: 14,
-                        ),
-                      ),
-                      T20UI.smallSpaceWidth,
-                      Icon(
-                        CharacterAlignmentTypeUtils.handleIcon(
-                          character.alignmentType.name,
-                        ),
-                        size: 12,
-                        color: palette.textSecundary,
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        CharacterAlignmentTypeUtils.handleTitle(
-                          character.alignmentType.name,
-                        ),
-                        maxLines: 2,
-                        style: TextStyle(
-                          color: palette.textSecundary,
-                          fontWeight: FontWeight.w500,
                           fontSize: 14,
                         ),
                       ),

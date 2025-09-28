@@ -4,11 +4,13 @@ import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/core/theme/theme.dart';
 import 'package:tormenta20/src/modules/home/modules/character_record/character_record_store.dart';
+import 'package:tormenta20/src/modules/home/modules/character_record/widgets/add_edit_office_expertise_bottomsheet.dart';
 import 'package:tormenta20/src/shared/entities/atributes.dart';
 import 'package:tormenta20/src/shared/entities/character_board.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise.dart';
 import 'package:tormenta20/src/shared/extensions/string_ext.dart';
 import 'package:tormenta20/src/shared/utils/atribute_utils.dart';
+import 'package:tormenta20/src/shared/utils/bottomsheet_utils.dart';
 
 class CharacterRecordExpertisesStage extends StatelessWidget {
   const CharacterRecordExpertisesStage(this.store, {super.key});
@@ -17,6 +19,23 @@ class CharacterRecordExpertisesStage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> onAddEdit({
+      required String parentUuid,
+      Expertise? initialExpertise,
+    }) async {
+      await BottomsheetUtils.show<Expertise?>(
+        context: context,
+        child: AddEditOfficeExpertiseBottomsheet(
+          initialExpertise: initialExpertise,
+          parentUuid: parentUuid,
+        ),
+      ).then((result) async {
+        if (result != null) {
+          await store.saveExpertise(result);
+        }
+      });
+    }
+
     return ListenableBuilder(
       listenable: store.characterBoard,
       builder: (_, _) {
@@ -54,16 +73,23 @@ class CharacterRecordExpertisesStage extends StatelessWidget {
           primary: false,
           itemBuilder: (_, index) {
             if (index == 0) {
-              return const SizedBox(
+              return SizedBox(
                 height: 48,
                 child: Card(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(FontAwesomeIcons.hammer),
-                      T20UI.smallSpaceWidth,
-                      Text('Adicionar ofício', style: TextStyle(fontSize: 16)),
-                    ],
+                  child: InkWell(
+                    borderRadius: T20UI.borderRadius,
+                    onTap: () => onAddEdit(parentUuid: character.uuid),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(FontAwesomeIcons.hammer),
+                        T20UI.smallSpaceWidth,
+                        Text(
+                          'Adicionar ofício',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );

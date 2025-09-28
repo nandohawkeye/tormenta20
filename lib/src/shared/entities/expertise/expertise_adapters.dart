@@ -24,6 +24,7 @@ abstract class ExpertiseAdapters {
       updatedAt: now,
       onlyTrained: base.onlyTrained,
       armorPenalty: base.armorPenalty,
+      isOffice: false,
     );
   }
 
@@ -44,6 +45,7 @@ abstract class ExpertiseAdapters {
       updatedAt: now,
       onlyTrained: base.onlyTrained,
       armorPenalty: base.armorPenalty,
+      isOffice: false,
     );
   }
 
@@ -61,6 +63,7 @@ abstract class ExpertiseAdapters {
       armorPenalty: data.armorPenalty ?? false,
       createdAt: DateTime.fromMillisecondsSinceEpoch(data.createdAt),
       updatedAt: DateTime.fromMillisecondsSinceEpoch(data.updatedAt),
+      isOffice: data.isOffice,
     );
   }
 
@@ -76,6 +79,7 @@ abstract class ExpertiseAdapters {
       valueFinal: data['value_final'],
       onlyTrained: data['only_trained'] ?? false,
       armorPenalty: data['armor_penalty'] ?? false,
+      isOffice: data['is_office'] ?? false,
       createdAt: DateTime.fromMillisecondsSinceEpoch(data['created_at']),
       updatedAt: DateTime.fromMillisecondsSinceEpoch(data['updated_at']),
     );
@@ -95,6 +99,7 @@ abstract class ExpertiseAdapters {
       'updated_at': entity.updatedAt.millisecondsSinceEpoch,
       'only_trained': entity.onlyTrained,
       'armor_penalty': entity.armorPenalty,
+      'is_office': entity.isOffice,
     };
   }
 
@@ -112,6 +117,7 @@ abstract class ExpertiseAdapters {
       updatedAt: Value(entity.updatedAt.millisecondsSinceEpoch),
       onlyTrained: Value(entity.onlyTrained),
       armorPenalty: Value(entity.armorPenalty),
+      isOffice: Value(entity.isOffice),
     );
   }
 }

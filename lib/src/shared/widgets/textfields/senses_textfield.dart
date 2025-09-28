@@ -5,16 +5,22 @@ class SensesTextfield extends StatelessWidget {
   const SensesTextfield({
     super.key,
     this.initialValue,
-    required this.onchange,
+    this.onchange,
+    this.onSaved,
+    this.onFieldSubmitted,
   });
 
   final String? initialValue;
-  final Function(String?) onchange;
+  final Function(String?)? onchange;
+  final Function(String?)? onSaved;
+  final Function(String)? onFieldSubmitted;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       onChanged: onchange,
+      onSaved: onSaved,
+      onFieldSubmitted: onFieldSubmitted,
       initialValue: initialValue,
       style: const TextStyle(fontSize: 16),
       textInputAction: TextInputAction.next,

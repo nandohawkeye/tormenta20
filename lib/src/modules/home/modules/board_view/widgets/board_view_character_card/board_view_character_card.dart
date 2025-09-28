@@ -65,47 +65,10 @@ class BoardViewCharacterCard extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                CharacterUtils.handleBroodTitle(
-                                  character.brood.name,
-                                ),
+                                '${CharacterUtils.handleBroodTitle(character.brood.name)} - ${CharacterAlignmentTypeUtils.handleTitle(character.alignmentType.name)}',
                                 style: TextStyle(
                                   color: palette.textSecundary,
                                   fontSize: 14,
-                                ),
-                              ),
-                              T20UI.smallSpaceWidth,
-                              Icon(
-                                CharacterAlignmentTypeUtils.handleIcon(
-                                  character.alignmentType.name,
-                                ),
-                                size: 12,
-                                color: palette.textSecundary,
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
-                                CharacterAlignmentTypeUtils.handleTitle(
-                                  character.alignmentType.name,
-                                ),
-                                maxLines: 2,
-                                style: TextStyle(
-                                  color: palette.textSecundary,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              Icon(
-                                FontAwesomeIcons.shieldHalved,
-                                color: palette.textSecundary,
-                                size: 12,
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
-                                character.defense.toString().padLeft(2, '0'),
-                                maxLines: 2,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: palette.textSecundary,
                                 ),
                               ),
                             ],

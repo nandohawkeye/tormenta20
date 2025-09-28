@@ -36,11 +36,20 @@ class _AddEditGeneralSkillsBottomSheetState
   String? _desc;
   void _setDesc(String? value) => _desc = value;
 
+  late final AddEditPowerBottomsheetTypeStore _typeStore;
+
   @override
   void initState() {
     super.initState();
     _setTitle(widget.initial?.name);
     _setDesc(widget.initial?.desc);
+    _typeStore = AddEditPowerBottomsheetTypeStore(widget.initial?.type);
+  }
+
+  @override
+  void dispose() {
+    _typeStore.dispose();
+    super.dispose();
   }
 
   @override
@@ -97,11 +106,7 @@ class _AddEditGeneralSkillsBottomSheetState
                     ),
                   ),
                   T20UI.spaceHeight,
-                  AddEditPowerBottomsheetTypeSelector(
-                    AddEditPowerBottomsheetTypeStore(
-                      widget.initial?.type,
-                    ),
-                  ),
+                  AddEditPowerBottomsheetTypeSelector(_typeStore),
                   T20UI.spaceHeight,
                 ],
               ),
@@ -117,7 +122,7 @@ class _AddEditGeneralSkillsBottomSheetState
                     uuid: widget.initial?.uuid ?? const Uuid().v4(),
                     name: _title!,
                     desc: _desc!,
-                    type: PowerType.general,
+                    type: _typeStore.data ?? PowerType.general,
                     createdAt: widget.initial?.createdAt ?? now,
                     updatedAt: now,
                   );
@@ -126,7 +131,7 @@ class _AddEditGeneralSkillsBottomSheetState
                 }
               },
             ),
-          )
+          ),
         ],
       ),
     );

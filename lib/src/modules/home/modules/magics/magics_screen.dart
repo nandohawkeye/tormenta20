@@ -1,13 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
-import 'package:tormenta20/src/core/theme/theme.dart';
-import 'package:tormenta20/src/modules/home/modules/add_edit_grimorie/add_grimorie_screen.dart';
-import 'package:tormenta20/src/modules/home/modules/grimorie/grimorie_screen.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/grimories_store.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/magics_store.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/grimoire_header.dart';
@@ -15,7 +10,6 @@ import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_circles
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magic_search_filter.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magics_header.dart';
 import 'package:tormenta20/src/modules/home/modules/magics/widgets/magics_wrap.dart';
-import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 
 class MagicsScreen extends StatefulWidget {
   const MagicsScreen({super.key});
@@ -39,50 +33,6 @@ class _MagicsScreenState extends State<MagicsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: RepaintBoundary(
-        child: ListenableBuilder(
-          listenable: _magicStore,
-          builder: (_, __) => _magicStore.searchEnable
-              ? const SizedBox.shrink()
-              : AnimationConfiguration.synchronized(
-                  duration: T20UI.defaultDurationAnimation,
-                  child: FadeInAnimation(
-                    child: SimpleButton(
-                      icon: FontAwesomeIcons.plus,
-                      backgroundColor: palette.selected,
-                      iconColor: palette.onSelected,
-                      onTap: () async {
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) =>
-                                const AddGrimorieScreen(initialGrimoire: null),
-                          ),
-                        ).then(
-                          (result) async {
-                            if (result != null) {
-                              await _grimoriesStore
-                                  .insertGrimoire(result)
-                                  .then((failure) {
-                                if (failure == null) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) =>
-                                          GrimorieScreen(grimoire: result),
-                                    ),
-                                  );
-                                }
-                              });
-                            }
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                ),
-        ),
-      ),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -114,11 +64,11 @@ class _MagicsScreenState extends State<MagicsScreen> {
                 ),
                 T20UI.spaceHeight,
                 RepaintBoundary(child: MagicsWrap(store: _magicStore)),
-                const SizedBox(height: 100)
+                const SizedBox(height: 100),
               ],
             ),
           ),
-          RepaintBoundary(child: MagicSearchFilter(store: _magicStore))
+          RepaintBoundary(child: MagicSearchFilter(store: _magicStore)),
         ],
       ),
     );

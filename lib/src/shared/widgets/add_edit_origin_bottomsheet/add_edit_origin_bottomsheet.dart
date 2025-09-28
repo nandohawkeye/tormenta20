@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_general_skills_bottom_sheet/add_edit_general_skills_main_buttons.dart';
+import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/origin.dart';
 import 'package:tormenta20/src/shared/widgets/add_edit_origin_bottomsheet/add_edit_origin_bottomsheet_desc.dart';
 import 'package:tormenta20/src/shared/widgets/add_edit_origin_bottomsheet/add_edit_origin_bottomsheet_title.dart';
@@ -47,23 +49,39 @@ class _AddEditGeneralSkillsBottomSheetState
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const RepaintBoundary(
+          RepaintBoundary(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                T20UI.spaceHeight,
                 Padding(
-                  padding: T20UI.horizontalPadding,
-                  child: Text(
-                    'Origem',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: FontFamily.tormenta,
+                  padding: const EdgeInsetsGeometry.only(
+                    left: T20UI.spaceSize + 4,
+                  ),
+                  child: SizedBox(
+                    height: T20UI.inputHeight,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Origem',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontFamily: FontFamily.tormenta,
+                          ),
+                        ),
+                        if (widget.initialOrigin != null)
+                          SimpleButton(
+                            icon: FontAwesomeIcons.solidTrashCan,
+                            backgroundColor: Colors.transparent,
+                            onTap: () {
+                              Navigator.pop(context, 'delete');
+                            },
+                          ),
+                      ],
                     ),
                   ),
                 ),
-                T20UI.spaceHeight,
               ],
             ),
           ),
@@ -116,7 +134,7 @@ class _AddEditGeneralSkillsBottomSheetState
                 }
               },
             ),
-          )
+          ),
         ],
       ),
     );

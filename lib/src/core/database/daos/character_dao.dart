@@ -32,6 +32,7 @@ import 'package:tormenta20/src/shared/entities/action/distance_attack_adapters.d
 import 'package:tormenta20/src/shared/entities/action/distance_attack.dart';
 import 'package:tormenta20/src/shared/entities/action/hand_to_hand.dart';
 import 'package:tormenta20/src/shared/entities/action/hand_to_hand_adapters.dart';
+import 'package:tormenta20/src/shared/entities/atributes.dart';
 import 'package:tormenta20/src/shared/entities/character.dart';
 import 'package:tormenta20/src/shared/entities/character_adapters.dart';
 import 'package:tormenta20/src/shared/entities/character_board.dart';
@@ -39,6 +40,7 @@ import 'package:tormenta20/src/shared/entities/character_board_adapters.dart';
 import 'package:tormenta20/src/shared/entities/character_board_dto.dart';
 import 'package:tormenta20/src/shared/entities/character_dto.dart';
 import 'package:tormenta20/src/shared/entities/classe_character_type_adapters.dart';
+import 'package:tormenta20/src/shared/entities/creature_size_category.dart';
 import 'package:tormenta20/src/shared/entities/equipament/adventure_backpack_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/adventurere_backpack.dart';
 import 'package:tormenta20/src/shared/entities/equipament/ammunition.dart';
@@ -59,6 +61,7 @@ import 'package:tormenta20/src/shared/entities/equipament/tibars.dart';
 import 'package:tormenta20/src/shared/entities/equipament/tibars_adapters.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon_adapters.dart';
+import 'package:tormenta20/src/shared/entities/expertise/expertise.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise_adapters.dart';
 import 'package:tormenta20/src/shared/entities/global_modifiers_adapters.dart';
 import 'package:tormenta20/src/shared/entities/origin.dart';
@@ -1079,6 +1082,59 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
     }
   }
 
+  Future<void> changeAtributeHandToHand(
+    String characterUuid,
+    Atribute atribute,
+  ) async {
+    (update(
+      characterBoardTable,
+    )..where((tbl) => tbl.uuid.equals(characterUuid))).write(
+      CharacterBoardTableCompanion(
+        handToHandAtributeIndex: Value(atribute.index),
+        updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+      ),
+    );
+  }
+
+  Future<void> changeCreatureSize(
+    String characterUuid,
+    CreatureSizeCategory creatureSize,
+  ) async {
+    (update(
+      characterBoardTable,
+    )..where((tbl) => tbl.uuid.equals(characterUuid))).write(
+      CharacterBoardTableCompanion(
+        creatureSizeIndex: Value(creatureSize.index),
+        updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+      ),
+    );
+  }
+
+  Future<void> changeDisplacement(
+    String characterUuid,
+    String? displacement,
+  ) async {
+    (update(
+      characterBoardTable,
+    )..where((tbl) => tbl.uuid.equals(characterUuid))).write(
+      CharacterBoardTableCompanion(
+        displacement: Value(displacement),
+        updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+      ),
+    );
+  }
+
+  Future<void> changeSenses(String characterUuid, String? senses) async {
+    (update(
+      characterBoardTable,
+    )..where((tbl) => tbl.uuid.equals(characterUuid))).write(
+      CharacterBoardTableCompanion(
+        senses: Value(senses),
+        updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+      ),
+    );
+  }
+
   Future<({Failure? failure, Stream<CharacterBoard>? character})>
   watchCharactersBoardFromUuid(String uuid) async {
     try {
@@ -1214,6 +1270,7 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
                     final characterBoardData = row.readTable(
                       characterBoardTable,
                     );
+
                     final grimoireData = row.readTableOrNull(grimoireTable);
                     final actionData = row.readTableOrNull(actionTable);
                     final conditionData = row.readTableOrNull(
@@ -1248,7 +1305,6 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
                     if (!(characterBoardDTO.containsKey(
                       characterBoardData.uuid,
                     ))) {
-                      print('tibars $tibarsData');
                       characterBoardDTO.addAll({
                         characterBoardData.uuid: CharacterBoardDto(
                           characterBoardsData: characterBoardData,
@@ -1513,6 +1569,212 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
     } catch (e, st) {
       if (kDebugMode) {
         print('failure in delete menace: $e $st');
+      }
+
+      return Failure(e.toString());
+    }
+  }
+
+  Future<Failure?> saveActionAndUpdateCharacterRecord(
+    ActionEnt entity,
+    String characterRecordUuid,
+  ) async {
+    try {
+      if (entity is HandToHand) {
+        await into(
+          actionHandToHandTable,
+        ).insertOnConflictUpdate(HandToHandAdapters.toDriftCompanion(entity));
+      } else if (entity is DistanceAttack) {
+        await into(actionDistanceAttackTable).insertOnConflictUpdate(
+          DistanceAttackAdapters.toDriftCompanion(entity),
+        );
+      } else {
+        await into(
+          actionTable,
+        ).insertOnConflictUpdate(ActionAdapters.toDriftCompanion(entity));
+      }
+
+      await (update(
+        characterBoardTable,
+      )..where((tbl) => tbl.uuid.equals(characterRecordUuid))).write(
+        CharacterBoardTableCompanion(
+          updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+        ),
+      );
+
+      return null;
+    } catch (e, st) {
+      if (kDebugMode) {
+        print('failure in save action and update character: $e $st');
+      }
+
+      return Failure(e.toString());
+    }
+  }
+
+  Future<Failure?> saveEquipmentAndUpdateCharacterRecord(
+    Equipment entity,
+    String characterRecordUuid,
+  ) async {
+    try {
+      if (entity is AdventureBackpack) {
+        await into(adventureBackpackTable).insertOnConflictUpdate(
+          AdventureBackpackAdapters.toDriftCompanion(entity),
+        );
+      } else if (entity is Ammunition) {
+        await into(
+          ammunitionTable,
+        ).insertOnConflictUpdate(AmmunitionAdapters.toDriftCompanion(entity));
+      } else if (entity is Armor) {
+        await into(
+          armorTable,
+        ).insertOnConflictUpdate(ArmorAdapters.toDriftCompanion(entity));
+      } else if (entity is Backpack) {
+        await into(
+          backpackTable,
+        ).insertOnConflictUpdate(BackpackAdapters.toDriftCompanion(entity));
+      } else if (entity is GeneralItem) {
+        await into(
+          generalItemTable,
+        ).insertOnConflictUpdate(GeneralItemAdapters.toDriftCompanion(entity));
+      } else if (entity is Saddlebag) {
+        await into(
+          saddlebagTable,
+        ).insertOnConflictUpdate(SaddlebagAdapters.toDriftCompanion(entity));
+      } else if (entity is Shield) {
+        await into(
+          shieldTable,
+        ).insertOnConflictUpdate(ShieldAdapters.toDriftCompanion(entity));
+      } else if (entity is Weapon) {
+        await into(
+          weaponTable,
+        ).insertOnConflictUpdate(WeaponAdapters.toDriftCompanion(entity));
+      } else {
+        await into(
+          equipmentTable,
+        ).insertOnConflictUpdate(EquipmentAdapters.toDriftCompanion(entity));
+      }
+
+      await (update(
+        characterBoardTable,
+      )..where((tbl) => tbl.uuid.equals(characterRecordUuid))).write(
+        CharacterBoardTableCompanion(
+          updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+        ),
+      );
+
+      return null;
+    } catch (e, st) {
+      if (kDebugMode) {
+        print('failure in save equipment and update character: $e $st');
+      }
+
+      return Failure(e.toString());
+    }
+  }
+
+  Future<Failure?> savePowerUpdateCharacterRecord(
+    Power entity,
+    String characterRecordUuid,
+  ) async {
+    try {
+      await into(
+        powerTable,
+      ).insertOnConflictUpdate(PowerAdapters.toDriftCompanion(entity));
+
+      await (update(
+        characterBoardTable,
+      )..where((tbl) => tbl.uuid.equals(characterRecordUuid))).write(
+        CharacterBoardTableCompanion(
+          updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+        ),
+      );
+
+      return null;
+    } catch (e, st) {
+      if (kDebugMode) {
+        print('failure in save power and update character: $e $st');
+      }
+
+      return Failure(e.toString());
+    }
+  }
+
+  Future<Failure?> saveExpertiseUpdateCharacterRecord(
+    Expertise entity,
+    String characterRecordUuid,
+  ) async {
+    try {
+      await into(
+        expertiseTable,
+      ).insertOnConflictUpdate(ExpertiseAdapters.toDriftCompanion(entity));
+
+      await (update(
+        characterBoardTable,
+      )..where((tbl) => tbl.uuid.equals(characterRecordUuid))).write(
+        CharacterBoardTableCompanion(
+          updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+        ),
+      );
+
+      return null;
+    } catch (e, st) {
+      if (kDebugMode) {
+        print('failure in save expertise and update character: $e $st');
+      }
+
+      return Failure(e.toString());
+    }
+  }
+
+  Future<Failure?> saveOriginUpdateCharacterRecord(
+    Origin entity,
+    String characterRecordUuid,
+  ) async {
+    try {
+      await into(
+        originTable,
+      ).insertOnConflictUpdate(OriginAdapters.toDriftCompanion(entity));
+
+      await (update(
+        characterBoardTable,
+      )..where((tbl) => tbl.uuid.equals(characterRecordUuid))).write(
+        CharacterBoardTableCompanion(
+          updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+        ),
+      );
+
+      return null;
+    } catch (e, st) {
+      if (kDebugMode) {
+        print('failure in save action and update character: $e $st');
+      }
+
+      return Failure(e.toString());
+    }
+  }
+
+  Future<Failure?> deleteOriginUpdateCharacterRecord(
+    Origin entity,
+    String characterRecordUuid,
+  ) async {
+    try {
+      await (delete(
+        originTable,
+      )..where((tbl) => tbl.uuid.equals(entity.uuid))).go();
+
+      await (update(
+        characterBoardTable,
+      )..where((tbl) => tbl.uuid.equals(characterRecordUuid))).write(
+        CharacterBoardTableCompanion(
+          updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+        ),
+      );
+
+      return null;
+    } catch (e, st) {
+      if (kDebugMode) {
+        print('failure in delete action and update character: $e $st');
       }
 
       return Failure(e.toString());

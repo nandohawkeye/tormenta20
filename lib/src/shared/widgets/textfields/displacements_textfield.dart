@@ -5,16 +5,22 @@ class DisplacementsTextfield extends StatelessWidget {
   const DisplacementsTextfield({
     super.key,
     this.initialValue,
-    required this.onchange,
+    this.onchange,
+    this.onFieldSubmitted,
+    this.onSaved,
   });
 
   final String? initialValue;
-  final Function(String?) onchange;
+  final Function(String?)? onchange;
+  final Function(String)? onFieldSubmitted;
+  final Function(String?)? onSaved;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       onChanged: onchange,
+      onFieldSubmitted: onFieldSubmitted,
+      onSaved: onSaved,
       initialValue: initialValue,
       style: const TextStyle(fontSize: 16),
       textInputAction: TextInputAction.next,
