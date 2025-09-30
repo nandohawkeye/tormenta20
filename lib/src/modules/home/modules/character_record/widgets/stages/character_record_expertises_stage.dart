@@ -23,15 +23,25 @@ class CharacterRecordExpertisesStage extends StatelessWidget {
       required String parentUuid,
       Expertise? initialExpertise,
     }) async {
-      await BottomsheetUtils.show<Expertise?>(
+      await BottomsheetUtils.show(
         context: context,
         child: AddEditOfficeExpertiseBottomsheet(
           initialExpertise: initialExpertise,
           parentUuid: parentUuid,
         ),
       ).then((result) async {
-        if (result != null) {
+        if (result == null) return;
+
+        if (result is Expertise) {
           await store.saveExpertise(result);
+        }
+
+        if (result is Expertise) {
+          await store.saveExpertise(result);
+        }
+
+        if (result is String && result == 'delete') {
+          await store.deleteExpertise(initialExpertise!);
         }
       });
     }
@@ -97,6 +107,10 @@ class CharacterRecordExpertisesStage extends StatelessWidget {
 
             return _Card(
               expertise: expertises[index - 1],
+              onEdit: (expertise) => onAddEdit(
+                parentUuid: character.uuid,
+                initialExpertise: expertise,
+              ),
               character: character,
             );
           },
@@ -107,10 +121,15 @@ class CharacterRecordExpertisesStage extends StatelessWidget {
 }
 
 class _Card extends StatelessWidget {
-  const _Card({required this.expertise, required this.character});
+  const _Card({
+    required this.expertise,
+    required this.character,
+    required this.onEdit,
+  });
 
   final Expertise expertise;
   final CharacterBoard character;
+  final Function(Expertise) onEdit;
 
   int _valueForAtribute(Expertise expertise, CharacterBoard character) {
     final Atribute atribute = expertise.atribute;
@@ -146,54 +165,58 @@ class _Card extends StatelessWidget {
     return Opacity(
       opacity: isEnable ? 1.0 : .4,
       child: Card(
-        child: Padding(
-          padding: const EdgeInsetsGeometry.symmetric(
-            vertical: T20UI.smallSpaceSize,
-            horizontal: T20UI.spaceSize,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    expertise.isTrained
-                        ? FontAwesomeIcons.solidStar
-                        : FontAwesomeIcons.star,
-                    color: expertise.isTrained
-                        ? Colors.yellow
-                        : palette.disable,
-                  ),
-                  T20UI.spaceWidth,
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(expertise.name.capitalize()),
-                      Text(
-                        AtributeUtils.handleTitle(expertise.atribute.name),
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: palette.textSecundary,
+        child: InkWell(
+          borderRadius: T20UI.borderRadius,
+          onTap: () => onEdit(expertise),
+          child: Padding(
+            padding: const EdgeInsetsGeometry.symmetric(
+              vertical: T20UI.smallSpaceSize,
+              horizontal: T20UI.spaceSize,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      expertise.isTrained
+                          ? FontAwesomeIcons.solidStar
+                          : FontAwesomeIcons.star,
+                      color: expertise.isTrained
+                          ? Colors.yellow
+                          : palette.disable,
+                    ),
+                    T20UI.spaceWidth,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(expertise.name.capitalize()),
+                        Text(
+                          AtributeUtils.handleTitle(expertise.atribute.name),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: palette.textSecundary,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                  ],
+                ),
+                if (expertise.armorPenalty)
+                  Icon(
+                    FontAwesomeIcons.shirt,
+                    color: palette.primary.withValues(alpha: .5),
                   ),
-                ],
-              ),
-              if (expertise.armorPenalty)
-                Icon(
-                  FontAwesomeIcons.shirt,
-                  color: palette.primary.withValues(alpha: .5),
+                Text(
+                  '${_valueForAtribute(expertise, character) + (character.classes.length / 2).toInt() + bonus}',
+                  style: const TextStyle(
+                    fontFamily: FontFamily.tormenta,
+                    fontSize: 28,
+                  ),
                 ),
-              Text(
-                '${_valueForAtribute(expertise, character) + (character.classes.length / 2).toInt() + bonus}',
-                style: const TextStyle(
-                  fontFamily: FontFamily.tormenta,
-                  fontSize: 28,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

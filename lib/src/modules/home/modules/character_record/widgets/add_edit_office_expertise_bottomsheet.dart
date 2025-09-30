@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tormenta20/gen/fonts.gen.dart';
 import 'package:tormenta20/src/core/theme/t20_ui.dart';
 import 'package:tormenta20/src/modules/home/modules/add_edit_menace/widgets/add_edit_general_skills_bottom_sheet/add_edit_general_skills_main_buttons.dart';
+import 'package:tormenta20/src/modules/home/widgets/simple_button.dart';
 import 'package:tormenta20/src/shared/entities/atributes.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise.dart';
 import 'package:tormenta20/src/shared/utils/atribute_utils.dart';
@@ -38,6 +40,7 @@ class _AddEditOfficeExpertiseBottomSheetState
   String? _name;
   void _setTitle(String? value) => _name = value;
   late final ValueNotifier<bool> _armorPenalty;
+  late final ValueNotifier<bool> _isTrained;
   late final _AddEditAtributeStore _atributeStore;
 
   @override
@@ -47,6 +50,10 @@ class _AddEditOfficeExpertiseBottomSheetState
     _armorPenalty = ValueNotifier<bool>(
       widget.initialExpertise?.armorPenalty ?? false,
     );
+    _isTrained = ValueNotifier<bool>(
+      widget.initialExpertise?.isTrained ?? true,
+    );
+
     _atributeStore = _AddEditAtributeStore(
       widget.initialExpertise?.atribute ?? Atribute.strength,
     );
@@ -54,6 +61,7 @@ class _AddEditOfficeExpertiseBottomSheetState
 
   @override
   void dispose() {
+    _isTrained.dispose();
     _armorPenalty.dispose();
     _atributeStore.dispose();
     super.dispose();
@@ -61,28 +69,47 @@ class _AddEditOfficeExpertiseBottomSheetState
 
   @override
   Widget build(BuildContext context) {
+    final isOffice = widget.initialExpertise?.isOffice ?? true;
     return BottomSheetBase(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const RepaintBoundary(
+          RepaintBoundary(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                T20UI.spaceHeight,
                 Padding(
-                  padding: T20UI.horizontalPadding,
-                  child: Text(
-                    'Ofício',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: FontFamily.tormenta,
+                  padding: const EdgeInsetsGeometry.only(
+                    left: T20UI.spaceSize + 4,
+                  ),
+                  child: SizedBox(
+                    height: T20UI.inputHeight,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          !isOffice
+                              ? (widget.initialExpertise?.name ?? '')
+                              : 'Ofício',
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontFamily: FontFamily.tormenta,
+                          ),
+                        ),
+                        if (isOffice && widget.initialExpertise != null)
+                          SimpleButton(
+                            icon: FontAwesomeIcons.solidTrashCan,
+                            backgroundColor: Colors.transparent,
+                            onTap: () {
+                              Navigator.pop(context, 'delete');
+                            },
+                          ),
+                      ],
                     ),
                   ),
                 ),
-                T20UI.spaceHeight,
               ],
             ),
           ),
@@ -96,50 +123,78 @@ class _AddEditOfficeExpertiseBottomSheetState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: T20UI.horizontallScreenPadding,
-                    child: Column(
-                      children: [
-                        AddEditOriginBottomsheetTitle(
-                          onchange: _setTitle,
-                          initialTitle: widget.initialExpertise?.name,
-                        ),
-                      ],
-                    ),
-                  ),
-                  T20UI.spaceHeight,
-                  SelectorOnlyField<Atribute>(
-                    label: 'Atributo base',
-                    handleTitle: AtributeUtils.handleTitle,
-                    itens: Atribute.values,
-                    store: _atributeStore,
-                    isObrigatory: true,
-                  ),
-                  T20UI.spaceHeight,
-                  Padding(
-                    padding: T20UI.horizontalPadding,
-                    child: InkWell(
-                      onTap: () {
-                        _armorPenalty.value = !_armorPenalty.value;
-                      },
-                      child: Row(
+                  if (isOffice) ...[
+                    Padding(
+                      padding: T20UI.horizontallScreenPadding,
+                      child: Column(
                         children: [
-                          ListenableBuilder(
-                            listenable: _armorPenalty,
-                            builder: (_, _) {
-                              final value = _armorPenalty.value;
-                              return CustomChecked(
-                                value: value,
-                                isEnabledToTap: false,
-                              );
-                            },
+                          AddEditOriginBottomsheetTitle(
+                            onchange: _setTitle,
+                            initialTitle: widget.initialExpertise?.name,
                           ),
-                          T20UI.smallSpaceWidth,
-                          const Text('Penalidade de armadura'),
                         ],
                       ),
                     ),
-                  ),
+                    T20UI.spaceHeight,
+                    SelectorOnlyField<Atribute>(
+                      label: 'Atributo base',
+                      handleTitle: AtributeUtils.handleTitle,
+                      itens: Atribute.values,
+                      store: _atributeStore,
+                      isObrigatory: true,
+                    ),
+                    T20UI.spaceHeight,
+                  ],
+                  if (isOffice)
+                    Padding(
+                      padding: T20UI.horizontalPadding,
+                      child: InkWell(
+                        onTap: () {
+                          _armorPenalty.value = !_armorPenalty.value;
+                        },
+                        child: Row(
+                          children: [
+                            ListenableBuilder(
+                              listenable: _armorPenalty,
+                              builder: (_, _) {
+                                final value = _armorPenalty.value;
+                                return CustomChecked(
+                                  value: value,
+                                  isEnabledToTap: false,
+                                );
+                              },
+                            ),
+                            T20UI.smallSpaceWidth,
+                            const Text('Penalidade de armadura'),
+                          ],
+                        ),
+                      ),
+                    )
+                  else
+                    Padding(
+                      padding: T20UI.horizontalPadding,
+                      child: InkWell(
+                        onTap: () {
+                          _isTrained.value = !_isTrained.value;
+                        },
+                        child: Row(
+                          children: [
+                            ListenableBuilder(
+                              listenable: _isTrained,
+                              builder: (_, _) {
+                                final value = _isTrained.value;
+                                return CustomChecked(
+                                  value: value,
+                                  isEnabledToTap: false,
+                                );
+                              },
+                            ),
+                            T20UI.smallSpaceWidth,
+                            const Text('Treinado'),
+                          ],
+                        ),
+                      ),
+                    ),
                   T20UI.spaceHeight,
                 ],
               ),
@@ -154,14 +209,14 @@ class _AddEditOfficeExpertiseBottomSheetState
                     id: 0,
                     name: _name!,
                     atribute: _atributeStore.data ?? Atribute.strength,
-                    onlyTrained: false,
+                    onlyTrained: widget.initialExpertise?.onlyTrained ?? false,
                     armorPenalty: _armorPenalty.value,
                     parentUuid: widget.parentUuid,
                     uuid: widget.initialExpertise?.uuid ?? const Uuid().v4(),
-                    isTrained: true,
+                    isTrained: _isTrained.value,
                     createdAt: widget.initialExpertise?.createdAt ?? now,
                     updatedAt: now,
-                    isOffice: true,
+                    isOffice: widget.initialExpertise?.isOffice ?? true,
                   );
 
                   Navigator.pop(context, expertise);

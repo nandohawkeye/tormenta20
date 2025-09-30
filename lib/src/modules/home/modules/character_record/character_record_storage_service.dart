@@ -99,6 +99,16 @@ class CharacterRecordStorageService extends DriftStorageService {
     );
   }
 
+  Future<Failure?> deleteExpertiseAndUpdateCharacterRecord(
+    Expertise entity,
+    String characterRecordUuid,
+  ) async {
+    return super.dataBase.characterDAO.deleteExpertiseUpdateCharacterRecord(
+      entity,
+      characterRecordUuid,
+    );
+  }
+
   Future<Failure?> saveEquipmentAndUpdateCharacterRecord(
     Equipment entity,
     String characterRecordUuid,

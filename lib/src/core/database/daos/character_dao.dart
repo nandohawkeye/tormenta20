@@ -1774,7 +1774,34 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
       return null;
     } catch (e, st) {
       if (kDebugMode) {
-        print('failure in delete action and update character: $e $st');
+        print('failure in delete origin and update character: $e $st');
+      }
+
+      return Failure(e.toString());
+    }
+  }
+
+  Future<Failure?> deleteExpertiseUpdateCharacterRecord(
+    Expertise entity,
+    String characterRecordUuid,
+  ) async {
+    try {
+      await (delete(
+        expertiseTable,
+      )..where((tbl) => tbl.uuid.equals(entity.uuid))).go();
+
+      await (update(
+        characterBoardTable,
+      )..where((tbl) => tbl.uuid.equals(characterRecordUuid))).write(
+        CharacterBoardTableCompanion(
+          updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+        ),
+      );
+
+      return null;
+    } catch (e, st) {
+      if (kDebugMode) {
+        print('failure in delete expertise and update character: $e $st');
       }
 
       return Failure(e.toString());

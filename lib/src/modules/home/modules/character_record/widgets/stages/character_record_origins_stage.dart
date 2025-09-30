@@ -33,7 +33,6 @@ class CharacterRecordOriginsStage extends StatelessWidget {
 
         if (result != null && result is String && result == 'delete') {
           await store.deleteOrigin(initialOrigin!);
-          //deleta
         }
       });
     }

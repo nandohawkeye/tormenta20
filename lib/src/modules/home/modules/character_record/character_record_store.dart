@@ -76,6 +76,12 @@ class CharacterRecordStore {
   Future<void> deleteOrigin(Origin entity) async => _storageService
       .deleteOriginAndUpdateCharacterRecord(entity, _characterBoard.value.uuid);
 
+  Future<void> deleteExpertise(Expertise entity) async =>
+      _storageService.deleteExpertiseAndUpdateCharacterRecord(
+        entity,
+        _characterBoard.value.uuid,
+      );
+
   Future<void> saveEquipment(Equipment entity) async =>
       _storageService.saveEquipmentAndUpdateCharacterRecord(
         entity,
