@@ -7,6 +7,7 @@ import 'package:tormenta20/src/shared/entities/character_board.dart';
 import 'package:tormenta20/src/shared/entities/creature_size_category.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise.dart';
+import 'package:tormenta20/src/shared/entities/global_modifiers.dart';
 import 'package:tormenta20/src/shared/entities/origin.dart';
 import 'package:tormenta20/src/shared/entities/power.dart';
 
@@ -39,6 +40,9 @@ class CharacterRecordStore {
       atribute,
     );
   }
+
+  Future<void> saveGlobalModifiers(GlobalModifiers entity) async =>
+      _storageService.saveGlobalModifiers(entity, _characterBoard.value.uuid);
 
   Future<void> changeCreatureSize(CreatureSizeCategory creatureSize) async {
     await _storageService.changeCreatureSize(

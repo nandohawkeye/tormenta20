@@ -63,6 +63,7 @@ import 'package:tormenta20/src/shared/entities/equipament/weapon.dart';
 import 'package:tormenta20/src/shared/entities/equipament/weapon_adapters.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise_adapters.dart';
+import 'package:tormenta20/src/shared/entities/global_modifiers.dart';
 import 'package:tormenta20/src/shared/entities/global_modifiers_adapters.dart';
 import 'package:tormenta20/src/shared/entities/origin.dart';
 import 'package:tormenta20/src/shared/entities/origin_adapters.dart';
@@ -1091,6 +1092,23 @@ class CharacterDAO extends DatabaseAccessor<AppDatabase>
     )..where((tbl) => tbl.uuid.equals(characterUuid))).write(
       CharacterBoardTableCompanion(
         handToHandAtributeIndex: Value(atribute.index),
+        updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
+      ),
+    );
+  }
+
+  Future<void> saveGlobalModifiers(
+    GlobalModifiers entity,
+    String characterUuid,
+  ) async {
+    await into(
+      globalModifierTable,
+    ).insertOnConflictUpdate(GlobalModifiersAdapters.toDriftCompanion(entity));
+
+    (update(
+      characterBoardTable,
+    )..where((tbl) => tbl.uuid.equals(characterUuid))).write(
+      CharacterBoardTableCompanion(
         updatedAt: Value(DateTime.now().millisecondsSinceEpoch),
       ),
     );

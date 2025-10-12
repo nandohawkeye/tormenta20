@@ -24,7 +24,7 @@ class BoardViewOptionsBottomsheet extends StatelessWidget {
         if (board.mode == BoardModeType.master)
           OptionsBottomsheetEntity(
             icon: FontAwesomeIcons.solidFileCode,
-            label: 'Compartilhar arquivo da mesa',
+            label: 'Compartilhar arquivo',
             mensage: 'Gere e compatilhe o arquivo desta mesa para os jogadores',
             type: BordViewOptionType.json,
           ),

@@ -4,6 +4,7 @@ import 'package:tormenta20/src/shared/entities/character_board.dart';
 import 'package:tormenta20/src/shared/entities/creature_size_category.dart';
 import 'package:tormenta20/src/shared/entities/equipament/equipment.dart';
 import 'package:tormenta20/src/shared/entities/expertise/expertise.dart';
+import 'package:tormenta20/src/shared/entities/global_modifiers.dart';
 import 'package:tormenta20/src/shared/entities/origin.dart';
 import 'package:tormenta20/src/shared/entities/power.dart';
 import 'package:tormenta20/src/shared/failures/failure.dart';
@@ -22,6 +23,16 @@ class CharacterRecordStorageService extends DriftStorageService {
     return super.dataBase.characterDAO.changeAtributeHandToHand(
       characterUuid,
       atribute,
+    );
+  }
+
+  Future<void> saveGlobalModifiers(
+    GlobalModifiers entity,
+    String characterUuid,
+  ) async {
+    return super.dataBase.characterDAO.saveGlobalModifiers(
+      entity,
+      characterUuid,
     );
   }
 
